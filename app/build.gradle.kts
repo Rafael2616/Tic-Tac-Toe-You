@@ -20,7 +20,7 @@ android {
     }
     signingConfigs {
         create("release") {
-            storeFile = file("Tic-Tac-Toe-Material-You/app/tictactoekey.jks")
+            storeFile = file("tictactoekey.jks")
             storePassword = "rafael1800"
             keyAlias = "tictactoekey"
             keyPassword = "rafael1800"
