@@ -1,0 +1,28 @@
+<resources>
+
+    <string name="app_name">Tres en Raia - Material You</string>
+    <string name="inapp_title">Tres en Raya</string>
+    <string name="play">Jugar</string>
+    <string name="settings">Ajustes</string>
+    <string name="creator_message">Desarrollado por: Rafael de Moura Nascimento</string>
+    <string name="player">Jugador</string>
+    <string name="winner">GANÓ !!!</string>
+    <string name="index_error">index error</string>   
+    <string name="play_again">Juega de Nuevo</string>   
+    <string name="got_old">Deu Viejo :|</string>     
+    <string name="restart">Reiniciar</string>
+    <string name="reset">Restabelecer</string>
+    <string name="player1_name">Nombre del primer Jugador</string>    
+    <string name="player2_name">Nombre del segundo Jugador</string>
+    <string name="player_x">Jugador X</string>    
+    <string name="player_o">Jugador O</string>
+    <string name="dark_theme">Tema Oscuro</string>    
+    <string name="material_you">Colores Dinámicos</string>
+    <string name="sound_effects">Efectos Sonoros</string>    
+    <string name="background_music">Musica de Fondo</string>
+    <string name="active_sound">Efectos</string>
+    <string name="active_music">Musica</string>
+    <string name="about_app">Sobre el App</string>
+    <string name="system_theme">Tema del Sistema</string>
+       
+</resources>
