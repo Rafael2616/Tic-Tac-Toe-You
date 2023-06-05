@@ -8,7 +8,7 @@ plugins {
 
 android {
     compileSdk = 33
-    buildToolsVersion = "33.0.3"
+    buildToolsVersion = "33.0.0"
     namespace = "com.rafael.tictactoe"
 
     defaultConfig {
