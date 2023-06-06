@@ -6,69 +6,39 @@ import androidx.compose.runtime.*
 import com.rafael.tictactoe.game.domain.repository.GameRepository
 import kotlinx.coroutines.*
 
-/*
+
 @Composable
 fun HandleCardClick(
 repository: GameRepository,
-index: Int,
-//play: Boolean,
-isCardClicked: List<Boolean>,
-//isXImage: Boolean,
-cards: List<Boolean>,
-//isPlayer1: Boolean,
-//isSoundEffectsOn: Boolean,
-//winner: Boolean*/ /*
+index: Int
 ) = runBlocking {
 
- val clickSound1 = MediaPlayer.create(this, R.raw.click1_sound)
- val clickSound2 = MediaPlayer.create(this, R.raw.click2_sound) 
-
-
+val cardsString = repository.getCards()
+val cards = cardsString.map { it.toBoolean() }.toMutableList()
+val isCardClickedString = repository.getIsCardClicked()
+val isCardClicked = isCardClickedString.map { it.toBoolean() }.toMutableList()
 val play = repository.getPlay()
-//isCardClicked = repository.get
 val isXImage = repository.getIsXImage()
-//cards = repository.get
-val isPlayer1 = repository.getIsPlayer1()
-val isSoundEffectsOn = repository.getIsSoundEffectsOn()
 val winner = repository.getWinner()
+val isPlayer1 = repository.getIsPlayer1()
 
-if (!play){
- return
+if ((play) && (!winner)) {
+    if (!isCardClicked[index]) {
+        if (isXImage) {
+            isCardClicked[index] = true
+            repository.setIsCardClicked(isCardClicked)
+            cards[index] = true
+            repository.setCards(cards)
+            repository.setIsXImage(false)
+            repository.setIsPlayer1(!isPlayer1)
+        } else {
+            isCardClicked[index] = true
+            repository.setIsCardClicked(isCardClicked)
+            cards[index] = false
+            repository.setCards(cards)
+            repository.setIsXImage(true)
+            repository.setIsPlayer1(!isPlayer1)
+       	 }
+    	}
+	}
 }
-
-if (winner) {
-    return
-  }
-  if (isCardClicked[index]) {
-      return
-     }
-     if (!isCardClicked[index]) {
-          if (isXImage){
-             isCardClicked = isCardClicked.toMutableList().also {
-               it[index] = true
-               }
-               cards = cards.toMutableList().also {
-             it[index] = true
-            }
-        if (isSoundEffectsOn) {
-         clickSound1.start()
-           }
-           repository.setIsXImage(false)
-         repository.setIsPlayer1(!isPlayer1)
-           }     
-       else {
-              isCardClicked = isCardClicked.toMutableList().also {
-                it[index] = true
-                }
-               cards = cards.toMutableList().also {
-             it[index] = false
-            }
-          if (isSoundEffectsOn) {
-            clickSound2.start()
-            }
-           repository.setIsXImage(true)
-           repository.setIsPlayer1(!isPlayer1)
-        }
-    }
-}
-*/
