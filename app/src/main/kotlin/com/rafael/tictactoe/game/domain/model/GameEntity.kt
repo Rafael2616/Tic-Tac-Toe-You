@@ -9,6 +9,8 @@ import androidx.room.TypeConverters
 @TypeConverters(BooleanListConverter::class)
 data class GameEntity(
   @PrimaryKey
+  var currentPlayerName: String,
+
   var player1Name: String,
   var player2Name: String,
 
@@ -17,15 +19,17 @@ data class GameEntity(
 
   var cards: List<Boolean>,
   var isCardClicked: List<Boolean>,
-  
-  var isScoreUp: Boolean,
+
+  var play: Boolean, 
   var isXImage: Boolean,
   var is1Win: Boolean,
   var isXFor1: Boolean,
   var isPlayer1: Boolean,
   var player1InToast: Boolean,
-  var play: Boolean,
+
+  var isScoreUp: Boolean,
   var expandButton: Boolean,
+  var showRestartButton: Boolean,
   var isWinSoundPlaying: Boolean,
   var isGotOldSoundPlaying: Boolean,
   var isSoundEffectsOn: Boolean,
@@ -38,7 +42,5 @@ data class GameEntity(
 
   var winner: Boolean,
   var gotOld: Boolean,
-  
-  var currentPlayerName: String
 
 )
