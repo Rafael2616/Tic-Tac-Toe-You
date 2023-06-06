@@ -21,6 +21,9 @@ interface GameRepository {
     suspend fun getPlayer2Wins(): Int
     suspend fun setPlayer2Wins(player2Wins: Int)
 
+    suspend fun incrementPlayer1Wins()
+    suspend fun incrementPlayer2Wins()
+
     suspend fun getCards(): List<String>
     suspend fun setCards(cards: List<Boolean>)
 
