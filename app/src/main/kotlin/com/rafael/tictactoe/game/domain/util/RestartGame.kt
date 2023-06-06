@@ -3,46 +3,24 @@ package com.rafael.tictactoe.game.domain.util
 import com.rafael.tictactoe.game.domain.repository.GameRepository
 import kotlinx.coroutines.*
 
-/*
+
 fun RestartGame(
-repository: GameRepository,
-isCardClicked: List<Boolean>,
-//isScoreUp: Boolean,
-cards: List<Boolean>,
-/*is1Win: Boolean,
-isWinSoundPlaying: Boolean,
-isGotOldSoundPlaying: Boolean,
-expandButton: Boolean,
-startX: Float,
-startY: Float,
-endX: Float,
-endY: Float*/ /*
-) {
+repository: GameRepository
+) = runBlocking {
 
-coroutineScope{
-    launch{
+val cardsString = repository.getCards()
+val cards = cardsString.map { it.toBoolean() }
+val isCardClickedString = repository.getIsCardClicked()
+val isCardClicked = isCardClickedString.map { it.toBoolean() }
 
-/*val isScoreUp = repository.getIsScoreUp()
-val is1Win = repository.getIs1Win()
-val isWinSoundPlaying = repository.getIsWinSoundPlaying()
-val isGotOldSoundPlaying = repository.getIsGotOldSoundPlaying()
-val expandButton = repository.getExpandButton()
-val startX = repository.getStartX()
-val startY = repository.getStartY()
-val endX = repository.getEndX()
-val endY = repository.getEndY()*/ /*
-
-
-   isCardClicked = List<Boolean>(9) {false}
-   repository.setIsScoreUp(false)
+   isCardClicked.all { false }
+   repository.setIsCardClicked(isCardClicked) 
    cards.all { false }
+   repository.setCards(cards)
+   repository.setIsScoreUp(false)
    repository.setIs1Win(false)
    repository.setIsWinSoundPlaying(false)
    repository.setIsGotOldSoundPlaying(false)
    repository.setExpandButton(false)
    repository.setCoordinates(0f, 0f, 0f, 0f)
 }
-
-}
-}
-*/
