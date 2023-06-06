@@ -8,6 +8,6 @@ class ToggleDarkTheme(
 private val repository: SettingsRepository
 ) {
 suspend operator fun invoke(isDarkThemeOn: Boolean) {
-  repository.setIsDarkThemeOnValue(isDarkThemeOn)
+  repository.setIsDarkThemeOn(isDarkThemeOn)
   }
 }

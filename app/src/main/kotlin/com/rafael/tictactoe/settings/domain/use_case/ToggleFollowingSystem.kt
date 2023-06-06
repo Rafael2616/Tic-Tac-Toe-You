@@ -8,6 +8,6 @@ class ToggleFollowingSystem(
 private val repository: SettingsRepository
 ) {
 suspend operator fun invoke(isFollowingSystemOn: Boolean) {
-  repository.setIsFollowingSystemOnValue(isFollowingSystemOn)
+  repository.setIsFollowingSystemOn(isFollowingSystemOn)
   }
 }

@@ -8,6 +8,6 @@ class ToggleAllSettingsValues(
 private val repository: SettingsRepository
 ) {
 suspend operator fun invoke(settingsEntity: SettingsEntity) {
-   repository.setSettingsEntity(settingsEntity)
+   repository.setAllSettingsValues(settingsEntity)
    }
 }

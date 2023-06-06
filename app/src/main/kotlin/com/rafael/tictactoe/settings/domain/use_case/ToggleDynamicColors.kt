@@ -8,6 +8,6 @@ class ToggleDynamicColors(
 private val repository: SettingsRepository
 ) {
 suspend operator fun invoke(isDynamicColorsOn: Boolean) {
-  repository.setIsDynamicColorsOnValue(isDynamicColorsOn)
+  repository.setIsDynamicColorsOn(isDynamicColorsOn)
   }
 }

@@ -8,6 +8,6 @@ class ToggleSoundEffects(
 private val repository: SettingsRepository
 ) {
 suspend operator fun invoke(isSoundEffectsOn: Boolean) {
-  repository.setIsSoundEffectsOnValue(isSoundEffectsOn)
+  repository.setIsSoundEffectsOn(isSoundEffectsOn)
   }
 }

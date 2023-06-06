@@ -8,6 +8,6 @@ class ToggleBackgroundMusic(
 private val repository: SettingsRepository
 ) {
 suspend operator fun invoke(isBackgroundMusicOn: Boolean) {
-  repository.setIsBackgroundMusicOnValue(isBackgroundMusicOn)
+  repository.setIsBackgroundMusicOn(isBackgroundMusicOn)
   }
 }
