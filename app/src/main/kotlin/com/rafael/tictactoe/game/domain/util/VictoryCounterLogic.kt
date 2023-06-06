@@ -1,26 +1,25 @@
 package com.rafael.tictactoe.game.domain.util
 
-//import com.rafael.tictactoe.game.domain.util.CheckForWinner
+import com.rafael.tictactoe.game.domain.repository.GameRepository
+import kotlinx.coroutines.*
 
-/*
+
 fun VictoryCounterLogic(
-isScoreUp: Boolean,
-winner: Boolean,
-is1Win: Boolean,
-player1Wins: Int,
-player2Wins: Int
-) {
+repository: GameRepository
+) = runBlocking {
 
-CheckForWinner()
+val isScoreUp = repository.getIsScoreUp()
+val winner = repository.getWinner()
+val is1Win = repository.getIs1Win()
+
 if (!isScoreUp) {
     if (winner) {
-        isScoreUp = true;
+        repository.setIsScoreUp(true)
       if (is1Win) {
-           player1Wins += 1
+           repository.incrementPlayer1Wins()
    } else {
-           player2Wins += 1
+           repository.incrementPlayer2Wins()
          }
       }
    }
 }
-*/
