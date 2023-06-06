@@ -5,17 +5,21 @@ import com.rafael.tictactoe.settings.domain.model.SettingsEntity
 
 interface SettingsRepository {
 
-    suspend fun getSettingsEntity(): SettingsEntity 
-    suspend fun getDarkThemeValue(): Boolean
-    suspend fun getSoundEffectsValue(): Boolean
-    suspend fun getDynamicColorsValue(): Boolean
-    suspend fun getFollowingSystemValue(): Boolean
-    suspend fun getBackgroundMusicValue(): Boolean
+    suspend fun getAllSettingsValues(): SettingsEntity
+    suspend fun setAllSettingsValues(settingsEntity: SettingsEntity)
 
-    suspend fun setSettingsEntity(settingsEntity: SettingsEntity)
-    suspend fun setIsDarkThemeOnValue(isDarkThemeOn: Boolean)
-    suspend fun setIsSoundEffectsOnValue(isSoundEffectsOn: Boolean)
-    suspend fun setIsDynamicColorsOnValue(isDynamicColorsOn: Boolean)
-    suspend fun setIsFollowingSystemOnValue(isFollowingSystemOn: Boolean)
-    suspend fun setIsBackgroundMusicOnValue(isBackgroundMusicOn: Boolean)
+    suspend fun getIsDarkThemeOn(): Boolean
+    suspend fun setIsDarkThemeOn(isDarkThemeOn: Boolean)
+
+    suspend fun getIsSoundEffectsOn(): Boolean
+    suspend fun setIsSoundEffectsOn(isSoundEffectsOn: Boolean)
+
+    suspend fun getIsDynamicColorsOn(): Boolean
+    suspend fun setIsDynamicColorsOn(isDynamicColorsOn: Boolean)
+
+    suspend fun getIsFollowingSystemOn(): Boolean
+    suspend fun setIsFollowingSystemOn(isFollowingSystemOn: Boolean)
+
+    suspend fun getIsBackgroundMusicOn(): Boolean
+    suspend fun setIsBackgroundMusicOn(isBackgroundMusicOn: Boolean)
 }
