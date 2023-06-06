@@ -30,6 +30,12 @@ suspend fun setPlayer1Wins(player1Wins: Int)
 @Query("UPDATE GameEntity SET player2Wins = :player2Wins")
 suspend fun setPlayer2Wins(player2Wins: Int)
 
+@Query("UPDATE GameEntity SET player1Wins = player1Wins + 1")
+suspend fun incrementPlayer1Wins()
+
+@Query("UPDATE GameEntity SET player2Wins = player2Wins + 1")
+suspend fun incrementPlayer2Wins()
+
 @Query("UPDATE GameEntity SET cards = :cards")
 suspend fun setCards(cards: List<Boolean>)
 
