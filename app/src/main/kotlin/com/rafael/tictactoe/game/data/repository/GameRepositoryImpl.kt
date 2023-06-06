@@ -37,6 +37,13 @@ private val gameDao: GameDao
         return gameDao.setPlayer1Wins(player1Wins)
     }
 
+    override suspend fun incrementPlayer1Wins() {
+        return gameDao.incrementPlayer1Wins()
+    }
+    override suspend fun incrementPlayer2Wins() {
+        return gameDao.incrementPlayer2Wins()
+    }
+
     override suspend fun getPlayer2Wins(): Int {
         return gameDao.getPlayer2Wins()
     }
