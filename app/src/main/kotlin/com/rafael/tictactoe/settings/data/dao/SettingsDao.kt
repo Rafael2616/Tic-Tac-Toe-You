@@ -11,42 +11,42 @@ import com.rafael.tictactoe.settings.domain.model.SettingsEntity
 interface SettingsDao {
 
 @Query("SELECT * FROM SettingsEntity LIMIT 1")
-suspend fun getSettingsEntity(): SettingsEntity
+suspend fun getAllSettingsValues(): SettingsEntity
 
 @Insert(onConflict = OnConflictStrategy.REPLACE)
-suspend fun setSettingsEntity(settingsEntity: SettingsEntity)
+suspend fun setAllSettingsValues(settingsEntity: SettingsEntity)
 
 
 @Query("UPDATE SettingsEntity SET isBackgroundMusicOn = :isBackgroundMusicOn")
-suspend fun setIsBackgroundMusicOnValue(isBackgroundMusicOn: Boolean)
+suspend fun setIsBackgroundMusicOn(isBackgroundMusicOn: Boolean)
 
 @Query("UPDATE SettingsEntity SET isSoundEffectsOn = :isSoundEffectsOn")
-suspend fun setIsSoundEffectsOnValue(isSoundEffectsOn: Boolean)
+suspend fun setIsSoundEffectsOn(isSoundEffectsOn: Boolean)
 
 @Query("UPDATE SettingsEntity SET isDynamicColorsOn = :isDynamicColorsOn")
-suspend fun setIsDynamicColorsOnValue(isDynamicColorsOn: Boolean)
+suspend fun setIsDynamicColorsOn(isDynamicColorsOn: Boolean)
 
 @Query("UPDATE SettingsEntity SET isDarkThemeOn = :isDarkThemeOn")
-suspend fun setIsDarkThemeOnValue(isDarkThemeOn: Boolean)
+suspend fun setIsDarkThemeOn(isDarkThemeOn: Boolean)
 
 @Query("UPDATE SettingsEntity SET isFollowingSystemOn = :isFollowingSystemOn")
-suspend fun setIsFollowingSystemOnValue(isFollowingSystemOn: Boolean)
+suspend fun setIsFollowingSystemOn(isFollowingSystemOn: Boolean)
 
 
 @Query("SELECT isBackgroundMusicOn FROM SettingsEntity LIMIT 1")
-suspend fun getBackgroundMusicValue(): Boolean
+suspend fun getIsBackgroundMusicOn(): Boolean
 
 @Query("SELECT isSoundEffectsOn FROM SettingsEntity LIMIT 1")
-suspend fun getSoundEffectsValue(): Boolean
+suspend fun getIsSoundEffectsOn(): Boolean
 
 @Query("SELECT isDynamicColorsOn FROM SettingsEntity LIMIT 1")
-suspend fun getDynamicColorsValue(): Boolean
+suspend fun getIsDynamicColorsOn(): Boolean
 
 @Query("SELECT isDarkThemeOn FROM SettingsEntity LIMIT 1")
-suspend fun getDarkThemeValue(): Boolean
+suspend fun getIsDarkThemeOn(): Boolean
 
 @Query("SELECT isFollowingSystemOn FROM SettingsEntity LIMIT 1")
-suspend fun getFollowingSystemValue(): Boolean
+suspend fun getIsFollowingSystemOn(): Boolean
 
 }
 
