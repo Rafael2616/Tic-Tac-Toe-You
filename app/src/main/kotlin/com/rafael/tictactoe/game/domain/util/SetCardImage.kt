@@ -11,12 +11,14 @@ import kotlinx.coroutines.*
 /*
 @Composable
 fun SetCardImage(
-index: Int,
-isCardClicked: List<Boolean>,
-cards: List<Boolean>,
-repository: GameRepository
+repository: GameRepository,
+index: Int
 ): Painter {
 
+  val cardsString = repository.getCards()
+  val cards = cardsString.map { it.toBoolean() }
+  val isCardClickedString = repository.getIsCardClicked()
+  val isCardClicked = isCardClickedString.map { it.toBoolean() }
   val xImage = painterResource(R.drawable.x_image)
   val circleImage = painterResource(R.drawable.circle_image)
   val transparentImage = painterResource(R.drawable.transparent_image)
