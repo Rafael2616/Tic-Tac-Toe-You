@@ -14,8 +14,6 @@ import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
-    private val settingsUseCase: SettingsUseCases,
-    private val settingsUtil: SettingsUtilities,
     private val repository: SettingsRepository
 ) : ViewModel() {
 
@@ -40,56 +38,46 @@ class SettingsViewModel @Inject constructor(
 
 init {
     viewModelScope.launch(Dispatchers.IO) {
-        val settingsValues = settingsUtil.getSettingsValues()
-        settingsValues?.let {
-        _isBackgroundMusicOn.value = it.isBackgroundMusicOn
-        _isDarkThemeOn.value = it.isDarkThemeOn
-        _isDynamicColorsOn.value = it.isDynamicColorsOn
-        _isFollowingSystemOn.value = it.isFollowingSystemOn
-        _isSoundEffectsOn.value = it.isSoundEffectsOn
-        }
+        _isBackgroundMusicOn.value = repository.getIsBackgroundMusicOn()
+        _isDarkThemeOn.value = repository.getIsDarkThemeOn()
+        _isDynamicColorsOn.value = repository.getIsDynamicColorsOn()
+        _isFollowingSystemOn.value = repository.getIsFollowingSystemOn()
+        _isSoundEffectsOn.value = repository.getIsSoundEffectsOn()
     }
 }
-/*
-init {
-    viewModelScope.launch(Dispatchers.IO) {
-        val settingsValues = settingsRepo.getBackgroundMusicValue()    
-        _isBackgroundMusicOn.value = settingsValues
-    }
-}*/
 
     fun updateIsBackgroundMusicOnValue(newValue: Boolean) {
         _isBackgroundMusicOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
-        //  val bgMsc = repository.toggleAllSettingsValues()
+          repository.setIsBackgroundMusicOn(_isBackgroundMusicOn.value)
         }
     }
 
     fun updateIsDarkThemeOnValue(newValue: Boolean) {
         _isDarkThemeOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
-           // settingsUseCase.toggleDarkTheme(isDarkThemeOn.value)
+           repository.setIsDarkThemeOn(_isDarkThemeOn.value)
         }
     }
 
     fun updateIsDynamicColorsOnValue(newValue: Boolean) {
         _isDynamicColorsOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
-          //  settingsUseCase.toggleDynamicColors(isDynamicColorsOn.value)
+          repository.setIsDynamicColorsOn(_isDynamicColorsOn.value)
         }
     }
 
     fun updateIsFollowingSystemOnValue(newValue: Boolean) {
         _isFollowingSystemOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
-         //  settingsUseCase.toggleFollowingSystem(isFollowingSystemOn.value)
+         repository.setIsFollowingSystemOn(_isFollowingSystemOn.value)
         }
     }
    
     fun updateIsSoundEffectsOnValue(newValue: Boolean) {
         _isSoundEffectsOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
-        //  settingsUseCase.toggleSoundEffects(isSoundEffectsOn.value)
+         repository.setIsSoundEffectsOn(_isSoundEffectsOn.value)
         }
     }
 
