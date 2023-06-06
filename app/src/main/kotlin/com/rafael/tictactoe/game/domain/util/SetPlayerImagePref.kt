@@ -1,16 +1,22 @@
 package com.rafael.tictactoe.game.domain.util
 
-/*
+import com.rafael.tictactoe.game.domain.repository.GameRepository
+import kotlinx.coroutines.*
+
+
 fun SetPlayerImagePref(
-play: Boolean,
-isXFor1: Boolean,
-isXImage: Boolean
-) {
+repository: GameRepository
+) = runBlocking {
+
+val play = repository.getPlay()
+val isXImage = repository.getIsXImage()
+val isXFor1 = repository.getIsXFor1()
+
 if (!play){
     if (isXFor1){
-        isXImage = true
-  } else { isXImage = false
+        repository.setIsXImage(true)
+  } else {
+        repository.setIsXImage(false)
       }
    }
 }
-*/
