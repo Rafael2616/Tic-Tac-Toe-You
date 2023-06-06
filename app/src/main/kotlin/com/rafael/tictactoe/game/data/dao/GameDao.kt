@@ -97,13 +97,13 @@ suspend fun getPlayer1Wins(): Int
 
 @Query("SELECT player2Wins FROM GameEntity LIMIT 1")
 suspend fun getPlayer2Wins(): Int
-/*
+
 @Query("SELECT cards FROM GameEntity")
-suspend fun getCards(): List<Boolean>
+suspend fun getCards(): List<String>
 
 @Query("SELECT isCardClicked FROM GameEntity")
-suspend fun getIsCardClicked(): List<Boolean>
-*/
+suspend fun getIsCardClicked(): List<String>
+
 @Query("SELECT isScoreUp FROM GameEntity LIMIT 1")
 suspend fun getIsScoreUp(): Boolean
 
@@ -160,5 +160,12 @@ suspend fun getGotOld(): Boolean
 
 @Query("SELECT currentPlayerName FROM GameEntity LIMIT 1")
 suspend fun getCurrentPlayerName(): String
+
+
+@Query("SELECT showRestartButton FROM GameEntity LIMIT 1")
+suspend fun getShowRestartButton(): Boolean
+
+@Query("UPDATE GameEntity SET showRestartButton = :showRestartButton")
+suspend fun setShowRestartButton(showRestartButton: Boolean)
 
 }
