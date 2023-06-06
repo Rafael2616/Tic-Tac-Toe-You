@@ -7,6 +7,6 @@ class GetSettingsValues(
 private val repository: SettingsRepository
 ) {
 suspend operator fun invoke(): SettingsEntity {
-   return repository.getSettingsEntity()
+   return repository.getAllSettingsValues()
   }
 }
