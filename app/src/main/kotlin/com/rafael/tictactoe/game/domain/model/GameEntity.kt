@@ -32,8 +32,6 @@ data class GameEntity(
   var showRestartButton: Boolean,
   var isWinSoundPlaying: Boolean,
   var isGotOldSoundPlaying: Boolean,
-  var isSoundEffectsOn: Boolean,
-  var isBackgroundMusicOn: Boolean,
 
   var startX: Float,
   var startY: Float,
