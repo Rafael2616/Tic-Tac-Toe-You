@@ -12,6 +12,7 @@ import androidx.compose.ui.*
 import androidx.lifecycle.*
 import com.rafael.tictactoe.common.presentation.ui.theme.AppTheme
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
+import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -28,6 +29,7 @@ class TestGameActivity : ComponentActivity() {
 fun testGameScreen(){
 
 val viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
+val settingsVM = ViewModelProvider(this).get(SettingsViewModel::class.java)
 
 val currentPlayerName by viewModel.currentPlayerName.collectAsState()
 val player1Name by viewModel.player1Name.collectAsState()
@@ -50,8 +52,9 @@ val expandButton by viewModel.expandButton.collectAsState()
 val showRestartButton by viewModel.showRestartButton.collectAsState()
 val isWinSoundPlaying by viewModel.isWinSoundPlaying.collectAsState()
 val isGotOldSoundPlaying by viewModel.isGotOldSoundPlaying.collectAsState()
-val isSoundEffectsOn by viewModel.isSoundEffectsOn.collectAsState()
-val isBackgroundMusicOn by viewModel.isBackgroundMusicOn.collectAsState()
+
+val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
+val isBackgroundMusicOn by settingsVM.isBackgroundMusicOn.collectAsState()
 
 val startX by viewModel.startX.collectAsState()
 val startY by viewModel.startY.collectAsState()
