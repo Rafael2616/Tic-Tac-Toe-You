@@ -60,12 +60,6 @@ interface GameRepository {
     suspend fun getIsGotOldSoundPlaying(): Boolean
     suspend fun setIsGotOldSoundPlaying(isGotOldSoundPlaying: Boolean)
 
-    suspend fun getIsSoundEffectsOn(): Boolean
-    suspend fun setIsSoundEffectsOn(isSoundEffectsOn: Boolean)
-
-    suspend fun getIsBackgroundMusicOn(): Boolean
-    suspend fun setIsBackgroundMusicOn(isBackgroundMusicOn: Boolean)
-
     suspend fun getWinner(): Boolean
     suspend fun setWinner(winner: Boolean)
 
