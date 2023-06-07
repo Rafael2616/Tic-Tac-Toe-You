@@ -72,12 +72,6 @@ suspend fun setIsWinSoundPlaying(isWinSoundPlaying: Boolean)
 @Query("UPDATE GameEntity SET isGotOldSoundPlaying = :isGotOldSoundPlaying")
 suspend fun setIsGotOldSoundPlaying(isGotOldSoundPlaying: Boolean)
 
-@Query("UPDATE GameEntity SET isSoundEffectsOn = :isSoundEffectsOn")
-suspend fun setIsSoundEffectsOn(isSoundEffectsOn: Boolean)
-
-@Query("UPDATE GameEntity SET isBackgroundMusicOn = :isBackgroundMusicOn")
-suspend fun setIsBackgroundMusicOn(isBackgroundMusicOn: Boolean)
-
 @Query("UPDATE GameEntity SET startX = :startX, startY = :startY, endX = :endX, endY = :endY")
 suspend fun setCoordinates(startX: Float, startY: Float, endX: Float, endY: Float)
 
@@ -139,12 +133,6 @@ suspend fun getIsWinSoundPlaying(): Boolean
 
 @Query("SELECT isGotOldSoundPlaying FROM GameEntity LIMIT 1")
 suspend fun getIsGotOldSoundPlaying(): Boolean
-
-@Query("SELECT isSoundEffectsOn FROM GameEntity LIMIT 1")
-suspend fun getIsSoundEffectsOn(): Boolean
-
-@Query("SELECT isBackgroundMusicOn FROM GameEntity LIMIT 1")
-suspend fun getIsBackgroundMusicOn(): Boolean
 
 @Query("SELECT startX FROM GameEntity LIMIT 1")
 suspend fun getStartX(): Float
