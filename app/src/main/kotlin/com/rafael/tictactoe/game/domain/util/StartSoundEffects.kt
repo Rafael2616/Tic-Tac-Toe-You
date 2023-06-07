@@ -11,6 +11,6 @@ settingsRepo: SettingsRepository
 ) = runBlocking {
 
 val isSoundEffectsOn = settingsRepo.getIsSoundEffectsOn()
-repository.setIsSoundEffectsOn(!isSoundEffectsOn)
+settingsRepo.setIsSoundEffectsOn(!isSoundEffectsOn)
 
 }
