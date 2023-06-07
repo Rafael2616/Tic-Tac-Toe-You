@@ -135,20 +135,6 @@ private val gameDao: GameDao
         return gameDao.setIsGotOldSoundPlaying(isGotOldSoundPlaying)
     }
 
-    override suspend fun getIsSoundEffectsOn(): Boolean {
-        return gameDao.getIsSoundEffectsOn()
-    }
-    override suspend fun setIsSoundEffectsOn(isSoundEffectsOn: Boolean) {
-        return gameDao.setIsSoundEffectsOn(isSoundEffectsOn)
-    }
-
-    override suspend fun getIsBackgroundMusicOn(): Boolean {
-        return gameDao.getIsBackgroundMusicOn()
-    }
-    override suspend fun setIsBackgroundMusicOn(isBackgroundMusicOn: Boolean) {
-        return gameDao.setIsBackgroundMusicOn(isBackgroundMusicOn)
-    }
-
     override suspend fun getWinner(): Boolean {
         return gameDao.getWinner()
     }
