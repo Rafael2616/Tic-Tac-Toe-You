@@ -68,12 +68,6 @@ val isWinSoundPlaying: StateFlow<Boolean> = _isWinSoundPlaying
 private var _isGotOldSoundPlaying = MutableStateFlow(false)
 val isGotOldSoundPlaying: StateFlow<Boolean> = _isGotOldSoundPlaying
 
-private var _isSoundEffectsOn = MutableStateFlow(false)
-val isSoundEffectsOn: StateFlow<Boolean> = _isSoundEffectsOn
-
-private var _isBackgroundMusicOn = MutableStateFlow(true)
-val isBackgroundMusicOn: StateFlow<Boolean> = _isBackgroundMusicOn
-
 private var _startX = MutableStateFlow(0f)
 val startX: StateFlow<Float> = _startX
 
@@ -216,20 +210,6 @@ val gotOld: StateFlow<Boolean> = _gotOld
         _isGotOldSoundPlaying.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
             repository.setIsGotOldSoundPlaying(newValue)
-        }
-    }
-
-    fun updateIsSoundEffectsOn(newValue: Boolean) {
-        _isSoundEffectsOn.value = newValue
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.setIsSoundEffectsOn(newValue)
-        }
-    }
-
-    fun updateIsBackgroundMusicOnValue(newValue: Boolean) {
-        _isBackgroundMusicOn.value = newValue
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.setIsBackgroundMusicOn(newValue)
         }
     }
 
