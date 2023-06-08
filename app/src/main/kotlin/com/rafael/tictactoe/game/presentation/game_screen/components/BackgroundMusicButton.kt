@@ -1,6 +1,7 @@
 package com.rafael.tictactoe.game.presentation.components
 
 import com.rafael.tictactoe.R
+import android.content.Context
 import androidx.activity.compose.*
 //import androidx.compose.animation.*
 import androidx.compose.foundation.*
@@ -20,11 +21,14 @@ import androidx.compose.ui.text.*
 import androidx.compose.ui.unit.*
 import androidx.compose.ui.graphics.painter.*
 //import com.rafael.tictactoe.game.domain.util.BackgroundMusicLogic
+import com.rafael.tictactoe.game.domain.repository.GameRepository
+import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
 
 
 @Composable
 fun BackgroundMusicButton(
-isBackgroundMusicOn: Boolean
+isBackgroundMusicOn: Boolean,
+context: Context
 ){
 
     Box(
@@ -44,7 +48,7 @@ isBackgroundMusicOn: Boolean
               modifier = Modifier
              .width(45.dp)
              .height(45.dp)
-             .clickable(onClick = {/*uiClickSound(); BackgroundMusicLogic()*/})
+             .clickable(onClick = {/*uiClickSound();*/ BackgroundMusicLogic(GameRepository, SettingsRepository, context)})
        ) {
             Image(
                   contentDescription = null,
