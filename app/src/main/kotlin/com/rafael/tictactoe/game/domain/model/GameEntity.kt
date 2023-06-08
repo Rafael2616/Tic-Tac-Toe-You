@@ -38,6 +38,9 @@ data class GameEntity(
   var endX: Float,
   var endY: Float,
 
+  var showPlayer1Name: String,
+  var showPlayer2Name: String,
+
   var winner: Boolean,
   var gotOld: Boolean,
 
