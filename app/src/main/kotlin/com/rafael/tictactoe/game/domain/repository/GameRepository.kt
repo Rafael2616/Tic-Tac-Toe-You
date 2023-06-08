@@ -72,6 +72,12 @@ interface GameRepository {
 	suspend fun getShowRestartButton(): Boolean
     suspend fun setShowRestartButton(showRestartButton: Boolean)
 
+    suspend fun getShowPlayer1Name(): String
+    suspend fun setShowPlayer1Name(showPlayer1Name: String)
+
+    suspend fun getShowPlayer2Name(): String
+    suspend fun setShowPlayer2Name(showPlayer2Name: String)
+
     suspend fun getStartX(): Float
     suspend fun getStartY(): Float
     suspend fun getEndX(): Float
