@@ -9,7 +9,6 @@ repository: GameRepository
 ) = runBlocking {
 
 val play = repository.getPlay()
-val isXImage = repository.getIsXImage()
 val isXFor1 = repository.getIsXFor1()
 
 if (!play){

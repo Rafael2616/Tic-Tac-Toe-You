@@ -11,19 +11,11 @@ class DisplayPlayerNames {
 
 @Composable
 fun firstPlayerName(
-repository: GameRepository,
-/*play: Boolean,
-player1InToast: Boolean,
-isPlayer1: Boolean,
-isXFor1: Boolean,
-player1Name: String,
-player2Name: String*/
+repository: GameRepository
 ) = runBlocking {
 
-val genericPlayerX = R.string.player_x
-val genericPlayerO = R.string.player_o
-
-
+val genericPlayerX = stringResource(R.string.player_x)
+val genericPlayerO = stringResource(R.string.player_o)
 val play = repository.getPlay()
 val player1InToast = repository.getPlayer1InToast()
 val isPlayer1 = repository.getIsPlayer1()
@@ -67,19 +59,11 @@ if(!play) repository.setPlayer1InToast(isPlayer1)
 
 @Composable
 fun secondPlayerName(
-repository: GameRepository,
-/*play: Boolean,
-player1InToast: Boolean,
-isPlayer1: Boolean,
-isXFor1: Boolean,
-player1Name: String,
-player2Name: String*/
+repository: GameRepository
 ) = runBlocking {
 
 val genericPlayerX = stringResource(R.string.player_x)
 val genericPlayerO = stringResource(R.string.player_o)
-
-
 val play = repository.getPlay()
 val player1InToast = repository.getPlayer1InToast()
 val isPlayer1 = repository.getIsPlayer1()

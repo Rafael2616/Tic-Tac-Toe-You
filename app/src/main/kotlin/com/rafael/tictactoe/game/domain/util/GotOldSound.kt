@@ -19,10 +19,8 @@ val gotOldSound = MediaPlayer.create(context, R.raw.got_old_sound)
 val isSoundEffectsOn = settingsRepo.getIsSoundEffectsOn()
 val isGotOldSoundPlaying = repository.getIsGotOldSoundPlaying()
 	
-if (isSoundEffectsOn){
-    if(!isGotOldSoundPlaying){
-        gotOldSound.start()
-        repository.setIsGotOldSoundPlaying(true)
-        }
+if (isSoundEffectsOn && !isGotOldSoundPlaying){
+    gotOldSound.start()
+    repository.setIsGotOldSoundPlaying(true)
     }
 }

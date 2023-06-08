@@ -4,8 +4,12 @@ import com.rafael.tictactoe.R
 import androidx.compose.ui.res.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.painter.*
+import com.rafael.tictactoe.game.domain.repository.GameRepository
+import kotlinx.coroutines.*
 
-/*
+
+//THIS FUNCTION RECEIVER VALUES DIRECTLY FROM VIEWMODEL
+
 @Composable
 fun ToastImageLogic(
 winner: Boolean,
@@ -21,4 +25,3 @@ return if (!winner) {
     if(!isXImage) xImageMax else circleImageMax
    }         
 }
-*/

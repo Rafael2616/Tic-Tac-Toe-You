@@ -13,7 +13,6 @@ val cards = cardsString.map { it.toBoolean() }
 val isCardClickedString = repository.getIsCardClicked()
 val isCardClicked = isCardClickedString.map { it.toBoolean() }
 
-
 	val winningPositions = listOf(
         listOf(0, 1, 2),
         listOf(3, 4, 5),
