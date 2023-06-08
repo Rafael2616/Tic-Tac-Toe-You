@@ -2,21 +2,22 @@ package com.rafael.tictactoe.common.domain.util
 
 import android.content.*
 import android.media.MediaPlayer
-import androidx.compose.runtime.*
 import com.rafael.tictactoe.R
-import androidx.compose.ui.platform.*
+import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
+import kotlinx.coroutines.runBlocking
 
-@Composable
+
 fun UiClickSound(
-//context: Context,
-isSoundEffectsOn: Boolean
-) {
-   val myContext = LocalContext.current
-   val uiSound = remember { MediaPlayer.create(myContext, R.raw.ui_click_sound) }
+context: Context,
+settingsRepo: SettingsRepository
+) = runBlocking {
+
+  val isSoundEffectsOn = settingsRepo.getIsBackgroundMusicOn()
+  val uiSound = MediaPlayer.create(context, R.raw.ui_click_sound)
 
 if (isSoundEffectsOn){
-uiSound.start()
+	uiSound.start()
 } else {
-uiSound.stop()
-  }
+	uiSound.stop()
+	}
 }
