@@ -179,5 +179,19 @@ private val gameDao: GameDao
         return gameDao.setCoordinates(startX, startY, endX, endY)
     }
 
+    override suspend fun getShowPlayer1Name(): String {
+        return gameDao.getShowPlayer1Name()
+    }
+    override suspend fun setShowPlayer1Name(showPlayer1Name: String) {
+        return gameDao.setShowPlayer1Name(showPlayer1Name)
+    }
+
+    override suspend fun getShowPlayer2Name(): String {
+        return gameDao.getShowPlayer2Name()
+    }
+    override suspend fun setShowPlayer2Name(showPlayer2Name: String) {
+        return gameDao.setShowPlayer2Name(showPlayer2Name)
+    }
+
 
 }
