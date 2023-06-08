@@ -7,18 +7,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.*
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.*
-import androidx.compose.runtime.livedata.*
 import androidx.compose.ui.*
-import androidx.compose.ui.graphics.*
-import androidx.compose.ui.graphics.painter.*
-import androidx.compose.ui.platform.*
-import androidx.compose.ui.res.*
-import androidx.compose.ui.text.*
-import androidx.compose.ui.unit.*
 import androidx.lifecycle.*
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,6 +20,8 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.Set
 import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsTopBar
 import com.rafael.tictactoe.settings.presentation.settings_screen.components.BackButton
 import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsCardsImpl
+import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -43,6 +36,10 @@ override fun onBackPressed() {
     startActivity(Intent(this, MainActivity::class.java))
 }
 
+@Inject
+lateinit var settingsRepo: SettingsRepository
+
+
 @Composable
 fun settingsScreen() {
    
@@ -55,7 +52,6 @@ fun settingsScreen() {
    val isSoundEffectsOn by viewModel.isSoundEffectsOn.collectAsState()
    val isAboutShown by viewModel.isAboutShown.collectAsState()
 
-
 Surface(
     color = MaterialTheme.colorScheme.surface,
     modifier = Modifier.fillMaxSize()
@@ -63,18 +59,18 @@ Surface(
 
 SettingsTopBar()
 BackButton()
-SettingsCardsImpl(viewModel, isFollowingSystemOn,isDarkThemeOn,isDynamicColorsOn,isSoundEffectsOn,isBackgroundMusicOn,isAboutShown)
+SettingsCardsImpl(viewModel, isFollowingSystemOn,isDarkThemeOn,isDynamicColorsOn,isSoundEffectsOn,isBackgroundMusicOn,isAboutShown, this, settingsRepo)
 }
 
 
 @Composable
 fun followSystemTheme(){
 
-if (isSystemInDarkTheme){
-viewModel.updateIsDarkThemeOnValue(true)
-} else {
-viewModel.updateIsDarkThemeOnValue(false)
-   }
+	if (isSystemInDarkTheme){
+		viewModel.updateIsDarkThemeOnValue(true)
+	} else {
+		viewModel.updateIsDarkThemeOnValue(false)
+	}
 }
 followSystemTheme()
 
