@@ -81,8 +81,17 @@ suspend fun setWinner(winner: Boolean)
 @Query("UPDATE GameEntity SET gotOld = :gotOld")
 suspend fun setGotOld(gotOld: Boolean)
 
+@Query("UPDATE GameEntity SET showRestartButton = :showRestartButton")
+suspend fun setShowRestartButton(showRestartButton: Boolean)
+
 @Query("UPDATE GameEntity SET currentPlayerName = :currentPlayerName")
 suspend fun setCurrentPlayerName(currentPlayerName: String)
+
+@Query("UPDATE GameEntity SET showPlayer1Name = :showPlayer1Name")
+suspend fun setShowPlayer1Name(showPlayer1Name: String)
+
+@Query("UPDATE GameEntity SET showPlayer2Name = :showPlayer2Name")
+suspend fun setShowPlayer2Name(showPlayer2Name: String)
 
 
 
@@ -155,11 +164,13 @@ suspend fun getGotOld(): Boolean
 @Query("SELECT currentPlayerName FROM GameEntity LIMIT 1")
 suspend fun getCurrentPlayerName(): String
 
-
 @Query("SELECT showRestartButton FROM GameEntity LIMIT 1")
 suspend fun getShowRestartButton(): Boolean
 
-@Query("UPDATE GameEntity SET showRestartButton = :showRestartButton")
-suspend fun setShowRestartButton(showRestartButton: Boolean)
+@Query("SELECT showPlayer1Name FROM GameEntity LIMIT 1")
+suspend fun getShowPlayer1Name(): String
+
+@Query("SELECT showPlayer2Name FROM GameEntity LIMIT 1")
+suspend fun getShowPlayer2Name(): String
 
 }
