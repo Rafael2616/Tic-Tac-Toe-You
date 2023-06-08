@@ -1,6 +1,7 @@
 package com.rafael.tictactoe.settings.presentation.settings_screen.components
 
 import com.rafael.tictactoe.R
+import android.content.Context
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -18,6 +19,7 @@ import com.rafael.tictactoe.settings.domain.util.HandleCardImage
 import com.rafael.tictactoe.settings.domain.util.HandleSwitchValues
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import com.rafael.tictactoe.common.domain.util.UiClickSound
+import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
 
 
 @Composable
@@ -30,17 +32,16 @@ isDynamicColorsOn: Boolean,
 isSoundEffectsOn: Boolean,
 isBackgroundMusicOn: Boolean,
 isAboutShown: Boolean,
+context: Context,
+settingsRepo: SettingsRepository
 ) {
 
-val UiSound = false //::UiClickSound
-
-
-    Card(
-        shape = MaterialTheme.shapes.medium,
-        modifier = Modifier
-            .width(360.dp)
-            .height(if ((index == 5 ) && (isAboutShown)) 190.dp else 70.dp)
-            .clickable(onClick = { HandleSwitchClicks(index,viewModel,isFollowingSystemOn,isDarkThemeOn,isDynamicColorsOn,isSoundEffectsOn,isBackgroundMusicOn, isAboutShown)/*; UiSound*/}) 
+Card(
+    shape = MaterialTheme.shapes.medium,
+    modifier = Modifier
+   .width(360.dp)
+   .height(if ((index == 5 ) && (isAboutShown)) 190.dp else 70.dp)
+   .clickable(onClick = { HandleSwitchClicks(index,viewModel,isFollowingSystemOn,isDarkThemeOn,isDynamicColorsOn,isSoundEffectsOn,isBackgroundMusicOn, isAboutShown); UiClickSound(context, settingsRepo)}) 
     ) {
         Box(
             modifier = Modifier
@@ -67,7 +68,7 @@ val UiSound = false //::UiClickSound
              if(index != 5) {
                 Switch(
                     checked = HandleSwitchValues(index,isFollowingSystemOn,isDarkThemeOn,isDynamicColorsOn,isSoundEffectsOn,isBackgroundMusicOn, isAboutShown),
-                    onCheckedChange = { HandleSwitchClicks(index,viewModel,isFollowingSystemOn,isDarkThemeOn,isDynamicColorsOn,isSoundEffectsOn,isBackgroundMusicOn, isAboutShown)/*; UiSound*/}
+                    onCheckedChange = { HandleSwitchClicks(index,viewModel,isFollowingSystemOn,isDarkThemeOn,isDynamicColorsOn,isSoundEffectsOn,isBackgroundMusicOn, isAboutShown); UiClickSound(context, settingsRepo)}
                 )
              }
             if(index == 5) {

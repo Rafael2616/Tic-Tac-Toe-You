@@ -4,6 +4,7 @@ import com.rafael.tictactoe.R
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsCards
 import android.os.Build.*
+import android.content.*
 import androidx.activity.compose.*
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -18,6 +19,7 @@ import androidx.compose.ui.platform.*
 import androidx.compose.ui.res.*
 import androidx.compose.ui.text.*
 import androidx.compose.ui.unit.*
+import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
 
 
 @Composable
@@ -29,6 +31,8 @@ isDynamicColorsOn: Boolean,
 isSoundEffectsOn: Boolean,
 isBackgroundMusicOn: Boolean,
 isAboutShown: Boolean,
+context: Context,
+settingsRepo: SettingsRepository
 ) {
 
 val isDynamicColorsSupported = VERSION.SDK_INT >= VERSION_CODES.S 
@@ -43,7 +47,7 @@ LazyColumn(
        if (((index == 1) && (!isFollowingSystemOn)) ||
             ((index == 2) && (isDynamicColorsSupported)) ||
             ((index != 1) && (index != 2))) {
-            SettingsCards(index,viewModel,isFollowingSystemOn,isDarkThemeOn,isDynamicColorsOn,isSoundEffectsOn,isBackgroundMusicOn,isAboutShown)
+            SettingsCards(index,viewModel,isFollowingSystemOn,isDarkThemeOn,isDynamicColorsOn,isSoundEffectsOn,isBackgroundMusicOn,isAboutShown, context, settingsRepo)
         }
       }
    }
