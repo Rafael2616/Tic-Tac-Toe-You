@@ -13,7 +13,7 @@
         android:hardwareAccelerated="true"
         android:theme="@style/AppTheme">
         
-        <service android:name=".game.services.MediaService" />
+        <service android:name=".common.services.MusicService" />
 
         <activity
             android:name=".game.presentation.splash_screen.activities.SplashActivity"
