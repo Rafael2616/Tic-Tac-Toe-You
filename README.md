@@ -2,19 +2,19 @@
 A classic tic-tac-toe game made with material you and others new android technologies
 
 # Features:
-The game has all basic features that you expect in a tictactoe game and the following below:
-✓ The UI is constructed with material you components
-✓ Beautiful csrd to add name and select you icon "X" or "O"
-✓ Sound Effects when click in cards, whem has a win ou things like it
-✓ Background Music
-✓ Lines when there is a winner
+*The game has all basic features that you expect in a tictactoe game and the following below:
+- The UI is constructed with material you components
+- Beautiful csrd to add name and select you icon "X" or "O"
+- Sound Effects when click in cards, whem has a win ou things like it
+- Background Music
+- Lines when there is a winner
 
 # Employed technologies:
-[X] Room database
-[X] Dependency Injection with Dagger Hilt
-[X] Clean Arquiteture
-[X] MVVM patterns
-[X] Jetpack Compose
+- Room database
+- Dependency Injection with Dagger Hilt
+- Clean Arquiteture
+- MVVM patterns
+- Jetpack Compose
 
 # Game Screenshots
 | Imagem 1 | Imagem 2 | Imagem 3 |
