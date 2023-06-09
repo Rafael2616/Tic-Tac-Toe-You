@@ -2,10 +2,10 @@
 A classic tic-tac-toe game made with material you and others new android technologies
 
 # Features:
-*The game has all basic features that you expect in a tictactoe game and the following below:
+*The game have all basic features that you expect in a tictactoe game and the following below:*
 - The UI is constructed with material you components
-- Beautiful csrd to add name and select you icon "X" or "O"
-- Sound Effects when click in cards, whem has a win ou things like it
+- Beautiful card to add name and select you icon "X" or "O"
+- Sound Effects when click in cards, when has a win ou things like it
 - Background Music
 - Lines when there is a winner
 
@@ -27,3 +27,9 @@ A classic tic-tac-toe game made with material you and others new android technol
 - The data is not saving on the database
 - The lines when there is a winner only work's in HD Screens (720*1080)
 - The status bar not change correctly in some cases
+
+# Disclaimer
+The Game is undergoing structural changes, before it was built on the basis of force😁, all funcions and UI in same files, but now i am separation the responsibilitys in base of Clean Arquiteture guidelines
+
+# Follow me on Instagram
+[Instagram](https://www.instagram.com/rafaelmoura_018/)
