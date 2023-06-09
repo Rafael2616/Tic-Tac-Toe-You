@@ -4,6 +4,7 @@ A classic tic-tac-toe game made with material you and others new android technol
 # Features:
 *The game have all basic features that you expect in a tic tac toe game and the following below:*
 - The UI is constructed with material you components
+- Dynamic Colors support
 - Beautiful card to add name and select you icon "X" or "O"
 - Sound Effects when click in cards, when has a win ou things like it
 - Background Music
