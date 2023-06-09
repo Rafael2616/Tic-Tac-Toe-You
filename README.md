@@ -32,4 +32,4 @@ A classic tic-tac-toe game made with material you and others new android technol
 The Game is undergoing structural changes, before it was built on the basis of force😁, all funcions and UI in same files, but now i am separation the responsibilitys in base of Clean Arquiteture guidelines
 
 # Follow me on Instagram
-[Instagram](https://www.instagram.com/rafal_mourana/)
+[Instagram](https://www.instagram.com/rafael_mourana/)
