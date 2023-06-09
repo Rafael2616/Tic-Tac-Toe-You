@@ -2,7 +2,7 @@ package com.rafael.tictactoe.game.presentation.game_screen.activities
 
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.presentation.ui.theme.AppTheme
-import com.rafael.tictactoe.commom.services.MusicService
+import com.rafael.tictactoe.common.services.MusicService
 import com.rafael.tictactoe.game.presentation.main_screen.activities.MainActivity
 import android.content.*
 import android.media.MediaPlayer
