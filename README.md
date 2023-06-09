@@ -2,12 +2,12 @@
 A classic tic-tac-toe game made with material you and others new android technologies
 
 # Features:
-*The game have all basic features that you expect in a tictactoe game and the following below:*
+*The game have all basic features that you expect in a tic tac toe game and the following below:*
 - The UI is constructed with material you components
 - Beautiful card to add name and select you icon "X" or "O"
 - Sound Effects when click in cards, when has a win ou things like it
 - Background Music
-- Lines when there is a winner
+- Line when there is a winner
 
 # Employed technologies:
 - Room database
@@ -24,11 +24,11 @@ A classic tic-tac-toe game made with material you and others new android technol
 | ![Screenshot_20230507-171211](https://github.com/Rafael2616/Tic-Tac-Toe-Material-You/assets/93414086/5c43c764-b2d2-4df3-b00d-83a8234fb034) | ![Screenshot_20230507-171227](https://github.com/Rafael2616/Tic-Tac-Toe-Material-You/assets/93414086/e3c9d533-3159-4cc6-a8c5-238273562ab4) |  |
 
 # Incompletes/Bugged Features
-- The data is not saving on the database
-- The lines when there is a winner only work's in HD Screens (720*1080)
-- The status bar not change correctly in some cases
+- The data is not being saved the database
+- The line when there is a winner only work's in HD Screens (720*1080)
+- The status bar not change the color correctly in some cases
 
-# Disclaimer
+# Notice
 The Game is undergoing structural changes, before it was built on the basis of force😁, all funcions and UI in same files, but now i am separation the responsibilitys in base of Clean Arquiteture guidelines
 
 # Follow me on Instagram
