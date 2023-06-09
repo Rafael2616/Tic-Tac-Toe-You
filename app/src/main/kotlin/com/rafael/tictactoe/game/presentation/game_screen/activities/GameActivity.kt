@@ -2,7 +2,7 @@ package com.rafael.tictactoe.game.presentation.game_screen.activities
 
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.presentation.ui.theme.AppTheme
-import com.rafael.tictactoe.game.services.MediaService
+import com.rafael.tictactoe.commom.services.MusicService
 import com.rafael.tictactoe.game.presentation.main_screen.activities.MainActivity
 import android.content.*
 import android.media.MediaPlayer
@@ -44,11 +44,11 @@ class GameActivity : ComponentActivity() {
 }
 
   override fun onStop() {
-   stopService(Intent(this, MediaService::class.java))
+   stopService(Intent(this, MusicService::class.java))
      super.onStop()
 }
   override fun onResume() {
-   startService(Intent(this, MediaService::class.java))
+   startService(Intent(this, MusicService::class.java))
      super.onResume()
 }
 
@@ -436,16 +436,8 @@ var gotOld = gotOld()
 
 fun handleCardClick(index: Int) {
 
-if (!play){
- return
-}
+if ((play) && (!winner)) {
 
-if (winner) {
-    return
-  }
-  if (isCardClicked[index]) {
-      return
-     }
      if (!isCardClicked[index]) {
           if (isXImage){
              isCardClicked = isCardClicked.toMutableList().also {
@@ -474,6 +466,7 @@ if (winner) {
            isPlayer1 = !isPlayer1
         }
     }
+}
 }
 
 
@@ -1019,8 +1012,8 @@ fun backgroundMusicButtonLogic() {
 isBackgroundMusicOn = !isBackgroundMusicOn
 editor.putBoolean("isBackgroundMusicOn", isBackgroundMusicOn)
 editor.apply()
-if (isBackgroundMusicOn) startService(Intent(this, MediaService::class.java))
-else stopService(Intent(this, MediaService::class.java))
+if (isBackgroundMusicOn) startService(Intent(this, MusicService::class.java))
+else stopService(Intent(this, MusicService::class.java))
 }
 
 
