@@ -2,40 +2,48 @@ package com.rafael.tictactoe.common.services
 
 import android.os.IBinder
 import android.app.Service
-import android.app.ActivityManager
-import android.annotation.SuppressLint
+//import android.app.ActivityManager
 import android.media.MediaPlayer
 import android.content.*
 import com.rafael.tictactoe.R
+import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
+import kotlinx.coroutines.*
 
 
 @AndroidEntryPoint
 class MusicService : Service() {
-private var mediaPlayer: MediaPlayer? = null
 
-override fun onBind(intent: Intent): IBinder? { 
-return null
-}
+    @Inject
+    lateinit var settingsRepo: SettingsRepository
 
-override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-       val sharedPreferences = getSharedPreferences("AppSettings", Context.MODE_PRIVATE)
-       var isMusicOn = sharedPreferences.getBoolean("isBackgroundMusicOn", true)
-        mediaPlayer = MediaPlayer.create(this, R.raw.background_music)
-        mediaPlayer?.isLooping = true
-      
-if(isMusicOn){
-    mediaPlayer?.start()
-    } else {
-       mediaPlayer?.stop()
-       }
-    return START_STICKY
-}
-        
-override fun onDestroy() {
-    super.onDestroy()
-    mediaPlayer?.stop()
-    mediaPlayer?.release()       
+    private lateinit var backgroundMusic: MediaPlayer
+
+    override fun onBind(intent: Intent): IBinder {
+        return null
     }
 
+    override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
+        CoroutineScope(Dispatchers.Main).launch {
+   	     val isBackgroundMusicOn = withContext(Dispatchers.IO) {
+            settingsRepo.getIsBackgroundMusicOn()
+     	   }
+     	   backgroundMusic = MediaPlayer.create(this@MusicService, R.raw.background_music)
+       	 backgroundMusic.isLooping = true
+
+    	    if (isBackgroundMusicOn) {
+           	 backgroundMusic.start()
+       	 } else {
+          	  backgroundMusic.pause()
+        	}
+        }
+        return START_STICKY
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        backgroundMusic.stop()
+        backgroundMusic.release()
+    }
 }
