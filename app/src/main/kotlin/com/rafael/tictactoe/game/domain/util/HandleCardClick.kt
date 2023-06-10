@@ -1,13 +1,10 @@
 package com.rafael.tictactoe.game.domain.util
 
 import com.rafael.tictactoe.R
-import android.media.MediaPlayer
-import androidx.compose.runtime.*
 import com.rafael.tictactoe.game.domain.repository.GameRepository
 import kotlinx.coroutines.*
 
 
-@Composable
 fun HandleCardClick(
 repository: GameRepository,
 index: Int
