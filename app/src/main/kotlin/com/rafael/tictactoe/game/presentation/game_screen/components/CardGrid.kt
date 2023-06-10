@@ -8,28 +8,33 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.*
-import androidx.compose.runtime.livedata.*
 import androidx.compose.ui.*
 import androidx.compose.ui.draw.*
 import androidx.compose.ui.graphics.*
-import androidx.compose.ui.graphics.drawscope.*
-import androidx.compose.ui.geometry.*
 import androidx.compose.ui.platform.*
 import androidx.compose.ui.res.*
 import androidx.compose.ui.text.*
 import androidx.compose.ui.unit.*
 import androidx.compose.ui.graphics.painter.*
 import androidx.constraintlayout.compose.*
-//import com.rafael.tictactoe.game.domain.util.HandleCardClick
-//import com.rafael.tictactoe.game.domain.util.WinnerLineLogic
-//import com.rafael.tictactoe.game.domain.util.SetCardImage
+import com.rafael.tictactoe.game.domain.repository.GameRepository
+import com.rafael.tictactoe.game.domain.util.HandleCardClick
+import com.rafael.tictactoe.game.domain.util.WinnerLineLogic
+import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
+import kotlinx.coroutines.*
 
 
 @Composable
 fun CardGrid(
 cards: List<Boolean>,
-expandButton: Boolean
+isCardClicked: List<Boolean>,
+repository: GameRepository,
+coordinates: WinnerLineCoordinates
 ) {
+
+ val xImage = painterResource(R.drawable.x_image)
+ val circleImage = painterResource(R.drawable.circle_image)
+ val transparentImage = painterResource(R.drawable.transparent_image)
 
   ConstraintLayout {
      val cardNumber = List(cards.size) { createRef() }
@@ -50,14 +55,14 @@ expandButton: Boolean
 cards.forEachIndexed { index, _ ->
    val cardRef = cardNumber[index]
 
- Card(     
-     shape = MaterialTheme.shapes.medium,
-      modifier = Modifier
-        .width(110.dp)
-        .height(110.dp)
-        .clickable(onClick = { /*HandleCardClick(index); WinnerLineLogic(); expandButton = false*/})
-        .constrainAs(cardRef) {
-      when (index) {
+Card(     
+    shape = MaterialTheme.shapes.medium,
+    modifier = Modifier
+   .width(110.dp)
+   .height(110.dp)
+   .clickable(onClick = { HandleCardClick(repository, index); WinnerLineLogic(repository, coordinates) })//; coroutineScope(Dispatchers.IO).launch { repository.setExpandButton(false)} })
+   .constrainAs(cardRef) {
+     when (index) {
     0 -> {
          top.linkTo(top1)
          bottom.linkTo(bottom1); (cardNumber[3].top)
@@ -113,16 +118,22 @@ cards.forEachIndexed { index, _ ->
          end.linkTo(end3)
          }
   else ->  error ("Inválid Index")
-               }
-             }
-           )
-         {
-   Image(
-         contentDescription = null,
-         modifier = Modifier.fillMaxSize(),
-         painter = painterResource(id = R.drawable.transparent_image) /*SetCardImage(index)*/ //TODO// IMPLEMENT THIS
-        )
-      }       
-    }
-  }
+         }
+       	}
+       	  )
+        	   {
+		  Image(
+  			  contentDescription = null,
+ 			   modifier = Modifier.fillMaxSize(),
+ 			   painter = painterResource(
+   			     if (isCardClicked[index]) {
+         			   if (cards[index]) R.drawable.x_image else R.drawable.circle_image
+    			    } else {
+       			     R.drawable.transparent_image
+    				    }
+					)
+				)
+			}       
+		}
+	}
 }
