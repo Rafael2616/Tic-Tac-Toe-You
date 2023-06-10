@@ -20,7 +20,7 @@ class MusicService : Service() {
 
     private lateinit var backgroundMusic: MediaPlayer
 
-    override fun onBind(intent: Intent): IBinder {
+    override fun onBind(intent: Intent): IBinder? {
         return null
     }
 
