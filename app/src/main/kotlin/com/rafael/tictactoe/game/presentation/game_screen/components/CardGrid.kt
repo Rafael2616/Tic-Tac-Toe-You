@@ -32,10 +32,6 @@ repository: GameRepository,
 coordinates: WinnerLineCoordinates
 ) {
 
- val xImage = painterResource(R.drawable.x_image)
- val circleImage = painterResource(R.drawable.circle_image)
- val transparentImage = painterResource(R.drawable.transparent_image)
-
   ConstraintLayout {
      val cardNumber = List(cards.size) { createRef() }
      
@@ -60,7 +56,7 @@ Card(
     modifier = Modifier
    .width(110.dp)
    .height(110.dp)
-   .clickable(onClick = { HandleCardClick(repository, index); WinnerLineLogic(repository, coordinates) })//; coroutineScope(Dispatchers.IO).launch { repository.setExpandButton(false)} })
+   .clickable(onClick = { HandleCardClick(repository, index); WinnerLineLogic(repository, coordinates) })
    .constrainAs(cardRef) {
      when (index) {
     0 -> {
@@ -122,13 +118,13 @@ Card(
        	}
        	  )
         	   {
-		  Image(
+ 		  Image(
   			  contentDescription = null,
  			   modifier = Modifier.fillMaxSize(),
  			   painter = painterResource(
    			     if (isCardClicked[index]) {
          			   if (cards[index]) R.drawable.x_image else R.drawable.circle_image
-    			    } else {
+    	 		    } else {
        			     R.drawable.transparent_image
     				    }
 					)
