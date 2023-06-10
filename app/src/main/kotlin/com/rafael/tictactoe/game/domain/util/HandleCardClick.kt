@@ -38,4 +38,5 @@ if ((play) && (!winner)) {
        	 }
     	}
 	}
+  repository.setExpandButton(false)
 }
