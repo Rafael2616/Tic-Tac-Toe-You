@@ -21,7 +21,7 @@ import com.rafael.tictactoe.game.domain.repository.GameRepository
 import com.rafael.tictactoe.game.domain.util.HandleCardClick
 import com.rafael.tictactoe.game.domain.util.WinnerLineLogic
 import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
-import kotlinx.coroutines.*
+import kotlinx.coroutines.launch
 
 
 @Composable
@@ -31,6 +31,8 @@ isCardClicked: List<Boolean>,
 repository: GameRepository,
 coordinates: WinnerLineCoordinates
 ) {
+
+   val scope = rememberCoroutineScope()
 
   ConstraintLayout {
      val cardNumber = List(cards.size) { createRef() }
@@ -56,7 +58,9 @@ Card(
     modifier = Modifier
    .width(110.dp)
    .height(110.dp)
-   .clickable(onClick = { HandleCardClick(repository, index); WinnerLineLogic(repository, coordinates) })
+   .clickable(onClick = { scope.launch {
+ HandleCardClick(repository, index); WinnerLineLogic(repository, coordinates
+}) })
    .constrainAs(cardRef) {
      when (index) {
     0 -> {

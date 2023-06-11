@@ -23,7 +23,8 @@ import androidx.compose.ui.graphics.painter.*
 import com.rafael.tictactoe.game.domain.util.BackgroundMusicLogic
 import com.rafael.tictactoe.game.domain.repository.GameRepository
 import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
-
+import com.rafael.tictactoe.common.domain.util.UiClickSound
+import kotlinx.coroutines.launch
 
 @Composable
 fun BackgroundMusicButton(
@@ -31,7 +32,9 @@ isBackgroundMusicOn: Boolean,
 context: Context,
 gameRepo: GameRepository,
 setRepo: SettingsRepository
-){
+) {
+
+val scope = rememberCoroutineScope()
 
     Box(
         modifier = Modifier
@@ -50,7 +53,7 @@ setRepo: SettingsRepository
               modifier = Modifier
              .width(45.dp)
              .height(45.dp)
-             .clickable(onClick = {/*uiClickSound();*/ BackgroundMusicLogic(gameRepo, setRepo, context)})
+             .clickable(onClick = { UiClickSound(); scope.launch { BackgroundMusicLogic(gameRepo, setRepo, context) }})
        ) {
             Image(
                   contentDescription = null,
