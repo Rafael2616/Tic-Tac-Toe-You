@@ -1,16 +1,13 @@
 package com.rafael.tictactoe.game.domain.util
 
 import com.rafael.tictactoe.game.domain.repository.GameRepository
-import kotlinx.coroutines.*
 
 
-fun VictoryCounterLogic(
-repository: GameRepository
-) = runBlocking {
+suspend fun VictoryCounterLogic(repository: GameRepository) {
 
-val isScoreUp = repository.getIsScoreUp()
-val winner = repository.getWinner()
-val is1Win = repository.getIs1Win()
+	val isScoreUp = repository.getIsScoreUp()
+	val winner = repository.getWinner()
+	val is1Win = repository.getIs1Win()
 
 if (!isScoreUp) {
     if (winner) {

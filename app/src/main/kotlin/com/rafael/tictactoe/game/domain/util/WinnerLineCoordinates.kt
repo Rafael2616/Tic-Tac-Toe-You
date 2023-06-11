@@ -1,9 +1,7 @@
 package com.rafael.tictactoe.game.domain.util
 
 import com.rafael.tictactoe.game.domain.repository.GameRepository
-import kotlinx.coroutines.*
 import javax.inject.Inject
-
 
 //THIS COORDINATES ONLY WORKS AS EXPECTED IN DEVICES WITH HD SCREEN(1280/720) AND NEEDS REWORK!!
 
@@ -11,35 +9,35 @@ class WinnerLineCoordinates @Inject constructor(
 private val repository : GameRepository
 ) {
 
-fun setFirstHorizontalLinePositions() = runBlocking {
+suspend fun setFirstHorizontalLinePositions() {
 	repository.setCoordinates(15f, 725f, 705f, 725f)
 }
 
-fun setSecondHorizontalLinePositions() = runBlocking {
+suspend fun setSecondHorizontalLinePositions() {
 	repository.setCoordinates(15f, 950f, 705f, 950f)
 }
 
-fun setTertiaryHorizontalLinePositions() = runBlocking {
+suspend fun setTertiaryHorizontalLinePositions() {
 	repository.setCoordinates(15f, 1170f, 705f, 1170f)
 }
 
-fun setFirstVerticalLinePositions() = runBlocking {
+suspend fun setFirstVerticalLinePositions() {
 	repository.setCoordinates(125f, 610f, 125f, 1285f)
 }
 
-fun setSecondVerticalLinePositions() = runBlocking {
+suspend fun setSecondVerticalLinePositions() {
     repository.setCoordinates(362f, 610f, 362f, 1285f)
 }
 
-fun setTertiaryVerticalLinePositions() = runBlocking {
+suspend fun setTertiaryVerticalLinePositions() {
     repository.setCoordinates(595f, 610f, 595f, 1285f)
 }
 
-fun setStartToEndTransversalLinePositions() = runBlocking {
+suspend fun setStartToEndTransversalLinePositions() {
     repository.setCoordinates(15f, 620f, 705f, 1275f)
 }
 
-fun setEndToStartTransversalLinePositions() = runBlocking {
+suspend fun setEndToStartTransversalLinePositions() {
     repository.setCoordinates(705f, 620f, 15f, 1275f)
-   }
+    }
 }

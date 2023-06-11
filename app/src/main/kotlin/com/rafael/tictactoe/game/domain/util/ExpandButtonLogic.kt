@@ -1,14 +1,10 @@
 package com.rafael.tictactoe.game.domain.util
 
 import com.rafael.tictactoe.game.domain.repository.GameRepository
-import kotlinx.coroutines.*
 
 
-fun ExpandButtonLogic(
-repository: GameRepository
-) = runBlocking {
+suspend fun ExpandButtonLogic(repository: GameRepository) {
 
-val expandButton = repository.getExpandButton()
-repository.setExpandButton(!expandButton)
-
+	val expandButton = repository.getExpandButton()
+	repository.setExpandButton(!expandButton)
 }

@@ -2,18 +2,14 @@ package com.rafael.tictactoe.game.domain.util
 
 import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
 import com.rafael.tictactoe.game.domain.repository.GameRepository
-import kotlinx.coroutines.*
 
 
-fun WinnerLineLogic(
-repository: GameRepository,
-cordinate: WinnerLineCoordinates
-) = runBlocking {
+suspend fun WinnerLineLogic(repository: GameRepository, cordinate: WinnerLineCoordinates) {
 
-val cardsString = repository.getCards()
-val cards = cardsString.map { it.toBoolean() }.toMutableList()
-val isCardClickedString = repository.getIsCardClicked()
-val isCardClicked = isCardClickedString.map { it.toBoolean() }.toMutableList()
+	val cardsString = repository.getCards()
+	val cards = cardsString.map { it.toBoolean() }.toMutableList()
+	val isCardClickedString = repository.getIsCardClicked()
+	val isCardClicked = isCardClickedString.map { it.toBoolean() }.toMutableList()
 
 if (isCardClicked[0] && isCardClicked[1] && isCardClicked[2]){
 	if ((cards[0] && cards[1] && cards[2]) || (!cards[0] && !cards[1] && !cards[2])) {

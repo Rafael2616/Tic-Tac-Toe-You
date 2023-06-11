@@ -1,17 +1,14 @@
 package com.rafael.tictactoe.game.domain.util
 
 import com.rafael.tictactoe.game.domain.repository.GameRepository
-import kotlinx.coroutines.*
 
 
-fun CheckForWinner(
-repository: GameRepository
-) = runBlocking {
+suspend fun CheckForWinner(repository: GameRepository) {
 
-val cardsString = repository.getCards()
-val cards = cardsString.map { it.toBoolean() }
-val isCardClickedString = repository.getIsCardClicked()
-val isCardClicked = isCardClickedString.map { it.toBoolean() }
+	val cardsString = repository.getCards()
+	val cards = cardsString.map { it.toBoolean() }
+	val isCardClickedString = repository.getIsCardClicked()
+	val isCardClicked = isCardClickedString.map { it.toBoolean() }
 
 	val winningPositions = listOf(
         listOf(0, 1, 2),

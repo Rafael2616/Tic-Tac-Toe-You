@@ -2,22 +2,18 @@ package com.rafael.tictactoe.game.domain.util
 
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.repository.GameRepository
-import kotlinx.coroutines.*
 
 
-fun HandleCardClick(
-repository: GameRepository,
-index: Int
-) = runBlocking {
+suspend fun HandleCardClick(repository: GameRepository, index: Int) {
 
-val cardsString = repository.getCards()
-val cards = cardsString.map { it.toBoolean() }.toMutableList()
-val isCardClickedString = repository.getIsCardClicked()
-val isCardClicked = isCardClickedString.map { it.toBoolean() }.toMutableList()
-val play = repository.getPlay()
-val isXImage = repository.getIsXImage()
-val winner = repository.getWinner()
-val isPlayer1 = repository.getIsPlayer1()
+	val cardsString = repository.getCards()
+	val cards = cardsString.map { it.toBoolean() }.toMutableList()
+	val isCardClickedString = repository.getIsCardClicked()
+	val isCardClicked = isCardClickedString.map { it.toBoolean() }.toMutableList()
+	val play = repository.getPlay()
+	val isXImage = repository.getIsXImage()
+	val winner = repository.getWinner()
+	val isPlayer1 = repository.getIsPlayer1()
 
 if ((play) && (!winner)) {
     if (!isCardClicked[index]) {

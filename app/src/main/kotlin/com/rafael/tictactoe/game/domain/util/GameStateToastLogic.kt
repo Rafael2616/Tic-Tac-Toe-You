@@ -6,6 +6,7 @@ import com.rafael.tictactoe.game.domain.repository.GameRepository
 
 
 suspend fun GameStateToastLogic(repository: GameRepository, context: Context) {
+
     val winner = repository.getWinner()
     val player1Name = repository.getPlayer1Name()
     val player2Name = repository.getPlayer2Name()
