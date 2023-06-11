@@ -26,7 +26,7 @@ fun BackgroundMusicButton(
 isBackgroundMusicOn: Boolean,
 context: Context,
 gameRepo: GameRepository,
-setRepo: SettingsRepository
+settingsRepo: SettingsRepository
 ) {
 
 val scope = rememberCoroutineScope()
@@ -48,7 +48,7 @@ val scope = rememberCoroutineScope()
               modifier = Modifier
              .width(45.dp)
              .height(45.dp)
-             .clickable(onClick = { UiClickSound(context, settingsRepo); scope.launch { BackgroundMusicLogic(gameRepo, setRepo, context) }})
+             .clickable(onClick = { UiClickSound(context, settingsRepo); scope.launch { BackgroundMusicLogic(gameRepo, settingsRepo, context) }})
        ) {
             Image(
                   contentDescription = null,
