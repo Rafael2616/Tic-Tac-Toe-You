@@ -60,7 +60,7 @@ Card(
    .height(110.dp)
    .clickable(onClick = { scope.launch {
  HandleCardClick(repository, index); WinnerLineLogic(repository, coordinates
-}) })
+)}})
    .constrainAs(cardRef) {
      when (index) {
     0 -> {
