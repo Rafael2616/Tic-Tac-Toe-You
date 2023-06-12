@@ -8,7 +8,7 @@ plugins {
 
 android {
     compileSdk = 33
-    buildToolsVersion = "33.0.0"
+    buildToolsVersion = "33.0.3"
     namespace = "com.rafael.tictactoe"
 
     defaultConfig {
@@ -75,27 +75,27 @@ dependencies {
     val room_version = "2.6.0-alpha01"
     val hilt_version = "2.46.1"
 
-    //Dependências Kotlin
+    //Kotlin
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
     
-    //Dependências Room
+    //Room
     implementation("androidx.room:room-runtime:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
     ksp("androidx.room:room-compiler:$room_version")
     
-    //Dependências Dagger Hilt
+    //Dagger Hilt
     implementation("com.google.dagger:hilt-android:$hilt_version")
     kapt("com.google.dagger:hilt-android-compiler:$hilt_version")    
-    implementation("androidx.hilt:hilt-navigation-compose:1.1.0-alpha01")
-    kapt("androidx.hilt:hilt-compiler:1.0.0")
+    
 
-  //Dependências Lifecycle
+
+  //Lifecycle
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycle_version")
     
-    //Dependências Jetpack Compose
+    //Jetpack Compose
     platform("androidx.compose:compose-bom:2023.06.00")
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.material3:material3:1.1.0")
@@ -103,21 +103,21 @@ dependencies {
     implementation("androidx.compose.runtime:runtime-livedata")
     implementation("androidx.compose.material:material-icons-core")
 
-    //Outras dependências do Jetpack Compose
+    //Others Jetpack deps
     implementation("androidx.activity:activity-compose:1.7.2")
     implementation("androidx.constraintlayout:constraintlayout-compose-android:1.1.0-alpha10")
 
-    //Dependências para personalização do tema
+    //Theming
     implementation("com.google.android.material:compose-theme-adapter-3:1.1.1") 
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.31.2-alpha")
 
-    //Dependências de teste unitários
+    //Test Unit
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.4.3")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-    //Para corrigir erro relacionado ao Room na tarefa KSP
+    //To fix Room issue in KSP task
 	configurations.all {
    	 resolutionStrategy {
       	  force("org.xerial:sqlite-jdbc:3.42.0.0")
