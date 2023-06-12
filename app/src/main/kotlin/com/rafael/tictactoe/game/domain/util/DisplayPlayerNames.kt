@@ -1,13 +1,15 @@
 package com.rafael.tictactoe.game.domain.util
 
+import android.content.Context
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.repository.GameRepository
 
 
 class DisplayPlayerNames {
 
-	suspend fun firstPlayerName(repository: GameRepository, genericPlayerX: String) {
+	suspend fun firstPlayerName(context: Context, repository: GameRepository) {
 
+    val genericPlayerX = context.getString(R.string.player_x)
 	val play = repository.getPlay()
 	val player1InToast = repository.getPlayer1InToast()
 	val isPlayer1 = repository.getIsPlayer1()
@@ -48,8 +50,9 @@ class DisplayPlayerNames {
 		}
 	}
 
-	suspend fun secondPlayerName(repository: GameRepository, genericPlayerO: String) {
+	suspend fun secondPlayerName(context: Context, repository: GameRepository) {
 
+	val genericPlayerO = context.getString(R.string.player_o)
 	val play = repository.getPlay()
 	val player1InToast = repository.getPlayer1InToast()
 	val isPlayer1 = repository.getIsPlayer1()
