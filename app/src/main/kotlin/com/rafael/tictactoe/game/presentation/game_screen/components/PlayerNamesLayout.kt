@@ -1,63 +1,72 @@
 package com.rafael.tictactoe.game.presentation.components
 
-import com.rafael.tictactoe.R
+import android.content.Context
 import androidx.activity.compose.*
 //import androidx.compose.animation.*
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.*
-import androidx.compose.runtime.livedata.*
 import androidx.compose.ui.*
-import androidx.compose.ui.draw.*
 import androidx.compose.ui.graphics.*
-import androidx.compose.ui.graphics.drawscope.*
-import androidx.compose.ui.geometry.*
 import androidx.compose.ui.platform.*
 import androidx.compose.ui.res.*
 import androidx.compose.ui.text.*
 import androidx.compose.ui.unit.*
 import androidx.compose.ui.graphics.painter.*
-
+import com.rafael.tictactoe.R
+import com.rafael.tictactoe.game.domain.repository.GameRepository
+import com.rafael.tictactoe.game.domain.util.DisplayPlayerNames
+import kotlinx.coroutines.launch
 
 @Composable
-fun PlayerNamesLayout(){
+fun PlayerNamesLayout(context: Context, repository: GameRepository, playerName: DisplayPlayerNames) {
+    val scope = rememberCoroutineScope()
+    var player1Name by remember{ mutableStateOf("") }
+    var player2Name by remember{ mutableStateOf("") }
 
- Box(
-     modifier = Modifier
-     .fillMaxWidth(),
-     contentAlignment = (Alignment.TopCenter)
-  ) {
-      Column(
-             verticalArrangement = Arrangement.Center,
-             modifier = Modifier
-            .wrapContentSize()
-            .padding(top = 24.dp, end = 80.dp)
-         ) {
+    LaunchedEffect(Unit) {
+        player1Name = repository.getShowPlayer1Name()
+        player2Name = repository.getShowPlayer2Name()
+        playerName.firstPlayerName(context, repository)
+        playerName.secondPlayerName(context, repository)
+    }
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth(),
+        contentAlignment = (Alignment.TopCenter)
+    ) {
+        Column(
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .wrapContentSize()
+                .padding(top = 24.dp, end = 80.dp)
+        ) {
             Text(
-                 text = ("hello") /*displayFirstPlayerNameLogic()*/,
-                 style = MaterialTheme.typography.bodyMedium,
-                 color = MaterialTheme.colorScheme.onSurface,                 
-               )
+                text = ("$player2Name"),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurface,
+            )
         }
- }
- Box(
-     modifier = Modifier
-    .fillMaxWidth(),
-     contentAlignment = (Alignment.TopCenter)
-   ) {
-      Column(
-             verticalArrangement = Arrangement.Center,
-             modifier = Modifier
-            .wrapContentSize()
-            .padding(top = 24.dp, start = 80.dp)
-          ) {
-             Text(
-                  text = ("hello")/* displaySecondPlayerNameLogic()*/,
-                  style = MaterialTheme.typography.bodyMedium,
-                  color = MaterialTheme.colorScheme.onSurface,
-                  )
-            }
-      }
+    }
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth(),
+        contentAlignment = (Alignment.TopCenter)
+    ) {
+        Column(
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .wrapContentSize()
+                .padding(top = 24.dp, start = 80.dp)
+        ) {
+            Text(
+                text = ("$player2Name"),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurface,
+            )
+        }
+    }
 }
