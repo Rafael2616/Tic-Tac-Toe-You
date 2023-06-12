@@ -15,54 +15,53 @@ import androidx.compose.ui.res.*
 import androidx.compose.ui.text.*
 import androidx.compose.ui.unit.*
 import androidx.compose.ui.graphics.painter.*
-import com.rafael.tictactoe.game.domain.util.BackgroundMusicLogic
-import com.rafael.tictactoe.game.domain.repository.GameRepository
-import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
 import com.rafael.tictactoe.common.domain.util.UiClickSound
+import com.rafael.tictactoe.game.domain.util.BackgroundMusicLogic
+import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
 import kotlinx.coroutines.launch
+
 
 @Composable
 fun BackgroundMusicButton(
-isBackgroundMusicOn: Boolean,
 context: Context,
-gameRepo: GameRepository,
+isBackgroundMusicOn: Boolean,
 settingsRepo: SettingsRepository
 ) {
 
-val scope = rememberCoroutineScope()
+	val scope = rememberCoroutineScope()
 
-    Box(
-        modifier = Modifier
-       .wrapContentSize(),
-        contentAlignment = Alignment.TopStart
+Box(
+	modifier = Modifier
+   .wrapContentSize(),
+    contentAlignment = Alignment.TopStart
  ) {
-     Column(
-             verticalArrangement = Arrangement.Center,
-             modifier = Modifier
-            .wrapContentSize()
-            .padding(start = 15.dp)
-            .padding(top = 165.dp)
+    Column(
+		verticalArrangement = Arrangement.Center,
+        modifier = Modifier
+       .wrapContentSize()
+       .padding(start = 15.dp)
+       .padding(top = 165.dp)
     ) {
-         Card(
-              shape = MaterialTheme.shapes.medium,
-              modifier = Modifier
-             .width(45.dp)
-             .height(45.dp)
-             .clickable(onClick = { UiClickSound(context, settingsRepo); scope.launch { BackgroundMusicLogic(gameRepo, settingsRepo, context) }})
-       ) {
-            Image(
-                  contentDescription = null,
-                  modifier = Modifier.fillMaxSize(),
-                  painter = painterResource( if (isBackgroundMusicOn) R.drawable.sound_on_icon
-                  else R.drawable.sound_off_icon)
-                 )      
-               }
-         Text(
-              text = stringResource(R.string.active_music),
-              style = MaterialTheme.typography.bodyMedium.copy(fontSize = 12.sp),
-              color = MaterialTheme.colorScheme.onSurfaceVariant,
-              modifier = Modifier.align(Alignment.CenterHorizontally)
+       Card(
+			shape = MaterialTheme.shapes.medium,
+            modifier = Modifier
+           .width(45.dp)
+           .height(45.dp)
+           .clickable(onClick = { UiClickSound(context, settingsRepo); scope.launch { BackgroundMusicLogic(settingsRepo, context) }})
+        ) {
+           Image(
+				contentDescription = null,
+                modifier = Modifier.fillMaxSize(),
+                painter = painterResource( if (isBackgroundMusicOn) R.drawable.sound_on_icon
+                else R.drawable.sound_off_icon)
+                )      
+              }
+        Text(
+			text = stringResource(R.string.active_music),
+            style = MaterialTheme.typography.bodyMedium.copy(fontSize = 12.sp),
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.align(Alignment.CenterHorizontally)
             )
         }
-    }
+	}
 }
