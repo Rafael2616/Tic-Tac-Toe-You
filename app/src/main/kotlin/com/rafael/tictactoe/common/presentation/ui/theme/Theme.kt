@@ -1,6 +1,5 @@
 package com.rafael.tictactoe.common.presentation.ui.theme
 
-import android.content.*
 import android.content.Context
 import android.os.Build.*
 import androidx.compose.foundation.*
@@ -10,17 +9,13 @@ import androidx.compose.runtime.saveable.*
 import androidx.compose.runtime.livedata.*
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.platform.*
+//import androidx.core.view.WindowCompat
 import androidx.lifecycle.*
-import androidx.lifecycle.viewmodel.compose.*
 import com.google.accompanist.systemuicontroller.*
+import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import javax.inject.Inject
-import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
 import kotlinx.coroutines.*
-//import androidx.core.view.WindowCompat
-import com.rafael.tictactoe.settings.domain.util.SettingsUtilities
-import androidx.lifecycle.ViewModelProvider
-//import androidx.hilt.navigation.compose.hiltViewModel
 
 
 private val LightColors = lightColorScheme(
@@ -93,60 +88,58 @@ fun AppTheme(
 context: Context,
 content: @Composable() () -> Unit
 ) {
-  //val isDarkThemeOn by viewModel.isDarkThemeOn.collectAsState()
-  val isDynamicColorsSupported = VERSION.SDK_INT >= VERSION_CODES.S 
-  var isDynamicColorsOn by rememberSaveable { mutableStateOf(true)}
-  var isFollowingSystemOn by rememberSaveable { mutableStateOf(true)}
-  var isDarkThemeOn by rememberSaveable { mutableStateOf(true)}
-  var isSystemInDarkTheme: Boolean = isSystemInDarkTheme()
 
+    //val isDarkThemeOn by viewModel.isDarkThemeOn.collectAsState()
+    val isDynamicColorsSupported = VERSION.SDK_INT >= VERSION_CODES.S 
+    var isDynamicColorsOn by rememberSaveable { mutableStateOf(true)}
+    var isFollowingSystemOn by rememberSaveable { mutableStateOf(true)}
+    var isDarkThemeOn by rememberSaveable { mutableStateOf(true)}
+    var isSystemInDarkTheme: Boolean = isSystemInDarkTheme()
 
-if ((isFollowingSystemOn) && (isSystemInDarkTheme)) {
-isDarkThemeOn = true
-}
-if ((isFollowingSystemOn) && (!isSystemInDarkTheme)) {
-isDarkThemeOn = false
-}
+	if ((isFollowingSystemOn) && (isSystemInDarkTheme)) {
+		isDarkThemeOn = true
+	}
+	if ((isFollowingSystemOn) && (!isSystemInDarkTheme)) {
+		isDarkThemeOn = false
+	}
 
+	val colors = if (!isFollowingSystemOn) {
+  	  if (isDynamicColorsSupported && isDynamicColorsOn) {
+      	  if (!isDarkThemeOn) {
+       	     dynamicLightColorScheme(context)
+ 	   } else {
+     	       dynamicDarkColorScheme(context)
+      	  }
+  	  } else {
+     	   if (!isDarkThemeOn) {
+     	       LightColors
+    	    } else {
+     	       DarkColors
+       	 }
+  	  }
+	} else {
+  	DarkColors
+	}
 
-val colors = if (!isFollowingSystemOn) {
-    if (isDynamicColorsSupported && isDynamicColorsOn) {
-        if (!isDarkThemeOn) {
-            dynamicLightColorScheme(context)
-    } else {
-            dynamicDarkColorScheme(context)
-        }
-    } else {
-        if (!isDarkThemeOn) {
-            LightColors
-        } else {
-            DarkColors
-        }
-    }
-} else {
-  DarkColors
-}
+	MaterialTheme(
+  	  colorScheme = colors,
+  	  shapes = Shapes,
+  	  typography = Typography,
+   	 content = content,
+	)
 
-
-MaterialTheme(
-    colorScheme = colors,
-    shapes = Shapes,
-    typography = Typography,
-    content = content,
-)
-
-val systemUiController = rememberSystemUiController()
-    if ((isDarkThemeOn) || ((isSystemInDarkTheme) && (isFollowingSystemOn))) {
+	val systemUiController = rememberSystemUiController()
+    if ((isDarkThemeOn || isSystemInDarkTheme) && (isFollowingSystemOn)) {
         systemUiController.setSystemBarsColor(
-     	   color = Color(0xFF1C1B1F),
-    	    darkIcons = false,
-          )
-} else {
+ 	   color = Color(0xFF1C1B1F),
+	    darkIcons = false,
+       )
+   } else {
         systemUiController.setSystemBarsColor(
-    	    color = Color(0xFFFFFBFE),
-    	    darkIcons = true,
-          )
-     }
+	    color = Color(0xFFFFFBFE),
+	    darkIcons = true,
+        )
+	}
 }
 
 /*
