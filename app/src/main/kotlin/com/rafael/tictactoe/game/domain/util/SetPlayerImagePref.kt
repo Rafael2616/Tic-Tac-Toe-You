@@ -8,11 +8,11 @@ suspend fun SetPlayerImagePref(repository: GameRepository) {
 	val play = repository.getPlay()
 	val isXFor1 = repository.getIsXFor1()
 
-if (!play){
-    if (isXFor1){
-        repository.setIsXImage(true)
-  } else {
-        repository.setIsXImage(false)
-        }
+	if (!play){
+		if (isXFor1){
+			repository.setIsXImage(true)
+	} else {
+			repository.setIsXImage(false)
+		}
     }
 }
