@@ -19,6 +19,7 @@ import com.rafael.tictactoe.game.domain.repository.GameRepository
 import com.rafael.tictactoe.game.domain.util.RestartGame
 import com.rafael.tictactoe.game.domain.util.RestartButtonLogic
 import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
+import kotlinx.coroutines.launch
 
 
 @Composable
@@ -27,9 +28,14 @@ fun PlayAgainButton(
     repository: GameRepository,
     settingsRepo: SettingsRepository
 ) {
-    RestartButtonLogic()
+ 
+    val scope = rememberCoroutineScope()
 
-    Box(
+    LaunchedEffect(Unit) {
+		RestartButtonLogic(repository) 
+	}
+
+  Box(
         modifier = Modifier
             .fillMaxWidth(),
         contentAlignment = Alignment.TopCenter
@@ -46,9 +52,9 @@ fun PlayAgainButton(
                 modifier = Modifier
                     .width(75.dp)
                     .height(75.dp)
-                    .clickable(onClick = {
-                        UiClickSound(context, settingsRepo)
+                    .clickable(onClick = { UiClickSound(context, settingsRepo); scope.launch{
                         RestartGame(repository)
+                        }
                     })
             ) {
                 Image(
