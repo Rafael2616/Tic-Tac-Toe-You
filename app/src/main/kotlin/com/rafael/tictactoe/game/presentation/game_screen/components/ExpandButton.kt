@@ -41,21 +41,21 @@ Box(
          modifier = Modifier
         .wrapContentSize()
         .padding(start = 15.dp)
-        .padding(top = 60.dp)
-    ) {
+		.padding(top = 60.dp)
+     ) {
          Card(
-              shape = MaterialTheme.shapes.medium,
-              colors = CardDefaults.cardColors(containerColor = Color.Transparent),
-              modifier = Modifier
-             .width(45.dp)
-             .height(35.dp)
-             .clickable(onClick = { UiClickSound(context, settingsRepo); scope.launch { ExpandButtonLogic(repository)}})
-       ) {
-            Image(
-                  contentDescription = null,
-                  modifier = Modifier.fillMaxSize(),
-                  painter = painterResource(if (expandButton) R.drawable.expand_up_icon
-                  else R.drawable.expand_down_icon)
+            shape = MaterialTheme.shapes.medium,
+            colors = CardDefaults.cardColors(containerColor = Color.Transparent),
+            modifier = Modifier
+            .width(45.dp)
+            .height(35.dp)
+			.clickable(onClick = { UiClickSound(context, settingsRepo); scope.launch { ExpandButtonLogic(repository)}})
+ 	    ) {
+			Image(
+                contentDescription = null,
+                modifier = Modifier.fillMaxSize(),
+                painter = painterResource(if (expandButton) R.drawable.expand_up_icon
+				else R.drawable.expand_down_icon)
                 )      
             }       
         }
