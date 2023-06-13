@@ -12,9 +12,27 @@ import androidx.compose.ui.*
 import androidx.lifecycle.*
 import com.rafael.tictactoe.common.presentation.ui.theme.AppTheme
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
+import com.rafael.tictactoe.game.presentation.game_screen.components.BackgroundMusicButton
+import com.rafael.tictactoe.game.presentation.game_screen.components.CardGrid
+import com.rafael.tictactoe.game.presentation.game_screen.components.ExpandButton
+import com.rafael.tictactoe.game.presentation.game_screen.components.GameStateToast
+import com.rafael.tictactoe.game.presentation.game_screen.components.GetPlayerPrefsCard
+import com.rafael.tictactoe.game.presentation.game_screen.components.PlayAgainButton
+import com.rafael.tictactoe.game.presentation.game_screen.components.PlayerNamesLayout
+import com.rafael.tictactoe.game.presentation.game_screen.components.ResetVictoryCounterButton
+import com.rafael.tictactoe.game.presentation.game_screen.components.RestartButton
+import com.rafael.tictactoe.game.presentation.game_screen.components.SoundEffectsButton
+import com.rafael.tictactoe.game.presentation.game_screen.components.VictoryCounter
+import com.rafael.tictactoe.game.presentation.game_screen.components.WinnerLine
+import com.rafael.tictactoe.game.domain.util.CheckForWinner
+import com.rafael.tictactoe.game.domain.util.CheckIfGotOld
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
-
+import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
+import com.rafael.tictactoe.game.domain.repository.GameRepository
+import javax.inject.Inject
+import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
+;
 
 @AndroidEntryPoint
 class TestGameActivity : ComponentActivity() {
@@ -24,6 +42,12 @@ class TestGameActivity : ComponentActivity() {
         } 
     }
 }
+
+@Inject
+lateinit var repository: GameRepository
+
+@Inject
+lateinit var settingsRepo: SettingsRepository
 
 @Composable
 fun testGameScreen(){
@@ -70,7 +94,14 @@ Surface(
      modifier = Modifier.fillMaxSize()
  ) {
 
-//TODO// CALL FUNCTIONS HERE..
+/*WHEN ACTIVITY STARTS ->*/ VictoryCounter(repository, player1Wins, player2Wins)//;// CardGrid(cards, isCardClicked, repository)//;// PlayerNamesLayout(); GameStateToast(); ExpandButton()
+/*if (!play) GetPlayerPrefsCard()
+//if (play) { CheckForWinner(); CheckIfGotOld() }
+if (expandButton) { BackgroundMusicButton(); SoundEffectsButton() }
+//if (showRestart) RestartButton()
+if (winner) { WinnerSound(); WinnerLine(); ResetVictoryCounterButton(); PlayAgainButton() }
+if (gotOld) { GotOldSound(); ResetVictoryCounterButton(); PlayAgainButton() }
+*/
 }
 
 
