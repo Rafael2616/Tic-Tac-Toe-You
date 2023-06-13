@@ -29,10 +29,12 @@ val player1Wins: StateFlow<Int> = _player1Wins
 private var _player2Wins = MutableStateFlow(0)
 val player2Wins: StateFlow<Int> = _player2Wins
 
-private var _cards = MutableStateFlow(emptyList<Boolean>())
+val initialCards = List(9) { false }
+private var _cards = MutableStateFlow(initialCards)
 val cards: StateFlow<List<Boolean>> = _cards
 
-private var _isCardClicked = MutableStateFlow(emptyList<Boolean>())
+val initialCardClicked = List(9) { false }
+private var _isCardClicked = MutableStateFlow(initialCardClicked)
 val isCardClicked: StateFlow<List<Boolean>> = _isCardClicked
 
 private var _play = MutableStateFlow(false)
@@ -47,10 +49,10 @@ val is1Win: StateFlow<Boolean> = _is1Win
 private var _isXFor1 = MutableStateFlow(false)
 val isXFor1: StateFlow<Boolean> = _isXFor1
 
-private var _isPlayer1 = MutableStateFlow(false)
+private var _isPlayer1 = MutableStateFlow(true)
 val isPlayer1: StateFlow<Boolean> = _isPlayer1
 
-private var _player1InToast = MutableStateFlow(false)
+private var _player1InToast = MutableStateFlow(true)
 val player1InToast: StateFlow<Boolean> = _player1InToast
 
 private var _isScoreUp = MutableStateFlow(false)
@@ -86,6 +88,25 @@ val winner: StateFlow<Boolean> = _winner
 private var _gotOld = MutableStateFlow(false)
 val gotOld: StateFlow<Boolean> = _gotOld
 
+	init{
+		viewModelScope.launch(Dispatchers.IO) {
+        repository.setPlayer1Name(_player1Name.value)
+        repository.setPlayer2Name(_player2Name.value)
+		
+    	}
+	}
+
+	fun updateCard(index: Int, value: Boolean) {
+	    val currentCards = _cards.value.toMutableList()
+	    currentCards[index] = value
+	    _cards.value = currentCards
+	}
+
+	fun updateIsCardClicked(index: Int, value: Boolean) {
+ 	   val currentIsCardClicked = _isCardClicked.value.toMutableList()
+ 	   currentIsCardClicked[index] = value
+ 	   _isCardClicked.value = currentIsCardClicked
+	}
 
     fun updateCurrentPlayerName(newValue: String) {
         _currentPlayerName.value = newValue
@@ -122,17 +143,17 @@ val gotOld: StateFlow<Boolean> = _gotOld
         }
     }
 
-    fun updateCards(newValue: List<Boolean>) {
-        _cards.value = newValue
+    fun updateAllCards(newCardsValue: List<Boolean>) {
+        _cards.value = newCardsValue
         viewModelScope.launch(Dispatchers.IO) {
-            repository.setCards(newValue)
+            repository.setCards(newCardsValue)
         }
     }
 
-    fun updateIsCardClicked(newValue: List<Boolean>) {
-        _isCardClicked.value = newValue
+    fun updateAllIsCardClicked(newCardClickedValue: List<Boolean>) {
+        _isCardClicked.value = newCardClickedValue
         viewModelScope.launch(Dispatchers.IO) {
-            repository.setIsCardClicked(newValue)
+            repository.setIsCardClicked(newCardClickedValue)
         }
     }
 
