@@ -29,7 +29,9 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
-import com.rafael.tictactoe.settings.domain.model.SettingsEntity
+import com.rafael.tictactoe.game.domain.util.GameUtils
+import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
+import com.rafael.tictactoe.game.domain.util.DisplayPlayerNames
 
 
 @Module
@@ -52,9 +54,17 @@ fun provideGameRepository(database: GameDatabase): GameRepository {
     return GameRepositoryImpl(database.gameDao)
 }
 
+//TODO// add misssing gameUtils here
+@Provides
+@Singleton
+fun provideGameUtilities(repository: GameRepository): GameUtils {
+	return GameUtils(
+    	coordinate = WinnerLineCoordinates(repository),
+		playerName = DisplayPlayerNames(repository)
+	)
+}
 
-
-
+// -> -> -> Bellow this line, all provides functions are related to settings part <- <- <-
 @Provides
 @Singleton
 fun provideSettingsDatabase(app: Application): SettingsDatabase {
