@@ -3,7 +3,7 @@ package com.rafael.tictactoe.game.domain.util
 import com.rafael.tictactoe.game.domain.repository.GameRepository
 
 
-suspend fun RestartGame( repository: GameRepository ) {
+suspend fun RestartGame(repository: GameRepository) {
 
 	val cardsString = repository.getCards()
 	val cards = cardsString.map { it.toBoolean() }
