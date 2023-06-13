@@ -7,7 +7,7 @@ import com.rafael.tictactoe.game.domain.repository.GameRepository
 import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
 
 
-suspend fun WinnerSound(repository: GameRepository, settingsRepo: SettingsRepository, context: Context) {
+suspend fun WinnerSound(context: Context, repository: GameRepository, settingsRepo: SettingsRepository) {
 
     val isSoundEffectsOn = settingsRepo.getIsSoundEffectsOn()
     val isWinSoundPlaying = repository.getIsWinSoundPlaying()

@@ -7,7 +7,7 @@ import com.rafael.tictactoe.game.domain.repository.GameRepository
 import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
 
 
-suspend fun GotOldSound(repository: GameRepository, settingsRepo: SettingsRepository, context: Context) {
+suspend fun GotOldSound(context: Context, repository: GameRepository, settingsRepo: SettingsRepository) {
 
 	val gotOldSound = MediaPlayer.create(context, R.raw.got_old_sound)
 	val isSoundEffectsOn = settingsRepo.getIsSoundEffectsOn()
