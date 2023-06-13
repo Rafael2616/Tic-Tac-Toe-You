@@ -24,86 +24,113 @@ import com.rafael.tictactoe.game.presentation.game_screen.components.RestartButt
 import com.rafael.tictactoe.game.presentation.game_screen.components.SoundEffectsButton
 import com.rafael.tictactoe.game.presentation.game_screen.components.VictoryCounter
 import com.rafael.tictactoe.game.presentation.game_screen.components.WinnerLine
+import com.rafael.tictactoe.game.domain.repository.GameRepository
 import com.rafael.tictactoe.game.domain.util.CheckForWinner
 import com.rafael.tictactoe.game.domain.util.CheckIfGotOld
+import com.rafael.tictactoe.game.domain.util.GotOldSound
+import com.rafael.tictactoe.game.domain.util.GameUtils
+import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
+import com.rafael.tictactoe.game.domain.util.WinnerSound
+import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
-import com.rafael.tictactoe.game.domain.repository.GameRepository
 import javax.inject.Inject
-import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
-;
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class TestGameActivity : ComponentActivity() {
-     override fun onCreate(savedInstanceState: Bundle?) {
-     super.onCreate(savedInstanceState)
-            setContent{ AppTheme(this) { testGameScreen()
-        } 
+
+    @Inject lateinit var gameUtil: GameUtils
+    @Inject lateinit var repository: GameRepository
+    @Inject lateinit var settingsRepo: SettingsRepository
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            AppTheme(this) {
+                testGameScreen()
+            }
+        }
     }
-}
 
-@Inject
-lateinit var repository: GameRepository
+    @Composable
+    fun testGameScreen() {
+        val scope = rememberCoroutineScope()
 
-@Inject
-lateinit var settingsRepo: SettingsRepository
+        val viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
+        val settingsVM = ViewModelProvider(this).get(SettingsViewModel::class.java)
+        val currentPlayerName by viewModel.currentPlayerName.collectAsState()
+        val player1Name by viewModel.player1Name.collectAsState()
+        val player2Name by viewModel.player2Name.collectAsState()
+        val player1Wins by viewModel.player1Wins.collectAsState()
+        val player2Wins by viewModel.player2Wins.collectAsState()
+        val cards by viewModel.cards.collectAsState()
+        val isCardClicked by viewModel.isCardClicked.collectAsState()
+        val play by viewModel.play.collectAsState()
+        val isXImage by viewModel.isXImage.collectAsState()
+        val is1Win by viewModel.is1Win.collectAsState()
+        val isXFor1 by viewModel.isXFor1.collectAsState()
+        val isPlayer1 by viewModel.isPlayer1.collectAsState()
+        val player1InToast by viewModel.player1InToast.collectAsState()
+        val isScoreUp by viewModel.isScoreUp.collectAsState()
+        val expandButton by viewModel.expandButton.collectAsState()
+        val showRestartButton by viewModel.showRestartButton.collectAsState()
+        val isWinSoundPlaying by viewModel.isWinSoundPlaying.collectAsState()
+        val isGotOldSoundPlaying by viewModel.isGotOldSoundPlaying.collectAsState()
+        val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
+        val isBackgroundMusicOn by settingsVM.isBackgroundMusicOn.collectAsState()
+        val startX by viewModel.startX.collectAsState()
+        val startY by viewModel.startY.collectAsState()
+        val endX by viewModel.endX.collectAsState()
+        val endY by viewModel.endY.collectAsState()
+        val winner by viewModel.winner.collectAsState()
+        val gotOld by viewModel.gotOld.collectAsState()
 
-@Composable
-fun testGameScreen(){
+        Surface(
+            color = MaterialTheme.colorScheme.surface,
+            modifier = Modifier.fillMaxSize()
+        ) {
+			//BELOW THE LOGIC THAT DECIDE IN WHICH CASE THE FUNCTIONS MUST BE CALLED AND
+            //PARAMS NEEEDED FOR THEM WORKS BECAUSE SOME FUNS NEEDS TO RECOMPOSE
 
-val viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
-val settingsVM = ViewModelProvider(this).get(SettingsViewModel::class.java)
+            //WHEN THE ACTIVITY STARTS
+            CardGrid(cards, isCardClicked, repository, gameUtil.coordinate)
+            ExpandButton(this, repository, settingsRepo, expandButton)
+            VictoryCounter(repository, player1Wins, player2Wins)
+            PlayerNamesLayout(this, repository, gameUtil.playerName)
+            //GameStateToast(this, repository, winner, gotOld)
 
-val currentPlayerName by viewModel.currentPlayerName.collectAsState()
-val player1Name by viewModel.player1Name.collectAsState()
-val player2Name by viewModel.player2Name.collectAsState()
-val player1Wins by viewModel.player1Wins.collectAsState()
-val player2Wins by viewModel.player2Wins.collectAsState()
-
-val cards by viewModel.cards.collectAsState()
-val isCardClicked by viewModel.isCardClicked.collectAsState()
-
-val play by viewModel.play.collectAsState()
-val isXImage by viewModel.isXImage.collectAsState()
-val is1Win by viewModel.is1Win.collectAsState()
-val isXFor1 by viewModel.isXFor1.collectAsState()
-val isPlayer1 by viewModel.isPlayer1.collectAsState()
-val player1InToast by viewModel.player1InToast.collectAsState()
-
-val isScoreUp by viewModel.isScoreUp.collectAsState()
-val expandButton by viewModel.expandButton.collectAsState()
-val showRestartButton by viewModel.showRestartButton.collectAsState()
-val isWinSoundPlaying by viewModel.isWinSoundPlaying.collectAsState()
-val isGotOldSoundPlaying by viewModel.isGotOldSoundPlaying.collectAsState()
-
-val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
-val isBackgroundMusicOn by settingsVM.isBackgroundMusicOn.collectAsState()
-
-val startX by viewModel.startX.collectAsState()
-val startY by viewModel.startY.collectAsState()
-val endX by viewModel.endX.collectAsState()
-val endY by viewModel.endY.collectAsState()
-
-val winner by viewModel.winner.collectAsState()
-val gotOld by viewModel.gotOld.collectAsState()
-
-
-Surface(
-     color = MaterialTheme.colorScheme.surface,
-     modifier = Modifier.fillMaxSize()
- ) {
-
-/*WHEN ACTIVITY STARTS ->*/ VictoryCounter(repository, player1Wins, player2Wins)//;// CardGrid(cards, isCardClicked, repository)//;// PlayerNamesLayout(); GameStateToast(); ExpandButton()
-/*if (!play) GetPlayerPrefsCard()
-//if (play) { CheckForWinner(); CheckIfGotOld() }
-if (expandButton) { BackgroundMusicButton(); SoundEffectsButton() }
-//if (showRestart) RestartButton()
-if (winner) { WinnerSound(); WinnerLine(); ResetVictoryCounterButton(); PlayAgainButton() }
-if (gotOld) { GotOldSound(); ResetVictoryCounterButton(); PlayAgainButton() }
-*/
-}
-
-
-}
+            /*if (!play) {
+				GetPlayerPrefsCard(this, settingsRepo, repository)
+			}*/
+            if (play) {
+                scope.launch {
+                    CheckForWinner(repository)
+                    CheckIfGotOld(repository)
+                }
+            }
+            if (expandButton) {
+                BackgroundMusicButton(this, isBackgroundMusicOn, settingsRepo)
+                SoundEffectsButton(this, isSoundEffectsOn, settingsRepo)
+            }
+            if (showRestartButton) {
+				RestartButton(this, repository, settingsRepo)
+			}
+            if (winner) {
+                scope.launch {
+                    WinnerSound(this@TestGameActivity, repository, settingsRepo)
+                }
+                WinnerLine(repository, gameUtil.coordinate, startX, startY, endX, endY)
+                ResetVictoryCounterButton(this, repository, settingsRepo)
+                PlayAgainButton(this, repository, settingsRepo)
+            }
+            if (gotOld) {
+                scope.launch {
+                    GotOldSound(this@TestGameActivity, repository, settingsRepo)
+                }
+                ResetVictoryCounterButton(this, repository, settingsRepo)
+                PlayAgainButton(this, repository, settingsRepo)
+            }
+        }
+    }
 }
