@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.presentation.components
+package com.rafael.tictactoe.game.presentation.game_screen.components
 
 import androidx.activity.compose.*
 //import androidx.compose.animation.*
@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 
 
 @Composable
-fun VictoryCounter(repository: GameRepository, player1Wins: String, player2Wins: String) {
+fun VictoryCounter(repository: GameRepository, player1Wins: Int, player2Wins: Int) {
     LaunchedEffect(Unit) {
         VictoryCounterLogic(repository)
     }

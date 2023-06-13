@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.presentation.components
+package com.rafael.tictactoe.game.presentation.game_screen.components
 
 import androidx.activity.compose.*
 //import androidx.compose.animation.*

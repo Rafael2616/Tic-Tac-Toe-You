@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.presentation.components
+package com.rafael.tictactoe.game.presentation.game_screen.components
 
 import android.content.Context
 import androidx.activity.compose.*
@@ -22,7 +22,6 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun PlayerNamesLayout(context: Context, repository: GameRepository, playerName: DisplayPlayerNames) {
-    val scope = rememberCoroutineScope()
     var player1Name by remember{ mutableStateOf("") }
     var player2Name by remember{ mutableStateOf("") }
 

@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.presentation.components
+package com.rafael.tictactoe.game.presentation.game_screen.components
 
 import android.content.Context
 import com.rafael.tictactoe.R
