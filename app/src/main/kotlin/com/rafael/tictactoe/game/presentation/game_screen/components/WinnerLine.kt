@@ -1,14 +1,11 @@
 package com.rafael.tictactoe.game.presentation.components
 
-import com.rafael.tictactoe.R
 import androidx.activity.compose.*
 //import androidx.compose.animation.*
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.*
-import androidx.compose.runtime.livedata.*
 import androidx.compose.ui.*
 import androidx.compose.ui.draw.*
 import androidx.compose.ui.graphics.*
@@ -18,16 +15,20 @@ import androidx.compose.ui.platform.*
 import androidx.compose.ui.res.*
 import androidx.compose.ui.text.*
 import androidx.compose.ui.unit.*
-import androidx.compose.ui.graphics.painter.*
+import com.rafael.tictactoe.R
+import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
+import com.rafael.tictactoe.game.domain.util.WinnerLineLogic
+import com.rafael.tictactoe.game.domain.repository.GameRepository
+import kotlinx.coroutines.launch
 
 
 @Composable
-fun WinnerLine(
-startX: Float,
-startY: Float,
-endX: Float,
-endY: Float
+fun WinnerLine(repository: GameRepository, coordinate: WinnerLineCoordinates, startX: Float, startY: Float, endX: Float, endY: Float
 ) {
+
+	LaunchedEffect(Unit) {
+		WinnerLineLogic(repository, coordinate)
+	}
 
  Column(
       modifier = Modifier
@@ -45,6 +46,6 @@ endY: Float
               start = Offset(x = startX, y = startY),
               end = Offset(x = endX, y = endY)
             )
-        }          
+        }
     }
 }
