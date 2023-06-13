@@ -9,15 +9,16 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
 import androidx.compose.ui.graphics.*
+import androidx.compose.ui.graphics.painter.*
 import androidx.compose.ui.platform.*
 import androidx.compose.ui.res.*
 import androidx.compose.ui.text.*
 import androidx.compose.ui.unit.*
-import androidx.compose.ui.graphics.painter.*
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.repository.GameRepository
 import com.rafael.tictactoe.game.domain.util.DisplayPlayerNames
 import kotlinx.coroutines.launch
+
 
 @Composable
 fun PlayerNamesLayout(context: Context, repository: GameRepository, playerName: DisplayPlayerNames) {
