@@ -22,20 +22,19 @@ import kotlinx.coroutines.launch
 
 
 @Composable
-fun SoundEffectsButton(context: Context, settingsRepo: SettingsRepository, isSoundEffectsOn: Boolean) {
+fun SoundEffectsButton(context: Context, isSoundEffectsOn: Boolean, settingsRepo: SettingsRepository,) {
     val scope = rememberCoroutineScope()
 
     Box(
         modifier = Modifier
-            .wrapContentSize(),
+           .fillMaxSize()
+ 	 	 .padding(top = 95.dp, start = 15.dp),
         contentAlignment = Alignment.TopStart
     ) {
         Column(
             verticalArrangement = Arrangement.Center,
             modifier = Modifier
                 .wrapContentSize()
-                .padding(start = 15.dp)
-                .padding(top = 95.dp)
         ) {
             Card(
                 shape = MaterialTheme.shapes.medium,

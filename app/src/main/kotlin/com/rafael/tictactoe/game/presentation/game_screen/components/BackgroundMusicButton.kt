@@ -22,25 +22,19 @@ import kotlinx.coroutines.launch
 
 
 @Composable
-fun BackgroundMusicButton(
-context: Context,
-isBackgroundMusicOn: Boolean,
-settingsRepo: SettingsRepository
-) {
-
+fun BackgroundMusicButton(context: Context, isBackgroundMusicOn: Boolean, settingsRepo: SettingsRepository) {
 	val scope = rememberCoroutineScope()
 
 Box(
 	modifier = Modifier
-   .wrapContentSize(),
+   	.fillMaxSize()
+ 	  .padding(top = 165.dp, start = 15.dp),
     contentAlignment = Alignment.TopStart
  ) {
     Column(
 		verticalArrangement = Arrangement.Center,
         modifier = Modifier
        .wrapContentSize()
-       .padding(start = 15.dp)
-       .padding(top = 165.dp)
     ) {
        Card(
 			shape = MaterialTheme.shapes.medium,
