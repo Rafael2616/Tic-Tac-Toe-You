@@ -7,10 +7,10 @@ suspend fun ExpandButtonLogic(repository: GameRepository) {
 
 val game = repository.getGameValues()
 
-game.expandButton = !game.expandButton
+/*game.expandButton = !game.expandButton
 repository.setGameValues(game)
+*/
 
-/*
 	val expandButton = repository.getExpandButton()
-	repository.setExpandButton(!expandButton)*/
+	repository.setExpandButton(!expandButton)
 }
