@@ -18,31 +18,28 @@ import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.game.domain.util.SetPlayerImagePref
 import com.rafael.tictactoe.game.domain.repository.GameRepository
+import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
 import kotlinx.coroutines.launch
 
 
 @Composable
-fun GetPlayerPrefsCard(context: Context, settingsRepo: SettingsRepository, repository: GameRepository) {
+fun GetPlayerPrefsCard(
+context: Context,
+settingsRepo: SettingsRepository,
+repository: GameRepository,
+vm: GameViewModel,
+isXFor1: Boolean,
+player1Name: String,
+player2Name: String,
+isPlayer1: Boolean,
+player1InToast: Boolean
+) {
     val scope = rememberCoroutineScope()
-
-    var isXFor1 by remember { mutableStateOf(false) }
-    var player1Name by remember { mutableStateOf("") }
-    var player2Name by remember { mutableStateOf("") }
-    var isPlayer1 by remember { mutableStateOf(true) }
-    var player1InToast by remember { mutableStateOf(true) }
 
     val maxLength = 10
     var player1Value = if (player1InToast) player1Name else player2Name
     var player2Value = if (player1InToast) player2Name else player1Name
-
-    LaunchedEffect(Unit) {
-        isXFor1 = repository.getIsXFor1()
-        player1Name = repository.getPlayer1Name()
-        player2Name = repository.getPlayer2Name()
-        isPlayer1 = repository.getIsPlayer1()
-        player1InToast = repository.getPlayer1InToast()
-    }
 
     Box(
         modifier = Modifier
@@ -66,7 +63,7 @@ fun GetPlayerPrefsCard(context: Context, settingsRepo: SettingsRepository, repos
                     value = player1Value,
                     onValueChange = {
                         if (it.length <= maxLength) {
-                            if (isPlayer1) player1Name = it else player2Name = it
+                            if (isPlayer1) vm.updatePlayer1Name(it) else vm.updatePlayer2Name(it)
                         }
                     },
                     label = { Text(stringResource(id = R.string.player1_name)) },
@@ -81,9 +78,9 @@ fun GetPlayerPrefsCard(context: Context, settingsRepo: SettingsRepository, repos
                         .height(85.dp)
                         .clickable(onClick = {
                             UiClickSound(context, settingsRepo)
+                            vm.updateIsPlayer1(!isPlayer1)
                             scope.launch {
                                 SetPlayerImagePref(repository)
-                                repository.setIsPlayer1(!isPlayer1)
                             }
                         })
                 ) {
@@ -97,7 +94,7 @@ fun GetPlayerPrefsCard(context: Context, settingsRepo: SettingsRepository, repos
                     value = player2Value,
                     onValueChange = {
                         if (it.length <= maxLength) {
-                            if (isPlayer1) player2Name = it else player1Name = it
+                            if (isPlayer1) vm.updatePlayer2Name(it) else vm.updatePlayer1Name(it)
                         }
                     },
                     label = { Text(stringResource(id = R.string.player2_name)) },
@@ -126,9 +123,9 @@ fun GetPlayerPrefsCard(context: Context, settingsRepo: SettingsRepository, repos
                         .height(60.dp)
                         .clickable(onClick = {
                             UiClickSound(context, settingsRepo)
+                            vm.updateIsXFor1(!isXFor1)
                             scope.launch {
                                 SetPlayerImagePref(repository)
-                                repository.setIsXFor1(!isXFor1)
                             }
                         })
                 ) {
@@ -140,7 +137,7 @@ fun GetPlayerPrefsCard(context: Context, settingsRepo: SettingsRepository, repos
                 }
                 Image(
                     contentDescription = null,
-                    painter = painterResource(if (isXFor1) R.drawable.circle_image else R.drawable.circle_image),
+                    painter = painterResource(if (isXFor1) R.drawable.circle_image else R.drawable.x_image),
                     modifier = Modifier
                         .width(120.dp)
                         .height(60.dp)
@@ -150,7 +147,7 @@ fun GetPlayerPrefsCard(context: Context, settingsRepo: SettingsRepository, repos
             Button(
                 onClick = {
                     UiClickSound(context, settingsRepo)
-                    scope.launch { repository.setPlay(true) }
+                    vm.updatePlay(true)
                 },
                 modifier = Modifier
                     .width(100.dp)

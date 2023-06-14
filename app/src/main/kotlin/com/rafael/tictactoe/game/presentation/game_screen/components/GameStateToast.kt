@@ -26,7 +26,7 @@ fun GameStateToast(context: Context, repository: GameRepository, winner: Boolean
 
     LaunchedEffect(Unit) {
         currentPlayerName = repository.getCurrentPlayerName()
-        GameStateToastLogic(repository, context)
+       // GameStateToastLogic(repository, context)
     }
 
     Box(
