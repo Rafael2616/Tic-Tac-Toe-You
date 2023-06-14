@@ -5,7 +5,7 @@ import com.rafael.tictactoe.game.domain.repository.GameRepository
 
 suspend fun ExpandButtonLogic(repository: GameRepository) {
 
-val game = repository.getGameValues()
+//val game = repository.getGameValues()
 
 /*game.expandButton = !game.expandButton
 repository.setGameValues(game)
