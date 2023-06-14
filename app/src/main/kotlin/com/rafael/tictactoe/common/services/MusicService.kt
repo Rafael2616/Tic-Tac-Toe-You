@@ -26,8 +26,9 @@ class MusicService : Service() {
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         CoroutineScope(Dispatchers.Main).launch {
+            val settings = settingsRepo.getAllSettingsValues()
    	     val isBackgroundMusicOn = withContext(Dispatchers.IO) {
-            settingsRepo.getIsBackgroundMusicOn()
+            settings.isBackgroundMusicOn
      	   }
      	   backgroundMusic = MediaPlayer.create(this@MusicService, R.raw.background_music)
        	 backgroundMusic.isLooping = true
