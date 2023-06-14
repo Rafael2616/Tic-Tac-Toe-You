@@ -3,13 +3,12 @@ package com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels
 import android.content.Context
 import android.widget.Toast
 import androidx.lifecycle.*
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
+import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
+import com.rafael.tictactoe.settings.domain.model.SettingsEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import com.rafael.tictactoe.settings.domain.use_case.SettingsUseCases
-import com.rafael.tictactoe.settings.domain.util.SettingsUtilities
-import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
 
 
 @HiltViewModel
@@ -35,49 +34,64 @@ class SettingsViewModel @Inject constructor(
     private var _isAboutShown = MutableStateFlow(false)
     val isAboutShown: StateFlow<Boolean> = _isAboutShown
 
+    //GET DEFAUT VALUES FOR SETTINGS VARIABLES FROM SETTINGS ENTITY
+    val defaultSettings = SettingsEntity.createDefaultSettings()
 
-init {
-    viewModelScope.launch(Dispatchers.IO) {
-        _isBackgroundMusicOn.value = repository.getIsBackgroundMusicOn()
-        _isDarkThemeOn.value = repository.getIsDarkThemeOn()
-        _isDynamicColorsOn.value = repository.getIsDynamicColorsOn()
-        _isFollowingSystemOn.value = repository.getIsFollowingSystemOn()
-        _isSoundEffectsOn.value = repository.getIsSoundEffectsOn()
-    }
-}
+    //INIT VIEWMODEL VARIABES WITH CORRESPONDING VALUES IN SETTINGS REPOSITORY 
+	init {
+  	  viewModelScope.launch(Dispatchers.IO) {
+	  	  val settings = repository.getAllSettingsValues() ?: defaultSettings
+   	     _isBackgroundMusicOn.value = settings.isBackgroundMusicOn
+    	    _isDarkThemeOn.value = settings.isDarkThemeOn
+    	    _isDynamicColorsOn.value = settings.isDynamicColorsOn
+    	    _isFollowingSystemOn.value = settings.isFollowingSystemOn
+     	   _isSoundEffectsOn.value = settings.isSoundEffectsOn
+  	  }
+	}
 
-    fun updateIsBackgroundMusicOnValue(newValue: Boolean) {
-        _isBackgroundMusicOn.value = newValue
-        viewModelScope.launch(Dispatchers.IO) {
-          repository.setIsBackgroundMusicOn(_isBackgroundMusicOn.value)
-        }
-    }
+    //FUNS TO UPDATE THE VALUES OF VARIABLES IN REPOSITORY AND VIEWMODEL TO UPDATE SCREEN
+	fun updateIsBackgroundMusicOnValue(newValue: Boolean) {
+ 	   _isBackgroundMusicOn.value = newValue
+ 	   viewModelScope.launch(Dispatchers.IO) {
+	  	  val settings = repository.getAllSettingsValues() ?: defaultSettings
+    		settings.isBackgroundMusicOn = newValue
+			repository.setAllSettingsValues(settings)
+  	  }
+	}
 
-    fun updateIsDarkThemeOnValue(newValue: Boolean) {
+   fun updateIsDarkThemeOnValue(newValue: Boolean) {
         _isDarkThemeOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
-           repository.setIsDarkThemeOn(_isDarkThemeOn.value)
+	  	  val settings = repository.getAllSettingsValues() ?: defaultSettings
+    		settings.isDarkThemeOn = newValue
+			repository.setAllSettingsValues(settings)
         }
     }
 
     fun updateIsDynamicColorsOnValue(newValue: Boolean) {
         _isDynamicColorsOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
-          repository.setIsDynamicColorsOn(_isDynamicColorsOn.value)
+	  	  val settings = repository.getAllSettingsValues() ?: defaultSettings
+    		settings.isDynamicColorsOn = newValue
+			repository.setAllSettingsValues(settings)
         }
     }
 
     fun updateIsFollowingSystemOnValue(newValue: Boolean) {
         _isFollowingSystemOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
-         repository.setIsFollowingSystemOn(_isFollowingSystemOn.value)
+	  	  val settings = repository.getAllSettingsValues() ?: defaultSettings
+    		settings.isFollowingSystemOn = newValue
+			repository.setAllSettingsValues(settings)
         }
     }
    
     fun updateIsSoundEffectsOnValue(newValue: Boolean) {
         _isSoundEffectsOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
-         repository.setIsSoundEffectsOn(_isSoundEffectsOn.value)
+    	    val settings = repository.getAllSettingsValues() ?: defaultSettings
+			settings.isSoundEffectsOn = newValue
+			repository.setAllSettingsValues(settings)
         }
     }
 
