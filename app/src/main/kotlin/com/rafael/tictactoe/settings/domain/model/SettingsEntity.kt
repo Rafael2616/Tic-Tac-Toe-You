@@ -6,10 +6,22 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class SettingsEntity(
-  @PrimaryKey
-  var isBackgroundMusicOn: Boolean,
-  var isDarkThemeOn: Boolean,
-  var isDynamicColorsOn: Boolean,
-  var isFollowingSystemOn: Boolean,
-  var isSoundEffectsOn: Boolean
-)
+    @PrimaryKey
+    var isBackgroundMusicOn: Boolean,
+    var isDarkThemeOn: Boolean,
+    var isDynamicColorsOn: Boolean,
+    var isFollowingSystemOn: Boolean,
+    var isSoundEffectsOn: Boolean
+) {
+    companion object {
+        fun createDefaultSettings(): SettingsEntity {
+            return SettingsEntity(
+                isBackgroundMusicOn = false,
+                isDarkThemeOn = false,
+                isDynamicColorsOn = false,
+                isFollowingSystemOn = false,
+                isSoundEffectsOn = false
+            )
+        }
+    }
+}
