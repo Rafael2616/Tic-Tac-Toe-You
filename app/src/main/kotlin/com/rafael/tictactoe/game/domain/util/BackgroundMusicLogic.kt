@@ -7,15 +7,18 @@ import com.rafael.tictactoe.common.services.MusicService
 
 suspend fun BackgroundMusicLogic(settingsRepo: SettingsRepository, context: Context ) {
 
-    val isBackgroundMusicOn = settingsRepo.getIsBackgroundMusicOn()
+    val settings = settingsRepo.getAllSettingsValues()
+    var isBackgroundMusicOn = settings.isBackgroundMusicOn
 
 	if (isBackgroundMusicOn) {
 		val serviceIntent = Intent(context, MusicService::class.java)
         context.startService(serviceIntent)
-        settingsRepo.setIsBackgroundMusicOn(false)
+        isBackgroundMusicOn = false
+        settingsRepo.setAllSettingsValues(settings)
     } else {
         val serviceIntent = Intent(context, MusicService::class.java)
         context.stopService(serviceIntent)
-        settingsRepo.setIsBackgroundMusicOn(true)
+        isBackgroundMusicOn = true
+        settingsRepo.setAllSettingsValues(settings)
 	}
 }

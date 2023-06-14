@@ -9,7 +9,8 @@ import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
 
 suspend fun WinnerSound(context: Context, repository: GameRepository, settingsRepo: SettingsRepository) {
 
-    val isSoundEffectsOn = settingsRepo.getIsSoundEffectsOn()
+    val settings = settingsRepo.getAllSettingsValues()
+    val isSoundEffectsOn = settings.isSoundEffectsOn
     val isWinSoundPlaying = repository.getIsWinSoundPlaying()
     val winnerSound = MediaPlayer.create(context, R.raw.winner_victory_sound)
 

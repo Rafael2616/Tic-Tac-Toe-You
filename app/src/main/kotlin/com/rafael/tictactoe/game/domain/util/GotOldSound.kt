@@ -9,8 +9,9 @@ import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
 
 suspend fun GotOldSound(context: Context, repository: GameRepository, settingsRepo: SettingsRepository) {
 
+    val settings = settingsRepo.getAllSettingsValues()
 	val gotOldSound = MediaPlayer.create(context, R.raw.got_old_sound)
-	val isSoundEffectsOn = settingsRepo.getIsSoundEffectsOn()
+	val isSoundEffectsOn = settings.isSoundEffectsOn
 	val isGotOldSoundPlaying = repository.getIsGotOldSoundPlaying()
 	
 if (isSoundEffectsOn && !isGotOldSoundPlaying){
