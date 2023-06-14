@@ -97,12 +97,12 @@ class TestGameActivity : ComponentActivity() {
             CardGrid(cards, isCardClicked, repository, gameUtil.coordinate)
             ExpandButton(this, repository, settingsRepo, expandButton)
             VictoryCounter(repository, player1Wins, player2Wins)
-            PlayerNamesLayout(this, repository, gameUtil.playerName)
-            //GameStateToast(this, repository, winner, gotOld)
+            PlayerNamesLayout(this, repository, gameUtil.playerName)  //THIS FUN CAUSES APP TO CRASH INTANTANEMENTE
+            GameStateToast(this, repository, winner, gotOld)  //THIS FUN CAUSES APP TO CRASH INTANTANEMENTE
 
-            /*if (!play) {
-				GetPlayerPrefsCard(this, settingsRepo, repository)
-			}*/
+            if (!play) {
+				GetPlayerPrefsCard(this, settingsRepo, repository,viewModel, isXFor1, player1Name, player2Name, isPlayer1, player1InToast)
+			}
             if (play) {
                 scope.launch {
                     CheckForWinner(repository)
