@@ -5,7 +5,9 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.Set
 
 
 suspend fun StartSoundEffects(settingsRepo: SettingsRepository) {
-
-	val isSoundEffectsOn = settingsRepo.getIsSoundEffectsOn()
-	settingsRepo.setIsSoundEffectsOn(!isSoundEffectsOn)
+    
+    val settings = settingsRepo.getAllSettingsValues()
+	var isSoundEffectsOn = settings.isSoundEffectsOn
+	isSoundEffectsOn = !isSoundEffectsOn
+	settingsRepo.setAllSettingsValues(settings)
 }
