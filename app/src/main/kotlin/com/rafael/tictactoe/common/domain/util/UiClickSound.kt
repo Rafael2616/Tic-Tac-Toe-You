@@ -11,9 +11,9 @@ fun UiClickSound(
 context: Context,
 settingsRepo: SettingsRepository
 ) = runBlocking {
-
-  val isSoundEffectsOn = settingsRepo.getIsBackgroundMusicOn()
-  val uiSound = MediaPlayer.create(context, R.raw.ui_click_sound)
+	val settings = settingsRepo.getAllSettingsValues()
+    val isSoundEffectsOn = settings.isBackgroundMusicOn
+    val uiSound = MediaPlayer.create(context, R.raw.ui_click_sound)
 
 if (isSoundEffectsOn){
 	uiSound.start()
