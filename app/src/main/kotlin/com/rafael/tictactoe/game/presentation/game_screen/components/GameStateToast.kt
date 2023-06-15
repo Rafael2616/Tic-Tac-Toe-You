@@ -16,6 +16,7 @@ import androidx.compose.ui.res.*
 import androidx.compose.ui.text.*
 import androidx.compose.ui.unit.*
 import com.rafael.tictactoe.R
+import com.rafael.tictactoe.game.domain.model.GameEntity
 import com.rafael.tictactoe.game.domain.util.GameStateToastLogic
 import com.rafael.tictactoe.game.domain.util.ToastImageLogic
 import com.rafael.tictactoe.game.domain.repository.GameRepository
@@ -26,7 +27,8 @@ fun GameStateToast(context: Context, repository: GameRepository, winner: Boolean
     var currentPlayerName by rememberSaveable { mutableStateOf("") }
 
     LaunchedEffect(Unit) {
-        val game = repository.getGameValues()
+		val gameDefaults = GameEntity.defaultGameValues()
+        val game = repository.getGameValues() ?: gameDefaults
         currentPlayerName = game.currentPlayerName
        // GameStateToastLogic(repository, context)
     }

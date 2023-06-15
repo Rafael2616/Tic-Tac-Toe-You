@@ -15,18 +15,20 @@ import androidx.compose.ui.res.*
 import androidx.compose.ui.text.*
 import androidx.compose.ui.unit.*
 import com.rafael.tictactoe.R
+import com.rafael.tictactoe.game.domain.model.GameEntity
 import com.rafael.tictactoe.game.domain.repository.GameRepository
 import com.rafael.tictactoe.game.domain.util.DisplayPlayerNames
 import kotlinx.coroutines.launch
 
-
 @Composable
 fun PlayerNamesLayout(context: Context, repository: GameRepository, playerName: DisplayPlayerNames) {
+
     var player1Name by remember{ mutableStateOf("") }
     var player2Name by remember{ mutableStateOf("") }
 
     LaunchedEffect(Unit) {
-        val game = repository.getGameValues()
+ 	   val gameDefaults = GameEntity.defaultGameValues()
+        val game = repository.getGameValues() ?: gameDefaults
         player1Name = game.showPlayer1Name
         player2Name = game.showPlayer2Name
        // playerName.firstPlayerName(context)

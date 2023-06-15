@@ -35,11 +35,11 @@ player2Name: String,
 isPlayer1: Boolean,
 player1InToast: Boolean
 ) {
-    val scope = rememberCoroutineScope()
 
     val maxLength = 10
     var player1Value = if (player1InToast) player1Name else player2Name
     var player2Value = if (player1InToast) player2Name else player1Name
+    val scope = rememberCoroutineScope()
 
     Box(
         modifier = Modifier
