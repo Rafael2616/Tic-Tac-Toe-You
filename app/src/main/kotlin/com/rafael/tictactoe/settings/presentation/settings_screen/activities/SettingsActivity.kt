@@ -11,8 +11,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
 import androidx.lifecycle.*
-import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.lifecycle.HiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.presentation.ui.theme.AppTheme
 import com.rafael.tictactoe.game.presentation.main_screen.activities.MainActivity
@@ -21,60 +19,67 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.components.Set
 import com.rafael.tictactoe.settings.presentation.settings_screen.components.BackButton
 import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsCardsImpl
 import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-
 
 @AndroidEntryPoint
 class SettingsActivity : ComponentActivity() {
-   override fun onCreate(savedInstanceState: Bundle?) {
-      super.onCreate(savedInstanceState)        
-          setContent{ AppTheme(this) { settingsScreen()
-      }
-   }
-}
-override fun onBackPressed() {
-    startActivity(Intent(this, MainActivity::class.java))
-}
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            AppTheme(this) {
+                settingsScreen()
+            }
+        }
+    }
 
-@Inject
-lateinit var settingsRepo: SettingsRepository
+    override fun onBackPressed() {
+        startActivity(Intent(this, MainActivity::class.java))
+    }
 
+    @Inject
+    lateinit var settingsRepo: SettingsRepository
 
-@Composable
-fun settingsScreen() {
-   
-   val viewModel = ViewModelProvider(this).get(SettingsViewModel::class.java)
-   val isSystemInDarkTheme = isSystemInDarkTheme()
-   val isDarkThemeOn by viewModel.isDarkThemeOn.collectAsState()
-   val isFollowingSystemOn by viewModel.isFollowingSystemOn.collectAsState()
-   val isDynamicColorsOn by viewModel.isDynamicColorsOn.collectAsState()
-   val isBackgroundMusicOn by viewModel.isBackgroundMusicOn.collectAsState()
-   val isSoundEffectsOn by viewModel.isSoundEffectsOn.collectAsState()
-   val isAboutShown by viewModel.isAboutShown.collectAsState()
+    @Composable
+    fun settingsScreen() {
+        val viewModel = ViewModelProvider(this).get(SettingsViewModel::class.java)
+        val isSystemInDarkTheme = isSystemInDarkTheme()
+        val isDarkThemeOn by viewModel.isDarkThemeOn.collectAsState()
+        val isFollowingSystemOn by viewModel.isFollowingSystemOn.collectAsState()
+        val isDynamicColorsOn by viewModel.isDynamicColorsOn.collectAsState()
+        val isBackgroundMusicOn by viewModel.isBackgroundMusicOn.collectAsState()
+        val isSoundEffectsOn by viewModel.isSoundEffectsOn.collectAsState()
+        val isAboutShown by viewModel.isAboutShown.collectAsState()
 
-Surface(
-    color = MaterialTheme.colorScheme.surface,
-    modifier = Modifier.fillMaxSize()
-) {
+        Surface(
+            color = MaterialTheme.colorScheme.surface,
+            modifier = Modifier.fillMaxSize()
+        ) {
+            BackButton()
+            SettingsTopBar()
+            SettingsCardsImpl(
+                viewModel,
+                isFollowingSystemOn,
+                isDarkThemeOn,
+                isDynamicColorsOn,
+                isSoundEffectsOn,
+                isBackgroundMusicOn,
+                isAboutShown,
+                this,
+                settingsRepo
+            )
+        }
 
-SettingsTopBar()
-BackButton()
-SettingsCardsImpl(viewModel, isFollowingSystemOn,isDarkThemeOn,isDynamicColorsOn,isSoundEffectsOn,isBackgroundMusicOn,isAboutShown, this, settingsRepo)
-}
-
-
-@Composable
-fun followSystemTheme(){
-
-	if (isSystemInDarkTheme){
-		viewModel.updateIsDarkThemeOnValue(true)
-	} else {
-		viewModel.updateIsDarkThemeOnValue(false)
-	}
-}
-followSystemTheme()
-
-
-} //SETTINGS SCREEN FUN ENDS HERE
-
+        fun syncDarkThemeValue() {
+            if (!isFollowingSystemOn) {
+                if (isSystemInDarkTheme) {
+                    viewModel.updateIsDarkThemeOnValue(true)
+                } else {
+                    viewModel.updateIsDarkThemeOnValue(false)
+                }
+            }
+        }
+        syncDarkThemeValue()
+    }
 }
