@@ -9,7 +9,6 @@ import javax.inject.Inject
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
-
 @HiltViewModel
 class GameViewModel @Inject constructor(
 private val repository: GameRepository
@@ -106,6 +105,7 @@ private val repository: GameRepository
         }
     }
 
+
     fun updateCurrentPlayerName(newValue: String) {
         _currentPlayerName.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
@@ -167,9 +167,8 @@ private val repository: GameRepository
         _cards.value = newCardsValue
         viewModelScope.launch(Dispatchers.IO) {
 			val game = repository.getGameValues() ?: gameDefaults
-			//game. = newValue
+			//game.cads.all = newCardsValue
             repository.setGameValues(game)
-            repository.setCards(newCardsValue)
         }
     }
 
@@ -177,9 +176,8 @@ private val repository: GameRepository
         _isCardClicked.value = newCardClickedValue
         viewModelScope.launch(Dispatchers.IO) {
 			val game = repository.getGameValues() ?: gameDefaults
-			//game. = newValue
+			//game.isCardClicked.all = newCardClickedValue
             repository.setGameValues(game)
-            repository.setIsCardClicked(newCardClickedValue)
         }
     }
 
