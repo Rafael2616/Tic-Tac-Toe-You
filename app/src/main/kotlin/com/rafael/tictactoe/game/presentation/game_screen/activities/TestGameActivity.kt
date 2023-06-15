@@ -95,7 +95,7 @@ class TestGameActivity : ComponentActivity() {
 
             //WHEN THE ACTIVITY STARTS
             CardGrid(cards, isCardClicked, repository, gameUtil.coordinate)
-            ExpandButton(this, repository, settingsRepo, expandButton)
+            ExpandButton(this, settingsRepo, viewModel, expandButton)
             VictoryCounter(repository, player1Wins, player2Wins)
             PlayerNamesLayout(this, repository, gameUtil.playerName)  //THIS FUN CAUSES APP TO CRASH INTANTANEMENTE
             GameStateToast(this, repository, winner, gotOld)  //THIS FUN CAUSES APP TO CRASH INTANTANEMENTE
