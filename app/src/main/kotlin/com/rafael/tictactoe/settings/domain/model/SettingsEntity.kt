@@ -16,11 +16,11 @@ data class SettingsEntity(
     companion object {
         fun createDefaultSettings(): SettingsEntity {
             return SettingsEntity(
-                isBackgroundMusicOn = false,
-                isDarkThemeOn = false,
-                isDynamicColorsOn = false,
-                isFollowingSystemOn = false,
-                isSoundEffectsOn = false
+                isBackgroundMusicOn = true,
+                isDarkThemeOn = true,
+                isDynamicColorsOn = true,
+                isFollowingSystemOn = true,
+                isSoundEffectsOn = true
             )
         }
     }
