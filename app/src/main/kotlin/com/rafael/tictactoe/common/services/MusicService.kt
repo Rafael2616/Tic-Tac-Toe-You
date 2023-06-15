@@ -6,11 +6,11 @@ import android.app.Service
 import android.media.MediaPlayer
 import android.content.*
 import com.rafael.tictactoe.R
+import com.rafael.tictactoe.settings.domain.model.SettingsEntity
 import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlinx.coroutines.*
-
 
 @AndroidEntryPoint
 class MusicService : Service() {
@@ -26,7 +26,9 @@ class MusicService : Service() {
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         CoroutineScope(Dispatchers.Main).launch {
-            val settings = settingsRepo.getAllSettingsValues()
+
+ 		   val settingsDefaults = SettingsEntity.createDefaultSettings()
+            val settings = settingsRepo.getAllSettingsValues() ?: settingsDefaults
    	     val isBackgroundMusicOn = withContext(Dispatchers.IO) {
             settings.isBackgroundMusicOn
      	   }
