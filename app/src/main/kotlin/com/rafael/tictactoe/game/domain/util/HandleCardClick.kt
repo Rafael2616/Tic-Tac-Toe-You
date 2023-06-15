@@ -6,14 +6,15 @@ import com.rafael.tictactoe.game.domain.repository.GameRepository
 
 suspend fun HandleCardClick(repository: GameRepository, index: Int) {
 
+    val game = repository.getGameValues()
 	val cardsString = repository.getCards()
 	val cards = cardsString.map { it.toBoolean() }.toMutableList()
 	val isCardClickedString = repository.getIsCardClicked()
 	val isCardClicked = isCardClickedString.map { it.toBoolean() }.toMutableList()
-	val play = repository.getPlay()
-	val isXImage = repository.getIsXImage()
-	val winner = repository.getWinner()
-	val isPlayer1 = repository.getIsPlayer1()
+	val play = game.play
+	val isXImage = game.isXImage
+	val winner = game.winner
+	val isPlayer1 = game.isPlayer1
 
 if ((play) && (!winner)) {
     if (!isCardClicked[index]) {
@@ -22,17 +23,20 @@ if ((play) && (!winner)) {
             repository.setIsCardClicked(isCardClicked)
             cards[index] = true
             repository.setCards(cards)
-            repository.setIsXImage(false)
-            repository.setIsPlayer1(!isPlayer1)
+            game.isXImage = false
+			game.isPlayer1 = !isPlayer1
+			repository.setGameValues(game)
         } else {
             isCardClicked[index] = true
             repository.setIsCardClicked(isCardClicked)
             cards[index] = false
             repository.setCards(cards)
-            repository.setIsXImage(true)
-            repository.setIsPlayer1(!isPlayer1)
+            game.isXImage = true
+			game.isPlayer1 = !isPlayer1
+			repository.setGameValues(game)
        	 }
     	}
 	}
-  repository.setExpandButton(false)
+   game.expandButton = false
+   repository.setGameValues(game)
 }

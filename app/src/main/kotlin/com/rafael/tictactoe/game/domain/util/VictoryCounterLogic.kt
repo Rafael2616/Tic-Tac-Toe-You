@@ -5,17 +5,23 @@ import com.rafael.tictactoe.game.domain.repository.GameRepository
 
 suspend fun VictoryCounterLogic(repository: GameRepository) {
 
-	val isScoreUp = repository.getIsScoreUp()
-	val winner = repository.getWinner()
-	val is1Win = repository.getIs1Win()
+	val game = repository.getGameValues()
+	val isScoreUp = game.isScoreUp
+	val winner = game.winner
+	val is1Win = game.is1Win
+    val player1Wins = game.player1Wins
+    val player2Wins = game.player2Wins
 
 	if (!isScoreUp) {
 		if (winner) {
-			repository.setIsScoreUp(true)
+			game.isScoreUp = true
+ 		   repository.setGameValues(game)
 		if (is1Win) {
-            repository.incrementPlayer1Wins()
+	        game.player1Wins = player1Wins + 1
+ 		   repository.setGameValues(game)
  	  } else {
-			repository.incrementPlayer2Wins()
+	        game.player2Wins = player2Wins + 1
+ 		   repository.setGameValues(game)
 			}
 		}
 	}

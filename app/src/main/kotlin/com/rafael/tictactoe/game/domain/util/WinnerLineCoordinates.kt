@@ -10,34 +10,74 @@ private val repository : GameRepository
 ) {
 
 suspend fun setFirstHorizontalLinePositions() {
-	repository.setCoordinates(15f, 725f, 705f, 725f)
+	val game = repository.getGameValues()
+    game.startX = 15f
+    game.startY = 725f
+    game.endX = 705f
+	game.endY = 725f
+    repository.setGameValues(game)
 }
 
 suspend fun setSecondHorizontalLinePositions() {
-	repository.setCoordinates(15f, 950f, 705f, 950f)
+	val game = repository.getGameValues()
+    game.startX = 15f
+    game.startY = 950f
+    game.endX = 705f
+	game.endY = 950f
+    repository.setGameValues(game)
 }
 
 suspend fun setTertiaryHorizontalLinePositions() {
-	repository.setCoordinates(15f, 1170f, 705f, 1170f)
+	val game = repository.getGameValues()
+    game.startX = 15f
+    game.startY = 1170f
+    game.endX = 705f
+	game.endY = 1170f
+    repository.setGameValues(game)
 }
 
 suspend fun setFirstVerticalLinePositions() {
-	repository.setCoordinates(125f, 610f, 125f, 1285f)
+	val game = repository.getGameValues()
+    game.startX = 125f
+    game.startY = 610f
+    game.endX = 125f
+	game.endY = 1285f
+    repository.setGameValues(game)
 }
 
 suspend fun setSecondVerticalLinePositions() {
-    repository.setCoordinates(362f, 610f, 362f, 1285f)
+	val game = repository.getGameValues()
+    game.startX = 362f
+    game.startY = 610f
+    game.endX = 362f
+	game.endY = 1285f
+    repository.setGameValues(game)
 }
 
 suspend fun setTertiaryVerticalLinePositions() {
-    repository.setCoordinates(595f, 610f, 595f, 1285f)
+	val game = repository.getGameValues()
+    game.startX = 595f
+    game.startY = 610f
+    game.endX = 595f
+	game.endY = 1285f
+    repository.setGameValues(game)
 }
 
 suspend fun setStartToEndTransversalLinePositions() {
-    repository.setCoordinates(15f, 620f, 705f, 1275f)
+	val game = repository.getGameValues()
+    game.startX = 15f
+    game.startY = 620f
+    game.endX = 705f
+	game.endY = 1275f
+    repository.setGameValues(game)
 }
 
 suspend fun setEndToStartTransversalLinePositions() {
-    repository.setCoordinates(705f, 620f, 15f, 1275f)
+	val game = repository.getGameValues()
+    game.startX = 705f
+    game.startY = 620f
+    game.endX = 15f
+	game.endY = 1275f
+    repository.setGameValues(game)
     }
 }

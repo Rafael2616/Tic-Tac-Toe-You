@@ -5,14 +5,17 @@ import com.rafael.tictactoe.game.domain.repository.GameRepository
 
 suspend fun SetPlayerImagePref(repository: GameRepository) {
 
-	val play = repository.getPlay()
-	val isXFor1 = repository.getIsXFor1()
+    val game = repository.getGameValues()
+	val play = game.play
+	val isXFor1 = game.isXFor1
 
 	if (!play){
 		if (isXFor1){
-			repository.setIsXImage(true)
+            game.isXImage = true
+			repository.setGameValues(game)
 	} else {
-			repository.setIsXImage(false)
+			game.isXImage = false
+			repository.setGameValues(game)
 		}
     }
 }

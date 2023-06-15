@@ -11,42 +11,51 @@ private val repository : GameRepository
 
 	suspend fun firstPlayerName(context: Context) {
 
+    val game = repository.getGameValues()
     val genericPlayerX = context.getString(R.string.player_x)
-	val play = repository.getPlay()
-	val player1InToast = repository.getPlayer1InToast()
-	val isPlayer1 = repository.getIsPlayer1()
-	val isXFor1 = repository.getIsXFor1()
-	val player1Name = repository.getPlayer1Name()
-	val player2Name = repository.getPlayer2Name()
+	val play = game.play
+	val player1InToast = game.player1InToast
+	val isPlayer1 = game.isPlayer1
+	val isXFor1 = game.isXFor1
+	val player1Name = game.player1Name
+	val player2Name = game.player2Name
 
 	//if(!play) player1InToast = isPlayer1
 
 	if (isXFor1) {
  	   if (player1InToast) {
   	      if (player1Name.isEmpty()) {
-   	         repository.setShowPlayer1Name(genericPlayerX)
+				game.showPlayer1Name = genericPlayerX
+ 			   repository.setGameValues(game)
   		      } else {
-     	          repository.setShowPlayer1Name(player1Name)
+					game.showPlayer1Name = player1Name
+ 			  	 repository.setGameValues(game)
      	       }
    	     } else {
     	        if (player2Name.isEmpty()) {
-					repository.setShowPlayer1Name(genericPlayerX)
+					game.showPlayer1Name = genericPlayerX
+ 			  	 repository.setGameValues(game)
       	      } else {
-     	           repository.setShowPlayer1Name(player2Name)
+					game.showPlayer1Name = player2Name
+ 			  	 repository.setGameValues(game)
        	     }
      	   }
  	   } else {
    	     if (player1InToast) {
    	         if (player2Name.isEmpty()) {
-    	            repository.setShowPlayer1Name(genericPlayerX)
+					game.showPlayer1Name = genericPlayerX
+ 			  	 repository.setGameValues(game)
    	         } else {
-    	            repository.setShowPlayer1Name(player2Name)
+					game.showPlayer1Name = player2Name
+ 			  	 repository.setGameValues(game)
      	       }
     	    } else {
     	        if (player1Name.isEmpty()) {
-    	            repository.setShowPlayer1Name(genericPlayerX)
+					game.showPlayer1Name = genericPlayerX
+ 			  	 repository.setGameValues(game)
     	        } else {
-      	          repository.setShowPlayer1Name(player1Name)
+					game.showPlayer1Name = player1Name
+ 			  	 repository.setGameValues(game)
 				}
 			}
 		}
@@ -54,42 +63,51 @@ private val repository : GameRepository
 
 	suspend fun secondPlayerName(context: Context) {
 
+    val game = repository.getGameValues()
 	val genericPlayerO = context.getString(R.string.player_o)
-	val play = repository.getPlay()
-	val player1InToast = repository.getPlayer1InToast()
-	val isPlayer1 = repository.getIsPlayer1()
-	val isXFor1 = repository.getIsXFor1()
-	val player1Name = repository.getPlayer1Name()
-	val player2Name = repository.getPlayer2Name()
+	val play = game.play
+	val player1InToast = game.player1InToast
+	val isPlayer1 = game.isPlayer1
+	val isXFor1 = game.isXFor1
+	val player1Name = game.player1Name
+	val player2Name = game.player2Name
 
 	//if(!play) player1InToast = isPlayer1
 
 	if (isXFor1) {
 		if (player1InToast) {
 			if (player2Name.isEmpty()) {
-				repository.setShowPlayer2Name(genericPlayerO)
+				game.showPlayer2Name = genericPlayerO
+ 			   repository.setGameValues(game)
 				} else {
-   	  	       repository.setShowPlayer2Name(player2Name)
+					game.showPlayer2Name = player2Name
+ 				   repository.setGameValues(game)
     	        }
   	      } else {
-   	         if (player1Name.isEmpty()) {
-     	           repository.setShowPlayer2Name(genericPlayerO)
+   	     	if (player1Name.isEmpty()) {
+					game.showPlayer2Name = genericPlayerO
+ 				   repository.setGameValues(game)
     	        } else {
-    	            repository.setShowPlayer2Name(player1Name)
+					game.showPlayer2Name = player1Name
+ 				   repository.setGameValues(game)
    	         }
     	    }
    	 } else {
    	     if (player1InToast) {
     	        if (player1Name.isEmpty()) {
-     	           repository.setShowPlayer2Name(genericPlayerO)
+					game.showPlayer2Name = genericPlayerO
+ 				   repository.setGameValues(game)
    	 	    } else {
-    	            repository.setShowPlayer2Name(player1Name)
+					game.showPlayer2Name = player1Name
+ 				   repository.setGameValues(game)
     	        }
    	     } else {
     	        if (player2Name.isEmpty()) {
-    	            repository.setShowPlayer2Name(genericPlayerO)
+					game.showPlayer2Name = genericPlayerO
+ 				   repository.setGameValues(game)
     		    } else {
-    	            repository.setShowPlayer2Name(player2Name)
+					game.showPlayer2Name = player2Name
+ 				   repository.setGameValues(game)
 		        }
 			}
 		}

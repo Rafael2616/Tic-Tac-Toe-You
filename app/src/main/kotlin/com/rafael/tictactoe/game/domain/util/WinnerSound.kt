@@ -9,13 +9,15 @@ import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
 
 suspend fun WinnerSound(context: Context, repository: GameRepository, settingsRepo: SettingsRepository) {
 
+	val game = repository.getGameValues()
     val settings = settingsRepo.getAllSettingsValues()
     val isSoundEffectsOn = settings.isSoundEffectsOn
-    val isWinSoundPlaying = repository.getIsWinSoundPlaying()
+    val isWinSoundPlaying = game.isWinSoundPlaying
     val winnerSound = MediaPlayer.create(context, R.raw.winner_victory_sound)
 
 if (isSoundEffectsOn && !isWinSoundPlaying) {
     winnerSound.start()
-    repository.setIsWinSoundPlaying(true)
+    game.isWinSoundPlaying = true
+    repository.setGameValues(game)
     }
 }

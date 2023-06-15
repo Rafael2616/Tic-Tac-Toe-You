@@ -4,12 +4,14 @@ import com.rafael.tictactoe.game.domain.repository.GameRepository
 
 
 suspend fun CheckIfGotOld(repository: GameRepository) {
-
+    
+    val game = repository.getGameValues()
 	val isCardClickedString = repository.getIsCardClicked()
 	val isCardClicked = isCardClickedString.map { it.toBoolean() }
-	val winner = repository.getWinner()
+	val winner = game.winner
 
 if ((isCardClicked.all { it }) && (!winner)) {
-	repository.setGotOld(false)
+	game.gotOld = false
+	repository.setGameValues(game)
     }
 }

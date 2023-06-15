@@ -5,6 +5,7 @@ import com.rafael.tictactoe.game.domain.repository.GameRepository
 
 suspend fun RestartGame(repository: GameRepository) {
 
+    val game = repository.getGameValues()
 	val cardsString = repository.getCards()
 	val cards = cardsString.map { it.toBoolean() }
 	val isCardClickedString = repository.getIsCardClicked()
@@ -14,10 +15,14 @@ suspend fun RestartGame(repository: GameRepository) {
     repository.setIsCardClicked(isCardClicked) 
     cards.all { false }
     repository.setCards(cards)
-    repository.setIsScoreUp(false)
-    repository.setIs1Win(false)
-    repository.setIsWinSoundPlaying(false)
-    repository.setIsGotOldSoundPlaying(false)
-    repository.setExpandButton(false)
-    repository.setCoordinates(0f, 0f, 0f, 0f)
+	game.isScoreUp = false
+    game.is1Win = false
+    game.isWinSoundPlaying = false
+    game.isGotOldSoundPlaying = false
+    game.expandButton = false
+    game.startX = 0f
+    game.startY = 0f
+    game.endX = 0f
+	game.endY = 0f
+    repository.setGameValues(game)
 }

@@ -8,6 +8,7 @@ import com.rafael.tictactoe.game.domain.repository.GameRepository
 import kotlinx.coroutines.*
 
 //THIS FUNCTION RECEIVER VALUES DIRECTLY FROM VIEWMODEL
+//TODO//REMVOE COMPOSE ELEMENTS OF THIS FUN
 
 @Composable
 fun ToastImageLogic(winner: Boolean, isXImage: Boolean): Painter {

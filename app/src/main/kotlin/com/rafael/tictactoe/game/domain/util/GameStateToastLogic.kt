@@ -7,11 +7,12 @@ import com.rafael.tictactoe.game.domain.repository.GameRepository
 
 suspend fun GameStateToastLogic(repository: GameRepository, context: Context) {
 
-    val winner = repository.getWinner()
-    val player1Name = repository.getPlayer1Name()
-    val player2Name = repository.getPlayer2Name()
-    val isPlayer1 = repository.getIsPlayer1()
-    val gotOld = repository.getGotOld()
+	val game = repository.getGameValues()
+    val winner = game.winner
+    val player1Name = game.player1Name
+    val player2Name = game.player2Name
+    val isPlayer1 = game.isPlayer1
+    val gotOld = game.gotOld
 
     val playerName = if (!winner) {
         if (isPlayer1) {
@@ -28,22 +29,30 @@ suspend fun GameStateToastLogic(repository: GameRepository, context: Context) {
     }
 
     if (gotOld) {
-        repository.setCurrentPlayerName(context.getString(R.string.got_old))
+		game.currentPlayerName = context.getString(R.string.got_old)
+		repository.setGameValues(game)
     }
 
     if (player1Name.isEmpty() && player2Name.isEmpty()) {
-        repository.setCurrentPlayerName(context.getString(R.string.player))
+		game.currentPlayerName = context.getString(R.string.player)
+		repository.setGameValues(game)
     } else if (player1Name.isNotBlank() && player2Name.isNotBlank()) {
-        repository.setCurrentPlayerName(playerName)
+		game.currentPlayerName = playerName
+		repository.setGameValues(game)
     } else if (player1Name.isEmpty() && player2Name.isNotBlank() && isPlayer1) {
-        repository.setCurrentPlayerName(context.getString(R.string.player))
+		game.currentPlayerName = context.getString(R.string.player)
+		repository.setGameValues(game)
     } else if (player1Name.isEmpty() && player2Name.isNotBlank() && !isPlayer1) {
-        repository.setCurrentPlayerName(player2Name)
+		game.currentPlayerName = player2Name
+		repository.setGameValues(game)
     } else if (player1Name.isNotBlank() && player2Name.isEmpty() && isPlayer1) {
-        repository.setCurrentPlayerName(player1Name)
+		game.currentPlayerName = player1Name
+		repository.setGameValues(game)
     } else if (player1Name.isNotBlank() && player2Name.isEmpty() && !isPlayer1) {
-        repository.setCurrentPlayerName(context.getString(R.string.player))
+		game.currentPlayerName = context.getString(R.string.player)
+		repository.setGameValues(game)
     } else {
-        repository.setCurrentPlayerName("")
+		game.currentPlayerName = ""
+		repository.setGameValues(game)
     }
 }

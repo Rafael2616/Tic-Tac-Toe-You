@@ -5,6 +5,7 @@ import com.rafael.tictactoe.game.domain.repository.GameRepository
 
 suspend fun CheckForWinner(repository: GameRepository) {
 
+    val game = repository.getGameValues()
 	val cardsString = repository.getCards()
 	val cards = cardsString.map { it.toBoolean() }
 	val isCardClickedString = repository.getIsCardClicked()
@@ -23,14 +24,20 @@ suspend fun CheckForWinner(repository: GameRepository) {
    for (positions in winningPositions) {
          if (positions.all { (isCardClicked.getOrNull(it) == true) &&
                      (cards.getOrNull(it) == false )}) {
-         repository.setIs1Win(false)
-         repository.setWinner(true)
+		 game.winner = true
+		 game.is1Win = false
+         repository.setGameValues(game)
+         //repository.setIs1Win(false)
+         //repository.setWinner(true)
        }
        else {
          if (positions.all { (isCardClicked.getOrNull(it) == true) && 
                     (cards.getOrNull(it) == true )}) {
-         repository.setIs1Win(true)
-         repository.setWinner(true)
+		 game.winner = true
+         game.is1Win = true
+		 repository.setGameValues(game)
+         //repository.setIs1Win(true)
+         //repository.setWinner(true)
          }
       }
    }
