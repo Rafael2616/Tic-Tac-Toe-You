@@ -22,10 +22,12 @@ import com.rafael.tictactoe.game.domain.repository.GameRepository
 
 @Composable
 fun GameStateToast(context: Context, repository: GameRepository, winner: Boolean, gotOld: Boolean) {
+
     var currentPlayerName by rememberSaveable { mutableStateOf("") }
 
     LaunchedEffect(Unit) {
-        currentPlayerName = repository.getCurrentPlayerName()
+        val game = repository.getGameValues()
+        currentPlayerName = game.currentPlayerName
        // GameStateToastLogic(repository, context)
     }
 

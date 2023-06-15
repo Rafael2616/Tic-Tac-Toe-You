@@ -26,8 +26,9 @@ fun PlayerNamesLayout(context: Context, repository: GameRepository, playerName: 
     var player2Name by remember{ mutableStateOf("") }
 
     LaunchedEffect(Unit) {
-        player1Name = repository.getShowPlayer1Name()
-        player2Name = repository.getShowPlayer2Name()
+        val game = repository.getGameValues()
+        player1Name = game.showPlayer1Name
+        player2Name = game.showPlayer2Name
        // playerName.firstPlayerName(context)
        // playerName.secondPlayerName(context)
     }
