@@ -1,11 +1,12 @@
 package com.rafael.tictactoe.game.domain.util
 
+import com.rafael.tictactoe.game.domain.model.GameEntity
 import com.rafael.tictactoe.game.domain.repository.GameRepository
-
 
 suspend fun VictoryCounterLogic(repository: GameRepository) {
 
-	val game = repository.getGameValues()
+    val gameDefaults = GameEntity.defaultGameValues()
+	val game = repository.getGameValues() ?: gameDefaults
 	val isScoreUp = game.isScoreUp
 	val winner = game.winner
 	val is1Win = game.is1Win

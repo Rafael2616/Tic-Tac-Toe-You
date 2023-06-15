@@ -1,16 +1,15 @@
 package com.rafael.tictactoe.game.domain.util
 
 import com.rafael.tictactoe.R
+import com.rafael.tictactoe.game.domain.model.GameEntity
 import com.rafael.tictactoe.game.domain.repository.GameRepository
-
 
 suspend fun HandleCardClick(repository: GameRepository, index: Int) {
 
-    val game = repository.getGameValues()
-	val cardsString = repository.getCards()
-	val cards = cardsString.map { it.toBoolean() }.toMutableList()
-	val isCardClickedString = repository.getIsCardClicked()
-	val isCardClicked = isCardClickedString.map { it.toBoolean() }.toMutableList()
+	val gameDefaults = GameEntity.defaultGameValues()
+    val game = repository.getGameValues() ?: gameDefaults
+    val cards = game.cards
+    val isCardClicked = game.isCardClicked
 	val play = game.play
 	val isXImage = game.isXImage
 	val winner = game.winner
@@ -19,18 +18,14 @@ suspend fun HandleCardClick(repository: GameRepository, index: Int) {
 if ((play) && (!winner)) {
     if (!isCardClicked[index]) {
         if (isXImage) {
-            isCardClicked[index] = true
-            repository.setIsCardClicked(isCardClicked)
-            cards[index] = true
-            repository.setCards(cards)
+   		//game.isCardClicked[index] = true
+           // game.cards[index] = true
             game.isXImage = false
 			game.isPlayer1 = !isPlayer1
 			repository.setGameValues(game)
         } else {
-            isCardClicked[index] = true
-            repository.setIsCardClicked(isCardClicked)
-            cards[index] = false
-            repository.setCards(cards)
+            //game.isCardClicked[index] = true
+            //game.cards[index] = false
             game.isXImage = true
 			game.isPlayer1 = !isPlayer1
 			repository.setGameValues(game)

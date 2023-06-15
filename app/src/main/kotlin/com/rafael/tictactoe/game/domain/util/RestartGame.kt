@@ -1,20 +1,17 @@
 package com.rafael.tictactoe.game.domain.util
 
+import com.rafael.tictactoe.game.domain.model.GameEntity
 import com.rafael.tictactoe.game.domain.repository.GameRepository
-
 
 suspend fun RestartGame(repository: GameRepository) {
 
-    val game = repository.getGameValues()
-	val cardsString = repository.getCards()
-	val cards = cardsString.map { it.toBoolean() }
-	val isCardClickedString = repository.getIsCardClicked()
-	val isCardClicked = isCardClickedString.map { it.toBoolean() }
+	val gameDefaults = GameEntity.defaultGameValues()
+    val game = repository.getGameValues() ?: gameDefaults
+    val cards = game.cards
+    val isCardClicked = game.isCardClicked
 
-    isCardClicked.all { false }
-    repository.setIsCardClicked(isCardClicked) 
-    cards.all { false }
-    repository.setCards(cards)
+   // game.isCardClicked.all { false }
+   // game.cards.all { false }
 	game.isScoreUp = false
     game.is1Win = false
     game.isWinSoundPlaying = false

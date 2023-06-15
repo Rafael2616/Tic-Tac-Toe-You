@@ -1,5 +1,6 @@
 package com.rafael.tictactoe.game.domain.util
 
+import com.rafael.tictactoe.game.domain.model.GameEntity
 import com.rafael.tictactoe.game.domain.repository.GameRepository
 import javax.inject.Inject
 
@@ -8,9 +9,10 @@ import javax.inject.Inject
 class WinnerLineCoordinates @Inject constructor(
 private val repository : GameRepository
 ) {
-
+	val gameDefaults = GameEntity.defaultGameValues()
+	
 suspend fun setFirstHorizontalLinePositions() {
-	val game = repository.getGameValues()
+	val game = repository.getGameValues() ?: gameDefaults
     game.startX = 15f
     game.startY = 725f
     game.endX = 705f
@@ -19,7 +21,7 @@ suspend fun setFirstHorizontalLinePositions() {
 }
 
 suspend fun setSecondHorizontalLinePositions() {
-	val game = repository.getGameValues()
+	val game = repository.getGameValues() ?: gameDefaults
     game.startX = 15f
     game.startY = 950f
     game.endX = 705f
@@ -28,7 +30,7 @@ suspend fun setSecondHorizontalLinePositions() {
 }
 
 suspend fun setTertiaryHorizontalLinePositions() {
-	val game = repository.getGameValues()
+	val game = repository.getGameValues() ?: gameDefaults
     game.startX = 15f
     game.startY = 1170f
     game.endX = 705f
@@ -37,7 +39,7 @@ suspend fun setTertiaryHorizontalLinePositions() {
 }
 
 suspend fun setFirstVerticalLinePositions() {
-	val game = repository.getGameValues()
+	val game = repository.getGameValues() ?: gameDefaults
     game.startX = 125f
     game.startY = 610f
     game.endX = 125f
@@ -46,7 +48,7 @@ suspend fun setFirstVerticalLinePositions() {
 }
 
 suspend fun setSecondVerticalLinePositions() {
-	val game = repository.getGameValues()
+	val game = repository.getGameValues() ?: gameDefaults
     game.startX = 362f
     game.startY = 610f
     game.endX = 362f
@@ -55,7 +57,7 @@ suspend fun setSecondVerticalLinePositions() {
 }
 
 suspend fun setTertiaryVerticalLinePositions() {
-	val game = repository.getGameValues()
+	val game = repository.getGameValues() ?: gameDefaults
     game.startX = 595f
     game.startY = 610f
     game.endX = 595f
@@ -64,7 +66,7 @@ suspend fun setTertiaryVerticalLinePositions() {
 }
 
 suspend fun setStartToEndTransversalLinePositions() {
-	val game = repository.getGameValues()
+	val game = repository.getGameValues() ?: gameDefaults
     game.startX = 15f
     game.startY = 620f
     game.endX = 705f
@@ -73,7 +75,7 @@ suspend fun setStartToEndTransversalLinePositions() {
 }
 
 suspend fun setEndToStartTransversalLinePositions() {
-	val game = repository.getGameValues()
+	val game = repository.getGameValues() ?: gameDefaults
     game.startX = 705f
     game.startY = 620f
     game.endX = 15f

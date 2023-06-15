@@ -2,12 +2,13 @@ package com.rafael.tictactoe.game.domain.util
 
 import com.rafael.tictactoe.R
 import android.content.Context
+import com.rafael.tictactoe.game.domain.model.GameEntity
 import com.rafael.tictactoe.game.domain.repository.GameRepository
-
 
 suspend fun GameStateToastLogic(repository: GameRepository, context: Context) {
 
-	val game = repository.getGameValues()
+	val gameDefaults = GameEntity.defaultGameValues()
+	val game = repository.getGameValues() ?: gameDefaults
     val winner = game.winner
     val player1Name = game.player1Name
     val player2Name = game.player2Name

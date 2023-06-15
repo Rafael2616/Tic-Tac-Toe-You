@@ -1,15 +1,14 @@
 package com.rafael.tictactoe.game.domain.util
 
+import com.rafael.tictactoe.game.domain.model.GameEntity
 import com.rafael.tictactoe.game.domain.repository.GameRepository
-
 
 suspend fun CheckForWinner(repository: GameRepository) {
 
-    val game = repository.getGameValues()
-	val cardsString = repository.getCards()
-	val cards = cardsString.map { it.toBoolean() }
-	val isCardClickedString = repository.getIsCardClicked()
-	val isCardClicked = isCardClickedString.map { it.toBoolean() }
+	val gameDefaults = GameEntity.defaultGameValues()
+    val game = repository.getGameValues() ?: gameDefaults
+    val cards = game.cards
+    val isCardClicked = game.isCardClicked
 
 	val winningPositions = listOf(
         listOf(0, 1, 2),
@@ -21,24 +20,19 @@ suspend fun CheckForWinner(repository: GameRepository) {
         listOf(0, 4, 8),
         listOf(2, 4, 6)
    )
-   for (positions in winningPositions) {
-         if (positions.all { (isCardClicked.getOrNull(it) == true) &&
-                     (cards.getOrNull(it) == false )}) {
-		 game.winner = true
-		 game.is1Win = false
-         repository.setGameValues(game)
-         //repository.setIs1Win(false)
-         //repository.setWinner(true)
-       }
-       else {
-         if (positions.all { (isCardClicked.getOrNull(it) == true) && 
-                    (cards.getOrNull(it) == true )}) {
-		 game.winner = true
-         game.is1Win = true
-		 repository.setGameValues(game)
-         //repository.setIs1Win(true)
-         //repository.setWinner(true)
-         }
-      }
-   }
+	for (positions in winningPositions) {
+		if (positions.all { (isCardClicked.getOrNull(it) == true) &&
+		   (cards.getOrNull(it) == false )}) {
+			game.winner = true
+   		 game.is1Win = false
+            repository.setGameValues(game)
+		} else {
+			if (positions.all { (isCardClicked.getOrNull(it) == true) && 
+     	      (cards.getOrNull(it) == true )}) {
+	   		 game.winner = true
+     	       game.is1Win = true
+	  	 	 repository.setGameValues(game)
+			}
+		}
+	}
 }

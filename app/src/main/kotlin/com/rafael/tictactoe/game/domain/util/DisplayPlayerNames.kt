@@ -2,16 +2,18 @@ package com.rafael.tictactoe.game.domain.util
 
 import android.content.Context
 import com.rafael.tictactoe.R
+import com.rafael.tictactoe.game.domain.model.GameEntity
 import com.rafael.tictactoe.game.domain.repository.GameRepository
 import javax.inject.Inject
 
-class DisplayPlayerNames @Inject constructor(
+class DisplayPlayerNames @Inject constructor (
 private val repository : GameRepository
 ) {
 
 	suspend fun firstPlayerName(context: Context) {
 
-    val game = repository.getGameValues()
+	val gameDefaults = GameEntity.defaultGameValues()
+    val game = repository.getGameValues() ?: gameDefaults
     val genericPlayerX = context.getString(R.string.player_x)
 	val play = game.play
 	val player1InToast = game.player1InToast
@@ -63,7 +65,8 @@ private val repository : GameRepository
 
 	suspend fun secondPlayerName(context: Context) {
 
-    val game = repository.getGameValues()
+	val gameDefaults = GameEntity.defaultGameValues()
+    val game = repository.getGameValues() ?: gameDefaults
 	val genericPlayerO = context.getString(R.string.player_o)
 	val play = game.play
 	val player1InToast = game.player1InToast
