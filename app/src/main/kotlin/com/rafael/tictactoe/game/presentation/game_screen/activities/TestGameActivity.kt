@@ -94,7 +94,7 @@ class TestGameActivity : ComponentActivity() {
             //PARAMS NEEEDED FOR THEM WORKS BECAUSE SOME FUNS NEEDS TO RECOMPOSE
 
             //WHEN THE ACTIVITY STARTS
-            CardGrid(cards, isCardClicked, repository, gameUtil.coordinate)
+            CardGrid(cards, isCardClicked, repository, gameUtil.coordinate, viewModel)
             ExpandButton(this, settingsRepo, viewModel, expandButton)
             VictoryCounter(repository, player1Wins, player2Wins)
             PlayerNamesLayout(this, repository, gameUtil.playerName)  //THIS FUN CAUSES APP TO CRASH INTANTANEMENTE
@@ -110,11 +110,11 @@ class TestGameActivity : ComponentActivity() {
                 }
             }
             if (expandButton) {
-                BackgroundMusicButton(this, isBackgroundMusicOn, settingsRepo)
-                SoundEffectsButton(this, isSoundEffectsOn, settingsRepo)
+                BackgroundMusicButton(this, isBackgroundMusicOn, settingsRepo, settingsVM)
+                SoundEffectsButton(this, isSoundEffectsOn, settingsRepo, settingsVM)
             }
             if (showRestartButton) {
-				RestartButton(this, repository, settingsRepo)
+				RestartButton(this, repository, settingsRepo, viewModel)
 			}
             if (winner) {
                 scope.launch {
@@ -122,14 +122,14 @@ class TestGameActivity : ComponentActivity() {
                 }
                 WinnerLine(repository, gameUtil.coordinate, startX, startY, endX, endY)
                 ResetVictoryCounterButton(this, repository, settingsRepo)
-                PlayAgainButton(this, repository, settingsRepo)
+                PlayAgainButton(this, repository, settingsRepo, viewModel)
             }
             if (gotOld) {
                 scope.launch {
                     GotOldSound(this@TestGameActivity, repository, settingsRepo)
                 }
                 ResetVictoryCounterButton(this, repository, settingsRepo)
-                PlayAgainButton(this, repository, settingsRepo)
+                PlayAgainButton(this, repository, settingsRepo, viewModel)
             }
         }
     }
