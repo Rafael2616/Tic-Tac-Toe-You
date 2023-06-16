@@ -18,12 +18,12 @@ import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.game.domain.util.RestartGame
 import com.rafael.tictactoe.game.domain.repository.GameRepository
+import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
 import kotlinx.coroutines.launch
 
-
 @Composable
-fun RestartButton(context: Context, repository: GameRepository, settingsRepo: SettingsRepository) {
+fun RestartButton(context: Context, repository: GameRepository, settingsRepo: SettingsRepository, vm: GameViewModel) {
     val scope = rememberCoroutineScope()
 
     Box(
@@ -44,6 +44,7 @@ fun RestartButton(context: Context, repository: GameRepository, settingsRepo: Se
                     .width(45.dp)
                     .height(45.dp)
                     .clickable(onClick = {
+						vm.updateExpandButton(false)						
                         UiClickSound(context, settingsRepo)
                         scope.launch {
                             RestartGame(repository)

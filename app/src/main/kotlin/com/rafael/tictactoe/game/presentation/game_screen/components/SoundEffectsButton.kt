@@ -16,13 +16,12 @@ import androidx.compose.ui.text.*
 import androidx.compose.ui.unit.*
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.UiClickSound
-import com.rafael.tictactoe.game.domain.util.StartSoundEffects
 import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
+import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import kotlinx.coroutines.launch
 
-
 @Composable
-fun SoundEffectsButton(context: Context, isSoundEffectsOn: Boolean, settingsRepo: SettingsRepository,) {
+fun SoundEffectsButton(context: Context, isSoundEffectsOn: Boolean, settingsRepo: SettingsRepository, vm: SettingsViewModel) {
     val scope = rememberCoroutineScope()
 
     Box(
@@ -43,9 +42,7 @@ fun SoundEffectsButton(context: Context, isSoundEffectsOn: Boolean, settingsRepo
                     .height(45.dp)
                     .clickable(onClick = {
                         UiClickSound(context, settingsRepo)
-                        scope.launch {
-                            StartSoundEffects(settingsRepo)
-                        }
+						vm.updateIsSoundEffectsOnValue(!isSoundEffectsOn)
                     })
             ) {
                 Image(

@@ -19,11 +19,11 @@ import com.rafael.tictactoe.game.domain.repository.GameRepository
 import com.rafael.tictactoe.game.domain.util.HandleCardClick
 import com.rafael.tictactoe.game.domain.util.WinnerLineLogic
 import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
+import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import kotlinx.coroutines.launch
 
-
 @Composable
-fun CardGrid(cards: List<Boolean>, isCardClicked: List<Boolean>, repository: GameRepository, coordinates: WinnerLineCoordinates) {
+fun CardGrid(cards: List<Boolean>, isCardClicked: List<Boolean>, repository: GameRepository, coordinates: WinnerLineCoordinates, vm: GameViewModel) {
      val scope = rememberCoroutineScope()
 
      ConstraintLayout {
@@ -51,7 +51,7 @@ fun CardGrid(cards: List<Boolean>, isCardClicked: List<Boolean>, repository: Gam
  	 		  .width(110.dp)
  		 	  .height(110.dp)
   		 	 .clickable(onClick = { scope.launch {
-					HandleCardClick(repository, index); WinnerLineLogic(repository, coordinates)}})
+					HandleCardClick(repository, index); WinnerLineLogic(repository, coordinates); vm.updateExpandButton(false)}})
 				.constrainAs(cardRef) {
 					when (index) {
 						0 -> {

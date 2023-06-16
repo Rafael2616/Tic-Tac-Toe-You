@@ -18,11 +18,11 @@ import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.game.domain.util.BackgroundMusicLogic
 import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
+import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import kotlinx.coroutines.launch
 
-
 @Composable
-fun BackgroundMusicButton(context: Context, isBackgroundMusicOn: Boolean, settingsRepo: SettingsRepository) {
+fun BackgroundMusicButton(context: Context, isBackgroundMusicOn: Boolean, settingsRepo: SettingsRepository, vm: SettingsViewModel) {
 	val scope = rememberCoroutineScope()
 
 Box(
@@ -41,7 +41,11 @@ Box(
             modifier = Modifier
            .width(45.dp)
            .height(45.dp)
-           .clickable(onClick = { UiClickSound(context, settingsRepo); scope.launch { BackgroundMusicLogic(settingsRepo, context) }})
+           .clickable(onClick = { UiClickSound(context, settingsRepo)
+					vm.updateIsBackgroundMusicOnValue(!isBackgroundMusicOn)
+			  	  scope.launch { BackgroundMusicLogic(settingsRepo, context)
+				}
+			})
         ) {
            Image(
 				contentDescription = null,
@@ -54,7 +58,7 @@ Box(
 			text = stringResource(R.string.active_music),
             style = MaterialTheme.typography.bodyMedium.copy(fontSize = 12.sp),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
+			modifier = Modifier.align(Alignment.CenterHorizontally)
             )
         }
 	}
