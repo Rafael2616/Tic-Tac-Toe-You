@@ -72,7 +72,7 @@ class SettingsActivity : ComponentActivity() {
         }
 
         fun syncDarkThemeValue() {
-            if (!isFollowingSystemOn) {
+            if (isFollowingSystemOn) {
                 if (isSystemInDarkTheme) {
                     viewModel.updateIsDarkThemeOnValue(true)
                 } else {
