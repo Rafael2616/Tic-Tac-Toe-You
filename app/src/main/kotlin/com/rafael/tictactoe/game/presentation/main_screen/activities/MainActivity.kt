@@ -1,11 +1,8 @@
 package com.rafael.tictactoe.game.presentation.main_screen.activities
 
-import com.rafael.tictactoe.game.presentation.main_screen.components.OptionsButtons
-import com.rafael.tictactoe.game.presentation.main_screen.components.TopAppBar
 import android.content.*
 import android.os.Bundle
 //import android.widget.Toast
-import com.rafael.tictactoe.common.presentation.ui.theme.AppTheme
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.*
 //import androidx.compose.animation.*
@@ -14,30 +11,36 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
-import androidx.compose.ui.draw.*
 import androidx.compose.ui.graphics.*
+import com.rafael.tictactoe.common.presentation.ui.theme.AppTheme
+import com.rafael.tictactoe.game.presentation.main_screen.components.OptionsButtons
+import com.rafael.tictactoe.game.presentation.main_screen.components.TopAppBar
+import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
 import dagger.hilt.android.AndroidEntryPoint
-
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-   override fun onCreate(savedInstanceState: Bundle?) {
-   super.onCreate(savedInstanceState)
-      setContent{ AppTheme(this) { homeScreen()
-      } 
-   }
-}
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+			setContent{ AppTheme(this) { homeScreen()
+			} 
+		}
+	}
 
-@Composable
-fun homeScreen() {
+	@Inject
+	lateinit var settingsRepo: SettingsRepository
+	
+	@Composable
+	fun homeScreen() {
 
-Surface(
-     color = MaterialTheme.colorScheme.surface,
-     modifier = Modifier.fillMaxSize()
- ) {
-      TopAppBar()
-      OptionsButtons()
-      }
-   }
+	Surface(
+   	 color = MaterialTheme.colorScheme.surface,
+		modifier = Modifier.fillMaxSize()
+    ) {
+        TopAppBar()
+        OptionsButtons(settingsRepo)
+		}
+	}
 }
