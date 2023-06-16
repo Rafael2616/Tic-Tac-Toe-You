@@ -32,6 +32,6 @@ if ((play) && (!winner)) {
        	 }
     	}
 	}
-   game.expandButton = false
-   repository.setGameValues(game)
+ //  game.expandButton = false
+ //  repository.setGameValues(game)
 }
