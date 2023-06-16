@@ -15,23 +15,21 @@ suspend fun HandleCardClick(repository: GameRepository, index: Int) {
 	val winner = game.winner
 	val isPlayer1 = game.isPlayer1
 
-if ((play) && (!winner)) {
-    if (!isCardClicked[index]) {
-        if (isXImage) {
-   		//game.isCardClicked[index] = true
-           // game.cards[index] = true
-            game.isXImage = false
-			game.isPlayer1 = !isPlayer1
-			repository.setGameValues(game)
-        } else {
-            //game.isCardClicked[index] = true
-            //game.cards[index] = false
-            game.isXImage = true
-			game.isPlayer1 = !isPlayer1
-			repository.setGameValues(game)
+	if ((play) && (!winner)) {
+  	  if (!isCardClicked[index]) {
+   	     if (isXImage) {
+   			//game.isCardClicked[index] = true
+    	       // game.cards[index] = true
+     	       game.isXImage = false
+				game.isPlayer1 = !isPlayer1
+				repository.setGameValues(game)
+      	  } else {
+    	        //game.isCardClicked[index] = true
+      	      //game.cards[index] = false
+    	        game.isXImage = true
+				game.isPlayer1 = !isPlayer1
+				repository.setGameValues(game)
        	 }
     	}
 	}
- //  game.expandButton = false
- //  repository.setGameValues(game)
 }

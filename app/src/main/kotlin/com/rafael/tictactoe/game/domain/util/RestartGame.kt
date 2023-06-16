@@ -16,7 +16,6 @@ suspend fun RestartGame(repository: GameRepository) {
     game.is1Win = false
     game.isWinSoundPlaying = false
     game.isGotOldSoundPlaying = false
-   // game.expandButton = false
     game.startX = 0f
     game.startY = 0f
     game.endX = 0f

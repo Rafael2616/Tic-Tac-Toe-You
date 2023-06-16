@@ -10,8 +10,8 @@ suspend fun CheckIfGotOld(repository: GameRepository) {
     val isCardClicked = game.isCardClicked
 	val winner = game.winner
 
-if ((isCardClicked.all { it }) && (!winner)) {
-	game.gotOld = false
-	repository.setGameValues(game)
+	if ((isCardClicked.all { it }) && (!winner)) {
+		game.gotOld = false
+		repository.setGameValues(game)
     }
 }

@@ -11,9 +11,9 @@ suspend fun RestartButtonLogic(repository: GameRepository) {
 	val gotOld = game.gotOld
 	val isCardClicked = game.isCardClicked
 
-if ((isCardClicked.all {!it}) || (winner) || (gotOld)) {
-    game.showRestartButton = false
-    repository.setGameValues(game)
+	if ((isCardClicked.all {!it}) || (winner) || (gotOld)) {
+  	  game.showRestartButton = false
+ 	   repository.setGameValues(game)
 	}
     game.showRestartButton = true
     repository.setGameValues(game)
