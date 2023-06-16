@@ -27,7 +27,6 @@ data class GameEntity(
     var player1InToast: Boolean,
 
     var isScoreUp: Boolean,
-    var expandButton: Boolean,
     var showRestartButton: Boolean,
     var isWinSoundPlaying: Boolean,
     var isGotOldSoundPlaying: Boolean,
@@ -60,7 +59,6 @@ data class GameEntity(
      	       isPlayer1 = true,
      	       player1InToast = true,
       	      isScoreUp = false,
-      	      expandButton = false,
      	       showRestartButton = false,
      	       isWinSoundPlaying = false,
      	       isGotOldSoundPlaying = false,
