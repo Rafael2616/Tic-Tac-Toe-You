@@ -92,7 +92,6 @@ private val repository: GameRepository
             _isPlayer1.value = game.isPlayer1
             _player1InToast.value = game.player1InToast
             _isScoreUp.value = game.isScoreUp
-            _expandButton.value = game.expandButton
             _showRestartButton.value = game.showRestartButton
             _isWinSoundPlaying.value = game.isWinSoundPlaying
             _isGotOldSoundPlaying.value = game.isGotOldSoundPlaying
@@ -246,11 +245,6 @@ private val repository: GameRepository
 
     fun updateExpandButton(newValue: Boolean) {
         _expandButton.value = newValue
-        viewModelScope.launch(Dispatchers.IO) {
-			val game = repository.getGameValues() ?: gameDefaults
-			game.expandButton = newValue
-            repository.setGameValues(game)
-        }
     }
 
     fun updateShowRestartButton(newValue: Boolean) {
