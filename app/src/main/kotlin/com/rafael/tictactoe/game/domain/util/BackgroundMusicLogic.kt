@@ -20,6 +20,6 @@ suspend fun BackgroundMusicLogic(settingsRepo: SettingsRepository, context: Cont
         val serviceIntent = Intent(context, MusicService::class.java)
         context.stopService(serviceIntent)
         settings.isBackgroundMusicOn = true
-        settingsRepo.setAllSettingsValues(settings)
+		settingsRepo.setAllSettingsValues(settings)
 	}
 }
