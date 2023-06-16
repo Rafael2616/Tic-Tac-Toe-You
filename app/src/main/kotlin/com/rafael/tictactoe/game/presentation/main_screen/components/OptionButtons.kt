@@ -17,13 +17,14 @@ import androidx.compose.ui.text.*
 import androidx.compose.ui.text.style.*
 import androidx.compose.ui.unit.*
 import com.rafael.tictactoe.R
+import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.game.presentation.game_screen.activities.GameActivity
 import com.rafael.tictactoe.game.presentation.game_screen.activities.TestGameActivity
+import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
 import com.rafael.tictactoe.settings.presentation.settings_screen.activities.SettingsActivity
 
-
 @Composable
-fun OptionsButtons(){
+fun OptionsButtons(settingsRepo: SettingsRepository){
 
 val mContext = LocalContext.current   
 var cards by rememberSaveable { mutableStateOf(List(2) { false} ) }
@@ -39,7 +40,7 @@ LazyColumn(
              modifier = Modifier
             .width(240.dp)
             .height(65.dp)
-            .clickable(onClick = {//UiClickSound();
+            .clickable(onClick = { UiClickSound(mContext, settingsRepo);
              when (index) {
                0 -> mContext.startActivity(Intent(mContext, TestGameActivity::class.java))
                1 -> mContext.startActivity(Intent(mContext, SettingsActivity::class.java))}})   
