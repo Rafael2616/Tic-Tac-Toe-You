@@ -10,7 +10,6 @@ import javax.inject.Inject
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
-
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     private val repository: SettingsRepository
