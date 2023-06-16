@@ -17,12 +17,12 @@ suspend fun VictoryCounterLogic(repository: GameRepository) {
 		if (winner) {
 			game.isScoreUp = true
  		   repository.setGameValues(game)
-		if (is1Win) {
-	        game.player1Wins = player1Wins + 1
- 		   repository.setGameValues(game)
- 	  } else {
-	        game.player2Wins = player2Wins + 1
- 		   repository.setGameValues(game)
+			if (is1Win) {
+	   	     game.player1Wins = player1Wins + 1
+ 			   repository.setGameValues(game)
+ 		  } else {
+	 	       game.player2Wins = player2Wins + 1
+ 			   repository.setGameValues(game)
 			}
 		}
 	}
