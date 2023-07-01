@@ -72,7 +72,7 @@ android {
 dependencies {
 
     val lifecycle_version = "2.6.1"
-    val room_version = "2.6.0-alpha01"
+    val room_version = "2.5.2"
     val hilt_version = "2.46.1"
 
     //Kotlin
