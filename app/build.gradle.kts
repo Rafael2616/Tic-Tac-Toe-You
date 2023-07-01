@@ -77,7 +77,7 @@ dependencies {
 
     //Kotlin
     implementation("androidx.core:core-ktx:1.10.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.2")
     
     //Room
     implementation("androidx.room:room-runtime:$room_version")
