@@ -107,7 +107,7 @@ dependencies {
 
     //Theming
     implementation("com.google.android.material:compose-theme-adapter-3:1.1.1") 
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.31.4-beta")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.31.5-beta")
 
     //Test Unit
     testImplementation("junit:junit:4.13.2")
