@@ -34,7 +34,7 @@ LazyColumn(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
  ) {
-     cards.forEachIndexed { index ->
+     cards.forEachIndexed { index, _ ->
         Card(
              shape = MaterialTheme.shapes.large,
              modifier = Modifier
