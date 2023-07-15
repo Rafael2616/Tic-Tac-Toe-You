@@ -27,14 +27,14 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.activities.Set
 fun OptionsButtons(settingsRepo: SettingsRepository){
 
 val mContext = LocalContext.current   
-var cards by rememberSaveable { mutableStateOf(List(2) { false} ) }
+var cards by rememberSaveable { mutableStateOf(List<Boolean>(2) { false} ) }
 
 LazyColumn(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
  ) {
-     items(cards.size) { index ->
+     cards.forEachIndexed { index ->
         Card(
              shape = MaterialTheme.shapes.large,
              modifier = Modifier
