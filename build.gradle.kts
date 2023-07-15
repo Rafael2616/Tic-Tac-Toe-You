@@ -8,14 +8,6 @@ plugins {
     id ("com.google.devtools.ksp") version "1.8.22-1.0.11" apply false
     id ("com.google.dagger.hilt.android") version "2.46.1" apply false
 }
-kotlin {
-sourceSets.all {
-
-languageSettings {
-languageVersion "2.0"
-}
-}
-}
 
 tasks.register<Delete>("clean") {
     delete(rootProject.buildDir)
