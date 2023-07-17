@@ -47,23 +47,23 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
-    kotlin {
+    /*kotlin {
         sourceSets.all {
             languageSettings {
                 languageVersion = "2.0"
             }
         }
-    }
+    }*/
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-  /*  kotlinOptions {
+    kotlinOptions {
         jvmTarget = "17"
         freeCompilerArgs += listOf(
             "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api"
         )
-    }*/
+    }
     buildFeatures {
         compose = true
     }
