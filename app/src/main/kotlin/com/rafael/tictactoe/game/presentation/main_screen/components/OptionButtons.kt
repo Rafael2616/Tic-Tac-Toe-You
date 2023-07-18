@@ -21,9 +21,10 @@ import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.game.presentation.game_screen.activities.GameActivity
 import com.rafael.tictactoe.game.presentation.game_screen.activities.TestGameActivity
 import com.rafael.tictactoe.settings.presentation.settings_screen.activities.SettingsActivity
+import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
 
 @Composable
-fun OptionsButtons(isSoundEffectsOn: Boolean){
+fun OptionsButtons(settingsRepo: SettingsRepository){
 
 val mContext = LocalContext.current   
 var cards by rememberSaveable { mutableStateOf(List<Boolean>(2) { false} ) }
@@ -33,13 +34,13 @@ LazyColumn(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
  ) {
-     cards.forEachIndexed { index, _ ->
+     items(cards.size) { index ->
         Card(
              shape = MaterialTheme.shapes.large,
              modifier = Modifier
             .width(240.dp)
             .height(65.dp)
-            .clickable(onClick = { UiClickSound(mContext, isSoundEffectsOn);
+            .clickable(onClick = { UiClickSound(mContext, settingsRepo);
              when (index) {
                0 -> mContext.startActivity(Intent(mContext, TestGameActivity::class.java))
                1 -> mContext.startActivity(Intent(mContext, SettingsActivity::class.java))}})   
