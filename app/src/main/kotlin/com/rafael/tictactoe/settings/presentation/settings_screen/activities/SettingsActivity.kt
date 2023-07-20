@@ -49,6 +49,7 @@ class SettingsActivity : ComponentActivity() {
 
     @Composable
     fun settingsScreen() {
+	
         val viewModel = ViewModelProvider(this).get(SettingsViewModel::class.java)
         val isSystemInDarkTheme = isSystemInDarkTheme()
         val isDarkThemeOn by viewModel.isDarkThemeOn.collectAsState()
@@ -90,19 +91,9 @@ class SettingsActivity : ComponentActivity() {
                 isDynamicColorsOn,
                 isSoundEffectsOn,
                 isBackgroundMusicOn,
-                isAboutShown
+                isAboutShown,
+				isSystemInDarkTheme
             )
         }
-
-        fun syncDarkThemeValue() {
-            if (isFollowingSystemOn) {
-                if (isSystemInDarkTheme) {
-                    viewModel.updateIsDarkThemeOn(true)
-                } else {
-                    viewModel.updateIsDarkThemeOn(false)
-                }
-            }
-        }
-        syncDarkThemeValue()
     }
 }
