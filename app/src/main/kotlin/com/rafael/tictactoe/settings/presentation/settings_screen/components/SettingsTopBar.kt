@@ -14,7 +14,6 @@ import androidx.compose.ui.res.*
 import androidx.compose.ui.text.*
 import androidx.compose.ui.unit.*
 
-
 @Composable
 fun SettingsTopBar(){
 

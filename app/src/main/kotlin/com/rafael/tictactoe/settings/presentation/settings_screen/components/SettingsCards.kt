@@ -17,6 +17,7 @@ import com.rafael.tictactoe.settings.domain.util.HandleSwitchClicks
 import com.rafael.tictactoe.settings.domain.util.HandleCardText
 import com.rafael.tictactoe.settings.domain.util.HandleCardImage
 import com.rafael.tictactoe.settings.domain.util.HandleSwitchValues
+import com.rafael.tictactoe.settings.domain.util.SyncDarkThemeToggleValue
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import com.rafael.tictactoe.common.domain.util.UiClickSound
 
@@ -30,8 +31,11 @@ isDarkThemeOn: Boolean,
 isDynamicColorsOn: Boolean,
 isSoundEffectsOn: Boolean,
 isBackgroundMusicOn: Boolean,
-isAboutShown: Boolean
+isAboutShown: Boolean,
+isSystemInDarkTheme: Boolean
 ) {
+
+	SyncDarkThemeToggleValue(viewModel, isFollowingSystemOn, isSystemInDarkTheme)
 
 Card(
     shape = MaterialTheme.shapes.medium,

@@ -29,7 +29,8 @@ isDarkThemeOn: Boolean,
 isDynamicColorsOn: Boolean,
 isSoundEffectsOn: Boolean,
 isBackgroundMusicOn: Boolean,
-isAboutShown: Boolean
+isAboutShown: Boolean,
+isSystemInDarkTheme: Boolean
 ) {
 
 val isDynamicColorsSupported = VERSION.SDK_INT >= VERSION_CODES.S 
@@ -44,7 +45,7 @@ LazyColumn(
        if (((index == 1) && (!isFollowingSystemOn)) ||
             ((index == 2) && (isDynamicColorsSupported)) ||
             ((index != 1) && (index != 2))) {
-            SettingsCards(context, index,viewModel,isFollowingSystemOn,isDarkThemeOn,isDynamicColorsOn,isSoundEffectsOn,isBackgroundMusicOn,isAboutShown)
+            SettingsCards(context, index,viewModel,isFollowingSystemOn,isDarkThemeOn,isDynamicColorsOn,isSoundEffectsOn,isBackgroundMusicOn,isAboutShown, isSystemInDarkTheme)
         }
       }
    }
