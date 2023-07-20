@@ -1,8 +1,10 @@
 package com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels
 
-import android.content.Context
+import android.content.*
 import android.widget.Toast
 import androidx.lifecycle.*
+import com.rafael.tictactoe.common.services.MusicService
+import com.rafael.tictactoe.game.domain.util.BackgroundMusic
 import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
 import com.rafael.tictactoe.settings.domain.model.SettingsEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -33,6 +35,12 @@ class SettingsViewModel @Inject constructor(
     private var _isAboutShown = MutableStateFlow(false)
     val isAboutShown: StateFlow<Boolean> = _isAboutShown
 
+    private var _isContentSetted = MutableStateFlow(true)
+    val isContentSetted: StateFlow<Boolean> = _isContentSetted
+	
+    private var _isActivityFinished = MutableStateFlow(true)
+    val isActivityFinished: StateFlow<Boolean> = _isActivityFinished
+
     //GET DEFAUT VALUES FOR SETTINGS VARIABLES FROM SETTINGS ENTITY
     val defaultSettings = SettingsEntity.createDefaultSettings()
 
@@ -40,6 +48,7 @@ class SettingsViewModel @Inject constructor(
 	init {
   	  viewModelScope.launch(Dispatchers.IO) {
 	  	  val settings = repository.getAllSettingsValues() ?: defaultSettings
+			settings.settingsID = 1
    	     _isBackgroundMusicOn.value = settings.isBackgroundMusicOn
     	    _isDarkThemeOn.value = settings.isDarkThemeOn
     	    _isDynamicColorsOn.value = settings.isDynamicColorsOn
@@ -48,17 +57,18 @@ class SettingsViewModel @Inject constructor(
   	  }
 	}
 
-    //FUNS TO UPDATE THE VALUES OF VARIABLES IN REPOSITORY AND VIEWMODEL TO UPDATE SCREEN
-	fun updateIsBackgroundMusicOnValue(newValue: Boolean) {
+    //FUNCTIONS TO UPDATE THE VALUES IN SETTINGS REPOSITORY AND VALUES USED TO UPDATE SCREEN
+	fun updateIsBackgroundMusicOn(newValue: Boolean, context: Context) {
  	   _isBackgroundMusicOn.value = newValue
  	   viewModelScope.launch(Dispatchers.IO) {
 	  	  val settings = repository.getAllSettingsValues() ?: defaultSettings
     		settings.isBackgroundMusicOn = newValue
 			repository.setAllSettingsValues(settings)
   	  }
+		BackgroundMusic(_isBackgroundMusicOn.value, context)
 	}
 
-   fun updateIsDarkThemeOnValue(newValue: Boolean) {
+   fun updateIsDarkThemeOn(newValue: Boolean) {
         _isDarkThemeOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
 	  	  val settings = repository.getAllSettingsValues() ?: defaultSettings
@@ -67,7 +77,7 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    fun updateIsDynamicColorsOnValue(newValue: Boolean) {
+    fun updateIsDynamicColorsOn(newValue: Boolean) {
         _isDynamicColorsOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
 	  	  val settings = repository.getAllSettingsValues() ?: defaultSettings
@@ -76,7 +86,7 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    fun updateIsFollowingSystemOnValue(newValue: Boolean) {
+    fun updateIsFollowingSystemOn(newValue: Boolean) {
         _isFollowingSystemOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
 	  	  val settings = repository.getAllSettingsValues() ?: defaultSettings
@@ -85,7 +95,7 @@ class SettingsViewModel @Inject constructor(
         }
     }
    
-    fun updateIsSoundEffectsOnValue(newValue: Boolean) {
+    fun updateIsSoundEffectsOn(newValue: Boolean) {
         _isSoundEffectsOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
     	    val settings = repository.getAllSettingsValues() ?: defaultSettings
@@ -94,7 +104,15 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    fun updateIsAboutShownValue(newValue: Boolean) {
+    fun updateIsAboutShown(newValue: Boolean) {
         _isAboutShown.value = newValue
+    }
+	
+    fun updateIsContentSetted(newValue: Boolean) {
+        _isContentSetted.value = newValue
+    }
+	
+    fun updateIsActivityFinished(newValue: Boolean) {
+        _isActivityFinished.value = newValue
     }
 }
