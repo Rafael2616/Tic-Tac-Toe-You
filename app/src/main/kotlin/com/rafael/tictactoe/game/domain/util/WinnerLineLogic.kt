@@ -1,55 +1,53 @@
 package com.rafael.tictactoe.game.domain.util
 
-import com.rafael.tictactoe.game.domain.model.GameEntity
-import com.rafael.tictactoe.game.domain.repository.GameRepository
 import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
+import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
-suspend fun WinnerLineLogic(repository: GameRepository, cordinate: WinnerLineCoordinates) {
-
-	val gameDefaults = GameEntity.defaultGameValues()
-    val game = repository.getGameValues() ?: gameDefaults
-    val cards = game.cards
-    val isCardClicked = game.isCardClicked
-  
+fun WinnerLineLogic(
+viewModel: GameViewModel,
+cordinate: WinnerLineCoordinates,
+cards: List<Boolean>,
+isCardClicked: List<Boolean>
+) {  
 
 	if (isCardClicked[0] && isCardClicked[1] && isCardClicked[2]){
 		if ((cards[0] && cards[1] && cards[2]) || (!cards[0] && !cards[1] && !cards[2])) {
-			cordinate.setFirstHorizontalLinePositions()
+			cordinate.setFirstHorizontalLinePositions(viewModel)
 		} 
 	}
 	if (isCardClicked[3] && isCardClicked[4] && isCardClicked[5]){
    	 if ((cards[3] && cards[4] && cards[5]) || (!cards[3] && !cards[4] && !cards[5])) {
-     	   cordinate.setSecondHorizontalLinePositions()
+     	   cordinate.setSecondHorizontalLinePositions(viewModel)
 		} 
 	}
 	if (isCardClicked[6] && isCardClicked[7] && isCardClicked[8]){  
  	   if ((cards[6] && cards[7] && cards[8]) || (!cards[6] && !cards[7] && !cards[8])) {
-			cordinate.setTertiaryHorizontalLinePositions()
+			cordinate.setTertiaryHorizontalLinePositions(viewModel)
   	  }
 	}
 	if (isCardClicked[0] && isCardClicked[3] && isCardClicked[6]){
    	 if ((cards[0] && cards[3] && cards[6]) || (!cards[0] && !cards[3] && !cards[6])) {
-			cordinate.setFirstVerticalLinePositions()
+			cordinate.setFirstVerticalLinePositions(viewModel)
     	}
 	}
 	if (isCardClicked[1] && isCardClicked[4] && isCardClicked[7]){ 
     	if ((cards[1] && cards[4] && cards[7]) || (!cards[1] && !cards[4] && !cards[7])) {
-			cordinate.setSecondVerticalLinePositions()
+			cordinate.setSecondVerticalLinePositions(viewModel)
   	  }
 	}
 	if (isCardClicked[2] && isCardClicked[5] && isCardClicked[8]){
    	 if ((cards[2] && cards[5] && cards[8]) || (!cards[2] && !cards[5] && !cards[8])) {
-			cordinate.setTertiaryVerticalLinePositions()
+			cordinate.setTertiaryVerticalLinePositions(viewModel)
     	}
 	}
 	if (isCardClicked[0] && isCardClicked[4] && isCardClicked[8]){
     	if ((cards[0] && cards[4] && cards[8]) || (!cards[0] && !cards[4] && !cards[8])) {
-			cordinate.setStartToEndTransversalLinePositions()
+			cordinate.setStartToEndTransversalLinePositions(viewModel)
    	 }
 	}
 	if (isCardClicked[2] && isCardClicked[4] && isCardClicked[6]){
     	if ((cards[2] && cards[4] && cards[6]) || (!cards[2] && !cards[4] && !cards[6])) {
-			cordinate.setEndToStartTransversalLinePositions()
+			cordinate.setEndToStartTransversalLinePositions(viewModel)
         }
     } 
 }

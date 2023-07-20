@@ -1,20 +1,16 @@
 package com.rafael.tictactoe.game.domain.util
 
-import com.rafael.tictactoe.game.domain.model.GameEntity
-import com.rafael.tictactoe.game.domain.repository.GameRepository
+import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
-suspend fun RestartButtonLogic(repository: GameRepository) {
-
-	val gameDefaults = GameEntity.defaultGameValues()
-    val game = repository.getGameValues() ?: gameDefaults
-	val winner = game.winner
-	val gotOld = game.gotOld
-	val isCardClicked = game.isCardClicked
+fun RestartButtonLogic(
+vm: GameViewModel,
+isCardClicked: List<Boolean>,
+winner: Boolean,
+gotOld: Boolean
+) {
 
 	if ((isCardClicked.all {!it}) || (winner) || (gotOld)) {
-  	  game.showRestartButton = false
- 	   repository.setGameValues(game)
+  	  vm.updateShowRestartButton(false)
 	}
-    game.showRestartButton = true
-    repository.setGameValues(game)
+    vm.updateShowRestartButton(true)
 }

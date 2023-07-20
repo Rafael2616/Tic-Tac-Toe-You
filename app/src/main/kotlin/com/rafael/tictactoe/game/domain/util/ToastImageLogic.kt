@@ -1,23 +1,23 @@
 package com.rafael.tictactoe.game.domain.util
 
 import com.rafael.tictactoe.R
-import androidx.compose.ui.res.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.graphics.painter.*
-import com.rafael.tictactoe.game.domain.repository.GameRepository
+import android.graphics.drawable.*
+import android.content.*
 
-//THIS FUNCTION RECEIVER VALUES DIRECTLY FROM VIEWMODEL
-//TODO//REMVOE COMPOSE ELEMENTS OF THIS FUN
+//some work needed in this file
 
-@Composable
-fun ToastImageLogic(winner: Boolean, isXImage: Boolean): Painter {
+fun ToastImageLogic(
+context: Context,
+winner: Boolean,
+isXImage: Boolean,
+xImageMax: Int,
+circleImageMax: Int
+)/*: Painter*/ {
 
-	val xImageMax = painterResource(R.drawable.x_image_max_size)
-    val circleImageMax = painterResource(R.drawable.circle_image_max_size)
-
-	return if (!winner) {
+	val image = if (!winner) {
    	 if (isXImage) xImageMax else circleImageMax
 	}else {
     	if(!isXImage) xImageMax else circleImageMax
-	}         
+	} 
+	//return context.getDrawable(image)!!       
 }

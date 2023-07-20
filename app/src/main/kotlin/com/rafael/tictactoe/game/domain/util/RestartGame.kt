@@ -1,24 +1,20 @@
 package com.rafael.tictactoe.game.domain.util
 
-import com.rafael.tictactoe.game.domain.model.GameEntity
-import com.rafael.tictactoe.game.domain.repository.GameRepository
+import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
-suspend fun RestartGame(repository: GameRepository) {
+fun RestartGame(
+vm: GameViewModel,
+cards: List<Boolean>,
+isCardClicked: List<Boolean>
+) {
 
-	val gameDefaults = GameEntity.defaultGameValues()
-    val game = repository.getGameValues() ?: gameDefaults
-    val cards = game.cards
-    val isCardClicked = game.isCardClicked
-
-   // game.isCardClicked.all { false }
-   // game.cards.all { false }
-	game.isScoreUp = false
-    game.is1Win = false
-    game.isWinSoundPlaying = false
-    game.isGotOldSoundPlaying = false
-    game.startX = 0f
-    game.startY = 0f
-    game.endX = 0f
-	game.endY = 0f
-    repository.setGameValues(game)
+	val allFalse = List(cards.size) { false }
+	
+    vm.updateAllIsCardClicked(allFalse)
+    vm.updateAllCards(allFalse)
+	vm.updateIsScoreUp(false)
+    vm.updateIs1Win(false)
+    vm.updateIsWinSoundPlaying(false)
+    vm.updateIsGotOldSoundPlaying(false)
+	vm.setCoordinates(0f, 0f, 0f, 0f)
 }

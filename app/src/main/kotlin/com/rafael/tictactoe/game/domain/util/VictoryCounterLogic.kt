@@ -1,28 +1,23 @@
 package com.rafael.tictactoe.game.domain.util
 
-import com.rafael.tictactoe.game.domain.model.GameEntity
-import com.rafael.tictactoe.game.domain.repository.GameRepository
+import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
-suspend fun VictoryCounterLogic(repository: GameRepository) {
-
-    val gameDefaults = GameEntity.defaultGameValues()
-	val game = repository.getGameValues() ?: gameDefaults
-	val isScoreUp = game.isScoreUp
-	val winner = game.winner
-	val is1Win = game.is1Win
-    val player1Wins = game.player1Wins
-    val player2Wins = game.player2Wins
+fun VictoryCounterLogic(
+vm: GameViewModel,
+isScoreUp: Boolean,
+winner: Boolean,
+is1Win: Boolean,
+player1Wins: Int,
+player2Wins: Int
+) {
 
 	if (!isScoreUp) {
 		if (winner) {
-			game.isScoreUp = true
- 		   repository.setGameValues(game)
+			vm.updateIsScoreUp(true)
 			if (is1Win) {
-	   	     game.player1Wins = player1Wins + 1
- 			   repository.setGameValues(game)
- 		  } else {
-	 	       game.player2Wins = player2Wins + 1
- 			   repository.setGameValues(game)
+	   	     vm.updatePlayer1Wins(player1Wins + 1)
+			} else {
+	 	       vm.updatePlayer2Wins(player2Wins + 1)
 			}
 		}
 	}

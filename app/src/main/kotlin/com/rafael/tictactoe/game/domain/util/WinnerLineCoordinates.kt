@@ -1,83 +1,72 @@
 package com.rafael.tictactoe.game.domain.util
 
-import com.rafael.tictactoe.game.domain.model.GameEntity
-import com.rafael.tictactoe.game.domain.repository.GameRepository
-import javax.inject.Inject
+import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
 // THIS COORDINATES ONLY WORKS AS EXPECTED IN DEVICES WITH HD SCREEN (1280/720) AND NEEDS REWORK!!
 
-class WinnerLineCoordinates @Inject constructor(private val repository: GameRepository) {
-    val gameDefaults = GameEntity.defaultGameValues()
+class WinnerLineCoordinates() {
 
-    suspend fun setFirstHorizontalLinePositions() {
-        val game = repository.getGameValues() ?: gameDefaults
-        game.startX = 15f
-        game.startY = 725f
-        game.endX = 705f
-        game.endY = 725f
-        repository.setGameValues(game)
+    fun setFirstHorizontalLinePositions(viewModel: GameViewModel) {
+        val startX = 15f
+        val startY = 725f
+        val endX = 705f
+        val endY = 725f
+		viewModel.setCoordinates(startX, startY, endX, endY)
     }
 
-    suspend fun setSecondHorizontalLinePositions() {
-        val game = repository.getGameValues() ?: gameDefaults
-        game.startX = 15f
-        game.startY = 950f
-        game.endX = 705f
-        game.endY = 950f
-        repository.setGameValues(game)
+    fun setSecondHorizontalLinePositions(viewModel: GameViewModel) {
+        val startX = 15f
+        val startY = 950f
+        val endX = 705f
+        val endY = 950f
+		viewModel.setCoordinates(startX, startY, endX, endY)
     }
 
-    suspend fun setTertiaryHorizontalLinePositions() {
-        val game = repository.getGameValues() ?: gameDefaults
-        game.startX = 15f
-        game.startY = 1170f
-        game.endX = 705f
-        game.endY = 1170f
-        repository.setGameValues(game)
+    fun setTertiaryHorizontalLinePositions(viewModel: GameViewModel) {
+        val startX = 15f
+        val startY = 1170f
+        val endX = 705f
+        val endY = 1170f
+		viewModel.setCoordinates(startX, startY, endX, endY)
     }
 
-    suspend fun setFirstVerticalLinePositions() {
-        val game = repository.getGameValues() ?: gameDefaults
-        game.startX = 125f
-        game.startY = 610f
-        game.endX = 125f
-        game.endY = 1285f
-        repository.setGameValues(game)
+    fun setFirstVerticalLinePositions(viewModel: GameViewModel) {
+    	val startX = 125f
+        val startY = 610f
+        val endX = 125f
+        val endY = 1285f
+		viewModel.setCoordinates(startX, startY, endX, endY)
     }
 
-    suspend fun setSecondVerticalLinePositions() {
-        val game = repository.getGameValues() ?: gameDefaults
-        game.startX = 362f
-        game.startY = 610f
-        game.endX = 362f
-        game.endY = 1285f
-        repository.setGameValues(game)
+    fun setSecondVerticalLinePositions(viewModel: GameViewModel) {
+        val startX = 362f
+        val startY = 610f
+        val endX = 362f
+        val endY = 1285f
+		viewModel.setCoordinates(startX, startY, endX, endY)
     }
 
-    suspend fun setTertiaryVerticalLinePositions() {
-        val game = repository.getGameValues() ?: gameDefaults
-        game.startX = 595f
-        game.startY = 610f
-        game.endX = 595f
-        game.endY = 1285f
-        repository.setGameValues(game)
+    fun setTertiaryVerticalLinePositions(viewModel: GameViewModel) {
+        val startX = 595f
+        val startY = 610f
+        val endX = 595f
+        val endY = 1285f
+		viewModel.setCoordinates(startX, startY, endX, endY)
     }
 
-    suspend fun setStartToEndTransversalLinePositions() {
-        val game = repository.getGameValues() ?: gameDefaults
-        game.startX = 15f
-        game.startY = 620f
-        game.endX = 705f
-        game.endY = 1275f
-        repository.setGameValues(game)
+    fun setStartToEndTransversalLinePositions(viewModel: GameViewModel) {
+        val startX = 15f
+        val startY = 620f
+        val endX = 705f
+        val endY = 1275f
+		viewModel.setCoordinates(startX, startY, endX, endY)
     }
 
-    suspend fun setEndToStartTransversalLinePositions() {
-        val game = repository.getGameValues() ?: gameDefaults
-        game.startX = 705f
-        game.startY = 620f
-        game.endX = 15f
-        game.endY = 1275f
-        repository.setGameValues(game)
+    fun setEndToStartTransversalLinePositions(viewModel: GameViewModel) {
+        val startX = 705f
+        val startY = 620f
+        val endX = 15f
+        val endY = 1275f
+		viewModel.setCoordinates(startX, startY, endX, endY)
     }
 }
