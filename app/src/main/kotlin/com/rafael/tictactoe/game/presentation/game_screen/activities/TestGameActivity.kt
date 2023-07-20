@@ -18,17 +18,18 @@ import com.rafael.tictactoe.game.presentation.game_screen.components.ExpandButto
 import com.rafael.tictactoe.game.presentation.game_screen.components.GameStateToast
 import com.rafael.tictactoe.game.presentation.game_screen.components.GetPlayerPrefsCard
 import com.rafael.tictactoe.game.presentation.game_screen.components.PlayAgainButton
-import com.rafael.tictactoe.game.presentation.game_screen.components.PlayerNamesLayout
-import com.rafael.tictactoe.game.presentation.game_screen.components.ResetVictoryCounterButton
+import com.rafael.tictactoe.game.presentation.game_screen.components.PlayersNamesLayout
 import com.rafael.tictactoe.game.presentation.game_screen.components.RestartButton
 import com.rafael.tictactoe.game.presentation.game_screen.components.SoundEffectsButton
 import com.rafael.tictactoe.game.presentation.game_screen.components.VictoryCounter
+import com.rafael.tictactoe.game.presentation.game_screen.components.VictoryCounterReseterButton
 import com.rafael.tictactoe.game.presentation.game_screen.components.WinnerLine
 import com.rafael.tictactoe.game.domain.repository.GameRepository
-import com.rafael.tictactoe.game.domain.util.CheckForWinner
-import com.rafael.tictactoe.game.domain.util.CheckIfGotOld
+import com.rafael.tictactoe.game.domain.util.WinnerChecker
+import com.rafael.tictactoe.game.domain.util.GotOldChecker
 import com.rafael.tictactoe.game.domain.util.GotOldSound
 import com.rafael.tictactoe.game.domain.util.GameUtils
+import com.rafael.tictactoe.game.domain.util.RestartButtonLogic
 import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
 import com.rafael.tictactoe.game.domain.util.WinnerSound
 import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
@@ -41,8 +42,6 @@ import kotlinx.coroutines.launch
 class TestGameActivity : ComponentActivity() {
 
     @Inject lateinit var gameUtil: GameUtils
-    @Inject lateinit var repository: GameRepository
-    @Inject lateinit var settingsRepo: SettingsRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,8 +54,7 @@ class TestGameActivity : ComponentActivity() {
 
     @Composable
     fun testGameScreen() {
-        val scope = rememberCoroutineScope()
-
+	
         val viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
         val settingsVM = ViewModelProvider(this).get(SettingsViewModel::class.java)
         val currentPlayerName by viewModel.currentPlayerName.collectAsState()
@@ -85,51 +83,48 @@ class TestGameActivity : ComponentActivity() {
         val endY by viewModel.endY.collectAsState()
         val winner by viewModel.winner.collectAsState()
         val gotOld by viewModel.gotOld.collectAsState()
+        val showPlayer1Name by viewModel.showPlayer1Name.collectAsState()
+        val showPlayer2Name by viewModel.showPlayer2Name.collectAsState()
 
-        Surface(
+       Surface(
             color = MaterialTheme.colorScheme.surface,
             modifier = Modifier.fillMaxSize()
         ) {
 			//BELOW THE LOGIC THAT DECIDE IN WHICH CASE THE FUNCTIONS MUST BE CALLED AND
-            //PARAMS NEEEDED FOR THEM WORKS BECAUSE SOME FUNS NEEDS TO RECOMPOSE
+            //PARAMS NEEEDED FOR THEM WORKS AND UPDATE UI IF NEEDED
 
             //WHEN THE ACTIVITY STARTS
-            CardGrid(cards, isCardClicked, repository, gameUtil.coordinate, viewModel)
-            ExpandButton(this, settingsRepo, viewModel, expandButton)
-            VictoryCounter(repository, player1Wins, player2Wins)
-            PlayerNamesLayout(this, repository, gameUtil.playerName)  //THIS FUN CAUSES APP TO CRASH INTANTANEMENTE
-            GameStateToast(this, repository, winner, gotOld)  //THIS FUN CAUSES APP TO CRASH INTANTANEMENTE
+            CardGrid(viewModel, gameUtil.coordinate, cards, isCardClicked, play, isXImage, winner, isPlayer1)
+            ExpandButton(this, viewModel, isSoundEffectsOn, expandButton)
+            VictoryCounter(viewModel, isScoreUp, winner, is1Win, player1Wins, player2Wins)
+            PlayersNamesLayout(this, viewModel, gameUtil.playerName, showPlayer1Name, showPlayer2Name, play, isPlayer1, isXFor1, player1Name, player2Name, player1InToast)
+            GameStateToast(this, viewModel, isXImage, winner, isPlayer1, gotOld, player1Name, player2Name, currentPlayerName, isXFor1)
+			RestartButtonLogic(viewModel, isCardClicked, winner, gotOld)
 
             if (!play) {
-				GetPlayerPrefsCard(this, settingsRepo, repository,viewModel, isXFor1, player1Name, player2Name, isPlayer1, player1InToast)
+				GetPlayerPrefsCard(this, viewModel, isSoundEffectsOn, isXFor1, player1Name, player2Name, isPlayer1, player1InToast, play)
 			}
             if (play) {
-                scope.launch {
-                    CheckForWinner(repository)
-                    CheckIfGotOld(repository)
-                }
+   		     GotOldChecker(viewModel, isCardClicked, winner)
+                WinnerChecker(viewModel, cards, isCardClicked)
             }
             if (expandButton) {
-                BackgroundMusicButton(this, isBackgroundMusicOn, settingsRepo, settingsVM)
-                SoundEffectsButton(this, isSoundEffectsOn, settingsRepo, settingsVM)
+                BackgroundMusicButton(this, isBackgroundMusicOn, isSoundEffectsOn, settingsVM)
+                SoundEffectsButton(this, settingsVM, isSoundEffectsOn)
             }
             if (showRestartButton) {
-				RestartButton(this, repository, settingsRepo, viewModel)
+				RestartButton(this, viewModel, isSoundEffectsOn, cards, isCardClicked)
 			}
             if (winner) {
-                scope.launch {
-                    WinnerSound(this@TestGameActivity, repository, settingsRepo)
-                }
-                WinnerLine(repository, gameUtil.coordinate, startX, startY, endX, endY)
-                ResetVictoryCounterButton(this, repository, settingsRepo)
-                PlayAgainButton(this, repository, settingsRepo, viewModel)
+                WinnerSound(this, viewModel, isSoundEffectsOn, isWinSoundPlaying)
+                WinnerLine(viewModel, gameUtil.coordinate, cards, isCardClicked, startX, startY, endX, endY)
+                VictoryCounterReseterButton(this, viewModel, isSoundEffectsOn)
+                PlayAgainButton(this, viewModel, isSoundEffectsOn, cards, isCardClicked, winner, gotOld)
             }
             if (gotOld) {
-                scope.launch {
-                    GotOldSound(this@TestGameActivity, repository, settingsRepo)
-                }
-                ResetVictoryCounterButton(this, repository, settingsRepo)
-                PlayAgainButton(this, repository, settingsRepo, viewModel)
+                GotOldSound(this, viewModel, isSoundEffectsOn, isGotOldSoundPlaying)					
+                VictoryCounterReseterButton(this, viewModel, isSoundEffectsOn)
+                PlayAgainButton(this, viewModel, isSoundEffectsOn, cards, isCardClicked, winner, gotOld)
             }
         }
     }
