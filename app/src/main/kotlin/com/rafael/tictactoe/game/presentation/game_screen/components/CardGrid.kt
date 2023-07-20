@@ -36,10 +36,9 @@ winner: Boolean,
 isPlayer1: Boolean
 ) {
 
-   val xImage = painterResource(R.drawable.x_image)
-   val circleImage = painterResource(R.drawable.circle_image)
-   val xImageMax = painterResource(R.drawable.x_image_max_size)
-   val transparentImage = painterResource(R.drawable.transparent_image)
+    val xImage = painterResource(R.drawable.x_image)
+    val circleImage = painterResource(R.drawable.circle_image)
+    val transparentImage = painterResource(R.drawable.transparent_image)
 
      ConstraintLayout {
   	   val cardNumber = List(cards.size) { createRef() }
