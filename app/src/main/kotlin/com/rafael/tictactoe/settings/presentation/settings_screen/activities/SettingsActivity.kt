@@ -3,6 +3,7 @@ package com.rafael.tictactoe.settings.presentation.settings_screen.activities
 import android.content.*
 import android.os.Bundle
 import android.widget.Toast
+import android.app.ActivityManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.*
 import androidx.compose.foundation.*
@@ -13,6 +14,7 @@ import androidx.compose.ui.*
 import androidx.lifecycle.*
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.presentation.ui.theme.AppTheme
+import com.rafael.tictactoe.common.services.MusicService
 import com.rafael.tictactoe.game.presentation.main_screen.activities.MainActivity
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsTopBar
@@ -35,7 +37,11 @@ class SettingsActivity : ComponentActivity() {
     }
 
     override fun onBackPressed() {
-        startActivity(Intent(this, MainActivity::class.java))
+		if(isTaskRoot) {
+        	startActivity(Intent(this, MainActivity::class.java))
+		} else {
+			finish()
+		}
     }
 
     @Inject
@@ -51,32 +57,49 @@ class SettingsActivity : ComponentActivity() {
         val isBackgroundMusicOn by viewModel.isBackgroundMusicOn.collectAsState()
         val isSoundEffectsOn by viewModel.isSoundEffectsOn.collectAsState()
         val isAboutShown by viewModel.isAboutShown.collectAsState()
+        val isContentSetted by viewModel.isContentSetted.collectAsState()
+        val isActivityFinished by viewModel.isActivityFinished.collectAsState()
+
+		if (!isContentSetted) {
+			setContent {
+				AppTheme(this, isDarkThemeOn, isFollowingSystemOn, isDynamicColorsOn) {
+					settingsScreen()
+				}
+			}
+		}
+		
+		if (!isActivityFinished) {
+			if(isTaskRoot) {
+        		startActivity(Intent(this, MainActivity::class.java))
+			} else {
+				finish()
+			}
+		}
 
         Surface(
             color = MaterialTheme.colorScheme.surface,
             modifier = Modifier.fillMaxSize()
         ) {
-            BackButton()
+            BackButton(this, isSoundEffectsOn,viewModel)
             SettingsTopBar()
             SettingsCardsImpl(
+				this,
                 viewModel,
                 isFollowingSystemOn,
                 isDarkThemeOn,
                 isDynamicColorsOn,
                 isSoundEffectsOn,
                 isBackgroundMusicOn,
-                isAboutShown,
-                this,
-                settingsRepo
+                isAboutShown
             )
         }
 
         fun syncDarkThemeValue() {
             if (isFollowingSystemOn) {
                 if (isSystemInDarkTheme) {
-                    viewModel.updateIsDarkThemeOnValue(true)
+                    viewModel.updateIsDarkThemeOn(true)
                 } else {
-                    viewModel.updateIsDarkThemeOnValue(false)
+                    viewModel.updateIsDarkThemeOn(false)
                 }
             }
         }
