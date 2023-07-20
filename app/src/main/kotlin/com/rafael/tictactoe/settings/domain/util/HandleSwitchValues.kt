@@ -1,6 +1,5 @@
 package com.rafael.tictactoe.settings.domain.util
 
-
 fun HandleSwitchValues(
 index: Int,
 isFollowingSystemOn: Boolean,
