@@ -1,8 +1,5 @@
 package com.rafael.tictactoe.settings.presentation.settings_screen.components
 
-import com.rafael.tictactoe.R
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
-import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsCards
 import android.os.Build.*
 import android.content.*
 import androidx.activity.compose.*
@@ -19,20 +16,20 @@ import androidx.compose.ui.platform.*
 import androidx.compose.ui.res.*
 import androidx.compose.ui.text.*
 import androidx.compose.ui.unit.*
-import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
-
+import com.rafael.tictactoe.R
+import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsCards
 
 @Composable
 fun SettingsCardsImpl(
+context: Context,
 viewModel: SettingsViewModel,
 isFollowingSystemOn: Boolean,
 isDarkThemeOn: Boolean,
 isDynamicColorsOn: Boolean,
 isSoundEffectsOn: Boolean,
 isBackgroundMusicOn: Boolean,
-isAboutShown: Boolean,
-context: Context,
-settingsRepo: SettingsRepository
+isAboutShown: Boolean
 ) {
 
 val isDynamicColorsSupported = VERSION.SDK_INT >= VERSION_CODES.S 
@@ -47,7 +44,7 @@ LazyColumn(
        if (((index == 1) && (!isFollowingSystemOn)) ||
             ((index == 2) && (isDynamicColorsSupported)) ||
             ((index != 1) && (index != 2))) {
-            SettingsCards(index,viewModel,isFollowingSystemOn,isDarkThemeOn,isDynamicColorsOn,isSoundEffectsOn,isBackgroundMusicOn,isAboutShown, context, settingsRepo)
+            SettingsCards(context, index,viewModel,isFollowingSystemOn,isDarkThemeOn,isDynamicColorsOn,isSoundEffectsOn,isBackgroundMusicOn,isAboutShown)
         }
       }
    }

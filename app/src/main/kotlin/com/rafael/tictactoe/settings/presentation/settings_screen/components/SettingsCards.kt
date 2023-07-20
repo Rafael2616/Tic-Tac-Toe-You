@@ -19,11 +19,10 @@ import com.rafael.tictactoe.settings.domain.util.HandleCardImage
 import com.rafael.tictactoe.settings.domain.util.HandleSwitchValues
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import com.rafael.tictactoe.common.domain.util.UiClickSound
-import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
-
 
 @Composable
 fun SettingsCards(
+context: Context,
 index: Int,
 viewModel: SettingsViewModel,
 isFollowingSystemOn: Boolean,
@@ -31,9 +30,7 @@ isDarkThemeOn: Boolean,
 isDynamicColorsOn: Boolean,
 isSoundEffectsOn: Boolean,
 isBackgroundMusicOn: Boolean,
-isAboutShown: Boolean,
-context: Context,
-settingsRepo: SettingsRepository
+isAboutShown: Boolean
 ) {
 
 Card(
@@ -41,7 +38,7 @@ Card(
     modifier = Modifier
    .width(360.dp)
    .height(if ((index == 5 ) && (isAboutShown)) 190.dp else 70.dp)
-   .clickable(onClick = { HandleSwitchClicks(index,viewModel,isFollowingSystemOn,isDarkThemeOn,isDynamicColorsOn,isSoundEffectsOn,isBackgroundMusicOn, isAboutShown); UiClickSound(context, settingsRepo)}) 
+   .clickable(onClick = { HandleSwitchClicks(context, index,viewModel,isFollowingSystemOn,isDarkThemeOn,isDynamicColorsOn,isSoundEffectsOn,isBackgroundMusicOn, isAboutShown); UiClickSound(context, isSoundEffectsOn)}) 
     ) {
         Box(
             modifier = Modifier
@@ -68,7 +65,7 @@ Card(
              if(index != 5) {
                 Switch(
                     checked = HandleSwitchValues(index,isFollowingSystemOn,isDarkThemeOn,isDynamicColorsOn,isSoundEffectsOn,isBackgroundMusicOn, isAboutShown),
-                    onCheckedChange = { HandleSwitchClicks(index,viewModel,isFollowingSystemOn,isDarkThemeOn,isDynamicColorsOn,isSoundEffectsOn,isBackgroundMusicOn, isAboutShown); UiClickSound(context, settingsRepo)}
+                    onCheckedChange = { HandleSwitchClicks(context, index,viewModel,isFollowingSystemOn,isDarkThemeOn,isDynamicColorsOn,isSoundEffectsOn,isBackgroundMusicOn, isAboutShown); UiClickSound(context, isSoundEffectsOn)}
                 )
              }
             if(index == 5) {
