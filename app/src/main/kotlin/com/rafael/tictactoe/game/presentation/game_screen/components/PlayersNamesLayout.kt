@@ -33,8 +33,8 @@ player2Name: String,
 player1InToast: Boolean
 ) {
 
-	val firstPlayerName = playerName.firstPlayerName(context, vm, play, isPlayer1, isXFor1, player1Name, player2Name, player1InToast)
-	val secondplayerName = playerName.secondPlayerName(context, vm, play, isPlayer1, isXFor1, player1Name, player2Name, player1InToast)
+	playerName.firstPlayerName(context, vm, play, isPlayer1, isXFor1, player1Name, player2Name, player1InToast)
+	playerName.secondPlayerName(context, vm, play, isPlayer1, isXFor1, player1Name, player2Name, player1InToast)
 	
     Box(
         modifier = Modifier
