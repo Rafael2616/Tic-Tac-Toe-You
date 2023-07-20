@@ -16,14 +16,15 @@ import androidx.compose.ui.text.*
 import androidx.compose.ui.unit.*
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.UiClickSound
-//import com.rafael.tictactoe.game.domain.util.ExpandButtonLogic
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
-import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
-import kotlinx.coroutines.launch
 
 @Composable
-fun ExpandButton(context: Context, settingsRepo: SettingsRepository, vm: GameViewModel, expandButton: Boolean) {
-    val scope = rememberCoroutineScope()
+fun ExpandButton(
+context: Context,
+vm: GameViewModel,
+isSoundEffectsOn: Boolean,
+expandButton: Boolean
+) {
 
 Box(
     modifier = Modifier
@@ -42,7 +43,7 @@ Box(
             modifier = Modifier
             .width(45.dp)
             .height(35.dp)
-			.clickable(onClick = { UiClickSound(context, settingsRepo); vm.updateExpandButton(!expandButton)})
+			.clickable(onClick = { UiClickSound(context, isSoundEffectsOn); vm.updateExpandButton(!expandButton)})
  	    ) {
 			Image(
                 contentDescription = null,

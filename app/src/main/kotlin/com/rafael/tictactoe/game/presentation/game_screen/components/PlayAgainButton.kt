@@ -16,20 +16,22 @@ import androidx.compose.ui.text.*
 import androidx.compose.ui.unit.*
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.UiClickSound
-import com.rafael.tictactoe.game.domain.repository.GameRepository
 import com.rafael.tictactoe.game.domain.util.RestartGame
 import com.rafael.tictactoe.game.domain.util.RestartButtonLogic
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
-import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
-import kotlinx.coroutines.launch
 
 @Composable
-fun PlayAgainButton(context: Context, repository: GameRepository, settingsRepo: SettingsRepository, vm: GameViewModel) {
-    val scope = rememberCoroutineScope()
-
-    LaunchedEffect(Unit) {
-		RestartButtonLogic(repository) 
-	}
+fun PlayAgainButton(
+context: Context,
+vm: GameViewModel,
+isSoundEffectsOn: Boolean,
+cards: List<Boolean>,
+isCardClicked: List<Boolean>,
+winner: Boolean,
+gotOld: Boolean
+) {
+ 
+	RestartButtonLogic(vm, isCardClicked, winner, gotOld)
 
   Box(
         modifier = Modifier
@@ -50,10 +52,8 @@ fun PlayAgainButton(context: Context, repository: GameRepository, settingsRepo: 
                     .height(75.dp)
                     .clickable(onClick = {
                         vm.updateExpandButton(false)
-						UiClickSound(context, settingsRepo)
-						scope.launch{
-             			   RestartGame(repository)
-                        }
+						UiClickSound(context, isSoundEffectsOn)
+             		   RestartGame(vm, cards, isCardClicked)
                     })
             ) {
                 Image(

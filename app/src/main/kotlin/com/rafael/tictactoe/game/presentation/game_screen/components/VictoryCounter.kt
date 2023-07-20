@@ -15,16 +15,20 @@ import androidx.compose.ui.unit.*
 import androidx.compose.ui.graphics.painter.*
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.UiClickSound
-import com.rafael.tictactoe.game.domain.repository.GameRepository
 import com.rafael.tictactoe.game.domain.util.VictoryCounterLogic
-import kotlinx.coroutines.launch
-
+import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
 @Composable
-fun VictoryCounter(repository: GameRepository, player1Wins: Int, player2Wins: Int) {
-    LaunchedEffect(Unit) {
-        VictoryCounterLogic(repository)
-    }
+fun VictoryCounter(
+vm: GameViewModel,
+isScoreUp: Boolean,
+winner: Boolean,
+is1Win: Boolean,
+player1Wins: Int,
+player2Wins: Int
+) {
+
+    VictoryCounterLogic(vm, isScoreUp, winner, is1Win, player1Wins, player2Wins)
 
     Box(
         modifier = Modifier

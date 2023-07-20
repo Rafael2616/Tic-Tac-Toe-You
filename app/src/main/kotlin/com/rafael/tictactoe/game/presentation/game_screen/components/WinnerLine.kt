@@ -18,34 +18,38 @@ import androidx.compose.ui.unit.*
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
 import com.rafael.tictactoe.game.domain.util.WinnerLineLogic
-import com.rafael.tictactoe.game.domain.repository.GameRepository
-import kotlinx.coroutines.launch
-
+import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
 @Composable
-fun WinnerLine(repository: GameRepository, coordinate: WinnerLineCoordinates, startX: Float, startY: Float, endX: Float, endY: Float
+fun WinnerLine(
+viewModel: GameViewModel,
+coordinate: WinnerLineCoordinates,
+cards: List<Boolean>,
+isCardClicked: List<Boolean>,
+startX: Float,
+startY: Float,
+endX: Float,
+endY: Float
 ) {
 
-	LaunchedEffect(Unit) {
-		WinnerLineLogic(repository, coordinate)
-	}
+	WinnerLineLogic(viewModel, coordinate, cards, isCardClicked)
 
- Column(
-      modifier = Modifier
-     .fillMaxSize(),
-      horizontalAlignment = Alignment.CenterHorizontally
- ) {
-     Canvas(
-           modifier = Modifier
-          .fillMaxSize()
-          .weight(1f)
-    ) {
-         drawLine(
-              color = Color.Yellow,
-              strokeWidth = 20.dp.toPx(),
-              start = Offset(x = startX, y = startY),
-              end = Offset(x = endX, y = endY)
-            )
+	Column(
+		modifier = Modifier
+			.fillMaxSize(),
+		horizontalAlignment = Alignment.CenterHorizontally
+	) {
+		Canvas(
+			modifier = Modifier
+            	.fillMaxSize()
+           	 .weight(1f)
+		) {
+			drawLine(
+				color = Color.Yellow,
+                strokeWidth = 20.dp.toPx(),
+                start = Offset(x = startX, y = startY),
+				end = Offset(x = endX, y = endY)
+			)
         }
-    }
+	}
 }

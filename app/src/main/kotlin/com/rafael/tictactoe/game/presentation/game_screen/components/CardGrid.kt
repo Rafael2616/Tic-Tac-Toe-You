@@ -1,7 +1,9 @@
 package com.rafael.tictactoe.game.presentation.game_screen.components
 
 import androidx.activity.compose.*
-//import androidx.compose.animation.*
+import androidx.compose.animation.*
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -15,16 +17,29 @@ import androidx.compose.ui.text.*
 import androidx.compose.ui.unit.*
 import androidx.constraintlayout.compose.*
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.game.domain.repository.GameRepository
-import com.rafael.tictactoe.game.domain.util.HandleCardClick
+import com.rafael.tictactoe.game.domain.util.CardClickHandler
 import com.rafael.tictactoe.game.domain.util.WinnerLineLogic
 import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
-import kotlinx.coroutines.launch
+
+//Some work needed im this file
 
 @Composable
-fun CardGrid(cards: List<Boolean>, isCardClicked: List<Boolean>, repository: GameRepository, coordinates: WinnerLineCoordinates, vm: GameViewModel) {
-     val scope = rememberCoroutineScope()
+fun CardGrid(
+vm: GameViewModel,
+coordinates: WinnerLineCoordinates,
+cards: List<Boolean>,
+isCardClicked: List<Boolean>,
+play: Boolean,
+isXImage: Boolean,
+winner: Boolean,
+isPlayer1: Boolean
+) {
+
+   val xImage = painterResource(R.drawable.x_image)
+   val circleImage = painterResource(R.drawable.circle_image)
+   val xImageMax = painterResource(R.drawable.x_image_max_size)
+   val transparentImage = painterResource(R.drawable.transparent_image)
 
      ConstraintLayout {
   	   val cardNumber = List(cards.size) { createRef() }
@@ -42,16 +57,16 @@ fun CardGrid(cards: List<Boolean>, isCardClicked: List<Boolean>, repository: Gam
  	    val end2 = createGuidelineFromEnd(0.4f)
   	   val end3 = createGuidelineFromEnd(0.05f)
 
-			cards.forEachIndexed { index, _ ->
-				val cardRef = cardNumber[index]
+		cards.forEachIndexed { index, _ ->
+			val cardRef = cardNumber[index]
 
 			Card(     
 				shape = MaterialTheme.shapes.medium,
 				modifier = Modifier
  	 		  .width(110.dp)
  		 	  .height(110.dp)
-  		 	 .clickable(onClick = { scope.launch {
-					HandleCardClick(repository, index); WinnerLineLogic(repository, coordinates); vm.updateExpandButton(false)}})
+  		 	 .clickable(onClick = { 
+					CardClickHandler(vm, isCardClicked, index, play, isXImage, winner, isPlayer1); WinnerLineLogic(vm, coordinates, cards, isCardClicked); vm.updateExpandButton(false)})
 				.constrainAs(cardRef) {
 					when (index) {
 						0 -> {
@@ -115,15 +130,25 @@ fun CardGrid(cards: List<Boolean>, isCardClicked: List<Boolean>, repository: Gam
 					Image(
 						contentDescription = null,
  					   modifier = Modifier.fillMaxSize(),
- 					   painter = painterResource(
+ 					   painter = /*cardGridImage(index, cards, isCardClicked)*/ //painterResource(
 						if (isCardClicked[index]) {
-         				   if (cards[index]) R.drawable.x_image else R.drawable.circle_image
+         				   if (cards[index]) xImage else circleImage
     	 		    } else {
-       			     R.drawable.transparent_image
+       			     transparentImage
     				    }
-					)
+					//)
 				)
 			}       
 		}
 	}
 }
+/*
+fun cardGridImage(index: Int, cards: List<Boolean>, isCardClicked: List<Boolean>) : Painter {
+
+return if (isCardClicked[index]) {
+	 if (cards[index]) R.drawable.x_image else R.drawable.circle_image
+      } else {
+     R.drawable.transparent_image
+   }
+
+}*/

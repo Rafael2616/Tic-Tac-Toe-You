@@ -16,30 +16,25 @@ import androidx.compose.ui.text.*
 import androidx.compose.ui.unit.*
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.UiClickSound
-import com.rafael.tictactoe.game.domain.util.SetPlayerImagePref
-import com.rafael.tictactoe.game.domain.repository.GameRepository
+import com.rafael.tictactoe.game.domain.util.PlayersImagesSetter
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
-import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
-import kotlinx.coroutines.launch
-
 
 @Composable
 fun GetPlayerPrefsCard(
 context: Context,
-settingsRepo: SettingsRepository,
-repository: GameRepository,
 vm: GameViewModel,
+isSoundEffectsOn: Boolean,
 isXFor1: Boolean,
 player1Name: String,
 player2Name: String,
 isPlayer1: Boolean,
-player1InToast: Boolean
+player1InToast: Boolean,
+play: Boolean
 ) {
 
     val maxLength = 10
     var player1Value = if (player1InToast) player1Name else player2Name
     var player2Value = if (player1InToast) player2Name else player1Name
-    val scope = rememberCoroutineScope()
 
     Box(
         modifier = Modifier
@@ -77,11 +72,9 @@ player1InToast: Boolean
                         .width(60.dp)
                         .height(85.dp)
                         .clickable(onClick = {
-                            UiClickSound(context, settingsRepo)
+                            UiClickSound(context, isSoundEffectsOn)
                             vm.updateIsPlayer1(!isPlayer1)
-                            scope.launch {
-                                SetPlayerImagePref(repository)
-                            }
+                            PlayersImagesSetter(vm, play, isXFor1)
                         })
                 ) {
                     Image(
@@ -122,11 +115,9 @@ player1InToast: Boolean
                         .width(60.dp)
                         .height(60.dp)
                         .clickable(onClick = {
-                            UiClickSound(context, settingsRepo)
+                            UiClickSound(context, isSoundEffectsOn)
                             vm.updateIsXFor1(!isXFor1)
-                            scope.launch {
-                                SetPlayerImagePref(repository)
-                            }
+	                        PlayersImagesSetter(vm, play, isXFor1)
                         })
                 ) {
                     Image(
@@ -146,7 +137,7 @@ player1InToast: Boolean
 
             Button(
                 onClick = {
-                    UiClickSound(context, settingsRepo)
+                    UiClickSound(context, isSoundEffectsOn)
                     vm.updatePlay(true)
                 },
                 modifier = Modifier
