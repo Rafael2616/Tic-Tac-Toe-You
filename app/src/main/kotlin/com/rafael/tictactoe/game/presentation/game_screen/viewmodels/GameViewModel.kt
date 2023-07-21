@@ -73,7 +73,6 @@ private val gameUtil : GameUtils
 	val showPlayer1Name: StateFlow<String> = _showPlayer1Name
 	private var _showPlayer2Name = MutableStateFlow("")
 	val showPlayer2Name: StateFlow<String> = _showPlayer2Name
- 
 
     fun updateCurrentPlayerName(newValue: String) {
         _currentPlayerName.value = newValue
