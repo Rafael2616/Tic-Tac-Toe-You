@@ -3,6 +3,7 @@ package com.rafael.tictactoe.game.presentation.main_screen.activities
 import android.content.*
 import android.os.Bundle
 //import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.*
 //import androidx.compose.animation.*
@@ -20,10 +21,11 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.Set
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import com.rafael.tictactoe.settings.presentation.settings_screen.activities.SettingsActivity
+import com.rafael.tictactoe.game.domain.util.BackgroundMusic
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
+	
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 			setContent{ AppTheme(this) { homeScreen()
@@ -33,15 +35,28 @@ class MainActivity : ComponentActivity() {
 
 	@Composable
 	fun homeScreen() {
+	
         val settingsVM = ViewModelProvider(this).get(SettingsViewModel::class.java)
         val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
-
+	    val isBackgroundMusicOn by settingsVM.isBackgroundMusicOn.collectAsState()
+	    val isAppInForeground by settingsVM.isAppInForeground.collectAsState()
+		val isContentSetted by settingsVM.isContentSetted.collectAsState()
+		val isDarkThemeOn by settingsVM.isDarkThemeOn.collectAsState()
+	
+		if(!isContentSetted) {
+			setContent{
+				AppTheme(this, isDarkThemeOn) {
+					homeScreen()
+				}
+			}
+		}	
 	Surface(
    	 color = MaterialTheme.colorScheme.surface,
 		modifier = Modifier.fillMaxSize()
     ) {
         TopAppBar()
         OptionsButtons(isSoundEffectsOn)
+		BackgroundMusic(this, isBackgroundMusicOn)
 		}
 	}
 }
