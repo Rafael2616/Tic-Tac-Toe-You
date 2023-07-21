@@ -10,5 +10,5 @@ plugins {
 }
 
 tasks.register<Delete>("clean") {
-    delete(rootProject.getBuildDirectory())
+    delete(project.getBuildDirectory())
 }
