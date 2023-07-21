@@ -41,6 +41,9 @@ class SettingsViewModel @Inject constructor(
     private var _isActivityFinished = MutableStateFlow(true)
     val isActivityFinished: StateFlow<Boolean> = _isActivityFinished
 
+    private var _isAppInForeground = MutableStateFlow(false)
+    val isAppInForeground: StateFlow<Boolean> = _isAppInForeground
+
     //GET DEFAUT VALUES FOR SETTINGS VARIABLES FROM SETTINGS ENTITY
     val defaultSettings = SettingsEntity.createDefaultSettings()
 
@@ -65,7 +68,7 @@ class SettingsViewModel @Inject constructor(
     		settings.isBackgroundMusicOn = newValue
 			repository.setAllSettingsValues(settings)
   	  }
-		BackgroundMusic(_isBackgroundMusicOn.value, context)
+		BackgroundMusic(context, _isBackgroundMusicOn.value)
 	}
 
    fun updateIsDarkThemeOn(newValue: Boolean) {
@@ -115,4 +118,8 @@ class SettingsViewModel @Inject constructor(
     fun updateIsActivityFinished(newValue: Boolean) {
         _isActivityFinished.value = newValue
     }
+    fun setIsAppInForeground(newValue: Boolean) {
+        _isAppInForeground.value = newValue
+    }
+	
 }
