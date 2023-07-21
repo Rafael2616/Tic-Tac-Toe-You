@@ -15,6 +15,7 @@ import com.rafael.tictactoe.settings.domain.util.HandleSwitchClicks
 import com.rafael.tictactoe.settings.domain.util.HandleCardText
 import com.rafael.tictactoe.settings.domain.util.HandleCardImage
 import com.rafael.tictactoe.settings.domain.util.HandleSwitchValues
+import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import dagger.hilt.components.SingletonComponent
 import dagger.hilt.InstallIn
 import dagger.Module
@@ -66,6 +67,12 @@ object AppModule {
     @Singleton
     fun provideSettingsRepository(database: SettingsDatabase): SettingsRepository {
         return SettingsRepositoryImpl(database.settingsDao)
+    }
+	
+    @Provides
+    @Singleton
+    fun provideSettingsViewModel(repository: SettingsRepository): SettingsViewModel {
+        return SettingsViewModel(repository)
     }
 
     //TODO// add misssing settingsUtils here
