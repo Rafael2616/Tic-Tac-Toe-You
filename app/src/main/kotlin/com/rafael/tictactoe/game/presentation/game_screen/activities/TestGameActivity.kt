@@ -42,7 +42,7 @@ import kotlinx.coroutines.launch
 class TestGameActivity : ComponentActivity() {
 
     @Inject lateinit var gameUtil: GameUtils
-
+	
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -55,8 +55,8 @@ class TestGameActivity : ComponentActivity() {
     @Composable
     fun testGameScreen() {
 	
+	    val settingsVM = ViewModelProvider(this).get(SettingsViewModel::class.java)
         val viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
-        val settingsVM = ViewModelProvider(this).get(SettingsViewModel::class.java)
         val currentPlayerName by viewModel.currentPlayerName.collectAsState()
         val player1Name by viewModel.player1Name.collectAsState()
         val player2Name by viewModel.player2Name.collectAsState()

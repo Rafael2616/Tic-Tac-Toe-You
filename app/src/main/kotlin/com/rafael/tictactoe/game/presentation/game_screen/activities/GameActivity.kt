@@ -32,10 +32,11 @@ import androidx.lifecycle.*
 import kotlinx.coroutines.flow.*
 import android.net.Uri
 import dagger.hilt.android.AndroidEntryPoint
-
+import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @AndroidEntryPoint
 class GameActivity : ComponentActivity() {
+
      override fun onCreate(savedInstanceState: Bundle?) {
      super.onCreate(savedInstanceState)
             setContent{ AppTheme(this) { gameScreen()
@@ -51,7 +52,6 @@ class GameActivity : ComponentActivity() {
    startService(Intent(this, MusicService::class.java))
      super.onResume()
 }
-
 
 @Composable
 fun gameScreen() {
