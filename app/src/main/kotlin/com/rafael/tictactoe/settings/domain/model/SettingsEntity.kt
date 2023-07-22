@@ -15,7 +15,7 @@ data class SettingsEntity(
     var isSoundEffectsOn: Boolean
 ) {
     companion object {
-        fun createDefaultSettings(): SettingsEntity {
+        fun getDefaultSettings(): SettingsEntity {
             return SettingsEntity(
 				settingsID = 1,
                 isBackgroundMusicOn = true,
