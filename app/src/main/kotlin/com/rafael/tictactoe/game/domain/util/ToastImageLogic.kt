@@ -1,23 +1,33 @@
 package com.rafael.tictactoe.game.domain.util
 
+import androidx.compose.runtime.*
+import androidx.compose.ui.res.*
+import androidx.compose.ui.graphics.painter.*
 import com.rafael.tictactoe.R
-import android.graphics.drawable.*
-import android.content.*
+import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
-//some work needed in this file
-
+@Composable
 fun ToastImageLogic(
-context: Context,
-winner: Boolean,
-isXImage: Boolean,
-xImageMax: Int,
-circleImageMax: Int
-)/*: Painter*/ {
+    viewModel: GameViewModel
+): Painter {
 
-	val image = if (!winner) {
-   	 if (isXImage) xImageMax else circleImageMax
-	}else {
-    	if(!isXImage) xImageMax else circleImageMax
-	} 
-	//return context.getDrawable(image)!!       
+    val play by viewModel.play.collectAsState()
+    val isXFor1 by viewModel.isXFor1.collectAsState()
+    val winner by viewModel.winner.collectAsState()
+    val isXImage by viewModel.isXImage.collectAsState()
+    val xImageMax = painterResource(R.drawable.x_image_max_size)
+    val circleImageMax = painterResource(R.drawable.circle_image_max_size)
+
+    val toastImage = if (!play) {
+        if (isXFor1) {
+            xImageMax
+        } else circleImageMax
+    } else {
+        if (!winner) {
+            if (isXImage) xImageMax else circleImageMax
+        } else {
+            if (!isXImage) xImageMax else circleImageMax
+        }
+    }
+    return toastImage
 }
