@@ -17,7 +17,9 @@ import com.rafael.tictactoe.game.presentation.main_screen.activities.MainActivit
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
-fun BackButton(context: Context, isSoundEffectsOn: Boolean, viewModel: SettingsViewModel) {
+fun BackButton(context: Context, viewModel: SettingsViewModel) {
+
+    val isSoundEffectsOn by viewModel.isSoundEffectsOn.collectAsState()
 
 Box(
     modifier = Modifier

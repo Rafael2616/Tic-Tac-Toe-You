@@ -22,31 +22,25 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.components.Set
 
 @Composable
 fun SettingsCardsImpl(
-context: Context,
-viewModel: SettingsViewModel,
-isFollowingSystemOn: Boolean,
-isDarkThemeOn: Boolean,
-isDynamicColorsOn: Boolean,
-isSoundEffectsOn: Boolean,
-isBackgroundMusicOn: Boolean,
-isAboutShown: Boolean,
-isSystemInDarkTheme: Boolean
+    context: Context,
+    viewModel: SettingsViewModel
 ) {
 
-val isDynamicColorsSupported = VERSION.SDK_INT >= VERSION_CODES.S 
-var cards by rememberSaveable { mutableStateOf(List<Boolean>(6) { true }) }
+    val isFollowingSystemOn by viewModel.isFollowingSystemOn.collectAsState()
+    val isDynamicColorsSupported = VERSION.SDK_INT >= VERSION_CODES.S
+    var cards by rememberSaveable { mutableStateOf(List<Boolean>(6) { true }) }
 
-LazyColumn(
-    modifier = Modifier.fillMaxSize().padding(top = 195.dp),
-    verticalArrangement = Arrangement.Top,
-    horizontalAlignment = Alignment.CenterHorizontally
-) {
-    items(cards.size) { index ->
-       if (((index == 1) && (!isFollowingSystemOn)) ||
-            ((index == 2) && (isDynamicColorsSupported)) ||
-            ((index != 1) && (index != 2))) {
-            SettingsCards(context, index,viewModel,isFollowingSystemOn,isDarkThemeOn,isDynamicColorsOn,isSoundEffectsOn,isBackgroundMusicOn,isAboutShown, isSystemInDarkTheme)
+    LazyColumn(
+        modifier = Modifier.fillMaxSize().padding(top = 195.dp),
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        items(cards.size) { index ->
+            if (((index == 1) && (!isFollowingSystemOn)) ||
+                ((index == 2) && (isDynamicColorsSupported)) ||
+                ((index != 1) && (index != 2))) {
+                SettingsCards(context, index, viewModel)
+            }
         }
-      }
-   }
+    }
 }
