@@ -7,12 +7,13 @@ import androidx.room.Update
 import androidx.room.Query
 import androidx.room.OnConflictStrategy
 import com.rafael.tictactoe.game.domain.model.GameEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface GameDao {
 
-	@Query("SELECT * FROM GameEntity LIMIT 1")
-	suspend fun getGameValues(): GameEntity
+	@Query("SELECT * FROM GameEntity")
+	fun getGameValues(): Flow<GameEntity>
 
 	@Insert(onConflict = OnConflictStrategy.REPLACE)
 	suspend fun setGameValues(gameEntity: GameEntity)
