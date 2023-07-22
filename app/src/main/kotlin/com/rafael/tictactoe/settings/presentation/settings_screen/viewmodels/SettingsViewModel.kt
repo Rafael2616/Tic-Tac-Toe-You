@@ -17,6 +17,7 @@ class SettingsViewModel @Inject constructor(
     private val repository: SettingsRepository
 ) : ViewModel() {
 
+	
     private var _isBackgroundMusicOn = MutableStateFlow(true)
     val isBackgroundMusicOn: StateFlow<Boolean> = _isBackgroundMusicOn
     
