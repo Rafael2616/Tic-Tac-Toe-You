@@ -16,7 +16,7 @@ import androidx.compose.ui.res.*
 import androidx.compose.ui.text.*
 import androidx.compose.ui.unit.*
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.game.domain.util.GameStateToastLogic
+import com.rafael.tictactoe.game.domain.util.ToastNameLogic
 import com.rafael.tictactoe.game.domain.util.ToastImageLogic
 import com.rafael.tictactoe.game.domain.repository.GameRepository
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
@@ -36,17 +36,9 @@ player2Name: String,
 currentPlayerName: String,
 isXFor1: Boolean
 ) {
-	val xImageMax = painterResource(R.drawable.x_image_max_size)
-    val circleImageMax = painterResource(R.drawable.circle_image_max_size)
 
-    GameStateToastLogic(context, vm, winner, isPlayer1, gotOld, player1Name, player2Name)
+    ToastNameLogic(context, vm, winner, isPlayer1, gotOld, player1Name, player2Name)
 
-	val image = if (!winner) {
-   	 if (isXFor1) xImageMax else circleImageMax
-	}else {
-    	if(!isXFor1) xImageMax else circleImageMax
-	} 
-	
     Box(
         modifier = Modifier.fillMaxWidth(),
         contentAlignment = Alignment.TopCenter
@@ -75,8 +67,7 @@ isXFor1: Boolean
                         Spacer(modifier = Modifier.padding(3.dp))
                         Image(
                             contentDescription = null,
-                            painter = image, //painterResource(id = R.drawable.transparent_image),
-						//	ToastImageLogic(context, winner, isXImage, xImageMax, circleImageMax) as Painter,
+                            painter = ToastImageLogic(vm),
                             modifier = Modifier.height(17.dp).width(17.dp)
                         )
                     }

@@ -17,7 +17,8 @@ import androidx.compose.ui.text.*
 import androidx.compose.ui.unit.*
 import androidx.constraintlayout.compose.*
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.game.domain.util.CardClickHandler
+import com.rafael.tictactoe.game.domain.util.CardGridClickHandler
+import com.rafael.tictactoe.game.domain.util.CardGridImageHandler
 import com.rafael.tictactoe.game.domain.util.WinnerLineLogic
 import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
@@ -36,9 +37,9 @@ winner: Boolean,
 isPlayer1: Boolean
 ) {
 
-    val xImage = painterResource(R.drawable.x_image)
-    val circleImage = painterResource(R.drawable.circle_image)
-    val transparentImage = painterResource(R.drawable.transparent_image)
+	val xImage = painterResource(R.drawable.x_image)
+	val circleImage = painterResource(R.drawable.circle_image)
+	val transparentImage = painterResource(R.drawable.transparent_image)
 
      ConstraintLayout {
   	   val cardNumber = List(cards.size) { createRef() }
@@ -65,7 +66,7 @@ isPlayer1: Boolean
  	 		  .width(110.dp)
  		 	  .height(110.dp)
   		 	 .clickable(onClick = { 
-					CardClickHandler(vm, isCardClicked, index, play, isXImage, winner, isPlayer1); WinnerLineLogic(vm, coordinates, cards, isCardClicked); vm.updateExpandButton(false)})
+					CardGridClickHandler(vm, isCardClicked, index, play, isXImage, winner, isPlayer1); WinnerLineLogic(vm, coordinates, cards, isCardClicked); vm.updateExpandButton(false)})
 				.constrainAs(cardRef) {
 					when (index) {
 						0 -> {
@@ -129,25 +130,9 @@ isPlayer1: Boolean
 					Image(
 						contentDescription = null,
  					   modifier = Modifier.fillMaxSize(),
- 					   painter = /*cardGridImage(index, cards, isCardClicked)*/ //painterResource(
-						if (isCardClicked[index]) {
-         				   if (cards[index]) xImage else circleImage
-    	 		    } else {
-       			     transparentImage
-    				    }
-					//)
+ 					   painter = CardGridImageHandler(vm, index)
 				)
 			}       
 		}
 	}
 }
-/*
-fun cardGridImage(index: Int, cards: List<Boolean>, isCardClicked: List<Boolean>) : Painter {
-
-return if (isCardClicked[index]) {
-	 if (cards[index]) R.drawable.x_image else R.drawable.circle_image
-      } else {
-     R.drawable.transparent_image
-   }
-
-}*/
