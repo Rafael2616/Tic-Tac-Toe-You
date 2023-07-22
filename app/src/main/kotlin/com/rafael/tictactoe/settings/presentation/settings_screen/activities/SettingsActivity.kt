@@ -43,22 +43,15 @@ class SettingsActivity : ComponentActivity() {
 		} else {
 			finish()
 		}
-    }
-
-    @Inject
-    lateinit var settingsRepo: SettingsRepository
-
+	}
+	
     @Composable
     fun settingsScreen() {
 	
         val viewModel = ViewModelProvider(this).get(SettingsViewModel::class.java)
-        val isSystemInDarkTheme = isSystemInDarkTheme()
         val isDarkThemeOn by viewModel.isDarkThemeOn.collectAsState()
         val isFollowingSystemOn by viewModel.isFollowingSystemOn.collectAsState()
         val isDynamicColorsOn by viewModel.isDynamicColorsOn.collectAsState()
-        val isBackgroundMusicOn by viewModel.isBackgroundMusicOn.collectAsState()
-        val isSoundEffectsOn by viewModel.isSoundEffectsOn.collectAsState()
-        val isAboutShown by viewModel.isAboutShown.collectAsState()
         val isContentSetted by viewModel.isContentSetted.collectAsState()
         val isActivityFinished by viewModel.isActivityFinished.collectAsState()
 
@@ -82,19 +75,9 @@ class SettingsActivity : ComponentActivity() {
             color = MaterialTheme.colorScheme.surface,
             modifier = Modifier.fillMaxSize()
         ) {
-            BackButton(this, isSoundEffectsOn,viewModel)
+            BackButton(this, viewModel)
             SettingsTopBar()
-            SettingsCardsImpl(
-				this,
-                viewModel,
-                isFollowingSystemOn,
-                isDarkThemeOn,
-                isDynamicColorsOn,
-                isSoundEffectsOn,
-                isBackgroundMusicOn,
-                isAboutShown,
-				isSystemInDarkTheme
-            )
+            SettingsCardsImpl(this, viewModel)
         }
     }
 }
