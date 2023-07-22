@@ -17,94 +17,105 @@ class SettingsViewModel @Inject constructor(
     private val repository: SettingsRepository
 ) : ViewModel() {
 
+    //Get default values for settings variables from SettingsEntity
+    val defaultSettings = SettingsEntity.getDefaultSettings()
 	
+    //Get variables stored in SettingsRepository
+    val settings = MutableStateFlow<SettingsEntity>(defaultSettings)
+	
+    //Private vars that are updated in update functions but only acessible in this class
     private var _isBackgroundMusicOn = MutableStateFlow(true)
-    val isBackgroundMusicOn: StateFlow<Boolean> = _isBackgroundMusicOn
-    
     private var _isDarkThemeOn = MutableStateFlow(true)
-    val isDarkThemeOn: StateFlow<Boolean> = _isDarkThemeOn
-
     private var _isDynamicColorsOn = MutableStateFlow(true)
-    val isDynamicColorsOn: StateFlow<Boolean> = _isDynamicColorsOn
-
     private var _isFollowingSystemOn = MutableStateFlow(true)
-    val isFollowingSystemOn: StateFlow<Boolean> = _isFollowingSystemOn
-
     private var _isSoundEffectsOn = MutableStateFlow(true)
-    val isSoundEffectsOn: StateFlow<Boolean> = _isSoundEffectsOn
- 
     private var _isAboutShown = MutableStateFlow(false)
-    val isAboutShown: StateFlow<Boolean> = _isAboutShown
-
     private var _isContentSetted = MutableStateFlow(true)
-    val isContentSetted: StateFlow<Boolean> = _isContentSetted
-	
     private var _isActivityFinished = MutableStateFlow(true)
-    val isActivityFinished: StateFlow<Boolean> = _isActivityFinished
-
     private var _isAppInForeground = MutableStateFlow(false)
+	
+	//Variables that have same values of private vars above, but cant be modified outside this class
+    val isBackgroundMusicOn: StateFlow<Boolean> = _isBackgroundMusicOn    
+    val isDarkThemeOn: StateFlow<Boolean> = _isDarkThemeOn
+    val isDynamicColorsOn: StateFlow<Boolean> = _isDynamicColorsOn
+    val isFollowingSystemOn: StateFlow<Boolean> = _isFollowingSystemOn
+    val isSoundEffectsOn: StateFlow<Boolean> = _isSoundEffectsOn
+    val isAboutShown: StateFlow<Boolean> = _isAboutShown
+    val isContentSetted: StateFlow<Boolean> = _isContentSetted	
+    val isActivityFinished: StateFlow<Boolean> = _isActivityFinished
     val isAppInForeground: StateFlow<Boolean> = _isAppInForeground
 
-    //GET DEFAUT VALUES FOR SETTINGS VARIABLES FROM SETTINGS ENTITY
-    val defaultSettings = SettingsEntity.createDefaultSettings()
-
-    //INIT VIEWMODEL VARIABES WITH CORRESPONDING VALUES IN SETTINGS REPOSITORY 
+    //Initialize ViewModel StateFlows Variables with corresponding values in SettingsRepository
 	init {
   	  viewModelScope.launch(Dispatchers.IO) {
-	  	  val settings = repository.getAllSettingsValues() ?: defaultSettings
-			settings.settingsID = 1
-   	     _isBackgroundMusicOn.value = settings.isBackgroundMusicOn
-    	    _isDarkThemeOn.value = settings.isDarkThemeOn
-    	    _isDynamicColorsOn.value = settings.isDynamicColorsOn
-    	    _isFollowingSystemOn.value = settings.isFollowingSystemOn
-     	   _isSoundEffectsOn.value = settings.isSoundEffectsOn
+	  	  repository.getAllSettingsValues().collect { settingsValues ->
+				val settingsData = settingsValues ?: defaultSettings
+   	 	    _isBackgroundMusicOn.value = settingsData.isBackgroundMusicOn
+    	 	   _isDarkThemeOn.value = settingsData.isDarkThemeOn
+    	 	   _isDynamicColorsOn.value = settingsData.isDynamicColorsOn
+    		    _isFollowingSystemOn.value = settingsData.isFollowingSystemOn
+     		   _isSoundEffectsOn.value = settingsData.isSoundEffectsOn
+				settings.value = settingsData
+			}
   	  }
 	}
-
-    //FUNCTIONS TO UPDATE THE VALUES IN SETTINGS REPOSITORY AND VALUES USED TO UPDATE SCREEN
+	
+    //Functions to update values in SettingsRepository (if needed) and SettingsViewModel StateFlows to notify @Composables to update
 	fun updateIsBackgroundMusicOn(newValue: Boolean, context: Context) {
- 	   _isBackgroundMusicOn.value = newValue
- 	   viewModelScope.launch(Dispatchers.IO) {
-	  	  val settings = repository.getAllSettingsValues() ?: defaultSettings
-    		settings.isBackgroundMusicOn = newValue
-			repository.setAllSettingsValues(settings)
-  	  }
+ 	   _isBackgroundMusicOn.value = newValue	
+		viewModelScope.launch(Dispatchers.IO) {
+			repository.getAllSettingsValues().collect { currentSettings ->
+				val newSettings = currentSettings ?: defaultSettings
+    			newSettings.isBackgroundMusicOn = newValue
+				repository.setAllSettingsValues(newSettings)
+  	  	}
+		}
 		BackgroundMusic(context, _isBackgroundMusicOn.value)
 	}
 
    fun updateIsDarkThemeOn(newValue: Boolean) {
         _isDarkThemeOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
-	  	  val settings = repository.getAllSettingsValues() ?: defaultSettings
-    		settings.isDarkThemeOn = newValue
-			repository.setAllSettingsValues(settings)
+	  	  repository.getAllSettingsValues().collect { currentSettings ->
+				val newSettings = currentSettings ?: defaultSettings
+    	    	newSettings.isDarkThemeOn = newValue
+								println("$newSettings.isDarkThemeOn")
+
+				repository.setAllSettingsValues(newSettings)
+			}
         }
     }
 
     fun updateIsDynamicColorsOn(newValue: Boolean) {
         _isDynamicColorsOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
-	  	  val settings = repository.getAllSettingsValues() ?: defaultSettings
-    		settings.isDynamicColorsOn = newValue
-			repository.setAllSettingsValues(settings)
+	  	  repository.getAllSettingsValues().collect { currentSettings ->
+				val newSettings = currentSettings ?: defaultSettings
+    			newSettings.isDynamicColorsOn = newValue
+				repository.setAllSettingsValues(newSettings)
+			}
         }
     }
 
     fun updateIsFollowingSystemOn(newValue: Boolean) {
         _isFollowingSystemOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
-	  	  val settings = repository.getAllSettingsValues() ?: defaultSettings
-    		settings.isFollowingSystemOn = newValue
-			repository.setAllSettingsValues(settings)
+	  	  repository.getAllSettingsValues().collect { currentSettings ->
+				val newSettings = currentSettings ?: defaultSettings
+    			newSettings.isFollowingSystemOn = newValue
+				repository.setAllSettingsValues(newSettings)
+			}
         }
     }
    
     fun updateIsSoundEffectsOn(newValue: Boolean) {
         _isSoundEffectsOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
-    	    val settings = repository.getAllSettingsValues() ?: defaultSettings
-			settings.isSoundEffectsOn = newValue
-			repository.setAllSettingsValues(settings)
+    	    repository.getAllSettingsValues().collect { currentSettings ->
+				val newSettings = currentSettings ?: defaultSettings
+		    	newSettings.isSoundEffectsOn = newValue
+				repository.setAllSettingsValues(newSettings)
+			}
         }
     }
 
@@ -122,5 +133,4 @@ class SettingsViewModel @Inject constructor(
     fun setIsAppInForeground(newValue: Boolean) {
         _isAppInForeground.value = newValue
     }
-	
 }
