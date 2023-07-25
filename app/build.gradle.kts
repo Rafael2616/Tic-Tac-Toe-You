@@ -84,7 +84,7 @@ dependencies {
 
     //Kotlin
     implementation("androidx.core:core-ktx:1.10.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     
     //Room
     implementation("androidx.room:room-runtime:$room_version")
@@ -123,9 +123,9 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     //To fix Room issue in KSP task
-	configurations.all {
-   	 resolutionStrategy {
-      	  force("org.xerial:sqlite-jdbc:3.42.0.0")
-   	 }
-	}
+    configurations.all {
+        resolutionStrategy {
+      	    force("org.xerial:sqlite-jdbc:3.42.0.0")
+   	}
+    }
 }
