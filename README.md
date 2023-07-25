@@ -1,4 +1,4 @@
-# Tic-Tac-Toe-Material-You
+# Tic-Tac-Toe-You
 A classic tic-tac-toe game made with material you and others new android technologies
 
 # Features:
