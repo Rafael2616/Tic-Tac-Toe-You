@@ -7,7 +7,7 @@ import com.rafael.tictactoe.settings.data.repository.SettingsRepositoryImpl
 import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
 import com.rafael.tictactoe.settings.domain.util.CardTextHandler
 import com.rafael.tictactoe.settings.domain.util.CardImageHandler
-import com.rafael.tictactoe.settings.domain.util.SwitchClicksHandler
+import com.rafael.tictactoe.settings.domain.util.SwitchOnCheckedChangeHandler
 import com.rafael.tictactoe.settings.domain.util.SwitchValuesHandler
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import dagger.hilt.components.SingletonComponent
