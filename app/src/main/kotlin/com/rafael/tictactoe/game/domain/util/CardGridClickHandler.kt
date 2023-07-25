@@ -22,7 +22,7 @@ fun CardGridClickHandler(
       	  } else {
     	        vm.updateIsXImage(true)
 				vm.updateIsPlayer1(!isPlayer1)
-    	        vm.updateCard(index, true)
+    	        vm.updateCard(index, false)
 				vm.updateIsCardClicked(index, true)
        	 }
     	}

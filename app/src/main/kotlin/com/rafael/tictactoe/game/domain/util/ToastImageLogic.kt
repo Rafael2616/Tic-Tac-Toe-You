@@ -18,6 +18,10 @@ fun ToastImageLogic(
     val xImageMax = painterResource(R.drawable.x_image_max_size)
     val circleImageMax = painterResource(R.drawable.circle_image_max_size)
 
+	if(!play) {
+	viewModel.updateIsXImage(isXFor1)
+	}
+	
     val toastImage = if (!play) {
         if (isXFor1) {
             xImageMax

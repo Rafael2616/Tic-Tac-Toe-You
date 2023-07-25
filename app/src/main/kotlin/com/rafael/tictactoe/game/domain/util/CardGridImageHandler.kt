@@ -8,8 +8,8 @@ import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewMod
 
 @Composable
 fun CardGridImageHandler(
-viewModel: GameViewModel,
-index: Int
+	viewModel: GameViewModel,
+	index: Int
 ): Painter {
 
 	val xImage = painterResource(R.drawable.x_image)
