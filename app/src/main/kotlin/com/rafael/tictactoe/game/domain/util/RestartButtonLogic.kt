@@ -11,6 +11,7 @@ gotOld: Boolean
 
 	if ((isCardClicked.all {!it}) || (winner) || (gotOld)) {
   	  vm.updateShowRestartButton(false)
+	} else {
+   	 vm.updateShowRestartButton(true)
 	}
-    vm.updateShowRestartButton(true)
 }
