@@ -95,13 +95,13 @@ private val gameUtil : GameUtils
     }
 
 	fun updateCard(index: Int, newValue: Boolean) {
-	    _cards.value.toMutableList().also {
+	    _cards.value = _cards.value.toMutableList().also {
 			it[index] = newValue
 		}
 	}
 
 	fun updateIsCardClicked(index: Int, newValue: Boolean) {
- 	   _isCardClicked.value.toMutableList().also {
+ 	   _isCardClicked.value = _isCardClicked.value.toMutableList().also {
  	  	 it[index] = newValue
 	    }
 	}
