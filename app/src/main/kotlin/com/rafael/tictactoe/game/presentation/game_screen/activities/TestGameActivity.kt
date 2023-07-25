@@ -55,7 +55,7 @@ class TestGameActivity : ComponentActivity() {
     @Composable
     fun testGameScreen() {
 	
-	    val settingsVM = ViewModelProvider(this).get(SettingsViewModel::class.java)
+	val settingsVM = ViewModelProvider(this).get(SettingsViewModel::class.java)
         val viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
         val currentPlayerName by viewModel.currentPlayerName.collectAsState()
         val player1Name by viewModel.player1Name.collectAsState()
@@ -90,7 +90,7 @@ class TestGameActivity : ComponentActivity() {
             color = MaterialTheme.colorScheme.surface,
             modifier = Modifier.fillMaxSize()
         ) {
-			//BELOW THE LOGIC THAT DECIDE IN WHICH CASE THE FUNCTIONS MUST BE CALLED AND
+	    //BELOW THE LOGIC THAT DECIDE IN WHICH CASE THE FUNCTIONS MUST BE CALLED AND
             //PARAMS NEEEDED FOR THEM WORKS AND UPDATE UI IF NEEDED
 
             //WHEN THE ACTIVITY STARTS
@@ -99,13 +99,13 @@ class TestGameActivity : ComponentActivity() {
             VictoryCounter(viewModel, isScoreUp, winner, is1Win, player1Wins, player2Wins)
             PlayersNamesLayout(this, viewModel, gameUtil.playerName, showPlayer1Name, showPlayer2Name, play, isPlayer1, isXFor1, player1Name, player2Name, player1InToast)
             GameStateToast(this, viewModel, isXImage, winner, isPlayer1, gotOld, player1Name, player2Name, currentPlayerName, isXFor1)
-			RestartButtonLogic(viewModel, isCardClicked, winner, gotOld)
+            RestartButtonLogic(viewModel, isCardClicked, winner, gotOld)
 
             if (!play) {
-				GetPlayerPrefsCard(this, viewModel, isSoundEffectsOn, isXFor1, player1Name, player2Name, isPlayer1, player1InToast, play)
-			}
+		GetPlayerPrefsCard(this, viewModel, isSoundEffectsOn, isXFor1, player1Name, player2Name, isPlayer1, player1InToast, play)
+	    }
             if (play) {
-   		     GotOldChecker(viewModel, isCardClicked, winner)
+   	        GotOldChecker(viewModel, isCardClicked, winner)
                 WinnerChecker(viewModel, cards, isCardClicked)
             }
             if (expandButton) {
@@ -113,10 +113,10 @@ class TestGameActivity : ComponentActivity() {
                 SoundEffectsButton(this, settingsVM, isSoundEffectsOn)
             }
             if (showRestartButton) {
-				RestartButton(this, viewModel, isSoundEffectsOn)
-			}
+		RestartButton(this, viewModel, isSoundEffectsOn)
+	    }
             if (winner) {
-                WinnerSound(this, viewModel, isSoundEffectsOn, isWinSoundPlaying, winner)
+                WinnerSound(this, viewModel, isSoundEffectsOn, isWinSoundPlaying)
                 WinnerLine(viewModel, gameUtil.coordinate, cards, isCardClicked, startX, startY, endX, endY)
                 VictoryCounterReseterButton(this, viewModel, isSoundEffectsOn)
                 PlayAgainButton(this, viewModel, isSoundEffectsOn, isCardClicked, winner, gotOld)
