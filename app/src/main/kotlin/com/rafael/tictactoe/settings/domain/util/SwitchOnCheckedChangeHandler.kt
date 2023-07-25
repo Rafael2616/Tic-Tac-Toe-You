@@ -5,7 +5,7 @@ import com.rafael.tictactoe.common.presentation.ui.theme.AppTheme
 import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
-fun SwitchClicksHandler(
+fun SwitchOnCheckedChangeHandler(
 context: Context,
 index: Int,
 viewModel: SettingsViewModel,
