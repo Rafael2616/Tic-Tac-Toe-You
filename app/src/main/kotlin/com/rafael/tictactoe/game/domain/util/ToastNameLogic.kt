@@ -28,10 +28,6 @@ player2Name: String
         }
     }
 
-    if (gotOld) {
-		vm.updateCurrentPlayerName(context.getString(R.string.got_old))
-    }
-
     if (player1Name.isEmpty() && player2Name.isEmpty()) {
 		vm.updateCurrentPlayerName(context.getString(R.string.player))
     } else if (player1Name.isNotBlank() && player2Name.isNotBlank()) {
@@ -46,5 +42,9 @@ player2Name: String
 		vm.updateCurrentPlayerName(context.getString(R.string.player))
     } else {
 		vm.updateCurrentPlayerName("")
+    }
+		
+	 if (gotOld) {
+		vm.updateCurrentPlayerName(context.getString(R.string.got_old))
     }
 }
