@@ -25,7 +25,6 @@ fun PlayAgainButton(
 context: Context,
 vm: GameViewModel,
 isSoundEffectsOn: Boolean,
-cards: List<Boolean>,
 isCardClicked: List<Boolean>,
 winner: Boolean,
 gotOld: Boolean
@@ -53,7 +52,7 @@ gotOld: Boolean
                     .clickable(onClick = {
                         vm.updateExpandButton(false)
 						UiClickSound(context, isSoundEffectsOn)
-             		   RestartGame(vm, cards, isCardClicked)
+             		   RestartGame(vm)
                     })
             ) {
                 Image(

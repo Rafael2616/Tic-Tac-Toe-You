@@ -23,9 +23,7 @@ import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewMod
 fun RestartButton(
 context: Context,
 vm: GameViewModel,
-isSoundEffectsOn: Boolean,
-cards: List<Boolean>,
-isCardClicked: List<Boolean>
+isSoundEffectsOn: Boolean
 ) {
 
     Box(
@@ -48,7 +46,7 @@ isCardClicked: List<Boolean>
                     .clickable(onClick = {
 						vm.updateExpandButton(false)						
                         UiClickSound(context, isSoundEffectsOn)
-                        RestartGame(vm, cards, isCardClicked)
+                        RestartGame(vm)
                     })
             ) {
                 Image(

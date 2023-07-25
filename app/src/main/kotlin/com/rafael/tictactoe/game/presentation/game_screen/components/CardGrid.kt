@@ -23,7 +23,7 @@ import com.rafael.tictactoe.game.domain.util.WinnerLineLogic
 import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
-//W: Some work in this file >> The card image is not appearing in cards
+//Some work needed im this file
 
 @Composable
 fun CardGrid(
@@ -36,7 +36,7 @@ isXImage: Boolean,
 winner: Boolean,
 isPlayer1: Boolean
 ) {
-	
+
      ConstraintLayout {
   	   val cardNumber = List(cards.size) { createRef() }
      
