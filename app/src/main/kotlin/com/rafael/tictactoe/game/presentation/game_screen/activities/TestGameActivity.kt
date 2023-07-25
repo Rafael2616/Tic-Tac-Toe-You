@@ -113,18 +113,18 @@ class TestGameActivity : ComponentActivity() {
                 SoundEffectsButton(this, settingsVM, isSoundEffectsOn)
             }
             if (showRestartButton) {
-				RestartButton(this, viewModel, isSoundEffectsOn, cards, isCardClicked)
+				RestartButton(this, viewModel, isSoundEffectsOn)
 			}
             if (winner) {
-                WinnerSound(this, viewModel, isSoundEffectsOn, isWinSoundPlaying)
+                WinnerSound(this, viewModel, isSoundEffectsOn, isWinSoundPlaying, winner)
                 WinnerLine(viewModel, gameUtil.coordinate, cards, isCardClicked, startX, startY, endX, endY)
                 VictoryCounterReseterButton(this, viewModel, isSoundEffectsOn)
-                PlayAgainButton(this, viewModel, isSoundEffectsOn, cards, isCardClicked, winner, gotOld)
+                PlayAgainButton(this, viewModel, isSoundEffectsOn, isCardClicked, winner, gotOld)
             }
             if (gotOld) {
                 GotOldSound(this, viewModel, isSoundEffectsOn, isGotOldSoundPlaying)					
                 VictoryCounterReseterButton(this, viewModel, isSoundEffectsOn)
-                PlayAgainButton(this, viewModel, isSoundEffectsOn, cards, isCardClicked, winner, gotOld)
+                PlayAgainButton(this, viewModel, isSoundEffectsOn, isCardClicked, winner, gotOld)
             }
         }
     }
