@@ -15,8 +15,8 @@ import androidx.compose.ui.text.*
 import androidx.compose.ui.unit.*
 import com.rafael.tictactoe.settings.domain.util.CardImageHandler
 import com.rafael.tictactoe.settings.domain.util.CardTextHandler
-import com.rafael.tictactoe.settings.domain.util.SwitchClicksHandler
 import com.rafael.tictactoe.settings.domain.util.SwitchValuesHandler
+import com.rafael.tictactoe.settings.domain.util.SwitchOnCheckedChangeHandler
 import com.rafael.tictactoe.settings.domain.util.SyncDarkThemeToggleValue
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import com.rafael.tictactoe.common.domain.util.UiClickSound
@@ -44,7 +44,7 @@ fun SettingsCards(
             .width(360.dp)
             .height(if ((index == 5) && (isAboutShown)) 190.dp else 70.dp)
             .clickable(onClick = {
-                SwitchClicksHandler(
+                SwitchOnCheckedChangeHandler(
                     context,
                     index,
                     viewModel,
@@ -92,7 +92,7 @@ fun SettingsCards(
                             isAboutShown
                         ),
                         onCheckedChange = {
-                            SwitchClicksHandler(
+                            SwitchOnCheckedChangeHandler(
                                 context,
                                 index,
                                 viewModel,
