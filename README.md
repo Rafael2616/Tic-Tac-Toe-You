@@ -16,7 +16,8 @@ A classic tic-tac-toe game made with material you and others new android technol
 - Clean Arquiteture
 - MVVM patterns
 - Jetpack Compose
-
+- Kotlin 100%
+  
 # Game Screenshots:
 | Imagem 1 | Imagem 2 | Imagem 3 |
 |----------|----------|----------|
