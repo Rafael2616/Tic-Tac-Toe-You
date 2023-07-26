@@ -29,8 +29,6 @@ fun GameStateToast(
     val currentPlayerName by viewModel.currentPlayerName.collectAsState()
     val player1Name by viewModel.player1Name.collectAsState()
     val player2Name by viewModel.player2Name.collectAsState()
-    val isXImage by viewModel.isXImage.collectAsState()
-    val isXFor1 by viewModel.isXFor1.collectAsState()
     val isPlayer1 by viewModel.isPlayer1.collectAsState()
     val winner by viewModel.winner.collectAsState()
     val gotOld by viewModel.gotOld.collectAsState()
