@@ -1,5 +1,6 @@
 package com.rafael.tictactoe.game.presentation.game_screen.components
 
+import android.content.Context
 import androidx.activity.compose.*
 import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
@@ -19,23 +20,24 @@ import androidx.constraintlayout.compose.*
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.util.CardGridClickHandler
 import com.rafael.tictactoe.game.domain.util.CardGridImageHandler
+import com.rafael.tictactoe.game.domain.util.CardGridSound
 import com.rafael.tictactoe.game.domain.util.WinnerLineLogic
 import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
-//Some work needed im this file
-
 @Composable
 fun CardGrid(
-vm: GameViewModel,
-coordinates: WinnerLineCoordinates,
-cards: List<Boolean>,
-isCardClicked: List<Boolean>,
-play: Boolean,
-isXImage: Boolean,
-winner: Boolean,
-isPlayer1: Boolean
+	context: Context,
+	viewModel: GameViewModel,
+	coordinates: WinnerLineCoordinates
 ) {
+
+    val cards by viewModel.cards.collectAsState()
+    val isCardClicked by viewModel.isCardClicked.collectAsState()
+    val isXImage by viewModel.isXImage.collectAsState()
+    val isPlayer1 by viewModel.isPlayer1.collectAsState()
+    val play by viewModel.play.collectAsState()
+    val winner by viewModel.winner.collectAsState()
 
      ConstraintLayout {
   	   val cardNumber = List(cards.size) { createRef() }
@@ -62,7 +64,10 @@ isPlayer1: Boolean
  	 		  .width(110.dp)
  		 	  .height(110.dp)
   		 	 .clickable(onClick = { 
-					CardGridClickHandler(vm, isCardClicked, index, play, isXImage, winner, isPlayer1); WinnerLineLogic(vm, coordinates, cards, isCardClicked); vm.updateExpandButton(false)})
+					CardGridClickHandler(viewModel, isCardClicked, index, play, isXImage, winner, isPlayer1);
+					CardGridSound(context, isPlayer1)
+					WinnerLineLogic(viewModel, coordinates, cards, isCardClicked);	
+					viewModel.updateExpandButton(false)})
 				.constrainAs(cardRef) {
 					when (index) {
 						0 -> {
@@ -126,7 +131,7 @@ isPlayer1: Boolean
 					Image(
 						contentDescription = null,
  					   modifier = Modifier.fillMaxSize(),
- 					   painter = CardGridImageHandler(vm, index)
+ 					   painter = CardGridImageHandler(viewModel, index)
 				)
 			}       
 		}
