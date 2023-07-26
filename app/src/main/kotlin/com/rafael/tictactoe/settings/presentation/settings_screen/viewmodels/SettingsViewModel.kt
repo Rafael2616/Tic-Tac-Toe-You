@@ -79,8 +79,6 @@ class SettingsViewModel @Inject constructor(
 	  	  repository.getAllSettingsValues().collect { currentSettings ->
 				val newSettings = currentSettings ?: defaultSettings
     	    	newSettings.isDarkThemeOn = newValue
-								println("$newSettings.isDarkThemeOn")
-
 				repository.setAllSettingsValues(newSettings)
 			}
         }
