@@ -16,7 +16,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object GaneModule {
+object GameModule {
 
     @Provides
     @Singleton
