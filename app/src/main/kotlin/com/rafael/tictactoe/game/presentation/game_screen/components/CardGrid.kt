@@ -68,7 +68,7 @@ fun CardGrid(
  		 	  .height(110.dp)
   		 	 .clickable(onClick = { 
 					CardGridClickHandler(viewModel, isCardClicked, index, play, isXImage, winner, isPlayer1);
-					CardGridSound(context, isPlayer1, isSoundEffectsOn)
+					CardGridSound(context, isPlayer1, isSoundEffectsOn, isCardClicked, index)
 					WinnerLineLogic(viewModel, coordinates, cards, isCardClicked);	
 					viewModel.updateExpandButton(false)})
 				.constrainAs(cardRef) {
