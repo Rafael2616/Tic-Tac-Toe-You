@@ -2,15 +2,21 @@ package com.rafael.tictactoe.common.services
 
 import android.os.IBinder
 import android.app.Service
-import android.media.MediaPlayer
-import android.content.*
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.common.MediaItem
 import com.rafael.tictactoe.R
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.lazy
 
 @AndroidEntryPoint
 class MusicService : Service() {
 
-    private var backgroundMusic: MediaPlayer? = null
+    private val exoPlayer: ExoPlayer by lazy { ExoPlayer.Builder(this).build() }
+	val backgroundMusicFile = R.raw.background_music
+    val backgroundMusic = MediaItem.fromUri(Uri.parse("android.resource://this/$backgroundMusicFile"))
 
     override fun onBind(intent: Intent): IBinder? {
         return null
@@ -22,14 +28,15 @@ class MusicService : Service() {
     }
 	
 	fun startBackgroundMusic(){
-	    backgroundMusic = MediaPlayer.create(this, R.raw.background_music)
-   	 backgroundMusic?.isLooping = true
-		backgroundMusic?.start()
+		exoPlayer.addMediaItem(backgroundMusic)
+    	exoPlayer.prepare()
+		exoPlayer.setRepeatMode(ExoPlayer.REPEAT_MODE_ALL)
+		exoPlayer.play()
 	}
 	
     override fun onDestroy() {
         super.onDestroy()
-        backgroundMusic?.stop()
-        backgroundMusic?.release()
+		exoPlayer.stop()
+		exoPlayer.release()
     }
 }
