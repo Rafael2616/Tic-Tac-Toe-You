@@ -35,17 +35,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        
-		<activity
-            android:name=".game.presentation.game_screen.activities.TestGameActivity"
-            android:exported="true"
-            android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-		
+        		
          <activity
             android:name=".game.presentation.main_screen.activities.MainActivity"
             android:exported="true">
