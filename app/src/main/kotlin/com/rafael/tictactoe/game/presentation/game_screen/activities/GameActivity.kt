@@ -39,7 +39,7 @@ import javax.inject.Inject
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class TestGameActivity : ComponentActivity() {
+class GameActivity : ComponentActivity() {
 
     @Inject lateinit var gameUtil: GameUtils
 	
