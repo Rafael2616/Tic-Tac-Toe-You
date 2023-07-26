@@ -81,14 +81,16 @@ dependencies {
     val lifecycle_version = "2.6.1"
     val room_version = "2.5.2"
     val hilt_version = "2.47"
-
+	val media3_version = "1.1.0"
+	
     //Kotlin
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     
 	//Media3
-	implementation("androidx.media3:media3-exoplayer:1.1.0")
-	
+	implementation("androidx.media3:media3-exoplayer:$media3_version")
+	implementation("androidx.media3:media3-common:$media3_version")
+
     //Room
     implementation("androidx.room:room-runtime:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
