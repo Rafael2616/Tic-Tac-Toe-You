@@ -1,11 +1,15 @@
 package com.rafael.tictactoe.game.domain.util
 
-import android.content.*
+import android.content.Context
 import com.rafael.tictactoe.common.services.MusicService
 import com.rafael.tictactoe.common.domain.util.ServiceRunningVerifier
 import com.rafael.tictactoe.common.domain.util.AppForegroundNotifier
 
-fun BackgroundMusic(context: Context, isBackgroundMusicOn: Boolean) {
+fun BackgroundMusic(
+    context: Context,
+    isBackgroundMusicOn: Boolean
+) {
+
 	val isServiceRunning = ::ServiceRunningVerifier	
 		
 	if (isBackgroundMusicOn) {
