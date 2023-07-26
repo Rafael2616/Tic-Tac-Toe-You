@@ -15,8 +15,8 @@ android {
         applicationId = "com.rafael.tictactoe"
         minSdk = 26
         targetSdk = 34
-        versionCode = 2
-        versionName = "1.1"
+        versionCode = 3
+        versionName = "1.2"
     }
     signingConfigs {
         create("release") {
@@ -47,12 +47,12 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
-    /*kotlin {
-        sourceSets.all {
-            languageSettings {
-                languageVersion = "2.0"
-            }
-        }
+/*	kotlin { 
+		sourceSets.all { 
+			languageSettings { 
+				languageVersion = "2.0" 
+            } 
+        } 
     }*/
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -80,12 +80,15 @@ dependencies {
 
     val lifecycle_version = "2.6.1"
     val room_version = "2.5.2"
-    val hilt_version = "2.46.1"
+    val hilt_version = "2.47"
 
     //Kotlin
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     
+	//Media3
+	implementation("androidx.media3:media3-exoplayer:1.1.0")
+	
     //Room
     implementation("androidx.room:room-runtime:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
@@ -99,7 +102,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycle_version")
-    
+
     //Jetpack Compose
     platform("androidx.compose:compose-bom:2023.06.01")
     implementation("androidx.compose.ui:ui")
@@ -123,9 +126,9 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     //To fix Room issue in KSP task
-    configurations.all {
-        resolutionStrategy {
-      	    force("org.xerial:sqlite-jdbc:3.42.0.0")
-   	}
-    }
+	configurations.all {
+   	 resolutionStrategy {
+      	  force("org.xerial:sqlite-jdbc:3.42.0.0")
+   	 }
+	}
 }
