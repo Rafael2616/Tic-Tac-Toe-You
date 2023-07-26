@@ -80,7 +80,7 @@ class SettingsActivity : ComponentActivity() {
         ) {
             BackButton(this, viewModel)
             SettingsTopBar()
-            SettingsCardsImpl(this, viewModel, repo)
+            SettingsCardsImpl(this, viewModel)
         }
     }
 }
