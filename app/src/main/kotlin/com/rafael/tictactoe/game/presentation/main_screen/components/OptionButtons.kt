@@ -19,7 +19,6 @@ import androidx.compose.ui.unit.*
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.game.presentation.game_screen.activities.GameActivity
-import com.rafael.tictactoe.game.presentation.game_screen.activities.TestGameActivity
 import com.rafael.tictactoe.settings.presentation.settings_screen.activities.SettingsActivity
 
 @Composable
@@ -41,7 +40,7 @@ LazyColumn(
             .height(65.dp)
             .clickable(onClick = { UiClickSound(mContext, isSoundEffectsOn);
              when (index) {
-               0 -> mContext.startActivity(Intent(mContext, TestGameActivity::class.java))
+               0 -> mContext.startActivity(Intent(mContext, GameActivity::class.java))
                1 -> mContext.startActivity(Intent(mContext, SettingsActivity::class.java))}})   
          ) {  
               Box(
