@@ -33,7 +33,7 @@ import com.rafael.tictactoe.game.domain.util.RestartButtonLogic
 import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
 import com.rafael.tictactoe.game.domain.util.WinnerSound
 import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
+import com.rafaelctoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlinx.coroutines.launch
@@ -94,7 +94,7 @@ class TestGameActivity : ComponentActivity() {
             //PARAMS NEEEDED FOR THEM WORKS AND UPDATE UI IF NEEDED
 
             //WHEN THE ACTIVITY STARTS
-            CardGrid(viewModel, gameUtil.coordinate, cards, isCardClicked, play, isXImage, winner, isPlayer1)
+            CardGrid(this, viewModel, gameUtil.coordinate)
             ExpandButton(this, viewModel, isSoundEffectsOn, expandButton)
             VictoryCounter(viewModel, isScoreUp, winner, is1Win, player1Wins, player2Wins)
             PlayersNamesLayout(this, viewModel, gameUtil.playerName, showPlayer1Name, showPlayer2Name, play, isPlayer1, isXFor1, player1Name, player2Name, player1InToast)
