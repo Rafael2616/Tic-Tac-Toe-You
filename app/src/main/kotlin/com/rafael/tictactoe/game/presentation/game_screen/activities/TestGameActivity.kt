@@ -33,7 +33,7 @@ import com.rafael.tictactoe.game.domain.util.RestartButtonLogic
 import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
 import com.rafael.tictactoe.game.domain.util.WinnerSound
 import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
-import com.rafaelctoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlinx.coroutines.launch
