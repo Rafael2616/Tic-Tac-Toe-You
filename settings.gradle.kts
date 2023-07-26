@@ -1,11 +1,11 @@
 import org.gradle.caching.configuration.BuildCacheConfiguration
 
 pluginManagement {
-    repositories {
+	repositories {
    	 gradlePluginPortal()
-  	 google()
-         mavenCentral()
-    }
+  	  google()
+  	  mavenCentral()
+	}
 }
 
 dependencyResolutionManagement {
@@ -15,7 +15,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }	
 	buildCache {
-        local {
+		local {
             isEnabled = true
         }
     }
