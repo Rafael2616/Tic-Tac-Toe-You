@@ -27,8 +27,7 @@ import kotlinx.coroutines.*
 fun SettingsCards(
     context: Context,
     index: Int,
-    viewModel: SettingsViewModel,
-	repo: SettingsRepository
+    viewModel: SettingsViewModel
 ) {
 
     val isSystemInDarkTheme = isSystemInDarkTheme()
@@ -38,7 +37,7 @@ fun SettingsCards(
     val isBackgroundMusicOn by viewModel.isBackgroundMusicOn.collectAsState()
     val isSoundEffectsOn by viewModel.isSoundEffectsOn.collectAsState()
     val isAboutShown by viewModel.isAboutShown.collectAsState()
-	val scope = rememberCoroutineScope()
+    val scope = rememberCoroutineScope()
 	
     SyncDarkThemeToggleValue(viewModel, isFollowingSystemOn, isSystemInDarkTheme)
 
@@ -48,7 +47,7 @@ fun SettingsCards(
             .width(360.dp)
             .height(if ((index == 5) && (isAboutShown)) 190.dp else 70.dp)
             .clickable(onClick = {
-				scope.launch {
+	scope.launch {
                 SwitchOnCheckedChangeHandler(
                     context,
                     index,
@@ -59,7 +58,7 @@ fun SettingsCards(
                     isSoundEffectsOn,
                     isBackgroundMusicOn,
                     isAboutShown,
-					isSystemInDarkTheme
+		    isSystemInDarkTheme
                 )
                 UiClickSound(context, isSoundEffectsOn)
             }})
@@ -89,16 +88,15 @@ fun SettingsCards(
                 if (index != 5) {
                     Switch(
                         checked = 
-							when (index) {
-    							0 -> isFollowingSystemOn
-     						   1 -> isDarkThemeOn
-   						     2 -> isDynamicColorsOn
-    						    3 -> isSoundEffectsOn
-      						  4 -> isBackgroundMusicOn
-								5 -> isAboutShown
-						 	else -> false
-							}
-						,
+		            when (index) {
+    				0 -> isFollowingSystemOn
+     		         	1 -> isDarkThemeOn
+   				2 -> isDynamicColorsOn
+    				3 -> isSoundEffectsOn
+      				4 -> isBackgroundMusicOn
+				5 -> isAboutShown
+			   else -> false
+			  },
                         onCheckedChange = {
                             SwitchOnCheckedChangeHandler(
                                 context,
