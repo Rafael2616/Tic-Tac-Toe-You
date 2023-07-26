@@ -21,11 +21,12 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.Set
 
 @Composable
 fun BackgroundMusicButton(
-context: Context,
-isBackgroundMusicOn: Boolean,
-isSoundEffectsOn: Boolean,
-vm: SettingsViewModel
+	context: Context,
+	settingsVM: SettingsViewModel
 ) {
+
+    val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
+    val isBackgroundMusicOn by settingsVM.isBackgroundMusicOn.collectAsState()
 
 Box(
 	modifier = Modifier
@@ -44,8 +45,7 @@ Box(
            .width(45.dp)
            .height(45.dp)
            .clickable(onClick = { UiClickSound(context, isSoundEffectsOn)
-				vm.updateIsBackgroundMusicOn(!isBackgroundMusicOn, context)
-			   // BackgroundMusicLogic(isBackgroundMusicOn, context)
+				settingsVM.updateIsBackgroundMusicOn(!isBackgroundMusicOn, context)
 			})
         ) {
            Image(

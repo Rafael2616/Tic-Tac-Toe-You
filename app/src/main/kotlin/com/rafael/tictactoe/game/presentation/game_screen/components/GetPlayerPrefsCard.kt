@@ -18,24 +18,26 @@ import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.game.domain.util.PlayersImagesSetter
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
+import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
 fun GetPlayerPrefsCard(
-context: Context,
-vm: GameViewModel,
-isSoundEffectsOn: Boolean,
-isXFor1: Boolean,
-player1Name: String,
-player2Name: String,
-isPlayer1: Boolean,
-player1InToast: Boolean,
-play: Boolean
+	context: Context,
+	viewModel: GameViewModel,
+	settingsVM: SettingsViewModel
 ) {
 
+    val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
+    val isXFor1 by viewModel.isXFor1.collectAsState()
+    val isPlayer1 by viewModel.isPlayer1.collectAsState()
+    val player1Name by viewModel.player1Name.collectAsState()
+    val player2Name by viewModel.player2Name.collectAsState()
     val maxLength = 10
-    var player1Value = if (player1InToast) player1Name else player2Name
-    var player2Value = if (player1InToast) player2Name else player1Name
-
+    val player1InToast by viewModel.player1InToast.collectAsState()
+    val player1Value = if (player1InToast) player1Name else player2Name
+    val player2Value = if (player1InToast) player2Name else player1Name
+    val play by viewModel.play.collectAsState()
+ 
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -58,7 +60,7 @@ play: Boolean
                     value = player1Value,
                     onValueChange = {
                         if (it.length <= maxLength) {
-                            if (isPlayer1) vm.updatePlayer1Name(it) else vm.updatePlayer2Name(it)
+                            if (isPlayer1) viewModel.updatePlayer1Name(it) else viewModel.updatePlayer2Name(it)
                         }
                     },
                     label = { Text(stringResource(id = R.string.player1_name)) },
@@ -73,8 +75,8 @@ play: Boolean
                         .height(85.dp)
                         .clickable(onClick = {
                             UiClickSound(context, isSoundEffectsOn)
-                            vm.updateIsPlayer1(!isPlayer1)
-                            PlayersImagesSetter(vm, play, isXFor1)
+                            viewModel.updateIsPlayer1(!isPlayer1)
+                            PlayersImagesSetter(viewModel, play, isXFor1)
                         })
                 ) {
                     Image(
@@ -87,7 +89,7 @@ play: Boolean
                     value = player2Value,
                     onValueChange = {
                         if (it.length <= maxLength) {
-                            if (isPlayer1) vm.updatePlayer2Name(it) else vm.updatePlayer1Name(it)
+                            if (isPlayer1) viewModel.updatePlayer2Name(it) else viewModel.updatePlayer1Name(it)
                         }
                     },
                     label = { Text(stringResource(id = R.string.player2_name)) },
@@ -116,8 +118,8 @@ play: Boolean
                         .height(60.dp)
                         .clickable(onClick = {
                             UiClickSound(context, isSoundEffectsOn)
-                            vm.updateIsXFor1(!isXFor1)
-	                        PlayersImagesSetter(vm, play, isXFor1)
+                            viewModel.updateIsXFor1(!isXFor1)
+	                        PlayersImagesSetter(viewModel, play, isXFor1)
                         })
                 ) {
                     Image(
@@ -138,7 +140,7 @@ play: Boolean
             Button(
                 onClick = {
                     UiClickSound(context, isSoundEffectsOn)
-                    vm.updatePlay(true)
+                    viewModel.updatePlay(true)
                 },
                 modifier = Modifier
                     .width(100.dp)

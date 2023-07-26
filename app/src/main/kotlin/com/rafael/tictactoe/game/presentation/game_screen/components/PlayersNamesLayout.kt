@@ -20,22 +20,23 @@ import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewMod
 
 @Composable
 fun PlayersNamesLayout(
-context: Context,
-vm: GameViewModel,
-playerName: PlayersNamesDisplay,
-showPlayer1Name: String,
-showPlayer2Name: String,
-play: Boolean,
-isPlayer1: Boolean,
-isXFor1: Boolean,
-player1Name: String,
-player2Name: String,
-player1InToast: Boolean
+	context: Context,
+	viewModel: GameViewModel,
+	playerName: PlayersNamesDisplay
 ) {
 
-	playerName.firstPlayerName(context, vm, play, isPlayer1, isXFor1, player1Name, player2Name, player1InToast)
-	playerName.secondPlayerName(context, vm, play, isPlayer1, isXFor1, player1Name, player2Name, player1InToast)
-	
+    val player1InToast by viewModel.player1InToast.collectAsState()
+    val player1Name by viewModel.player1Name.collectAsState()
+    val player2Name by viewModel.player2Name.collectAsState()
+    val isXFor1 by viewModel.isXFor1.collectAsState()
+    val isPlayer1 by viewModel.isPlayer1.collectAsState()
+    val play by viewModel.play.collectAsState()
+    val showPlayer1Name by viewModel.showPlayer1Name.collectAsState()
+    val showPlayer2Name by viewModel.showPlayer2Name.collectAsState()
+
+	playerName.firstPlayerName(context, viewModel, play, isPlayer1, isXFor1, player1Name, player2Name, player1InToast)
+	playerName.secondPlayerName(context, viewModel, play, isPlayer1, isXFor1, player1Name, player2Name, player1InToast)
+		
     Box(
         modifier = Modifier
             .fillMaxWidth(),

@@ -20,11 +20,12 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.Set
 
 @Composable
 fun SoundEffectsButton(
-context: Context,
-vm: SettingsViewModel,
-isSoundEffectsOn: Boolean
+	context: Context,
+	settingsVM: SettingsViewModel
 ) {
-    
+
+    val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
+
     Box(
         modifier = Modifier
            .fillMaxSize()
@@ -43,7 +44,7 @@ isSoundEffectsOn: Boolean
                     .height(45.dp)
                     .clickable(onClick = {
                         UiClickSound(context, isSoundEffectsOn)
-						vm.updateIsSoundEffectsOn(!isSoundEffectsOn)
+						settingsVM.updateIsSoundEffectsOn(!isSoundEffectsOn)
                     })
             ) {
                 Image(

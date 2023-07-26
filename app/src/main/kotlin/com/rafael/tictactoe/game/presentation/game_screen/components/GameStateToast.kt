@@ -18,26 +18,24 @@ import androidx.compose.ui.unit.*
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.util.ToastNameLogic
 import com.rafael.tictactoe.game.domain.util.ToastImageLogic
-import com.rafael.tictactoe.game.domain.repository.GameRepository
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
-
-//Some work needed in this file
 
 @Composable
 fun GameStateToast(
-context: Context,
-vm: GameViewModel,
-isXImage: Boolean,
-winner: Boolean,
-isPlayer1: Boolean,
-gotOld: Boolean,
-player1Name: String,
-player2Name: String,
-currentPlayerName: String,
-isXFor1: Boolean
+	context: Context,
+	viewModel: GameViewModel
 ) {
 
-    ToastNameLogic(context, vm, winner, isPlayer1, gotOld, player1Name, player2Name)
+    val currentPlayerName by viewModel.currentPlayerName.collectAsState()
+    val player1Name by viewModel.player1Name.collectAsState()
+    val player2Name by viewModel.player2Name.collectAsState()
+    val isXImage by viewModel.isXImage.collectAsState()
+    val isXFor1 by viewModel.isXFor1.collectAsState()
+    val isPlayer1 by viewModel.isPlayer1.collectAsState()
+    val winner by viewModel.winner.collectAsState()
+    val gotOld by viewModel.gotOld.collectAsState()
+
+    ToastNameLogic(context, viewModel, winner, isPlayer1, gotOld, player1Name, player2Name)
 
     Box(
         modifier = Modifier.fillMaxWidth(),
@@ -67,7 +65,7 @@ isXFor1: Boolean
                         Spacer(modifier = Modifier.padding(3.dp))
                         Image(
                             contentDescription = null,
-                            painter = ToastImageLogic(vm),
+                            painter = ToastImageLogic(viewModel),
                             modifier = Modifier.height(17.dp).width(17.dp)
                         )
                     }

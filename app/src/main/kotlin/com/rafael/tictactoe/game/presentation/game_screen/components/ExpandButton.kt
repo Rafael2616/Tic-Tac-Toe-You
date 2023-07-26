@@ -17,14 +17,17 @@ import androidx.compose.ui.unit.*
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
+import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
 fun ExpandButton(
-context: Context,
-vm: GameViewModel,
-isSoundEffectsOn: Boolean,
-expandButton: Boolean
+	context: Context,
+	viewModel: GameViewModel,
+	settingsVM: SettingsViewModel
 ) {
+
+	val expandButton by viewModel.expandButton.collectAsState()
+    val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
 
 Box(
     modifier = Modifier
@@ -43,7 +46,7 @@ Box(
             modifier = Modifier
             .width(45.dp)
             .height(35.dp)
-			.clickable(onClick = { UiClickSound(context, isSoundEffectsOn); vm.updateExpandButton(!expandButton)})
+			.clickable(onClick = { UiClickSound(context, isSoundEffectsOn); viewModel.updateExpandButton(!expandButton)})
  	    ) {
 			Image(
                 contentDescription = null,

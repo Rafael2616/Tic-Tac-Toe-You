@@ -19,16 +19,15 @@ import com.rafael.tictactoe.game.domain.util.VictoryCounterLogic
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
 @Composable
-fun VictoryCounter(
-vm: GameViewModel,
-isScoreUp: Boolean,
-winner: Boolean,
-is1Win: Boolean,
-player1Wins: Int,
-player2Wins: Int
-) {
+fun VictoryCounter(viewModel: GameViewModel) {
 
-    VictoryCounterLogic(vm, isScoreUp, winner, is1Win, player1Wins, player2Wins)
+    val is1Win by viewModel.is1Win.collectAsState()
+    val isScoreUp by viewModel.isScoreUp.collectAsState()
+    val winner by viewModel.winner.collectAsState()
+    val player1Wins by viewModel.player1Wins.collectAsState()
+    val player2Wins by viewModel.player2Wins.collectAsState()
+
+    VictoryCounterLogic(viewModel, isScoreUp, winner, is1Win, player1Wins, player2Wins)
 
     Box(
         modifier = Modifier

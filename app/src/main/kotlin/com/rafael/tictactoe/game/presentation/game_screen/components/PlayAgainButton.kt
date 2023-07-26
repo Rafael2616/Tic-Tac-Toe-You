@@ -19,18 +19,21 @@ import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.game.domain.util.RestartGame
 import com.rafael.tictactoe.game.domain.util.RestartButtonLogic
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
+import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
 fun PlayAgainButton(
-context: Context,
-vm: GameViewModel,
-isSoundEffectsOn: Boolean,
-isCardClicked: List<Boolean>,
-winner: Boolean,
-gotOld: Boolean
+	context: Context,
+	viewModel: GameViewModel,
+	settingsVM: SettingsViewModel
 ) {
- 
-	RestartButtonLogic(vm, isCardClicked, winner, gotOld)
+
+    val winner by viewModel.winner.collectAsState()
+    val gotOld by viewModel.gotOld.collectAsState()
+    val isCardClicked by viewModel.isCardClicked.collectAsState()
+	val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
+	
+	RestartButtonLogic(viewModel, isCardClicked, winner, gotOld)
 
   Box(
         modifier = Modifier
@@ -50,9 +53,9 @@ gotOld: Boolean
                     .width(75.dp)
                     .height(75.dp)
                     .clickable(onClick = {
-                        vm.updateExpandButton(false)
+                        viewModel.updateExpandButton(false)
 						UiClickSound(context, isSoundEffectsOn)
-             		   RestartGame(vm)
+             		   RestartGame(viewModel)
                     })
             ) {
                 Image(

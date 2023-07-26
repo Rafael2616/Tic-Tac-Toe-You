@@ -18,13 +18,16 @@ import androidx.compose.ui.graphics.painter.*
 import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.game.domain.util.VictoryCounterReset
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
+import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
 fun VictoryCounterReseterButton(
-context: Context,
-vm: GameViewModel,
-isSoundEffectsOn: Boolean
+	context: Context,
+	viewModel: GameViewModel,
+	settingsVM: SettingsViewModel
 ) {
+
+    val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
 
     Box(
         modifier = Modifier.fillMaxWidth(),
@@ -45,7 +48,7 @@ isSoundEffectsOn: Boolean
                     .height(45.dp)
                     .clickable(onClick = {
                         UiClickSound(context, isSoundEffectsOn)
-                        VictoryCounterReset(vm)
+                        VictoryCounterReset(viewModel)
                     })
             ) {
                 Image(

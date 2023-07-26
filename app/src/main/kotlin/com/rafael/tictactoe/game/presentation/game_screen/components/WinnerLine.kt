@@ -22,15 +22,16 @@ import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewMod
 
 @Composable
 fun WinnerLine(
-viewModel: GameViewModel,
-coordinate: WinnerLineCoordinates,
-cards: List<Boolean>,
-isCardClicked: List<Boolean>,
-startX: Float,
-startY: Float,
-endX: Float,
-endY: Float
+	viewModel: GameViewModel,
+	coordinate: WinnerLineCoordinates,
 ) {
+
+    val startX by viewModel.startX.collectAsState()
+    val startY by viewModel.startY.collectAsState()
+    val endX by viewModel.endX.collectAsState()
+    val endY by viewModel.endY.collectAsState()
+    val cards by viewModel.cards.collectAsState()
+    val isCardClicked by viewModel.isCardClicked.collectAsState()
 
 	WinnerLineLogic(viewModel, coordinate, cards, isCardClicked)
 
