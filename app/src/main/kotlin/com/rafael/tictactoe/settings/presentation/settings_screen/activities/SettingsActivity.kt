@@ -44,6 +44,8 @@ class SettingsActivity : ComponentActivity() {
 			finish()
 		}
 	}
+	@Inject
+	lateinit var repo: SettingsRepository
 	
     @Composable
     fun settingsScreen() {
@@ -69,6 +71,7 @@ class SettingsActivity : ComponentActivity() {
 			} else {
 				finish()
 			}
+			viewModel.updateIsActivityFinished(true)
 		}
 
         Surface(
@@ -77,7 +80,7 @@ class SettingsActivity : ComponentActivity() {
         ) {
             BackButton(this, viewModel)
             SettingsTopBar()
-            SettingsCardsImpl(this, viewModel)
+            SettingsCardsImpl(this, viewModel, repo)
         }
     }
 }
