@@ -18,23 +18,22 @@ import com.rafael.tictactoe.common.presentation.ui.theme.AppTheme
 import com.rafael.tictactoe.game.presentation.main_screen.components.OptionsButtons
 import com.rafael.tictactoe.game.presentation.main_screen.components.TopAppBar
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.game.domain.util.BackgroundMusic
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-import com.rafael.tictactoe.settings.presentation.settings_screen.activities.SettingsActivity
-import com.rafael.tictactoe.game.domain.util.BackgroundMusic
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 	
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-			setContent{ AppTheme(this) { homeScreen()
+			setContent{ AppTheme(this) { HomeScreen()
 			} 
 		}
 	}
 
 	@Composable
-	fun homeScreen() {
+	fun HomeScreen() {
 	
         val settingsVM = ViewModelProvider(this).get(SettingsViewModel::class.java)
         val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
@@ -46,7 +45,7 @@ class MainActivity : ComponentActivity() {
 		if(!isContentSetted) {
 			setContent{
 				AppTheme(this, isDarkThemeOn) {
-					homeScreen()
+					HomeScreen()
 				}
 			}
 		}	
