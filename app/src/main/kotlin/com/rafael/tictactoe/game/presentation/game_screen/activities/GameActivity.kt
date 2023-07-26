@@ -47,13 +47,13 @@ class TestGameActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AppTheme(this) {
-                testGameScreen()
+                GameScreen()
             }
         }
     }
 
     @Composable
-    fun testGameScreen() {
+    fun GameScreen() {
 	
 	val settingsVM = ViewModelProvider(this).get(SettingsViewModel::class.java)
         val viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
@@ -94,7 +94,7 @@ class TestGameActivity : ComponentActivity() {
             //PARAMS NEEEDED FOR THEM WORKS AND UPDATE UI IF NEEDED
 
             //WHEN THE ACTIVITY STARTS
-            CardGrid(this, viewModel, gameUtil.coordinate)
+            CardGrid(this, viewModel, settingsVM, gameUtil.coordinate)
             ExpandButton(this, viewModel, isSoundEffectsOn, expandButton)
             VictoryCounter(viewModel, isScoreUp, winner, is1Win, player1Wins, player2Wins)
             PlayersNamesLayout(this, viewModel, gameUtil.playerName, showPlayer1Name, showPlayer2Name, play, isPlayer1, isXFor1, player1Name, player2Name, player1InToast)
