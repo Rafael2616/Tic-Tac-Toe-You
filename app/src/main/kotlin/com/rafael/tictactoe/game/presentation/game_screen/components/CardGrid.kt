@@ -24,11 +24,13 @@ import com.rafael.tictactoe.game.domain.util.CardGridSound
 import com.rafael.tictactoe.game.domain.util.WinnerLineLogic
 import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
+import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
 fun CardGrid(
 	context: Context,
 	viewModel: GameViewModel,
+	settingsVM: SettingsViewModel,
 	coordinates: WinnerLineCoordinates
 ) {
 
@@ -38,7 +40,8 @@ fun CardGrid(
     val isPlayer1 by viewModel.isPlayer1.collectAsState()
     val play by viewModel.play.collectAsState()
     val winner by viewModel.winner.collectAsState()
-
+	val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
+	
      ConstraintLayout {
   	   val cardNumber = List(cards.size) { createRef() }
      
@@ -65,7 +68,7 @@ fun CardGrid(
  		 	  .height(110.dp)
   		 	 .clickable(onClick = { 
 					CardGridClickHandler(viewModel, isCardClicked, index, play, isXImage, winner, isPlayer1);
-					CardGridSound(context, isPlayer1)
+					CardGridSound(context, isPlayer1, isSoundEffectsOn)
 					WinnerLineLogic(viewModel, coordinates, cards, isCardClicked);	
 					viewModel.updateExpandButton(false)})
 				.constrainAs(cardRef) {
