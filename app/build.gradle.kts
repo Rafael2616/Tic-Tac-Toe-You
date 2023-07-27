@@ -46,13 +46,13 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
-    kotlin { 
+    /*kotlin { 
         sourceSets.all { 
             languageSettings { 
 		languageVersion = "2.0" 
             } 
         } 
-    }
+    }*/
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
