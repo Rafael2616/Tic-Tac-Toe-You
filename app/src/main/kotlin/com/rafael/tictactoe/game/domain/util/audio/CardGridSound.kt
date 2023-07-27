@@ -33,8 +33,6 @@ fun CardGridSound(
 				exoPlayer.prepare()
 				exoPlayer.play()
 			}
-		} else {
-			exoPlayer.release()
 		}
 	}
 }

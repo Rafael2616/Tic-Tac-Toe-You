@@ -22,8 +22,5 @@ fun WinnerSound(
 		exoPlayer.prepare()
 		exoPlayer.play()
    	 vm.updateIsWinSoundPlaying(true)
-	} else {
-		exoPlayer.stop()
-		exoPlayer.release()
 	}
 }

@@ -17,9 +17,9 @@ fun BackgroundMusic(
 		if (!isServiceRunning(context, MusicService::class.java)) {
 			val serviceIntent = Intent(context, MusicService::class.java)
     		context.startService(serviceIntent)
-			}
-		// Do Nothing
-		} else {
+		}
+		// Do nothing
+	} else {
 		val serviceIntent = Intent(context, MusicService::class.java)
    	 context.stopService(serviceIntent)
 	}

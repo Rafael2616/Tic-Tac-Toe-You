@@ -18,8 +18,5 @@ fun GotOldSound(context: Context, vm: GameViewModel, isSoundEffectsOn: Boolean, 
  	   exoPlayer.prepare()
 		exoPlayer.play()
         vm.updateIsGotOldSoundPlaying(true)
-    } else {
-		exoPlayer.stop()
-		exoPlayer.release()
-	}
+    }
 }
