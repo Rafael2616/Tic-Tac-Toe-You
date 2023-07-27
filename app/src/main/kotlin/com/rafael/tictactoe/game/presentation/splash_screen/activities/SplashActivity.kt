@@ -2,9 +2,7 @@ package com.rafael.tictactoe.game.presentation.splash_screen.activities
 
 import android.content.*
 import android.os.Bundle
-import android.os.Handler
-import androidx.activity.viewModels
-import androidx.activity.ComponentActivity
+import androidx.activity.*
 import androidx.activity.compose.*
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -20,6 +18,7 @@ import com.rafael.tictactoe.common.presentation.ui.theme.AppTheme
 import com.rafael.tictactoe.game.presentation.main_screen.activities.MainActivity
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.*
 
 @AndroidEntryPoint
 class SplashActivity : ComponentActivity() {
@@ -27,10 +26,12 @@ class SplashActivity : ComponentActivity() {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)       
  			setContent{ AppTheme(this){ splashScreen()
-				Handler().postDelayed({
-					startActivity(Intent(this, MainActivity::class.java))
-     		   finish()
-				}, 1200)
+			 	val coroutineScope = rememberCoroutineScope()
+				 coroutineScope.launch {
+ 				   delay(1200)
+   				 startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+    				finish()
+				}
 			}
 		}
 	}
@@ -44,12 +45,12 @@ class SplashActivity : ComponentActivity() {
 	Surface(
 		color = MaterialTheme.colorScheme.surface,
         modifier = Modifier.fillMaxSize()
- 	){
+	) {
 		Box(
        	 modifier = Modifier
       		 .fillMaxSize(),
        	 contentAlignment = Alignment.Center
-		){
+		) {
 			Image(
    	  	   painter = painterResource(id =
 				if(isDarkThemeOn) R.drawable.splash_icon_dark
