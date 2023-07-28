@@ -8,15 +8,13 @@ import com.rafael.tictactoe.R
 
 fun UiClickSound(context: Context, isSoundEffectsOn: Boolean) {
 
-    val exoPlayer = ExoPlayer.Builder(context).build()
-	val uiSoundFile = R.raw.ui_click_sound
-    val uiSound = MediaItem.fromUri(Uri.parse("android.resource://$context/$uiSoundFile"))
-
-	if (isSoundEffectsOn){
+	if (isSoundEffectsOn) {	
+    	val exoPlayer = ExoPlayer.Builder(context).build()
+		val uiSoundFile = R.raw.ui_click_sound
+   	 val uiSound = MediaItem.fromUri(Uri.parse("android.resource://$context/$uiSoundFile"))
+		
 		exoPlayer.addMediaItem(uiSound)
 		exoPlayer.prepare()
 		exoPlayer.play()
-	} else {
-		//Do nothing
 	}
 }
