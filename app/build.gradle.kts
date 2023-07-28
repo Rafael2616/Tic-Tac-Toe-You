@@ -114,7 +114,7 @@ dependencies {
 
     //Others Jetpack deps
     implementation("androidx.activity:activity-compose:1.7.2")
-    implementation("androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha10")
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha11")
 
     //Theming
     implementation("com.google.android.material:compose-theme-adapter-3:1.1.1") 
