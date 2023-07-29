@@ -16,6 +16,7 @@ import androidx.lifecycle.*
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.presentation.ui.theme.AppTheme
 import com.rafael.tictactoe.game.presentation.main_screen.activities.MainActivity
+import com.rafael.tictactoe.game.domain.util.BackgroundMusic
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
@@ -41,6 +42,9 @@ class SplashActivity : ComponentActivity() {
 
     val settingsVM = ViewModelProvider(this).get(SettingsViewModel::class.java)	
 	val isDarkThemeOn by settingsVM.isDarkThemeOn.collectAsState()
+	val isBackgroundMusicOn by settingsVM.isBackgroundMusicOn.collectAsState()
+
+	BackgroundMusic(this, isBackgroundMusicOn)
 
 	Surface(
 		color = MaterialTheme.colorScheme.surface,
