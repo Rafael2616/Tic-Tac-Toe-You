@@ -36,25 +36,29 @@ class MainActivity : ComponentActivity() {
 	
         val settingsVM = ViewModelProvider(this).get(SettingsViewModel::class.java)
         val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
-	    val isBackgroundMusicOn by settingsVM.isBackgroundMusicOn.collectAsState()
 	    val isAppInForeground by settingsVM.isAppInForeground.collectAsState()
 		val isContentSetted by settingsVM.isContentSetted.collectAsState()
 		val isDarkThemeOn by settingsVM.isDarkThemeOn.collectAsState()
-	
-		/*if(!isContentSetted) {
-			setContent{
-				AppTheme(this, isDarkThemeOn) {
-					HomeScreen()
-				}
-			}
-		}*/
-			
+        val isFollowingSystemOn by settingsVM.isFollowingSystemOn.collectAsState()
+        val isDynamicColorsOn by settingsVM.isDynamicColorsOn.collectAsState()
+
+		//Below the logic that decides in  which case each function must be called
+        //and params needed for then works and update the UI if thats the case
+
 		Surface(
    		 color = MaterialTheme.colorScheme.surface,
 			modifier = Modifier.fillMaxSize()
   	  ) {
         	TopAppBar()
        	 OptionsButtons(isSoundEffectsOn)
+		}
+		
+		if(!isContentSetted) {
+			setContent{
+				AppTheme(this, isDarkThemeOn, isFollowingSystemOn, isDynamicColorsOn) {
+					HomeScreen()
+				}
+			}
 		}
 	}
 }
