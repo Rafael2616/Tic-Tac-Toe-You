@@ -67,6 +67,10 @@ class GameActivity : ComponentActivity() {
         val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
         val winner by viewModel.winner.collectAsState()
         val gotOld by viewModel.gotOld.collectAsState()
+		val isContentSetted by settingsVM.isContentSetted.collectAsState()
+		val isDarkThemeOn by settingsVM.isDarkThemeOn.collectAsState()
+        val isFollowingSystemOn by settingsVM.isFollowingSystemOn.collectAsState()
+        val isDynamicColorsOn by settingsVM.isDynamicColorsOn.collectAsState()
 
 		//Below the logic that decides in  which case each function must be called
         //and params needed for then works and update the UI if thats the case
@@ -109,6 +113,14 @@ class GameActivity : ComponentActivity() {
                 VictoryCounterReseterButton(this, viewModel, settingsVM)
                 PlayAgainButton(this, viewModel, settingsVM)
             }
+			
+	   	if(!isContentSetted) {
+		   	setContent{
+			   	AppTheme(this, isDarkThemeOn, isFollowingSystemOn, isDynamicColorsOn) {
+				   	GameScreen()
+					}
+				}
+			}
         }
     }
 }
