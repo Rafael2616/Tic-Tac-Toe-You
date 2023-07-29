@@ -17,12 +17,9 @@ class SettingsViewModel @Inject constructor(
     private val repository: SettingsRepository
 ) : ViewModel() {
 
-    //Get default values for settings variables from SettingsEntity
+    //Get default values for settings variables from SettingsEntity (used to avoid NPEs)
     val defaultSettings = SettingsEntity.getDefaultSettings()
-	
-    //Get variables stored in SettingsRepository
-    val settings = MutableStateFlow<SettingsEntity>(defaultSettings)
-	
+
     //Private vars that are updated in update functions but only acessible in this class
     private var _isBackgroundMusicOn = MutableStateFlow(true)
     private var _isDarkThemeOn = MutableStateFlow(true)
@@ -35,7 +32,7 @@ class SettingsViewModel @Inject constructor(
     private var _isAppInForeground = MutableStateFlow(false)
 	
 	//Variables that have same values of private vars above, but cant be modified outside this class
-    val isBackgroundMusicOn: StateFlow<Boolean> = _isBackgroundMusicOn    
+    val isBackgroundMusicOn: StateFlow<Boolean> = _isBackgroundMusicOn
     val isDarkThemeOn: StateFlow<Boolean> = _isDarkThemeOn
     val isDynamicColorsOn: StateFlow<Boolean> = _isDynamicColorsOn
     val isFollowingSystemOn: StateFlow<Boolean> = _isFollowingSystemOn
@@ -49,13 +46,12 @@ class SettingsViewModel @Inject constructor(
 	init {
   	  viewModelScope.launch(Dispatchers.IO) {
 	  	  repository.getAllSettingsValues().collect { settingsValues ->
-				val settingsData = settingsValues ?: defaultSettings
-   	 	    _isBackgroundMusicOn.value = settingsData.isBackgroundMusicOn
-    	 	   _isDarkThemeOn.value = settingsData.isDarkThemeOn
-    	 	   _isDynamicColorsOn.value = settingsData.isDynamicColorsOn
-    		    _isFollowingSystemOn.value = settingsData.isFollowingSystemOn
-     		   _isSoundEffectsOn.value = settingsData.isSoundEffectsOn
-				settings.value = settingsData
+				val settings = settingsValues ?: defaultSettings
+   	 	    _isBackgroundMusicOn.value = settings.isBackgroundMusicOn
+    	 	   _isDarkThemeOn.value = settings.isDarkThemeOn
+    	 	   _isDynamicColorsOn.value = settings.isDynamicColorsOn
+    		    _isFollowingSystemOn.value = settings.isFollowingSystemOn
+     		   _isSoundEffectsOn.value = settings.isSoundEffectsOn
 			}
   	  }
 	}
@@ -65,7 +61,7 @@ class SettingsViewModel @Inject constructor(
  	   _isBackgroundMusicOn.value = newValue	
 		viewModelScope.launch(Dispatchers.IO) {
 			repository.getAllSettingsValues().collect { currentSettings ->
-				val newSettings = currentSettings ?: defaultSettings
+				var newSettings = currentSettings ?: defaultSettings
     			newSettings.isBackgroundMusicOn = newValue
 				repository.setAllSettingsValues(newSettings)
   	  	}
@@ -77,7 +73,7 @@ class SettingsViewModel @Inject constructor(
         _isDarkThemeOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
 	  	  repository.getAllSettingsValues().collect { currentSettings ->
-				val newSettings = currentSettings ?: defaultSettings
+				var newSettings = currentSettings ?: defaultSettings
     	    	newSettings.isDarkThemeOn = newValue
 				repository.setAllSettingsValues(newSettings)
 			}
@@ -88,7 +84,7 @@ class SettingsViewModel @Inject constructor(
         _isDynamicColorsOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
 	  	  repository.getAllSettingsValues().collect { currentSettings ->
-				val newSettings = currentSettings ?: defaultSettings
+				var newSettings = currentSettings ?: defaultSettings
     			newSettings.isDynamicColorsOn = newValue
 				repository.setAllSettingsValues(newSettings)
 			}
@@ -99,7 +95,7 @@ class SettingsViewModel @Inject constructor(
         _isFollowingSystemOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
 	  	  repository.getAllSettingsValues().collect { currentSettings ->
-				val newSettings = currentSettings ?: defaultSettings
+				var newSettings = currentSettings ?: defaultSettings
     			newSettings.isFollowingSystemOn = newValue
 				repository.setAllSettingsValues(newSettings)
 			}
@@ -110,7 +106,7 @@ class SettingsViewModel @Inject constructor(
         _isSoundEffectsOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
     	    repository.getAllSettingsValues().collect { currentSettings ->
-				val newSettings = currentSettings ?: defaultSettings
+				var newSettings = currentSettings ?: defaultSettings
 		    	newSettings.isSoundEffectsOn = newValue
 				repository.setAllSettingsValues(newSettings)
 			}
