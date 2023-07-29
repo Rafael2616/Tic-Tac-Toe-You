@@ -12,10 +12,10 @@ import com.rafael.tictactoe.game.data.dao.GameDao
     exportSchema = false
 ) 
 abstract class GameDatabase : RoomDatabase() {
+    
+    abstract val gameDao: GameDao
 
-abstract val gameDao: GameDao
-
-companion object {
-    const val DATABASE_NAME = "game_database"
-   }
+    companion object {
+        const val DATABASE_NAME = "game_database"
+    }
 }
