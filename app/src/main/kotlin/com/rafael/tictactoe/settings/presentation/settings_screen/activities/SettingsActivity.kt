@@ -24,6 +24,7 @@ import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.flow.*
 
 @AndroidEntryPoint
 class SettingsActivity : ComponentActivity() {
@@ -44,6 +45,7 @@ class SettingsActivity : ComponentActivity() {
 			finish()
 		}
 	}
+	
 	@Inject
 	lateinit var repo: SettingsRepository
 	
@@ -55,8 +57,19 @@ class SettingsActivity : ComponentActivity() {
         val isFollowingSystemOn by viewModel.isFollowingSystemOn.collectAsState()
         val isDynamicColorsOn by viewModel.isDynamicColorsOn.collectAsState()
         val isContentSetted by viewModel.isContentSetted.collectAsState()
-        val isActivityFinished by viewModel.isActivityFinished.collectAsState()
 
+		//Below the logic that decides in  which case each function must be called
+        //and params needed for then works and update the UI if thats the case
+
+        Surface(
+            color = MaterialTheme.colorScheme.surface,
+            modifier = Modifier.fillMaxSize()
+        ) {
+            BackButton(this, viewModel, this, isTaskRoot)
+            SettingsTopBar()
+            SettingsCardsImpl(this, viewModel)
+        }
+		
 		if (!isContentSetted) {
 			setContent {
 				AppTheme(this, isDarkThemeOn, isFollowingSystemOn, isDynamicColorsOn) {
@@ -64,23 +77,5 @@ class SettingsActivity : ComponentActivity() {
 				}
 			}
 		}
-		
-		if (!isActivityFinished) {
-			if(isTaskRoot) {
-        		startActivity(Intent(this, MainActivity::class.java))
-			} else {
-				finish()
-			}
-			viewModel.updateIsActivityFinished(true)
-		}
-
-        Surface(
-            color = MaterialTheme.colorScheme.surface,
-            modifier = Modifier.fillMaxSize()
-        ) {
-            BackButton(this, viewModel)
-            SettingsTopBar()
-            SettingsCardsImpl(this, viewModel)
-        }
     }
 }
