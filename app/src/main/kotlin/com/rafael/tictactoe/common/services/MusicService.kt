@@ -9,12 +9,11 @@ import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.common.MediaItem
 import com.rafael.tictactoe.R
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.lazy
 
 @AndroidEntryPoint
 class MusicService : Service() {
 
-    private val exoPlayer: ExoPlayer by lazy { ExoPlayer.Builder(this).build() }
+    private lateinit var exoPlayer: ExoPlayer
 	val backgroundMusicFile = R.raw.background_music
     val backgroundMusic = MediaItem.fromUri(Uri.parse("android.resource://this/$backgroundMusicFile"))
 
@@ -28,6 +27,7 @@ class MusicService : Service() {
     }
 	
 	fun startBackgroundMusic(){
+	    exoPlayer = ExoPlayer.Builder(this).build()
 		exoPlayer.addMediaItem(backgroundMusic)
     	exoPlayer.prepare()
 		exoPlayer.setRepeatMode(ExoPlayer.REPEAT_MODE_ALL)
@@ -37,6 +37,5 @@ class MusicService : Service() {
     override fun onDestroy() {
         super.onDestroy()
 		exoPlayer.stop()
-		exoPlayer.release()
     }
 }
