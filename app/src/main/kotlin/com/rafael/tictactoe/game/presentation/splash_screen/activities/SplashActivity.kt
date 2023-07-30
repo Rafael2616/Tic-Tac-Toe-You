@@ -2,8 +2,9 @@ package com.rafael.tictactoe.game.presentation.splash_screen.activities
 
 import android.content.*
 import android.os.Bundle
-import androidx.activity.*
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.*
+import androidx.activity.viewModels
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -24,6 +25,8 @@ import kotlinx.coroutines.*
 @AndroidEntryPoint
 class SplashActivity : ComponentActivity() {
  
+    val settingsVM: SettingsViewModel by viewModels()
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)       
  			setContent{ AppTheme(this){ splashScreen()
@@ -40,7 +43,6 @@ class SplashActivity : ComponentActivity() {
 	@Composable
 	fun splashScreen() {
 
-    val settingsVM = ViewModelProvider(this).get(SettingsViewModel::class.java)	
 	val isDarkThemeOn by settingsVM.isDarkThemeOn.collectAsState()
 	val isBackgroundMusicOn by settingsVM.isBackgroundMusicOn.collectAsState()
 
