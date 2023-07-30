@@ -1,5 +1,6 @@
 package com.rafael.tictactoe.settings.presentation.settings_screen.components
 
+import android.app.Activity
 import android.content.*
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -15,9 +16,15 @@ import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.game.presentation.main_screen.activities.MainActivity
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.settings.domain.util.RecreateOrFinishActivityHandler
 
 @Composable
-fun BackButton(context: Context, viewModel: SettingsViewModel) {
+fun BackButton(
+	context: Context,
+	viewModel: SettingsViewModel,
+    activity: Activity,
+	isTaskRoot: Boolean
+) {
 
     val isSoundEffectsOn by viewModel.isSoundEffectsOn.collectAsState()
 
@@ -28,7 +35,10 @@ Box(
     contentAlignment = Alignment.TopStart
 ) {
 		IconButton(
-        	onClick = { viewModel.updateIsActivityFinished(false); UiClickSound(context, isSoundEffectsOn)},
+        	onClick = {
+				UiClickSound(context, isSoundEffectsOn)
+				RecreateOrFinishActivityHandler(context, activity, viewModel, true/*= isActivityFinished*/, isTaskRoot);
+			},
             modifier = Modifier
           	 .width(35.dp).height(35.dp)
 	) {

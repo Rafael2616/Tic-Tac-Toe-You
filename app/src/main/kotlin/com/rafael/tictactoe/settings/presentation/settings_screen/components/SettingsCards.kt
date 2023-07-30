@@ -13,15 +13,12 @@ import androidx.compose.ui.platform.*
 import androidx.compose.ui.res.*
 import androidx.compose.ui.text.*
 import androidx.compose.ui.unit.*
+import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.settings.domain.util.CardImageHandler
 import com.rafael.tictactoe.settings.domain.util.CardTextHandler
 import com.rafael.tictactoe.settings.domain.util.SwitchOnCheckedChangeHandler
-import com.rafael.tictactoe.settings.domain.util.SwitchValuesHandler
 import com.rafael.tictactoe.settings.domain.util.SyncDarkThemeToggleValue
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
-import com.rafael.tictactoe.common.domain.util.UiClickSound
-import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
-import kotlinx.coroutines.*
 
 @Composable
 fun SettingsCards(
@@ -37,7 +34,6 @@ fun SettingsCards(
     val isBackgroundMusicOn by viewModel.isBackgroundMusicOn.collectAsState()
     val isSoundEffectsOn by viewModel.isSoundEffectsOn.collectAsState()
     val isAboutShown by viewModel.isAboutShown.collectAsState()
-    val scope = rememberCoroutineScope()
 	
     SyncDarkThemeToggleValue(viewModel, isFollowingSystemOn, isSystemInDarkTheme)
 
@@ -47,7 +43,6 @@ fun SettingsCards(
             .width(360.dp)
             .height(if ((index == 5) && (isAboutShown)) 190.dp else 70.dp)
             .clickable(onClick = {
-	scope.launch {
                 SwitchOnCheckedChangeHandler(
                     context,
                     index,
@@ -58,10 +53,10 @@ fun SettingsCards(
                     isSoundEffectsOn,
                     isBackgroundMusicOn,
                     isAboutShown,
-		    isSystemInDarkTheme
+					isSystemInDarkTheme
                 )
                 UiClickSound(context, isSoundEffectsOn)
-            }})
+            })
     ) {
         Box(
             modifier = Modifier
@@ -88,15 +83,16 @@ fun SettingsCards(
                 if (index != 5) {
                     Switch(
                         checked = 
-		            when (index) {
-    				0 -> isFollowingSystemOn
-     		         	1 -> isDarkThemeOn
-   				2 -> isDynamicColorsOn
-    				3 -> isSoundEffectsOn
-      				4 -> isBackgroundMusicOn
-				5 -> isAboutShown
-			   else -> false
-			  },
+							when (index) {
+    							0 -> isFollowingSystemOn
+     						   1 -> isDarkThemeOn
+   						     2 -> isDynamicColorsOn
+    						    3 -> isSoundEffectsOn
+      						  4 -> isBackgroundMusicOn
+								5 -> isAboutShown
+						 	else -> false
+							}
+						,
                         onCheckedChange = {
                             SwitchOnCheckedChangeHandler(
                                 context,
