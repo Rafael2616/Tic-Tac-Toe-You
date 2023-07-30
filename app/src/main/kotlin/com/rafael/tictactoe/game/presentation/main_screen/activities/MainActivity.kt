@@ -3,9 +3,9 @@ package com.rafael.tictactoe.game.presentation.main_screen.activities
 import android.content.*
 import android.os.Bundle
 //import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.*
+import androidx.activity.viewModels
 //import androidx.compose.animation.*
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -23,7 +23,9 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-	
+
+    val settingsVM: SettingsViewModel by viewModels()
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 			setContent{ AppTheme(this) { HomeScreen()
@@ -34,7 +36,6 @@ class MainActivity : ComponentActivity() {
 	@Composable
 	fun HomeScreen() {
 	
-        val settingsVM = ViewModelProvider(this).get(SettingsViewModel::class.java)
         val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
 	    val isAppInForeground by settingsVM.isAppInForeground.collectAsState()
 		val isContentSetted by settingsVM.isContentSetted.collectAsState()
