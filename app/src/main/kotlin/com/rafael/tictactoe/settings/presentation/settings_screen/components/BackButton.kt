@@ -37,6 +37,7 @@ Box(
 		IconButton(
         	onClick = {
 				UiClickSound(context, isSoundEffectsOn)
+				viewModel.updateIsAboutShown(false)
 				RecreateOrFinishActivityHandler(context, activity, viewModel, true/*= isActivityFinished*/, isTaskRoot);
 			},
             modifier = Modifier
