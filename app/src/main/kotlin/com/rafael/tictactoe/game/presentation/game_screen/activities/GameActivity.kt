@@ -4,6 +4,7 @@ import android.content.*
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.*
+import androidx.activity.viewModels
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -41,7 +42,11 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class GameActivity : ComponentActivity() {
 
-    @Inject lateinit var gameUtil: GameUtils
+    val viewModel: GameViewModel by viewModels()
+    val settingsVM: SettingsViewModel by viewModels()
+
+    @Inject
+	lateinit var gameUtil: GameUtils
 	
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,8 +60,6 @@ class GameActivity : ComponentActivity() {
     @Composable
     fun GameScreen() {
 	
-	    val settingsVM = ViewModelProvider(this).get(SettingsViewModel::class.java)
-        val viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
         val cards by viewModel.cards.collectAsState()
         val isCardClicked by viewModel.isCardClicked.collectAsState()
         val play by viewModel.play.collectAsState()
