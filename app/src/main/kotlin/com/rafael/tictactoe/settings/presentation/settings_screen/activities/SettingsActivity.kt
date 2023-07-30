@@ -6,6 +6,7 @@ import android.widget.Toast
 import android.app.ActivityManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.*
+import androidx.activity.viewModels
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -26,8 +27,11 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.*
 
+
 @AndroidEntryPoint
 class SettingsActivity : ComponentActivity() {
+
+    val settingsVM: SettingsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,19 +48,19 @@ class SettingsActivity : ComponentActivity() {
 		} else {
 			finish()
 		}
+		settingsVM.updateIsAboutShown(false)
 	}
-	
+
 	@Inject
 	lateinit var repo: SettingsRepository
 	
     @Composable
     fun settingsScreen() {
 	
-        val viewModel = ViewModelProvider(this).get(SettingsViewModel::class.java)
-        val isDarkThemeOn by viewModel.isDarkThemeOn.collectAsState()
-        val isFollowingSystemOn by viewModel.isFollowingSystemOn.collectAsState()
-        val isDynamicColorsOn by viewModel.isDynamicColorsOn.collectAsState()
-        val isContentSetted by viewModel.isContentSetted.collectAsState()
+        val isDarkThemeOn by settingsVM.isDarkThemeOn.collectAsState()
+        val isFollowingSystemOn by settingsVM.isFollowingSystemOn.collectAsState()
+        val isDynamicColorsOn by settingsVM.isDynamicColorsOn.collectAsState()
+        val isContentSetted by settingsVM.isContentSetted.collectAsState()
 
 		//Below the logic that decides in  which case each function must be called
         //and params needed for then works and update the UI if thats the case
@@ -65,9 +69,9 @@ class SettingsActivity : ComponentActivity() {
             color = MaterialTheme.colorScheme.surface,
             modifier = Modifier.fillMaxSize()
         ) {
-            BackButton(this, viewModel, this, isTaskRoot)
+            BackButton(this, settingsVM, this/*=SettingsActivity*/, isTaskRoot)
             SettingsTopBar()
-            SettingsCardsImpl(this, viewModel)
+            SettingsCardsImpl(this, settingsVM)
         }
 		
 		if (!isContentSetted) {
