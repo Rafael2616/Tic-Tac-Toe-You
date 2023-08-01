@@ -1,9 +1,9 @@
 package com.rafael.tictactoe.settings.domain.util
 
 import android.content.Context
-import com.rafael.tictactoe.common.presentation.ui.theme.AppTheme
 import com.rafael.tictactoe.common.domain.util.UiClickSound
-import com.rafael.tictactoe.settings.domain.util.SetContentDecider
+import com.rafael.tictactoe.common.domain.util.SetContentDecider
+import com.rafael.tictactoe.common.presentation.ui.theme.AppTheme
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 fun SwitchOnCheckedChangeHandler(
