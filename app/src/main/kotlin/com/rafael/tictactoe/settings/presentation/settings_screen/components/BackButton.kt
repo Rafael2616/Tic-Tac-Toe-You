@@ -13,10 +13,10 @@ import androidx.compose.ui.res.*
 import androidx.compose.ui.text.*
 import androidx.compose.ui.unit.*
 import com.rafael.tictactoe.R
+import com.rafael.tictactoe.common.domain.util.RecreateOrFinishActivityHandler
 import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.game.presentation.main_screen.activities.MainActivity
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
-import com.rafael.tictactoe.settings.domain.util.RecreateOrFinishActivityHandler
 
 @Composable
 fun BackButton(
