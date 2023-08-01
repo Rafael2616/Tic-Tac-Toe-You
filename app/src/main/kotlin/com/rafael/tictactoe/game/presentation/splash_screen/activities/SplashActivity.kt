@@ -25,7 +25,7 @@ import kotlinx.coroutines.*
 @AndroidEntryPoint
 class SplashActivity : ComponentActivity() {
  
-    val settingsVM: SettingsViewModel by viewModels()
+    val settingsVM by viewModels<SettingsViewModel>()
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)       
