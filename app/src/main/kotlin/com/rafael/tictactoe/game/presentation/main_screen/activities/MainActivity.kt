@@ -24,7 +24,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    val settingsVM: SettingsViewModel by viewModels()
+    val settingsVM by viewModels<SettingsViewModel>()
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
