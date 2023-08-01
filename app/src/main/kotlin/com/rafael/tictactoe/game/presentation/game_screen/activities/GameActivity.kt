@@ -25,6 +25,7 @@ import com.rafael.tictactoe.game.presentation.game_screen.components.SoundEffect
 import com.rafael.tictactoe.game.presentation.game_screen.components.VictoryCounter
 import com.rafael.tictactoe.game.presentation.game_screen.components.VictoryCounterReseterButton
 import com.rafael.tictactoe.game.presentation.game_screen.components.WinnerLine
+import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinatesTest
 import com.rafael.tictactoe.game.domain.repository.GameRepository
 import com.rafael.tictactoe.game.domain.util.WinnerChecker
 import com.rafael.tictactoe.game.domain.util.GotOldChecker
@@ -42,8 +43,8 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class GameActivity : ComponentActivity() {
 
-    val viewModel: GameViewModel by viewModels()
-    val settingsVM: SettingsViewModel by viewModels()
+    val viewModel by viewModels<GameViewModel>()
+    val settingsVM by viewModels<SettingsViewModel>()
 
     @Inject
 	lateinit var gameUtil: GameUtils
@@ -84,7 +85,7 @@ class GameActivity : ComponentActivity() {
         ) {
 
             //When activity is created
-            CardGrid(this, viewModel, settingsVM, gameUtil.coordinate)
+            CardGrid(this, viewModel, settingsVM, WinnerLineCoordinatesTest(this))
             ExpandButton(this, viewModel, settingsVM)
             VictoryCounter(viewModel)
             PlayersNamesLayout(this, viewModel, gameUtil.playerName)
@@ -107,7 +108,7 @@ class GameActivity : ComponentActivity() {
 			}
             if (winner) {
                 WinnerSound(this, viewModel, isSoundEffectsOn, isWinSoundPlaying)
-                WinnerLine(viewModel, gameUtil.coordinate)
+                WinnerLine(viewModel, WinnerLineCoordinatesTest(this))
                 VictoryCounterReseterButton(this, viewModel, settingsVM)
                 PlayAgainButton(this, viewModel, settingsVM)
             }
