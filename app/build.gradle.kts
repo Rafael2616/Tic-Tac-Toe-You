@@ -17,6 +17,7 @@ android {
         versionCode = 3
         versionName = "1.2"
     }
+	
     signingConfigs {
         create("release") {
             storeFile = file("tictactoekey.jks")
@@ -26,11 +27,6 @@ android {
         }
     }
     buildTypes {
-        named("release") {
-            isMinifyEnabled = true
-            signingConfig = signingConfigs.getByName("release")
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-        }
         create("beta") {
             isMinifyEnabled = true
             signingConfig = signingConfigs.getByName("release")
@@ -38,6 +34,7 @@ android {
             resValue("string", "app_name_beta", "Jogo da Velha - Beta")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
+		
         named("debug") {
             isMinifyEnabled = false
             applicationIdSuffix = ".debug"
@@ -45,31 +42,34 @@ android {
             resValue("string", "app_name_debug", "Jogo da Velha - Debug")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
+		
+		named("release") {
+			isMinifyEnabled = true
+			signingConfig = signingConfigs.getByName("release")
+			proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
     }
-    /*kotlin { 
-        sourceSets.all { 
-            languageSettings { 
-		languageVersion = "2.0" 
-            } 
-        } 
-    }*/
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+	
     kotlinOptions {
         jvmTarget = "17"
     }
+	
     buildFeatures {
         compose = true
     }
+	
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
-    packagingOptions.resources.excludes += listOf(
-        "/META-INF/AL2.0",
-        "/META-INF/LGPL2.1"
-    )
+	
+    packaging {
+		resources.excludes += listOf("/META-INF/AL2.0", "/META-INF/LGPL2.1")
+	}
 }
 
 dependencies {
@@ -77,15 +77,15 @@ dependencies {
     val lifecycle_version = "2.6.1"
     val room_version = "2.5.2"
     val hilt_version = "2.47"
-    val media3_version = "1.1.0"
+	val media3_version = "1.1.0"
 	
     //Kotlin
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     
-    //Media3
-    implementation("androidx.media3:media3-exoplayer:$media3_version")
-    implementation("androidx.media3:media3-common:$media3_version")
+	//Media3
+	implementation("androidx.media3:media3-exoplayer:$media3_version")
+	implementation("androidx.media3:media3-common:$media3_version")
 
     //Room
     implementation("androidx.room:room-runtime:$room_version")
@@ -125,8 +125,8 @@ dependencies {
 
     //To fix Room issue in KSP task
 	configurations.all {
-   	 resolutionStrategy {
-      	  force("org.xerial:sqlite-jdbc:3.42.0.0")
-   	 }
+		resolutionStrategy {
+			force("org.xerial:sqlite-jdbc:3.42.0.0")
+		}
 	}
 }
