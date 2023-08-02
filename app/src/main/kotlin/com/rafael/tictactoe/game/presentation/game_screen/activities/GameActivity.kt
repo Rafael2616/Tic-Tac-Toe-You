@@ -25,7 +25,6 @@ import com.rafael.tictactoe.game.presentation.game_screen.components.SoundEffect
 import com.rafael.tictactoe.game.presentation.game_screen.components.VictoryCounter
 import com.rafael.tictactoe.game.presentation.game_screen.components.VictoryCounterReseterButton
 import com.rafael.tictactoe.game.presentation.game_screen.components.WinnerLine
-import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinatesTest
 import com.rafael.tictactoe.game.domain.repository.GameRepository
 import com.rafael.tictactoe.game.domain.util.WinnerChecker
 import com.rafael.tictactoe.game.domain.util.GotOldChecker
@@ -71,8 +70,8 @@ class GameActivity : ComponentActivity() {
         val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
         val winner by viewModel.winner.collectAsState()
         val gotOld by viewModel.gotOld.collectAsState()
-		val isContentSetted by settingsVM.isContentSetted.collectAsState()
-		val isDarkThemeOn by settingsVM.isDarkThemeOn.collectAsState()
+	val isContentSetted by settingsVM.isContentSetted.collectAsState()
+	val isDarkThemeOn by settingsVM.isDarkThemeOn.collectAsState()
         val isFollowingSystemOn by settingsVM.isFollowingSystemOn.collectAsState()
         val isDynamicColorsOn by settingsVM.isDynamicColorsOn.collectAsState()
 
@@ -85,18 +84,18 @@ class GameActivity : ComponentActivity() {
         ) {
 
             //When activity is created
-            CardGrid(this, viewModel, settingsVM, WinnerLineCoordinatesTest(this))
+            CardGrid(this, viewModel, settingsVM, gameUtil.coordinate)
             ExpandButton(this, viewModel, settingsVM)
             VictoryCounter(viewModel)
             PlayersNamesLayout(this, viewModel, gameUtil.playerName)
             GameStateToast(this, viewModel)
-			RestartButtonLogic(viewModel, isCardClicked, winner, gotOld)
+            RestartButtonLogic(viewModel, isCardClicked, winner, gotOld)
 
             if (!play) {
-				GetPlayerPrefsCard(this, viewModel, settingsVM)
+		GetPlayerPrefsCard(this, viewModel, settingsVM)
 			}
             if (play) {
-   		     GotOldChecker(viewModel, isCardClicked, winner)
+   	        GotOldChecker(viewModel, isCardClicked, winner)
                 WinnerChecker(viewModel, cards, isCardClicked)
             }
             if (expandButton) {
@@ -104,11 +103,11 @@ class GameActivity : ComponentActivity() {
                 SoundEffectsButton(this, settingsVM)
             }
             if (showRestartButton) {
-				RestartButton(this, viewModel, settingsVM)
-			}
+		RestartButton(this, viewModel, settingsVM)
+	    }
             if (winner) {
                 WinnerSound(this, viewModel, isSoundEffectsOn, isWinSoundPlaying)
-                WinnerLine(viewModel, WinnerLineCoordinatesTest(this))
+                WinnerLine(viewModel, gameUtil.coordinate)
                 VictoryCounterReseterButton(this, viewModel, settingsVM)
                 PlayAgainButton(this, viewModel, settingsVM)
             }
