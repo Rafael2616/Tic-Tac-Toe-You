@@ -4,6 +4,8 @@ import com.rafael.tictactoe.R
 import android.content.Context
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
@@ -60,11 +62,11 @@ fun SettingsCards(
     ) {
         Box(
             modifier = Modifier
-                .fillMaxHeight(),
+                .fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
             Row(
-                modifier = Modifier.fillMaxWidth().padding(end = 12.dp),
+                modifier = Modifier.fillMaxSize().padding(end = 12.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
@@ -91,8 +93,7 @@ fun SettingsCards(
       						  4 -> isBackgroundMusicOn
 								5 -> isAboutShown
 						 	else -> false
-							}
-						,
+							},
                         onCheckedChange = {
                             SwitchOnCheckedChangeHandler(
                                 context,
@@ -107,7 +108,22 @@ fun SettingsCards(
 								isSystemInDarkTheme
                             )
                             UiClickSound(context, isSoundEffectsOn)
-                        }
+                        },
+						thumbContent = {
+    					  Icon(
+     					   imageVector = when (index) {
+    							0 -> if (isFollowingSystemOn) Icons.Filled.Check else Icons.Filled.Close
+     						   1 -> if (isDarkThemeOn) Icons.Filled.Check else Icons.Filled.Close
+   						     2 -> if (isDynamicColorsOn) Icons.Filled.Check else Icons.Filled.Close
+    						    3 -> if (isSoundEffectsOn) Icons.Filled.Check else Icons.Filled.Close
+      						  4 -> if (isBackgroundMusicOn) Icons.Filled.Check else Icons.Filled.Close
+								5 -> if (isAboutShown) Icons.Filled.Check else Icons.Filled.Close
+						 	else -> Icons.Filled.Close
+							},
+    					    contentDescription = null,
+       					 modifier = Modifier.size(SwitchDefaults.IconSize)
+      					)
+   					 }
                     )
                 }
                 if (index == 5) {
@@ -122,5 +138,5 @@ fun SettingsCards(
             }
         }
     }
-    Spacer(modifier = Modifier.height(12.dp))
+    Spacer(modifier = Modifier.height(10.dp))
 }
