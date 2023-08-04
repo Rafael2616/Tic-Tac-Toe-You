@@ -1,8 +1,8 @@
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
+    id("com.google.devtools.ksp")
+    id("org.jetbrains.kotlin.android")
     kotlin("kapt")
 }
 
@@ -24,8 +24,10 @@ android {
             storePassword = "rafael1800"
             keyAlias = "tictactoekey"
             keyPassword = "rafael1800"
+			enableV3Signing = true
         }
     }
+	
     buildTypes {
         create("beta") {
             isMinifyEnabled = true
