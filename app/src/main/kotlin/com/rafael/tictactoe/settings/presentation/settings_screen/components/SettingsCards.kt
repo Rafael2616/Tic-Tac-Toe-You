@@ -141,5 +141,4 @@ fun SettingsCards(
             }
         }
     }
-   // Spacer(modifier = Modifier.height(10.dp))
 }
