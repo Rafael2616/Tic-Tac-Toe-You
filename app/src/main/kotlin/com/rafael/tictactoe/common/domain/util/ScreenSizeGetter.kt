@@ -7,9 +7,9 @@ import android.util.DisplayMetrics
 fun ScreenSizeGetter(activity: Activity): Pair<Int, Int> {
 
     val displaySize = DisplayMetrics()
-    activity.windowManager.defaultDisplay.getMetrics(displaySize)
+    activity.display!!.getRealMetrics(displaySize)
     val width = displaySize.widthPixels
     val height = displaySize.heightPixels
 	
     return Pair(width, height)
-} 
+}
