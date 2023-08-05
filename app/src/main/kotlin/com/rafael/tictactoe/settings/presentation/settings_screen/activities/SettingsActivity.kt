@@ -17,7 +17,6 @@ import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.presentation.ui.theme.AppTheme
 import com.rafael.tictactoe.common.services.MusicService
 import com.rafael.tictactoe.game.presentation.main_screen.activities.MainActivity
-import com.rafael.tictactoe.settings.presentation.settings_screen.components.BackButton
 import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsCardsImpl
 import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsTopBar
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
@@ -27,6 +26,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @AndroidEntryPoint
+@OptIn(ExperimentalMaterial3Api::class)
 class SettingsActivity : ComponentActivity() {
 
     val settingsVM by viewModels<SettingsViewModel>()
@@ -64,9 +64,7 @@ class SettingsActivity : ComponentActivity() {
             color = MaterialTheme.colorScheme.surface,
             modifier = Modifier.fillMaxSize()
         ) {
-            BackButton(this, settingsVM, this/*=SettingsActivity*/, isTaskRoot)
-            SettingsTopBar()
-            SettingsCardsImpl(this, settingsVM)
+            SettingsTopBar(this, settingsVM, this)
         }
 		
 		if (!isContentSetted) {
