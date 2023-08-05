@@ -1,7 +1,6 @@
 package com.rafael.tictactoe.common.domain.util
 
 import android.app.Activity
-import android.view.WindowManager
 import android.util.DisplayMetrics
 
 fun ScreenSizeGetter(activity: Activity): Pair<Int, Int> {
