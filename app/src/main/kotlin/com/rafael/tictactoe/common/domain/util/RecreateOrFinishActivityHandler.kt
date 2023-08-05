@@ -10,12 +10,11 @@ fun RecreateOrFinishActivityHandler(
 	context: Context,
 	activity: Activity,
 	viewModel: SettingsViewModel,
-	isActivityFinished: Boolean,
-	isTaskRoot: Boolean
+	isActivityFinished: Boolean
 ) {
 
 	if (isActivityFinished) {
-		if(isTaskRoot) {
+		if(activity.isTaskRoot) {
     		context.startActivity(Intent(context, MainActivity::class.java))
 		} else {
 			activity.finish()
