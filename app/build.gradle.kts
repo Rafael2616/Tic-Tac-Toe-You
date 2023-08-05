@@ -82,52 +82,54 @@ dependencies {
     val room_version = "2.5.2"
     val hilt_version = "2.47"
 	val media3_version = "1.1.0"
-	
-    //Kotlin
-    implementation("androidx.core:core-ktx:1.10.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     
+    //Kotlin
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
+    //Android Core
+    implementation("androidx.core:core-ktx:1.10.1")
+    implementation("androidx.activity:activity-compose:1.7.2")
+
+    //Dagger Hilt
+    implementation("com.google.dagger:hilt-android:$hilt_version")
+    kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
+
+    //Jetpack Compose
+    platform("androidx.compose:compose-bom:2023.06.01")
+    implementation("androidx.compose.foundation:foundation")
+    implementation("androidx.compose.material:material-icons-core")
+    implementation("androidx.compose.material3:material3:1.1.1")
+    implementation("androidx.compose.runtime:runtime-livedata")
+    implementation("androidx.compose.ui:ui")
+
+    //Jetpack ConstraintLayout
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha11")
+
+    //Lifecycle
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version")
+
 	//Media3
+    implementation("androidx.media3:media3-common:$media3_version")
 	implementation("androidx.media3:media3-exoplayer:$media3_version")
-	implementation("androidx.media3:media3-common:$media3_version")
 
     //Room
     implementation("androidx.room:room-runtime:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
     ksp("androidx.room:room-compiler:$room_version")
-    
-    //Dagger Hilt
-    implementation("com.google.dagger:hilt-android:$hilt_version")
-    kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
-
-    //Lifecycle
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version")
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycle_version")
-
-    //Jetpack Compose
-    platform("androidx.compose:compose-bom:2023.06.01")
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.material3:material3:1.1.1")
-    implementation("androidx.compose.foundation:foundation")
-    implementation("androidx.compose.runtime:runtime-livedata")
-    implementation("androidx.compose.material:material-icons-core")
-
-    //Others Jetpack deps
-    implementation("androidx.activity:activity-compose:1.7.2")
-    implementation("androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha11")
 
     //Theming
-    implementation("com.google.android.material:compose-theme-adapter-3:1.1.1") 
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.31.6-rc")
+    implementation("com.google.android.material:compose-theme-adapter-3:1.1.1") 
 
     //Test Unit
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.4.3")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
 
-    //To fix Room issue in KSP task
+    //Fix Room issue in KSP task
 	configurations.all {
 		resolutionStrategy {
 			force("org.xerial:sqlite-jdbc:3.42.0.0")
