@@ -23,15 +23,17 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.components.Set
 @Composable
 fun SettingsCardsImpl(
     context: Context,
-    viewModel: SettingsViewModel
+    viewModel: SettingsViewModel,
+    paddingValues: PaddingValues
 ) {
-
     val isFollowingSystemOn by viewModel.isFollowingSystemOn.collectAsState()
     val isDynamicColorsSupported = VERSION.SDK_INT >= VERSION_CODES.S
     var cards by rememberSaveable { mutableStateOf(List<Boolean>(6) { true }) }
 
-    LazyColumn(
-        modifier = Modifier.fillMaxSize().padding(top = 195.dp),
+   LazyColumn(
+        modifier = Modifier.
+            fillMaxSize()
+            .padding(paddingValues),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

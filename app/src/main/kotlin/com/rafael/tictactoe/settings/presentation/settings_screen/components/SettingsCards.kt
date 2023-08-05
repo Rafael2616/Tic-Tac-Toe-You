@@ -39,12 +39,15 @@ fun SettingsCards(
 	
     SyncDarkThemeToggleValue(viewModel, isFollowingSystemOn, isSystemInDarkTheme)
 
+    Spacer(modifier = Modifier.height(12.dp))
+
     Card(
         shape = MaterialTheme.shapes.medium,
         modifier = Modifier
             .width(360.dp)
             .height(if ((index == 5) && (isAboutShown)) 190.dp else 70.dp)
             .clickable(onClick = {
+                UiClickSound(context, isSoundEffectsOn)
                 SwitchOnCheckedChangeHandler(
                     context,
                     index,
@@ -57,8 +60,8 @@ fun SettingsCards(
                     isAboutShown,
 					isSystemInDarkTheme
                 )
-                UiClickSound(context, isSoundEffectsOn)
-            })
+            }
+        )
     ) {
         Box(
             modifier = Modifier
@@ -138,5 +141,5 @@ fun SettingsCards(
             }
         }
     }
-    Spacer(modifier = Modifier.height(10.dp))
+   // Spacer(modifier = Modifier.height(10.dp))
 }
