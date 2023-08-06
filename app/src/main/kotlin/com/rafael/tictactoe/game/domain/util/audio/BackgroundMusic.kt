@@ -10,8 +10,7 @@ fun BackgroundMusic(
     context: Context,
     isBackgroundMusicOn: Boolean
 ) {
-
-	val isServiceRunning = ::ServiceRunningVerifier	
+	val isServiceRunning = ::RunningServiceVerifier	
 		
 	if (isBackgroundMusicOn) {
 		if (!isServiceRunning(context, MusicService::class.java)) {
