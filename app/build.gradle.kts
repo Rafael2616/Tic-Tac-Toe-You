@@ -26,6 +26,9 @@ android {
             keyPassword = "rafael1800"
 			enableV3Signing = true
         }
+        named("debug") {
+            enableV3Signing = true
+        }
     }
 	
     buildTypes {
