@@ -7,13 +7,13 @@ plugins {
 }
 
 android {
-    compileSdk = 34
+    compileSdk = 33
     namespace = "com.rafael.tictactoe"
 
     defaultConfig {
         applicationId = "com.rafael.tictactoe"
         minSdk = 26
-        targetSdk = 34
+        targetSdk = 33
         versionCode = 3
         versionName = "1.2"
     }
