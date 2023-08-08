@@ -98,7 +98,7 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
 
     //Jetpack Compose
-    platform("androidx.compose:compose-bom:2023.06.01")
+    platform("androidx.compose:compose-bom:2023.08.00")
     implementation("androidx.compose.foundation:foundation")
     implementation("androidx.compose.material:material-icons-core")
     implementation("androidx.compose.material3:material3:1.1.1")
