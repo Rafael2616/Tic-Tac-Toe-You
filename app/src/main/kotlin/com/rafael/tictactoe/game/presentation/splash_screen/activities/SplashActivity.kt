@@ -1,26 +1,34 @@
 package com.rafael.tictactoe.game.presentation.splash_screen.activities
 
-import android.content.*
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.*
 import androidx.activity.viewModels
-import androidx.compose.foundation.*
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.*
-import androidx.compose.ui.res.*
-import androidx.compose.ui.unit.*
-import androidx.compose.ui.graphics.painter.*
-import androidx.lifecycle.*
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.common.presentation.ui.theme.AppTheme
+import com.rafael.tictactoe.common.presentation.theme.AppTheme
 import com.rafael.tictactoe.game.presentation.main_screen.activities.MainActivity
 import com.rafael.tictactoe.game.domain.util.BackgroundMusic
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.*
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SplashActivity : ComponentActivity() {
@@ -29,7 +37,8 @@ class SplashActivity : ComponentActivity() {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)       
- 			setContent{ AppTheme(this){ splashScreen()
+ 			setContent{ AppTheme() {
+                 SplashScreen()
 			 	val coroutineScope = rememberCoroutineScope()
 				 coroutineScope.launch {
  				   delay(1200)
@@ -41,8 +50,7 @@ class SplashActivity : ComponentActivity() {
 	}
 
 	@Composable
-	fun splashScreen() {
-
+	fun SplashScreen() {
 	val isDarkThemeOn by settingsVM.isDarkThemeOn.collectAsState()
 	val isBackgroundMusicOn by settingsVM.isBackgroundMusicOn.collectAsState()
 
