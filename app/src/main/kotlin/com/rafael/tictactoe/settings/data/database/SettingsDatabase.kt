@@ -2,9 +2,8 @@ package com.rafael.tictactoe.settings.data.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.rafael.tictactoe.settings.domain.model.SettingsEntity
 import com.rafael.tictactoe.settings.data.dao.SettingsDao
-
+import com.rafael.tictactoe.settings.domain.model.SettingsEntity
 
 @Database(
     entities = [SettingsEntity::class],
@@ -12,10 +11,9 @@ import com.rafael.tictactoe.settings.data.dao.SettingsDao
     exportSchema = false
 ) 
 abstract class SettingsDatabase : RoomDatabase() {
+    abstract val settingsDao: SettingsDao
 
-abstract val settingsDao: SettingsDao
-
-companion object {
-    const val DATABASE_NAME = "settings_database"
-   }
+    companion object {
+        const val DATABASE_NAME = "settings_database"
+    }
 }
