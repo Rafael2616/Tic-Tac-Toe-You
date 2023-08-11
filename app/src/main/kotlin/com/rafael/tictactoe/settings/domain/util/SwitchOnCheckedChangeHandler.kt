@@ -2,29 +2,22 @@ package com.rafael.tictactoe.settings.domain.util
 
 import android.content.Context
 import com.rafael.tictactoe.common.domain.util.UiClickSound
-import com.rafael.tictactoe.common.domain.util.SetContentDecider
-import com.rafael.tictactoe.common.presentation.ui.theme.AppTheme
+import com.rafael.tictactoe.common.presentation.theme.AppTheme
+import com.rafael.tictactoe.settings.domain.util.SyncDarkThemeToggleValue
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 fun SwitchOnCheckedChangeHandler(
 	context: Context,
 	index: Int,
-	viewModel: SettingsViewModel,
-	isFollowingSystemOn: Boolean,
-	isDarkThemeOn: Boolean,
-	isDynamicColorsOn: Boolean,
-	isSoundEffectsOn: Boolean,
-	isBackgroundMusicOn: Boolean,
-	isAboutShown: Boolean,
+	vm: SettingsViewModel,
 	isSystemInDarkTheme: Boolean
 ) {
-
-when (index){
-    0 -> { viewModel.updateIsFollowingSystemOn(!isFollowingSystemOn);  SetContentDecider(viewModel, isDarkThemeOn, isSystemInDarkTheme) }
-    1 -> { viewModel.updateIsDarkThemeOn(!isDarkThemeOn); viewModel.updateIsContentSetted(false) }
-    2 -> { viewModel.updateIsDynamicColorsOn(!isDynamicColorsOn); viewModel.updateIsContentSetted(false) }
-    3 -> viewModel.updateIsSoundEffectsOn(!isSoundEffectsOn)
-    4 -> viewModel.updateIsBackgroundMusicOn(!isBackgroundMusicOn, context)
-    5 -> viewModel.updateIsAboutShown(!isAboutShown)
+    when (index){
+        0 -> { vm.updateIsFollowingSystemOn(!vm.isFollowingSystemOn.value); SyncDarkThemeToggleValue(vm, isSystemInDarkTheme)}
+        1 -> vm.updateIsDarkThemeOn(!vm.isDarkThemeOn.value)
+        2 -> vm.updateIsDynamicColorsOn(!vm.isDynamicColorsOn.value)
+        3 -> vm.updateIsSoundEffectsOn(!vm.isSoundEffectsOn.value)
+        4 -> vm.updateIsBackgroundMusicOn(!vm.isBackgroundMusicOn.value, context)
+        5 -> vm.updateIsAboutShown(!vm.isAboutShown.value)
     }
 }

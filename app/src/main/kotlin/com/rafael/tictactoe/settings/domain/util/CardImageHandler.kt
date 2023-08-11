@@ -1,17 +1,17 @@
 package com.rafael.tictactoe.settings.domain.util
 
-import androidx.compose.runtime.*
-import androidx.compose.ui.graphics.painter.*
-import androidx.compose.ui.res.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
-fun CardImageHandler(
-index: Int,
-viewModel: SettingsViewModel
-): Painter {
-
+fun CardImageHandler(index: Int): Painter {
+    val viewModel = viewModel<SettingsViewModel>()
     val isDarkThemeOn by viewModel.isDarkThemeOn.collectAsState()
     val isDynamicColorsOn by viewModel.isDynamicColorsOn.collectAsState()
     val isBackgroundMusicOn by viewModel.isBackgroundMusicOn.collectAsState()

@@ -3,16 +3,16 @@ package com.rafael.tictactoe.settings.domain.util
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 fun SyncDarkThemeToggleValue(
-viewModel: SettingsViewModel,
-isFollowingSystemOn: Boolean,
-isSystemInDarkTheme: Boolean
+    vm: SettingsViewModel,
+    isSystemInDarkTheme: Boolean
 ) {
+    val isFollowingSystemOn = vm.isFollowingSystemOn.value
 
     if (isFollowingSystemOn) {
         if (isSystemInDarkTheme) {
-            viewModel.updateIsDarkThemeOn(true)
+            vm.updateIsDarkThemeOn(true)
         } else {
-            viewModel.updateIsDarkThemeOn(false)
+            vm.updateIsDarkThemeOn(false)
         }
     }
 }
