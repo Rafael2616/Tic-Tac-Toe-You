@@ -1,16 +1,17 @@
 package com.rafael.tictactoe.game.presentation.game_screen.viewmodels
 
 import android.content.Context
-import androidx.lifecycle.*
+import androidx.lifecycle.ViewModel
 import com.rafael.tictactoe.game.domain.util.GameUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 
 @HiltViewModel
 class GameViewModel @Inject constructor(
-private val gameUtil : GameUtils
+    private val gameUtil : GameUtils
 ): ViewModel() {
 
 	private var _currentPlayerName = MutableStateFlow("")
@@ -31,6 +32,9 @@ private val gameUtil : GameUtils
 	private var _isCardClicked = MutableStateFlow(List<Boolean>(9){false})
 	val isCardClicked: StateFlow<List<Boolean>> = _isCardClicked
 
+	private var _isTimerOn = MutableStateFlow(true)
+	val isTimerOn: StateFlow<Boolean> = _isTimerOn
+    
 	private var _play = MutableStateFlow(false)
 	val play: StateFlow<Boolean> = _play
 	private var _isXImage = MutableStateFlow(false)
@@ -46,8 +50,8 @@ private val gameUtil : GameUtils
 
 	private var _isScoreUp = MutableStateFlow(false)
 	val isScoreUp: StateFlow<Boolean> = _isScoreUp
-	private var _expandButton = MutableStateFlow(false)
-	val expandButton: StateFlow<Boolean> = _expandButton
+	private var _isExpandButtonShown = MutableStateFlow(false)
+	val isExpandButtonShown: StateFlow<Boolean> = _isExpandButtonShown
 	private var _showRestartButton = MutableStateFlow(false)
 	val showRestartButton: StateFlow<Boolean> = _showRestartButton
 	private var _isWinSoundPlaying = MutableStateFlow(false)
@@ -69,10 +73,20 @@ private val gameUtil : GameUtils
 	private var _gotOld = MutableStateFlow(false)
 	val gotOld: StateFlow<Boolean> = _gotOld
 
+	private var _isGameFinished = MutableStateFlow(false)
+	val isGameFinished: StateFlow<Boolean> = _isGameFinished
+
 	private var _showPlayer1Name = MutableStateFlow("")
 	val showPlayer1Name: StateFlow<String> = _showPlayer1Name
 	private var _showPlayer2Name = MutableStateFlow("")
 	val showPlayer2Name: StateFlow<String> = _showPlayer2Name
+
+	private var _playerName = MutableStateFlow("")
+	val playerName: StateFlow<String> = _playerName
+
+    fun updatePlayerName(newValue: String) {
+        _playerName.value = newValue
+    }
 
     fun updateCurrentPlayerName(newValue: String) {
         _currentPlayerName.value = newValue
@@ -142,8 +156,8 @@ private val gameUtil : GameUtils
         _isScoreUp.value = newValue
     }
 
-    fun updateExpandButton(newValue: Boolean) {
-        _expandButton.value = newValue
+    fun updateIsExpandButtonShown(newValue: Boolean) {
+        _isExpandButtonShown.value = newValue
     }
 
     fun updateShowRestartButton(newValue: Boolean) {
@@ -172,6 +186,14 @@ private val gameUtil : GameUtils
 
     fun showPlayer2Name(newValue: String) {
         _showPlayer2Name.value = newValue
+    }
+
+    fun updateIsGameFinished(newValue: Boolean) {
+        _isGameFinished.value = newValue
+    }
+    
+    fun updateIsTimerOn(newValue: Boolean) {
+        _isTimerOn.value = newValue
     }
 
     fun setCoordinates(sX: Float, sY: Float, eX: Float, eY: Float) {     
