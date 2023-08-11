@@ -1,17 +1,18 @@
 package com.rafael.tictactoe.game.presentation.game_screen.activities
 
-import android.content.*
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.*
 import androidx.activity.viewModels
-import androidx.compose.foundation.*
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.*
-import androidx.lifecycle.*
-import com.rafael.tictactoe.common.presentation.ui.theme.AppTheme
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import com.rafael.tictactoe.common.presentation.theme.AppTheme
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import com.rafael.tictactoe.game.presentation.game_screen.components.BackgroundMusicButton
 import com.rafael.tictactoe.game.presentation.game_screen.components.CardGrid
@@ -25,12 +26,14 @@ import com.rafael.tictactoe.game.presentation.game_screen.components.SoundEffect
 import com.rafael.tictactoe.game.presentation.game_screen.components.VictoryCounter
 import com.rafael.tictactoe.game.presentation.game_screen.components.VictoryCounterReseterButton
 import com.rafael.tictactoe.game.presentation.game_screen.components.WinnerLine
-import com.rafael.tictactoe.game.domain.repository.GameRepository
+import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinatesTest
 import com.rafael.tictactoe.game.domain.util.WinnerChecker
 import com.rafael.tictactoe.game.domain.util.GotOldChecker
 import com.rafael.tictactoe.game.domain.util.GotOldSound
 import com.rafael.tictactoe.game.domain.util.GameUtils
 import com.rafael.tictactoe.game.domain.util.RestartButtonLogic
+import com.rafael.tictactoe.game.domain.util.PlayersNamesDisplay
+import com.rafael.tictactoe.game.domain.util.ToastNameLogic
 import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
 import com.rafael.tictactoe.game.domain.util.WinnerSound
 import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
@@ -41,17 +44,16 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class GameActivity : ComponentActivity() {
-
     val viewModel by viewModels<GameViewModel>()
     val settingsVM by viewModels<SettingsViewModel>()
 
     @Inject
 	lateinit var gameUtil: GameUtils
-	
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            AppTheme(this) {
+            AppTheme() {
                 GameScreen()
             }
         }
@@ -59,21 +61,15 @@ class GameActivity : ComponentActivity() {
 
     @Composable
     fun GameScreen() {
-	
         val cards by viewModel.cards.collectAsState()
         val isCardClicked by viewModel.isCardClicked.collectAsState()
         val play by viewModel.play.collectAsState()
-        val expandButton by viewModel.expandButton.collectAsState()
+        val isExpandButtonShown by viewModel.isExpandButtonShown.collectAsState()
         val showRestartButton by viewModel.showRestartButton.collectAsState()
-        val isWinSoundPlaying by viewModel.isWinSoundPlaying.collectAsState()
-        val isGotOldSoundPlaying by viewModel.isGotOldSoundPlaying.collectAsState()
-        val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
         val winner by viewModel.winner.collectAsState()
         val gotOld by viewModel.gotOld.collectAsState()
-	val isContentSetted by settingsVM.isContentSetted.collectAsState()
-	val isDarkThemeOn by settingsVM.isDarkThemeOn.collectAsState()
-        val isFollowingSystemOn by settingsVM.isFollowingSystemOn.collectAsState()
-        val isDynamicColorsOn by settingsVM.isDynamicColorsOn.collectAsState()
+        val playerName =gameUtil.playerName
+        //val scope = rememberCoroutineScope()
 
 		//Below the logic that decides in  which case each function must be called
         //and params needed for then works and update the UI if thats the case
@@ -84,46 +80,46 @@ class GameActivity : ComponentActivity() {
         ) {
 
             //When activity is created
-            CardGrid(this, viewModel, settingsVM, gameUtil.coordinate)
-            ExpandButton(this, viewModel, settingsVM)
-            VictoryCounter(viewModel)
-            PlayersNamesLayout(this, viewModel, gameUtil.playerName)
-            GameStateToast(this, viewModel)
-            RestartButtonLogic(viewModel, isCardClicked, winner, gotOld)
+            CardGrid(WinnerLineCoordinatesTest(this))
+            ExpandButton()
+            VictoryCounter()
+            PlayersNamesLayout()
+            GameStateToast()
+			RestartButtonLogic(viewModel)
+            ToastNameLogic()
 
             if (!play) {
-		GetPlayerPrefsCard(this, viewModel, settingsVM)
+				GetPlayerPrefsCard()      
+                playerName.firstPlayerName()
+                playerName.secondPlayerName()
 			}
+
             if (play) {
-   	        GotOldChecker(viewModel, isCardClicked, winner)
+   		     GotOldChecker(viewModel)
                 WinnerChecker(viewModel, cards, isCardClicked)
             }
-            if (expandButton) {
-                BackgroundMusicButton(this, settingsVM)
-                SoundEffectsButton(this, settingsVM)
+
+            if (isExpandButtonShown) {
+                BackgroundMusicButton()
+                SoundEffectsButton()
             }
+
             if (showRestartButton) {
-		RestartButton(this, viewModel, settingsVM)
-	    }
-            if (winner) {
-                WinnerSound(this, viewModel, isSoundEffectsOn, isWinSoundPlaying)
-                WinnerLine(viewModel, gameUtil.coordinate)
-                VictoryCounterReseterButton(this, viewModel, settingsVM)
-                PlayAgainButton(this, viewModel, settingsVM)
-            }
-            if (gotOld) {
-                GotOldSound(this, viewModel, isSoundEffectsOn, isGotOldSoundPlaying)					
-                VictoryCounterReseterButton(this, viewModel, settingsVM)
-                PlayAgainButton(this, viewModel, settingsVM)
-            }
-			
-	   	if(!isContentSetted) {
-		   	setContent{
-			   	AppTheme(this, isDarkThemeOn, isFollowingSystemOn, isDynamicColorsOn) {
-				   	GameScreen()
-					}
-				}
+				RestartButton()
 			}
+
+            if (winner) {
+                WinnerSound(this, viewModel, settingsVM)
+                WinnerLine(WinnerLineCoordinatesTest(this))
+                VictoryCounterReseterButton()
+                PlayAgainButton()
+            }
+
+            if (gotOld) {
+                GotOldSound(this, viewModel, settingsVM)					
+                VictoryCounterReseterButton()
+                PlayAgainButton()
+            }
         }
     }
 }
