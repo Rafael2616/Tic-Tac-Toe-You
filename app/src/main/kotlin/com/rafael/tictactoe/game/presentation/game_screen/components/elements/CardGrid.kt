@@ -30,7 +30,6 @@ fun CardGrid(coordinates: WinnerLineCoordinatesTest) {
     val viewModel = viewModel<GameViewModel>()
     val settingsVM = viewModel<SettingsViewModel>()
     val context = LocalContext.current
-    val isCardClicked by viewModel.isCardClicked.collectAsState()
     val cards by viewModel.cards.collectAsState()
 
      ConstraintLayout {
