@@ -5,14 +5,16 @@ import android.net.Uri
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.common.MediaItem
 import com.rafael.tictactoe.R
+import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
+import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 fun CardGridSound(
 	context: Context,
-	isPlayer1: Boolean,
-	isSoundEffectsOn: Boolean,
-	isCardClicked: List<Boolean>,
-	index: Int
+    viewModel: GameViewModel,
+    settingsVM: SettingsViewModel
 ) {
+    val isPlayer1 = viewModel.isPlayer1.value
+    val isSoundEffectsOn = settingsVM.isSoundEffectsOn.value
 
 	if (isSoundEffectsOn) {	
    	 val exoPlayer = ExoPlayer.Builder(context).build()
@@ -21,18 +23,14 @@ fun CardGridSound(
  	   val clickSound1 = MediaItem.fromUri(Uri.parse("android.resource://$context/$clickSoundFile"))
  	   val clickSound2 = MediaItem.fromUri(Uri.parse("android.resource://$context/$clickSound2File"))
 
-		if (!isCardClicked[index]) {
-			if (isPlayer1) {
-				exoPlayer.stop()
-				exoPlayer.addMediaItem(clickSound1)
-				exoPlayer.prepare()
-				exoPlayer.play()
-			} else {
-				exoPlayer.stop()
-				exoPlayer.addMediaItem(clickSound2)
-				exoPlayer.prepare()
-				exoPlayer.play()
-			}
+		if (isPlayer1) {
+			exoPlayer.addMediaItem(clickSound1)
+			exoPlayer.prepare()
+			exoPlayer.play()
+		} else {
+			exoPlayer.addMediaItem(clickSound2)
+			exoPlayer.prepare()
+			exoPlayer.play()
 		}
 	}
 }
