@@ -5,9 +5,8 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class SettingsEntity(
-
     @PrimaryKey
-	var settingsID: Int,
+	var id: Int = 1,
     var isBackgroundMusicOn: Boolean,
     var isDarkThemeOn: Boolean,
     var isDynamicColorsOn: Boolean,
@@ -17,7 +16,7 @@ data class SettingsEntity(
     companion object {
         fun getDefaultSettings(): SettingsEntity {
             return SettingsEntity(
-				settingsID = 1,
+				id = 1,
                 isBackgroundMusicOn = true,
                 isDarkThemeOn = true,
                 isDynamicColorsOn = true,
