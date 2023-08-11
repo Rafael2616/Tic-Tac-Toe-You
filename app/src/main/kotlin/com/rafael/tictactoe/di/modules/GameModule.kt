@@ -8,10 +8,10 @@ import com.rafael.tictactoe.game.domain.repository.GameRepository
 import com.rafael.tictactoe.game.domain.util.GameUtils
 import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
 import com.rafael.tictactoe.game.domain.util.PlayersNamesDisplay
-import dagger.hilt.components.SingletonComponent
-import dagger.hilt.InstallIn
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.components.SingletonComponent
+import dagger.hilt.InstallIn
 import javax.inject.Singleton
 
 @Module

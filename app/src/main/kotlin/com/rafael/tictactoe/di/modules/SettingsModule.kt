@@ -9,10 +9,10 @@ import com.rafael.tictactoe.settings.domain.util.CardTextHandler
 import com.rafael.tictactoe.settings.domain.util.CardImageHandler
 import com.rafael.tictactoe.settings.domain.util.SwitchOnCheckedChangeHandler
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
-import dagger.hilt.components.SingletonComponent
-import dagger.hilt.InstallIn
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.components.SingletonComponent
+import dagger.hilt.InstallIn
 import javax.inject.Singleton
 
 @Module
