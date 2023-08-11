@@ -7,15 +7,15 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 
 class SettingsRepositoryImpl @Inject constructor(
-private val settingsDao: SettingsDao
+    private val settingsDao: SettingsDao
 ) : SettingsRepository {
 
 	init{
 		println("Settings repository has been initialized")
 	}
 
-    override fun getAllSettingsValues(): Flow<SettingsEntity> {
-        return settingsDao.getSettingsValues()
+    override fun getAllSettingsValues(id: Int): Flow<SettingsEntity> {
+        return settingsDao.getSettingsValues(id)
     }
 
     override suspend fun setAllSettingsValues(settingsEntity: SettingsEntity) {
