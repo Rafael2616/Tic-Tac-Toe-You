@@ -1,12 +1,12 @@
 package com.rafael.tictactoe.common.services
 
-import android.os.IBinder
 import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import androidx.media3.exoplayer.ExoPlayer
+import android.os.IBinder
 import androidx.media3.common.MediaItem
+import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.R
 import dagger.hilt.android.AndroidEntryPoint
 
