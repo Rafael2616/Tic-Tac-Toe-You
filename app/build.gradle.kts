@@ -1,4 +1,4 @@
-plugins {
+lifecyclplugins {
     id("androidx.room")
     id("com.android.application")
     id("com.google.dagger.hilt.android")
@@ -113,7 +113,6 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha12")
 
     //Lifecycle
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version")
 
