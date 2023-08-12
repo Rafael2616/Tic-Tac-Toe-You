@@ -110,7 +110,7 @@ dependencies {
     implementation("androidx.compose.ui:ui")
 
     //Jetpack ConstraintLayout
-    implementation("androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha11")
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha12")
 
     //Lifecycle
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
