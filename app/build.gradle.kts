@@ -1,4 +1,4 @@
-lifecyclplugins {
+plugins {
     id("androidx.room")
     id("com.android.application")
     id("com.google.dagger.hilt.android")
