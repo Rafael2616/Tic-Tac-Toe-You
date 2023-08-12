@@ -6,13 +6,10 @@ fun SyncDarkThemeToggleValue(
     vm: SettingsViewModel,
     isSystemInDarkTheme: Boolean
 ) {
-    val isFollowingSystemOn = vm.isFollowingSystemOn.value
 
-    if (isFollowingSystemOn) {
-        if (isSystemInDarkTheme) {
-            vm.updateIsDarkThemeOn(true)
-        } else {
-            vm.updateIsDarkThemeOn(false)
-        }
+    if (isSystemInDarkTheme) {
+        vm.updateIsDarkThemeOn(true)
+    } else {
+        vm.updateIsDarkThemeOn(false)
     }
 }
