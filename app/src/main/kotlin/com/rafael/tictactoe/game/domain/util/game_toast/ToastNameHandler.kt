@@ -16,7 +16,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
-fun ToastNameLogic() {
+fun ToastNameHandler() {
     val vm = viewModel<GameViewModel>()
     val context = LocalContext.current
 	val winner by vm.winner.collectAsState()
