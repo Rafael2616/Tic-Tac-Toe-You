@@ -82,36 +82,38 @@ private val DarkColors = darkColorScheme(
 )
 
 @Composable
-fun AppTheme(content: @Composable() () -> Unit) {
+fun AppTheme(
+    isSystemInDarkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable() () -> Unit
+) {
     val viewModel = viewModel<SettingsViewModel>()
     val isDarkThemeOn by viewModel.isDarkThemeOn.collectAsState()
     val isFollowingSystemOn by viewModel.isFollowingSystemOn.collectAsState()
     val isDynamicColorsOn by viewModel.isDynamicColorsOn.collectAsState()
     val context = LocalContext.current
     val isAndroidS = VERSION.SDK_INT >= VERSION_CODES.S 
-    val isSystemInDarkTheme = isSystemInDarkTheme()
 
 	val colors = if (!isFollowingSystemOn) {
   	  if (isAndroidS && isDynamicColorsOn) {
       	  if (!isDarkThemeOn) {
        	     dynamicLightColorScheme(context)
- 	   } else {
+ 	       } else {
      	       dynamicDarkColorScheme(context)
       	  }
   	  } else {
-     	   if (!isDarkThemeOn) {
+            if (!isDarkThemeOn) {
      	       LightColors
     	    } else {
-     	   DarkColors
+     	       DarkColors
        	 }
   	  }
-	} else {
-		if (!isDarkThemeOn) {
-			LightColors
-     } else {
-         DarkColors
+    } else {
+        if (!isSystemInDarkTheme) {
+            LightColors
+        } else {
+            DarkColors
    	 }
-	}
+    }
 
 	MaterialTheme(
   	  colorScheme = colors,
