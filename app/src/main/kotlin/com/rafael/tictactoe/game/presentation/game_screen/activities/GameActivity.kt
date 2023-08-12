@@ -33,7 +33,7 @@ import com.rafael.tictactoe.game.domain.util.GotOldSound
 import com.rafael.tictactoe.game.domain.util.GameUtils
 import com.rafael.tictactoe.game.domain.util.RestartButtonLogic
 import com.rafael.tictactoe.game.domain.util.PlayersNamesDisplay
-import com.rafael.tictactoe.game.domain.util.ToastNameLogic
+import com.rafael.tictactoe.game.domain.util.ToastNameHandler
 import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
 import com.rafael.tictactoe.game.domain.util.WinnerSound
 import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
