@@ -12,12 +12,13 @@ A classic tic-tac-toe game made with material you and others new android technol
 
 # Employed technologies:
 - Room database
-- Dependency Injection with Dagger Hilt
+- Dependency Injection w/ Dagger Hilt
 - Clean Arquiteture
 - MVVM patterns
 - Jetpack Compose
 - Media3 Library
 - Kotlin 100%
+- Reative Programming w/ Kotlin Flows
   
 # Game Screenshots:
 |          |          |          |
