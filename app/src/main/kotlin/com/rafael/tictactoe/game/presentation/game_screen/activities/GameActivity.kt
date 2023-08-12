@@ -48,7 +48,7 @@ class GameActivity : ComponentActivity() {
     val settingsVM by viewModels<SettingsViewModel>()
 
     @Inject
-	lateinit var gameUtil: GameUtils
+    lateinit var gameUtil: GameUtils
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,7 +71,7 @@ class GameActivity : ComponentActivity() {
         val playerName =gameUtil.playerName
         //val scope = rememberCoroutineScope()
 
-		//Below the logic that decides in  which case each function must be called
+	//Below the logic that decides in  which case each function must be called
         //and params needed for then works and update the UI if thats the case
 
        Surface(
@@ -85,17 +85,17 @@ class GameActivity : ComponentActivity() {
             VictoryCounter()
             PlayersNamesLayout()
             GameStateToast()
-			RestartButtonLogic(viewModel)
-            ToastNameLogic()
+	    RestartButtonLogic(viewModel)
+            ToastNameHandler()
 
             if (!play) {
-				GetPlayerPrefsCard()      
+		GetPlayerPrefsCard()      
                 playerName.firstPlayerName()
                 playerName.secondPlayerName()
-			}
+	    }
 
             if (play) {
-   		     GotOldChecker(viewModel)
+   		GotOldChecker(viewModel)
                 WinnerChecker(viewModel, cards, isCardClicked)
             }
 
@@ -105,8 +105,8 @@ class GameActivity : ComponentActivity() {
             }
 
             if (showRestartButton) {
-				RestartButton()
-			}
+		RestartButton()
+	    }
 
             if (winner) {
                 WinnerSound(this, viewModel, settingsVM)
