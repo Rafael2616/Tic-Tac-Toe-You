@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 fun ToastNameHandler() {
     val vm = viewModel<GameViewModel>()
     val context = LocalContext.current
-	val winner by vm.winner.collectAsState()
+    val winner by vm.winner.collectAsState()
     val gotOld by vm.gotOld.collectAsState()
     val play by vm.play.collectAsState()
     val player1Name by vm.player1Name.collectAsState()
@@ -27,7 +27,7 @@ fun ToastNameHandler() {
     val isPlayer1 by vm.isPlayer1.collectAsState()
     val playerName by vm.playerName.collectAsState()
     val isTimerOn by vm.isTimerOn.collectAsState()
-    var timer by rememberSaveable {mutableStateOf(4)}
+    var timer by rememberSaveable { mutableIntStateOf(4) }
     val scope = rememberCoroutineScope()
     
      if (play && isTimerOn) {
