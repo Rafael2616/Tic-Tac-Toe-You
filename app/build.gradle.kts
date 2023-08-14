@@ -108,6 +108,7 @@ dependencies {
     implementation("androidx.compose.material3:material3:1.2.0-alpha05")
     implementation("androidx.compose.runtime:runtime-livedata")
     implementation("androidx.compose.ui:ui")
+    implementation("androidx.navigation:navigation-compose:2.7.0")
 
     //Jetpack ConstraintLayout
     implementation("androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha12")
