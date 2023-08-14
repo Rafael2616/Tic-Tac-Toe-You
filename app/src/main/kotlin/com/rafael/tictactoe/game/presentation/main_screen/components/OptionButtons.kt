@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -31,14 +32,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.rafael.tictactoe.R
+import com.rafael.tictactoe.TicTacToeActivity
 import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.game.presentation.game_screen.activities.GameActivity
 import com.rafael.tictactoe.settings.presentation.settings_screen.activities.SettingsActivity
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
-fun OptionsButtons() {
+@ExperimentalMaterial3Api
+fun OptionsButtons(navController: NavController) {
     val settingsVM = viewModel<SettingsViewModel>()
     val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
     val context = LocalContext.current
@@ -58,8 +62,8 @@ fun OptionsButtons() {
                     .clickable(onClick = {
                         UiClickSound(context, isSoundEffectsOn)
                         when (index) {
-                            0 -> context.startActivity(Intent(context, GameActivity::class.java))
-                            1 -> context.startActivity(Intent(context, SettingsActivity::class.java))
+                            0 -> navController.navigate("game")//context.startActivity(Intent(context, GameActivity::class.java))
+                            1 -> navController.navigate("settings")//context.startActivity(Intent(context, SettingsActivity::class.java))
                         }
                     })
             ) {
