@@ -13,26 +13,33 @@ import com.rafael.tictactoe.game.presentation.main_screen.MainScreen
 import com.rafael.tictactoe.game.presentation.splash_screen.SplashScreen
 import com.rafael.tictactoe.settings.presentation.settings_screen.SettingsScreen
 
+sealed class Screen(val route: String) {
+    object SplashScreen: Screen("splash")
+    object MainScreen: Screen("main")
+    object GameScreen: Screen("game")
+    object SettingsScreen: Screen("settings")
+}
+
 @Composable
 @ExperimentalMaterial3Api
 fun NavGraph(activity: Activity, gameUtil: GameUtils) {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "splash") {
+    NavHost(navController = navController, startDestination = Screen.SplashScreen.route) {
         navigation(
             route = "gameNavigation",
-            startDestination = "splash"
+            startDestination = Screen.SplashScreen.route
         ) {
-            composable("splash") {
+            composable(Screen.SplashScreen.route) {
                 SplashScreen(navController)
             }
-            composable("main") {
+            composable(Screen.MainScreen.route) {
                 MainScreen(navController)
             }
-            composable("game") {
+            composable(Screen.GameScreen.route) {
                 GameScreen(navController, gameUtil, activity)
             }
-            composable("settings") {
+            composable(Screen.SettingsScreen.route) {
                 SettingsScreen(navController, activity)
             }
         }
