@@ -52,7 +52,7 @@ class SettingsActivity : ComponentActivity() {
             color = MaterialTheme.colorScheme.surface,
             modifier = Modifier.fillMaxSize()
         ) {
-            SettingsTopBar(this)
+         //   SettingsTopBar(this)
         }
     }
 }
