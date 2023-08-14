@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
 			modifier = Modifier.fillMaxSize()
   	  ) {
         	MainAppBar()
-       	 OptionsButtons()
+       	// OptionsButtons()
 		}
 	}
 }
