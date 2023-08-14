@@ -16,10 +16,19 @@
         <service android:name=".common.services.MusicService" />
 
         <activity
-            android:name=".game.presentation.splash_screen.activities.SplashActivity"
+            android:name=".TicTacToeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".game.presentation.splash_screen.activities.SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
