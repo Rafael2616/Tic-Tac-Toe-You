@@ -13,7 +13,7 @@ inline fun <reified T : ViewModel> NavBackStackEntry.viewModelInstanceBuilder(
   context: Context,
   navController: NavController
 ): T {
-  val navGraphRoute = dstination.parent?.route ?: return viewModel()
+  val navGraphRoute = destination.parent?.route ?: return viewModel()
   val parentEntry = remember(context) {
     navController.getBackStackEntry(navGraphRoute)
   }
