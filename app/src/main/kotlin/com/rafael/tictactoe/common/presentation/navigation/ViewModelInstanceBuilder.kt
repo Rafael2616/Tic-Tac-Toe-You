@@ -1,11 +1,11 @@
 package com.rafael.tictactoe
 
 import android.content.Context
-import androix.compose.runtime.Composable
-import androix.compose.runtime.remember
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewmoodel.compose.viewModel
-import androidx.navigation.NavBackEntryStackEntry
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 
 @Composable
