@@ -88,7 +88,7 @@ dependencies {
     val lifecycle_version = "2.6.1"
     val room_version = "2.6.0-alpha03"
     val hilt_version = "2.47"
-	val media3_version = "1.1.0"
+	val media3_version = "1.1.1"
     
     //Kotlin
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
