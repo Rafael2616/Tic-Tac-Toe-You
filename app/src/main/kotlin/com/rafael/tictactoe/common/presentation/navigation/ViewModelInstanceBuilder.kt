@@ -9,7 +9,7 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 
 @Composable
-inline fun <reified T : ViewModel> NavBackEntryStackEntry.viewModelInstanceBuilder(
+inline fun <reified T : ViewModel> NavBackStackEntry.viewModelInstanceBuilder(
   context: Context,
   navController: NavController
 ): T {
