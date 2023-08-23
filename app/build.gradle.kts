@@ -86,7 +86,7 @@ android {
 
 dependencies {
     val lifecycle_version = "2.6.1"
-    val room_version = "2.6.0-alpha03"
+    val room_version = "2.6.0-beta01"
     val hilt_version = "2.47"
 	val media3_version = "1.1.1"
     
