@@ -25,7 +25,7 @@ android {
             storePassword = "rafael1800"
             keyAlias = "tictactoekey"
             keyPassword = "rafael1800"
-			enableV3Signing = true
+	    enableV3Signing = true
         }
         named("debug") {
             enableV3Signing = true
@@ -48,11 +48,11 @@ android {
             resValue("string", "app_name_debug", "Jogo da Velha - Debug")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
-		
-		named("release") {
-			isMinifyEnabled = true
-			signingConfig = signingConfigs.getByName("release")
-			proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+
+	named("release") {
+	    isMinifyEnabled = true
+	    signingConfig = signingConfigs.getByName("release")
+	    proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
 
@@ -63,8 +63,8 @@ android {
 	
     kotlin {
         jvmToolchain {
-			languageVersion = JavaLanguageVersion.of(17)
-		}
+     	    languageVersion = JavaLanguageVersion.of(17)
+	}
     }
 	
     buildFeatures {
@@ -76,8 +76,8 @@ android {
     }
 	
     packaging {
-		resources.excludes += listOf("/META-INF/AL2.0", "/META-INF/LGPL2.1")
-	}
+	resources.excludes += listOf("/META-INF/AL2.0", "/META-INF/LGPL2.1")
+    }
 
     room {
         schemaDirectory("schemas")
@@ -88,7 +88,7 @@ dependencies {
     val lifecycle_version = "2.6.1"
     val room_version = "2.6.0-beta01"
     val hilt_version = "2.47"
-	val media3_version = "1.1.1"
+    val media3_version = "1.1.1"
     
     //Kotlin
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
@@ -117,9 +117,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version")
 
-	//Media3
+    //Media3
     implementation("androidx.media3:media3-common:$media3_version")
-	implementation("androidx.media3:media3-exoplayer:$media3_version")
+    implementation("androidx.media3:media3-exoplayer:$media3_version")
 
     //Room
     implementation("androidx.room:room-runtime:$room_version")
