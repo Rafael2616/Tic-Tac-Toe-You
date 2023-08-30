@@ -46,9 +46,9 @@ fun GetPlayerPrefsCard() {
     val player1Name by viewModel.player1Name.collectAsState()
     val player2Name by viewModel.player2Name.collectAsState()
     val maxLength = 10
-    val player1InToast by viewModel.player1InToast.collectAsState()
-    val player1Value = if (player1InToast) player1Name else player2Name
-    val player2Value = if (player1InToast) player2Name else player1Name
+    val player1Value = if (isPlayer1) player1Name else player2Name
+    val player2Value = if (isPlayer1) player2Name else player1Name
+    val isCPUMode by viewModel.isCPUMode.collectAsState()
 
     Box(
         modifier = Modifier
@@ -116,6 +116,7 @@ fun GetPlayerPrefsCard() {
                     placeholder = {
                         Text( stringResource(id = if (isXFor1) R.string.player_o else R.string.player_x))
                     },
+                    readOnly = isCPUMode,
                     modifier = Modifier
                         .weight(1f)
                 )
