@@ -15,18 +15,17 @@ class PlayersNamesDisplay() {
 	fun firstPlayerName() {
         val vm = viewModel<GameViewModel>()
         val context = LocalContext.current
-	    val play by vm.play.collectAsState()
         val isXFor1 by vm.isXFor1.collectAsState()
         val player1Name by vm.player1Name.collectAsState()
         val player2Name by vm.player2Name.collectAsState()
         val isPlayer1 by vm.isPlayer1.collectAsState()
-        val player1InToast by vm.player1InToast.collectAsState()
         val genericPlayerX = context.getString(R.string.player_x)
+        val isCPUMode by vm.isCPUMode.collectAsState()
 
-	    if(!play) vm.updatePlayer1InToast(isPlayer1)
-
+        if (isCPUMode) vm.updatePlayer2Name("CPU")
+    
 	    if (isXFor1) {
- 	       if (player1InToast) {
+ 	       if (isPlayer1) {
   	          if (player1Name.isEmpty()) {
 				    vm.showPlayer1Name(genericPlayerX)
   		      } else {
@@ -40,7 +39,7 @@ class PlayersNamesDisplay() {
        	     }
      	   }
  	   } else {
-   	     if (player1InToast) {
+   	     if (isPlayer1) {
    	         if (player2Name.isEmpty()) {
 					vm.showPlayer1Name(genericPlayerX)
    	         } else {
@@ -60,18 +59,14 @@ class PlayersNamesDisplay() {
 	fun secondPlayerName() {
         val vm = viewModel<GameViewModel>()
         val context = LocalContext.current
-	    val play by vm.play.collectAsState()
         val isXFor1 by vm.isXFor1.collectAsState()
         val player1Name by vm.player1Name.collectAsState()
         val player2Name by vm.player2Name.collectAsState()
         val isPlayer1 by vm.isPlayer1.collectAsState()
-        val player1InToast by vm.player1InToast.collectAsState()
 	    val genericPlayerO = context.getString(R.string.player_o)
 
-	    if(!play) vm.updatePlayer1InToast(isPlayer1)
-
     	if (isXFor1) {
-	    	if (player1InToast) {
+	    	if (isPlayer1) {
 			    if (player2Name.isEmpty()) {
 				    vm.showPlayer2Name(genericPlayerO)
 				} else {
@@ -85,7 +80,7 @@ class PlayersNamesDisplay() {
    	         }
     	    }
    	 } else {
-   	     if (player1InToast) {
+   	     if (isPlayer1) {
     	        if (player1Name.isEmpty()) {
 					vm.showPlayer2Name(genericPlayerO)
    	 	    } else {
