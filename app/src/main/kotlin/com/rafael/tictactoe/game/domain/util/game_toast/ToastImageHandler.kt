@@ -26,10 +26,10 @@ fun ToastImageHandler(): Painter {
     val toastImage = if (!play) {
         if (isXFor1) xImageMax else circleImageMax
     } else {
-        if (!winner) {
-            if (isXImage) xImageMax else circleImageMax
-        } else {
+        if (winner) {
             if (!isXImage) xImageMax else circleImageMax
+        } else {
+            if (isXImage) xImageMax else circleImageMax
         }
     }
     return toastImage

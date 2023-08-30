@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 fun ToastNameHandler() {
     val vm = viewModel<GameViewModel>()
     val context = LocalContext.current
-    val winner by vm.winner.collectAsState()
+	val winner by vm.winner.collectAsState()
     val gotOld by vm.gotOld.collectAsState()
     val play by vm.play.collectAsState()
     val player1Name by vm.player1Name.collectAsState()
@@ -29,7 +29,10 @@ fun ToastNameHandler() {
     val isTimerOn by vm.isTimerOn.collectAsState()
     var timer by rememberSaveable { mutableIntStateOf(4) }
     val scope = rememberCoroutineScope()
-    
+    val isCPUMode by vm.isCPUMode.collectAsState()
+    val emptyPlayerName = context.getString(R.string.player)
+
+    //Counter showed when game starts
      if (play && isTimerOn) {
         scope.launch {
             while (isTimerOn) {
@@ -45,36 +48,47 @@ fun ToastNameHandler() {
         }
     }
 
+    //Defines witch neme will be showed in case of is versus CPU Mode
+    val secondPlayerName = if (isCPUMode) {
+        "CPU"
+    } else {
+        player2Name 
+    }
+
+    //Assert player name to show for cases of game is ongoing or has winner
     if (!winner) {
         if (isPlayer1) {
             vm.updatePlayerName(player1Name)
         } else {
-            vm.updatePlayerName(player2Name)
+            vm.updatePlayerName(secondPlayerName)
         }
     } else {
         if (!isPlayer1) {
             vm.updatePlayerName(player1Name)
         } else {
-            vm.updatePlayerName(player2Name)
+            vm.updatePlayerName(secondPlayerName)
         }
+        return
     }
-
+    
+    //Live update of current player name showed in toast game
     if (player1Name.isEmpty() && player2Name.isEmpty()) {
-		vm.updateCurrentPlayerName(context.getString(R.string.player))
+		vm.updateCurrentPlayerName(emptyPlayerName)
     } else if (player1Name.isNotBlank() && player2Name.isNotBlank()) {
 		vm.updateCurrentPlayerName(playerName)
     } else if (player1Name.isEmpty() && player2Name.isNotBlank() && isPlayer1) {
-		vm.updateCurrentPlayerName(context.getString(R.string.player))
+		vm.updateCurrentPlayerName(emptyPlayerName)
     } else if (player1Name.isEmpty() && player2Name.isNotBlank() && !isPlayer1) {
-		vm.updateCurrentPlayerName(player2Name)
+		vm.updateCurrentPlayerName(secondPlayerName)
     } else if (player1Name.isNotBlank() && player2Name.isEmpty() && isPlayer1) {
 		vm.updateCurrentPlayerName(player1Name)
     } else if (player1Name.isNotBlank() && player2Name.isEmpty() && !isPlayer1) {
-		vm.updateCurrentPlayerName(context.getString(R.string.player))
+		vm.updateCurrentPlayerName(emptyPlayerName)
     } else {
 		vm.updateCurrentPlayerName("no name found")
     }
     
+    //In case of got old, update tosst with this default string
 	 if (gotOld) {
 		vm.updateCurrentPlayerName(context.getString(R.string.got_old))
     }
