@@ -32,21 +32,22 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.TicTacToeActivity
 import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.game.presentation.game_screen.activities.GameActivity
+import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import com.rafael.tictactoe.settings.presentation.settings_screen.activities.SettingsActivity
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
 @ExperimentalMaterial3Api
-fun OptionsButtons(navController: NavController) {
+fun OptionsButtons() {
+    val vm = viewModel<GameViewModel>()
     val settingsVM = viewModel<SettingsViewModel>()
     val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
     val context = LocalContext.current
-    var cards by rememberSaveable { mutableStateOf(List<Boolean>(2) { false }) }
+    var cards by rememberSaveable { mutableStateOf(List<Boolean>(3) { false }) }
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -62,8 +63,13 @@ fun OptionsButtons(navController: NavController) {
                     .clickable(onClick = {
                         UiClickSound(context, isSoundEffectsOn)
                         when (index) {
-                            0 -> navController.navigate("game")//context.startActivity(Intent(context, GameActivity::class.java))
-                            1 -> navController.navigate("settings")//context.startActivity(Intent(context, SettingsActivity::class.java))
+                            0 -> { vm.updateIsCPUMode(false);
+                                context.startActivity(Intent(context, GameActivity::class.java))
+                            }
+                            1 -> { vm.updateIsCPUMode(true);
+                                context.startActivity(Intent(context, GameActivity::class.java))       
+                            }
+                            2 -> context.startActivity(Intent(context, SettingsActivity::class.java))
                         }
                     })
             ) {
@@ -87,7 +93,8 @@ fun OptionsButtons(navController: NavController) {
                             painter = painterResource(
                                 id = when (index) {
                                     0 -> R.drawable.play_icon
-                                    1 -> R.drawable.settings_icon
+                                    1 -> R.drawable.cpu_icon
+                                    2 -> R.drawable.settings_icon
                                     else -> R.drawable.transparent_image
                                 }
                             )
@@ -99,7 +106,8 @@ fun OptionsButtons(navController: NavController) {
                             softWrap = true,
                             text = when (index) {
                                 0 -> stringResource(id = R.string.play)
-                                1 -> stringResource(id = R.string.settings)
+                                1 -> stringResource(id = R.string.vs_cpu)
+                                2 -> stringResource(id = R.string.settings)
                                 else -> "index error"
                             }
                         )
