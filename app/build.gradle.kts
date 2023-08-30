@@ -4,7 +4,6 @@ plugins {
     id("com.google.dagger.hilt.android")
     id("com.google.devtools.ksp")
     id("org.jetbrains.kotlin.android")
-    kotlin("kapt")
 }
 
 android {
@@ -84,7 +83,7 @@ android {
 dependencies {
     val lifecycle_version = "2.6.1"
     val room_version = "2.6.0-beta01"
-    val hilt_version = "2.47"
+    val hilt_version = "2.48"
     val media3_version = "1.1.1"
     
     //Kotlin
@@ -96,7 +95,7 @@ dependencies {
 
     //Dagger Hilt
     implementation("com.google.dagger:hilt-android:$hilt_version")
-    kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
+    ksp("com.google.dagger:hilt-android-compiler:$hilt_version")
 
     //Jetpack Compose
     platform("androidx.compose:compose-bom:2023.08.00")
