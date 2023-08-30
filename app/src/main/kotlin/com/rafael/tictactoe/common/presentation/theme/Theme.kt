@@ -92,6 +92,7 @@ fun AppTheme(
     val isDynamicColorsOn by viewModel.isDynamicColorsOn.collectAsState()
     val context = LocalContext.current
     val isAndroidS = VERSION.SDK_INT >= VERSION_CODES.S 
+	val systemUiController = rememberSystemUiController()
 
 	val colors = if (!isFollowingSystemOn) {
   	  if (isAndroidS && isDynamicColorsOn) {
@@ -122,16 +123,5 @@ fun AppTheme(
    	 content = content,
 	)
 
-	val systemUiController = rememberSystemUiController()
-    if ((isFollowingSystemOn && isSystemInDarkTheme) || (!isFollowingSystemOn && isDarkThemeOn)) {
-        systemUiController.setSystemBarsColor(
- 	       color = colors.surface,
-	        darkIcons = false,
-       )
-   } else {
-        systemUiController.setSystemBarsColor(
-	        color = colors.surface,
-	        darkIcons = true,
-        )
-	}
+    systemUiController.setSystemBarsColor(color = colors.surface)
 }
