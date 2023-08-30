@@ -21,17 +21,15 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.RecreateOrFinishActivityHandler
 import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsCardsImpl
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
-import com.rafael.tictactoe.game.presentation.main_screen.MainScreen
 
 @Composable
 @ExperimentalMaterial3Api
-fun SettingsTopBar(activity: Activity, navController: NavController) {
+fun SettingsTopBar(activity: Activity) {
     val viewModel = viewModel<SettingsViewModel>()
     val context = LocalContext.current
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
@@ -52,8 +50,7 @@ fun SettingsTopBar(activity: Activity, navController: NavController) {
                         	UiClickSound(context, isSoundEffectsOn)
 				            viewModel.updateIsAboutShown(false)
                             viewModel.updateIsActivityFinished(false)
-                            navController.navigate("main")
-				            //RecreateOrFinishActivityHandler(context, activity, viewModel)
+				            RecreateOrFinishActivityHandler(context, activity, viewModel)
                         }
                     ) {
                         Icon(

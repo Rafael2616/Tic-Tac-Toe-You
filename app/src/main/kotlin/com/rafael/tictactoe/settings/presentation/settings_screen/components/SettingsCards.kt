@@ -1,5 +1,6 @@
 package com.rafael.tictactoe.settings.presentation.settings_screen.components
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -28,8 +29,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.settings.domain.util.CardImageHandler
@@ -54,6 +55,7 @@ fun SettingsCards(index: Int) {
     Card(
         shape = MaterialTheme.shapes.medium,
         modifier = Modifier
+            .animateContentSize()
             .width(360.dp)
             .height(if ((index == 5) && (isAboutShown)) 190.dp else 70.dp)
             .clickable(onClick = {
@@ -82,12 +84,12 @@ fun SettingsCards(index: Int) {
                     modifier = Modifier
                         .height(55.dp)
                         .width(55.dp),
-                    painter = CardImageHandler(index)
+                    painter = CardImageHandler(index, viewModel)
                 )
                 Text(
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onSurface,
-                    text = CardTextHandler(index)
+                    text = CardTextHandler(index, viewModel)
                 )
                 if (index != 5) {
                     Switch(

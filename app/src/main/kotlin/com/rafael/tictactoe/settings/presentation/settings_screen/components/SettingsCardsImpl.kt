@@ -25,7 +25,7 @@ fun SettingsCardsImpl(paddingValues: PaddingValues) {
     val settingsVM = viewModel<SettingsViewModel>()
     val isFollowingSystemOn by settingsVM.isFollowingSystemOn.collectAsState()
     val isDynamicColorsSupported = VERSION.SDK_INT >= VERSION_CODES.S
-    var cards by rememberSaveable { mutableStateOf(List<Boolean>(6) { true })}
+    var cards by rememberSaveable { mutableStateOf(List<Boolean>(6) { false }) }
 
    LazyColumn(
         modifier = Modifier.
