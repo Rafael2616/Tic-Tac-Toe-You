@@ -24,5 +24,6 @@
     <string name="active_music">Music</string>
     <string name="about_app">About app</string>
     <string name="system_theme">System Theme</string>
-       
+    <string name="vs_cpu">Versus CPU</string>
+     
 </resources>
