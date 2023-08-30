@@ -10,12 +10,12 @@ import androidx.navigation.NavController
 
 @Composable
 inline fun <reified T : ViewModel> NavBackStackEntry.viewModelInstanceBuilder(
-  context: Context,
-  navController: NavController
+    context: Context,
+    navController: NavController
 ): T {
-  val navGraphRoute = destination.parent?.route ?: return viewModel()
-  val parentEntry = remember(context) {
-    navController.getBackStackEntry(navGraphRoute)
-  }
-  return viewModel(parentEntry)
+    val navGraphRoute = destination.parent?.route ?: return viewModel()
+    val parentEntry = remember(context) {
+        navController.getBackStackEntry(navGraphRoute)
+    }
+    return viewModel(parentEntry)
 }
