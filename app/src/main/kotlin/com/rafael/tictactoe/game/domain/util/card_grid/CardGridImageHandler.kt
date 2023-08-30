@@ -18,6 +18,9 @@ fun CardGridImageHandler(index: Int): Painter {
     val cards by viewModel.cards.collectAsState()
 	val isCardClicked by viewModel.isCardClicked.collectAsState()
 
+   // if (winner) {
+       // return transparentImage
+   // }
 	val cardGridImage = if (isCardClicked[index]) {
     	if (cards[index]) xImage else circleImage
 	} else {

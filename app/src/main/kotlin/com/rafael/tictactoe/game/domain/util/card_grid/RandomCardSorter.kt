@@ -1,0 +1,41 @@
+package com.rafael.tictactoe.game.domain.util
+
+import android.content.Context
+import com.rafael.tictactoe.game.domain.util.CardGridSound
+import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
+import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+
+suspend fun RandomCardSorter(
+    vm: GameViewModel,
+    settingsVM: SettingsViewModel,
+    context: Context
+) {
+    val isCardClicked = vm.isCardClicked.value
+    var randomPosition = (0 until isCardClicked.size).random()
+    val isCPU = vm.isCPU.value
+    val isXImage = vm.isXImage.value
+
+    if (isCardClicked.all { it }) {
+        return
+    }
+
+    while (isCardClicked[randomPosition]) {
+        randomPosition = (0 until isCardClicked.size).random()
+    }
+
+    if (isCPU) {
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(480L)
+            vm.updateIsPlayer1(true)
+            vm.updateCard(randomPosition, isXImage)
+            vm.updateIsCardClicked(randomPosition, true)
+            vm.updateIsXImage(!isXImage)
+            vm.updateIsCPU(false)
+            CardGridSound(context, vm, settingsVM)
+        }
+    }
+}
