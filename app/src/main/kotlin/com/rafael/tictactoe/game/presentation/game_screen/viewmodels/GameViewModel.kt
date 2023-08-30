@@ -45,8 +45,6 @@ class GameViewModel @Inject constructor(
 	val isXFor1: StateFlow<Boolean> = _isXFor1
 	private var _isPlayer1 = MutableStateFlow(true)
 	val isPlayer1: StateFlow<Boolean> = _isPlayer1
-	private var _player1InToast = MutableStateFlow(true)
-	val player1InToast: StateFlow<Boolean> = _player1InToast
 
 	private var _isScoreUp = MutableStateFlow(false)
 	val isScoreUp: StateFlow<Boolean> = _isScoreUp
@@ -83,6 +81,12 @@ class GameViewModel @Inject constructor(
 
 	private var _playerName = MutableStateFlow("")
 	val playerName: StateFlow<String> = _playerName
+
+	private var _isCPU = MutableStateFlow(false)
+	val isCPU: StateFlow<Boolean> = _isCPU
+
+	private var _isCPUMode = MutableStateFlow(true)
+	val isCPUMode: StateFlow<Boolean> = _isCPUMode
 
     fun updatePlayerName(newValue: String) {
         _playerName.value = newValue
@@ -148,10 +152,6 @@ class GameViewModel @Inject constructor(
         _isPlayer1.value = newValue
     }
 
-    fun updatePlayer1InToast(newValue: Boolean) {
-        _player1InToast.value = newValue
-    }
-
     fun updateIsScoreUp(newValue: Boolean) {
         _isScoreUp.value = newValue
     }
@@ -194,6 +194,13 @@ class GameViewModel @Inject constructor(
     
     fun updateIsTimerOn(newValue: Boolean) {
         _isTimerOn.value = newValue
+    }
+    fun updateIsCPU(newValue: Boolean) {
+        _isCPU.value = newValue
+    }
+
+    fun updateIsCPUMode(newValue: Boolean) {
+        _isCPUMode.value = newValue
     }
 
     fun setCoordinates(sX: Float, sY: Float, eX: Float, eY: Float) {     
