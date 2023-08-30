@@ -9,8 +9,8 @@ import com.rafael.tictactoe.R
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
-fun CardTextHandler(index: Int): String {
-    val viewModel = viewModel<SettingsViewModel>()
+fun CardTextHandler(index: Int, viewModel: SettingsViewModel): String {
+//    val viewModel = viewModel<SettingsViewModel>()
     val isAboutShown by viewModel.isAboutShown.collectAsState()
 
     return when (index) {
