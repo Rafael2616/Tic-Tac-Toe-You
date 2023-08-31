@@ -15,14 +15,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsCards
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
 fun SettingsCardsImpl(paddingValues: PaddingValues) {
-    val settingsVM = viewModel<SettingsViewModel>()
+    val settingsVM = hiltViewModel<SettingsViewModel>()
     val isFollowingSystemOn by settingsVM.isFollowingSystemOn.collectAsState()
     val isDynamicColorsSupported = VERSION.SDK_INT >= VERSION_CODES.S
     var cards by rememberSaveable { mutableStateOf(List<Boolean>(6) { false }) }

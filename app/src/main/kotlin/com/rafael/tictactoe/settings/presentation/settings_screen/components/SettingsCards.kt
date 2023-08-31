@@ -30,7 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.settings.domain.util.CardImageHandler
@@ -40,7 +40,7 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.Set
 
 @Composable
 fun SettingsCards(index: Int) {
-    val viewModel = viewModel<SettingsViewModel>()
+    val viewModel = hiltViewModel<SettingsViewModel>()
     val context = LocalContext.current
     val isSystemInDarkTheme = isSystemInDarkTheme()
     val isDarkThemeOn by viewModel.isDarkThemeOn.collectAsState()
@@ -89,7 +89,7 @@ fun SettingsCards(index: Int) {
                 Text(
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onSurface,
-                    text = CardTextHandler(index, viewModel)
+                    text = CardTextHandler(index)
                 )
                 if (index != 5) {
                     Switch(
