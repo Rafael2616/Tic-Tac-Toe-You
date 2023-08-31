@@ -15,7 +15,7 @@ android {
         minSdk = 26
         targetSdk = 34
         versionCode = 3
-        versionName = "1.2"
+        versionName = "1.2.0"
     }
 	
     signingConfigs {
@@ -24,13 +24,14 @@ android {
             storePassword = "rafael1800"
             keyAlias = "tictactoekey"
             keyPassword = "rafael1800"
-	    enableV3Signing = true
+			enableV3Signing = true
         }
+
         named("debug") {
             enableV3Signing = true
         }
     }
-	
+
     buildTypes {
         create("beta") {
             isMinifyEnabled = true
@@ -47,33 +48,33 @@ android {
             resValue("string", "app_name_debug", "Jogo da Velha - Debug")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
-
-	named("release") {
-	    isMinifyEnabled = true
-	    signingConfig = signingConfigs.getByName("release")
-	    proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+		
+		named("release") {
+			isMinifyEnabled = true
+			signingConfig = signingConfigs.getByName("release")
+			proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
 
     kotlin {
         jvmToolchain {
-     	    languageVersion = JavaLanguageVersion.of(17)
-	}
+			languageVersion = JavaLanguageVersion.of(17)
+		}
     }
-	
+
     buildFeatures {
         compose = true
     }
-	
+
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.3"
     }
-	
+
     packaging {
-	resources {
+		resources {
             excludes += listOf("/META-INF/AL2.0", "/META-INF/LGPL2.1")
         }
-    }
+	}
 
     room {
         schemaDirectory("schemas")
@@ -84,7 +85,7 @@ dependencies {
     val lifecycle_version = "2.6.1"
     val room_version = "2.6.0-beta01"
     val hilt_version = "2.48"
-    val media3_version = "1.1.1"
+	val media3_version = "1.1.1"
     
     //Kotlin
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
@@ -96,6 +97,7 @@ dependencies {
     //Dagger Hilt
     implementation("com.google.dagger:hilt-android:$hilt_version")
     ksp("com.google.dagger:hilt-android-compiler:$hilt_version")
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0-alpha01")
 
     //Jetpack Compose
     platform("androidx.compose:compose-bom:2023.08.00")
@@ -113,9 +115,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version")
 
-    //Media3
+	//Media3
     implementation("androidx.media3:media3-common:$media3_version")
-    implementation("androidx.media3:media3-exoplayer:$media3_version")
+	implementation("androidx.media3:media3-exoplayer:$media3_version")
 
     //Room
     implementation("androidx.room:room-runtime:$room_version")
