@@ -15,13 +15,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.Text
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
 @Composable
 fun PlayersNamesLayout() {
-    val viewModel = viewModel<GameViewModel>()
+    val viewModel = hiltViewModel<GameViewModel>()
     val showPlayer1Name by viewModel.showPlayer1Name.collectAsState()
     val showPlayer2Name by viewModel.showPlayer2Name.collectAsState()
 		

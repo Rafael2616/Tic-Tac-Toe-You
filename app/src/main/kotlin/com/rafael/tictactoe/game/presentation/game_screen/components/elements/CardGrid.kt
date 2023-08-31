@@ -16,7 +16,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.util.CardGridClickHandler
 import com.rafael.tictactoe.game.domain.util.CardGridImageHandler
@@ -30,8 +30,8 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun CardGrid(coordinates: WinnerLineCoordinatesTest) {
-    val viewModel = viewModel<GameViewModel>()
-    val settingsVM = viewModel<SettingsViewModel>()
+    val viewModel = hiltViewModel<GameViewModel>()
+    val settingsVM = hiltViewModel<SettingsViewModel>()
     val context = LocalContext.current
     val cards by viewModel.cards.collectAsState()
     val scope = rememberCoroutineScope()

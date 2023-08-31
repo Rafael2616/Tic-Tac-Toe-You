@@ -22,14 +22,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
 @Composable
 fun VictoryCounter() {
-    val viewModel = viewModel<GameViewModel>()
+    val viewModel = hiltViewModel<GameViewModel>()
     val player1Wins by viewModel.player1Wins.collectAsState()
     val player2Wins by viewModel.player2Wins.collectAsState()
 

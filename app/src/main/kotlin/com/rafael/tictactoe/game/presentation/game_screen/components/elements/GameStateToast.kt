@@ -23,14 +23,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import com.rafael.tictactoe.game.domain.util.ToastImageHandler
 
 @Composable
 fun GameStateToast() {
-    val viewModel = viewModel<GameViewModel>()
+    val viewModel = hiltViewModel<GameViewModel>()
     val currentPlayerName by viewModel.currentPlayerName.collectAsState()
     val winner by viewModel.winner.collectAsState()
     val gotOld by viewModel.gotOld.collectAsState()
