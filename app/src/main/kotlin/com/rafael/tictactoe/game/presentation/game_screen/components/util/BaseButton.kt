@@ -27,7 +27,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
@@ -45,7 +45,7 @@ fun BaseButton(
     transparentColor: Boolean = false,
     description: String = "there is no description"
 ) {
-    val settingsVM = viewModel<SettingsViewModel>()
+    val settingsVM = hiltViewModel<SettingsViewModel>()
     val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
     val context = LocalContext.current
 
