@@ -25,7 +25,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.game.domain.util.RestartGame
@@ -35,8 +35,8 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.Set
 
 @Composable
 fun PlayAgainButton() {
-    val viewModel = viewModel<GameViewModel>()
-    val settingsVM = viewModel<SettingsViewModel>()
+    val viewModel = hiltViewModel<GameViewModel>()
+    val settingsVM = hiltViewModel<SettingsViewModel>()
     val context = LocalContext.current
 	val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
 	

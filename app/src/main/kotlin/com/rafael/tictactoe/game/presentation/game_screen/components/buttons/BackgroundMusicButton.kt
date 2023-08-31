@@ -5,14 +5,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import com.rafael.tictactoe.game.presentation.game_screen.components.util.BaseButton
 
 @Composable
 fun BackgroundMusicButton() {
-    val settingsVM = viewModel<SettingsViewModel>()
+    val settingsVM = hiltViewModel<SettingsViewModel>()
     val context = LocalContext.current
     val isBackgroundMusicOn by settingsVM.isBackgroundMusicOn.collectAsState()
  
