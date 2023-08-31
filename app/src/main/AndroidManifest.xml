@@ -12,7 +12,7 @@
         android:supportsRtl="false"
         android:hardwareAccelerated="true"
         android:theme="@style/AppTheme">
-        
+    
         <service android:name=".common.services.MusicService" />
 
         <activity
@@ -21,42 +21,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".game.presentation.splash_screen.activities.SplashActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-          
-        <activity
-            android:name=".game.presentation.game_screen.activities.GameActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        		
-         <activity
-            android:name=".game.presentation.main_screen.activities.MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        
-        <activity
-            android:name=".settings.presentation.settings_screen.activities.SettingsActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
