@@ -3,7 +3,6 @@ package com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rafael.tictactoe.common.services.MusicService
 import com.rafael.tictactoe.game.domain.util.BackgroundMusic
 import com.rafael.tictactoe.settings.domain.model.SettingsEntity
 import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
@@ -29,8 +28,6 @@ class SettingsViewModel @Inject constructor(
     private var _isFollowingSystemOn = MutableStateFlow(true)
     private var _isSoundEffectsOn = MutableStateFlow(true)
     private var _isAboutShown = MutableStateFlow(false)
-    private var _isActivityFinished = MutableStateFlow(true)
-    private var _isAppInForeground = MutableStateFlow(false)
 
 	//Variables that have same values of private vars above, but cant be modified outside this class
     val isBackgroundMusicOn: StateFlow<Boolean> = _isBackgroundMusicOn
@@ -38,21 +35,19 @@ class SettingsViewModel @Inject constructor(
     val isDynamicColorsOn: StateFlow<Boolean> = _isDynamicColorsOn
     val isFollowingSystemOn: StateFlow<Boolean> = _isFollowingSystemOn
     val isSoundEffectsOn: StateFlow<Boolean> = _isSoundEffectsOn
-    val isAboutShown: StateFlow<Boolean> = _isAboutShown	
-    val isActivityFinished: StateFlow<Boolean> = _isActivityFinished
-    val isAppInForeground: StateFlow<Boolean> = _isAppInForeground
- 
+    val isAboutShown: StateFlow<Boolean> = _isAboutShown
+
     //Initialize ViewModel StateFlows Variables with corresponding values in SettingsRepository
 	init {
   	  viewModelScope.launch(Dispatchers.IO) {
 	  	  repository.getAllSettingsValues(1).collect { settingsValues ->
 				val settings = settingsValues ?: defaultSettings
-                settings.id = 1
+               /* settings.id = 1
    	 	    _isBackgroundMusicOn.value = settings.isBackgroundMusicOn
     	 	   _isDarkThemeOn.value = settings.isDarkThemeOn
     	 	   _isDynamicColorsOn.value = settings.isDynamicColorsOn
     		    _isFollowingSystemOn.value = settings.isFollowingSystemOn
-     		   _isSoundEffectsOn.value = settings.isSoundEffectsOn
+     		   _isSoundEffectsOn.value = settings.isSoundEffectsOn */
 			}
   	  }
 	}
@@ -61,11 +56,11 @@ class SettingsViewModel @Inject constructor(
 	fun updateIsBackgroundMusicOn(newValue: Boolean, context: Context) {
  	   _isBackgroundMusicOn.value = newValue	
 		viewModelScope.launch(Dispatchers.IO) {
-			repository.getAllSettingsValues(1).collect { currentSettings ->
+		/*	repository.getAllSettingsValues(1).collect { currentSettings ->
 				var newSettings = currentSettings ?: defaultSettings
-    			newSettings.isBackgroundMusicOn = newValue
+    			newSettings.isBackgroundMusicOn = _isBackgroundMusicOn.value
 				repository.setAllSettingsValues(newSettings)
-  	  	}
+  	  	}*/
 		}
 		BackgroundMusic(context, _isBackgroundMusicOn.value)
 	}
@@ -73,56 +68,48 @@ class SettingsViewModel @Inject constructor(
    fun updateIsDarkThemeOn(newValue: Boolean) {
         _isDarkThemeOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
-	  	  repository.getAllSettingsValues(1).collect { currentSettings ->
-				var newSettings = currentSettings ?:defaultSettings
-    	    	newSettings.isDarkThemeOn = newValue
+	  /*	  repository.getAllSettingsValues(1).collect { currentSettings ->
+				var newSettings = currentSettings ?: defaultSettings
+    	    	newSettings.isDarkThemeOn = _isDarkThemeOn.value
 				repository.setAllSettingsValues(newSettings)
-			}
+			}*/
         }
     }
 
     fun updateIsDynamicColorsOn(newValue: Boolean) {
         _isDynamicColorsOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
-	  	  repository.getAllSettingsValues(1).collect { currentSettings ->
-				var newSettings = currentSettings ?:defaultSettings
-    			newSettings.isDynamicColorsOn = newValue
+	  	 /* repository.getAllSettingsValues(1).collect { currentSettings ->
+				var newSettings = currentSettings ?: defaultSettings
+    			newSettings.isDynamicColorsOn = _isDynamicColorsOn.value
 				repository.setAllSettingsValues(newSettings)
-			}
+			} */
         }
     }
 
     fun updateIsFollowingSystemOn(newValue: Boolean) {
         _isFollowingSystemOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
-	  	  repository.getAllSettingsValues(1).collect { currentSettings ->
+	  	/*  repository.getAllSettingsValues(1).collect { currentSettings ->
 				var newSettings = currentSettings ?: defaultSettings
-    			newSettings.isFollowingSystemOn = newValue
+    			newSettings.isFollowingSystemOn = _isFollowingSystemOn.value
 				repository.setAllSettingsValues(newSettings)
-			}
+			}*/
         }
     }
    
     fun updateIsSoundEffectsOn(newValue: Boolean) {
         _isSoundEffectsOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
-    	    repository.getAllSettingsValues(1).collect { currentSettings ->
+    	  /*  repository.getAllSettingsValues(1).collect { currentSettings ->
 				var newSettings = currentSettings ?: defaultSettings
-		    	newSettings.isSoundEffectsOn = newValue
+		    	newSettings.isSoundEffectsOn = _isSoundEffectsOn.value
 				repository.setAllSettingsValues(newSettings)
-			}
+			}*/
         }
     }
-
+ 
     fun updateIsAboutShown(newValue: Boolean) {
         _isAboutShown.value = newValue
-    }
-
-    fun updateIsActivityFinished(newValue: Boolean) {
-        _isActivityFinished.value = newValue
-    }
-    
-    fun setIsAppInForeground(newValue: Boolean) {
-        _isAppInForeground.value = newValue
     }
 }
