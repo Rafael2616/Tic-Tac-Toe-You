@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
@@ -13,7 +13,7 @@ class PlayersNamesDisplay() {
 
     @Composable
 	fun firstPlayerName() {
-        val vm = viewModel<GameViewModel>()
+        val vm = hiltViewModel<GameViewModel>()
         val context = LocalContext.current
         val isXFor1 by vm.isXFor1.collectAsState()
         val player1Name by vm.player1Name.collectAsState()
@@ -57,7 +57,7 @@ class PlayersNamesDisplay() {
 
     @Composable
 	fun secondPlayerName() {
-        val vm = viewModel<GameViewModel>()
+        val vm = hiltViewModel<GameViewModel>()
         val context = LocalContext.current
         val isXFor1 by vm.isXFor1.collectAsState()
         val player1Name by vm.player1Name.collectAsState()
