@@ -1,6 +1,5 @@
 package com.rafael.tictactoe.game.presentation.main_screen.components
 
-import android.content.Intent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -31,20 +30,20 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.TicTacToeActivity
 import com.rafael.tictactoe.common.domain.util.UiClickSound
-import com.rafael.tictactoe.game.presentation.game_screen.activities.GameActivity
+import com.rafael.tictactoe.common.presentation.navigation.Destinations
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
-import com.rafael.tictactoe.settings.presentation.settings_screen.activities.SettingsActivity
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
 @ExperimentalMaterial3Api
-fun OptionsButtons() {
-    val vm = viewModel<GameViewModel>()
-    val settingsVM = viewModel<SettingsViewModel>()
+fun OptionsButtons(navController: NavController) {
+    val vm = hiltViewModel<GameViewModel>()
+    val settingsVM = hiltViewModel<SettingsViewModel>()
     val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
     val context = LocalContext.current
     var cards by rememberSaveable { mutableStateOf(List<Boolean>(3) { false }) }
@@ -64,12 +63,12 @@ fun OptionsButtons() {
                         UiClickSound(context, isSoundEffectsOn)
                         when (index) {
                             0 -> { vm.updateIsCPUMode(false);
-                                context.startActivity(Intent(context, GameActivity::class.java))
+                                navController.navigate(Destinations.Game.screen)
                             }
                             1 -> { vm.updateIsCPUMode(true);
-                                context.startActivity(Intent(context, GameActivity::class.java))       
+                                navController.navigate(Destinations.Game.screen)
                             }
-                            2 -> context.startActivity(Intent(context, SettingsActivity::class.java))
+                            2 -> navController.navigate(Destinations.Settings.screen)
                         }
                     })
             ) {
