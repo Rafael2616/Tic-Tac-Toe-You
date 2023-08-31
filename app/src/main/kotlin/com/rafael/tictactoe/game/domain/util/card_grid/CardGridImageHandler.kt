@@ -5,13 +5,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
 @Composable
 fun CardGridImageHandler(index: Int): Painter {
-    val viewModel = viewModel<GameViewModel>()
+    val viewModel = hiltViewModel<GameViewModel>()
 	val xImage = painterResource(R.drawable.x_image)
 	val circleImage = painterResource(R.drawable.circle_image)
 	val transparentImage = painterResource(R.drawable.transparent_image)
