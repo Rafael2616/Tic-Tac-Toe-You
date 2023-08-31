@@ -5,13 +5,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
 @Composable
 fun ToastImageHandler(): Painter {
-    val viewModel = viewModel<GameViewModel>()
+    val viewModel = hiltViewModel<GameViewModel>()
     val play by viewModel.play.collectAsState()
     val isXFor1 by viewModel.isXFor1.collectAsState()
     val winner by viewModel.winner.collectAsState()

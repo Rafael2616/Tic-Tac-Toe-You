@@ -9,7 +9,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.platform.LocalContext
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import kotlinx.coroutines.delay
@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun ToastNameHandler() {
-    val vm = viewModel<GameViewModel>()
+    val vm = hiltViewModel<GameViewModel>()
     val context = LocalContext.current
 	val winner by vm.winner.collectAsState()
     val gotOld by vm.gotOld.collectAsState()
