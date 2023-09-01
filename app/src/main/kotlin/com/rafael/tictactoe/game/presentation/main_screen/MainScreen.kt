@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavController
-import com.rafael.tictactoe.game.presentation.main_screen.components.OptionsButtons
+import com.rafael.tictactoe.game.presentation.main_screen.components.MainOptions
 import com.rafael.tictactoe.game.presentation.main_screen.components.MainTopBar
 
 @Composable
@@ -13,5 +13,5 @@ import com.rafael.tictactoe.game.presentation.main_screen.components.MainTopBar
 fun MainScreen(navController: NavController) {
 
     MainTopBar()
-    OptionsButtons(navController)
+    MainOptions(navController)
 }
