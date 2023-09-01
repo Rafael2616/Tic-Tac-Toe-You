@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.sp
 import com.rafael.tictactoe.R
 
 @Composable
-fun MainAppBar() {
+fun MainTopBar() {
     Box(
         modifier = Modifier
             .fillMaxSize()
