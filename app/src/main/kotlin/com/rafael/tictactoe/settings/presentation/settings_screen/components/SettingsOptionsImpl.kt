@@ -17,11 +17,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsCards
+import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsOptions
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
-fun SettingsCardsImpl(paddingValues: PaddingValues) {
+fun SettingsOptionsImpl(paddingValues: PaddingValues) {
     val settingsVM = hiltViewModel<SettingsViewModel>()
     val isFollowingSystemOn by settingsVM.isFollowingSystemOn.collectAsState()
     val isDynamicColorsSupported = VERSION.SDK_INT >= VERSION_CODES.S
@@ -38,7 +38,7 @@ fun SettingsCardsImpl(paddingValues: PaddingValues) {
             if (((index == 1) && (!isFollowingSystemOn)) ||
                 ((index == 2) && (isDynamicColorsSupported)) ||
                 ((index != 1) && (index != 2))) {
-                SettingsCards(index)
+                SettingsOptions(index)
             }
         }
     }
