@@ -23,7 +23,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.UiClickSound
-import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsCardsImpl
+import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsOptionsImpl
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
@@ -46,8 +46,8 @@ fun SettingsTopBar(navController: NavController) {
                 navigationIcon = {
                     IconButton(
                         onClick = {
-                        	UiClickSound(context, isSoundEffectsOn)
-				            viewModel.updateIsAboutShown(false)
+                            UiClickSound(context, isSoundEffectsOn)
+			    viewModel.updateIsAboutShown(false)
                             navController.popBackStack()
                         }
                     ) {
@@ -61,6 +61,6 @@ fun SettingsTopBar(navController: NavController) {
             )
         }
     ) { paddingValues ->
-        SettingsCardsImpl(paddingValues)
+        SettingsOptionsImpl(paddingValues)
     }
 }
