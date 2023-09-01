@@ -6,7 +6,7 @@ import com.rafael.tictactoe.common.presentation.theme.AppTheme
 import com.rafael.tictactoe.settings.domain.util.SyncDarkThemeToggleValue
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
-fun SwitchOnCheckedChangeHandler(
+fun toggleSettingsHandler(
 	context: Context,
 	index: Int,
 	vm: SettingsViewModel,
