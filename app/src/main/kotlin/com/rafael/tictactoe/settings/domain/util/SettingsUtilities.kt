@@ -2,7 +2,7 @@ package com.rafael.tictactoe.settings.domain.util
 
 import com.rafael.tictactoe.settings.domain.util.CardImageHandler
 import com.rafael.tictactoe.settings.domain.util.CardTextHandler
-import com.rafael.tictactoe.settings.domain.util.SwitchOnCheckedChangeHandler
+import com.rafael.tictactoe.settings.domain.util.toggleSettingsHandler
 /*
 data class SettingsUtilities(
 
