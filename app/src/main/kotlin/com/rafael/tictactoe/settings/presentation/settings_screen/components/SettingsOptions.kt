@@ -35,11 +35,11 @@ import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.settings.domain.util.CardImageHandler
 import com.rafael.tictactoe.settings.domain.util.CardTextHandler
-import com.rafael.tictactoe.settings.domain.util.SwitchOnCheckedChangeHandler
+import com.rafael.tictactoe.settings.domain.util.toggleSettingsHandler
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
-fun SettingsCards(index: Int) {
+fun SettingsOptions(index: Int) {
     val viewModel = hiltViewModel<SettingsViewModel>()
     val context = LocalContext.current
     val isSystemInDarkTheme = isSystemInDarkTheme()
@@ -60,11 +60,11 @@ fun SettingsCards(index: Int) {
             .height(if ((index == 5) && (isAboutShown)) 190.dp else 70.dp)
             .clickable(onClick = {
                 UiClickSound(context, isSoundEffectsOn)
-                SwitchOnCheckedChangeHandler(
+                toggleSettingsHandler(
                     context,
                     index,
                     viewModel,
-					isSystemInDarkTheme
+		    isSystemInDarkTheme
                 )
             }
         )
@@ -94,39 +94,40 @@ fun SettingsCards(index: Int) {
                 if (index != 5) {
                     Switch(
                         checked = 
-							when (index) {
-    							0 -> isFollowingSystemOn
-     						   1 -> isDarkThemeOn
-   						     2 -> isDynamicColorsOn
-    						    3 -> isSoundEffectsOn
-      						  4 -> isBackgroundMusicOn
-								5 -> isAboutShown
-						 	else -> false
-							},
+			    when (index) {
+    			        0 -> isFollowingSystemOn
+     			        1 -> isDarkThemeOn
+   			        2 -> isDynamicColorsOn
+    			        3 -> isSoundEffectsOn
+      			        4 -> isBackgroundMusicOn
+			        5 -> isAboutShown
+			    else -> false
+			},
                         onCheckedChange = {
-                            SwitchOnCheckedChangeHandler(
+                            toggleSettingsHandler(
                                 context,
                                 index,
                                 viewModel,
-								isSystemInDarkTheme
+				isSystemInDarkTheme
                             )
                             UiClickSound(context, isSoundEffectsOn)
                         },
-						thumbContent = {
-    					  Icon(
-     					   imageVector = when (index) {
-    							0 -> if (isFollowingSystemOn) Icons.Filled.Check else Icons.Filled.Close
-     						   1 -> if (isDarkThemeOn) Icons.Filled.Check else Icons.Filled.Close
-   						     2 -> if (isDynamicColorsOn) Icons.Filled.Check else Icons.Filled.Close
-    						    3 -> if (isSoundEffectsOn) Icons.Filled.Check else Icons.Filled.Close
-      						  4 -> if (isBackgroundMusicOn) Icons.Filled.Check else Icons.Filled.Close
-								5 -> if (isAboutShown) Icons.Filled.Check else Icons.Filled.Close
-						 	else -> Icons.Filled.Close
-							},
-    					    contentDescription = null,
-       					 modifier = Modifier.size(SwitchDefaults.IconSize)
-      					)
-   					 }
+			thumbContent = {
+    			    Icon(
+     				imageVector = 
+				    when (index) {
+    				        0 -> if (isFollowingSystemOn) Icons.Filled.Check else Icons.Filled.Close
+     				        1 -> if (isDarkThemeOn) Icons.Filled.Check else Icons.Filled.Close
+   				        2 -> if (isDynamicColorsOn) Icons.Filled.Check else Icons.Filled.Close
+    				        3 -> if (isSoundEffectsOn) Icons.Filled.Check else Icons.Filled.Close
+      				        4 -> if (isBackgroundMusicOn) Icons.Filled.Check else Icons.Filled.Close
+				        5 -> if (isAboutShown) Icons.Filled.Check else Icons.Filled.Close
+				    else -> Icons.Filled.Close
+			       },
+    			       contentDescription = null,
+       			       modifier = Modifier.size(SwitchDefaults.IconSize)
+      			    )
+   			}
                     )
                 }
                 if (index == 5) {
