@@ -6,12 +6,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavController
 import com.rafael.tictactoe.game.presentation.main_screen.components.OptionsButtons
-import com.rafael.tictactoe.game.presentation.main_screen.components.MainAppBar
+import com.rafael.tictactoe.game.presentation.main_screen.components.MainTopBar
 
 @Composable
 @ExperimentalMaterial3Api
 fun MainScreen(navController: NavController) {
 
-    MainAppBar()
+    MainTopBar()
     OptionsButtons(navController)
 }
