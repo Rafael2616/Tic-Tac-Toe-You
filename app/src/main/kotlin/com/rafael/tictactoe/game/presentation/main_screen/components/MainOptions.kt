@@ -41,7 +41,7 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.Set
 
 @Composable
 @ExperimentalMaterial3Api
-fun OptionsButtons(navController: NavController) {
+fun MainOptions(navController: NavController) {
     val vm = hiltViewModel<GameViewModel>()
     val settingsVM = hiltViewModel<SettingsViewModel>()
     val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
