@@ -10,7 +10,8 @@ suspend fun CardGridClickHandler(
     context: Context,
 	vm: GameViewModel,
     settingsVM: SettingsViewModel,
-	index: Int
+	rowIndex: Int,
+	cardIndex: Int
 ) {
 	val play = vm.play.value
     val isCardClicked = vm.isCardClicked.value
@@ -28,7 +29,7 @@ suspend fun CardGridClickHandler(
         return
     }
 
-    if (isCardClicked[index]) {
+    if (isCardClicked[rowIndex][cardIndex]) {
         return
     }
 
@@ -40,13 +41,13 @@ suspend fun CardGridClickHandler(
         if (isPlayer1) {
             vm.updateIsXImage(!isXImage)
 			vm.updateIsPlayer1(false)
-	        vm.updateCard(index, isXImage)
-			vm.updateIsCardClicked(index, true)
+	        vm.updateCard(rowIndex, cardIndex, isXImage)
+			vm.updateIsCardClicked(rowIndex, cardIndex, true)
         } else {
             vm.updateIsXImage(!isXImage)
             vm.updateIsPlayer1(true)      
-            vm.updateCard(index, isXImage)
-            vm.updateIsCardClicked(index, true)
+            vm.updateCard(rowIndex, cardIndex, isXImage)
+            vm.updateIsCardClicked(rowIndex, cardIndex, true)
         }
         CardGridSound(context, vm, settingsVM)
     }
@@ -54,8 +55,8 @@ suspend fun CardGridClickHandler(
     if (isCPUMode) {
         if (isPlayer1) {
             vm.updateIsXImage(!isXImage)
-	        vm.updateCard(index, isXImage)
-			vm.updateIsCardClicked(index, true)
+	        vm.updateCard(rowIndex, cardIndex, isXImage)
+			vm.updateIsCardClicked(rowIndex, cardIndex, true)
             vm.updateIsPlayer1(false)
             vm.updateIsCPU(true)
             RandomCardSorter(vm, settingsVM, context)              

@@ -15,24 +15,26 @@ suspend fun RandomCardSorter(
     context: Context
 ) {
     val isCardClicked = vm.isCardClicked.value
-    var randomPosition = (0 until isCardClicked.size).random()
+    var randomPosition = (0 until isCardClicked[0].size).random()
+    var secRandomPosition = (0 until isCardClicked[1].size).random()
     val isCPU = vm.isCPU.value
     val isXImage = vm.isXImage.value
 
-    if (isCardClicked.all { it }) {
+    if (isCardClicked.flatten().all { it }) {
         return
     }
 
-    while (isCardClicked[randomPosition]) {
-        randomPosition = (0 until isCardClicked.size).random()
+    while (isCardClicked[randomPosition][secRandomPosition]) {
+        randomPosition = (0 until isCardClicked[0].size).random()
+        secRandomPosition = (0 until isCardClicked[1].size).random()
     }
 
     if (isCPU) {
         CoroutineScope(Dispatchers.Main).launch {
             delay(480L)
             vm.updateIsPlayer1(true)
-            vm.updateCard(randomPosition, isXImage)
-            vm.updateIsCardClicked(randomPosition, true)
+            vm.updateCard(randomPosition, secRandomPosition, isXImage)
+            vm.updateIsCardClicked(randomPosition, secRandomPosition, true)
             vm.updateIsXImage(!isXImage)
             vm.updateIsCPU(false)
             CardGridSound(context, vm, settingsVM)

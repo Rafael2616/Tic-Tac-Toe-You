@@ -10,19 +10,16 @@ import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
 @Composable
-fun CardGridImageHandler(index: Int): Painter {
+fun CardGridImageHandler(rowIndex: Int, cardIndex: Int): Painter {
     val viewModel = hiltViewModel<GameViewModel>()
 	val xImage = painterResource(R.drawable.x_image)
 	val circleImage = painterResource(R.drawable.circle_image)
 	val transparentImage = painterResource(R.drawable.transparent_image)
-    val cards by viewModel.cards.collectAsState()
+    val card by viewModel.card.collectAsState()
 	val isCardClicked by viewModel.isCardClicked.collectAsState()
 
-   // if (winner) {
-       // return transparentImage
-   // }
-	val cardGridImage = if (isCardClicked[index]) {
-    	if (cards[index]) xImage else circleImage
+	val cardGridImage = if (isCardClicked[rowIndex][cardIndex]) {
+    	if (card[rowIndex][cardIndex]) xImage else circleImage
 	} else {
 		transparentImage
 	}
