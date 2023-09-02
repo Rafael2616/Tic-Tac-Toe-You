@@ -4,6 +4,13 @@ import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewMod
 
 fun RestartGame(vm: GameViewModel) {
 	val allFalse = List(3){List<Boolean>(3) { false }}
+    val is1Win = vm.is1Win.value
+
+    if (is1Win) {
+        vm.updateIsPlayer1(true)
+    } else {
+        vm.updateIsPlayer1(false)
+    }
 
 	vm.updateWinner(false)
 	vm.updateGotOld(false)
@@ -11,8 +18,9 @@ fun RestartGame(vm: GameViewModel) {
     vm.updateAllIsCardClicked(allFalse)
     vm.updateAllCards(allFalse)
 	vm.updateIsScoreUp(false)
-    vm.updateIs1Win(false)
     vm.updateIsWinSoundPlaying(false)
     vm.updateIsGotOldSoundPlaying(false)
 	vm.setCoordinates(0f, 0f, 0f, 0f)
+
+
 }
