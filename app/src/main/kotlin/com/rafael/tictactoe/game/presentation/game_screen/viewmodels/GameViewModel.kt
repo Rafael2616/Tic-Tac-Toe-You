@@ -27,12 +27,12 @@ class GameViewModel @Inject constructor(
 	private var _player2Wins = MutableStateFlow(0)
 	val player2Wins: StateFlow<Int> = _player2Wins
 
-	private var _cards = MutableStateFlow(List<Boolean>(9){false})
-	val cards: StateFlow<List<Boolean>> = _cards
-	private var _isCardClicked = MutableStateFlow(List<Boolean>(9){false})
-	val isCardClicked: StateFlow<List<Boolean>> = _isCardClicked
-
-	private var _isTimerOn = MutableStateFlow(true)
+	private var _card = MutableStateFlow(List(3){List<Boolean>(3){false}})
+	val card: StateFlow<List<List<Boolean>>> = _card
+	private var _isCardClicked = MutableStateFlow(List(3){List<Boolean>(3){false}})
+	val isCardClicked: StateFlow<List<List<Boolean>>> = _isCardClicked
+    
+    private var _isTimerOn = MutableStateFlow(true)
 	val isTimerOn: StateFlow<Boolean> = _isTimerOn
     
 	private var _play = MutableStateFlow(false)
@@ -88,6 +88,7 @@ class GameViewModel @Inject constructor(
 	private var _isCPUMode = MutableStateFlow(true)
 	val isCPUMode: StateFlow<Boolean> = _isCPUMode
 
+
     fun updatePlayerName(newValue: String) {
         _playerName.value = newValue
     }
@@ -112,23 +113,27 @@ class GameViewModel @Inject constructor(
         _player2Wins.value = newValue
     }
 
-	fun updateCard(index: Int, newValue: Boolean) {
-	    _cards.value = _cards.value.toMutableList().also {
-			it[index] = newValue
-		}
-	}
-
-	fun updateIsCardClicked(index: Int, newValue: Boolean) {
- 	   _isCardClicked.value = _isCardClicked.value.toMutableList().also {
- 	  	 it[index] = newValue
-	    }
-	}
-
-    fun updateAllCards(newCardsValue: List<Boolean>) {
-        _cards.value = newCardsValue
+    fun updateIsCardClicked(rowIndex: Int, cardIndex: Int, newValue: Boolean) {  
+        _isCardClicked.value = _isCardClicked.value.toMutableList().apply {
+            this[rowIndex] = this[rowIndex].toMutableList().apply {
+                this[cardIndex] = newValue
+            }
+        }
     }
 
-    fun updateAllIsCardClicked(newCardClickedValue: List<Boolean>) {
+    fun updateCard(rowIndex: Int, cardIndex: Int, newValue: Boolean) {  
+        _card.value = _card.value.toMutableList().apply {
+            this[rowIndex] = this[rowIndex].toMutableList().apply {
+                this[cardIndex] = newValue
+            }
+        }
+    }
+
+    fun updateAllCards(newCardsValue: List<List<Boolean>>) {
+        _card.value = newCardsValue
+    }
+
+    fun updateAllIsCardClicked(newCardClickedValue: List<List<Boolean>>) {
         _isCardClicked.value = newCardClickedValue
     }
 

@@ -36,14 +36,13 @@ import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
 import com.rafael.tictactoe.game.domain.util.WinnerSound
 import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
-import kotlinx.coroutines.launch
 
 @Composable
 fun GameScreen(gameUtil: GameUtils, activity: Activity) {
     val viewModel = hiltViewModel<GameViewModel>()
     val settingsVM = hiltViewModel<SettingsViewModel>()
-    val cards by viewModel.cards.collectAsState()
-    val isCardClicked by viewModel.isCardClicked.collectAsState()
+    val card by viewModel.card.collectAsState()
+    val isCardClicked by viewModel.isCardClicked.collectAsState()   
     val play by viewModel.play.collectAsState()
     val isExpandButtonShown by viewModel.isExpandButtonShown.collectAsState()
     val showRestartButton by viewModel.showRestartButton.collectAsState()
@@ -51,7 +50,6 @@ fun GameScreen(gameUtil: GameUtils, activity: Activity) {
     val gotOld by viewModel.gotOld.collectAsState()
     val playerName = gameUtil.playerName
     val context = LocalContext.current
-    //val scope = rememberCoroutineScope()
 
 	//Below the logic that decides in  which case each function must be called
     //and params needed for then works and update the UI if needed
@@ -73,7 +71,7 @@ fun GameScreen(gameUtil: GameUtils, activity: Activity) {
 
     if (play) {
         GotOldChecker(viewModel)
-        WinnerChecker(viewModel, cards, isCardClicked)
+        WinnerChecker(viewModel, card, isCardClicked)
     }
 
     if (isExpandButtonShown) {

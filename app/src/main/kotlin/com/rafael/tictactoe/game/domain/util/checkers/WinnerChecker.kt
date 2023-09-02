@@ -5,32 +5,42 @@ import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewMod
 
 fun WinnerChecker(
     vm: GameViewModel,
-    cards: List<Boolean>,
-    isCardClicked: List<Boolean>
+    card: List<List<Boolean>>,
+    isCardClicked: List<List<Boolean>>
 ) {
-    val winner = vm.winner.value
+    val winningPositions = listOf(
+        // Lines
+        listOf(Pair(0, 0), Pair(0, 1), Pair(0, 2)),
+        listOf(Pair(1, 0), Pair(1, 1), Pair(1, 2)),
+        listOf(Pair(2, 0), Pair(2, 1), Pair(2, 2)),
 
-	val winningPositions = listOf(
-        listOf(0, 1, 2),
-        listOf(3, 4, 5),
-        listOf(6, 7, 8),
-        listOf(0, 3, 6),
-        listOf(1, 4, 7),
-        listOf(2, 5, 8),
-        listOf(0, 4, 8),
-        listOf(2, 4, 6)
-   )
-	for (positions in winningPositions) {
-		if (positions.all { (isCardClicked.get(it) == true) && (cards.get(it) == false )}) {
-			vm.updateWinner(true)
-   		 vm.updateIs1Win(false)
-		} else {
-			if (positions.all { (isCardClicked.get(it) == true) && (cards.get(it) == true )}) {
-	   		 vm.updateWinner(true)
-     	       vm.updateIs1Win(true)
-			}
-		}
-	}
+        // Columns
+        listOf(Pair(0, 0), Pair(1, 0), Pair(2, 0)),
+        listOf(Pair(0, 1), Pair(1, 1), Pair(2, 1)),
+        listOf(Pair(0, 2), Pair(1, 2), Pair(2, 2)),
+
+        // Diagonals
+        listOf(Pair(0, 0), Pair(1, 1), Pair(2, 2)),
+        listOf(Pair(0, 2), Pair(1, 1), Pair(2, 0))
+    )
+
+    for (positions in winningPositions) {
+        val areAllClicked = positions.all { (x, y) -> isCardClicked[x][y] }
+        val areAllX = positions.all { (x, y) -> card[x][y] }
+        val areAllO = positions.all { (x, y) -> !card[x][y] }
+
+        if (areAllClicked) {
+            if (areAllX) {
+                vm.updateWinner(true)
+                vm.updateIs1Win(true)
+            } else if (areAllO) {
+                vm.updateWinner(true)
+                vm.updateIs1Win(false)
+            }
+        }
+    }
+
+    val winner = vm.winner.value
 
     if (winner) {
         vm.updateIsGameFinished(true)

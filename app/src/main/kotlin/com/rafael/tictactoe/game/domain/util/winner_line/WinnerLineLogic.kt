@@ -8,47 +8,47 @@ fun WinnerLineLogic(
     viewModel: GameViewModel,
     cordinate: WinnerLineCoordinatesTest
 ) {  
-    val cards = viewModel.cards.value
+    val card = viewModel.card.value
     val isCardClicked = viewModel.isCardClicked.value
     
-	if (isCardClicked[0] && isCardClicked[1] && isCardClicked[2]){
-		if ((cards[0] && cards[1] && cards[2]) || (!cards[0] && !cards[1] && !cards[2])) {
+	if (isCardClicked[0][0] && isCardClicked[0][1] && isCardClicked[0][2]){
+		if ((card[0][0] && card[0][1] && card[0][2]) || (!card[0][0] && !card[0][1] && !card[0][2])) {
 			cordinate.setFirstHorizontalLinePositions(viewModel)
 		} 
 	}
-	if (isCardClicked[3] && isCardClicked[4] && isCardClicked[5]){
-   	 if ((cards[3] && cards[4] && cards[5]) || (!cards[3] && !cards[4] && !cards[5])) {
+	if (isCardClicked[1][0] && isCardClicked[1][1] && isCardClicked[1][2]){
+   	 if ((card[1][0] && card[1][1] && card[1][2]) || (!card[1][0] && !card[1][1] && !card[1][2])) {
      	   cordinate.setSecondHorizontalLinePositions(viewModel)
 		} 
 	}
-	if (isCardClicked[6] && isCardClicked[7] && isCardClicked[8]){  
- 	   if ((cards[6] && cards[7] && cards[8]) || (!cards[6] && !cards[7] && !cards[8])) {
+	if (isCardClicked[2][0] && isCardClicked[2][1] && isCardClicked[2][2]){  
+ 	   if ((card[2][0] && card[2][1] && card[2][2]) || (!card[2][0] && !card[2][1] && !card[2][2])) {
 			cordinate.setTertiaryHorizontalLinePositions(viewModel)
   	  }
 	}
-	if (isCardClicked[0] && isCardClicked[3] && isCardClicked[6]){
-   	 if ((cards[0] && cards[3] && cards[6]) || (!cards[0] && !cards[3] && !cards[6])) {
+	if (isCardClicked[0][0] && isCardClicked[1][0] && isCardClicked[2][0]){
+   	 if ((card[0][0] && card[1][0] && card[2][0]) || (!card[0][0] && !card[1][0] && !card[2][0])) {
 			cordinate.setFirstVerticalLinePositions(viewModel)
     	}
 	}
-	if (isCardClicked[1] && isCardClicked[4] && isCardClicked[7]){ 
-    	if ((cards[1] && cards[4] && cards[7]) || (!cards[1] && !cards[4] && !cards[7])) {
+	if (isCardClicked[0][1] && isCardClicked[1][1] && isCardClicked[2][1]){ 
+    	if ((card[0][1] && card[1][1] && card[2][1]) || (!card[0][1] && !card[1][1] && !card[2][1])) {
 			cordinate.setSecondVerticalLinePositions(viewModel)
   	  }
 	}
-	if (isCardClicked[2] && isCardClicked[5] && isCardClicked[8]){
-   	 if ((cards[2] && cards[5] && cards[8]) || (!cards[2] && !cards[5] && !cards[8])) {
+	if (isCardClicked[0][2] && isCardClicked[1][2] && isCardClicked[2][2]){
+   	 if ((card[0][2] && card[1][2] && card[2][2]) || (!card[0][2] && !card[1][2] && !card[2][2])) {
 			cordinate.setTertiaryVerticalLinePositions(viewModel)
     	}
 	}
-	if (isCardClicked[0] && isCardClicked[4] && isCardClicked[8]){
-    	if ((cards[0] && cards[4] && cards[8]) || (!cards[0] && !cards[4] && !cards[8])) {
+	if (isCardClicked[0][0] && isCardClicked[1][1] && isCardClicked[2][2]){
+    	if ((card[0][0] && card[1][1] && card[2][2]) || (!card[0][0] && !card[1][1] && !card[2][2])) {
 			cordinate.setStartToEndTransversalLinePositions(viewModel)
    	 }
 	}
-	if (isCardClicked[2] && isCardClicked[4] && isCardClicked[6]){
-    	if ((cards[2] && cards[4] && cards[6]) || (!cards[2] && !cards[4] && !cards[6])) {
+	if (isCardClicked[0][2] && isCardClicked[1][1] && isCardClicked[2][0]){
+    	if ((card[0][2] && card[1][1] && card[2][0]) || (!card[0][2] && !card[1][1] && !card[2][0])) {
 			cordinate.setEndToStartTransversalLinePositions(viewModel)
         }
-    } 
+    }
 }
