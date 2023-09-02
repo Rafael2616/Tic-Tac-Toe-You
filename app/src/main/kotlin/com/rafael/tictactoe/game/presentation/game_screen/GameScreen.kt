@@ -71,7 +71,7 @@ fun GameScreen(gameUtil: GameUtils, activity: Activity) {
 
     if (play) {
         GotOldChecker(viewModel)
-        WinnerChecker(viewModel, card, isCardCliked)
+        WinnerChecker(viewModel, card, isCardClicked)
     }
 
     if (isExpandButtonShown) {
