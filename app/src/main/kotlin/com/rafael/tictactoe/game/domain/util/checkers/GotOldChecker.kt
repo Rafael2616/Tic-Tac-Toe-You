@@ -7,13 +7,13 @@ fun GotOldChecker(vm: GameViewModel) {
     val winner = vm.winner.value
     val isCardClicked = vm.isCardClicked.value
 
-	if ((isCardClicked.all { it }) && (!winner)) {
+	if ((isCardClicked.flatten().all { it }) && (!winner)) {
 		vm.updateGotOld(true)
     } else {
 		vm.updateGotOld(false)
 	}
     
-    if(gotOld) {
+    if (gotOld) {
         vm.updateIsGameFinished(true)
     }
 }
