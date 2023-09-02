@@ -8,6 +8,8 @@ fun WinnerChecker(
     card: List<List<Boolean>>,
     isCardClicked: List<List<Boolean>>
 ) {
+    val isXFor1 = vm.isXFor1.value
+
     val winningPositions = listOf(
         // Lines
         listOf(Pair(0, 0), Pair(0, 1), Pair(0, 2)),
@@ -30,12 +32,13 @@ fun WinnerChecker(
         val areAllO = positions.all { (x, y) -> !card[x][y] }
 
         if (areAllClicked) {
-            if (areAllX) {
+            if (areAllX || areAllO) {
                 vm.updateWinner(true)
-                vm.updateIs1Win(true)
-            } else if (areAllO) {
-                vm.updateWinner(true)
-                vm.updateIs1Win(false)
+                if (isXFor1) {
+                   vm.updateIs1Win(true)
+                } else {             
+                   vm.updateIs1Win(false)
+                }
             }
         }
     }
