@@ -38,7 +38,7 @@ import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
-fun GameScreen(gameUtil: GameUtils, activity: Activity) {
+fun GameScreen(gameUtil: GameUtils, activity: Activity, isCPUMode: Boolean) {
     val viewModel = hiltViewModel<GameViewModel>()
     val settingsVM = hiltViewModel<SettingsViewModel>()
     val card by viewModel.card.collectAsState()
@@ -53,6 +53,8 @@ fun GameScreen(gameUtil: GameUtils, activity: Activity) {
 
 	//Below the logic that decides in  which case each function must be called
     //and params needed for then works and update the UI if needed
+    
+    viewModel.updateIsCPUMode(isCPUMode)
 
     //When GameScreen starts
     CardGrid(WinnerLineCoordinatesTest(activity))
