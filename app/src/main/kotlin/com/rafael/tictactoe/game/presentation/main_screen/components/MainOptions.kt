@@ -36,13 +36,11 @@ import com.rafael.tictactoe.R
 import com.rafael.tictactoe.TicTacToeActivity
 import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.common.presentation.navigation.Destinations
-import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
 @ExperimentalMaterial3Api
 fun MainOptions(navController: NavController) {
-    val vm = hiltViewModel<GameViewModel>()
     val settingsVM = hiltViewModel<SettingsViewModel>()
     val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
     val context = LocalContext.current
@@ -62,12 +60,8 @@ fun MainOptions(navController: NavController) {
                     .clickable(onClick = {
                         UiClickSound(context, isSoundEffectsOn)
                         when (index) {
-                            0 -> { vm.updateIsCPUMode(false);
-                                navController.navigate(Destinations.Game.screen)
-                            }
-                            1 -> { vm.updateIsCPUMode(true);
-                                navController.navigate(Destinations.Game.screen)
-                            }
+                            0 -> navController.navigate(Destinations.Game.screen + "/false")
+                            1 -> navController.navigate(Destinations.Game.screen + "/true")
                             2 -> navController.navigate(Destinations.Settings.screen)
                         }
                     })
