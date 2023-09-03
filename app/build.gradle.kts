@@ -97,7 +97,7 @@ dependencies {
     //Dagger Hilt
     implementation("com.google.dagger:hilt-android:$hilt_version")
     ksp("com.google.dagger:hilt-android-compiler:$hilt_version")
-    implementation("androidx.hilt:hilt-navigation-compose:1.1.0-alpha01")
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
     //Jetpack Compose
     implementation(platform("androidx.compose:compose-bom:2023.08.00"))
@@ -123,7 +123,7 @@ dependencies {
     ksp("androidx.room:room-compiler:$room_version")
 
     //Theming
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.33.0-alpha")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.32.0")
     implementation("com.google.android.material:compose-theme-adapter-3:1.1.1") 
 
     //Test Unit
