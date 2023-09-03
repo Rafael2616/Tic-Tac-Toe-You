@@ -4,6 +4,8 @@ import android.app.Activity
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.navigation.navArgument
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
@@ -33,8 +35,21 @@ fun NavGraph(
         composable(Destinations.Main.screen) {
             MainScreen(navController)
         }
-        composable(Destinations.Game.screen) {
-            GameScreen(gameUtil, activity)
+        composable(
+            route = Destinations.Game.screen + "/{isCPUMode}",
+            arguments = listOf(
+                navArgument("isCPUMode") {
+                    type = NavType.BoolType
+                    defaultValue = false
+                    nullable = false
+                }
+            )
+        ) { backStackEntry ->
+            GameScreen(
+                gameUtil,
+                activity,
+                backStackEntry.arguments?.getBoolean("isCPUMode") ?: false
+            )
         }
         composable(Destinations.Settings.screen) {
             SettingsScreen(navController)
