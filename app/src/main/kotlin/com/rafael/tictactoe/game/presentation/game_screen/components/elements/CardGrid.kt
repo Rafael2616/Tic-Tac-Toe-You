@@ -26,7 +26,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.util.CardGridClickHandler
 import com.rafael.tictactoe.game.domain.util.CardGridImageHandler
-import com.rafael.tictactoe.game.domain.util.RandomCardSorter
 import com.rafael.tictactoe.game.domain.util.WinnerLineLogic
 import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
 import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinatesTest
@@ -72,7 +71,7 @@ fun CardGrid(coordinates: WinnerLineCoordinatesTest) {
                 		Image(
 					        contentDescription = null,
                             alignment = Alignment.Center,
- 				           modifier = Modifier.height(116.dp).width(116.dp),
+ 				           modifier = Modifier.height(114.dp).width(114.dp),
  				           painter = CardGridImageHandler(rowIndex, cardIndex)
 			        	)
                     }
