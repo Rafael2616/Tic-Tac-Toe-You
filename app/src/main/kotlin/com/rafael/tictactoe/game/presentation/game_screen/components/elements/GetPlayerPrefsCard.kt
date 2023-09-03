@@ -53,11 +53,19 @@ fun GetPlayerPrefsCard() {
     val player2Value = if (isPlayer1) player2Name else player1Name
     val isCPUMode by viewModel.isCPUMode.collectAsState()
 	val systemUiController = rememberSystemUiController()
+    val colorSurface = MaterialTheme.colorScheme.surface
+    val isDarkThemeOn by settingsVM.isDarkThemeOn.collectAsState()
 
-    systemUiController.setSystemBarsColor(color = Color.Black.copy(alpha = 0.3f))
+    if (isDarkThemeOn) {
+        systemUiController.setSystemBarsColor(color = Color.Black.copy(alpha = 0.3f))
+    }
 
     Surface(
-        color = Color.Black.copy(alpha = 0.3f),
+        color = if (isDarkThemeOn) {
+                Color.Black.copy(alpha = 0.3f)
+            } else {
+                Color.Transparent
+            },
         modifier = Modifier
             .fillMaxSize()
     ) {
@@ -177,7 +185,7 @@ fun GetPlayerPrefsCard() {
                     onClick = {
                         UiClickSound(context, isSoundEffectsOn)
                         viewModel.updatePlay(true)
-                        systemUiController.setSystemBarsColor(color = Color.Transparent)
+                        systemUiController.setSystemBarsColor(color = colorSurface)
                     },
                     modifier = Modifier
                         .width(100.dp)
