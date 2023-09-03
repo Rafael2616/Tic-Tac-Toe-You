@@ -23,7 +23,7 @@ import javax.inject.Inject
 @OptIn(ExperimentalMaterial3Api::class)
 class TicTacToeActivity : ComponentActivity() {
 
-    val settingsVM by viewModels<SettingsViewModel>()
+    private val settingsVM by viewModels<SettingsViewModel>()
   
     @Inject
 	lateinit var gameUtil: GameUtils
