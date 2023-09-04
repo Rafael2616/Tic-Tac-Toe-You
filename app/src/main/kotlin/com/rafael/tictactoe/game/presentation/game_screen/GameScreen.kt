@@ -1,6 +1,7 @@
 package com.rafael.tictactoe.game.presentation.game_screen
 
 import android.app.Activity
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -48,13 +49,13 @@ fun GameScreen(gameUtil: GameUtils, activity: Activity, isCPUMode: Boolean) {
     val showRestartButton by viewModel.showRestartButton.collectAsState()
     val winner by viewModel.winner.collectAsState()
     val gotOld by viewModel.gotOld.collectAsState()
+    val isGameFinished by viewModel.isGameFinished.collectAsState()
     val playerName = gameUtil.playerName
     val context = LocalContext.current
 
-	//Below the logic that decides in  which case each function must be called
-    //and params needed for then works and update the UI if needed
-    
     viewModel.updateIsCPUMode(isCPUMode)
+    
+	//Conditions for each UI component function to be called
 
     //When GameScreen starts
     CardGrid(WinnerLineCoordinatesTest(activity))
@@ -62,39 +63,41 @@ fun GameScreen(gameUtil: GameUtils, activity: Activity, isCPUMode: Boolean) {
     VictoryCounter()
     PlayersNamesLayout()
     GameStateToast()
-	RestartButtonLogic(viewModel)
     ToastNameHandler()
 
-    if (!play) {
-		GetPlayerPrefsCard()      
+    AnimatedVisibility(!play) {
+		GetPlayerPrefsCard()
         playerName.firstPlayerName()
         playerName.secondPlayerName()
-	}
-
-    if (play) {
-        GotOldChecker(viewModel)
-        WinnerChecker(viewModel, card, isCardClicked)
     }
 
-    if (isExpandButtonShown) {
+    AnimatedVisibility(isExpandButtonShown) {
         BackgroundMusicButton()
         SoundEffectsButton()
     }
 
-    if (showRestartButton) {
+    AnimatedVisibility(showRestartButton) {
 		RestartButton()
 	}
 
-    if (winner) {
-        WinnerSound(context, viewModel, settingsVM)
-        WinnerLine(WinnerLineCoordinatesTest(activity))
+    AnimatedVisibility(isGameFinished) {
         VictoryCounterReseterButton()
         PlayAgainButton()
     }
 
+    //Conditions for each business logic funcions to be called
+    if (play) {
+        GotOldChecker(viewModel)
+        WinnerChecker(viewModel, card, isCardClicked)
+    	RestartButtonLogic(viewModel)
+    }
+
+    if (winner) {
+        WinnerSound(context, viewModel, settingsVM)
+        WinnerLine(WinnerLineCoordinatesTest(activity))
+    }
+
     if (gotOld) {
-        GotOldSound(context, viewModel, settingsVM)					
-        VictoryCounterReseterButton()
-        PlayAgainButton()
+        GotOldSound(context, viewModel, settingsVM)
     }
 }
