@@ -23,6 +23,7 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -64,7 +65,7 @@ fun SettingsOptions(index: Int) {
                     context,
                     index,
                     viewModel,
-		    isSystemInDarkTheme
+					isSystemInDarkTheme
                 )
             }
         )
@@ -94,40 +95,39 @@ fun SettingsOptions(index: Int) {
                 if (index != 5) {
                     Switch(
                         checked = 
-			    when (index) {
-    			        0 -> isFollowingSystemOn
-     			        1 -> isDarkThemeOn
-   			        2 -> isDynamicColorsOn
-    			        3 -> isSoundEffectsOn
-      			        4 -> isBackgroundMusicOn
-			        5 -> isAboutShown
-			    else -> false
-			},
+							when (index) {
+    							0 -> isFollowingSystemOn
+     						   1 -> isDarkThemeOn
+   						     2 -> isDynamicColorsOn
+    						    3 -> isSoundEffectsOn
+      						  4 -> isBackgroundMusicOn
+								5 -> isAboutShown
+						 	else -> false
+							},
                         onCheckedChange = {
                             toggleSettingsHandler(
                                 context,
                                 index,
                                 viewModel,
-				isSystemInDarkTheme
+								isSystemInDarkTheme
                             )
                             UiClickSound(context, isSoundEffectsOn)
                         },
-			thumbContent = {
-    			    Icon(
-     				imageVector = 
-				    when (index) {
-    				        0 -> if (isFollowingSystemOn) Icons.Filled.Check else Icons.Filled.Close
-     				        1 -> if (isDarkThemeOn) Icons.Filled.Check else Icons.Filled.Close
-   				        2 -> if (isDynamicColorsOn) Icons.Filled.Check else Icons.Filled.Close
-    				        3 -> if (isSoundEffectsOn) Icons.Filled.Check else Icons.Filled.Close
-      				        4 -> if (isBackgroundMusicOn) Icons.Filled.Check else Icons.Filled.Close
-				        5 -> if (isAboutShown) Icons.Filled.Check else Icons.Filled.Close
-				    else -> Icons.Filled.Close
-			       },
-    			       contentDescription = null,
-       			       modifier = Modifier.size(SwitchDefaults.IconSize)
-      			    )
-   			}
+						thumbContent = {
+    					  Icon(
+     					   imageVector = when (index) {
+    							0 -> if (isFollowingSystemOn) Icons.Filled.Check else Icons.Filled.Close
+     						   1 -> if (isDarkThemeOn) Icons.Filled.Check else Icons.Filled.Close
+   						     2 -> if (isDynamicColorsOn) Icons.Filled.Check else Icons.Filled.Close
+    						    3 -> if (isSoundEffectsOn) Icons.Filled.Check else Icons.Filled.Close
+      						  4 -> if (isBackgroundMusicOn) Icons.Filled.Check else Icons.Filled.Close
+								5 -> if (isAboutShown) Icons.Filled.Check else Icons.Filled.Close
+						 	else -> Icons.Filled.Close
+							},
+    					    contentDescription = null,
+       					 modifier = Modifier.size(SwitchDefaults.IconSize)
+      					)
+   					 }
                     )
                 }
                 if (index == 5) {
@@ -140,6 +140,12 @@ fun SettingsOptions(index: Int) {
                     )
                 }
             }
+        }
+    }
+
+    DisposableEffect(Unit) {
+        onDispose {
+            viewModel.updateIsAboutShown(false)
         }
     }
 }
