@@ -7,10 +7,7 @@ fun WinnerChecker(
     vm: GameViewModel,
     card: List<List<Boolean>>,
     isCardClicked: List<List<Boolean>>
-) {
-    val isXFor1 = vm.isXFor1.value
-    val isPlayer1 = vm.isPlayer1.value
-    
+) {   
     val winningPositions = listOf(
         // Lines
         listOf(Pair(0, 0), Pair(0, 1), Pair(0, 2)),
