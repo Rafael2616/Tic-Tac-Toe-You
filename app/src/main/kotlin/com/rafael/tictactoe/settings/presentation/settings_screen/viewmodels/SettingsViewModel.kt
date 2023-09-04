@@ -12,6 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.first
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
@@ -40,15 +41,12 @@ class SettingsViewModel @Inject constructor(
     //Initialize ViewModel StateFlows Variables with corresponding values in SettingsRepository
 	init {
   	  viewModelScope.launch(Dispatchers.IO) {
-	  	  repository.getAllSettingsValues(1).collect { settingsValues ->
-				val settings = settingsValues ?: defaultSettings
-               /* settings.id = 1
-   	 	    _isBackgroundMusicOn.value = settings.isBackgroundMusicOn
-    	 	   _isDarkThemeOn.value = settings.isDarkThemeOn
-    	 	   _isDynamicColorsOn.value = settings.isDynamicColorsOn
-    		    _isFollowingSystemOn.value = settings.isFollowingSystemOn
-     		   _isSoundEffectsOn.value = settings.isSoundEffectsOn */
-			}
+	      var settings = repository.getAllSettingsValues(1).first()  ?: defaultSettings
+   	 	_isBackgroundMusicOn.value = settings.isBackgroundMusicOn
+    	    _isDarkThemeOn.value = settings.isDarkThemeOn
+    	    _isDynamicColorsOn.value = settings.isDynamicColorsOn
+            _isFollowingSystemOn.value = settings.isFollowingSystemOn
+            _isSoundEffectsOn.value = settings.isSoundEffectsOn
   	  }
 	}
 	
@@ -56,11 +54,9 @@ class SettingsViewModel @Inject constructor(
 	fun updateIsBackgroundMusicOn(newValue: Boolean, context: Context) {
  	   _isBackgroundMusicOn.value = newValue	
 		viewModelScope.launch(Dispatchers.IO) {
-		/*	repository.getAllSettingsValues(1).collect { currentSettings ->
-				var newSettings = currentSettings ?: defaultSettings
-    			newSettings.isBackgroundMusicOn = _isBackgroundMusicOn.value
-				repository.setAllSettingsValues(newSettings)
-  	  	}*/
+            var settings = repository.getAllSettingsValues(1).first() ?: defaultSettings
+            settings.isBackgroundMusicOn = _isBackgroundMusicOn.value
+			repository.setAllSettingsValues(settings)
 		}
 		BackgroundMusic(context, _isBackgroundMusicOn.value)
 	}
@@ -68,44 +64,36 @@ class SettingsViewModel @Inject constructor(
    fun updateIsDarkThemeOn(newValue: Boolean) {
         _isDarkThemeOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
-	  /*	  repository.getAllSettingsValues(1).collect { currentSettings ->
-				var newSettings = currentSettings ?: defaultSettings
-    	    	newSettings.isDarkThemeOn = _isDarkThemeOn.value
-				repository.setAllSettingsValues(newSettings)
-			}*/
+	  	  var settings = repository.getAllSettingsValues(1).first() ?: defaultSettings
+    		settings.isDarkThemeOn = _isDarkThemeOn.value
+			repository.setAllSettingsValues(settings)
         }
     }
 
     fun updateIsDynamicColorsOn(newValue: Boolean) {
         _isDynamicColorsOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
-	  	 /* repository.getAllSettingsValues(1).collect { currentSettings ->
-				var newSettings = currentSettings ?: defaultSettings
-    			newSettings.isDynamicColorsOn = _isDynamicColorsOn.value
-				repository.setAllSettingsValues(newSettings)
-			} */
+            var settings = repository.getAllSettingsValues(1).first() ?: defaultSettings
+    		settings.isDynamicColorsOn = _isDynamicColorsOn.value
+			repository.setAllSettingsValues(settings)
         }
     }
 
     fun updateIsFollowingSystemOn(newValue: Boolean) {
         _isFollowingSystemOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
-	  	/*  repository.getAllSettingsValues(1).collect { currentSettings ->
-				var newSettings = currentSettings ?: defaultSettings
-    			newSettings.isFollowingSystemOn = _isFollowingSystemOn.value
-				repository.setAllSettingsValues(newSettings)
-			}*/
+	  	  var settings = repository.getAllSettingsValues(1).first() ?: defaultSettings
+    		settings.isFollowingSystemOn = _isFollowingSystemOn.value
+			repository.setAllSettingsValues(settings)
         }
     }
    
     fun updateIsSoundEffectsOn(newValue: Boolean) {
         _isSoundEffectsOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
-    	  /*  repository.getAllSettingsValues(1).collect { currentSettings ->
-				var newSettings = currentSettings ?: defaultSettings
-		    	newSettings.isSoundEffectsOn = _isSoundEffectsOn.value
-				repository.setAllSettingsValues(newSettings)
-			}*/
+            var settings = repository.getAllSettingsValues(1).first() ?: defaultSettings
+			settings.isSoundEffectsOn = _isSoundEffectsOn.value
+			repository.setAllSettingsValues(settings)
         }
     }
  
