@@ -14,7 +14,7 @@ class SettingsRepositoryImpl @Inject constructor(
 		println("Settings repository has been initialized")
 	}
 
-    override fun getAllSettingsValues(id: Int): Flow<SettingsEntity> {
+    override fun getAllSettingsValues(id: Int): Flow<SettingsEntity?> {
         return settingsDao.getSettingsValues(id)
     }
 
