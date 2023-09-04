@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 
-suspend fun RandomCardSorter(
+fun RandomCardSorter(
     vm: GameViewModel,
     settingsVM: SettingsViewModel,
     context: Context
@@ -19,6 +19,12 @@ suspend fun RandomCardSorter(
     var secRandomPosition = (0 until isCardClicked[1].size).random()
     val isCPU = vm.isCPU.value
     val isXImage = vm.isXImage.value
+    val isXFor1 = vm.isXFor1.value
+    val isGameFinished = vm.isGameFinished.value
+ 
+    if (isGameFinished) {
+        return
+    }
 
     if (isCardClicked.flatten().all { it }) {
         return
@@ -32,10 +38,10 @@ suspend fun RandomCardSorter(
     if (isCPU) {
         CoroutineScope(Dispatchers.Main).launch {
             delay(480L)
-            vm.updateIsPlayer1(true)
-            vm.updateCard(randomPosition, secRandomPosition, isXImage)
-            vm.updateIsCardClicked(randomPosition, secRandomPosition, true)
             vm.updateIsXImage(!isXImage)
+            vm.updateCard(randomPosition, secRandomPosition, !isXFor1)
+            vm.updateIsCardClicked(randomPosition, secRandomPosition, true)
+            vm.updateIsPlayer1(true)           
             vm.updateIsCPU(false)
             CardGridSound(context, vm, settingsVM)
         }

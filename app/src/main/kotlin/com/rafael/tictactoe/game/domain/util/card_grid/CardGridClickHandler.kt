@@ -20,6 +20,7 @@ suspend fun CardGridClickHandler(
     val isTimerOn = vm.isTimerOn.value
     val isCPUMode = vm.isCPUMode.value
     val isGameFinished = vm.isGameFinished.value
+    val isXFor1 = vm.isXFor1.value
 
     if (isTimerOn) {
         return
@@ -41,12 +42,12 @@ suspend fun CardGridClickHandler(
         if (isPlayer1) {
             vm.updateIsXImage(!isXImage)
 			vm.updateIsPlayer1(false)
-	        vm.updateCard(rowIndex, cardIndex, isXImage)
+	        vm.updateCard(rowIndex, cardIndex, isXFor1)
 			vm.updateIsCardClicked(rowIndex, cardIndex, true)
         } else {
             vm.updateIsXImage(!isXImage)
             vm.updateIsPlayer1(true)      
-            vm.updateCard(rowIndex, cardIndex, isXImage)
+            vm.updateCard(rowIndex, cardIndex, !isXFor1)
             vm.updateIsCardClicked(rowIndex, cardIndex, true)
         }
         CardGridSound(context, vm, settingsVM)
@@ -55,11 +56,11 @@ suspend fun CardGridClickHandler(
     if (isCPUMode) {
         if (isPlayer1) {
             vm.updateIsXImage(!isXImage)
-	        vm.updateCard(rowIndex, cardIndex, isXImage)
+	        vm.updateCard(rowIndex, cardIndex, isXFor1)
 			vm.updateIsCardClicked(rowIndex, cardIndex, true)
             vm.updateIsPlayer1(false)
             vm.updateIsCPU(true)
-            RandomCardSorter(vm, settingsVM, context)              
+            RandomCardSorter(vm, settingsVM, context)             
         }
         CardGridSound(context, vm, settingsVM)
     }
