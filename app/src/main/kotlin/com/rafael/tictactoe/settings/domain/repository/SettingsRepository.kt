@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface SettingsRepository {
 
-    fun getAllSettingsValues(id: Int): Flow<SettingsEntity>
+    fun getAllSettingsValues(id: Int): Flow<SettingsEntity?>
 	
     suspend fun setAllSettingsValues(settingsEntity: SettingsEntity)
 }
