@@ -36,7 +36,7 @@ import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.settings.domain.util.CardImageHandler
 import com.rafael.tictactoe.settings.domain.util.CardTextHandler
-import com.rafael.tictactoe.settings.domain.util.toggleSettingsHandler
+import com.rafael.tictactoe.settings.domain.use_cases.toggleSettingsUseCase
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
@@ -61,7 +61,7 @@ fun SettingsOptions(index: Int) {
             .height(if ((index == 5) && (isAboutShown)) 190.dp else 70.dp)
             .clickable(onClick = {
                 UiClickSound(context, isSoundEffectsOn)
-                toggleSettingsHandler(
+                toggleSettingsUseCase(
                     context,
                     index,
                     viewModel,
@@ -105,7 +105,7 @@ fun SettingsOptions(index: Int) {
 						 	else -> false
 							},
                         onCheckedChange = {
-                            toggleSettingsHandler(
+                            toggleSettingsUseCase(
                                 context,
                                 index,
                                 viewModel,
