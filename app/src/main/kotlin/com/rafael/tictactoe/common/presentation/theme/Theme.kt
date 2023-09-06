@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.viewModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
@@ -86,7 +86,7 @@ fun AppTheme(
     isSystemInDarkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable() () -> Unit
 ) {
-    val viewModel = viewModel<SettingsViewModel>()
+    val viewModel = hiltViewModel<SettingsViewModel>()
     val isDarkThemeOn by viewModel.isDarkThemeOn.collectAsState()
     val isFollowingSystemOn by viewModel.isFollowingSystemOn.collectAsState()
     val isDynamicColorsOn by viewModel.isDynamicColorsOn.collectAsState()
@@ -123,5 +123,11 @@ fun AppTheme(
    	 content = content,
 	)
 
+    if (isSystemInDarkTheme && isFollowingSystemOn) {
+        viewModel.updateIsDarkThemeOn(true)
+    } else if (!isSystemInDarkTheme && isFollowingSystemOn) {
+        viewModel.updateIsDarkThemeOn(false)
+    }
+    
     systemUiController.setSystemBarsColor(color = colors.surface)
 }
