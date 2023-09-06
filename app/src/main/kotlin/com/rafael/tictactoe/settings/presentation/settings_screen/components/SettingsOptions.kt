@@ -43,7 +43,6 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.Set
 fun SettingsOptions(index: Int) {
     val viewModel = hiltViewModel<SettingsViewModel>()
     val context = LocalContext.current
-    val isSystemInDarkTheme = isSystemInDarkTheme()
     val isDarkThemeOn by viewModel.isDarkThemeOn.collectAsState()
     val isFollowingSystemOn by viewModel.isFollowingSystemOn.collectAsState()
     val isDynamicColorsOn by viewModel.isDynamicColorsOn.collectAsState()
@@ -64,8 +63,7 @@ fun SettingsOptions(index: Int) {
                 toggleSettingsUseCase(
                     context,
                     index,
-                    viewModel,
-					isSystemInDarkTheme
+                    viewModel
                 )
             }
         )
@@ -108,8 +106,7 @@ fun SettingsOptions(index: Int) {
                             toggleSettingsUseCase(
                                 context,
                                 index,
-                                viewModel,
-								isSystemInDarkTheme
+                                viewModel
                             )
                             UiClickSound(context, isSoundEffectsOn)
                         },
