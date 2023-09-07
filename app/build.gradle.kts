@@ -105,7 +105,7 @@ dependencies {
     implementation("androidx.compose.animation:animation")
     implementation("androidx.compose.foundation:foundation")
     implementation("androidx.compose.material:material-icons-core")
-    implementation("androidx.compose.material3:material3:1.2.0-alpha05")
+    implementation("androidx.compose.material3:material3:1.2.0-alpha07")
     implementation("androidx.compose.runtime:runtime")
     implementation("androidx.compose.ui:ui")
 
