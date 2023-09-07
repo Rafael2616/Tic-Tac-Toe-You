@@ -24,7 +24,7 @@ android {
             storePassword = "rafael1800"
             keyAlias = "tictactoekey"
             keyPassword = "rafael1800"
-			enableV3Signing = true
+	    enableV3Signing = true
         }
 
         named("debug") {
@@ -43,6 +43,7 @@ android {
 		
         named("debug") {
             isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("release")
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
             resValue("string", "app_name_debug", "Jogo da Velha - Debug")
