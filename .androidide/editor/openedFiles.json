@@ -1,0 +1,65 @@
+{
+  "allFiles": [
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/TicTacToeYou/app/build.gradle.kts",
+      "selection": {
+        "end": {
+          "column": 0,
+          "index": -1,
+          "line": 0
+        },
+        "start": {
+          "column": 0,
+          "index": -1,
+          "line": 0
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/TicTacToeYou/app/src/main/kotlin/com/rafael/tictactoe/game/domain/util/audio/BackgroundMusic.kt",
+      "selection": {
+        "end": {
+          "column": 0,
+          "index": -1,
+          "line": 0
+        },
+        "start": {
+          "column": 0,
+          "index": -1,
+          "line": 0
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/TicTacToeYou/app/src/main/kotlin/com/rafael/tictactoe/game/domain/util/audio/CardGridSound.kt",
+      "selection": {
+        "end": {
+          "column": 60,
+          "index": -1,
+          "line": 16
+        },
+        "start": {
+          "column": 60,
+          "index": -1,
+          "line": 16
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/TicTacToeYou/app/src/main/kotlin/com/rafael/tictactoe/game/domain/util/card_grid/CardGridClickHandler.kt",
+      "selection": {
+        "end": {
+          "column": 0,
+          "index": -1,
+          "line": 0
+        },
+        "start": {
+          "column": 0,
+          "index": -1,
+          "line": 0
+        }
+      }
+    }
+  ],
+  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/TicTacToeYou/app/src/main/kotlin/com/rafael/tictactoe/game/domain/util/card_grid/CardGridClickHandler.kt"
+}

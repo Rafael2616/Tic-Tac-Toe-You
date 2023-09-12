@@ -1,0 +1,29 @@
+<resources>
+
+    <string name="app_name">Jogo da Velha - Material You</string>
+    <string name="inapp_title">Jogo da Velha</string>
+    <string name="play">Jogar</string>
+    <string name="settings">Configurações</string>
+    <string name="creator_message">Desenvolvido por: Rafael de Moura Nascimento</string>
+    <string name="player">Jogador</string>
+    <string name="winner">GANHOU !!!</string>
+    <string name="index_error">index error</string>   
+    <string name="play_again">Jogar Novamente</string>   
+    <string name="got_old">Deu Velha :|</string>     
+    <string name="restart">Recomeçar</string>
+    <string name="reset">Zerar</string>
+    <string name="player1_name">Nome do 1º Jogador</string>    
+    <string name="player2_name">Nome do 2º Jogador</string>
+    <string name="player_x">Jogador X</string>    
+    <string name="player_o">Jogador O</string>
+    <string name="dark_theme">Tema Escuro</string>    
+    <string name="material_you">Cores Dinâmicas</string>
+    <string name="sound_effects">Efeitos Sonoros</string>    
+    <string name="background_music">Música de Fundo</string>
+    <string name="active_sound">Efeitos</string>
+    <string name="active_music">Musica</string>
+    <string name="about_app">Sobre o app</string>
+    <string name="system_theme">Tema do Sistema</string>
+    <string name="vs_cpu">Contra CPU</string>
+
+</resources>
