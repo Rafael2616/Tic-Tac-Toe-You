@@ -82,7 +82,11 @@ fun BaseButton(
                     painter = painterResource(btnImage)
                 )
             }
+<<<<<<< HEAD
             if (btnText != null) {
+=======
+            if(btnText != null) {
+>>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2
                 Text(
                     text = stringResource(btnText),
                     style = MaterialTheme.typography.bodyMedium.copy(fontSize = 12.sp),

@@ -85,9 +85,16 @@ class GameViewModel @Inject constructor(
 	private var _isCPU = MutableStateFlow(false)
 	val isCPU: StateFlow<Boolean> = _isCPU
 
+<<<<<<< HEAD
 	private var _isCPUMode = MutableStateFlow(false)
 	val isCPUMode: StateFlow<Boolean> = _isCPUMode
 
+=======
+	private var _isCPUMode = MutableStateFlow(true)
+	val isCPUMode: StateFlow<Boolean> = _isCPUMode
+
+
+>>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2
     fun updatePlayerName(newValue: String) {
         _playerName.value = newValue
     }
@@ -112,24 +119,37 @@ class GameViewModel @Inject constructor(
         _player2Wins.value = newValue
     }
 
+<<<<<<< HEAD
     fun updateIsCardClicked(rowIndex: Int, cardIndex: Int, newValue: Boolean) {
         if (!_isGameFinished.value) {
+=======
+    fun updateIsCardClicked(rowIndex: Int, cardIndex: Int, newValue: Boolean) {  
+>>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2
         _isCardClicked.value = _isCardClicked.value.toMutableList().apply {
             this[rowIndex] = this[rowIndex].toMutableList().apply {
                 this[cardIndex] = newValue
             }
         }
+<<<<<<< HEAD
         }
     }
 
     fun updateCard(rowIndex: Int, cardIndex: Int, newValue: Boolean) {
         if (!_isGameFinished.value) {
+=======
+    }
+
+    fun updateCard(rowIndex: Int, cardIndex: Int, newValue: Boolean) {  
+>>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2
         _card.value = _card.value.toMutableList().apply {
             this[rowIndex] = this[rowIndex].toMutableList().apply {
                 this[cardIndex] = newValue
             }
         }
+<<<<<<< HEAD
         }
+=======
+>>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2
     }
 
     fun updateAllCards(newCardsValue: List<List<Boolean>>) {

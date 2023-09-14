@@ -35,7 +35,11 @@ class WinnerLineCoordinatesTest(val activity: Activity) {
         val startX = horizontalStart.toFloat() //Ok
         val startY = heightCenter.toFloat() //Ok + review
         val endX = horizontalEnd.toFloat() //Ok
+<<<<<<< HEAD
         val endY = heightCenter.toFloat() //ok + review 
+=======
+        val endY = heightCenter.toFloat() //ok + review
+>>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2
 		viewModel.setCoordinates(startX, startY, endX, endY)
     }
 

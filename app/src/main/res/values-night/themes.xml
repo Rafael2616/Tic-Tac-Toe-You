@@ -5,8 +5,16 @@
   
     <item name="android:navigationBarColor">@android:color/transparent</item> 
     <item name="android:statusBarColor">@android:color/transparent</item>     
+<<<<<<< HEAD
+=======
+
+>>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2
     <item name="android:windowLightStatusBar">false</item>
          
   </style>
     
+<<<<<<< HEAD
 </resources>
+=======
+</resources>
+>>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2

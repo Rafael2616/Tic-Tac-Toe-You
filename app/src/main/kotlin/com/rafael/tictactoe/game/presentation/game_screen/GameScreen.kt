@@ -8,6 +8,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+<<<<<<< HEAD
+=======
+import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
+>>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2
 import com.rafael.tictactoe.game.presentation.game_screen.components.BackgroundMusicButton
 import com.rafael.tictactoe.game.presentation.game_screen.components.CardGrid
 import com.rafael.tictactoe.game.presentation.game_screen.components.ExpandButton
@@ -20,6 +24,7 @@ import com.rafael.tictactoe.game.presentation.game_screen.components.SoundEffect
 import com.rafael.tictactoe.game.presentation.game_screen.components.VictoryCounter
 import com.rafael.tictactoe.game.presentation.game_screen.components.VictoryCounterReseterButton
 import com.rafael.tictactoe.game.presentation.game_screen.components.WinnerLine
+<<<<<<< HEAD
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import com.rafael.tictactoe.game.domain.util.GameUtils
 import com.rafael.tictactoe.game.domain.util.GotOldChecker
@@ -36,6 +41,23 @@ fun GameScreen(
     activity: Activity,
     isCPUMode: Boolean
 ) {
+=======
+import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinatesTest
+import com.rafael.tictactoe.game.domain.util.WinnerChecker
+import com.rafael.tictactoe.game.domain.util.GotOldChecker
+import com.rafael.tictactoe.game.domain.util.GotOldSound
+import com.rafael.tictactoe.game.domain.util.GameUtils
+import com.rafael.tictactoe.game.domain.util.RestartButtonLogic
+import com.rafael.tictactoe.game.domain.util.PlayersNamesDisplay
+import com.rafael.tictactoe.game.domain.util.ToastNameHandler
+import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
+import com.rafael.tictactoe.game.domain.util.WinnerSound
+import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
+import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
+
+@Composable
+fun GameScreen(gameUtil: GameUtils, activity: Activity, isCPUMode: Boolean) {
+>>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2
     val viewModel = hiltViewModel<GameViewModel>()
     val settingsVM = hiltViewModel<SettingsViewModel>()
     val card by viewModel.card.collectAsState()
@@ -44,6 +66,10 @@ fun GameScreen(
     val isExpandButtonShown by viewModel.isExpandButtonShown.collectAsState()
     val showRestartButton by viewModel.showRestartButton.collectAsState()
     val winner by viewModel.winner.collectAsState()
+<<<<<<< HEAD
+=======
+    val gotOld by viewModel.gotOld.collectAsState()
+>>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2
     val isGameFinished by viewModel.isGameFinished.collectAsState()
     val playerName = gameUtil.playerName
     val context = LocalContext.current
@@ -53,7 +79,11 @@ fun GameScreen(
 	//Conditions for each UI component function to be called
 
     //When GameScreen starts
+<<<<<<< HEAD
     CardGrid()
+=======
+    CardGrid(WinnerLineCoordinatesTest(activity))
+>>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2
     ExpandButton()
     VictoryCounter()
     PlayersNamesLayout()
@@ -80,6 +110,7 @@ fun GameScreen(
         PlayAgainButton()
     }
 
+<<<<<<< HEAD
     AnimatedVisibility(winner) {
         WinnerLine(WinnerLineCoordinatesTest(activity))
     }
@@ -91,4 +122,21 @@ fun GameScreen(
     	RestartButtonLogic(viewModel)
     }
 
+=======
+    //Conditions for each business logic funcions to be called
+    if (play) {
+        GotOldChecker(viewModel)
+        WinnerChecker(viewModel, card, isCardClicked)
+    	RestartButtonLogic(viewModel)
+    }
+
+    if (winner) {
+        WinnerSound(context, viewModel, settingsVM)
+        WinnerLine(WinnerLineCoordinatesTest(activity))
+    }
+
+    if (gotOld) {
+        GotOldSound(context, viewModel, settingsVM)
+    }
+>>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2
 }
