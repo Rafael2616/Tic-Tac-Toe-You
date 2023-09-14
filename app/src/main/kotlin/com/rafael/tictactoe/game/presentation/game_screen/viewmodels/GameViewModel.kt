@@ -114,18 +114,20 @@ class GameViewModel @Inject constructor(
 
     fun updateIsCardClicked(rowIndex: Int, cardIndex: Int, newValue: Boolean) {
         if (!_isGameFinished.value) {
-        _isCardClicked.value = _isCardClicked.value.toMutableList().apply {
-            this[rowIndex] = this[rowIndex].toMutableList().apply {
-                this[cardIndex] = newValue
+            _isCardClicked.value = _isCardClicked.value.toMutableList().apply {
+                this[rowIndex] = this[rowIndex].toMutableList().apply {
+                    this[cardIndex] = newValue
+                }
             }
         }
     }
 
     fun updateCard(rowIndex: Int, cardIndex: Int, newValue: Boolean) {
         if (!_isGameFinished.value) {
-        _card.value = _card.value.toMutableList().apply {
-            this[rowIndex] = this[rowIndex].toMutableList().apply {
-                this[cardIndex] = newValue
+            _card.value = _card.value.toMutableList().apply {
+                this[rowIndex] = this[rowIndex].toMutableList().apply {
+                    this[cardIndex] = newValue
+                }
             }
         }
     }
@@ -201,6 +203,7 @@ class GameViewModel @Inject constructor(
     fun updateIsTimerOn(newValue: Boolean) {
         _isTimerOn.value = newValue
     }
+
     fun updateIsCPU(newValue: Boolean) {
         _isCPU.value = newValue
     }
