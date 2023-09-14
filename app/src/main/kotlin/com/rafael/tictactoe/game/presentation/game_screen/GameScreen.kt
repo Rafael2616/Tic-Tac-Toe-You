@@ -90,13 +90,4 @@ fun GameScreen(
         WinnerChecker(viewModel, settingsVM, context, card, isCardClicked)
     	RestartButtonLogic(viewModel)
     }
-
-    if (winner) {
-        WinnerSound(context, viewModel, settingsVM)
-        WinnerLine(WinnerLineCoordinatesTest(activity))
-    }
-
-    if (gotOld) {
-        GotOldSound(context, viewModel, settingsVM)
-    }
 }
