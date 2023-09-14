@@ -1,0 +1,35 @@
+{
+  "allFiles": [
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/TicTacToeYou/app/build.gradle.kts",
+      "selection": {
+        "end": {
+          "column": 0,
+          "index": -1,
+          "line": 78
+        },
+        "start": {
+          "column": 0,
+          "index": -1,
+          "line": 78
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/TicTacToeYou/renovate.json",
+      "selection": {
+        "end": {
+          "column": 29,
+          "index": -1,
+          "line": 3
+        },
+        "start": {
+          "column": 29,
+          "index": -1,
+          "line": 3
+        }
+      }
+    }
+  ],
+  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/TicTacToeYou/renovate.json"
+}
