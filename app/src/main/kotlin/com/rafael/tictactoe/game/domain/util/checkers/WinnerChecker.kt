@@ -1,6 +1,5 @@
 package com.rafael.tictactoe.game.domain.util
 
-<<<<<<< HEAD
 import android.content.Context
 import com.rafael.tictactoe.game.domain.util.WinnerSound
 import com.rafael.tictactoe.game.domain.util.VictoryCounterUpdater
@@ -14,16 +13,6 @@ fun WinnerChecker(
     card: List<List<Boolean>>,
     isCardClicked: List<List<Boolean>>
 ) {
-=======
-import com.rafael.tictactoe.game.domain.util.VictoryCounterUpdater
-import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
-
-fun WinnerChecker(
-    vm: GameViewModel,
-    card: List<List<Boolean>>,
-    isCardClicked: List<List<Boolean>>
-) {   
->>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2
     val winningPositions = listOf(
         // Lines
         listOf(Pair(0, 0), Pair(0, 1), Pair(0, 2)),
@@ -61,11 +50,6 @@ fun WinnerChecker(
     if (winner) {
         vm.updateIsGameFinished(true)
         VictoryCounterUpdater(vm)
-<<<<<<< HEAD
         WinnerSound(context, vm, settingsVM)
     }
 }
-=======
-    }
-}
->>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2

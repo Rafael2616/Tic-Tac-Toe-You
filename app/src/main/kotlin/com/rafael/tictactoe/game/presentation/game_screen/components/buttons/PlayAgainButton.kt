@@ -18,10 +18,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-<<<<<<< HEAD
 import androidx.compose.runtime.rememberCoroutineScope
-=======
->>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -32,18 +29,10 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.UiClickSound
-<<<<<<< HEAD
-import com.rafael.tictactoe.game.domain.util.RandomCardSorter
-=======
->>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2
 import com.rafael.tictactoe.game.domain.util.RestartGame
 import com.rafael.tictactoe.game.domain.util.RestartButtonLogic
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
-<<<<<<< HEAD
-import kotlinx.coroutines.launch
-=======
->>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2
 
 @Composable
 fun PlayAgainButton() {
@@ -51,11 +40,7 @@ fun PlayAgainButton() {
     val settingsVM = hiltViewModel<SettingsViewModel>()
     val context = LocalContext.current
 	val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
-<<<<<<< HEAD
-    val scope = rememberCoroutineScope()
-=======
->>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2
-	
+    
 	RestartButtonLogic(viewModel)
 
     Box(
@@ -79,12 +64,6 @@ fun PlayAgainButton() {
                         viewModel.updateIsExpandButtonShown(false)
 						UiClickSound(context, isSoundEffectsOn)
              		   RestartGame(viewModel)
-<<<<<<< HEAD
-                        scope.launch {
-                            RandomCardSorter(viewModel, settingsVM, context)
-                        }
-=======
->>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2
                     })
             ) {
                 Image(

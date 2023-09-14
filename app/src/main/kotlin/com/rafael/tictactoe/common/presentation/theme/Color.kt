@@ -11,11 +11,7 @@ val md_theme_light_onSecondary = Color(0xFFFFFFFF)
 val md_theme_light_secondaryContainer = Color(0xFFE8DEF8)
 val md_theme_light_onSecondaryContainer = Color(0xFF1E192B)
 val md_theme_light_tertiary = Color(0xFF7E5260)
-<<<<<<< HEAD
 val md_theme_light_onTertiary = Color(0xFFFFFFFF)
-=======
-val md_theme_light_onTertiary = Color(0xFF000000)
->>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2
 val md_theme_light_tertiaryContainer = Color(0xFFFFD9E3)
 val md_theme_light_onTertiaryContainer = Color(0xFF31101D)
 val md_theme_light_error = Color(0xFFBA1A1A)
@@ -37,10 +33,6 @@ val md_theme_light_surfaceTint = Color(0xFF6750A4)
 val md_theme_light_outlineVariant = Color(0xFFCAC4CF)
 val md_theme_light_scrim = Color(0xFF000000)
 
-<<<<<<< HEAD
-=======
-
->>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2
 val md_theme_dark_primary = Color(0xFFCFBCFF)
 val md_theme_dark_onPrimary = Color(0xFF381E72)
 val md_theme_dark_primaryContainer = Color(0xFF4F378A)
@@ -50,11 +42,7 @@ val md_theme_dark_onSecondary = Color(0xFF332D41)
 val md_theme_dark_secondaryContainer = Color(0xFF4A4458)
 val md_theme_dark_onSecondaryContainer = Color(0xFFE8DEF8)
 val md_theme_dark_tertiary = Color(0xFFEFB8C8)
-<<<<<<< HEAD
 val md_theme_dark_onTertiary = Color(0xFF4A2532)
-=======
-val md_theme_dark_onTertiary = Color(0xFFFFFFFF)
->>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2
 val md_theme_dark_tertiaryContainer = Color(0xFF633B48)
 val md_theme_dark_onTertiaryContainer = Color(0xFFFFD9E3)
 val md_theme_dark_error = Color(0xFFFFB4AB)
@@ -78,7 +66,6 @@ val md_theme_dark_scrim = Color(0xFF000000)
 
 
 val seed = Color(0xFF6750A4)
-<<<<<<< HEAD
 val CustomColor1 = Color(0xFF8382FF)
 val CustomColor2 = Color(0xFF00A7DB)
 val light_CustomColor1 = Color(0xFF504DC8)
@@ -97,14 +84,3 @@ val dark_CustomColor2 = Color(0xFF73D1FF)
 val dark_onCustomColor2 = Color(0xFF003548)
 val dark_CustomColor2Container = Color(0xFF004D67)
 val dark_onCustomColor2Container = Color(0xFFC1E8FF)
-=======
-val CustomColor4 = Color(0xFF592D58)
-val light_CustomColor4 = Color(0xFF884588)
-val light_onCustomColor4 = Color(0xFFFFFFFF)
-val light_CustomColor4Container = Color(0xFFFFD6F8)
-val light_onCustomColor4Container = Color(0xFF37003A)
-val dark_CustomColor4 = Color(0xFFFCABF6)
-val dark_onCustomColor4 = Color(0xFF531356)
-val dark_CustomColor4Container = Color(0xFF6D2C6E)
-val dark_onCustomColor4Container = Color(0xFFFFD6F8)
->>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2

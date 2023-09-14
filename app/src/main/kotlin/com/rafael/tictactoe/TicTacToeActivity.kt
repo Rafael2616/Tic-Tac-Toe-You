@@ -31,15 +31,9 @@ class TicTacToeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-<<<<<<< HEAD
             AppTheme() {         
                 Surface(
                     color = MaterialTheme.colorScheme.background,
-=======
-            AppTheme() {
-                Surface(
-                    color = MaterialTheme.colorScheme.surface,
->>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2
                     modifier = Modifier.fillMaxSize()
                 ) {
                     NavGraph(this, gameUtil)
@@ -57,8 +51,4 @@ class TicTacToeActivity : ComponentActivity() {
         BackgroundMusic(this, settingsVM.isBackgroundMusicOn.value)
         super.onResume()
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2

@@ -46,13 +46,8 @@ fun SettingsTopBar(navController: NavController) {
                 navigationIcon = {
                     IconButton(
                         onClick = {
-<<<<<<< HEAD
                         	UiClickSound(context, isSoundEffectsOn)
 				            viewModel.updateIsAboutShown(false)
-=======
-                            UiClickSound(context, isSoundEffectsOn)
-			    viewModel.updateIsAboutShown(false)
->>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2
                             navController.popBackStack()
                         }
                     ) {
@@ -68,8 +63,4 @@ fun SettingsTopBar(navController: NavController) {
     ) { paddingValues ->
         SettingsOptionsImpl(paddingValues)
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2

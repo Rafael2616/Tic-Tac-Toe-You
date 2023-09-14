@@ -17,13 +17,8 @@
 #  Uncomment the following line in case you need and you don't have the release build type files in your app
 # Gradle files
 .gradle/
-<<<<<<< HEAD
-.git/
-/build/
-=======
 /build/
 gradle/wrapper/
->>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2
 
 # Local configuration file (sdk path, etc)
 local.properties
@@ -87,3 +82,8 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 # lint/reports/
+
+# Others files
+
+.git/
+.androidide/

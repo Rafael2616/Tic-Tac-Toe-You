@@ -16,7 +16,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
-<<<<<<< HEAD
 /*
 import android.app.Activity
 import androidx.compose.runtime.SideEffect 
@@ -24,9 +23,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView 
 import androidx.core.view.WindowCompat
 */
-=======
 
->>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2
 private val LightColors = lightColorScheme(
     primary = md_theme_light_primary,
     onPrimary = md_theme_light_onPrimary,
@@ -94,11 +91,7 @@ private val DarkColors = darkColorScheme(
 @Composable
 fun AppTheme(
     isSystemInDarkTheme: Boolean = isSystemInDarkTheme(),
-<<<<<<< HEAD
     content: @Composable () -> Unit
-=======
-    content: @Composable() () -> Unit
->>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2
 ) {
     val viewModel = hiltViewModel<SettingsViewModel>()
     val isDarkThemeOn by viewModel.isDarkThemeOn.collectAsState()
@@ -144,7 +137,6 @@ fun AppTheme(
     }
     
     systemUiController.setSystemBarsColor(color = colors.surface)
-<<<<<<< HEAD
      
     // TODO replace system ui controller setSystemVarsColors for the code below when this library
     // is deprecated  
@@ -159,6 +151,3 @@ fun AppTheme(
     }
 */
 }
-=======
-}
->>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2

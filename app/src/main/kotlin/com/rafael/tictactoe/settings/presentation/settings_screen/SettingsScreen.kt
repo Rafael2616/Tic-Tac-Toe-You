@@ -10,8 +10,4 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.components.Set
 fun SettingsScreen(navController: NavController) {
 
     SettingsTopBar(navController)
-<<<<<<< HEAD
-
-=======
->>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2
 }

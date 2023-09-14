@@ -15,11 +15,7 @@ fun CardGridSound(
 ) {
     val isPlayer1 = viewModel.isPlayer1.value
     val isSoundEffectsOn = settingsVM.isSoundEffectsOn.value
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2
 	if (isSoundEffectsOn) {	
    	 val exoPlayer = ExoPlayer.Builder(context).build()
 		val clickSoundFile = R.raw.click1_sound
