@@ -3,14 +3,8 @@ package com.rafael.tictactoe
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Assert.*
-<<<<<<< HEAD
 import org.junit.runner.RunWith
 import org.junit.Test
-=======
-import org.junit.Test
-import org.junit.runner.RunWith
-
->>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -25,8 +19,4 @@ class ExampleInstrumentedTest {
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         assertEquals("com.rafael.tictactoe", appContext.packageName)
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> d5ae19674af2cd8a0b6887db5d50fae73d9b1ae2
