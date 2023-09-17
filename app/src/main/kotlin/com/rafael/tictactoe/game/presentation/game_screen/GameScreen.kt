@@ -5,6 +5,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -29,6 +30,7 @@ import com.rafael.tictactoe.game.domain.util.WinnerChecker
 import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
 import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinatesTest
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
+import kotlinx.coroutines.launch
 
 @Composable
 fun GameScreen(
@@ -47,10 +49,11 @@ fun GameScreen(
     val isGameFinished by viewModel.isGameFinished.collectAsState()
     val playerName = gameUtil.playerName
     val context = LocalContext.current
+    val scope = rememberCoroutineScope()
 
     viewModel.updateIsCPUMode(isCPUMode)
     
-	//Conditions for each UI component function to be called
+	//Handle when each UI component function will be called
 
     //When GameScreen starts
     CardGrid()
@@ -86,8 +89,10 @@ fun GameScreen(
 
     //Conditions for some business logic funcions to be called
     if (play) {
-        GotOldChecker(viewModel, settingsVM, context)
-        WinnerChecker(viewModel, settingsVM, context, card, isCardClicked)
     	RestartButtonLogic(viewModel)
+        WinnerChecker(viewModel, settingsVM, context, card, isCardClicked)
+        scope.launch {
+            GotOldChecker(viewModel, settingsVM, context, isCardClicked)
+        }
     }
 }

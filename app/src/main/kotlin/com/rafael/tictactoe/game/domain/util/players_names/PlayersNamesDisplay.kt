@@ -24,6 +24,7 @@ class PlayersNamesDisplay() {
         val play by vm.play.collectAsState()
         val emptyPlayerName = context.getString(R.string.player)
 
+        //Handle first player name when game is in setup fase/not started yet
         if (!play) {
             if (localPlayer1) {
                 if (player1Name.isEmpty()) {
@@ -48,6 +49,7 @@ class PlayersNamesDisplay() {
             }
         }
 
+        //Handle first player name when game is ongoing or finished
         if (play) {
             if (player1Name.isEmpty() || player1Name == "$emptyPlayerName") {
                 if (isXFor1) {
@@ -77,6 +79,7 @@ class PlayersNamesDisplay() {
 
         if (isCPUMode) vm.updatePlayer2Name("CPU")
 
+        //Handle second player name when game is in setup fase/not started yet
         if (!play) {
             if (localPlayer1) {
                 if (player2Name.isEmpty()) {
@@ -101,6 +104,7 @@ class PlayersNamesDisplay() {
             }
         }
 
+        //Handle second player name when game is ongoing or finished
         if (play) {
             if (player2Name.isEmpty() || player2Name == "$emptyPlayerName") {
                 if (isXFor1) {

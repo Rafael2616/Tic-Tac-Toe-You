@@ -15,8 +15,12 @@ fun RestartGame(vm: GameViewModel) {
 
     if (is1Win && isXFor1) {
         vm.updateIsXImage(true)
-    } else {
+    } else if (is1Win && !isXFor1){
         vm.updateIsXImage(false)
+    } else if (!is1Win && isXFor1) {
+        vm.updateIsXImage(false)
+    } else {
+        vm.updateIsXImage(true)
     }
  
     vm.updateWinner(false)
