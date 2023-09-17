@@ -76,9 +76,17 @@ fun ToastNameHandler() {
    //Current player name for case of has winner   
     if (winner) {
         if (is1Win) {
-            vm.updateCurrentPlayerName(player1Name)
+           if (player1Name.isEmpty()) {
+                vm.updateCurrentPlayerName(emptyPlayerName)
+           } else {
+                vm.updateCurrentPlayerName(player1Name)
+           }         
         } else {
-            vm.updateCurrentPlayerName(secondPlayerName)
+            if (player2Name.isEmpty()) {
+                vm.updateCurrentPlayerName(emptyPlayerName)
+        } else {
+                vm.updateCurrentPlayerName(secondPlayerName)
+            }
         }
     }
 
