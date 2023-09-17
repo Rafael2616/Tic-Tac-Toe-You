@@ -50,7 +50,7 @@ suspend fun CardGridClickHandler(
             vm.updateIsCardClicked(rowIndex, cardIndex, true)
             vm.updateIsXImage(!isXImage)
             vm.updateIsPlayer1(true)
-         }
+        }
         CardGridSound(context, vm, settingsVM)
     }
        

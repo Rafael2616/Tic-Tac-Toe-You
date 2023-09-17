@@ -189,6 +189,7 @@ fun GetPlayerPrefsCard() {
                         viewModel.updatePlay(true)
                         viewModel.updatePlayer1Name(player1Value)
                         viewModel.updatePlayer2Name(player2Value)
+                        viewModel.updateIsXImage(isXFor1)
                         systemUiController.setSystemBarsColor(color = colorSurface)
                     },
                     modifier = Modifier

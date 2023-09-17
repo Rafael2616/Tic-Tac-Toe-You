@@ -24,8 +24,7 @@ fun ToastImageHandler(): Painter {
     
     //Image showed when game not started yet
 	if (!play) {
-	    viewModel.updateIsXImage(isXFor1)
-       toastImage = if (isXFor1) xImageMax else circleImageMax
+        toastImage = if (isXFor1) xImageMax else circleImageMax
         
         return toastImage
 	}
