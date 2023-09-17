@@ -41,15 +41,15 @@ suspend fun CardGridClickHandler(
     //PvP Mode
 	if (!isCPUMode) {
         if (isPlayer1) {
+ 	       vm.updateCard(rowIndex, cardIndex, isXImage)
+			vm.updateIsCardClicked(rowIndex, cardIndex, true)
             vm.updateIsXImage(!isXImage)
 			vm.updateIsPlayer1(false)
-	        vm.updateCard(rowIndex, cardIndex, isXFor1)
-			vm.updateIsCardClicked(rowIndex, cardIndex, true)
         } else {
+            vm.updateCard(rowIndex, cardIndex, isXImage)
+            vm.updateIsCardClicked(rowIndex, cardIndex, true)
             vm.updateIsXImage(!isXImage)
             vm.updateIsPlayer1(true)
-            vm.updateCard(rowIndex, cardIndex, !isXFor1)
-            vm.updateIsCardClicked(rowIndex, cardIndex, true)
          }
         CardGridSound(context, vm, settingsVM)
     }

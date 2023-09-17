@@ -12,18 +12,44 @@ import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewMod
 class PlayersNamesDisplay() {
 
     @Composable
-	fun firstPlayerName() {
+    fun firstPlayerName() {
         val vm = hiltViewModel<GameViewModel>()
         val context = LocalContext.current
         val isXFor1 by vm.isXFor1.collectAsState()
         val player1Name by vm.player1Name.collectAsState()
         val player2Name by vm.player2Name.collectAsState()
         val genericPlayerX = context.getString(R.string.player_x)
-	    val genericPlayerO = context.getString(R.string.player_o)
+        val genericPlayerO = context.getString(R.string.player_o)
         val localPlayer1 by vm.localPlayer1.collectAsState()
+        val play by vm.play.collectAsState()
+        val emptyPlayerName = context.getString(R.string.player)
 
-        if (localPlayer1) {
-            if (player1Name.isEmpty()) {
+        if (!play) {
+            if (localPlayer1) {
+                if (player1Name.isEmpty()) {
+                    if (isXFor1) {
+                        vm.showPlayer1Name(genericPlayerX)
+                    } else {
+                        vm.showPlayer1Name(genericPlayerO)
+                    }
+                } else {
+                    vm.showPlayer1Name(player1Name)
+                }
+            } else {
+                if (player2Name.isEmpty()) {
+                    if (isXFor1) {
+                        vm.showPlayer1Name(genericPlayerX)
+                    } else {
+                        vm.showPlayer1Name(genericPlayerO)
+                    }
+                } else {
+                    vm.showPlayer1Name(player2Name)
+                }
+            }
+        }
+
+        if (play) {
+            if (player1Name.isEmpty() || player1Name == "$emptyPlayerName") {
                 if (isXFor1) {
                     vm.showPlayer1Name(genericPlayerX)
                 } else {
@@ -31,36 +57,52 @@ class PlayersNamesDisplay() {
                 }
             } else {
                 vm.showPlayer1Name(player1Name)
-            }       
-        } else {
-            if (player2Name.isEmpty()) {
-                if (isXFor1) {
-                    vm.showPlayer1Name(genericPlayerX)
-                } else {
-                    vm.showPlayer1Name(genericPlayerO)
-                }
-            } else {
-		    	vm.showPlayer1Name(player2Name)
             }
         }
     }
 
     @Composable
-	fun secondPlayerName() {
+    fun secondPlayerName() {
         val vm = hiltViewModel<GameViewModel>()
         val context = LocalContext.current
         val isXFor1 by vm.isXFor1.collectAsState()
         val player1Name by vm.player1Name.collectAsState()
         val player2Name by vm.player2Name.collectAsState()
-	    val genericPlayerO = context.getString(R.string.player_o)
+        val genericPlayerO = context.getString(R.string.player_o)
         val isCPUMode by vm.isCPUMode.collectAsState()
-	    val genericPlayerX = context.getString(R.string.player_x)
+        val genericPlayerX = context.getString(R.string.player_x)
         val localPlayer1 by vm.localPlayer1.collectAsState()
-     
+        val play by vm.play.collectAsState()
+        val emptyPlayerName = context.getString(R.string.player)
+
         if (isCPUMode) vm.updatePlayer2Name("CPU")
 
-        if (localPlayer1) {
-            if (player2Name.isEmpty()) {
+        if (!play) {
+            if (localPlayer1) {
+                if (player2Name.isEmpty()) {
+                    if (isXFor1) {
+                        vm.showPlayer2Name(genericPlayerO)
+                    } else {
+                        vm.showPlayer2Name(genericPlayerX)
+                    }
+                } else {
+                    vm.showPlayer2Name(player2Name)
+                }
+            } else {
+                if (player1Name.isEmpty()) {
+                    if (isXFor1) {
+                        vm.showPlayer2Name(genericPlayerO)
+                    } else {
+                        vm.showPlayer2Name(genericPlayerX)
+                    }
+                } else {
+                    vm.showPlayer2Name(player1Name)
+                }
+            }
+        }
+
+        if (play) {
+            if (player2Name.isEmpty() || player2Name == "$emptyPlayerName") {
                 if (isXFor1) {
                     vm.showPlayer2Name(genericPlayerO)
                 } else {
@@ -68,16 +110,6 @@ class PlayersNamesDisplay() {
                 }
             } else {
                 vm.showPlayer2Name(player2Name)
-            }       
-        } else {
-            if (player1Name.isEmpty()) {
-                if (isXFor1) {
-                    vm.showPlayer2Name(genericPlayerO)
-                } else {
-                    vm.showPlayer2Name(genericPlayerX)
-                }
-            } else {
-		    	vm.showPlayer2Name(player1Name)
             }
         }
     }
