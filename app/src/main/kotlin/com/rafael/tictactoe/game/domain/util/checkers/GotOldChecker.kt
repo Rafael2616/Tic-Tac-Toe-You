@@ -20,8 +20,8 @@ suspend fun GotOldChecker(
 		vm.updateGotOld(false)
 	}
  
-    vm.gotOld.collect { hasGotOld ->
-        if (hasgotOld) {
+    vm.gotOld.collect { updatedGotOldState ->
+        if (updatedGotOldState) {
             vm.updateIsGameFinished(true)
             GotOldSound(context, vm, settingsVM)
         }
