@@ -45,6 +45,8 @@ class GameViewModel @Inject constructor(
 	val isXFor1: StateFlow<Boolean> = _isXFor1
 	private var _isPlayer1 = MutableStateFlow(true)
 	val isPlayer1: StateFlow<Boolean> = _isPlayer1
+	private var _localPlayer1 = MutableStateFlow(true)
+	val localPlayer1: StateFlow<Boolean> = _localPlayer1
 
 	private var _isScoreUp = MutableStateFlow(false)
 	val isScoreUp: StateFlow<Boolean> = _isScoreUp
@@ -81,7 +83,6 @@ class GameViewModel @Inject constructor(
 
 	private var _isCPU = MutableStateFlow(false)
 	val isCPU: StateFlow<Boolean> = _isCPU
-
 	private var _isCPUMode = MutableStateFlow(false)
 	val isCPUMode: StateFlow<Boolean> = _isCPUMode
 
@@ -147,6 +148,10 @@ class GameViewModel @Inject constructor(
 
     fun updateIsPlayer1(newValue: Boolean) {
         _isPlayer1.value = newValue
+    }
+
+    fun updateLocalPlayer1(newValue: Boolean) {
+        _localPlayer1.value = newValue
     }
 
     fun updateIsScoreUp(newValue: Boolean) {

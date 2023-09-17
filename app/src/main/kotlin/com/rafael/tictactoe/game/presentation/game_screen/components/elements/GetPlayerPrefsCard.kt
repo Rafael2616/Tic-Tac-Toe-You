@@ -50,8 +50,9 @@ fun GetPlayerPrefsCard() {
     val player1Name by viewModel.player1Name.collectAsState()
     val player2Name by viewModel.player2Name.collectAsState()
     val maxLength = 10
-    val player1Value = if (isPlayer1) player1Name else player2Name
-    val player2Value = if (isPlayer1) player2Name else player1Name
+    val localPlayer1 by viewModel.localPlayer1.collectAsState()
+    var player1Value = if (localPlayer1) player1Name else player2Name
+    var player2Value = if (localPlayer1) player2Name else player1Name
     val isCPUMode by viewModel.isCPUMode.collectAsState()
 	val systemUiController = rememberSystemUiController()
     val colorSurface = MaterialTheme.colorScheme.surface
@@ -94,7 +95,7 @@ fun GetPlayerPrefsCard() {
                         value = player1Value,
                         onValueChange = {
                             if (it.length <= maxLength) {
-                                if (isPlayer1) viewModel.updatePlayer1Name(it) else viewModel.updatePlayer2Name(it)
+                                if (localPlayer1) viewModel.updatePlayer1Name(it) else viewModel.updatePlayer2Name(it)
                             }
                         },
                         label = {
@@ -112,8 +113,8 @@ fun GetPlayerPrefsCard() {
                             .width(60.dp)
                             .height(85.dp)
                             .clickable(onClick = {
-                                UiClickSound(context, isSoundEffectsOn)
-                                viewModel.updateIsPlayer1(!isPlayer1)
+                                UiClickSound(context, isSoundEffectsOn)                            
+                                viewModel.updateLocalPlayer1(!localPlayer1)
                                 PlayersImagesSetter(viewModel)
                             })
                     ) {
@@ -127,7 +128,7 @@ fun GetPlayerPrefsCard() {
                         value = player2Value,
                         onValueChange = {
                             if (it.length <= maxLength) {
-                                if (isPlayer1) viewModel.updatePlayer2Name(it) else viewModel.updatePlayer1Name(it)
+                                if (localPlayer1) viewModel.updatePlayer2Name(it) else viewModel.updatePlayer1Name(it)
                             }
                         },
                         label = {
@@ -186,6 +187,8 @@ fun GetPlayerPrefsCard() {
                     onClick = {
                         UiClickSound(context, isSoundEffectsOn)
                         viewModel.updatePlay(true)
+                        viewModel.updatePlayer1Name(player1Value)
+                        viewModel.updatePlayer2Name(player2Value)
                         systemUiController.setSystemBarsColor(color = colorSurface)
                     },
                     modifier = Modifier

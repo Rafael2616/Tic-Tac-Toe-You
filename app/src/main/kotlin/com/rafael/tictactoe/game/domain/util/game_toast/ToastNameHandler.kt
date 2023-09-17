@@ -30,6 +30,7 @@ fun ToastNameHandler() {
     var timer by rememberSaveable { mutableIntStateOf(4) }
     val scope = rememberCoroutineScope()
     val isCPUMode by vm.isCPUMode.collectAsState()
+    val localPlayer1 by vm.localPlayer1.collectAsState()
     val emptyPlayerName = context.getString(R.string.player)
     val cpuName = context.getString(R.string.cpu)
 
@@ -55,19 +56,38 @@ fun ToastNameHandler() {
     } else {
         player2Name 
     }
-
-    //Current player name for case of game is ongoing
-    if (!winner) {
-        if (isPlayer1) {
-           if (player1Name.isEmpty()) {
-                vm.updateCurrentPlayerName(emptyPlayerName)
+    
+    //Current player name for case of game not started yet
+    if (!play) {
+        if (localPlayer1) {
+            if (player1Name.isEmpty()) {
+               vm.updateCurrentPlayerName(emptyPlayerName)
            } else {
                 vm.updateCurrentPlayerName(player1Name)
            }         
         } else {
             if (player2Name.isEmpty()) {
                 vm.updateCurrentPlayerName(emptyPlayerName)
+            } else {
+                vm.updateCurrentPlayerName(secondPlayerName)
+            }
+        }
+    }
+   
+    //Current player name for case of game is ongoing
+    if (play && !winner) {
+        if (isPlayer1) {
+            if (player1Name.isEmpty()) {
+                vm.updateCurrentPlayerName(emptyPlayerName)
+                vm.updatePlayer1Name(emptyPlayerName)
+           } else {
+                vm.updateCurrentPlayerName(player1Name)
+           }
         } else {
+            if (player2Name.isEmpty()) {
+                vm.updateCurrentPlayerName(emptyPlayerName)
+                vm.updatePlayer2Name(emptyPlayerName)
+            } else {
                 vm.updateCurrentPlayerName(secondPlayerName)
             }
         }
