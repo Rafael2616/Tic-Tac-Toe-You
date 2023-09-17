@@ -30,11 +30,9 @@ fun RandomCardSorter(
         return
     }
 
-   if (isCardClicked[randomPosition][secRandomPosition]) {  
-       while (isCardClicked[randomPosition][secRandomPosition]) {
-            randomPosition = (0 until isCardClicked[0].size).random()
-            secRandomPosition = (0 until isCardClicked[1].size).random()
-        }
+    while (isCardClicked[randomPosition][secRandomPosition]) {
+        randomPosition = (0 until isCardClicked[0].size).random()
+        secRandomPosition = (0 until isCardClicked[1].size).random()
     }
 
     if (isCPU) {

@@ -79,18 +79,11 @@ class GameViewModel @Inject constructor(
 	private var _showPlayer2Name = MutableStateFlow("")
 	val showPlayer2Name: StateFlow<String> = _showPlayer2Name
 
-	private var _playerName = MutableStateFlow("")
-	val playerName: StateFlow<String> = _playerName
-
 	private var _isCPU = MutableStateFlow(false)
 	val isCPU: StateFlow<Boolean> = _isCPU
 
 	private var _isCPUMode = MutableStateFlow(false)
 	val isCPUMode: StateFlow<Boolean> = _isCPUMode
-
-    fun updatePlayerName(newValue: String) {
-        _playerName.value = newValue
-    }
 
     fun updateCurrentPlayerName(newValue: String) {
         _currentPlayerName.value = newValue

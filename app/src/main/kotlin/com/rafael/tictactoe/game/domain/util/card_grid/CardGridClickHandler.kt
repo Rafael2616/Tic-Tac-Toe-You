@@ -43,12 +43,12 @@ suspend fun CardGridClickHandler(
         if (isPlayer1) {
             vm.updateIsXImage(!isXImage)
 			vm.updateIsPlayer1(false)
-	        vm.updateCard(rowIndex, cardIndex, isXImage)
+	        vm.updateCard(rowIndex, cardIndex, isXFor1)
 			vm.updateIsCardClicked(rowIndex, cardIndex, true)
         } else {
             vm.updateIsXImage(!isXImage)
             vm.updateIsPlayer1(true)
-            vm.updateCard(rowIndex, cardIndex, isXImage)
+            vm.updateCard(rowIndex, cardIndex, !isXFor1)
             vm.updateIsCardClicked(rowIndex, cardIndex, true)
          }
         CardGridSound(context, vm, settingsVM)
