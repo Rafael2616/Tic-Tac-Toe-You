@@ -41,7 +41,7 @@ class SettingsViewModel @Inject constructor(
     //Initialize ViewModel StateFlows Variables with corresponding values in SettingsRepository
 	init {
   	  viewModelScope.launch(Dispatchers.IO) {
-	      var settings = repository.getAllSettingsValues(1).first()  ?: defaultSettings
+	    var settings = repository.getAllSettingsValues(1).first()  ?: defaultSettings
    	 	_isBackgroundMusicOn.value = settings.isBackgroundMusicOn
     	    _isDarkThemeOn.value = settings.isDarkThemeOn
     	    _isDynamicColorsOn.value = settings.isDynamicColorsOn

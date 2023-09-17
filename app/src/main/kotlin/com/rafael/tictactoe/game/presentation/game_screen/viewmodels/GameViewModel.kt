@@ -37,11 +37,11 @@ class GameViewModel @Inject constructor(
     
 	private var _play = MutableStateFlow(false)
 	val play: StateFlow<Boolean> = _play
-	private var _isXImage = MutableStateFlow(false)
+	private var _isXImage = MutableStateFlow(true)
 	val isXImage: StateFlow<Boolean> = _isXImage
 	private var _is1Win = MutableStateFlow(false)
 	val is1Win: StateFlow<Boolean> = _is1Win
-	private var _isXFor1 = MutableStateFlow(false)
+	private var _isXFor1 = MutableStateFlow(true)
 	val isXFor1: StateFlow<Boolean> = _isXFor1
 	private var _isPlayer1 = MutableStateFlow(true)
 	val isPlayer1: StateFlow<Boolean> = _isPlayer1
@@ -113,21 +113,17 @@ class GameViewModel @Inject constructor(
     }
 
     fun updateIsCardClicked(rowIndex: Int, cardIndex: Int, newValue: Boolean) {
-        if (!_isGameFinished.value) {
-            _isCardClicked.value = _isCardClicked.value.toMutableList().apply {
-                this[rowIndex] = this[rowIndex].toMutableList().apply {
-                    this[cardIndex] = newValue
-                }
+        _isCardClicked.value = _isCardClicked.value.toMutableList().apply {
+            this[rowIndex] = this[rowIndex].toMutableList().apply {
+                this[cardIndex] = newValue
             }
         }
     }
 
     fun updateCard(rowIndex: Int, cardIndex: Int, newValue: Boolean) {
-        if (!_isGameFinished.value) {
-            _card.value = _card.value.toMutableList().apply {
-                this[rowIndex] = this[rowIndex].toMutableList().apply {
-                    this[cardIndex] = newValue
-                }
+        _card.value = _card.value.toMutableList().apply {
+            this[rowIndex] = this[rowIndex].toMutableList().apply {
+                this[cardIndex] = newValue
             }
         }
     }

@@ -35,9 +35,9 @@ fun SettingsOptionsImpl(paddingValues: PaddingValues) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         items(cards.size) { index ->
-            if (((index == 1) && (!isFollowingSystemOn)) ||
-                ((index == 2) && (isDynamicColorsSupported)) ||
-                ((index != 1) && (index != 2))) {
+            if ((index == 1 && !isFollowingSystemOn) ||
+                (index == 2 && isDynamicColorsSupported) ||
+                (index != 1 && index != 2)) {
                 SettingsOptions(index)
             }
         }

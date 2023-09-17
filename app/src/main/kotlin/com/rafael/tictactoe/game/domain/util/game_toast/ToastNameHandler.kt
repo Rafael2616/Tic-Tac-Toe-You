@@ -25,15 +25,16 @@ fun ToastNameHandler() {
     val player1Name by vm.player1Name.collectAsState()
     val player2Name by vm.player2Name.collectAsState()
     val isPlayer1 by vm.isPlayer1.collectAsState()
-    val playerName by vm.playerName.collectAsState()
+    val is1Win by vm.is1Win.collectAsState()
     val isTimerOn by vm.isTimerOn.collectAsState()
     var timer by rememberSaveable { mutableIntStateOf(4) }
     val scope = rememberCoroutineScope()
     val isCPUMode by vm.isCPUMode.collectAsState()
     val emptyPlayerName = context.getString(R.string.player)
+    val cpuName = context.getString(R.string.cpu)
 
     //Counter showed when game starts
-     if (play && isTimerOn) {
+    if (play && isTimerOn) {
         scope.launch {
             while (isTimerOn) {
                 delay(500L)
@@ -48,47 +49,40 @@ fun ToastNameHandler() {
         }
     }
 
-    //Defines witch neme will be showed in case of is versus CPU Mode
+    //Handle second player name for case of is versus CPU Mode
     val secondPlayerName = if (isCPUMode) {
-        "CPU"
+        cpuName
     } else {
         player2Name 
     }
 
-    //Assert player name to show for cases of game is ongoing or has winner
+    //Current player name for case of game is ongoing
     if (!winner) {
         if (isPlayer1) {
-            vm.updatePlayerName(player1Name)
+           if (player1Name.isEmpty()) {
+                vm.updateCurrentPlayerName(emptyPlayerName)
+           } else {
+                vm.updateCurrentPlayerName(player1Name)
+           }         
         } else {
-            vm.updatePlayerName(secondPlayerName)
-        }
-    } else {
-        if (!isPlayer1) {
-            vm.updatePlayerName(player1Name)
+            if (player2Name.isEmpty()) {
+                vm.updateCurrentPlayerName(emptyPlayerName)
         } else {
-            vm.updatePlayerName(secondPlayerName)
+                vm.updateCurrentPlayerName(secondPlayerName)
+            }
         }
-        return
     }
-    
-    //Live update of current player name showed in toast game
-    if (player1Name.isEmpty() && player2Name.isEmpty()) {
-		vm.updateCurrentPlayerName(emptyPlayerName)
-    } else if (player1Name.isNotBlank() && player2Name.isNotBlank()) {
-		vm.updateCurrentPlayerName(playerName)
-    } else if (player1Name.isEmpty() && player2Name.isNotBlank() && isPlayer1) {
-		vm.updateCurrentPlayerName(emptyPlayerName)
-    } else if (player1Name.isEmpty() && player2Name.isNotBlank() && !isPlayer1) {
-		vm.updateCurrentPlayerName(secondPlayerName)
-    } else if (player1Name.isNotBlank() && player2Name.isEmpty() && isPlayer1) {
-		vm.updateCurrentPlayerName(player1Name)
-    } else if (player1Name.isNotBlank() && player2Name.isEmpty() && !isPlayer1) {
-		vm.updateCurrentPlayerName(emptyPlayerName)
-    } else {
-		vm.updateCurrentPlayerName("no name found")
+ 
+   //Current player name for case of has winner   
+    if (winner) {
+        if (is1Win) {
+            vm.updateCurrentPlayerName(player1Name)
+        } else {
+            vm.updateCurrentPlayerName(secondPlayerName)
+        }
     }
-    
-    //In case of got old, update tosst with this default string
+
+    //Current player name for case of got old
 	 if (gotOld) {
 		vm.updateCurrentPlayerName(context.getString(R.string.got_old))
     }

@@ -30,19 +30,24 @@ fun RandomCardSorter(
         return
     }
 
-    while (isCardClicked[randomPosition][secRandomPosition]) {
-        randomPosition = (0 until isCardClicked[0].size).random()
-        secRandomPosition = (0 until isCardClicked[1].size).random()
+   if (isCardClicked[randomPosition][secRandomPosition]) {  
+       while (isCardClicked[randomPosition][secRandomPosition]) {
+            randomPosition = (0 until isCardClicked[0].size).random()
+            secRandomPosition = (0 until isCardClicked[1].size).random()
+        }
     }
 
     if (isCPU) {
-        CoroutineScope(Dispatchers.Main).launch {
-            delay(480L)
+        CoroutineScope(Dispatchers.IO).launch {
+            delay(500L)
             vm.updateIsXImage(!isXImage)
             vm.updateCard(randomPosition, secRandomPosition, !isXFor1)
             vm.updateIsCardClicked(randomPosition, secRandomPosition, true)
             vm.updateIsPlayer1(true)           
             vm.updateIsCPU(false)
+        }
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(500L)
             CardGridSound(context, vm, settingsVM)
         }
     }
