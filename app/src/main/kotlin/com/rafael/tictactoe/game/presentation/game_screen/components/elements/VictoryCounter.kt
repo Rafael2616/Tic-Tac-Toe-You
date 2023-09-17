@@ -32,6 +32,7 @@ fun VictoryCounter() {
     val viewModel = hiltViewModel<GameViewModel>()
     val player1Wins by viewModel.player1Wins.collectAsState()
     val player2Wins by viewModel.player2Wins.collectAsState()
+    val isXFor1 by viewModel.isXFor1.collectAsState()
 
     Box(
         modifier = Modifier
@@ -66,7 +67,11 @@ fun VictoryCounter() {
                     Image(
                         contentDescription = null,
                         modifier = Modifier.fillMaxSize(),
-                        painter = painterResource(R.drawable.x_image)
+                        painter = if (isXFor1) {
+                            painterResource(R.drawable.x_image)
+                        } else { 
+                            painterResource(R.drawable.circle_image)
+                        }
                     )
                 }
                 Spacer(
@@ -89,7 +94,11 @@ fun VictoryCounter() {
                     Image(
                         contentDescription = null,
                         modifier = Modifier.fillMaxSize(),
-                        painter = painterResource(R.drawable.circle_image)
+                        painter = if (isXFor1) {
+                            painterResource(R.drawable.circle_image)
+                        } else {
+                            painterResource(R.drawable.x_image)
+                        } 
                     )
                 }
             }

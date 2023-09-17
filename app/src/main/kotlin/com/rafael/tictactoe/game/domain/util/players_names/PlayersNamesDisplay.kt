@@ -18,42 +18,32 @@ class PlayersNamesDisplay() {
         val isXFor1 by vm.isXFor1.collectAsState()
         val player1Name by vm.player1Name.collectAsState()
         val player2Name by vm.player2Name.collectAsState()
-        val isPlayer1 by vm.isPlayer1.collectAsState()
         val genericPlayerX = context.getString(R.string.player_x)
-        val isCPUMode by vm.isCPUMode.collectAsState()
+	    val genericPlayerO = context.getString(R.string.player_o)
+        val localPlayer1 by vm.localPlayer1.collectAsState()
 
-        if (isCPUMode) vm.updatePlayer2Name("CPU")
-    
-	    if (isXFor1) {
- 	       if (isPlayer1) {
-  	          if (player1Name.isEmpty()) {
-				    vm.showPlayer1Name(genericPlayerX)
-  		      } else {
-					vm.showPlayer1Name(player1Name)
-     	       }
-   	     } else {
-    	        if (player2Name.isEmpty()) {
-					vm.showPlayer1Name(genericPlayerX)
-      	      } else {
-					vm.showPlayer1Name(player2Name)
-       	     }
-     	   }
- 	   } else {
-   	     if (isPlayer1) {
-   	         if (player2Name.isEmpty()) {
-					vm.showPlayer1Name(genericPlayerX)
-   	         } else {
-					vm.showPlayer1Name(player2Name)
-     	       }
-    	    } else {
-    	        if (player1Name.isEmpty()) {
-					vm.showPlayer1Name(genericPlayerX)
-    	        } else {
-					vm.showPlayer1Name(player1Name)
-				}
-			}
-		}
-	}
+        if (localPlayer1) {
+            if (player1Name.isEmpty()) {
+                if (isXFor1) {
+                    vm.showPlayer1Name(genericPlayerX)
+                } else {
+                    vm.showPlayer1Name(genericPlayerO)
+                }
+            } else {
+                vm.showPlayer1Name(player1Name)
+            }       
+        } else {
+            if (player2Name.isEmpty()) {
+                if (isXFor1) {
+                    vm.showPlayer1Name(genericPlayerX)
+                } else {
+                    vm.showPlayer1Name(genericPlayerO)
+                }
+            } else {
+		    	vm.showPlayer1Name(player2Name)
+            }
+        }
+    }
 
     @Composable
 	fun secondPlayerName() {
@@ -62,37 +52,33 @@ class PlayersNamesDisplay() {
         val isXFor1 by vm.isXFor1.collectAsState()
         val player1Name by vm.player1Name.collectAsState()
         val player2Name by vm.player2Name.collectAsState()
-        val isPlayer1 by vm.isPlayer1.collectAsState()
 	    val genericPlayerO = context.getString(R.string.player_o)
+        val isCPUMode by vm.isCPUMode.collectAsState()
+	    val genericPlayerX = context.getString(R.string.player_x)
+        val localPlayer1 by vm.localPlayer1.collectAsState()
+     
+        if (isCPUMode) vm.updatePlayer2Name("CPU")
 
-    	if (isXFor1) {
-	    	if (isPlayer1) {
-			    if (player2Name.isEmpty()) {
-				    vm.showPlayer2Name(genericPlayerO)
-				} else {
-					vm.showPlayer2Name(player2Name)
-    	        }
-  	      } else {
-   	     	if (player1Name.isEmpty()) {
-					vm.showPlayer2Name(genericPlayerO)
-    	        } else {
-					vm.showPlayer2Name(player1Name)
-   	         }
-    	    }
-   	 } else {
-   	     if (isPlayer1) {
-    	        if (player1Name.isEmpty()) {
-					vm.showPlayer2Name(genericPlayerO)
-   	 	    } else {
-					vm.showPlayer2Name(player1Name)
-    	        }
-   	     } else {
-    	        if (player2Name.isEmpty()) {
-					vm.showPlayer2Name(genericPlayerO)
-    		    } else {
-					vm.showPlayer2Name(player2Name)
-		        }
-			}
-		}
-	}
+        if (localPlayer1) {
+            if (player2Name.isEmpty()) {
+                if (isXFor1) {
+                    vm.showPlayer2Name(genericPlayerO)
+                } else {
+                    vm.showPlayer2Name(genericPlayerX)
+                }
+            } else {
+                vm.showPlayer2Name(player2Name)
+            }       
+        } else {
+            if (player1Name.isEmpty()) {
+                if (isXFor1) {
+                    vm.showPlayer2Name(genericPlayerO)
+                } else {
+                    vm.showPlayer2Name(genericPlayerX)
+                }
+            } else {
+		    	vm.showPlayer2Name(player1Name)
+            }
+        }
+    }
 }
