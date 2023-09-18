@@ -5,7 +5,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.platform.LocalContext
@@ -14,6 +13,8 @@ import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 
 @Composable
 fun ToastNameHandler() {
@@ -28,7 +29,6 @@ fun ToastNameHandler() {
     val is1Win by vm.is1Win.collectAsState()
     val isTimerOn by vm.isTimerOn.collectAsState()
     var timer by rememberSaveable { mutableIntStateOf(4) }
-    val scope = rememberCoroutineScope()
     val isCPUMode by vm.isCPUMode.collectAsState()
     val localPlayer1 by vm.localPlayer1.collectAsState()
     val emptyPlayerName = context.getString(R.string.player)
@@ -36,15 +36,17 @@ fun ToastNameHandler() {
 
     //Counter showed when game starts
     if (play && isTimerOn) {
-        scope.launch {
+        CoroutineScope(Dispatchers.IO).launch {          
             while (isTimerOn) {
-                delay(500L)
-                timer--
-                if (timer >= 0) {
-                    vm.updateCurrentPlayerName(timer.toString())
-                }
-                if (timer == 0) {
-                    vm.updateIsTimerOn(false)
+                delay(700L)
+                synchronized(context) {
+                    timer--
+                    if (timer >= 0) {
+                        vm.updateCurrentPlayerName(timer.toString())
+                    }
+                    if (timer == 0) {
+                        vm.updateIsTimerOn(false)
+                    }
                 }
             }
         }

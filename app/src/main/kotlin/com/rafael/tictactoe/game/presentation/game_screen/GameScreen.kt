@@ -5,7 +5,6 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -31,6 +30,8 @@ import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
 import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinatesTest
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 
 @Composable
 fun GameScreen(
@@ -49,7 +50,6 @@ fun GameScreen(
     val isGameFinished by viewModel.isGameFinished.collectAsState()
     val playerName = gameUtil.playerName
     val context = LocalContext.current
-    val scope = rememberCoroutineScope()
 
     viewModel.updateIsCPUMode(isCPUMode)
     
@@ -91,8 +91,9 @@ fun GameScreen(
     if (play) {
         WinnerChecker(viewModel, settingsVM, context, card, isCardClicked)
     	RestartButtonLogic(viewModel)
-        scope.launch {
+
+        CoroutineScope(Dispatchers.Main).launch {
             GotOldChecker(viewModel, settingsVM, context, isCardClicked)
-         }
+        }
     }
 }
