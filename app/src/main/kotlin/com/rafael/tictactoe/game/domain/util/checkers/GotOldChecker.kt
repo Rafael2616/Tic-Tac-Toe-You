@@ -11,7 +11,6 @@ suspend fun GotOldChecker(
     context: Context,
     isCardClicked: List<List<Boolean>>
 ) {
-    val gotOld = vm.gotOld.value
     val winner = vm.winner.value
 
 	if ((isCardClicked.flatten().all { it }) && (!winner)) {
@@ -20,8 +19,8 @@ suspend fun GotOldChecker(
 		vm.updateGotOld(false)
 	}
  
-    vm.gotOld.collect { updatedGotOldState ->
-        if (updatedGotOldState) {
+    vm.gotOld.collect { hasGotOld ->
+        if (hasGotOld) {
             vm.updateIsGameFinished(true)
             GotOldSound(context, vm, settingsVM)
         }

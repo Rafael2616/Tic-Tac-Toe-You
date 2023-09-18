@@ -46,7 +46,6 @@ fun GetPlayerPrefsCard() {
     val context = LocalContext.current
     val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
     val isXFor1 by viewModel.isXFor1.collectAsState()
-    val isPlayer1 by viewModel.isPlayer1.collectAsState()
     val player1Name by viewModel.player1Name.collectAsState()
     val player2Name by viewModel.player2Name.collectAsState()
     val maxLength = 10

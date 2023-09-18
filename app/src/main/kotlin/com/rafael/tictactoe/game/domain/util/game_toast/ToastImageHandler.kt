@@ -20,9 +20,9 @@ fun ToastImageHandler(): Painter {
     val xImageMax = painterResource(R.drawable.x_image_max_size)
     val circleImageMax = painterResource(R.drawable.circle_image_max_size)
     var transparentImage = painterResource(R.drawable.transparent_image)
-    var toastImage = painterResource(R.drawable.transparent_image)
+    var toastImage: Painter
     
-    //Image showed when game not started yet
+    //Image showed when game not started yet (configuration fase)
 	if (!play) {
         toastImage = if (isXFor1) xImageMax else circleImageMax
         
@@ -52,6 +52,6 @@ fun ToastImageHandler(): Painter {
         return toastImage
     }
     
-    //Standard case, this shoudnt happen, returns trasparent image
+    //Standard case, this shoudnt happen, returns transparent image
     return transparentImage
 }
