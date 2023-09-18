@@ -89,10 +89,10 @@ fun GameScreen(
 
     //Conditions for some business logic funcions to be called
     if (play) {
-    	RestartButtonLogic(viewModel)
         WinnerChecker(viewModel, settingsVM, context, card, isCardClicked)
+    	RestartButtonLogic(viewModel)
         scope.launch {
             GotOldChecker(viewModel, settingsVM, context, isCardClicked)
-        }
+         }
     }
 }

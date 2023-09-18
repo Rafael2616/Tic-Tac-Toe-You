@@ -1,11 +1,15 @@
 package com.rafael.tictactoe.game.domain.util
 
 import android.content.Context
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import com.rafael.tictactoe.game.domain.util.WinnerSound
 import com.rafael.tictactoe.game.domain.util.VictoryCounterUpdater
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
+@Composable
 fun WinnerChecker(
     vm: GameViewModel,
     settingsVM: SettingsViewModel,
@@ -13,7 +17,7 @@ fun WinnerChecker(
     card: List<List<Boolean>>,
     isCardClicked: List<List<Boolean>>
 ) {
-    val isXFor1 = vm.isXFor1.value
+    val isXFor1 by vm.isXFor1.collectAsState()
 
     val winningPositions = listOf(
         // Lines
@@ -33,18 +37,18 @@ fun WinnerChecker(
 
     for (positions in winningPositions) {
         val areAllClicked = positions.all { (x, y) -> isCardClicked[x][y] }
-        val areAllX = positions.all { (x, y) -> card[x][y] }
-        val areAllO = positions.all { (x, y) -> !card[x][y] }
+        val areAllClickedByPlayer1 = positions.all { (x, y) -> card[x][y] }
+        val areAllClickedByPlayer2 = positions.all { (x, y) -> !card[x][y] }
 
         if (areAllClicked) {
-            if (areAllX) {
+            if (areAllClickedByPlayer1) {
                 vm.updateWinner(true)
                 if (isXFor1) {
                     vm.updateIs1Win(true)
                 } else {
                     vm.updateIs1Win(false)
                 }   
-            } else if (areAllO) {
+            } else if (areAllClickedByPlayer2) {
                 vm.updateWinner(true)
                 if (isXFor1) {
                     vm.updateIs1Win(false)
@@ -55,9 +59,9 @@ fun WinnerChecker(
         }
     }
 
-    val winner = vm.winner.value
+    val hasWinner by vm.winner.collectAsState()
 
-    if (winner) {
+    if (hasWinner) {
         vm.updateIsGameFinished(true)
         VictoryCounterUpdater(vm)
         WinnerSound(context, vm, settingsVM)
