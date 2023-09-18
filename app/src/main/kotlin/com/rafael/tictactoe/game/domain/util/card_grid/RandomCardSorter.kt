@@ -20,7 +20,7 @@ fun RandomCardSorter(
     val isCPU = vm.isCPU.value
     val isXImage = vm.isXImage.value
     val isXFor1 = vm.isXFor1.value
-    val isGameFinished = vm.isGameFinished .value
+    val isGameFinished = vm.isGameFinished.value
 
     if (isGameFinished) {
         return
@@ -33,7 +33,7 @@ fun RandomCardSorter(
     while (isCardClicked[randomPosition][secRandomPosition]) {
         randomPosition = (0 until isCardClicked[0].size).random()
         secRandomPosition = (0 until isCardClicked[1].size).random()
-    }   
+    }
 
     if (isCPU) {
         CoroutineScope(Dispatchers.IO).launch {
