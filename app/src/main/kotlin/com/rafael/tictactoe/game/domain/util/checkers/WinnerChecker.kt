@@ -13,10 +13,10 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.Set
 fun WinnerChecker(
     vm: GameViewModel,
     settingsVM: SettingsViewModel,
-    context: Context,
-    card: List<List<Boolean>>,
-    isCardClicked: List<List<Boolean>>
+    context: Context
 ) {
+    val card by viewModel.card.collectAsState()
+    val isCardClicked by viewModel.isCardClicked.collectAsState()
     val isXFor1 by vm.isXFor1.collectAsState()
 
     val winningPositions = listOf(

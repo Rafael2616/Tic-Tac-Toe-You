@@ -37,7 +37,7 @@ fun RandomCardSorter(
 
     if (isCPU) {
         CoroutineScope(Dispatchers.IO).launch {
-            delay(600L)
+            delay(500L)
             vm.updateIsXImage(!isXImage)
             vm.updateCard(randomPosition, secRandomPosition, !isXFor1)
             vm.updateIsCardClicked(randomPosition, secRandomPosition, true)

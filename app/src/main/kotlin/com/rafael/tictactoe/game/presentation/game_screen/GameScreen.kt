@@ -42,7 +42,7 @@ fun GameScreen(
     val viewModel = hiltViewModel<GameViewModel>()
     val settingsVM = hiltViewModel<SettingsViewModel>()
     val card by viewModel.card.collectAsState()
-    val isCardClicked by viewModel.isCardClicked.collectAsState()   
+    val isCardClicked by viewModel.isCardClicked.collectAsState()
     val play by viewModel.play.collectAsState()
     val isExpandButtonShown by viewModel.isExpandButtonShown.collectAsState()
     val showRestartButton by viewModel.showRestartButton.collectAsState()
@@ -87,9 +87,9 @@ fun GameScreen(
         WinnerLine(WinnerLineCoordinatesTest(activity))
     }
 
-    //Conditions for some business logic funcions to be called
+    //Handle when some business logic will be called
     if (play) {
-        WinnerChecker(viewModel, settingsVM, context, card, isCardClicked)
+        WinnerChecker(viewModel, settingsVM, context)
     	RestartButtonLogic(viewModel)
 
         CoroutineScope(Dispatchers.Main).launch {

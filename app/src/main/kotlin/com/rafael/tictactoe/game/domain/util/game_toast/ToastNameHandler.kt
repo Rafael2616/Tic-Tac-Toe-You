@@ -38,7 +38,7 @@ fun ToastNameHandler() {
     if (play && isTimerOn) {
         CoroutineScope(Dispatchers.IO).launch {          
             while (isTimerOn) {
-                delay(700L)
+                delay(600L)
                 synchronized(context) {
                     timer--
                     if (timer >= 0) {
