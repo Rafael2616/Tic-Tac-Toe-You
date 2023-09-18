@@ -15,8 +15,8 @@ fun WinnerChecker(
     settingsVM: SettingsViewModel,
     context: Context
 ) {
-    val card by viewModel.card.collectAsState()
-    val isCardClicked by viewModel.isCardClicked.collectAsState()
+    val card by vm.card.collectAsState()
+    val isCardClicked by vm.isCardClicked.collectAsState()
     val isXFor1 by vm.isXFor1.collectAsState()
 
     val winningPositions = listOf(
