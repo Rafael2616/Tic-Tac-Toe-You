@@ -23,6 +23,7 @@ fun RestartButton() {
         description = "Restart Button",
         onClickFun = {
             viewModel.updateIsExpandButtonShown(false)
+            RestartGame(viewModel)
         }
     )
 }
