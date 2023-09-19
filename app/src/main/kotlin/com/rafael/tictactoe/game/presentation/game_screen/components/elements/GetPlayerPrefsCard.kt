@@ -59,10 +59,6 @@ fun GetPlayerPrefsCard() {
     val colorSurface = MaterialTheme.colorScheme.surface
     val isDarkThemeOn by settingsVM.isDarkThemeOn.collectAsState()
 
-    if (isDarkThemeOn) {
-        systemUiController.setSystemBarsColor(color = Color.Black.copy(alpha = 0.3f))
-    }
-
     Surface(
         color = if (isDarkThemeOn) {
                 Color.Black.copy(alpha = 0.3f)
@@ -195,8 +191,6 @@ fun GetPlayerPrefsCard() {
                     onClick = {
                         UiClickSound(context, isSoundEffectsOn)
                         viewModel.updatePlay(true)
-                        viewModel.updatePlayer1Name(player1Value)
-                        viewModel.updatePlayer2Name(player2Value)
                         viewModel.updateIsXImage(isXFor1)
                         if (isCPUMode) {
                             if (isCPUPlayer1) {
@@ -232,8 +226,13 @@ fun GetPlayerPrefsCard() {
     }
     
     DisposableEffect(Unit) {
+        if (isDarkThemeOn) {
+            systemUiController.setSystemBarsColor(color = Color.Black.copy(alpha = 0.3f))
+        }
         onDispose {
             systemUiController.setSystemBarsColor(color = colorSurface)
+            viewModel.updatePlayer1Name(player1Value)
+            viewModel.updatePlayer2Name(player2Value)
         }
     }
 }
