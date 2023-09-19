@@ -101,7 +101,7 @@ fun GetPlayerPrefsCard() {
                         placeholder = {
                             Text( stringResource(id = if (isXFor1) R.string.player_x else R.string.player_o))
                         },
-                        readOnly = if (isCPUMode) localPlayer1 else false,
+                        readOnly = if (isCPUMode) isCPUPlayer1 else false,
                         modifier = Modifier
                             .weight(1f)
                     )
@@ -141,7 +141,7 @@ fun GetPlayerPrefsCard() {
                         placeholder = {
                             Text( stringResource(id = if (isXFor1) R.string.player_o else R.string.player_x))
                         },
-                        readOnly = if (isCPUMode) !localPlayer1 else false,
+                        readOnly = if (isCPUMode) !isCPUPlayer1 else false,
                         modifier = Modifier
                             .weight(1f)
                     )

@@ -27,6 +27,7 @@ class PlayersNamesDisplay() {
         val emptyPlayerName = context.getString(R.string.player)
         val cpuName = context.getString(R.string.cpu)
 
+        //Apply "CPU" name for first player name when needed in CPU Mode
         if (isCPUMode) {
             if (isCPUPlayer1) {
                 vm.showPlayer1Name(cpuName)
@@ -89,6 +90,7 @@ class PlayersNamesDisplay() {
         val emptyPlayerName = context.getString(R.string.player)
         val cpuName = context.getString(R.string.cpu)
 
+        //Apply "CPU" name for second player name when needed in CPU Mode
         if (isCPUMode) {
             if (!isCPUPlayer1) {
                 vm.showPlayer2Name(cpuName)
