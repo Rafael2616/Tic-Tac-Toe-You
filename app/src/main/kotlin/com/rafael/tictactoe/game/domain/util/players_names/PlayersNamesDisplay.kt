@@ -35,6 +35,7 @@ class PlayersNamesDisplay() {
                 vm.showPlayer1Name("")
             }
         }
+
         //Handle first player name when game is in setup fase/not started yet
         if (!play) {
             if (localPlayer1) {
@@ -62,7 +63,7 @@ class PlayersNamesDisplay() {
 
         //Handle first player name when game is ongoing or finished
         if (play) {
-            if (player1Name.isEmpty() || player1Name == "$emptyPlayerName") {
+            if (player1Name.isEmpty() || player1Name == emptyPlayerName) {
                 if (isXFor1) {
                     vm.showPlayer1Name(genericPlayerX)
                 } else {
@@ -126,7 +127,7 @@ class PlayersNamesDisplay() {
 
         //Handle second player name when game is ongoing or finished
         if (play) {
-            if (player2Name.isEmpty() || player2Name == "$emptyPlayerName") {
+            if (player2Name.isEmpty() || player2Name == emptyPlayerName) {
                 if (isXFor1) {
                     vm.showPlayer2Name(genericPlayerO)
                 } else {
