@@ -101,7 +101,7 @@ fun GetPlayerPrefsCard() {
                         placeholder = {
                             Text( stringResource(id = if (isXFor1) R.string.player_x else R.string.player_o))
                         },
-                        readOnly = if (isCPUMode) isCPUPlayer1 else false,
+                        readOnly = if (isCPUMode) localPlayer1 else false,
                         modifier = Modifier
                             .weight(1f)
                     )
@@ -117,8 +117,8 @@ fun GetPlayerPrefsCard() {
                                     viewModel.updateLocalPlayer1(!localPlayer1)
                                 };
                                 if (isCPUMode) {
-                                    viewModel.updateLocalPlayer1(!isCPUPlayer1)
                                     viewModel.updateIsCPUPlayer1(localPlayer1)
+                                    viewModel.updateLocalPlayer1(!isCPUPlayer1)
                                 }
                             })
                     ) {
@@ -141,7 +141,7 @@ fun GetPlayerPrefsCard() {
                         placeholder = {
                             Text( stringResource(id = if (isXFor1) R.string.player_o else R.string.player_x))
                         },
-                        readOnly = if (isCPUMode) !isCPUPlayer1 else false,
+                        readOnly = if (isCPUMode) !localPlayer1 else false,
                         modifier = Modifier
                             .weight(1f)
                     )
@@ -192,6 +192,8 @@ fun GetPlayerPrefsCard() {
                         UiClickSound(context, isSoundEffectsOn)
                         viewModel.updatePlay(true)
                         viewModel.updateIsXImage(isXFor1)
+                        viewModel.updatePlayer1Name(player1Value)
+                        viewModel.updatePlayer2Name(player2Value)
                         if (isCPUMode) {
                             if (isCPUPlayer1) {
                                 viewModel.updateIsCPU(true)
@@ -231,8 +233,6 @@ fun GetPlayerPrefsCard() {
         }
         onDispose {
             systemUiController.setSystemBarsColor(color = colorSurface)
-            viewModel.updatePlayer1Name(player1Value)
-            viewModel.updatePlayer2Name(player2Value)
         }
     }
 }

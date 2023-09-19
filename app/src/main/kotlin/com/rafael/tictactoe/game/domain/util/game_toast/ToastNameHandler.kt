@@ -35,7 +35,7 @@ fun ToastNameHandler() {
     val emptyPlayerName = context.getString(R.string.player)
     val cpuName = context.getString(R.string.cpu)
 
-    //Handle second player name for case of is versus CPU Mode
+    //Handle player name for case of is versus CPU Mode
     if (isCPUMode) {
         if (isCPUPlayer1) {
             vm.updatePlayer1Name(cpuName)
