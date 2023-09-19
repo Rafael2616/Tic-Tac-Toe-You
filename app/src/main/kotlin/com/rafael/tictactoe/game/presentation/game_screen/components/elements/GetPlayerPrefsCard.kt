@@ -36,6 +36,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.game.domain.util.PlayersImagesSetter
+import com.rafael.tictactoe.game.domain.util.RandomCardSorter
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
@@ -50,6 +51,7 @@ fun GetPlayerPrefsCard() {
     val player2Name by viewModel.player2Name.collectAsState()
     val maxLength = 10
     val localPlayer1 by viewModel.localPlayer1.collectAsState()
+    val isCPUPlayer1 by viewModel.isCPUPlayer1.collectAsState()
     var player1Value = if (localPlayer1) player1Name else player2Name
     var player2Value = if (localPlayer1) player2Name else player1Name
     val isCPUMode by viewModel.isCPUMode.collectAsState()
@@ -103,6 +105,7 @@ fun GetPlayerPrefsCard() {
                         placeholder = {
                             Text( stringResource(id = if (isXFor1) R.string.player_x else R.string.player_o))
                         },
+                        readOnly = if (isCPUMode) isCPUPlayer1 else false,
                         modifier = Modifier
                             .weight(1f)
                     )
@@ -112,9 +115,15 @@ fun GetPlayerPrefsCard() {
                             .width(60.dp)
                             .height(85.dp)
                             .clickable(onClick = {
-                                UiClickSound(context, isSoundEffectsOn)                            
-                                viewModel.updateLocalPlayer1(!localPlayer1)
+                                UiClickSound(context, isSoundEffectsOn)
                                 PlayersImagesSetter(viewModel)
+                                if (!isCPUMode) {
+                                    viewModel.updateLocalPlayer1(!localPlayer1)
+                                };
+                                if (isCPUMode) {
+                                    viewModel.updateLocalPlayer1(!isCPUPlayer1)
+                                    viewModel.updateIsCPUPlayer1(localPlayer1)
+                                }
                             })
                     ) {
                         Image(
@@ -136,7 +145,7 @@ fun GetPlayerPrefsCard() {
                         placeholder = {
                             Text( stringResource(id = if (isXFor1) R.string.player_o else R.string.player_x))
                         },
-                        readOnly = isCPUMode,
+                        readOnly = if (isCPUMode) !isCPUPlayer1 else false,
                         modifier = Modifier
                             .weight(1f)
                     )
@@ -189,7 +198,12 @@ fun GetPlayerPrefsCard() {
                         viewModel.updatePlayer1Name(player1Value)
                         viewModel.updatePlayer2Name(player2Value)
                         viewModel.updateIsXImage(isXFor1)
-                        systemUiController.setSystemBarsColor(color = colorSurface)
+                        if (isCPUMode) {
+                            if (isCPUPlayer1) {
+                                viewModel.updateIsCPU(true)
+                                RandomCardSorter(viewModel, settingsVM, context)
+                            }
+                        }
                     },
                     modifier = Modifier
                         .width(100.dp)

@@ -25,6 +25,7 @@ fun ToastNameHandler() {
     val play by vm.play.collectAsState()
     val player1Name by vm.player1Name.collectAsState()
     val player2Name by vm.player2Name.collectAsState()
+    val isCPUPlayer1 by vm.isCPUPlayer1.collectAsState()
     val isPlayer1 by vm.isPlayer1.collectAsState()
     val is1Win by vm.is1Win.collectAsState()
     val isTimerOn by vm.isTimerOn.collectAsState()
@@ -34,31 +35,21 @@ fun ToastNameHandler() {
     val emptyPlayerName = context.getString(R.string.player)
     val cpuName = context.getString(R.string.cpu)
 
-    //Counter showed when game starts
-    if (play && isTimerOn) {
-        CoroutineScope(Dispatchers.IO).launch {          
-            while (isTimerOn) {
-                delay(600L)
-                synchronized(context) {
-                    timer--
-                    if (timer >= 0) {
-                        vm.updateCurrentPlayerName(timer.toString())
-                    }
-                    if (timer == 0) {
-                        vm.updateIsTimerOn(false)
-                    }
-                }
+    //Handle second player name for case of is versus CPU Mode
+    if (isCPUMode) {
+        if (isCPUPlayer1) {
+            vm.updatePlayer1Name(cpuName)
+            if (player2Name == cpuName) {
+                vm.updatePlayer2Name("")
+            }
+        } else {
+            vm.updatePlayer2Name(cpuName)
+            if (player1Name == cpuName) {
+            vm.updatePlayer1Name("")
             }
         }
     }
 
-    //Handle second player name for case of is versus CPU Mode
-    val secondPlayerName = if (isCPUMode) {
-        cpuName
-    } else {
-        player2Name 
-    }
-    
     //Current player name for case of game not started yet
     if (!play) {
         if (localPlayer1) {
@@ -71,13 +62,31 @@ fun ToastNameHandler() {
             if (player2Name.isEmpty()) {
                 vm.updateCurrentPlayerName(emptyPlayerName)
             } else {
-                vm.updateCurrentPlayerName(secondPlayerName)
+                vm.updateCurrentPlayerName(player2Name)
+            }
+        }
+    }
+   
+    //Counter showed when game starts
+    if (play && isTimerOn) {
+        CoroutineScope(Dispatchers.IO).launch {          
+            while (isTimerOn) {
+                delay(500L)
+                synchronized(context) {
+                    timer--
+                    if (timer >= 0) {
+                        vm.updateCurrentPlayerName(timer.toString())
+                    }
+                    if (timer == 0) {
+                        vm.updateIsTimerOn(false)
+                    }
+                }
             }
         }
     }
    
     //Current player name for case of game is ongoing
-    if (play && !winner) {
+    if (play && !winner && !isTimerOn) {
         if (isPlayer1) {
             if (player1Name.isEmpty()) {
                 vm.updateCurrentPlayerName(emptyPlayerName)
@@ -90,7 +99,7 @@ fun ToastNameHandler() {
                 vm.updateCurrentPlayerName(emptyPlayerName)
                 vm.updatePlayer2Name(emptyPlayerName)
             } else {
-                vm.updateCurrentPlayerName(secondPlayerName)
+                vm.updateCurrentPlayerName(player2Name)
             }
         }
     }
@@ -100,7 +109,7 @@ fun ToastNameHandler() {
         if (is1Win) {
             vm.updateCurrentPlayerName(player1Name)
         } else {
-            vm.updateCurrentPlayerName(secondPlayerName)
+            vm.updateCurrentPlayerName(player2Name)
         }
     }
 

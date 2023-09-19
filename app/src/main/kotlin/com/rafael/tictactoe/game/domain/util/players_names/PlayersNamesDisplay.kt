@@ -20,10 +20,20 @@ class PlayersNamesDisplay() {
         val player2Name by vm.player2Name.collectAsState()
         val genericPlayerX = context.getString(R.string.player_x)
         val genericPlayerO = context.getString(R.string.player_o)
+        val isCPUMode by vm.isCPUMode.collectAsState()
+        val isCPUPlayer1 by vm.isCPUPlayer1.collectAsState()
         val localPlayer1 by vm.localPlayer1.collectAsState()
         val play by vm.play.collectAsState()
         val emptyPlayerName = context.getString(R.string.player)
+        val cpuName = context.getString(R.string.cpu)
 
+        if (isCPUMode) {
+            if (isCPUPlayer1) {
+                vm.showPlayer1Name(cpuName)
+            } else {
+                vm.showPlayer1Name("")
+            }
+        }
         //Handle first player name when game is in setup fase/not started yet
         if (!play) {
             if (localPlayer1) {
@@ -72,12 +82,20 @@ class PlayersNamesDisplay() {
         val player2Name by vm.player2Name.collectAsState()
         val genericPlayerO = context.getString(R.string.player_o)
         val isCPUMode by vm.isCPUMode.collectAsState()
+        val isCPUPlayer1 by vm.isCPUPlayer1.collectAsState()
         val genericPlayerX = context.getString(R.string.player_x)
         val localPlayer1 by vm.localPlayer1.collectAsState()
         val play by vm.play.collectAsState()
         val emptyPlayerName = context.getString(R.string.player)
+        val cpuName = context.getString(R.string.cpu)
 
-        if (isCPUMode) vm.updatePlayer2Name("CPU")
+        if (isCPUMode) {
+            if (!isCPUPlayer1) {
+                vm.showPlayer2Name(cpuName)
+            } else {
+                vm.showPlayer2Name("")
+            }
+        }
 
         //Handle second player name when game is in setup fase/not started yet
         if (!play) {

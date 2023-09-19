@@ -29,9 +29,6 @@ import com.rafael.tictactoe.game.domain.util.WinnerChecker
 import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
 import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinatesTest
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 
 @Composable
 fun GameScreen(
@@ -41,8 +38,6 @@ fun GameScreen(
 ) {
     val viewModel = hiltViewModel<GameViewModel>()
     val settingsVM = hiltViewModel<SettingsViewModel>()
-    val card by viewModel.card.collectAsState()
-    val isCardClicked by viewModel.isCardClicked.collectAsState()
     val play by viewModel.play.collectAsState()
     val isExpandButtonShown by viewModel.isExpandButtonShown.collectAsState()
     val showRestartButton by viewModel.showRestartButton.collectAsState()
@@ -90,10 +85,7 @@ fun GameScreen(
     //Handle when some business logic will be called
     if (play) {
         WinnerChecker(viewModel, settingsVM, context)
+        GotOldChecker(viewModel, settingsVM, context)
     	RestartButtonLogic(viewModel)
-
-        CoroutineScope(Dispatchers.Main).launch {
-            GotOldChecker(viewModel, settingsVM, context, isCardClicked)
-        }
     }
 }

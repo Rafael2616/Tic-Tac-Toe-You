@@ -85,6 +85,8 @@ class GameViewModel @Inject constructor(
 	val isCPU: StateFlow<Boolean> = _isCPU
 	private var _isCPUMode = MutableStateFlow(false)
 	val isCPUMode: StateFlow<Boolean> = _isCPUMode
+	private var _isCPUPlayer1 = MutableStateFlow(false)
+	val isCPUPlayer1: StateFlow<Boolean> = _isCPUPlayer1
 
     fun updateCurrentPlayerName(newValue: String) {
         _currentPlayerName.value = newValue
@@ -204,6 +206,10 @@ class GameViewModel @Inject constructor(
 
     fun updateIsCPUMode(newValue: Boolean) {
         _isCPUMode.value = newValue
+    }
+
+    fun updateIsCPUPlayer1(newValue: Boolean) {
+        _isCPUPlayer1.value = newValue
     }
 
     fun setCoordinates(sX: Float, sY: Float, eX: Float, eY: Float) {     

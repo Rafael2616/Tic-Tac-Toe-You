@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.UiClickSound
-import com.rafael.tictactoe.game.domain.util.RestartButtonLogic
+import com.rafael.tictactoe.game.domain.util.RandomCardSorter
 import com.rafael.tictactoe.game.domain.util.RestartGame
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
@@ -40,8 +40,9 @@ fun PlayAgainButton() {
     val settingsVM = hiltViewModel<SettingsViewModel>()
     val context = LocalContext.current
 	val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
-    
-	RestartButtonLogic(viewModel)
+    val isCPUPlayer1 by viewModel.isCPUPlayer1.collectAsState()
+    val isCPUMode by viewModel.isCPUMode.collectAsState()
+    val is1Win by viewModel.is1Win.collectAsState()
 
     Box(
         modifier = Modifier
@@ -64,6 +65,11 @@ fun PlayAgainButton() {
                         viewModel.updateIsExpandButtonShown(false)
 						UiClickSound(context, isSoundEffectsOn)
              		   RestartGame(viewModel)
+                        if (isCPUMode) {
+                            if (isCPUPlayer1 && is1Win || !isCPUPlayer1 && !is1Win) {
+                                RandomCardSorter(viewModel, settingsVM, context)
+                            }
+                        }
                     })
             ) {
                 Image(

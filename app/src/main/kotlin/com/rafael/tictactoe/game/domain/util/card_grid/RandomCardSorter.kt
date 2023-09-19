@@ -18,9 +18,11 @@ fun RandomCardSorter(
     var randomPosition = (0 until isCardClicked[0].size).random()
     var secRandomPosition = (0 until isCardClicked[1].size).random()
     val isCPU = vm.isCPU.value
+    val isCPUPlayer1 = vm.isCPUPlayer1.value
     val isXImage = vm.isXImage.value
     val isXFor1 = vm.isXFor1.value
     val isGameFinished = vm.isGameFinished.value
+    val isTimerOn = vm.isTimerOn.value
 
     if (isGameFinished) {
         return
@@ -37,15 +39,29 @@ fun RandomCardSorter(
 
     if (isCPU) {
         CoroutineScope(Dispatchers.IO).launch {
-            delay(500L)
+            if (isTimerOn) {
+                delay(2000L)
+            } else {
+                delay(500L)
+            }
             vm.updateIsXImage(!isXImage)
-            vm.updateCard(randomPosition, secRandomPosition, !isXFor1)
-            vm.updateIsCardClicked(randomPosition, secRandomPosition, true)
-            vm.updateIsPlayer1(true)           
             vm.updateIsCPU(false)
+            if (isCPUPlayer1) {
+                vm.updateCard(randomPosition, secRandomPosition, isXFor1)
+                vm.updateIsCardClicked(randomPosition, secRandomPosition, true)
+                vm.updateIsPlayer1(false)           
+            } else {
+                vm.updateCard(randomPosition, secRandomPosition, !isXFor1)
+                vm.updateIsCardClicked(randomPosition, secRandomPosition, true)
+                vm.updateIsPlayer1(true)
+            }
         }
         CoroutineScope(Dispatchers.Main).launch {
-            delay(500L)
+            if (isTimerOn) {
+                delay(2300L)
+            } else {
+                delay(500L)
+            }
             CardGridSound(context, vm, settingsVM)
         }
     }
