@@ -35,7 +35,10 @@ fun ToastNameHandler() {
     val emptyPlayerName = context.getString(R.string.player)
     val cpuName = context.getString(R.string.cpu)
 
-    //Handle player name for case of is versus CPU Mode
+    /*
+     *CPU Mode only
+     *Handle player name for case of is versus CPU Mode
+     */
     if (isCPUMode) {
         if (isCPUPlayer1) {
             vm.updatePlayer1Name(cpuName)
@@ -50,7 +53,10 @@ fun ToastNameHandler() {
         }
     }
 
-    //Current player name for case of game not started yet
+    /*
+     *Both CPU and PvP Modes
+     *Current player name for case of game not started yet
+     */
     if (!play) {
         if (localPlayer1) {
             if (player1Name.isEmpty()) {
@@ -114,7 +120,7 @@ fun ToastNameHandler() {
     }
 
     //Current player name for case of got old
-	 if (gotOld) {
+	 if (gotOld && !winner) {
 		vm.updateCurrentPlayerName(context.getString(R.string.got_old))
     }
 }
