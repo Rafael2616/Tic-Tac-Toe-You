@@ -9,6 +9,7 @@ A classic tic-tac-toe game made with material you and others new android technol
 - Sound Effects when click in cards, when has a win ou things like it
 - Background Music
 - Line when there is a winner
+- Versus CPU Mode
 
 # Employed technologies:
 - Room database
@@ -30,9 +31,6 @@ A classic tic-tac-toe game made with material you and others new android technol
 # Incompletes/Bugged Features
 - The data is not being saved in the database
 - The line when there is a winner only work's in HD Screens (720*1080)
-
-# Notice
-The Game is undergoing structural changes, before it was built on the basis of force😁, all funcions and UI in same files, but now i am separating the responsibilities in base of Clean Arquiteture guidelines
 
 # Follow me on Instagram
 [Instagram](https://www.instagram.com/rafael_mourana/)
