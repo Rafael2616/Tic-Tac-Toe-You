@@ -88,6 +88,9 @@ class GameViewModel @Inject constructor(
 	private var _isCPUPlayer1 = MutableStateFlow(false)
 	val isCPUPlayer1: StateFlow<Boolean> = _isCPUPlayer1
 
+	private var _winningPositionsIndices = MutableStateFlow<List<Int>>(emptyList())
+	val winningPositionsIndices: StateFlow<List<Int>> = _winningPositionsIndices
+
     fun updateCurrentPlayerName(newValue: String) {
         _currentPlayerName.value = newValue
     }
@@ -119,9 +122,11 @@ class GameViewModel @Inject constructor(
     }
 
     fun updateCard(rowIndex: Int, cardIndex: Int, newValue: Boolean) {
-        _card.value = _card.value.toMutableList().apply {
-            this[rowIndex] = this[rowIndex].toMutableList().apply {
-                this[cardIndex] = newValue
+        if (!isCPU.value && !isGameFinished.value) {
+            _card.value = _card.value.toMutableList().apply {
+                this[rowIndex] = this[rowIndex].toMutableList().apply {
+                    this[cardIndex] = newValue
+                }
             }
         }
     }
@@ -212,6 +217,14 @@ class GameViewModel @Inject constructor(
 
     fun updateIsCPUPlayer1(newValue: Boolean) {
         _isCPUPlayer1.value = newValue
+    }
+
+    fun updateWinningPositionsIndices(index: Int) {
+        _winningPositionsIndices.value = listOf(index)
+    }
+
+    fun resetWinningPositionsIndices(emptyList: List<Int>) {
+        _winningPositionsIndices.value = emptyList
     }
 
     fun setCoordinates(sX: Float, sY: Float, eX: Float, eY: Float) {     

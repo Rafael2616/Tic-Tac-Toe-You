@@ -59,5 +59,6 @@ fun RestartGame(vm: GameViewModel) {
     vm.updateIsScoreUp(false)
     vm.updateIsWinSoundPlaying(false)
     vm.updateIsGotOldSoundPlaying(false)
+    vm.resetWinningPositionsIndices(emptyList())
     vm.setCoordinates(0f, 0f, 0f, 0f)
 }

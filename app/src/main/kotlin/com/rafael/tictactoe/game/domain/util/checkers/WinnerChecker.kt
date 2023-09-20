@@ -35,7 +35,7 @@ fun WinnerChecker(
         listOf(Pair(0, 2), Pair(1, 1), Pair(2, 0))
     )
 
-    for (positions in winningPositions) {
+    for ((index, positions) in winningPositions.withIndex()) {
         val areAllClicked = positions.all { (x, y) -> isCardClicked[x][y] }
         val areAllClickedByPlayer1 = positions.all { (x, y) -> card[x][y] }
         val areAllClickedByPlayer2 = positions.all { (x, y) -> !card[x][y] }
@@ -47,18 +47,20 @@ fun WinnerChecker(
                     vm.updateIs1Win(true)
                 } else {
                     vm.updateIs1Win(false)
-                }   
+                }
+                vm.updateWinningPositionsIndices(index)
             } else if (areAllClickedByPlayer2) {
                 vm.updateWinner(true)
                 if (isXFor1) {
                     vm.updateIs1Win(false)
                 } else {
                     vm.updateIs1Win(true)
-                }   
+                }
+                vm.updateWinningPositionsIndices(index)
             }
         }
     }
-
+    
     val hasWinner by vm.winner.collectAsState()
 
     if (hasWinner) {
