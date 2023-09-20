@@ -15,7 +15,14 @@ fun CardGridSound(
 ) {
     val isPlayer1 = viewModel.isPlayer1.value
     val isSoundEffectsOn = settingsVM.isSoundEffectsOn.value
-
+    val isGameFinished = viewModel.isGameFinished.value
+    
+    //Avoid click sound if it action is perfomed by @RandomCardSorter,
+    //This is needed due a bug in mentioned component.
+    if (isGameFinished) {
+        return
+    }
+    
 	if (isSoundEffectsOn) {	
    	 val exoPlayer = ExoPlayer.Builder(context).build()
 		val clickSoundFile = R.raw.click1_sound
