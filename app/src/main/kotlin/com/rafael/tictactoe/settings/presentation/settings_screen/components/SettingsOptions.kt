@@ -79,7 +79,7 @@ fun SettingsOptions(index: Int) {
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Image(
-                    contentDescription = null,
+                    contentDescription = "Setting Image",
                     modifier = Modifier
                         .height(55.dp)
                         .width(55.dp),
@@ -121,7 +121,7 @@ fun SettingsOptions(index: Int) {
 								5 -> if (isAboutShown) Icons.Filled.Check else Icons.Filled.Close
 						 	else -> Icons.Filled.Close
 							},
-    					    contentDescription = null,
+    					    contentDescription = "Setting Switcher",
        					 modifier = Modifier.size(SwitchDefaults.IconSize)
       					)
    					 }
@@ -129,7 +129,7 @@ fun SettingsOptions(index: Int) {
                 }
                 if (index == 5) {
                     Image(
-                        contentDescription = null,
+                        contentDescription = "About Application",
                         modifier = Modifier
                             .height(35.dp)
                             .width(45.dp),

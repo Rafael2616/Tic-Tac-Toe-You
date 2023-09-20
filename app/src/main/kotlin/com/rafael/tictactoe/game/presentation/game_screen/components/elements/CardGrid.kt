@@ -64,7 +64,7 @@ fun CardGrid() {
                         )
                     ) {
                 		Image(
-					        contentDescription = null,
+					        contentDescription = "card $rowIndex $cardIndex",
                             alignment = Alignment.Center,
  				           modifier = Modifier.width(114.dp).height(114.dp),
 			 	           painter = CardGridImageHandler(rowIndex, cardIndex)

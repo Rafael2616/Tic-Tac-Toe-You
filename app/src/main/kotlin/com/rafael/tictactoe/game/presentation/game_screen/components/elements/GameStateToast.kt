@@ -62,7 +62,7 @@ fun GameStateToast() {
                     if (!gotOld) {
                         Spacer(modifier = Modifier.padding(3.dp))
                         Image(
-                            contentDescription = null,
+                            contentDescription = "Current Player Image",
                             painter = ToastImageHandler(),
                             modifier = Modifier.height(17.dp).width(17.dp)
                         )

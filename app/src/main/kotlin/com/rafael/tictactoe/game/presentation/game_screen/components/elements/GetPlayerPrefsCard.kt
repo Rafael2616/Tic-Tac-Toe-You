@@ -123,7 +123,7 @@ fun GetPlayerPrefsCard() {
                             })
                     ) {
                         Image(
-                            contentDescription = null,
+                            contentDescription = "Switch Player Position",
                             modifier = Modifier.fillMaxSize(),
                             painter = painterResource(R.drawable.switch_icon)
                         )
@@ -154,7 +154,7 @@ fun GetPlayerPrefsCard() {
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Image(
-                        contentDescription = null,
+                        contentDescription = "Player 1 Image",
                         painter = painterResource(if (isXFor1) R.drawable.x_image else R.drawable.circle_image),
                         modifier = Modifier
                             .width(120.dp)
@@ -172,13 +172,13 @@ fun GetPlayerPrefsCard() {
                             })
                     ) {
                         Image(
-                            contentDescription = null,
+                            contentDescription = "Player Image Switcher",
                             modifier = Modifier.fillMaxSize(),
                             painter = painterResource(R.drawable.switch_icon)
                         )
                     }
                     Image(
-                        contentDescription = null,
+                        contentDescription = "Second Player Image",
                         painter = painterResource(if (isXFor1) R.drawable.circle_image else R.drawable.x_image),
                         modifier = Modifier
                             .width(120.dp)

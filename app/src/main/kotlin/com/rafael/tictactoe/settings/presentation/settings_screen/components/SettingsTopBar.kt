@@ -53,7 +53,7 @@ fun SettingsTopBar(navController: NavController) {
                     ) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = "Voltar"
+                            contentDescription = "Go Back"
                         )
                     }
                 },

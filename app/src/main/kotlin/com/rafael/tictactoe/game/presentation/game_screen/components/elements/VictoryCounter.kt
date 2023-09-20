@@ -65,7 +65,7 @@ fun VictoryCounter() {
                             .align(Alignment.CenterHorizontally)
                     )
                     Image(
-                        contentDescription = null,
+                        contentDescription = "Player 1 Image",
                         modifier = Modifier.fillMaxSize(),
                         painter = if (isXFor1) {
                             painterResource(R.drawable.x_image)
@@ -92,7 +92,7 @@ fun VictoryCounter() {
                             .align(Alignment.CenterHorizontally)
                     )
                     Image(
-                        contentDescription = null,
+                        contentDescription = "Player 2 Image",
                         modifier = Modifier.fillMaxSize(),
                         painter = if (isXFor1) {
                             painterResource(R.drawable.circle_image)
