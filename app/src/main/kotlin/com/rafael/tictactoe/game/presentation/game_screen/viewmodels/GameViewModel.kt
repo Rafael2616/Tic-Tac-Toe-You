@@ -109,9 +109,11 @@ class GameViewModel @Inject constructor(
     }
 
     fun updateIsCardClicked(rowIndex: Int, cardIndex: Int, newValue: Boolean) {
-        _isCardClicked.value = _isCardClicked.value.toMutableList().apply {
-            this[rowIndex] = this[rowIndex].toMutableList().apply {
-                this[cardIndex] = newValue
+        if (!isCPU.value && !isGameFinished.value) {
+            _isCardClicked.value = _isCardClicked.value.toMutableList().apply {
+                this[rowIndex] = this[rowIndex].toMutableList().apply {
+                    this[cardIndex] = newValue
+                }
             }
         }
     }
