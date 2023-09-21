@@ -40,7 +40,7 @@ fun RandomCardSorter(
     if (isCPU) {
         CoroutineScope(Dispatchers.IO).launch {
             if (isTimerOn) {
-                delay(2000L)
+                delay(2300L)
             } else {
                 delay(500L)
             }
