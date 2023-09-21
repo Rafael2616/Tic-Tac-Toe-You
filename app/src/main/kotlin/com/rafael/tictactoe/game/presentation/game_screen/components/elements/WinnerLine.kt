@@ -13,12 +13,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinatesTest
+import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
 import com.rafael.tictactoe.game.domain.util.WinnerLineLogic
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
 @Composable
-fun WinnerLine(coordinate: WinnerLineCoordinatesTest) {
+fun WinnerLine(coordinate: WinnerLineCoordinates) {
     val viewModel = hiltViewModel<GameViewModel>()
     val startX by viewModel.startX.collectAsState()
     val startY by viewModel.startY.collectAsState()
@@ -39,7 +39,7 @@ fun WinnerLine(coordinate: WinnerLineCoordinatesTest) {
 		) {
 			drawLine(
 				color = Color.Yellow,
-                strokeWidth = 20.dp.toPx(),
+                strokeWidth = 18.dp.toPx(),
                 start = Offset(x = startX, y = startY),
 				end = Offset(x = endX, y = endY)
 			)

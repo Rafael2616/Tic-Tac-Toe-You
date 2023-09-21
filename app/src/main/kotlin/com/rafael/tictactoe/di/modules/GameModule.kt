@@ -1,5 +1,6 @@
 package com.rafael.tictactoe.di
 
+//import android.app.Activity
 import android.app.Application
 import androidx.room.Room
 import com.rafael.tictactoe.game.data.database.GameDatabase
@@ -37,9 +38,9 @@ object GameModule {
     //TODO// add misssing gameUtils here
     @Provides
     @Singleton
-    fun provideGameUtilities(): GameUtils {
+    fun provideGameUtilities(/*activity: Activity*/): GameUtils {
         return GameUtils(
-            coordinate = WinnerLineCoordinates(),
+           // winnerLineCoordinates = WinnerLineCoordinates(activity),
             playerName = PlayersNamesDisplay()
         )
     }

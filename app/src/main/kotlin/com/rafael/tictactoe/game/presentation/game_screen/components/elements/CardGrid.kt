@@ -42,7 +42,7 @@ fun CardGrid() {
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp),
-            verticalArrangement = Arrangement.Bottom
+        verticalArrangement = Arrangement.Bottom
     ) {
         rowItems.forEachIndexed { rowIndex, _->
             Row(

@@ -27,7 +27,6 @@ import com.rafael.tictactoe.game.domain.util.RestartButtonLogic
 import com.rafael.tictactoe.game.domain.util.ToastNameHandler
 import com.rafael.tictactoe.game.domain.util.WinnerChecker
 import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
-import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinatesTest
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
@@ -45,7 +44,7 @@ fun GameScreen(
     val isGameFinished by viewModel.isGameFinished.collectAsState()
     val playerName = gameUtil.playerName
     val context = LocalContext.current
-
+ 
     viewModel.updateIsCPUMode(isCPUMode)
     
 	//Handle when each UI component function will be called
@@ -79,7 +78,7 @@ fun GameScreen(
     }
 
     AnimatedVisibility(winner) {
-        WinnerLine(WinnerLineCoordinatesTest(activity))
+        WinnerLine(WinnerLineCoordinates(activity))
     }
 
     //Handle when some business logic will be called

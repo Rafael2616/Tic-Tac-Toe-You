@@ -1,72 +1,71 @@
 package com.rafael.tictactoe.game.domain.util
 
+import android.app.Activity
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
-
-// THIS COORDINATES ONLY WORKS AS EXPECTED IN DEVICES WITH HD SCREEN (1280/720) AND NEEDS REWORK!!
-
-class WinnerLineCoordinates() {
-
+ 
+class WinnerLineCoordinates(activity: Activity) : Coordinates(activity) {
+      
     fun setFirstHorizontalLinePositions(viewModel: GameViewModel) {
-        val startX = 15f
-        val startY = 725f
-        val endX = 705f
-        val endY = 725f
+        val startX = horizontalStartX
+        val startY = heightCenter
+        val endX = horizontalEndX
+        val endY = heightCenter
 		viewModel.setCoordinates(startX, startY, endX, endY)
     }
 
     fun setSecondHorizontalLinePositions(viewModel: GameViewModel) {
-        val startX = 15f
-        val startY = 950f
-        val endX = 705f
-        val endY = 950f
+        val startX = horizontalStartX
+        val startY = secondHorizontalY
+        val endX = horizontalEndX
+        val endY = secondHorizontalY
 		viewModel.setCoordinates(startX, startY, endX, endY)
     }
 
     fun setTertiaryHorizontalLinePositions(viewModel: GameViewModel) {
-        val startX = 15f
-        val startY = 1170f
-        val endX = 705f
-        val endY = 1170f
+        val startX = horizontalStartX
+        val startY = tertiaryHorizontalY
+        val endX = horizontalEndX
+        val endY = tertiaryHorizontalY
 		viewModel.setCoordinates(startX, startY, endX, endY)
     }
 
     fun setFirstVerticalLinePositions(viewModel: GameViewModel) {
-    	val startX = 125f
-        val startY = 610f
-        val endX = 125f
-        val endY = 1285f
+    	val startX = firstVerticalStartAndEndX
+        val startY = verticalAndTransversalStartY
+        val endX = firstVerticalStartAndEndX
+        val endY = endHeight
 		viewModel.setCoordinates(startX, startY, endX, endY)
     }
 
     fun setSecondVerticalLinePositions(viewModel: GameViewModel) {
-        val startX = 362f
-        val startY = 610f
-        val endX = 362f
-        val endY = 1285f
+        val startX = widthCenter
+        val startY = verticalAndTransversalStartY
+        val endX = widthCenter
+        val endY = endHeight
 		viewModel.setCoordinates(startX, startY, endX, endY)
     }
 
     fun setTertiaryVerticalLinePositions(viewModel: GameViewModel) {
-        val startX = 595f
-        val startY = 610f
-        val endX = 595f
-        val endY = 1285f
+        val startX = tertiaryVerticalStartAndEndX
+        val startY = verticalAndTransversalStartY
+        val endX = tertiaryVerticalStartAndEndX
+        val endY = endHeight
 		viewModel.setCoordinates(startX, startY, endX, endY)
     }
 
     fun setStartToEndTransversalLinePositions(viewModel: GameViewModel) {
-        val startX = 15f
-        val startY = 620f
-        val endX = 705f
-        val endY = 1275f
+        val startX = horizontalStartX
+        val startY = verticalAndTransversalStartY
+        val endX = horizontalEndX
+        val endY = transversalEndY
 		viewModel.setCoordinates(startX, startY, endX, endY)
     }
 
     fun setEndToStartTransversalLinePositions(viewModel: GameViewModel) {
-        val startX = 705f
-        val startY = 620f
-        val endX = 15f
-        val endY = 1275f
+        val startX = horizontalEndX
+        val startY = verticalAndTransversalStartY
+        val endX = horizontalStartX
+        val endY = transversalEndY
 		viewModel.setCoordinates(startX, startY, endX, endY)
     }
 }

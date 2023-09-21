@@ -4,7 +4,7 @@ import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
 import com.rafael.tictactoe.game.domain.util.PlayersNamesDisplay
 
 data class GameUtils(
-    val coordinate: WinnerLineCoordinates,
+//    val winnerLineCoordinates: WinnerLineCoordinates,
     val playerName: PlayersNamesDisplay
 )
 
