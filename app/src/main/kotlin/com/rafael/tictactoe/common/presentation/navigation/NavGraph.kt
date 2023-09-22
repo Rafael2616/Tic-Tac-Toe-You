@@ -1,6 +1,9 @@
 package com.rafael.tictactoe.common.presentation.navigation
 
 import android.app.Activity
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.core.tween
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -24,16 +27,24 @@ fun NavGraph(
     gameUtil: GameUtils
 ) {
     val navController = rememberNavController()
-
+    val enterTransition = fadeIn(
+        animationSpec = tween(durationMillis = 300)
+    )
+    val exitTransition = fadeOut(
+        animationSpec = tween(durationMillis = 300)
+    )
+    
     NavHost(
         navController = navController,
-        startDestination = Destinations.Splash.screen
-    ) {
+        startDestination = Destinations.Splash.screen,
+        enterTransition = { enterTransition },
+        exitTransition = { exitTransition }
+     ) {
         composable(Destinations.Splash.screen) {
             SplashScreen(navController)
         }
         composable(Destinations.Main.screen) {
-            MainScreen(navController)
+             MainScreen(navController)
         }
         composable(
             route = Destinations.Game.screen + "/{isCPUMode}",
