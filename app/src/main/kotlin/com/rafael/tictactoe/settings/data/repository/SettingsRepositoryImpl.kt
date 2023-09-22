@@ -14,11 +14,11 @@ class SettingsRepositoryImpl @Inject constructor(
 		println("Settings repository has been initialized")
 	}
 
-    override fun getAllSettingsValues(id: Int): Flow<SettingsEntity?> {
+    override suspend fun getAllSettingsValues(id: Int): SettingsEntity? {
         return settingsDao.getSettingsValues(id)
     }
 
     override suspend fun setAllSettingsValues(settingsEntity: SettingsEntity) {
-        return settingsDao.setSettingsValues(settingsEntity)
+        settingsDao.setSettingsValues(settingsEntity)
     }
 }

@@ -3,7 +3,7 @@ package com.rafael.tictactoe.settings.domain.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "settings")
 data class SettingsEntity(
     @PrimaryKey
 	var id: Int = 1,

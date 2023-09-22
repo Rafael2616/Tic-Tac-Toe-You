@@ -41,7 +41,7 @@ class SettingsViewModel @Inject constructor(
     //Initialize ViewModel StateFlows Variables with corresponding values in SettingsRepository
 	init {
   	  viewModelScope.launch(Dispatchers.IO) {
-	    var settings = repository.getAllSettingsValues(1).first()  ?: defaultSettings
+            val settings = repository.getAllSettingsValues(1)  ?: defaultSettings
    	 	_isBackgroundMusicOn.value = settings.isBackgroundMusicOn
     	    _isDarkThemeOn.value = settings.isDarkThemeOn
     	    _isDynamicColorsOn.value = settings.isDynamicColorsOn
@@ -50,12 +50,12 @@ class SettingsViewModel @Inject constructor(
   	  }
 	}
 	
-    //Functions to update values in SettingsRepository (if needed) and SettingsViewModel StateFlows to notify @Composables to update
+    //Functions to update values in SettingsRepository and SettingsViewModel StateFlows
 	fun updateIsBackgroundMusicOn(newValue: Boolean, context: Context) {
  	   _isBackgroundMusicOn.value = newValue	
 		viewModelScope.launch(Dispatchers.IO) {
-            var settings = repository.getAllSettingsValues(1).first() ?: defaultSettings
-            settings.isBackgroundMusicOn = _isBackgroundMusicOn.value
+            var settings = repository.getAllSettingsValues(1) ?: defaultSettings
+            settings.isBackgroundMusicOn = newValue
 			repository.setAllSettingsValues(settings)
 		}
 		BackgroundMusic(context, _isBackgroundMusicOn.value)
@@ -64,8 +64,8 @@ class SettingsViewModel @Inject constructor(
    fun updateIsDarkThemeOn(newValue: Boolean) {
         _isDarkThemeOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
-	  	  var settings = repository.getAllSettingsValues(1).first() ?: defaultSettings
-    		settings.isDarkThemeOn = _isDarkThemeOn.value
+	  	  var settings = repository.getAllSettingsValues(1) ?: defaultSettings
+    		settings.isDarkThemeOn = newValue
 			repository.setAllSettingsValues(settings)
         }
     }
@@ -73,8 +73,8 @@ class SettingsViewModel @Inject constructor(
     fun updateIsDynamicColorsOn(newValue: Boolean) {
         _isDynamicColorsOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
-            var settings = repository.getAllSettingsValues(1).first() ?: defaultSettings
-    		settings.isDynamicColorsOn = _isDynamicColorsOn.value
+            var settings = repository.getAllSettingsValues(1) ?: defaultSettings
+    		settings.isDynamicColorsOn = newValue
 			repository.setAllSettingsValues(settings)
         }
     }
@@ -82,8 +82,8 @@ class SettingsViewModel @Inject constructor(
     fun updateIsFollowingSystemOn(newValue: Boolean) {
         _isFollowingSystemOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
-	  	  var settings = repository.getAllSettingsValues(1).first() ?: defaultSettings
-    		settings.isFollowingSystemOn = _isFollowingSystemOn.value
+	  	  var settings = repository.getAllSettingsValues(1) ?: defaultSettings
+    		settings.isFollowingSystemOn = newValue
 			repository.setAllSettingsValues(settings)
         }
     }
@@ -91,8 +91,8 @@ class SettingsViewModel @Inject constructor(
     fun updateIsSoundEffectsOn(newValue: Boolean) {
         _isSoundEffectsOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
-            var settings = repository.getAllSettingsValues(1).first() ?: defaultSettings
-			settings.isSoundEffectsOn = _isSoundEffectsOn.value
+            var settings = repository.getAllSettingsValues(1) ?: defaultSettings
+			settings.isSoundEffectsOn = newValue
 			repository.setAllSettingsValues(settings)
         }
     }
