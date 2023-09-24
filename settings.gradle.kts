@@ -20,6 +20,6 @@ dependencyResolutionManagement {
         }
     }
 }
-   
+
 rootProject.name = "TicTacToe You"
 include(":app")

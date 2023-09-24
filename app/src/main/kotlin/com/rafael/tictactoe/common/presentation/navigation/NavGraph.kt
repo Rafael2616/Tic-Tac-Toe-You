@@ -44,7 +44,7 @@ fun NavGraph(
             SplashScreen(navController)
         }
         composable(Destinations.Main.screen) {
-             MainScreen(navController)
+            MainScreen(navController)
         }
         composable(
             route = Destinations.Game.screen + "/{isCPUMode}",
