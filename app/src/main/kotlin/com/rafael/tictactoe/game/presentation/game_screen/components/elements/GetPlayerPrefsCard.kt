@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Card
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
@@ -31,6 +32,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.rafael.tictactoe.R
@@ -102,8 +106,13 @@ fun GetPlayerPrefsCard() {
                             Text( stringResource(id = if (isXFor1) R.string.player_x else R.string.player_o))
                         },
                         readOnly = if (isCPUMode) isCPUPlayer1 else false,
-                        modifier = Modifier
-                            .weight(1f)
+                        keyboardOptions = KeyboardOptions(
+                            autoCorrect = true,
+                            keyboardType = KeyboardType.Text,
+                            imeAction = ImeAction.Done,
+                            capitalization = KeyboardCapitalization.Words
+                        ),
+                        modifier = Modifier.weight(1f)
                     )
                     Card(
                         shape = MaterialTheme.shapes.large,
@@ -142,8 +151,13 @@ fun GetPlayerPrefsCard() {
                             Text( stringResource(id = if (isXFor1) R.string.player_o else R.string.player_x))
                         },
                         readOnly = if (isCPUMode) !isCPUPlayer1 else false,
-                        modifier = Modifier
-                            .weight(1f)
+                        keyboardOptions = KeyboardOptions(
+                            autoCorrect = true,
+                            keyboardType = KeyboardType.Text,
+                            imeAction = ImeAction.Done,
+                            capitalization = KeyboardCapitalization.Words
+                        ),
+                        modifier = Modifier.weight(1f)
                     )
                 }
 
