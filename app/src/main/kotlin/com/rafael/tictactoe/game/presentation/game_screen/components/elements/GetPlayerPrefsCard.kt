@@ -105,7 +105,7 @@ fun GetPlayerPrefsCard() {
                         placeholder = {
                             Text( stringResource(id = if (isXFor1) R.string.player_x else R.string.player_o))
                         },
-                        readOnly = if (isCPUMode) isCPUPlayer1 else false,
+                        readOnly = if (isCPUMode) { if (isCPUPlayer1) true else false } else {false},
                         keyboardOptions = KeyboardOptions(
                             autoCorrect = true,
                             keyboardType = KeyboardType.Text,
@@ -128,7 +128,7 @@ fun GetPlayerPrefsCard() {
                                 if (isCPUMode) {
                                     viewModel.updateIsCPUPlayer1(localPlayer1)
                                     viewModel.updateLocalPlayer1(!isCPUPlayer1)
-                                }
+                         }
                             })
                     ) {
                         Image(
@@ -150,7 +150,7 @@ fun GetPlayerPrefsCard() {
                         placeholder = {
                             Text( stringResource(id = if (isXFor1) R.string.player_o else R.string.player_x))
                         },
-                        readOnly = if (isCPUMode) !isCPUPlayer1 else false,
+                        readOnly = if (isCPUMode) { if (isCPUPlayer1) false else true } else { false},
                         keyboardOptions = KeyboardOptions(
                             autoCorrect = true,
                             keyboardType = KeyboardType.Text,
