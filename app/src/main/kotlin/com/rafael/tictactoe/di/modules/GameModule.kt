@@ -7,7 +7,6 @@ import com.rafael.tictactoe.game.data.database.GameDatabase
 import com.rafael.tictactoe.game.data.repository.GameRepositoryImpl
 import com.rafael.tictactoe.game.domain.repository.GameRepository
 import com.rafael.tictactoe.game.domain.util.GameUtils
-import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
 import com.rafael.tictactoe.game.domain.util.PlayersNamesDisplay
 import dagger.Module
 import dagger.Provides
@@ -38,9 +37,8 @@ object GameModule {
     //TODO// add misssing gameUtils here
     @Provides
     @Singleton
-    fun provideGameUtilities(/*activity: Activity*/): GameUtils {
+    fun provideGameUtilities(): GameUtils {
         return GameUtils(
-           // winnerLineCoordinates = WinnerLineCoordinates(activity),
             playerName = PlayersNamesDisplay()
         )
     }

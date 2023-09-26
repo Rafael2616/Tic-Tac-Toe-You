@@ -34,7 +34,7 @@ fun PlayersNamesLayout() {
             verticalArrangement = Arrangement.Center,
             modifier = Modifier
                 .wrapContentSize()
-                .padding(top = 24.dp, end = 80.dp)
+                .padding(top = 30.dp, end = 80.dp)
         ) {
             Text(
                 text = ("$showPlayer1Name"),
@@ -53,7 +53,7 @@ fun PlayersNamesLayout() {
             verticalArrangement = Arrangement.Center,
             modifier = Modifier
                 .wrapContentSize()
-                .padding(top = 24.dp, start = 80.dp)
+                .padding(top = 30.dp, start = 80.dp)
         ) {
             Text(
                 text = ("$showPlayer2Name"),

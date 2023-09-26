@@ -1,48 +1,106 @@
 package com.rafael.tictactoe.game.presentation.game_screen.components
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
-import com.rafael.tictactoe.game.domain.util.WinnerLineLogic
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
 @Composable
-fun WinnerLine(coordinate: WinnerLineCoordinates) {
+fun WinnerLine() {
     val viewModel = hiltViewModel<GameViewModel>()
-    val startX by viewModel.startX.collectAsState()
-    val startY by viewModel.startY.collectAsState()
-    val endX by viewModel.endX.collectAsState()
-    val endY by viewModel.endY.collectAsState()
+    val winningPositionsIndices = viewModel.winningPositionsIndices.value
+ 
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 8.dp, end = 8.dp, bottom = 45.dp),
+        verticalArrangement = Arrangement.Bottom
+    ) {
+         Canvas(
+             modifier = Modifier.fillMaxWidth(),
+        ) {
+            if (winningPositionsIndices.contains(0)) {    
+                drawLine(
+                    start = Offset(x = 2.dp.toPx(), y = size.height - 330.dp.toPx()),
+                    end = Offset(x = size.width - 2.dp.toPx(), y = size.height - 330.dp.toPx()),
+                    color = Color.Yellow,
+                    strokeWidth = 18.dp.toPx(),
+                )
+            }
 
-	WinnerLineLogic(viewModel, coordinate)
+            if (winningPositionsIndices.contains(1)) {
+                drawLine(
+                    start = Offset(x =  2.dp.toPx(), y = size.height - 197.dp.toPx()),
+                    end = Offset(x = size.width - 2.dp.toPx(), y = size.height - 197.dp.toPx()),
+                    color = Color.Yellow,
+                    strokeWidth = 18.dp.toPx(),
+                )
+            }
 
-	Column(
-		modifier = Modifier
-			.fillMaxSize(),
-		horizontalAlignment = Alignment.CenterHorizontally
-	) {
-		Canvas(
-			modifier = Modifier
-            	.fillMaxSize()
-           	 .weight(1f)
-		) {
-			drawLine(
-				color = Color.Yellow,
-                strokeWidth = 18.dp.toPx(),
-                start = Offset(x = startX, y = startY),
-				end = Offset(x = endX, y = endY)
-			)
+            if (winningPositionsIndices.contains(2)) {
+                drawLine(
+                    start = Offset(x = 2.dp.toPx(), y = size.height - 65.dp.toPx()),
+                    end = Offset(x = size.width - 2.dp.toPx(), y = size.height - 65.dp.toPx() ),
+                    color = Color.Yellow,
+                    strokeWidth = 18.dp.toPx(),
+                )
+            }
+
+            if (winningPositionsIndices.contains(3)) {
+                drawLine(
+                    start = Offset(x = size.width / 6, y = size.height),
+                    end = Offset(x = size.width / 6, y = size.height - 395.dp.toPx()),
+                    color = Color.Yellow,
+                    strokeWidth = 18.dp.toPx(),
+                )
+            }
+
+            if (winningPositionsIndices.contains(4)) {
+                drawLine(
+                    start = Offset(x = (size.width / 2) - 2.dp.toPx(), y = size.height),
+                    end = Offset(x = (size.width / 2) - 2.dp.toPx(), y = size.height - 395.dp.toPx()),
+                    color = Color.Yellow,
+                    strokeWidth = 18.dp.toPx(),
+                )
+            }
+
+            if (winningPositionsIndices.contains(5)) {
+                drawLine(
+                    start = Offset(x = size.width - (size.width / 6) - 4.dp.toPx(), y = size.height),
+                    end = Offset(x = size.width - (size.width / 6) - 4.dp.toPx(), y = size.height - 395.dp.toPx()),
+                    color = Color.Yellow,
+                    strokeWidth = 18.dp.toPx(),
+                )
+            }
+
+            if (winningPositionsIndices.contains(6)) {
+                drawLine(
+                    start = Offset(x = 2.dp.toPx(),  y = size.height - 395.dp.toPx()),
+                    end = Offset(x = size.width - 2.dp.toPx(), y = size.height),
+                    color = Color.Yellow,
+                    strokeWidth = 18.dp.toPx(),
+                )
+            }
+                
+            if (winningPositionsIndices.contains(7)) {
+                drawLine(
+                    start = Offset(x = size.width - 2.dp.toPx(), y = size.height - 395.dp.toPx()),
+                    end = Offset(x = 2.dp.toPx(), y = size.height),
+                    color = Color.Yellow,
+                    strokeWidth = 18.dp.toPx(),
+                )
+            }
         }
-	}
+    }
 }

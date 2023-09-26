@@ -18,6 +18,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -27,6 +28,10 @@ import com.rafael.tictactoe.game.domain.util.CardGridImageHandler
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import kotlinx.coroutines.launch
+
+import androidx.compose.foundation.Canvas
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.drawscope.DrawScope
 
 @Composable
 fun CardGrid() {
@@ -41,7 +46,7 @@ fun CardGrid() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp),
+            .padding(start = 8.dp, end = 8.dp, bottom = 45.dp),
         verticalArrangement = Arrangement.Bottom
     ) {
         rowItems.forEachIndexed { rowIndex, _->
@@ -49,7 +54,7 @@ fun CardGrid() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(2.dp)
-            ) {
+             ) {
                 cardItems.forEachIndexed { cardIndex, _ ->
                     Card(
                         modifier = Modifier
@@ -63,7 +68,7 @@ fun CardGrid() {
                             }
                         )
                     ) {
-                		Image(
+                 		Image(
 					        contentDescription = "card $rowIndex $cardIndex",
                             alignment = Alignment.Center,
  				           modifier = Modifier.width(114.dp).height(114.dp),

@@ -1,6 +1,5 @@
 package com.rafael.tictactoe.game.presentation.game_screen
 
-import android.app.Activity
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -26,13 +25,11 @@ import com.rafael.tictactoe.game.domain.util.GotOldChecker
 import com.rafael.tictactoe.game.domain.util.RestartButtonLogic
 import com.rafael.tictactoe.game.domain.util.ToastNameHandler
 import com.rafael.tictactoe.game.domain.util.WinnerChecker
-import com.rafael.tictactoe.game.domain.util.WinnerLineCoordinates
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
 fun GameScreen(
     gameUtil: GameUtils,
-    activity: Activity,
     isCPUMode: Boolean
 ) {
     val viewModel = hiltViewModel<GameViewModel>()
@@ -78,7 +75,7 @@ fun GameScreen(
     }
 
     AnimatedVisibility(winner) {
-        WinnerLine(WinnerLineCoordinates(activity))
+        WinnerLine()
     }
 
     //Handle when some business logic will be called

@@ -1,6 +1,5 @@
 package com.rafael.tictactoe.common.presentation.navigation
 
-import android.app.Activity
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.core.tween
@@ -22,10 +21,7 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.SettingsScreen
 
 @Composable
 @ExperimentalMaterial3Api
-fun NavGraph(
-    activity: Activity,
-    gameUtil: GameUtils
-) {
+fun NavGraph(gameUtil: GameUtils) {
     val navController = rememberNavController()
     val enterTransition = fadeIn(
         animationSpec = tween(durationMillis = 300)
@@ -58,7 +54,6 @@ fun NavGraph(
         ) { backStackEntry ->
             GameScreen(
                 gameUtil,
-                activity,
                 backStackEntry.arguments?.getBoolean("isCPUMode") ?: false
             )
         }
