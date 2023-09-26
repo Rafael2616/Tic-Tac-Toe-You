@@ -29,10 +29,6 @@ import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewMod
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import kotlinx.coroutines.launch
 
-import androidx.compose.foundation.Canvas
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.drawscope.DrawScope
-
 @Composable
 fun CardGrid() {
     var cardItems by rememberSaveable { mutableStateOf(List<Boolean>(3){false})}
@@ -42,7 +38,6 @@ fun CardGrid() {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
-    //TODO implement custom height for diferents screen sizes using window-size-class library
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -54,7 +49,7 @@ fun CardGrid() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(2.dp)
-             ) {
+            ) {
                 cardItems.forEachIndexed { cardIndex, _ ->
                     Card(
                         modifier = Modifier
@@ -68,7 +63,7 @@ fun CardGrid() {
                             }
                         )
                     ) {
-                 		Image(
+                        Image(
 					        contentDescription = "card $rowIndex $cardIndex",
                             alignment = Alignment.Center,
  				           modifier = Modifier.width(114.dp).height(114.dp),
