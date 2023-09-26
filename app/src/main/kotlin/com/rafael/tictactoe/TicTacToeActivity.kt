@@ -42,7 +42,7 @@ class TicTacToeActivity : ComponentActivity() {
                     NavGraph(this, gameUtil)
                 }
             }
-        }            
+        }
     }
 
     override fun onStop() {
