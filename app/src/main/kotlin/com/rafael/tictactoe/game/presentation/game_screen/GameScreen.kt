@@ -12,7 +12,7 @@ import com.rafael.tictactoe.game.presentation.game_screen.components.BackgroundM
 import com.rafael.tictactoe.game.presentation.game_screen.components.CardGrid
 import com.rafael.tictactoe.game.presentation.game_screen.components.ExpandButton
 import com.rafael.tictactoe.game.presentation.game_screen.components.GameStateToast
-import com.rafael.tictactoe.game.presentation.game_screen.components.GetPlayerPrefsCard
+import com.rafael.tictactoe.game.presentation.game_screen.components.GetPlayerPrefsDialog
 import com.rafael.tictactoe.game.presentation.game_screen.components.PlayAgainButton
 import com.rafael.tictactoe.game.presentation.game_screen.components.PlayersNamesLayout
 import com.rafael.tictactoe.game.presentation.game_screen.components.RestartButton
@@ -58,7 +58,7 @@ fun GameScreen(
     ToastNameHandler()
 
     AnimatedVisibility(!play) {
-		GetPlayerPrefsCard()
+		GetPlayerPrefsDialog()
         playerName.firstPlayerName()
         playerName.secondPlayerName()
     }

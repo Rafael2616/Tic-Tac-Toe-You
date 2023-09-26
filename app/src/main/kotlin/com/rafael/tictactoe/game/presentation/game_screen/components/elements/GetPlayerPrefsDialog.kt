@@ -1,5 +1,8 @@
 package com.rafael.tictactoe.game.presentation.game_screen.components
 
+import android.view.ViewTreeObserver
+import androidx.core.view.ViewCompat 
+import androidx.core.view.WindowInsetsCompat
 import androidx.compose.foundation.background
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
@@ -25,10 +28,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView 
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -43,12 +50,13 @@ import com.rafael.tictactoe.game.domain.util.PlayersImagesSetter
 import com.rafael.tictactoe.game.domain.util.RandomCardSorter
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
-
+ 
 @Composable
-fun GetPlayerPrefsCard() {
+fun GetPlayerPrefsDialog() {
     val viewModel = hiltViewModel<GameViewModel>()
     val settingsVM = hiltViewModel<SettingsViewModel>()
     val context = LocalContext.current
+    val view = LocalView.current
     val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
     val isXFor1 by viewModel.isXFor1.collectAsState()
     val player1Name by viewModel.player1Name.collectAsState()
@@ -62,6 +70,8 @@ fun GetPlayerPrefsCard() {
 	val systemUiController = rememberSystemUiController()
     val colorSurface = MaterialTheme.colorScheme.surface
     val isDarkThemeOn by settingsVM.isDarkThemeOn.collectAsState()
+    var isKeyboardOpen by rememberSaveable {  mutableStateOf(false) } 
+    val bottomPadding = if (isKeyboardOpen) 150.dp else 0.dp
 
     Surface(
         color = if (isDarkThemeOn) {
@@ -75,6 +85,7 @@ fun GetPlayerPrefsCard() {
         Box(
             modifier = Modifier
                 .fillMaxSize()
+                .padding(bottom = bottomPadding)
         ) {
             Card(
                 shape = MaterialTheme.shapes.large,
@@ -85,7 +96,7 @@ fun GetPlayerPrefsCard() {
                     .align(Alignment.Center)
             ) {
 
-                // TextFields to get player names
+                //TextFields to get player names
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -240,7 +251,21 @@ fun GetPlayerPrefsCard() {
             }
         }
     }
-    
+
+    //Detect when keyboard is open
+    DisposableEffect(view) {
+        val listener = ViewTreeObserver.OnGlobalLayoutListener { 
+            isKeyboardOpen = ViewCompat.getRootWindowInsets(view)?.isVisible(
+                WindowInsetsCompat.Type.ime()
+            ) ?: false
+        }
+        view.viewTreeObserver.addOnGlobalLayoutListener(listener)
+        onDispose { 
+            view.viewTreeObserver.removeOnGlobalLayoutListener(listener)
+        }
+    }
+
+    //Set property color for status bar when composable is created and destroyed
     DisposableEffect(Unit) {
         if (isDarkThemeOn) {
             systemUiController.setSystemBarsColor(color = Color.Black.copy(alpha = 0.3f))
