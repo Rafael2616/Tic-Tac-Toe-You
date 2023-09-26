@@ -1,8 +1,9 @@
 package com.rafael.tictactoe
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.activity.ComponentActivity
+import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -30,8 +31,10 @@ class TicTacToeActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
-            AppTheme() {         
+            enableEdgeToEdge()
+            AppTheme(this) {
                 Surface(
                     color = MaterialTheme.colorScheme.background,
                     modifier = Modifier.fillMaxSize()
@@ -39,7 +42,7 @@ class TicTacToeActivity : ComponentActivity() {
                     NavGraph(this, gameUtil)
                 }
             }
-        }
+        }            
     }
 
     override fun onStop() {

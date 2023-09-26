@@ -119,7 +119,6 @@ dependencies {
     implementation("androidx.room:room-ktx:$room_version")
     ksp("androidx.room:room-compiler:$room_version")
     //Theming
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.32.0")
     implementation("com.google.android.material:compose-theme-adapter-3:1.1.1") 
     //Test Unit
     testImplementation("junit:junit:4.13.2")

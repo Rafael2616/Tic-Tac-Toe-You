@@ -43,7 +43,6 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.game.domain.util.PlayersImagesSetter
@@ -67,8 +66,6 @@ fun GetPlayerPrefsDialog() {
     var player1Value = if (localPlayer1) player1Name else player2Name
     var player2Value = if (localPlayer1) player2Name else player1Name
     val isCPUMode by viewModel.isCPUMode.collectAsState()
-	val systemUiController = rememberSystemUiController()
-    val colorSurface = MaterialTheme.colorScheme.surface
     val isDarkThemeOn by settingsVM.isDarkThemeOn.collectAsState()
     var isKeyboardOpen by rememberSaveable {  mutableStateOf(false) } 
     val bottomPadding = if (isKeyboardOpen) 150.dp else 0.dp
@@ -262,16 +259,6 @@ fun GetPlayerPrefsDialog() {
         view.viewTreeObserver.addOnGlobalLayoutListener(listener)
         onDispose { 
             view.viewTreeObserver.removeOnGlobalLayoutListener(listener)
-        }
-    }
-
-    //Set property color for status bar when composable is created and destroyed
-    DisposableEffect(Unit) {
-        if (isDarkThemeOn) {
-            systemUiController.setSystemBarsColor(color = Color.Black.copy(alpha = 0.3f))
-        }
-        onDispose {
-            systemUiController.setSystemBarsColor(color = colorSurface)
         }
     }
 }
