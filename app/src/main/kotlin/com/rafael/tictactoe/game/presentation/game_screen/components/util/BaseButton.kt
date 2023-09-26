@@ -1,5 +1,7 @@
 package com.rafael.tictactoe.game.presentation.game_screen.components.util
 
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -38,8 +40,8 @@ fun BaseButton(
     startPadding: Dp = 0.dp,
     endPadding: Dp = 0.dp,
     alignment: Alignment = Alignment.TopStart,
-    btnImage: Int,
-    btnText: Int? = null,
+    @DrawableRes btnImage: Int,
+    @StringRes btnText: Int? = null,
     onClickFun: () -> Unit,
     btnHeight: Dp = 45.dp,
     transparentColor: Boolean = false,
