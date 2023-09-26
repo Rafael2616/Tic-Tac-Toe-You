@@ -68,7 +68,7 @@ fun GetPlayerPrefsDialog() {
     val isCPUMode by viewModel.isCPUMode.collectAsState()
     val isDarkThemeOn by settingsVM.isDarkThemeOn.collectAsState()
     var isKeyboardOpen by rememberSaveable {  mutableStateOf(false) } 
-    val bottomPadding = if (isKeyboardOpen) 150.dp else 0.dp
+    val bottomPadding = if (isKeyboardOpen) 160.dp else 0.dp
 
     Surface(
         color = if (isDarkThemeOn) {

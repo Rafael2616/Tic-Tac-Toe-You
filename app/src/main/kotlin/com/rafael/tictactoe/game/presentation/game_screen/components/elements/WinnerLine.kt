@@ -77,8 +77,8 @@ fun WinnerLine() {
 
             if (winningPositionsIndices.contains(5)) {
                 drawLine(
-                    start = Offset(x = size.width - (size.width / 6) - 4.dp.toPx(), y = size.height),
-                    end = Offset(x = size.width - (size.width / 6) - 4.dp.toPx(), y = size.height - 395.dp.toPx()),
+                    start = Offset(x = size.width - (size.width / 6) - 3.dp.toPx(), y = size.height),
+                    end = Offset(x = size.width - (size.width / 6) - 3.dp.toPx(), y = size.height - 395.dp.toPx()),
                     color = Color.Yellow,
                     strokeWidth = 18.dp.toPx(),
                 )
