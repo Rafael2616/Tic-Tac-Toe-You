@@ -10,7 +10,7 @@ fun RestartGame(vm: GameViewModel) {
     val isCPUPlayer1 = vm.isCPUPlayer1.value
 
     /*
-     *Defines which player will start next match 
+     *Defines which player will start next match in PvP Mode
      *based on who was the winner in the previous match
      */
     if (is1Win) {
@@ -34,7 +34,7 @@ fun RestartGame(vm: GameViewModel) {
     }
 
     /*
-     *Defines which player will start next match, 
+     *Defines which player will start next match in CPU Mode, 
      *considering the possibility of the player being the CPU player,
      *based on who was the winner in the previous match
      */       
@@ -60,5 +60,4 @@ fun RestartGame(vm: GameViewModel) {
     vm.updateIsWinSoundPlaying(false)
     vm.updateIsGotOldSoundPlaying(false)
     vm.resetWinningPositionsIndices(emptyList())
-    vm.setCoordinates(0f, 0f, 0f, 0f)
 }

@@ -59,15 +59,6 @@ class GameViewModel @Inject constructor(
 	private var _isGotOldSoundPlaying = MutableStateFlow(false)
 	val isGotOldSoundPlaying: StateFlow<Boolean> = _isGotOldSoundPlaying
 
-	private var _startX = MutableStateFlow(0f)
-	val startX: StateFlow<Float> = _startX
-	private var _startY = MutableStateFlow(0f)
-	val startY: StateFlow<Float> = _startY
-	private var _endX = MutableStateFlow(0f)
-	val endX: StateFlow<Float> = _endX
-	private var _endY = MutableStateFlow(0f)
-	val endY: StateFlow<Float> = _endY
-
 	private var _winner = MutableStateFlow(false)
 	val winner: StateFlow<Boolean> = _winner
 	private var _gotOld = MutableStateFlow(false)
@@ -225,12 +216,5 @@ class GameViewModel @Inject constructor(
 
     fun resetWinningPositionsIndices(emptyList: List<Int>) {
         _winningPositionsIndices.value = emptyList
-    }
-
-    fun setCoordinates(sX: Float, sY: Float, eX: Float, eY: Float) {     
-        _startX.value = sX
-        _startY.value = sY
-        _endX.value = eX
-        _endY.value = eY
     }
 }
