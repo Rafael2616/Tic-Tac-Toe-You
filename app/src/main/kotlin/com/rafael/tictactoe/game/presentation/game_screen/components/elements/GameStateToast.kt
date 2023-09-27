@@ -27,13 +27,16 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import com.rafael.tictactoe.game.domain.util.ToastImageHandler
+import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
 fun GameStateToast() {
     val viewModel = hiltViewModel<GameViewModel>()
+    val settingsVM = hiltViewModel<SettingsViewModel>()
     val currentPlayerName by viewModel.currentPlayerName.collectAsState()
     val winner by viewModel.winner.collectAsState()
     val gotOld by viewModel.gotOld.collectAsState()
+    val isDarkThemeOn by settingsVM.isDarkThemeOn.collectAsState()
 
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -72,7 +75,7 @@ fun GameStateToast() {
                         Text(
                             text = stringResource(R.string.winner),
                             style = MaterialTheme.typography.bodyLarge,
-                            color = Color.Green
+                            color = if (isDarkThemeOn) Color.Green else Color(0xFF229A00)
                         )
                     }
                 }
