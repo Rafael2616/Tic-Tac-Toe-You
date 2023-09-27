@@ -98,6 +98,7 @@ fun AppTheme(
     val context = LocalContext.current
     val isAndroidS = VERSION.SDK_INT >= VERSION_CODES.S 
 
+    //Handle with color will be applied according with some settings toggles
 	val colors = if (!isFollowingSystemOn) {
   	  if (isAndroidS && isDynamicColorsOn) {
       	  if (!isDarkThemeOn) {
@@ -127,24 +128,23 @@ fun AppTheme(
    	 content = content,
 	)
 
+    //Sync dark theme var with value of system theme
     if (isSystemInDarkTheme && isFollowingSystemOn) {
         viewModel.updateIsDarkThemeOn(true)
     } else if (!isSystemInDarkTheme && isFollowingSystemOn) {
         viewModel.updateIsDarkThemeOn(false)
     }
-  
-    val lightScrim = android.graphics.Color.argb(0xe6, 0xFF, 0xFF, 0xFF) 
-    val darkScrim = android.graphics.Color.argb(0x80, 0x1b, 0x1b, 0x1b)
 
+    //Set System Bars Colors
     DisposableEffect(isDarkThemeOn) { 
         activity.enableEdgeToEdge( 
-            statusBarStyle = SystemBarStyle.auto( 
+            statusBarStyle = SystemBarStyle.auto(
                 Color.TRANSPARENT,
                 Color.TRANSPARENT,
             ) { isDarkThemeOn },
-            navigationBarStyle = SystemBarStyle.auto( 
-                lightScrim, 
-                darkScrim, 
+            navigationBarStyle = SystemBarStyle.auto(
+                Color.TRANSPARENT,
+                Color.TRANSPARENT,
             ) { isDarkThemeOn }, 
         ) 
         onDispose {} 

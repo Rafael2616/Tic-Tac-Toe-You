@@ -66,16 +66,11 @@ fun GetPlayerPrefsDialog() {
     var player1Value = if (localPlayer1) player1Name else player2Name
     var player2Value = if (localPlayer1) player2Name else player1Name
     val isCPUMode by viewModel.isCPUMode.collectAsState()
-    val isDarkThemeOn by settingsVM.isDarkThemeOn.collectAsState()
     var isKeyboardOpen by rememberSaveable {  mutableStateOf(false) } 
     val bottomPadding = if (isKeyboardOpen) 160.dp else 0.dp
 
     Surface(
-        color = if (isDarkThemeOn) {
-                Color.Black.copy(alpha = 0.3f)
-            } else {
-                Color.Transparent
-            },
+        color = Color.Black.copy(alpha = 0.3f),
         modifier = Modifier
             .fillMaxSize()
     ) {
