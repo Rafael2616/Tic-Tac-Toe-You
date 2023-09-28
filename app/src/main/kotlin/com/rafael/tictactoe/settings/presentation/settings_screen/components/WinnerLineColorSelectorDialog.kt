@@ -88,7 +88,7 @@ fun WinnerLineColorSelectorDialog() {
                                         1 -> settingsVM.setWinnerLineColor(Color.Red)
                                         2 -> settingsVM.setWinnerLineColor(Color.Yellow)
                                         3 -> settingsVM.setWinnerLineColor(Color.Green)
-                                        4 -> settingsVM.setWinnerLineColor(Color(0xFF502888))
+                                        4 -> settingsVM.setWinnerLineColor(Color(0xFF6400EE))
                                         5 -> settingsVM.setWinnerLineColor(Color(0xFFB010B8))
                                         6 -> settingsVM.setWinnerLineColor(Color.White)
                                         else -> settingsVM.setWinnerLineColor(Color.Transparent)
@@ -122,7 +122,7 @@ fun WinnerLineColorSelectorDialog() {
                                                 1 -> Color.Red
                                                 2 -> Color.Yellow
                                                 3 -> Color.Green
-                                                4 -> Color(0xFF502888)
+                                                4 -> Color(0xFF6400EE)
                                                 5 -> Color(0xFFB010B8)
                                                 6 -> Color.White
                                                 else -> Color.Transparent
