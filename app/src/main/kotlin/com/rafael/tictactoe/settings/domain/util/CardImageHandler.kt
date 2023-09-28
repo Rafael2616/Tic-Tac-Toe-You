@@ -23,7 +23,7 @@ fun CardImageHandler(index: Int): Painter {
         2 -> if (isDynamicColorsOn) painterResource(R.drawable.dynamic_colors_on_icon) else painterResource(R.drawable.dynamic_colors_off_icon)
         3 -> if (isSoundEffectsOn) painterResource(R.drawable.sound_effects_on_icon) else painterResource(R.drawable.sound_effects_off_icon)
         4 -> if (isBackgroundMusicOn) painterResource(R.drawable.sound_on_icon) else painterResource(R.drawable.sound_off_icon)
-        5 -> painterResource(R.drawable.about_icon)
+        6 -> painterResource(R.drawable.about_icon)
         else -> painterResource(R.drawable.transparent_image)
     }
 }
