@@ -1,6 +1,7 @@
 package com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels
 
 import android.content.Context
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rafael.tictactoe.game.domain.util.BackgroundMusic
@@ -28,7 +29,10 @@ class SettingsViewModel @Inject constructor(
     private var _isDynamicColorsOn = MutableStateFlow(true)
     private var _isFollowingSystemOn = MutableStateFlow(true)
     private var _isSoundEffectsOn = MutableStateFlow(true)
-    private var _isAboutShown = MutableStateFlow(false)
+    private var _isAboutShown = MutableStateFlow(false)  
+    private var _showWinnerLineColorDialog = MutableStateFlow(false)
+    private var _winnerLineColor = MutableStateFlow(Color.Yellow)
+    private var _selectedColorOption = MutableStateFlow(2)
 
 	//Variables that have same values of private vars above, but cant be modified outside this class
     val isBackgroundMusicOn: StateFlow<Boolean> = _isBackgroundMusicOn
@@ -37,6 +41,9 @@ class SettingsViewModel @Inject constructor(
     val isFollowingSystemOn: StateFlow<Boolean> = _isFollowingSystemOn
     val isSoundEffectsOn: StateFlow<Boolean> = _isSoundEffectsOn
     val isAboutShown: StateFlow<Boolean> = _isAboutShown
+    val showWinnerLineColorDialog: StateFlow<Boolean> = _showWinnerLineColorDialog
+    val winnerLineColor: StateFlow<Color> = _winnerLineColor
+    val selectedColorOption: StateFlow<Int> = _selectedColorOption
 
     //Initialize ViewModel StateFlows Variables with corresponding values in SettingsRepository
 	init {
@@ -99,5 +106,17 @@ class SettingsViewModel @Inject constructor(
  
     fun updateIsAboutShown(newValue: Boolean) {
         _isAboutShown.value = newValue
+    }
+    
+    fun showWinnerLineColorDialog(newValue: Boolean) {
+        _showWinnerLineColorDialog.value = newValue
+    }
+
+    fun setWinnerLineColor(newValue: Color) {
+        _winnerLineColor.value = newValue
+    }
+
+    fun updateSelectedColorOption(newValue: Int) {
+        _selectedColorOption.value = newValue
     }
 }

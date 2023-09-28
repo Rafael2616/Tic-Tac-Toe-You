@@ -19,7 +19,8 @@ fun CardTextHandler(index: Int): String {
         2 -> stringResource(R.string.material_you)
         3 -> stringResource(R.string.sound_effects)
         4 -> stringResource(R.string.background_music)
-        5 -> stringResource(id = if (!isAboutShown) R.string.about_app else R.string.creator_message)
+        5 -> stringResource(R.string.winner_line_color)
+        6 -> stringResource(id = if (!isAboutShown) R.string.about_app else R.string.creator_message)
      else -> stringResource(R.string.index_error)
     }
 }

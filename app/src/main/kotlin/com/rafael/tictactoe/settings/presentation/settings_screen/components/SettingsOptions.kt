@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Card
@@ -39,6 +40,11 @@ import com.rafael.tictactoe.settings.domain.util.CardTextHandler
 import com.rafael.tictactoe.settings.domain.use_cases.toggleSettingsUseCase
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+
 @Composable
 fun SettingsOptions(index: Int) {
     val viewModel = hiltViewModel<SettingsViewModel>()
@@ -49,15 +55,16 @@ fun SettingsOptions(index: Int) {
     val isBackgroundMusicOn by viewModel.isBackgroundMusicOn.collectAsState()
     val isSoundEffectsOn by viewModel.isSoundEffectsOn.collectAsState()
     val isAboutShown by viewModel.isAboutShown.collectAsState()
-
+    val winnerLineColor by viewModel.winnerLineColor.collectAsState()
+ 
     Spacer(modifier = Modifier.height(12.dp))
-
+  
     Card(
         shape = MaterialTheme.shapes.medium,
         modifier = Modifier
             .animateContentSize()
             .width(360.dp)
-            .height(if ((index == 5) && (isAboutShown)) 190.dp else 70.dp)
+            .height(if ((index == 6) && (isAboutShown)) 190.dp else 70.dp)
             .clickable(onClick = {
                 UiClickSound(context, isSoundEffectsOn)
                 toggleSettingsUseCase(
@@ -78,19 +85,36 @@ fun SettingsOptions(index: Int) {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Image(
-                    contentDescription = "Setting Image",
-                    modifier = Modifier
-                        .height(55.dp)
-                        .width(55.dp),
-                    painter = CardImageHandler(index, viewModel)
-                )
+                if (index != 5) {
+                    Image(
+                        contentDescription = "Setting Image",
+                        modifier = Modifier
+                            .height(55.dp)
+                            .width(55.dp),
+                        painter = CardImageHandler(index)
+                    )
+                }
+                if (index == 5) {
+                    Box(
+                        modifier = Modifier
+                            .size(55.dp)
+                            .padding(5.dp)
+                            .clip(CircleShape),
+                        content = {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .background(winnerLineColor)
+                            )
+                        }
+                    )
+                }
                 Text(
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onSurface,
                     text = CardTextHandler(index)
                 )
-                if (index != 5) {
+                if (index != 5 && index != 6) {
                     Switch(
                         checked = 
 							when (index) {
@@ -110,24 +134,30 @@ fun SettingsOptions(index: Int) {
                             )
                             UiClickSound(context, isSoundEffectsOn)
                         },
-						thumbContent = {
-    					  Icon(
-     					   imageVector = when (index) {
-    							0 -> if (isFollowingSystemOn) Icons.Filled.Check else Icons.Filled.Close
-     						   1 -> if (isDarkThemeOn) Icons.Filled.Check else Icons.Filled.Close
-   						     2 -> if (isDynamicColorsOn) Icons.Filled.Check else Icons.Filled.Close
-    						    3 -> if (isSoundEffectsOn) Icons.Filled.Check else Icons.Filled.Close
-      						  4 -> if (isBackgroundMusicOn) Icons.Filled.Check else Icons.Filled.Close
-								5 -> if (isAboutShown) Icons.Filled.Check else Icons.Filled.Close
-						 	else -> Icons.Filled.Close
-							},
-    					    contentDescription = "Setting Switcher",
-       					 modifier = Modifier.size(SwitchDefaults.IconSize)
-      					)
+                        thumbContent = {
+                            Icon(
+     					       imageVector = when (index) {
+    						    	0 -> if (isFollowingSystemOn) Icons.Filled.Check else Icons.Filled.Close
+     					    	   1 -> if (isDarkThemeOn) Icons.Filled.Check else Icons.Filled.Close
+   						         2 -> if (isDynamicColorsOn) Icons.Filled.Check else Icons.Filled.Close
+    					    	    3 -> if (isSoundEffectsOn) Icons.Filled.Check else Icons.Filled.Close
+      					    	  4 -> if (isBackgroundMusicOn) Icons.Filled.Check else Icons.Filled.Close
+						     	else -> Icons.Filled.Close
+						    	},
+    					        contentDescription = "Setting Switcher",
+       					     modifier = Modifier.size(SwitchDefaults.IconSize)
+                            )
    					 }
                     )
                 }
                 if (index == 5) {
+                    Icon(
+                        imageVector = Icons.Filled.ArrowForward,
+                        contentDescription = "Select Color",
+       				 modifier = Modifier.size(35.dp)
+                    )
+                }
+                if (index == 6) {
                     Image(
                         contentDescription = "About Application",
                         modifier = Modifier

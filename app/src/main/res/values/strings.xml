@@ -25,6 +25,15 @@
     <string name="about_app">About app</string>
     <string name="system_theme">System Theme</string>
     <string name="vs_cpu">Versus CPU</string>
+    <string name="winner_line_color">Winner line color</string>
+    <string name="color_blue">Blue</string>
+    <string name="color_red">Red</string>
+    <string name="color_yellow">Yellow</string>
+    <string name="color_green">Geeen</string>
+    <string name="color_purple">Purple</string>
+    <string name="color_pink">Pink</string>
+    <string name="color_white">White</string>
+
     <string name="cpu">CPU</string>
-     
+
 </resources>

@@ -131,8 +131,8 @@ fun GetPlayerPrefsDialog() {
                                 if (isCPUMode) {
                                     viewModel.updateIsCPUPlayer1(localPlayer1)
                                     viewModel.updateLocalPlayer1(!isCPUPlayer1)
-                         }
-                            })
+                               }
+                           })
                     ) {
                         Image(
                             contentDescription = "Switch Player Position",

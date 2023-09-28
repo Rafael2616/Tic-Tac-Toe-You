@@ -5,13 +5,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
-fun CardImageHandler(index: Int, viewModel: SettingsViewModel): Painter {
-//    val viewModel = viewModel<SettingsViewModel>()
+fun CardImageHandler(index: Int): Painter {
+    val viewModel = hiltViewModel<SettingsViewModel>()
     val isDarkThemeOn by viewModel.isDarkThemeOn.collectAsState()
     val isDynamicColorsOn by viewModel.isDynamicColorsOn.collectAsState()
     val isBackgroundMusicOn by viewModel.isBackgroundMusicOn.collectAsState()

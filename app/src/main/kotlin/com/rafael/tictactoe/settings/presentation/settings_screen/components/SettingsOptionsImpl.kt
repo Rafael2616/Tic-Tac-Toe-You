@@ -2,6 +2,7 @@ package com.rafael.tictactoe.settings.presentation.settings_screen.components
 
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -25,19 +26,20 @@ fun SettingsOptionsImpl(paddingValues: PaddingValues) {
     val settingsVM = hiltViewModel<SettingsViewModel>()
     val isFollowingSystemOn by settingsVM.isFollowingSystemOn.collectAsState()
     val isDynamicColorsSupported = VERSION.SDK_INT >= VERSION_CODES.S
-    var cards by rememberSaveable { mutableStateOf(List<Boolean>(6) { false }) }
+    var settings by rememberSaveable { mutableStateOf(List<Boolean>(7) { false }) }
 
    LazyColumn(
         modifier = Modifier.
             fillMaxSize()
-            .padding(paddingValues),
+            .padding(paddingValues)
+            .animateContentSize(),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        items(cards.size) { index ->
+        items(settings.size) { index ->
             if ((index == 1 && !isFollowingSystemOn) ||
-                (index == 2 && isDynamicColorsSupported) ||
-                (index != 1 && index != 2)) {
+            (index == 2 && isDynamicColorsSupported) ||
+            (index != 1 && index != 2)) {
                 SettingsOptions(index)
             }
         }
