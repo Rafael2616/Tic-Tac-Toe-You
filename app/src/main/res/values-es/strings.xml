@@ -33,6 +33,6 @@
     <string name="color_purple">Púrpura</string>
     <string name="color_pink">Rosa</string>
     <string name="color_white">Blanco</string>
-
+   <string name="choose_color">Elije un color:</string>
 
 </resources>

@@ -34,6 +34,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.UiClickSound
@@ -61,9 +62,17 @@ fun WinnerLineColorSelectorDialog() {
                 border = BorderStroke(1.5.dp, Color.Gray),
                 modifier = Modifier
                     .width(270.dp)
-                    .height(290.dp)
+                    .height(325.dp)
                     .align(Alignment.Center)
             ) {
+                Text(
+                    text = stringResource(R.string.choose_color),
+                    style = MaterialTheme.typography.titleMedium.copy(fontSize = 20.sp),
+                    color = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier
+                    .padding(8.dp)
+                    .padding(start = 10.dp)
+                )
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -142,7 +151,7 @@ fun WinnerLineColorSelectorDialog() {
                     modifier = Modifier
                         .width(90.dp)
                         .height(40.dp)
-                        .padding(end = 12.dp)
+                        .padding(end = 12.dp, bottom  = 6.dp)
                         .align(Alignment.End),
                 ) {
                     Box(
