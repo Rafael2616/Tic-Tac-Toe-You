@@ -2,6 +2,7 @@ package com.rafael.tictactoe.settings.presentation.settings_screen.components
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Check
@@ -29,6 +31,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -39,11 +43,6 @@ import com.rafael.tictactoe.settings.domain.util.CardImageHandler
 import com.rafael.tictactoe.settings.domain.util.CardTextHandler
 import com.rafael.tictactoe.settings.domain.use_cases.toggleSettingsUseCase
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
-
-import androidx.compose.foundation.background
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 
 @Composable
 fun SettingsOptions(index: Int) {
@@ -56,9 +55,9 @@ fun SettingsOptions(index: Int) {
     val isSoundEffectsOn by viewModel.isSoundEffectsOn.collectAsState()
     val isAboutShown by viewModel.isAboutShown.collectAsState()
     val winnerLineColor by viewModel.winnerLineColor.collectAsState()
- 
+
     Spacer(modifier = Modifier.height(12.dp))
-  
+
     Card(
         shape = MaterialTheme.shapes.medium,
         modifier = Modifier

@@ -14,8 +14,8 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.Set
 @Composable
 @ExperimentalMaterial3Api
 fun SettingsScreen(navController: NavController) {
-    val viewModel = hiltViewModel<SettingsViewModel>()
-    val showWinnerLineColorDialog by viewModel.showWinnerLineColorDialog.collectAsState()
+    val settingsVM = hiltViewModel<SettingsViewModel>()
+    val showWinnerLineColorDialog by settingsVM.showWinnerLineColorDialog.collectAsState()
 
     SettingsTopBar(navController)
 
