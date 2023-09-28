@@ -19,6 +19,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.ExpandLess
+import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -35,6 +37,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
@@ -111,7 +114,9 @@ fun SettingsOptions(index: Int) {
                 Text(
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onSurface,
-                    text = CardTextHandler(index)
+                    text = CardTextHandler(index),
+                    modifier = Modifier.width(240.dp),
+                    textAlign = TextAlign.Center
                 )
                 if (index != 5 && index != 6) {
                     Switch(
@@ -157,12 +162,10 @@ fun SettingsOptions(index: Int) {
                     )
                 }
                 if (index == 6) {
-                    Image(
+                    Icon(
+                        imageVector =  if (isAboutShown) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore,
                         contentDescription = "About Application",
-                        modifier = Modifier
-                            .height(35.dp)
-                            .width(45.dp),
-                        painter = painterResource(if (!isAboutShown) R.drawable.expand_down_icon else R.drawable.expand_up_icon)
+       				 modifier = Modifier.size(45.dp)
                     )
                 }
             }

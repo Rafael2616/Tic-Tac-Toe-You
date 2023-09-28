@@ -44,7 +44,6 @@ fun BaseButton(
     @StringRes btnText: Int? = null,
     onClickFun: () -> Unit,
     btnHeight: Dp = 45.dp,
-    transparentColor: Boolean = false,
     description: String = "there is no description"
 ) {
     val settingsVM = hiltViewModel<SettingsViewModel>()
@@ -65,11 +64,6 @@ fun BaseButton(
         ) {
             Card(
                 shape = MaterialTheme.shapes.medium,
-                colors = if (transparentColor) {
-                    CardDefaults.cardColors(containerColor = Color.Transparent)
-                } else {
-                    CardDefaults.cardColors()
-                },
                 modifier = Modifier
                     .width(45.dp)
                     .height(btnHeight)
@@ -89,7 +83,9 @@ fun BaseButton(
                     text = stringResource(btnText),
                     style = MaterialTheme.typography.bodyMedium.copy(fontSize = 12.sp),
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                    modifier = Modifier
+                        .align(Alignment.CenterHorizontally)
+                        .padding(top = 5.dp)
                 )
             }
         }
