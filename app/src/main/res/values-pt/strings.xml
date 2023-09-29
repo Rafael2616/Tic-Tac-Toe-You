@@ -23,7 +23,7 @@
     <string name="active_sound">Efeitos</string>
     <string name="active_music">Musica</string>
     <string name="about_app">Sobre o app</string>
-    <string name="system_theme">Tema do Sistema</string>
+    <string name="system_theme">Siga o Sistema</string>
     <string name="vs_cpu">Contra CPU</string>
     <string name="winner_line_color">Cor da linha vencedora</string>
     <string name="color_blue">Azul</string>
@@ -34,5 +34,9 @@
     <string name="color_pink">Rosa</string>
     <string name="color_white">Branco</string>
     <string name="choose_color">Escolha uma cor:</string>
+    <string name="group_theme">Tema</string>
+    <string name="group_sound">Som</string>
+    <string name="group_customization">Personalização</string>
+    <string name="group_others">Outros</string>
 
 </resources>

@@ -109,7 +109,7 @@ fun WinnerLineColorSelectorDialog() {
                                     0 -> stringResource(R.string.color_blue)
                                     1 -> stringResource(R.string.color_red)
                                     2 -> stringResource(R.string.color_yellow)
-                                    3 -> stringResource(R.string.color_red)
+                                    3 -> stringResource(R.string.color_green)
                                     4 -> stringResource(R.string.color_purple)
                                     5 -> stringResource(R.string.color_pink)
                                     6 -> stringResource(R.string.color_white)

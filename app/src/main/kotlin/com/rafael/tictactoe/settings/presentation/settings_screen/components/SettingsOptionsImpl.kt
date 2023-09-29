@@ -1,7 +1,5 @@
 package com.rafael.tictactoe.settings.presentation.settings_screen.components
 
-import android.os.Build.VERSION
-import android.os.Build.VERSION_CODES
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,38 +7,55 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsOptions
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsWithIcon
+import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsWithSwitcher
+import com.rafael.tictactoe.settings.domain.util.GroupType
 
 @Composable
 fun SettingsOptionsImpl(paddingValues: PaddingValues) {
-    val settingsVM = hiltViewModel<SettingsViewModel>()
-    val isFollowingSystemOn by settingsVM.isFollowingSystemOn.collectAsState()
-    val isDynamicColorsSupported = VERSION.SDK_INT >= VERSION_CODES.S
-    var settings by rememberSaveable { mutableStateOf(List<Boolean>(7) { false }) }
+    var settingsGroups by rememberSaveable { mutableStateOf(List<Boolean>(4) { false }) }
+    val themeGroupSize = listOf(0,1,2)
+    val soundGroupSize = listOf(0,1)
+    val cutomizationGroupSize = listOf(0)
+    val otherGroupSize = listOf(0)
 
-   LazyColumn(
-        modifier = Modifier.
-            fillMaxSize()
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
             .padding(paddingValues)
             .animateContentSize(),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        items(settings.size) { index ->
-            if ((index == 1 && !isFollowingSystemOn) ||
-            (index == 2 && isDynamicColorsSupported) ||
-            (index != 1 && index != 2)) {
-                SettingsOptions(index)
+    ) {   
+        items(settingsGroups.size) { index ->
+            when (index) {
+              0 -> SettingsWithSwitcher(
+                    size = themeGroupSize,
+                    groupType = GroupType.THEME,
+                    groupName = R.string.group_theme
+				)
+                1 -> SettingsWithSwitcher(
+                    size = soundGroupSize,
+                    groupType = GroupType.SOUND,
+                    groupName = R.string.group_sound
+                )
+                2 -> SettingsWithIcon(
+                    size = cutomizationGroupSize,
+                    groupType = GroupType.CUSTOMIZATION,
+                    groupName = R.string.group_customization
+                )
+                3 -> SettingsWithIcon(
+                    size = otherGroupSize,
+                    groupType = GroupType.OTHER,
+                    groupName = R.string.group_others
+                )
             }
         }
     }
