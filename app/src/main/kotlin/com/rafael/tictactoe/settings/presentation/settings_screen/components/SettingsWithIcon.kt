@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -28,7 +27,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -114,17 +115,19 @@ fun SettingsWithIcon(
                         Image(
                             contentDescription = "Setting Image",
                             modifier = Modifier
-                                .height(55.dp)
-                                .width(55.dp),
+                                .size(55.dp),
                             painter = CardImageHandler(index, groupType)
                         )
                     }
                     if (groupType == GroupType.CUSTOMIZATION && index == 0) {
+                        Spacer(modifier = Modifier.width(6.dp))
                         Box(
                             modifier = Modifier
-                                .size(50.dp)
-                                .padding(5.dp)
-                                .clip(CircleShape),
+                                .height(50.dp)
+                                .width(15.dp)
+                                .padding(4.dp)
+                                .rotate(45f)
+                                .clip(RectangleShape),
                             content = {
                             Box(
                                 modifier = Modifier
