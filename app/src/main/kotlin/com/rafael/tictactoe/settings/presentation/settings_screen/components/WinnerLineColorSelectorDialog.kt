@@ -81,65 +81,87 @@ fun WinnerLineColorSelectorDialog() {
                         .animateContentSize(),
                 ) {
                     items(optionsSize.size) { option ->
-                        Row(
+                        Box(
                             modifier = Modifier
-                                .height(60.dp)
-                                .fillMaxWidth()
-                                .padding(10.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically,
+                            .height(60.dp)
+                            .fillMaxWidth()
+                            .clickable(onClick = {
+                                settingsVM.updateSelectedColorOption(option)
+                                UiClickSound(context, isSoundEffectsOn)
+                                when (option) {
+                                    0 -> settingsVM.setWinnerLineColor(Color.Blue)
+                                    1 -> settingsVM.setWinnerLineColor(Color.Red)
+                                    2 -> settingsVM.setWinnerLineColor(Color.Yellow)
+                                    3 -> settingsVM.setWinnerLineColor(Color.Green)
+                                    4 -> settingsVM.setWinnerLineColor(Color(0xFF6400EE))
+                                    5 -> settingsVM.setWinnerLineColor(Color(0xFFB010B8))
+                                    6 -> settingsVM.setWinnerLineColor(Color.White)
+                                    else -> settingsVM.setWinnerLineColor(Color.Transparent)
+                               }
+                           })
                         ) {
-                            RadioButton(
-                                selected = option == selectedColorOption,
-                                onClick = { settingsVM.updateSelectedColorOption(option);
-                                    when (option) {
-                                        0 -> settingsVM.setWinnerLineColor(Color.Blue)
-                                        1 -> settingsVM.setWinnerLineColor(Color.Red)
-                                        2 -> settingsVM.setWinnerLineColor(Color.Yellow)
-                                        3 -> settingsVM.setWinnerLineColor(Color.Green)
-                                        4 -> settingsVM.setWinnerLineColor(Color(0xFF6400EE))
-                                        5 -> settingsVM.setWinnerLineColor(Color(0xFFB010B8))
-                                        6 -> settingsVM.setWinnerLineColor(Color.White)
-                                        else -> settingsVM.setWinnerLineColor(Color.Transparent)
-                                    }
-                                },
-                            )
-                            Text(
-                                text = when (option) {
-                                    0 -> stringResource(R.string.color_blue)
-                                    1 -> stringResource(R.string.color_red)
-                                    2 -> stringResource(R.string.color_yellow)
-                                    3 -> stringResource(R.string.color_green)
-                                    4 -> stringResource(R.string.color_purple)
-                                    5 -> stringResource(R.string.color_pink)
-                                    6 -> stringResource(R.string.color_white)
-                                    else -> "undefined_color"
-                                }
-                            )
-                            Box(
+                            Row(
                                 modifier = Modifier
-                                    .size(55.dp)
-                                    .padding(5.dp)
-                                    .clip(CircleShape),
-                                content = {
-                                    Box(
-                                        modifier = Modifier
-                                        .fillMaxSize()
-                                        .background(
-                                            when (option) {
-                                                0 -> Color.Blue
-                                                1 -> Color.Red
-                                                2 -> Color.Yellow
-                                                3 -> Color.Green
-                                                4 -> Color(0xFF6400EE)
-                                                5 -> Color(0xFFB010B8)
-                                                6 -> Color.White
-                                                else -> Color.Transparent
-                                            }
+                                    .height(60.dp)
+                                    .fillMaxWidth()
+                                    .padding(10.dp),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically,
+                            ) {
+                                RadioButton(
+                                    selected = option == selectedColorOption,
+                                    onClick = {
+                                        settingsVM.updateSelectedColorOption(option)
+                                        UiClickSound(context, isSoundEffectsOn)
+                                        when (option) {
+                                            0 -> settingsVM.setWinnerLineColor(Color.Blue)
+                                            1 -> settingsVM.setWinnerLineColor(Color.Red)
+                                            2 -> settingsVM.setWinnerLineColor(Color.Yellow)
+                                            3 -> settingsVM.setWinnerLineColor(Color.Green)
+                                            4 -> settingsVM.setWinnerLineColor(Color(0xFF6400EE))
+                                            5 -> settingsVM.setWinnerLineColor(Color(0xFFB010B8))
+                                            6 -> settingsVM.setWinnerLineColor(Color.White)
+                                            else -> settingsVM.setWinnerLineColor(Color.Transparent)
+                                        }
+                                    },
+                                )
+                                Text(
+                                    text = when (option) {
+                                        0 -> stringResource(R.string.color_blue)
+                                        1 -> stringResource(R.string.color_red)
+                                        2 -> stringResource(R.string.color_yellow)
+                                        3 -> stringResource(R.string.color_green)
+                                        4 -> stringResource(R.string.color_purple)
+                                        5 -> stringResource(R.string.color_pink)
+                                        6 -> stringResource(R.string.color_white)
+                                        else -> "undefined_color"
+                                    }
+                                )
+                                Box(
+                                    modifier = Modifier
+                                        .size(55.dp)
+                                        .padding(5.dp)
+                                        .clip(CircleShape),
+                                    content = {
+                                        Box(
+                                            modifier = Modifier
+                                            .fillMaxSize()
+                                            .background(
+                                                when (option) {
+                                                    0 -> Color.Blue
+                                                    1 -> Color.Red
+                                                    2 -> Color.Yellow
+                                                    3 -> Color.Green
+                                                    4 -> Color(0xFF6400EE)
+                                                    5 -> Color(0xFFB010B8)
+                                                    6 -> Color.White
+                                                    else -> Color.Transparent
+                                                }
+                                            )
                                         )
-                                    )
-                                }
-                            )
+                                    }
+                                )
+                            }
                         }
                     }
                 }

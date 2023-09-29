@@ -122,7 +122,7 @@ fun SettingsWithIcon(
                     if (groupType == GroupType.CUSTOMIZATION && index == 0) {
                         Box(
                             modifier = Modifier
-                                .size(55.dp)
+                                .size(50.dp)
                                 .padding(5.dp)
                                 .clip(CircleShape),
                             content = {

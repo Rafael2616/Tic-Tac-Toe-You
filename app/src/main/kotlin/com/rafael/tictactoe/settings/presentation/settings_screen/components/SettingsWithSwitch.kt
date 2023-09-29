@@ -110,7 +110,7 @@ fun SettingsWithSwitcher(
                                 index,
                                 viewModel
                             )
-                    })
+                        })
                 ) {
                     Row(
                         modifier = Modifier.fillMaxSize().padding(end = 12.dp),
@@ -147,16 +147,19 @@ fun SettingsWithSwitcher(
                                 UiClickSound(context, isSoundEffectsOn)
                             },
                             thumbContent = {
-                                Icon(
-     					           imageVector = if (
-                                        switchCheckedValueHandler(
-                                            groupType,
-                                            index,
-                                            viewModel
-                                        )) Icons.Filled.Check else Icons.Filled.Close,
-    					            contentDescription = "Setting Switcher",
-       					         modifier = Modifier.size(SwitchDefaults.IconSize)
-                                )
+                                 if (switchCheckedValueHandler(
+                                        groupType,
+                                        index,
+                                        viewModel
+                                    )) {
+                                    Icon(
+     					               imageVector = Icons.Filled.Check,
+    					                contentDescription = "Setting Switcher",
+       					             modifier = Modifier.size(SwitchDefaults.IconSize)
+                                    )
+                                } else {
+                                    Box(modifier = Modifier)
+                                }
    					     }
                         )
                     }
