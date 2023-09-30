@@ -16,7 +16,7 @@ fun SettingsImageHandler(index: Int, groupType: GroupType): Painter {
     val isDynamicColorsOn by viewModel.isDynamicColorsOn.collectAsState()
     val isBackgroundMusicOn by viewModel.isBackgroundMusicOn.collectAsState()
     val isSoundEffectsOn by viewModel.isSoundEffectsOn.collectAsState()
-
+    
     @Composable
     fun ThemeCardImageHandler(index: Int): Painter {
         return when (index) {

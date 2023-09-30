@@ -38,6 +38,7 @@
     <string name="group_sound">Sound</string>
     <string name="group_customization">Customization</string>
     <string name="group_others">Others</string>
+    <string name="app_version">Version</string>
 
     <string name="cpu">CPU</string>
 

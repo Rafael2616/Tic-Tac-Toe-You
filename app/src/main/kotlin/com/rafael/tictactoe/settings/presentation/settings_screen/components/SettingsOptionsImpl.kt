@@ -34,8 +34,8 @@ fun SettingsOptionsImpl(paddingValues: PaddingValues) {
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {   
-        items(settingsGroups.size) { index ->
-            when (index) {
+        items(settingsGroups.size) { group ->
+            when (group) {
               0 -> SettingsWithSwitch(
                     size = themeGroupSize,
                     groupType = GroupType.THEME,

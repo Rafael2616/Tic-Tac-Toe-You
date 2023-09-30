@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -40,6 +41,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.UiClickSound
+import com.rafael.tictactoe.common.domain.util.getPackageVersion
 import com.rafael.tictactoe.settings.domain.util.GroupType
 import com.rafael.tictactoe.settings.domain.util.SettingsIconHandler
 import com.rafael.tictactoe.settings.domain.util.SettingsImageHandler
@@ -94,7 +96,7 @@ fun SettingsWithIcon(
                     modifier = Modifier
                         .animateContentSize()
                         .width(360.dp)
-                        .height(if (groupType == GroupType.OTHER && index == 0 && isAboutShown) 190.dp else 68.dp)
+                        .height(if (groupType == GroupType.OTHER && index == 0 && isAboutShown) 150.dp else 68.dp)
                         .clickable(onClick = {
                             UiClickSound(context, isSoundEffectsOn)
                             toggleSettingsUseCase(
@@ -138,13 +140,30 @@ fun SettingsWithIcon(
                             }
                         )
                     }
-                    Text(
-                        style = MaterialTheme.typography.titleMedium,
-                        color = MaterialTheme.colorScheme.onSurface,
-                        text = SettingsTextHandler(index, groupType),
-                        modifier = Modifier.width(240.dp),
-                        textAlign = TextAlign.Center
-                    )                  
+                    Column(
+                        modifier = Modifier
+                            .wrapContentSize()
+                            .animateContentSize(),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            text = SettingsTextHandler(index, groupType),
+                            modifier = Modifier.width(240.dp),
+                            textAlign = TextAlign.Center
+                        ) 
+                        if (groupType == GroupType.OTHER && index == 0 && isAboutShown) {
+                            Text(
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurface,
+                                text = stringResource(R.string.app_version) +" "+ getPackageVersion(context),
+                                modifier = Modifier.width(240.dp).padding(top = 8.dp),
+                                textAlign = TextAlign.Center
+                            )
+                        }
+                    }           
                     Icon(
                         imageVector = SettingsIconHandler(index, groupType),
                         contentDescription = "Icon",

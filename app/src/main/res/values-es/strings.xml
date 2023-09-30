@@ -38,5 +38,6 @@
     <string name="group_sound">Sonido</string>
     <string name="group_customization">Personalización</string>
     <string name="group_others">Otros</string>
+    <string name="app_version">Versión</string>
 
 </resources>
