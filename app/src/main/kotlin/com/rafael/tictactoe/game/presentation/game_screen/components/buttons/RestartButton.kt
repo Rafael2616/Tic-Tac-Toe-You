@@ -1,9 +1,11 @@
 package com.rafael.tictactoe.game.presentation.game_screen.components
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -24,8 +26,7 @@ fun RestartButton() {
     val is1Win by viewModel.is1Win.collectAsState()
 
     BaseButton(
-        topPadding = 55.dp,
-        endPadding = 30.dp,
+        modifier = Modifier.padding(top = 55.dp, end = 30.dp),
         alignment = Alignment.TopEnd,
         btnImage = R.drawable.reset_icon,
         btnText = R.string.restart,

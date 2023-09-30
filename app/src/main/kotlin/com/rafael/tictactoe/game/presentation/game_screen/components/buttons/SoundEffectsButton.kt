@@ -1,9 +1,11 @@
 package com.rafael.tictactoe.game.presentation.game_screen.components
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
@@ -15,8 +17,7 @@ fun SoundEffectsButton() {
     val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
 
     BaseButton(
-        topPadding = 95.dp,
-        startPadding = 15.dp,
+        modifier = Modifier.padding(top = 95.dp, start = 15.dp),
         btnImage = if (isSoundEffectsOn) R.drawable.sound_effects_on_icon
         else R.drawable.sound_effects_off_icon,
         btnText = R.string.active_sound,

@@ -1,9 +1,11 @@
 package com.rafael.tictactoe.game.presentation.game_screen.components
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
@@ -17,8 +19,7 @@ fun BackgroundMusicButton() {
     val isBackgroundMusicOn by settingsVM.isBackgroundMusicOn.collectAsState()
  
     BaseButton(
-        topPadding = 165.dp,
-        startPadding = 15.dp,
+        modifier = Modifier.padding(top = 165.dp, start = 15.dp),
         btnImage = if (isBackgroundMusicOn) R.drawable.sound_on_icon
         else  R.drawable.sound_off_icon,
         btnText = R.string.active_music,

@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Card
@@ -36,9 +37,7 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.Set
 
 @Composable
 fun BaseButton(
-    topPadding: Dp,
-    startPadding: Dp = 0.dp,
-    endPadding: Dp = 0.dp,
+    modifier: Modifier = Modifier,
     alignment: Alignment = Alignment.TopStart,
     @DrawableRes btnImage: Int,
     @StringRes btnText: Int? = null,
@@ -51,9 +50,8 @@ fun BaseButton(
     val context = LocalContext.current
 
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(top = topPadding, start = startPadding, end = endPadding),
+        modifier = modifier
+            .fillMaxSize(),
         contentAlignment = alignment
     ) {
         Column(
