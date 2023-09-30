@@ -41,15 +41,15 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.UiClickSound
-import com.rafael.tictactoe.settings.domain.util.CardImageHandler
-import com.rafael.tictactoe.settings.domain.util.CardTextHandler
 import com.rafael.tictactoe.settings.domain.util.GroupType
-import com.rafael.tictactoe.settings.domain.util.switchCheckedValueHandler
+import com.rafael.tictactoe.settings.domain.util.SettingsImageHandler
+import com.rafael.tictactoe.settings.domain.util.SettingsTextHandler
+import com.rafael.tictactoe.settings.domain.util.switchCheckedHandler
 import com.rafael.tictactoe.settings.domain.use_cases.toggleSettingsUseCase
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
-fun SettingsWithSwitcher(
+fun SettingsWithSwitch(
     size: List<Int>,
     groupType: GroupType,
     @StringRes groupName: Int
@@ -90,7 +90,7 @@ fun SettingsWithSwitcher(
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Start,
             modifier = Modifier
-                .padding(start = 14.dp, top = 4.dp, bottom = 6.dp)
+                .padding(start = 14.dp, bottom = 6.dp)
                 .fillMaxWidth()
         )
         size.forEachIndexed { _, index ->
@@ -100,7 +100,7 @@ fun SettingsWithSwitcher(
                     modifier = Modifier
                         .animateContentSize()
                         .width(360.dp)
-                        .height(70.dp)
+                        .height(68.dp)
                         .clickable(onClick = {
                             UiClickSound(context, isSoundEffectsOn)
                             toggleSettingsUseCase(
@@ -112,7 +112,9 @@ fun SettingsWithSwitcher(
                         })
                 ) {
                     Row(
-                        modifier = Modifier.fillMaxSize().padding(end = 12.dp),
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(end = 12.dp),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
@@ -121,17 +123,17 @@ fun SettingsWithSwitcher(
                             modifier = Modifier
                                 .height(55.dp)
                                 .width(55.dp),
-                            painter = CardImageHandler(index, groupType)
+                            painter = SettingsImageHandler(index, groupType)
                         )
                         Text(
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onSurface,
-                            text = CardTextHandler(index, groupType),
+                            text = SettingsTextHandler(index, groupType),
                             modifier = Modifier.width(240.dp),
                             textAlign = TextAlign.Center
                         )
                         Switch(
-                            checked = switchCheckedValueHandler(
+                            checked = switchCheckedHandler(
                                 groupType,
                                 index,
                                 viewModel
@@ -146,7 +148,7 @@ fun SettingsWithSwitcher(
                                 UiClickSound(context, isSoundEffectsOn)
                             },
                             thumbContent = {
-                                 if (switchCheckedValueHandler(
+                                 if (switchCheckedHandler(
                                         groupType,
                                         index,
                                         viewModel
@@ -157,7 +159,7 @@ fun SettingsWithSwitcher(
        					             modifier = Modifier.size(SwitchDefaults.IconSize)
                                     )
                                 } else {
-                                    null
+                                    Unit
                                 }
    					     }
                         )

@@ -15,7 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsWithIcon
-import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsWithSwitcher
+import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsWithSwitch
 import com.rafael.tictactoe.settings.domain.util.GroupType
 
 @Composable
@@ -36,12 +36,12 @@ fun SettingsOptionsImpl(paddingValues: PaddingValues) {
     ) {   
         items(settingsGroups.size) { index ->
             when (index) {
-              0 -> SettingsWithSwitcher(
+              0 -> SettingsWithSwitch(
                     size = themeGroupSize,
                     groupType = GroupType.THEME,
                     groupName = R.string.group_theme
 				)
-                1 -> SettingsWithSwitcher(
+                1 -> SettingsWithSwitch(
                     size = soundGroupSize,
                     groupType = GroupType.SOUND,
                     groupName = R.string.group_sound

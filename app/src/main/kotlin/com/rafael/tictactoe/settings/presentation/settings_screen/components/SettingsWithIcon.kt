@@ -40,10 +40,10 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.UiClickSound
-import com.rafael.tictactoe.settings.domain.util.CardImageHandler
-import com.rafael.tictactoe.settings.domain.util.CardTextHandler
-import com.rafael.tictactoe.settings.domain.util.IconHandler
 import com.rafael.tictactoe.settings.domain.util.GroupType
+import com.rafael.tictactoe.settings.domain.util.SettingsIconHandler
+import com.rafael.tictactoe.settings.domain.util.SettingsImageHandler
+import com.rafael.tictactoe.settings.domain.util.SettingsTextHandler
 import com.rafael.tictactoe.settings.domain.util.switchCheckedValueHandler
 import com.rafael.tictactoe.settings.domain.use_cases.toggleSettingsUseCase
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
@@ -86,7 +86,7 @@ fun SettingsWithIcon(
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Start,
             modifier = Modifier
-                .padding(start = 14.dp, top = 4.dp, bottom = 6.dp)
+                .padding(start = 14.dp, bottom = 6.dp)
                 .fillMaxWidth()
             )
             size.forEachIndexed { _, index ->
@@ -95,7 +95,7 @@ fun SettingsWithIcon(
                     modifier = Modifier
                         .animateContentSize()
                         .width(360.dp)
-                        .height(if (groupType == GroupType.OTHER && index == 0 && isAboutShown) 190.dp else 70.dp)
+                        .height(if (groupType == GroupType.OTHER && index == 0 && isAboutShown) 190.dp else 68.dp)
                         .clickable(onClick = {
                             UiClickSound(context, isSoundEffectsOn)
                             toggleSettingsUseCase(
@@ -107,7 +107,9 @@ fun SettingsWithIcon(
                         })
                     ) {
                 Row(
-                    modifier = Modifier.fillMaxSize().padding(end = 12.dp),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(end = 12.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
@@ -116,7 +118,7 @@ fun SettingsWithIcon(
                             contentDescription = "Setting Image",
                             modifier = Modifier
                                 .size(55.dp),
-                            painter = CardImageHandler(index, groupType)
+                            painter = SettingsImageHandler(index, groupType)
                         )
                     }
                     if (groupType == GroupType.CUSTOMIZATION && index == 0) {
@@ -140,12 +142,12 @@ fun SettingsWithIcon(
                     Text(
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.onSurface,
-                        text = CardTextHandler(index, groupType),
+                        text = SettingsTextHandler(index, groupType),
                         modifier = Modifier.width(240.dp),
                         textAlign = TextAlign.Center
                     )                  
                     Icon(
-                        imageVector = IconHandler(index, groupType),
+                        imageVector = SettingsIconHandler(index, groupType),
                         contentDescription = "Icon",
        		    	 modifier = Modifier.size(35.dp)
                     )         

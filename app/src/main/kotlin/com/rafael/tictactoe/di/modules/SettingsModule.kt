@@ -5,8 +5,6 @@ import androidx.room.Room
 import com.rafael.tictactoe.settings.data.database.SettingsDatabase
 import com.rafael.tictactoe.settings.data.repository.SettingsRepositoryImpl
 import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
-import com.rafael.tictactoe.settings.domain.util.CardTextHandler
-import com.rafael.tictactoe.settings.domain.util.CardImageHandler
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import dagger.Module
 import dagger.Provides
@@ -45,8 +43,6 @@ object SettingsModule {
     @Singleton
     fun provideSettingsUtilities(repository: SettingsRepository): SettingsUtilities {
         return SettingsUtilities(
-            handleCardImage = HandleCardImage(index, isDarkThemeOn, isDynamicColorsOn, isSoundEffectsOn, isBackgroundMusicOn)
-            handleCardText = HandleCardText(repository)
         )
     }*/
 }

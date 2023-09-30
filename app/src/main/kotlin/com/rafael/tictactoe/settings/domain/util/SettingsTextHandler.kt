@@ -9,7 +9,7 @@ import com.rafael.tictactoe.R
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
-fun CardTextHandler(index: Int, groupType: GroupType): String {
+fun SettingsTextHandler(index: Int, groupType: GroupType): String {
     val settingsVM = hiltViewModel<SettingsViewModel>()
     val isAboutShown by settingsVM.isAboutShown.collectAsState()
 

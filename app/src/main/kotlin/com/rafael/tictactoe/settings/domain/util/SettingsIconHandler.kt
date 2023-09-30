@@ -16,7 +16,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
-fun IconHandler(index: Int, groupType: GroupType): ImageVector {
+fun SettingsIconHandler(index: Int, groupType: GroupType): ImageVector {
     val viewModel = hiltViewModel<SettingsViewModel>()
     val isAboutShown by viewModel.isAboutShown.collectAsState()
 
@@ -41,5 +41,4 @@ fun IconHandler(index: Int, groupType: GroupType): ImageVector {
         GroupType.OTHER -> OtherIconHandler(index)
         else -> Icons.Filled.Close
     }
-
 }
