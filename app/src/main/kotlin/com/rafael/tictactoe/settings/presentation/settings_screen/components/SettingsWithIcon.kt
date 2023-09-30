@@ -44,7 +44,6 @@ import com.rafael.tictactoe.settings.domain.util.GroupType
 import com.rafael.tictactoe.settings.domain.util.SettingsIconHandler
 import com.rafael.tictactoe.settings.domain.util.SettingsImageHandler
 import com.rafael.tictactoe.settings.domain.util.SettingsTextHandler
-import com.rafael.tictactoe.settings.domain.util.switchCheckedValueHandler
 import com.rafael.tictactoe.settings.domain.use_cases.toggleSettingsUseCase
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 

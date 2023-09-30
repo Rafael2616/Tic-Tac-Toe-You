@@ -2,13 +2,13 @@ package com.rafael.tictactoe.settings.domain.util
 
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
-fun switchCheckedValueHandler(
+fun switchCheckedHandler(
     groupType: GroupType,
     index: Int,
     viewModel: SettingsViewModel
 ): Boolean {
    
-    fun themeSwitchCheckedValue(index: Int, vm: SettingsViewModel): Boolean {
+    fun themeSwitchCheckedHandler(index: Int, vm: SettingsViewModel): Boolean {
         return when (index) {
     		0 -> vm.isFollowingSystemOn.value
  		   1 -> vm.isDarkThemeOn.value
@@ -17,7 +17,7 @@ fun switchCheckedValueHandler(
         } 
     }
    
-    fun audioSwitchCheckedValue(index: Int, vm: SettingsViewModel): Boolean {
+    fun audioSwitchCheckedHandler(index: Int, vm: SettingsViewModel): Boolean {
 		return when (index) {
     		0 -> vm.isSoundEffectsOn.value
      	   1 -> vm.isBackgroundMusicOn.value
@@ -26,8 +26,8 @@ fun switchCheckedValueHandler(
     }
 
     return when (groupType) {
-        GroupType.THEME -> themeSwitchCheckedValue(index, viewModel)
-        GroupType.SOUND -> audioSwitchCheckedValue(index, viewModel)
+        GroupType.THEME -> themeSwitchCheckedHandler(index, viewModel)
+        GroupType.SOUND -> audioSwitchCheckedHandler(index, viewModel)
         else -> false
     }  
 }
