@@ -8,7 +8,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.game.domain.util.VictoryCounterReseter
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import com.rafael.tictactoe.game.presentation.game_screen.components.util.BaseButton
 
@@ -21,8 +20,8 @@ fun VictoryCounterReseterButton() {
         btnImage = R.drawable.trash_icon,
         btnText = R.string.reset,
         description = "Victory Counter Reseter Button",
-        onClickFun = { 
-            VictoryCounterReseter(viewModel)
+        onClickFun = {
+            viewModel.resetVictoryCounter()
         }
     )
 }

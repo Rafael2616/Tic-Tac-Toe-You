@@ -39,5 +39,9 @@
     <string name="group_customization">Personalización</string>
     <string name="group_others">Otros</string>
     <string name="app_version">Versión</string>
+    <string name="leave_game_msg">¿Quieres abandonar el juego?</string>
+    <string name="leave_game_description">Esto restablecerá todo el progreso</string>
+    <string name="leave">Salir</string>
+    <string name="stay">Quedarse</string>
 
 </resources>

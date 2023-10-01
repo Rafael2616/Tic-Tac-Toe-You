@@ -54,6 +54,7 @@ fun NavGraph(gameUtil: GameUtils) {
         ) { backStackEntry ->
             GameScreen(
                 gameUtil,
+                navController,
                 backStackEntry.arguments?.getBoolean("isCPUMode") ?: false
             )
         }

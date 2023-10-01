@@ -39,6 +39,10 @@
     <string name="group_customization">Customization</string>
     <string name="group_others">Others</string>
     <string name="app_version">Version</string>
+    <string name="leave_game_msg">Do you want to leave the game?</string>
+    <string name="leave_game_description">This will reset all progress</string>
+    <string name="leave">Leave</string>
+    <string name="stay">Stay</string>
 
     <string name="cpu">CPU</string>
 

@@ -86,6 +86,9 @@ class GameViewModel @Inject constructor(
 	private var _isCPUPlayer1 = MutableStateFlow(false)
 	val isCPUPlayer1: StateFlow<Boolean> = _isCPUPlayer1
 
+	private var _showExitGameDialog = MutableStateFlow(false)
+	val showExitGameDialog: StateFlow<Boolean> = _showExitGameDialog
+
 	private var _winningPositionsIndices = MutableStateFlow<List<Int>>(emptyList())
 	val winningPositionsIndices: StateFlow<List<Int>> = _winningPositionsIndices
 
@@ -107,6 +110,11 @@ class GameViewModel @Inject constructor(
 
     fun updatePlayer2Wins(newValue: Int) {
         _player2Wins.value = newValue
+    }
+
+    fun resetVictoryCounter() {
+        _player1Wins.value = 0
+        _player2Wins.value = 0     
     }
 
     fun updateIsCardClicked(rowIndex: Int, cardIndex: Int, newValue: Boolean) {
@@ -235,5 +243,9 @@ class GameViewModel @Inject constructor(
 
     fun execWinnerSound(context: Context) {
         WinnerSound(context, this, settingsVM, player)
+    }
+
+    fun showExitGameDialog(show: Boolean) {
+        _showExitGameDialog.value = show
     }
 }

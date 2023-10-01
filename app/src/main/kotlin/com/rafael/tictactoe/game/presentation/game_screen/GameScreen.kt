@@ -1,5 +1,6 @@
 package com.rafael.tictactoe.game.presentation.game_screen
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -9,6 +10,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.game.presentation.game_screen.components.BackgroundMusicButton
 import com.rafael.tictactoe.game.presentation.game_screen.components.CardGrid
+import com.rafael.tictactoe.game.presentation.game_screen.components.ExitGameDialog
 import com.rafael.tictactoe.game.presentation.game_screen.components.ExpandButton
 import com.rafael.tictactoe.game.presentation.game_screen.components.GameStateToast
 import com.rafael.tictactoe.game.presentation.game_screen.components.GetPlayerPrefsDialog
@@ -29,6 +31,7 @@ import com.rafael.tictactoe.game.domain.util.WinnerChecker
 @Composable
 fun GameScreen(
     gameUtil: GameUtils,
+    navController: NavController,
     isCPUMode: Boolean
 ) {
     val viewModel = hiltViewModel<GameViewModel>()
@@ -37,6 +40,7 @@ fun GameScreen(
     val showRestartButton by viewModel.showRestartButton.collectAsState()
     val winner by viewModel.winner.collectAsState()
     val isGameFinished by viewModel.isGameFinished.collectAsState()
+    val showExitGameDialog by viewModel.showExitGameDialog.collectAsState()
     val playerName = gameUtil.playerName
     val context = LocalContext.current
  
@@ -76,10 +80,18 @@ fun GameScreen(
         WinnerLine()
     }
 
+    AnimatedVisibility(showExitGameDialog) {
+        ExitGameDialog(navController)
+    }
+    
     //Handle when some business logic will be called
     if (play) {
         WinnerChecker(viewModel, context)
         GotOldChecker(viewModel, context)
     	RestartButtonLogic(viewModel)
+    }
+    
+    BackHandler {
+        viewModel.showExitGameDialog(!showExitGameDialog)  
     }
 }
