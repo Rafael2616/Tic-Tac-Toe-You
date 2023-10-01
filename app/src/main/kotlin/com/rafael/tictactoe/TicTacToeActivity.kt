@@ -45,12 +45,20 @@ class TicTacToeActivity : ComponentActivity() {
     }
 
     override fun onStop() {
-        BackgroundMusic(this, false)
+        BackgroundMusic(
+            context = this,
+            viewModel = settingsVM,
+            isAppInOnStop = true
+        )
         super.onStop()
     }
     
     override fun onResume() {
-        BackgroundMusic(this, settingsVM.isBackgroundMusicOn.value)
+        BackgroundMusic(
+            context = this,
+            viewModel = settingsVM,
+            isAppInOnStop = false
+        )
         super.onResume()
     }
 

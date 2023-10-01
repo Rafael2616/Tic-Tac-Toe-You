@@ -35,8 +35,8 @@ class MusicService : Service() {
 	}
 	
     override fun onDestroy() {
-        super.onDestroy()
-		exoPlayer.stop()
+    	exoPlayer.stop()
         exoPlayer.release()
+        super.onDestroy()
     }
 }

@@ -36,6 +36,7 @@ class SettingsViewModel @Inject constructor(
     private var _showWinnerLineColorDialog = MutableStateFlow(false)
     private var _winnerLineColor = MutableStateFlow(Color.Yellow)
     private var _selectedColorOption = MutableStateFlow(2)
+    private var _isBMPlaying = MutableStateFlow(false)
 
 	//Variables that have same values of private vars above, but cant be modified outside this class
     val isBackgroundMusicOn: StateFlow<Boolean> = _isBackgroundMusicOn
@@ -47,6 +48,7 @@ class SettingsViewModel @Inject constructor(
     val showWinnerLineColorDialog: StateFlow<Boolean> = _showWinnerLineColorDialog
     val winnerLineColor: StateFlow<Color> = _winnerLineColor
     val selectedColorOption: StateFlow<Int> = _selectedColorOption
+    val isBMPlaying: StateFlow<Boolean> = _isBMPlaying
 
     //Initialize ViewModel StateFlows Variables with corresponding values in SettingsRepository
 	init {
@@ -62,14 +64,14 @@ class SettingsViewModel @Inject constructor(
 	
     //Functions to update values in SettingsRepository and SettingsViewModel StateFlows
 	fun updateIsBackgroundMusicOn(newValue: Boolean, context: Context) {
- 	   _isBackgroundMusicOn.value = newValue	
+ 	   _isBackgroundMusicOn.value = newValue
 		viewModelScope.launch(Dispatchers.IO) {
             var settings = repository.getAllSettingsValues(1) ?: defaultSettings
             settings.isBackgroundMusicOn = newValue
 			repository.setAllSettingsValues(settings)
 		}
-		BackgroundMusic(context, _isBackgroundMusicOn.value)
-	}
+        BackgroundMusic(context, this)
+    }
 
    fun updateIsDarkThemeOn(newValue: Boolean) {
         _isDarkThemeOn.value = newValue
@@ -127,5 +129,9 @@ class SettingsViewModel @Inject constructor(
         if (_isSoundEffectsOn.value) {
             UiClickSound(context, player)
         }
+    }
+
+    fun updateIsBMPlaying(newValue: Boolean) {
+        _isBMPlaying.value = newValue
     }
 }
