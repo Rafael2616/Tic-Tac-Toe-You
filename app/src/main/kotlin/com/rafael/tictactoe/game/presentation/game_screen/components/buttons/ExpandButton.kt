@@ -41,7 +41,7 @@ fun ExpandButton() {
                 .size(45.dp)
                 .clickable(onClick = { 
                     settingsVM.execUIClickSound(context)
-                    viewModel.updateIsExpandButtonShown(!isExpandButtonShown)
+                    viewModel.showExpandButton(!isExpandButtonShown)
             })
         )      
     }

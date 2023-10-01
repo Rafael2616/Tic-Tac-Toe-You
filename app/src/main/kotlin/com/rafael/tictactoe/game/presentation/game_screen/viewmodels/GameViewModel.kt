@@ -173,7 +173,7 @@ class GameViewModel @Inject constructor(
         _isScoreUp.value = newValue
     }
 
-    fun updateIsExpandButtonShown(newValue: Boolean) {
+    fun showExpandButton(newValue: Boolean) {
         _isExpandButtonShown.value = newValue
     }
 

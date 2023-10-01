@@ -30,7 +30,7 @@ fun RestartButton() {
         btnText = R.string.restart,
         description = "Restart Button",
         onClickFun = {
-            viewModel.updateIsExpandButtonShown(false)
+            viewModel.showExpandButton(false)
             RestartGame(viewModel)
             if (isCPUMode) {
                 if (isCPUPlayer1 && is1Win || !isCPUPlayer1 && !is1Win) {

@@ -21,4 +21,5 @@ fun exitGameParams(vm: GameViewModel) {
     vm.updateIsCPU(false)
     vm.updateIsXImage(true)
     vm.updateIsXFor1(true)
+    vm.showExpandButton(false)
 }
