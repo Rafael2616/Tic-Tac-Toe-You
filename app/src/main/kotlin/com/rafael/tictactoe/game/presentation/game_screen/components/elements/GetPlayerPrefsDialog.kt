@@ -209,6 +209,7 @@ fun GetPlayerPrefsDialog() {
                         viewModel.updateIsXImage(isXFor1)
                         viewModel.updatePlayer1Name(player1Value)
                         viewModel.updatePlayer2Name(player2Value)
+                        viewModel.updateIsTimerOn(true)
                         if (isCPUMode) {
                             if (isCPUPlayer1) {
                                 viewModel.updateIsCPU(true)

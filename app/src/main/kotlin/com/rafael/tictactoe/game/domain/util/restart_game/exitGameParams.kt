@@ -19,4 +19,6 @@ fun exitGameParams(vm: GameViewModel) {
     vm.updateIsPlayer1(true)
     vm.updateIsCPUPlayer1(false)
     vm.updateIsCPU(false)
+    vm.updateIsXImage(true)
+    vm.updateIsXFor1(true)
 }
