@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.R
+import com.rafael.tictactoe.game.domain.util.exitGameParams
 import com.rafael.tictactoe.game.domain.util.RestartGame
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
@@ -115,11 +116,7 @@ fun ExitGameDialog(navController: NavController) {
                         onClick = {
                             settingsVM.execUIClickSound(context)
                             RestartGame(viewModel)
-                            viewModel.resetVictoryCounter()
-                            viewModel.showExitGameDialog(false)
-                            viewModel.updatePlay(false)
-                            viewModel.updatePlayer1Name("")
-                            viewModel.updatePlayer2Name("")
+                            exitGameParams(viewModel)
                             navController.popBackStack()
                         },
                         modifier = Modifier
