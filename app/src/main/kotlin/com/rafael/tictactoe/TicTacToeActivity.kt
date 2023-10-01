@@ -12,6 +12,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.common.presentation.navigation.NavGraph
 import com.rafael.tictactoe.common.presentation.theme.AppTheme
 import com.rafael.tictactoe.game.domain.util.BackgroundMusic
@@ -26,8 +27,8 @@ class TicTacToeActivity : ComponentActivity() {
 
     private val settingsVM by viewModels<SettingsViewModel>()
  
-    @Inject
-	lateinit var gameUtils: GameUtils
+    @Inject lateinit var gameUtils: GameUtils
+    @Inject lateinit var exoPlayer: ExoPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,5 +54,10 @@ class TicTacToeActivity : ComponentActivity() {
     override fun onResume() {
         BackgroundMusic(this, settingsVM.isBackgroundMusicOn.value)
         super.onResume()
+    }
+
+    override fun onDestroy() {
+        exoPlayer.release()
+        super.onDestroy()
     }
 }
