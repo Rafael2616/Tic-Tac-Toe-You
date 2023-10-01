@@ -118,6 +118,8 @@ fun ExitGameDialog(navController: NavController) {
                             viewModel.resetVictoryCounter()
                             viewModel.showExitGameDialog(false)
                             viewModel.updatePlay(false)
+                            viewModel.updatePlayer1Name("")
+                            viewModel.updatePlayer2Name("")
                             navController.popBackStack()
                         },
                         modifier = Modifier

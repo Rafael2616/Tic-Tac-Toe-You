@@ -9,10 +9,11 @@ import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewMod
 fun RestartButtonLogic(vm: GameViewModel) {
     val isCardClicked by vm.isCardClicked.collectAsState()   
     val isGameFinished by vm.isGameFinished.collectAsState()   
+    val play by vm.play.collectAsState()   
 
-	if ((isCardClicked.flatten().all {!it}) || (isGameFinished)) {
-  	  vm.updateShowRestartButton(false)
+	if (isCardClicked.flatten().all {!it} || isGameFinished || !play) {
+  	  vm.showRestartButton(false)
 	} else {
-   	 vm.updateShowRestartButton(true)
+   	 vm.showRestartButton(true)
 	}
 }

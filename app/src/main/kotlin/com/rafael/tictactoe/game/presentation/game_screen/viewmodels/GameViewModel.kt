@@ -177,7 +177,7 @@ class GameViewModel @Inject constructor(
         _isExpandButtonShown.value = newValue
     }
 
-    fun updateShowRestartButton(newValue: Boolean) {
+    fun showRestartButton(newValue: Boolean) {
         _showRestartButton.value = newValue
     }
 

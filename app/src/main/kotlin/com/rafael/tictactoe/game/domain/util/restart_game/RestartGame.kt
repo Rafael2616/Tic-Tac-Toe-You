@@ -50,7 +50,7 @@ fun RestartGame(vm: GameViewModel) {
         }
     }
 
-    // Common actions, executed in any case
+    //Common actions, executed in all cases
     vm.updateWinner(false)
     vm.updateGotOld(false)
     vm.updateIsGameFinished(false)
@@ -60,4 +60,5 @@ fun RestartGame(vm: GameViewModel) {
     vm.updateIsWinSoundPlaying(false)
     vm.updateIsGotOldSoundPlaying(false)
     vm.resetWinningPositionsIndices(emptyList())
+    vm.showRestartButton(false)
 }
