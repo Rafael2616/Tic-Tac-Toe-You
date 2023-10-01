@@ -7,12 +7,10 @@ import androidx.compose.runtime.getValue
 import com.rafael.tictactoe.game.domain.util.WinnerSound
 import com.rafael.tictactoe.game.domain.util.VictoryCounterUpdater
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
 fun WinnerChecker(
     vm: GameViewModel,
-    settingsVM: SettingsViewModel,
     context: Context
 ) {
     val card by vm.card.collectAsState()
@@ -66,6 +64,6 @@ fun WinnerChecker(
     if (hasWinner) {
         vm.updateIsGameFinished(true)
         VictoryCounterUpdater(vm)
-        WinnerSound(context, vm, settingsVM)
+        vm.execWinnerSound(context)
     }
 }

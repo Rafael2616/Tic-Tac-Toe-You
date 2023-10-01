@@ -44,7 +44,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.game.domain.util.PlayersImagesSetter
 import com.rafael.tictactoe.game.domain.util.RandomCardSorter
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
@@ -56,7 +55,6 @@ fun GetPlayerPrefsDialog() {
     val settingsVM = hiltViewModel<SettingsViewModel>()
     val context = LocalContext.current
     val view = LocalView.current
-    val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
     val isXFor1 by viewModel.isXFor1.collectAsState()
     val player1Name by viewModel.player1Name.collectAsState()
     val player2Name by viewModel.player2Name.collectAsState()
@@ -123,7 +121,7 @@ fun GetPlayerPrefsDialog() {
                             .width(60.dp)
                             .height(85.dp)
                             .clickable(onClick = {
-                                UiClickSound(context, isSoundEffectsOn)
+                                settingsVM.execUIClickSound(context)
                                 PlayersImagesSetter(viewModel)
                                 if (!isCPUMode) {
                                     viewModel.updateLocalPlayer1(!localPlayer1)
@@ -183,7 +181,7 @@ fun GetPlayerPrefsDialog() {
                             .width(60.dp)
                             .height(60.dp)
                             .clickable(onClick = {
-                                UiClickSound(context, isSoundEffectsOn)
+                                settingsVM.execUIClickSound(context)
                                 viewModel.updateIsXFor1(!isXFor1)
     	                        PlayersImagesSetter(viewModel)
                             })
@@ -206,7 +204,7 @@ fun GetPlayerPrefsDialog() {
                 //Play button, used to start game
                 Button(
                     onClick = {
-                        UiClickSound(context, isSoundEffectsOn)
+                        settingsVM.execUIClickSound(context)
                         viewModel.updatePlay(true)
                         viewModel.updateIsXImage(isXFor1)
                         viewModel.updatePlayer1Name(player1Value)
@@ -214,7 +212,7 @@ fun GetPlayerPrefsDialog() {
                         if (isCPUMode) {
                             if (isCPUPlayer1) {
                                 viewModel.updateIsCPU(true)
-                                RandomCardSorter(viewModel, settingsVM, context)
+                                RandomCardSorter(viewModel, context)
                             }
                         }
                     },

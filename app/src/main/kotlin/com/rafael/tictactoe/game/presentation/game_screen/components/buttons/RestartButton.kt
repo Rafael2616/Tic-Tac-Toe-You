@@ -14,12 +14,10 @@ import com.rafael.tictactoe.game.domain.util.RandomCardSorter
 import com.rafael.tictactoe.game.domain.util.RestartGame
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import com.rafael.tictactoe.game.presentation.game_screen.components.util.BaseButton
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
 fun RestartButton() {
     val viewModel = hiltViewModel<GameViewModel>()
-    val settingsVM = hiltViewModel<SettingsViewModel>()
     val context = LocalContext.current
     val isCPUPlayer1 by viewModel.isCPUPlayer1.collectAsState()
     val isCPUMode by viewModel.isCPUMode.collectAsState()
@@ -36,7 +34,7 @@ fun RestartButton() {
             RestartGame(viewModel)
             if (isCPUMode) {
                 if (isCPUPlayer1 && is1Win || !isCPUPlayer1 && !is1Win) {
-                    RandomCardSorter(viewModel, settingsVM, context)
+                    RandomCardSorter(viewModel, context)
                 }
             }
         }

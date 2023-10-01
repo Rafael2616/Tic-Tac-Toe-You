@@ -6,12 +6,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.collectAsState
 import com.rafael.tictactoe.game.domain.util.GotOldSound
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
 fun GotOldChecker(
     vm: GameViewModel,
-    settingsVM: SettingsViewModel,
     context: Context
 ) {
     val isCardClicked by vm.isCardClicked.collectAsState()   
@@ -27,6 +25,6 @@ fun GotOldChecker(
 
     if (hasGotOld) {
         vm.updateIsGameFinished(true)
-        GotOldSound(context, vm, settingsVM)
+        vm.execGotOldSound(context)
     }
 }

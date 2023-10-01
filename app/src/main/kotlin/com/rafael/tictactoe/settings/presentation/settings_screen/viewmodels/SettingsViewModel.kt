@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.media3.exoplayer.ExoPlayer
+import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.game.domain.util.BackgroundMusic
 import com.rafael.tictactoe.settings.domain.model.SettingsEntity
 import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
@@ -17,7 +19,8 @@ import kotlinx.coroutines.flow.first
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
-    private val repository: SettingsRepository
+    private val repository: SettingsRepository,
+    private val player: ExoPlayer
 ) : ViewModel() {
 
     //Get default values for settings variables from SettingsEntity (used to avoid NPEs)
@@ -118,5 +121,11 @@ class SettingsViewModel @Inject constructor(
 
     fun updateSelectedColorOption(newValue: Int) {
         _selectedColorOption.value = newValue
+    }
+    
+    fun execUIClickSound(context: Context) {
+        if (_isSoundEffectsOn.value) {
+            UiClickSound(context, player)
+        }
     }
 }

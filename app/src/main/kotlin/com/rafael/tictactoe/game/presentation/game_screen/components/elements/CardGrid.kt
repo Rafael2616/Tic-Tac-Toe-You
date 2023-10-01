@@ -26,7 +26,6 @@ import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.util.CardGridClickHandler
 import com.rafael.tictactoe.game.domain.util.CardGridImageHandler
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import kotlinx.coroutines.launch
 
 @Composable
@@ -34,7 +33,6 @@ fun CardGrid() {
     var cardItems by rememberSaveable { mutableStateOf(List<Boolean>(3){false})}
     var rowItems by rememberSaveable { mutableStateOf(List<Boolean>(3){false})}
     val viewModel = hiltViewModel<GameViewModel>()
-    val settingsVM = hiltViewModel<SettingsViewModel>()
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
@@ -58,7 +56,7 @@ fun CardGrid() {
                             .clickable(onClick = {
 				            	viewModel.updateIsExpandButtonShown(false)
                                 scope.launch {
-                                    CardGridClickHandler(context, viewModel, settingsVM, rowIndex, cardIndex)
+                                    CardGridClickHandler(context, viewModel, rowIndex, cardIndex)
                                 };
                             }
                         )

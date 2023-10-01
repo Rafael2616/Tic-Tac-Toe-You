@@ -22,7 +22,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsOptionsImpl
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
@@ -32,7 +31,6 @@ fun SettingsTopBar(navController: NavController) {
     val viewModel = hiltViewModel<SettingsViewModel>()
     val context = LocalContext.current
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
-    val isSoundEffectsOn by viewModel.isSoundEffectsOn.collectAsState()
 
     Scaffold(
         modifier = Modifier
@@ -46,7 +44,7 @@ fun SettingsTopBar(navController: NavController) {
                 navigationIcon = {
                     IconButton(
                         onClick = {
-                        	UiClickSound(context, isSoundEffectsOn)
+                        	viewModel.execUIClickSound(context)
 				            viewModel.updateIsAboutShown(false)
                             navController.popBackStack()
                         }

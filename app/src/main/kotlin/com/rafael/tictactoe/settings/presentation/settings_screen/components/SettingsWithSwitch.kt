@@ -40,7 +40,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.settings.domain.util.GroupType
 import com.rafael.tictactoe.settings.domain.util.SettingsImageHandler
 import com.rafael.tictactoe.settings.domain.util.SettingsTextHandler
@@ -57,7 +56,6 @@ fun SettingsWithSwitch(
     val viewModel = hiltViewModel<SettingsViewModel>()
     val context = LocalContext.current
     val isFollowingSystemOn by viewModel.isFollowingSystemOn.collectAsState()
-    val isSoundEffectsOn by viewModel.isSoundEffectsOn.collectAsState()
     val isDynamicColorsSupported = VERSION.SDK_INT >= VERSION_CODES.S
 
     fun validate(groupType: GroupType, index: Int): Boolean {
@@ -102,7 +100,7 @@ fun SettingsWithSwitch(
                         .width(360.dp)
                         .height(68.dp)
                         .clickable(onClick = {
-                            UiClickSound(context, isSoundEffectsOn)
+                            viewModel.execUIClickSound(context)
                             toggleSettingsUseCase(
                                 groupType,
                                 context,
@@ -145,7 +143,7 @@ fun SettingsWithSwitch(
                                     index,
                                     viewModel
                                 )
-                                UiClickSound(context, isSoundEffectsOn)
+                                viewModel.execUIClickSound(context)
                             },
                             thumbContent = {
                                  if (switchCheckedHandler(

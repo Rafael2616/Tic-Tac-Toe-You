@@ -11,9 +11,9 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.Set
 fun GotOldSound(
     context: Context,
     vm: GameViewModel,
-    settingsVM: SettingsViewModel
+    settingsVM: SettingsViewModel,
+    exoPlayer: ExoPlayer
 ) {
-    val exoPlayer = ExoPlayer.Builder(context).build()
 	val gotOldSoundFile = R.raw.got_old_sound
     val gotOldSound = MediaItem.fromUri(Uri.parse("android.resource://$context/$gotOldSoundFile"))
     val isSoundEffectsOn = settingsVM.isSoundEffectsOn.value
@@ -22,6 +22,7 @@ fun GotOldSound(
 	if (isSoundEffectsOn && !isGotOldSoundPlaying) {
 		exoPlayer.addMediaItem(gotOldSound)
  	   exoPlayer.prepare()
+        exoPlayer.setMediaItem(gotOldSound)
 		exoPlayer.play()
         vm.updateIsGotOldSoundPlaying(true)
     }

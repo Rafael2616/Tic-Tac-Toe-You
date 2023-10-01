@@ -34,7 +34,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.TicTacToeActivity
-import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.common.presentation.navigation.Destinations
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
@@ -42,7 +41,6 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.Set
 @ExperimentalMaterial3Api
 fun MainOptions(navController: NavController) {
     val settingsVM = hiltViewModel<SettingsViewModel>()
-    val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
     val context = LocalContext.current
     var cards by rememberSaveable { mutableStateOf(List<Boolean>(3) { false }) }
 
@@ -58,7 +56,7 @@ fun MainOptions(navController: NavController) {
                     .width(240.dp)
                     .height(65.dp)
                     .clickable(onClick = {
-                        UiClickSound(context, isSoundEffectsOn)
+                        settingsVM.execUIClickSound(context)
                         when (index) {
                             0 -> navController.navigate(Destinations.Game.screen + "/false")
                             1 -> navController.navigate(Destinations.Game.screen + "/true")

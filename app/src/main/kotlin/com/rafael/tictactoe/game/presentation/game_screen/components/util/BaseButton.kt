@@ -31,7 +31,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
@@ -45,7 +44,6 @@ fun BaseButton(
     description: String = "there is no description"
 ) {
     val settingsVM = hiltViewModel<SettingsViewModel>()
-    val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
     val context = LocalContext.current
 
     Box(
@@ -65,7 +63,7 @@ fun BaseButton(
                     .width(45.dp)
                     .height(btnHeight)
                     .clickable(onClick = {
-                        UiClickSound(context, isSoundEffectsOn)
+                        settingsVM.execUIClickSound(context)
                         onClickFun()
                     })
             ) {

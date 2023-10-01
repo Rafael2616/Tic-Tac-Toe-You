@@ -1,6 +1,7 @@
 package com.rafael.tictactoe.di
 
 import android.app.Application
+import androidx.media3.exoplayer.ExoPlayer
 import androidx.room.Room
 import com.rafael.tictactoe.settings.data.database.SettingsDatabase
 import com.rafael.tictactoe.settings.data.repository.SettingsRepositoryImpl
@@ -34,8 +35,8 @@ object SettingsModule {
 	
     @Provides
     @Singleton
-    fun provideSettingsViewModel(repository: SettingsRepository): SettingsViewModel {
-        return SettingsViewModel(repository)
+    fun provideSettingsViewModel(repository: SettingsRepository, player: ExoPlayer): SettingsViewModel {
+        return SettingsViewModel(repository, player)
     }
 
     //TODO// add misssing settingsUtils here

@@ -39,9 +39,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.common.domain.util.UiClickSound
-import com.rafael.tictactoe.common.domain.util.getPackageVersion
+import com.rafael.tictactoe.common.domain.util.getAppVersion
 import com.rafael.tictactoe.settings.domain.util.GroupType
 import com.rafael.tictactoe.settings.domain.util.SettingsIconHandler
 import com.rafael.tictactoe.settings.domain.util.SettingsImageHandler
@@ -57,7 +57,6 @@ fun SettingsWithIcon(
 ) {
     val viewModel = hiltViewModel<SettingsViewModel>()
     val context = LocalContext.current
-    val isSoundEffectsOn by viewModel.isSoundEffectsOn.collectAsState()
     val isAboutShown by viewModel.isAboutShown.collectAsState()
     val winnerLineColor by viewModel.winnerLineColor.collectAsState()
 
@@ -98,7 +97,7 @@ fun SettingsWithIcon(
                         .width(360.dp)
                         .height(if (groupType == GroupType.OTHER && index == 0 && isAboutShown) 150.dp else 68.dp)
                         .clickable(onClick = {
-                            UiClickSound(context, isSoundEffectsOn)
+                            viewModel.execUIClickSound(context)
                             toggleSettingsUseCase(
                                 groupType,
                                 context,
@@ -158,7 +157,7 @@ fun SettingsWithIcon(
                             Text(
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onSurface,
-                                text = stringResource(R.string.app_version) +" "+ getPackageVersion(context),
+                                text = stringResource(R.string.app_version) +" "+ getAppVersion(context),
                                 modifier = Modifier.width(240.dp).padding(top = 8.dp),
                                 textAlign = TextAlign.Center
                             )

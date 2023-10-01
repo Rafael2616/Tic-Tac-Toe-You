@@ -11,7 +11,8 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.Set
 fun CardGridSound(
 	context: Context,
     viewModel: GameViewModel,
-    settingsVM: SettingsViewModel
+    settingsVM: SettingsViewModel,
+    exoPlayer: ExoPlayer
 ) {
     val isPlayer1 = viewModel.isPlayer1.value
     val isSoundEffectsOn = settingsVM.isSoundEffectsOn.value
@@ -24,7 +25,6 @@ fun CardGridSound(
     }
     
 	if (isSoundEffectsOn) {	
-   	 val exoPlayer = ExoPlayer.Builder(context).build()
 		val clickSoundFile = R.raw.click1_sound
 		val clickSound2File = R.raw.click2_sound
  	   val clickSound1 = MediaItem.fromUri(Uri.parse("android.resource://$context/$clickSoundFile"))
@@ -33,10 +33,12 @@ fun CardGridSound(
 		if (isPlayer1) {
 			exoPlayer.addMediaItem(clickSound1)
 			exoPlayer.prepare()
+			exoPlayer.setMediaItem(clickSound1)
 			exoPlayer.play()
 		} else {
 			exoPlayer.addMediaItem(clickSound2)
 			exoPlayer.prepare()
+        	exoPlayer.setMediaItem(clickSound2)
 			exoPlayer.play()
 		}
 	}

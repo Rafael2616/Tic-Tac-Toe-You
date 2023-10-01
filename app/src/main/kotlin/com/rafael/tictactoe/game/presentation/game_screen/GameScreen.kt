@@ -25,7 +25,6 @@ import com.rafael.tictactoe.game.domain.util.GotOldChecker
 import com.rafael.tictactoe.game.domain.util.RestartButtonLogic
 import com.rafael.tictactoe.game.domain.util.ToastNameHandler
 import com.rafael.tictactoe.game.domain.util.WinnerChecker
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
 fun GameScreen(
@@ -33,7 +32,6 @@ fun GameScreen(
     isCPUMode: Boolean
 ) {
     val viewModel = hiltViewModel<GameViewModel>()
-    val settingsVM = hiltViewModel<SettingsViewModel>()
     val play by viewModel.play.collectAsState()
     val isExpandButtonShown by viewModel.isExpandButtonShown.collectAsState()
     val showRestartButton by viewModel.showRestartButton.collectAsState()
@@ -80,8 +78,8 @@ fun GameScreen(
 
     //Handle when some business logic will be called
     if (play) {
-        WinnerChecker(viewModel, settingsVM, context)
-        GotOldChecker(viewModel, settingsVM, context)
+        WinnerChecker(viewModel, context)
+        GotOldChecker(viewModel, context)
     	RestartButtonLogic(viewModel)
     }
 }

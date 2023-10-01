@@ -2,12 +2,15 @@ package com.rafael.tictactoe.di
 
 //import android.app.Activity
 import android.app.Application
+import androidx.media3.exoplayer.ExoPlayer
 import androidx.room.Room
 import com.rafael.tictactoe.game.data.database.GameDatabase
 import com.rafael.tictactoe.game.data.repository.GameRepositoryImpl
 import com.rafael.tictactoe.game.domain.repository.GameRepository
 import com.rafael.tictactoe.game.domain.util.GameUtils
 import com.rafael.tictactoe.game.domain.util.PlayersNamesDisplay
+import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
+import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.components.SingletonComponent
@@ -32,6 +35,12 @@ object GameModule {
     @Singleton
     fun provideGameRepository(database: GameDatabase): GameRepository {
         return GameRepositoryImpl(database.gameDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGameViewModel(gameUtils: GameUtils, player: ExoPlayer, settingsVM: SettingsViewModel): GameViewModel {
+        return GameViewModel(gameUtils, player, settingsVM)
     }
 
     //TODO// add misssing gameUtils here

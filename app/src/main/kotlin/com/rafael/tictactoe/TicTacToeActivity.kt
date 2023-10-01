@@ -25,7 +25,7 @@ import javax.inject.Inject
 class TicTacToeActivity : ComponentActivity() {
 
     private val settingsVM by viewModels<SettingsViewModel>()
-  
+ 
     @Inject
 	lateinit var gameUtils: GameUtils
 

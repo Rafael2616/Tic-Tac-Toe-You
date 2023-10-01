@@ -18,7 +18,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
@@ -26,7 +25,6 @@ import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewMod
 fun ExpandButton() {
     val settingsVM = hiltViewModel<SettingsViewModel>()
     val viewModel = hiltViewModel<GameViewModel>()
-    val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
     val isExpandButtonShown by viewModel.isExpandButtonShown.collectAsState()
     val context = LocalContext.current
 
@@ -42,7 +40,7 @@ fun ExpandButton() {
        	 modifier = Modifier
                 .size(45.dp)
                 .clickable(onClick = { 
-                    UiClickSound(context, isSoundEffectsOn)
+                    settingsVM.execUIClickSound(context)
                     viewModel.updateIsExpandButtonShown(!isExpandButtonShown)
             })
         )      

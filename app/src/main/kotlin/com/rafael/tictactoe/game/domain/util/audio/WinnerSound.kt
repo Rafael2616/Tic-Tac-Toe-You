@@ -11,9 +11,9 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.Set
 fun WinnerSound(
 	context: Context,
 	vm: GameViewModel,
-    settingsVM: SettingsViewModel
+    settingsVM: SettingsViewModel,
+    exoPlayer: ExoPlayer
 ) {
-    val exoPlayer = ExoPlayer.Builder(context).build()
 	val winnerSoundFile = R.raw.winner_victory_sound
     val winnerSound = MediaItem.fromUri(Uri.parse("android.resource://$context/$winnerSoundFile"))
     val isSoundEffectsOn = settingsVM.isSoundEffectsOn.value
@@ -22,6 +22,7 @@ fun WinnerSound(
 	if (isSoundEffectsOn && !isWinSoundPlaying) {
    	 exoPlayer.addMediaItem(winnerSound)
 		exoPlayer.prepare()
+        exoPlayer.setMediaItem(winnerSound)
 		exoPlayer.play()
    	 vm.updateIsWinSoundPlaying(true)
 	}

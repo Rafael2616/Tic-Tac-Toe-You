@@ -4,12 +4,10 @@ import android.content.Context
 import com.rafael.tictactoe.game.domain.util.CardGridSound
 import com.rafael.tictactoe.game.domain.util.RandomCardSorter
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 suspend fun CardGridClickHandler(
     context: Context,
 	vm: GameViewModel,
-    settingsVM: SettingsViewModel,
 	rowIndex: Int,
 	cardIndex: Int
 ) {
@@ -52,7 +50,7 @@ suspend fun CardGridClickHandler(
             vm.updateIsXImage(!isXImage)
             vm.updateIsPlayer1(true)
         }
-        CardGridSound(context, vm, settingsVM)
+        vm.execCardGridSound(context)
     }
        
     //Vs CPU Mode
@@ -67,7 +65,7 @@ suspend fun CardGridClickHandler(
             } else {
                 vm.updateIsCPU(true)           
             }
-            RandomCardSorter(vm, settingsVM, context)
+            RandomCardSorter(vm, context)
         } else {
             vm.updateIsXImage(!isXImage)
 	        vm.updateCard(rowIndex, cardIndex, !isXFor1)
@@ -78,8 +76,8 @@ suspend fun CardGridClickHandler(
             } else {
                 vm.updateIsCPU(false)        
             }
-            RandomCardSorter(vm, settingsVM, context)
+            RandomCardSorter(vm, context)
         }
-        CardGridSound(context, vm, settingsVM)
+        vm.execCardGridSound(context)
      }
 }
