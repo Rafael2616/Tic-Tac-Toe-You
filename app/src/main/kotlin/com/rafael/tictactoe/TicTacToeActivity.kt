@@ -3,7 +3,6 @@ package com.rafael.tictactoe
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -25,8 +24,7 @@ import javax.inject.Inject
 @OptIn(ExperimentalMaterial3Api::class)
 class TicTacToeActivity : ComponentActivity() {
 
-    private val settingsVM by viewModels<SettingsViewModel>()
- 
+    @Inject lateinit var settingsVM: SettingsViewModel
     @Inject lateinit var gameUtils: GameUtils
     @Inject lateinit var exoPlayer: ExoPlayer
 
