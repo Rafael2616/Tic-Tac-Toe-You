@@ -42,6 +42,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.getAppVersion
+import com.rafael.tictactoe.settings.domain.util.ComponentValidator
 import com.rafael.tictactoe.settings.domain.util.GroupType
 import com.rafael.tictactoe.settings.domain.util.SettingsIconHandler
 import com.rafael.tictactoe.settings.domain.util.SettingsImageHandler
@@ -60,19 +61,6 @@ fun SettingsWithIcon(
     val isAboutShown by viewModel.isAboutShown.collectAsState()
     val winnerLineColor by viewModel.winnerLineColor.collectAsState()
 
-    fun validate(groupType: GroupType, index: Int): Boolean {
-        if (groupType != GroupType.CUSTOMIZATION) {
-            return true
-        }
-        if (groupType == GroupType.CUSTOMIZATION && index == 0) {
-            return false
-        }
-        if (groupType == GroupType.CUSTOMIZATION && index != 0) {
-            return true
-        }
-        return false
-    }
-    
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -113,7 +101,7 @@ fun SettingsWithIcon(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                   if (validate(groupType, index)) {
+                    if (ComponentValidator.validateImage(groupType, index)) {
                         Image(
                             contentDescription = "Setting Image",
                             modifier = Modifier
@@ -121,7 +109,7 @@ fun SettingsWithIcon(
                             painter = SettingsImageHandler(index, groupType)
                         )
                     }
-                    if (groupType == GroupType.CUSTOMIZATION && index == 0) {
+                    if (ComponentValidator.validateCardWithPreview(groupType, index)) {
                         Spacer(modifier = Modifier.width(6.dp))
                         Box(
                             modifier = Modifier
@@ -153,7 +141,7 @@ fun SettingsWithIcon(
                             modifier = Modifier.width(240.dp),
                             textAlign = TextAlign.Center
                         ) 
-                        if (groupType == GroupType.OTHER && index == 0 && isAboutShown) {
+                        if (ComponentValidator.validateSubText(groupType, index, isAboutShown)) {
                             Text(
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onSurface,
