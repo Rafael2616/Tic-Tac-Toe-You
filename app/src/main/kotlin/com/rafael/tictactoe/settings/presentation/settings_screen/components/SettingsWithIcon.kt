@@ -60,6 +60,7 @@ fun SettingsWithIcon(
     val context = LocalContext.current
     val isAboutShown by viewModel.isAboutShown.collectAsState()
     val winnerLineColor by viewModel.winnerLineColor.collectAsState()
+    val componentValidator = ComponentValidator()
 
     Column(
         modifier = Modifier
@@ -101,7 +102,7 @@ fun SettingsWithIcon(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    if (ComponentValidator.validateImage(groupType, index)) {
+                    if (componentValidator.validateImage(groupType, index)) {
                         Image(
                             contentDescription = "Setting Image",
                             modifier = Modifier
@@ -109,7 +110,7 @@ fun SettingsWithIcon(
                             painter = SettingsImageHandler(index, groupType)
                         )
                     }
-                    if (ComponentValidator.validateCardWithPreview(groupType, index)) {
+                    if (componentValidator.validateCardWithPreview(groupType, index)) {
                         Spacer(modifier = Modifier.width(6.dp))
                         Box(
                             modifier = Modifier
@@ -141,7 +142,7 @@ fun SettingsWithIcon(
                             modifier = Modifier.width(240.dp),
                             textAlign = TextAlign.Center
                         ) 
-                        if (ComponentValidator.validateSubText(groupType, index, isAboutShown)) {
+                        if (componentValidator.validateSubText(groupType, index, isAboutShown)) {
                             Text(
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onSurface,

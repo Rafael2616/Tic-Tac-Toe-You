@@ -1,7 +1,5 @@
 package com.rafael.tictactoe.settings.presentation.settings_screen.components
 
-import android.os.Build.VERSION
-import android.os.Build.VERSION_CODES
 import androidx.annotation.StringRes
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
@@ -40,6 +38,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
+import com.rafael.tictactoe.settings.domain.util.ComponentValidator
 import com.rafael.tictactoe.settings.domain.util.GroupType
 import com.rafael.tictactoe.settings.domain.util.SettingsImageHandler
 import com.rafael.tictactoe.settings.domain.util.SettingsTextHandler
@@ -56,24 +55,7 @@ fun SettingsWithSwitch(
     val viewModel = hiltViewModel<SettingsViewModel>()
     val context = LocalContext.current
     val isFollowingSystemOn by viewModel.isFollowingSystemOn.collectAsState()
-    val isDynamicColorsSupported = VERSION.SDK_INT >= VERSION_CODES.S
-
-    fun validate(groupType: GroupType, index: Int): Boolean {
-        if (groupType == GroupType.THEME && ((index == 1 && !isFollowingSystemOn) ||
-        (index == 2 && isDynamicColorsSupported) ||
-        (index != 1 && index != 2))) {
-            return true
-        }
-        if (groupType != GroupType.THEME) {
-            return true
-        }
-        if (groupType == GroupType.THEME && ((index == 1 && isFollowingSystemOn) ||
-        (index == 2 && !isDynamicColorsSupported))) {
-            return false
-        }
-
-        return false
-    }
+    val componentValidator = ComponentValidator()
     
     Column(
         modifier = Modifier
@@ -92,7 +74,11 @@ fun SettingsWithSwitch(
                 .fillMaxWidth()
         )
         size.forEachIndexed { _, index ->
-            if (validate(groupType, index)) {
+            if (componentValidator.validateCard(
+                groupType,
+                index,
+                isFollowingSystemOn
+            )) {
                 Card(
                     shape = MaterialTheme.shapes.medium,
                     modifier = Modifier
