@@ -23,7 +23,7 @@ fun GotOldChecker(
 
     val hasGotOld by vm.gotOld.collectAsState()
 
-    if (hasGotOld) {
+    if (hasGotOld && !winner) {
         vm.updateIsGameFinished(true)
         vm.execGotOldSound(context)
     }
