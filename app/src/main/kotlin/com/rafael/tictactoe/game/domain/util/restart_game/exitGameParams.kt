@@ -22,4 +22,5 @@ fun exitGameParams(vm: GameViewModel) {
     vm.updateIsXImage(true)
     vm.updateIsXFor1(true)
     vm.showExpandButton(false)
+    vm.updateCurrentPlayerName("")
 }

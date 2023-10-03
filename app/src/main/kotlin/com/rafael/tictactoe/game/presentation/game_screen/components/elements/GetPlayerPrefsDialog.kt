@@ -131,8 +131,7 @@ fun GetPlayerPrefsDialog() {
                                 if (!isCPUMode) {
                                     viewModel.updateLocalPlayer1(!localPlayer1)
                                 } else {
-                                    viewModel.updateIsCPUPlayer1(localPlayer1)
-                                    viewModel.updateLocalPlayer1(!isCPUPlayer1)
+                                    viewModel.updateIsCPUPlayer1(!isCPUPlayer1)
                                }
                            })
                     ) {

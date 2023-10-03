@@ -48,7 +48,7 @@ fun ToastNameHandler() {
         } else {
             vm.updatePlayer2Name(cpuName)
             if (player1Name == cpuName) {
-            vm.updatePlayer1Name(player2Name)
+                vm.updatePlayer1Name(player2Name)
             }
         }
     }
