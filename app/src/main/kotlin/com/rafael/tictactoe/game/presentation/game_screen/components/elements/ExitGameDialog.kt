@@ -20,6 +20,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,7 +39,8 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.Set
 fun ExitGameDialog(navController: NavController) {
     val viewModel = hiltViewModel<GameViewModel>()
     val settingsVM = hiltViewModel<SettingsViewModel>()
-        
+    var isExitClicked by remember { mutableStateOf(false) }
+  
     Surface(
         color = Color.Black.copy(alpha = 0.3f),
         modifier = Modifier
@@ -105,9 +108,12 @@ fun ExitGameDialog(navController: NavController) {
                     }
                     Button(
                         onClick = {
-                            settingsVM.execUIClickSound()
-                            viewModel.reset()
-                            navController.popBackStack()
+                            if (!isExitClicked) {
+                                isExitClicked = true
+                                settingsVM.execUIClickSound()
+                                navController.popBackStack()
+                                viewModel.reset()
+                            }
                         },
                         modifier = Modifier
                             .width(100.dp)

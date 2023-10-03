@@ -14,6 +14,9 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
@@ -29,6 +32,7 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.Set
 fun SettingsTopBar(navController: NavController) {
     val viewModel = hiltViewModel<SettingsViewModel>()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+    var isGoBackClicked by remember { mutableStateOf(false) }
 
     Scaffold(
         modifier = Modifier
@@ -42,9 +46,12 @@ fun SettingsTopBar(navController: NavController) {
                 navigationIcon = {
                     IconButton(
                         onClick = {
-                        	viewModel.execUIClickSound()
-				            viewModel.updateIsAboutShown(false)
-                            navController.popBackStack()
+                            if (!isGoBackClicked) {
+                                isGoBackClicked = true
+                        	    viewModel.execUIClickSound()
+				                viewModel.updateIsAboutShown(false)
+                                navController.popBackStack()
+                            }
                         }
                     ) {
                         Icon(
