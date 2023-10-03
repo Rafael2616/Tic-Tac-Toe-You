@@ -1,10 +1,10 @@
 package com.rafael.tictactoe.settings.domain.util
 
 sealed class Settings(groupType: GroupType) {
-    class Theme : SettingsEnum(GroupType.THEME)
-    class Sound : SettingsEnum(GroupType.SOUND)
-    class Customization : SettingsEnum(GroupType.CUSTOMIZATION)
-    class Other : SettingsEnum(GroupType.OTHER)
+    class Theme : Settings(GroupType.THEME)
+    class Sound : Settings(GroupType.SOUND)
+    class Customization : Settings(GroupType.CUSTOMIZATION)
+    class Other : Settings(GroupType.OTHER)
 }
 
 enum class Theme {
