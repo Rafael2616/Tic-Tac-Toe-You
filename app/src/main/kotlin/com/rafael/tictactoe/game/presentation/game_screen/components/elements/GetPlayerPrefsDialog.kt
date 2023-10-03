@@ -69,8 +69,10 @@ fun GetPlayerPrefsDialog() {
     var player2Value = if (localPlayer1) player2Name else player1Name
     val isCPUMode by viewModel.isCPUMode.collectAsState()
     var isKeyboardOpen by rememberSaveable {  mutableStateOf(false) }
-    val bottomPadding = if (isKeyboardOpen) 160.dp else 0.dp 
-
+    val bottomPadding = if (isKeyboardOpen) 160.dp else 0.dp
+    val textField1State = if (isCPUMode) { if (isCPUPlayer1) true else false } else {false}
+    val textField2State = if (isCPUMode) { if (isCPUPlayer1) false else true } else {false}
+    
     Surface(
         color = Color.Black.copy(alpha = 0.3f),
         modifier = Modifier
@@ -110,7 +112,8 @@ fun GetPlayerPrefsDialog() {
                         placeholder = {
                             Text( stringResource(id = if (isXFor1) R.string.player_x else R.string.player_o))
                         },
-                        readOnly = if (isCPUMode) { if (isCPUPlayer1) true else false } else {false},
+                        readOnly = textField1State,
+                        enabled = !textField1State,
                         keyboardOptions = KeyboardOptions(
                             autoCorrect = true,
                             keyboardType = KeyboardType.Text,
@@ -154,7 +157,8 @@ fun GetPlayerPrefsDialog() {
                         placeholder = {
                             Text( stringResource(id = if (isXFor1) R.string.player_o else R.string.player_x))
                         },
-                        readOnly = if (isCPUMode) { if (isCPUPlayer1) false else true } else { false},
+                        readOnly = textField2State,
+                        enabled = !textField2State,
                         keyboardOptions = KeyboardOptions(
                             autoCorrect = true,
                             keyboardType = KeyboardType.Text,
