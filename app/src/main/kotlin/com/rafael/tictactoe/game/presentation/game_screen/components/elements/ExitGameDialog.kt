@@ -31,7 +31,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.common.presentation.navigation.Destinations
 import com.rafael.tictactoe.game.domain.util.exitGameParams
 import com.rafael.tictactoe.game.domain.util.RestartGame
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
@@ -119,7 +118,6 @@ fun ExitGameDialog(navController: NavController) {
                             RestartGame(viewModel)
                             exitGameParams(viewModel)
                             navController.popBackStack()
-                            navController.navigate(Destinations.Main.screen)
                         },
                         modifier = Modifier
                             .width(100.dp)

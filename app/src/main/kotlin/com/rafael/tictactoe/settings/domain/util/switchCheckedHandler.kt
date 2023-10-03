@@ -10,7 +10,7 @@ fun switchCheckedHandler(
    
     fun themeSwitchCheckedHandler(index: Int, vm: SettingsViewModel): Boolean {
         return when (index) {
-    		0 -> vm.isFollowingSystemOn.value
+   		 0 -> vm.isFollowingSystemOn.value
  		   1 -> vm.isDarkThemeOn.value
    	     2 -> vm.isDynamicColorsOn.value
         	else -> false 

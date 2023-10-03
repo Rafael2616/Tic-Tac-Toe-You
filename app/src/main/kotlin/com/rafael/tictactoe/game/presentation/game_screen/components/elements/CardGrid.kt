@@ -5,10 +5,11 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -38,6 +39,7 @@ fun CardGrid() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
+            .fillMaxHeight(0.6f)
             .padding(start = 8.dp, end = 8.dp, bottom = 45.dp),
         verticalArrangement = Arrangement.Bottom
     ) {
@@ -52,6 +54,7 @@ fun CardGrid() {
                         modifier = Modifier
                             .weight(1f)
                             .padding(6.dp)
+                            .size(114.dp)
                             .clickable(onClick = {
 				            	viewModel.showExpandButton(false)
                                 scope.launch {
@@ -63,7 +66,7 @@ fun CardGrid() {
                         Image(
 					        contentDescription = "card $rowIndex $cardIndex",
                             alignment = Alignment.Center,
- 				           modifier = Modifier.width(114.dp).height(114.dp),
+ 				           modifier = Modifier.fillMaxSize(),
 			 	           painter = CardGridImageHandler(rowIndex, cardIndex)
 			        	)
                     }
