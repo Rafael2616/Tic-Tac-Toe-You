@@ -3,8 +3,11 @@ package com.rafael.tictactoe.game.presentation.game_screen
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -43,8 +46,14 @@ fun GameScreen(
     val showExitGameDialog by viewModel.showExitGameDialog.collectAsState()
     val playerName = gameUtil.playerName
     val context = LocalContext.current
- 
-    viewModel.updateIsCPUMode(isCPUMode)
+    val update by rememberSaveable { mutableStateOf(true) }
+
+    DisposableEffect(key1 = "update") {
+        if (update) {
+            viewModel.updateIsCPUMode(isCPUMode)
+        }
+        onDispose{}
+    }
     
 	//Handle when each UI component function will be called
 

@@ -39,7 +39,7 @@ fun ToastNameHandler() {
      *CPU Mode only
      *Handle player name for case of is versus CPU Mode
      */
-    if (isCPUMode && !showExitGameDialog) {
+    if (isCPUMode) {
         if (isCPUPlayer1) {
             vm.updatePlayer1Name(cpuName)
             if (player2Name == cpuName) {

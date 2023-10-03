@@ -250,7 +250,7 @@ class GameViewModel @Inject constructor(
     }
     
     fun reset() {
-       val allFalse = List(3){List<Boolean>(3) { false }}
+        val allFalse = List(3){List<Boolean>(3) { false }}
         resetVictoryCounter()
         showExpandButton(false)
         showRestartButton(false)  
@@ -259,6 +259,7 @@ class GameViewModel @Inject constructor(
         updateAllCards(allFalse)
         updateLocalPlayer1(true)
         updateIsPlayer1(true)
+        updateIsCPUMode(false)
         updateIsCPUPlayer1(false)
         updateIsCPU(false)
         updateIsXImage(true)
@@ -275,5 +276,6 @@ class GameViewModel @Inject constructor(
         updateIsGotOldSoundPlaying(false)
         resetWinningPositionsIndices(emptyList())
         updatePlay(false)
+        updateIsTimerOn(true)
     }
 }
