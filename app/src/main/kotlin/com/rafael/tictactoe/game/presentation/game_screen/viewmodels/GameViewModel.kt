@@ -248,4 +248,32 @@ class GameViewModel @Inject constructor(
     fun showExitGameDialog(show: Boolean) {
         _showExitGameDialog.value = show
     }
+    
+    fun reset() {
+       val allFalse = List(3){List<Boolean>(3) { false }}
+        resetVictoryCounter()
+        showExpandButton(false)
+        showRestartButton(false)  
+        showExitGameDialog(false)
+        updateAllIsCardClicked(allFalse)
+        updateAllCards(allFalse)
+        updateLocalPlayer1(true)
+        updateIsPlayer1(true)
+        updateIsCPUPlayer1(false)
+        updateIsCPU(false)
+        updateIsXImage(true)
+        updateIsXFor1(true)
+        showPlayer1Name("")
+        showPlayer2Name("")
+        updatePlayer1Name("")
+        updatePlayer2Name("")
+        updateWinner(false)
+        updateGotOld(false)
+        updateIsGameFinished(false)
+        updateIsScoreUp(false)
+        updateIsWinSoundPlaying(false)
+        updateIsGotOldSoundPlaying(false)
+        resetWinningPositionsIndices(emptyList())
+        updatePlay(false)
+    }
 }

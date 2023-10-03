@@ -34,12 +34,12 @@ fun ToastNameHandler() {
     val localPlayer1 by vm.localPlayer1.collectAsState()
     val emptyPlayerName = context.getString(R.string.player)
     val cpuName = context.getString(R.string.cpu)
-
+    
     /*
      *CPU Mode only
      *Handle player name for case of is versus CPU Mode
      */
-    if (isCPUMode) {
+    if (isCPUMode && !showExitGameDialog) {
         if (isCPUPlayer1) {
             vm.updatePlayer1Name(cpuName)
             if (player2Name == cpuName) {
