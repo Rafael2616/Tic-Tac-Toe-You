@@ -3,16 +3,17 @@ package com.rafael.tictactoe.game.presentation.main_screen.components
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -25,9 +26,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -44,17 +47,18 @@ fun MainOptions(navController: NavController) {
     val context = LocalContext.current
     var cards by rememberSaveable { mutableStateOf(List<Boolean>(3) { false }) }
 
-    LazyColumn(
+    Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        items(cards.size) { index ->
+        cards.forEachIndexed { index, _ ->
             Card(
                 shape = MaterialTheme.shapes.large,
                 modifier = Modifier
                     .width(240.dp)
                     .height(65.dp)
+                    .clip(RoundedCornerShape(36.dp))
                     .clickable(onClick = {
                         settingsVM.execUIClickSound(context)
                         when (index) {
@@ -64,45 +68,41 @@ fun MainOptions(navController: NavController) {
                         }
                     })
             ) {
-                Box(
+                Row(
                     modifier = Modifier
-                        .fillMaxHeight(),
-                    contentAlignment = Alignment.Center
+                        .fillMaxWidth()
+                        .padding(6.dp)
+                        .padding(end = 10.dp),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Row(
+                    Image(
+                        contentDescription = null,
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(end = 18.dp),
-                        horizontalArrangement = Arrangement.Center,
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Image(
-                            contentDescription = null,
-                            modifier = Modifier
-                                .height(60.dp)
-                                .width(60.dp),
-                            painter = painterResource(
-                                id = when (index) {
-                                    0 -> R.drawable.play_icon
-                                    1 -> R.drawable.cpu_icon
-                                    2 -> R.drawable.settings_icon
-                                    else -> R.drawable.transparent_image
-                                }
-                            )
-                        )
-                        Text(
-                            style = MaterialTheme.typography.titleLarge,
-                            color = MaterialTheme.colorScheme.onSurface,
-                            overflow = TextOverflow.Ellipsis,
-                            softWrap = true,
-                            text = when (index) {
-                                0 -> stringResource(id = R.string.play)
-                                1 -> stringResource(id = R.string.vs_cpu)
-                                2 -> stringResource(id = R.string.settings)
-                                else -> "index error"
+                            .size(50.dp),
+                        painter = painterResource(
+                            id = when (index) {
+                                0 -> R.drawable.play_icon
+                                1 -> R.drawable.cpu_icon
+                                2 -> R.drawable.settings_icon
+                                else -> R.drawable.transparent_image
                             }
                         )
-                    }
+                    )
+                    Text(
+                        modifier = Modifier.wrapContentSize(),
+                        style = MaterialTheme.typography.titleLarge,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        overflow = TextOverflow.Ellipsis,
+                        textAlign = TextAlign.Center,
+                        softWrap = true,
+                        text = when (index) {
+                            0 -> stringResource(id = R.string.play)
+                            1 -> stringResource(id = R.string.vs_cpu)
+                            2 -> stringResource(id = R.string.settings)
+                            else -> "index error"
+                        }
+                    )
                 }
             }
             Spacer(modifier = Modifier.height(20.dp))
