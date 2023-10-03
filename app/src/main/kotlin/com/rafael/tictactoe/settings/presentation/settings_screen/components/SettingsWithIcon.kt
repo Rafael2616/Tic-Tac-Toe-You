@@ -85,8 +85,8 @@ fun SettingsWithIcon(
                     modifier = Modifier
                         .animateContentSize()
                         .width(360.dp)
-                        .clip(RoundedCornerShape(26.dp))
                         .height(if (groupType == GroupType.OTHER && index == 0 && isAboutShown) 150.dp else 68.dp)
+                        .clip(RoundedCornerShape(26.dp))
                         .clickable(onClick = {
                             viewModel.execUIClickSound(context)
                             toggleSettingsUseCase(
