@@ -1,12 +1,10 @@
 package com.rafael.tictactoe.settings.domain.use_cases
 
-import android.content.Context
 import com.rafael.tictactoe.settings.domain.util.GroupType
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 fun toggleSettingsUseCase(
     groupType: GroupType,
-	context: Context,
 	index: Int,
 	vm: SettingsViewModel
 ) {
@@ -22,7 +20,7 @@ fun toggleSettingsUseCase(
     fun toggleSoundSettings(index: Int) {
         when (index) {
             0 -> vm.updateIsSoundEffectsOn(!vm.isSoundEffectsOn.value)
-            1 -> vm.updateIsBackgroundMusicOn(!vm.isBackgroundMusicOn.value, context)
+            1 -> vm.updateIsBackgroundMusicOn(!vm.isBackgroundMusicOn.value)
         }
     }
 

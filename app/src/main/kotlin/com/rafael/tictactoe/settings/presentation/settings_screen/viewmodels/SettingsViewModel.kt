@@ -1,5 +1,6 @@
 package com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels
 
+import android.app.Application
 import android.content.Context
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
@@ -20,7 +21,8 @@ import kotlinx.coroutines.flow.first
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     private val repository: SettingsRepository,
-    private val player: ExoPlayer
+    private val player: ExoPlayer,
+    private val context: Application
 ) : ViewModel() {
 
     //Get default values for settings variables from SettingsEntity (used to avoid NPEs)
@@ -63,7 +65,7 @@ class SettingsViewModel @Inject constructor(
 	}
 	
     //Functions to update values in SettingsRepository and SettingsViewModel StateFlows
-	fun updateIsBackgroundMusicOn(newValue: Boolean, context: Context) {
+	fun updateIsBackgroundMusicOn(newValue: Boolean) {
  	   _isBackgroundMusicOn.value = newValue
 		viewModelScope.launch(Dispatchers.IO) {
             var settings = repository.getAllSettingsValues(1) ?: defaultSettings
@@ -125,7 +127,7 @@ class SettingsViewModel @Inject constructor(
         _selectedColorOption.value = newValue
     }
     
-    fun execUIClickSound(context: Context) {
+    fun execUIClickSound() {
         if (_isSoundEffectsOn.value) {
             UiClickSound(context, player)
         }

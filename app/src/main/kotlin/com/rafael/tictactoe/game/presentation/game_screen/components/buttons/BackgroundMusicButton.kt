@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -15,7 +14,6 @@ import com.rafael.tictactoe.game.presentation.game_screen.components.util.BaseBu
 @Composable
 fun BackgroundMusicButton() {
     val settingsVM = hiltViewModel<SettingsViewModel>()
-    val context = LocalContext.current
     val isBackgroundMusicOn by settingsVM.isBackgroundMusicOn.collectAsState()
  
     BaseButton(
@@ -25,7 +23,7 @@ fun BackgroundMusicButton() {
         btnText = R.string.active_music,
         description = "Background Music Button",
         onClickFun = { 
-            settingsVM.updateIsBackgroundMusicOn(!isBackgroundMusicOn, context)
+            settingsVM.updateIsBackgroundMusicOn(!isBackgroundMusicOn)
         }
     )
 }

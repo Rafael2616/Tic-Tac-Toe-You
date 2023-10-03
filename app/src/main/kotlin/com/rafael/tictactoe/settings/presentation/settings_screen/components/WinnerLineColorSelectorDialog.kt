@@ -30,7 +30,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -42,7 +41,6 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.Set
 @Composable
 fun WinnerLineColorSelectorDialog() {
     val settingsVM = hiltViewModel<SettingsViewModel>()
-    val context = LocalContext.current
     var optionsSize = listOf(0,1,2,3,4,5,6)
     val selectedColorOption by settingsVM.selectedColorOption.collectAsState()
         
@@ -85,7 +83,7 @@ fun WinnerLineColorSelectorDialog() {
                             .fillMaxWidth()
                             .clickable(onClick = {
                                 settingsVM.updateSelectedColorOption(option)
-                                settingsVM.execUIClickSound(context)
+                                settingsVM.execUIClickSound()
                                 when (option) {
                                     0 -> settingsVM.setWinnerLineColor(Color.Blue)
                                     1 -> settingsVM.setWinnerLineColor(Color.Red)
@@ -110,7 +108,7 @@ fun WinnerLineColorSelectorDialog() {
                                     selected = option == selectedColorOption,
                                     onClick = {
                                         settingsVM.updateSelectedColorOption(option)
-                                        settingsVM.execUIClickSound(context)
+                                        settingsVM.execUIClickSound()
                                         when (option) {
                                             0 -> settingsVM.setWinnerLineColor(Color.Blue)
                                             1 -> settingsVM.setWinnerLineColor(Color.Red)
@@ -165,7 +163,7 @@ fun WinnerLineColorSelectorDialog() {
                 }
                 OutlinedButton(
                     onClick = {
-                        settingsVM.execUIClickSound(context)
+                        settingsVM.execUIClickSound()
                         settingsVM.showWinnerLineColorDialog(false)
                     },
                     modifier = Modifier

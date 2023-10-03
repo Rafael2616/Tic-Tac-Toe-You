@@ -129,7 +129,7 @@ fun GetPlayerPrefsDialog() {
                             .height(85.dp)
                             .clip(CircleShape)
                             .clickable(onClick = {
-                                settingsVM.execUIClickSound(context)
+                                settingsVM.execUIClickSound()
                                 PlayersImagesSetter(viewModel)
                                 if (!isCPUMode) {
                                     viewModel.updateLocalPlayer1(!localPlayer1)
@@ -188,7 +188,7 @@ fun GetPlayerPrefsDialog() {
                             .size(60.dp)
                             .clip(CircleShape)
                             .clickable(onClick = {
-                                settingsVM.execUIClickSound(context)
+                                settingsVM.execUIClickSound()
                                 viewModel.updateIsXFor1(!isXFor1)
     	                        PlayersImagesSetter(viewModel)
                             })
@@ -211,7 +211,7 @@ fun GetPlayerPrefsDialog() {
                 //Play button, used to start game
                 Button(
                     onClick = {
-                        settingsVM.execUIClickSound(context)
+                        settingsVM.execUIClickSound()
                         viewModel.updatePlay(true)
                         viewModel.updateIsXImage(isXFor1)
                         viewModel.updatePlayer1Name(player1Value)

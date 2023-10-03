@@ -27,7 +27,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -44,15 +43,14 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.Set
 @ExperimentalMaterial3Api
 fun MainOptions(navController: NavController) {
     val settingsVM = hiltViewModel<SettingsViewModel>()
-    val context = LocalContext.current
-    var cards by rememberSaveable { mutableStateOf(List<Boolean>(3) { false }) }
+    var options by rememberSaveable { mutableStateOf(List<Boolean>(3) { false }) }
 
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        cards.forEachIndexed { index, _ ->
+        options.forEachIndexed { index, _ ->
             Card(
                 shape = MaterialTheme.shapes.large,
                 modifier = Modifier
@@ -60,7 +58,7 @@ fun MainOptions(navController: NavController) {
                     .height(65.dp)
                     .clip(RoundedCornerShape(36.dp))
                     .clickable(onClick = {
-                        settingsVM.execUIClickSound(context)
+                        settingsVM.execUIClickSound()
                         when (index) {
                             0 -> navController.navigate(Destinations.Game.screen + "/false")
                             1 -> navController.navigate(Destinations.Game.screen + "/true")

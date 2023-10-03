@@ -16,7 +16,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
@@ -28,7 +27,6 @@ fun ExpandButton() {
     val settingsVM = hiltViewModel<SettingsViewModel>()
     val viewModel = hiltViewModel<GameViewModel>()
     val isExpandButtonShown by viewModel.isExpandButtonShown.collectAsState()
-    val context = LocalContext.current
 
     Box(
         modifier = Modifier
@@ -43,7 +41,7 @@ fun ExpandButton() {
                 .size(45.dp)
                 .clip(CircleShape)
                 .clickable(onClick = { 
-                    settingsVM.execUIClickSound(context)
+                    settingsVM.execUIClickSound()
                     viewModel.showExpandButton(!isExpandButtonShown)
             })
         )      

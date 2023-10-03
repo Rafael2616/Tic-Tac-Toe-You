@@ -32,7 +32,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -55,7 +54,6 @@ fun SettingsWithSwitch(
     @StringRes groupName: Int
 ) {
     val viewModel = hiltViewModel<SettingsViewModel>()
-    val context = LocalContext.current
     val isFollowingSystemOn by viewModel.isFollowingSystemOn.collectAsState()
     val componentValidator = ComponentValidator()
     
@@ -89,10 +87,9 @@ fun SettingsWithSwitch(
                         .height(68.dp)
                         .clip(RoundedCornerShape(26.dp))
                         .clickable(onClick = {
-                            viewModel.execUIClickSound(context)
+                            viewModel.execUIClickSound()
                             toggleSettingsUseCase(
                                 groupType,
-                                context,
                                 index,
                                 viewModel
                             )
@@ -128,11 +125,10 @@ fun SettingsWithSwitch(
                             onCheckedChange = {
                                 toggleSettingsUseCase(
                                     groupType,
-                                    context,
                                     index,
                                     viewModel
                                 )
-                                viewModel.execUIClickSound(context)
+                                viewModel.execUIClickSound()
                             },
                             thumbContent = {
                                  if (switchCheckedHandler(

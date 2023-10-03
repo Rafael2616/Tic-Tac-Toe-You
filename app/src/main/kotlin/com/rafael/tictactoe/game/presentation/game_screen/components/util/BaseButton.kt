@@ -24,7 +24,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -44,7 +43,6 @@ fun BaseButton(
     description: String = "there is no description"
 ) {
     val settingsVM = hiltViewModel<SettingsViewModel>()
-    val context = LocalContext.current
 
     Box(
         modifier = modifier
@@ -63,7 +61,7 @@ fun BaseButton(
                     .size(45.dp)
                     .clip(CircleShape)
                     .clickable(onClick = {
-                        settingsVM.execUIClickSound(context)
+                        settingsVM.execUIClickSound()
                         onClickFun()
                     })
             ) {

@@ -88,10 +88,9 @@ fun SettingsWithIcon(
                         .height(if (groupType == GroupType.OTHER && index == 0 && isAboutShown) 150.dp else 68.dp)
                         .clip(RoundedCornerShape(26.dp))
                         .clickable(onClick = {
-                            viewModel.execUIClickSound(context)
+                            viewModel.execUIClickSound()
                             toggleSettingsUseCase(
                                 groupType,
-                                context,
                                 index,
                                 viewModel
                             )

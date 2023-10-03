@@ -57,7 +57,7 @@ fun PlayAgainButton() {
                     .clip(CircleShape)
                     .clickable(onClick = {
                         viewModel.showExpandButton(false)
-						settingsVM.execUIClickSound(context)
+						settingsVM.execUIClickSound()
              		   RestartGame(viewModel)
                         if (isCPUMode) {
                             if (isCPUPlayer1 && is1Win || !isCPUPlayer1 && !is1Win) {
