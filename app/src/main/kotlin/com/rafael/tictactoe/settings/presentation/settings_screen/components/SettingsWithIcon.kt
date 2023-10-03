@@ -110,7 +110,7 @@ fun SettingsWithIcon(
                             painter = SettingsImageHandler(index, groupType)
                         )
                     }
-                    if (componentValidator.validateCardWithPreview(groupType, index)) {
+                    if (componentValidator.validateBoxWithLinePreview(groupType, index)) {
                         Spacer(modifier = Modifier.width(6.dp))
                         Box(
                             modifier = Modifier
@@ -118,14 +118,8 @@ fun SettingsWithIcon(
                                 .width(15.dp)
                                 .padding(4.dp)
                                 .rotate(45f)
-                                .clip(RectangleShape),
-                            content = {
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .background(winnerLineColor)
-                                )
-                            }
+                                .clip(RectangleShape)
+                                .background(winnerLineColor)
                         )
                     }
                     Column(

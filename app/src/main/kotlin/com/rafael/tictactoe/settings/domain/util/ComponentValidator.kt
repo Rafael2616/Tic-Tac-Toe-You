@@ -18,7 +18,7 @@ class ComponentValidator {
         return false
     }
     
-    fun validateCardWithPreview(groupType: GroupType, index: Int): Boolean {
+    fun validateBoxWithLinePreview(groupType: GroupType, index: Int): Boolean {
         if (groupType == GroupType.CUSTOMIZATION && index == 0) {
              return true   
         }

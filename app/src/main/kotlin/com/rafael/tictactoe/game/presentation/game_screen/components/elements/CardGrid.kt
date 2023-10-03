@@ -60,8 +60,7 @@ fun CardGrid() {
                                 scope.launch {
                                     CardGridClickHandler(context, viewModel, rowIndex, cardIndex)
                                 };
-                            }
-                        )
+                            })
                     ) {
                         Image(
 					        contentDescription = "card $rowIndex $cardIndex",
