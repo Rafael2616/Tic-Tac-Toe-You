@@ -2,6 +2,7 @@ package com.rafael.tictactoe.settings.presentation.settings_screen.components
 
 import androidx.annotation.StringRes
 import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -41,8 +42,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.common.domain.util.getVersionName
 import com.rafael.tictactoe.common.domain.util.getVersionCode
+import com.rafael.tictactoe.common.domain.util.getVersionName
 import com.rafael.tictactoe.settings.domain.util.ComponentValidator
 import com.rafael.tictactoe.settings.domain.util.GroupType
 import com.rafael.tictactoe.settings.domain.util.SettingsIconHandler
@@ -79,12 +80,15 @@ fun SettingsWithIcon(
                 .fillMaxWidth()
             )
             size.forEachIndexed { _, index ->
+                val cardHeight by animateDpAsState(
+                    if (groupType == GroupType.OTHER && index == 0 && isAboutShown) 150.dp else 68.dp
+                )
                 Card(
                     shape = MaterialTheme.shapes.medium,
                     modifier = Modifier
                         .animateContentSize()
                         .width(360.dp)
-                        .height(if (groupType == GroupType.OTHER && index == 0 && isAboutShown) 150.dp else 68.dp)
+                        .height(cardHeight)
                         .clip(RoundedCornerShape(26.dp))
                         .clickable(onClick = {
                             viewModel.execUIClickSound()

@@ -124,8 +124,7 @@ fun AppTheme(
             LightColors
         }
     }
-    
-    
+
 	MaterialTheme(
   	  colorScheme = colors,
   	  shapes = Shapes,
