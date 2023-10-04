@@ -30,7 +30,6 @@ A classic tic-tac-toe game made with material you and others new android technol
 
 # Incompletes/Bugged Features
 - The data is not being saved in the database
-- The line when there is a winner only work's in HD Screens (720*1080)
 
 # Follow me on Instagram
 [Instagram](https://www.instagram.com/rafael_mourana/)
