@@ -99,28 +99,33 @@ fun AppTheme(
     val isAndroidS = VERSION.SDK_INT >= VERSION_CODES.S 
 
     //Handle with color will be applied according with some settings toggles
-	val colors = if (!isFollowingSystemOn) {
-  	  if (isAndroidS && isDynamicColorsOn) {
-      	  if (!isDarkThemeOn) {
-       	     dynamicLightColorScheme(context)
- 	       } else {
-     	       dynamicDarkColorScheme(context)
-      	  }
-  	  } else {
-            if (!isDarkThemeOn) {
-     	       LightColors
-    	    } else {
-     	       DarkColors
-       	 }
-  	  }
-    } else {
-        if (!isSystemInDarkTheme) {
-            LightColors
-        } else {
+    val colors = if (isFollowingSystemOn) {
+        if (isAndroidS && isDynamicColorsOn) {
+            if (isSystemInDarkTheme) {
+                 dynamicDarkColorScheme(context)
+            } else {           
+                 dynamicLightColorScheme(context)
+            }
+        } else if (isSystemInDarkTheme) {
             DarkColors
-   	 }
+        } else {
+            LightColors
+        }
+    } else {
+        if (isAndroidS && isDynamicColorsOn) {
+            if (isDarkThemeOn) {
+                 dynamicDarkColorScheme(context)
+            } else {           
+                 dynamicLightColorScheme(context)
+            }
+        } else if (isDarkThemeOn) {
+            DarkColors
+        } else {
+            LightColors
+        }
     }
-
+    
+    
 	MaterialTheme(
   	  colorScheme = colors,
   	  shapes = Shapes,
