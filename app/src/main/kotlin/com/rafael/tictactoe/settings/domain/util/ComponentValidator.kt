@@ -49,4 +49,11 @@ class ComponentValidator {
         }
         return false
     }
+    
+    fun validateCanvas(groupType: GroupType, index: Int): Boolean {
+        if (groupType == GroupType.CUSTOMIZATION && index == 1 || index == 2) {
+            return true
+        }
+        return false
+    }
 }

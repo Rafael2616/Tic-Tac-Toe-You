@@ -19,7 +19,9 @@ enum class Sound {
 }
 
 enum class Customization {
-    WINNERLINECOLOR
+    WINNERLINECOLOR,
+    OCOLOR,
+    XCOLOR
 }
 
 enum class Other {

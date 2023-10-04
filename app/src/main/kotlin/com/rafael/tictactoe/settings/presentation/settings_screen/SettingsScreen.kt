@@ -8,18 +8,18 @@ import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsTopBar
-import com.rafael.tictactoe.settings.presentation.settings_screen.components.WinnerLineColorSelectorDialog
+import com.rafael.tictactoe.settings.presentation.settings_screen.components.LineColorSelectorDialog
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
 @ExperimentalMaterial3Api
 fun SettingsScreen(navController: NavController) {
     val settingsVM = hiltViewModel<SettingsViewModel>()
-    val showWinnerLineColorDialog by settingsVM.showWinnerLineColorDialog.collectAsState()
+    val showLineColorSelectorDialog by settingsVM.showLineColorSelectorDialog.collectAsState()
 
     SettingsTopBar(navController)
 
-    AnimatedVisibility(showWinnerLineColorDialog) {
-        WinnerLineColorSelectorDialog()
+    AnimatedVisibility(showLineColorSelectorDialog) {
+        LineColorSelectorDialog()
     }
 }

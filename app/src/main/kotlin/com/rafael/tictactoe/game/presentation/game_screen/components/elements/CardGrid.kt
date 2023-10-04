@@ -1,8 +1,9 @@
 package com.rafael.tictactoe.game.presentation.game_screen.components
 
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -26,8 +28,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.util.CardGridClickHandler
-import com.rafael.tictactoe.game.domain.util.CardGridImageHandler
+import com.rafael.tictactoe.game.domain.util.drawXorO
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
+import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import kotlinx.coroutines.launch
 
 @Composable
@@ -35,6 +38,9 @@ fun CardGrid() {
     var cardItems by rememberSaveable { mutableStateOf(List<Boolean>(3){false})}
     var rowItems by rememberSaveable { mutableStateOf(List<Boolean>(3){false})}
     val viewModel = hiltViewModel<GameViewModel>()
+    val settingsVM = hiltViewModel<SettingsViewModel>()
+    val card by viewModel.card.collectAsState()
+	val isCardClicked by viewModel.isCardClicked.collectAsState()
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
@@ -64,13 +70,26 @@ fun CardGrid() {
                                     CardGridClickHandler(context, viewModel, rowIndex, cardIndex)
                                 };
                             })
-                    ) {
-                        Image(
-					        contentDescription = "card $rowIndex $cardIndex",
-                            alignment = Alignment.Center,
- 				           modifier = Modifier.fillMaxSize(),
-			 	           painter = CardGridImageHandler(rowIndex, cardIndex)
-			        	)
+                    ) {                 
+                        Box (
+                            modifier = Modifier.size(114.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Canvas(
+                                 modifier = Modifier
+                                     .fillMaxSize()
+                                     .padding(27.dp)
+                                     .align(Alignment.Center)
+                            ) {
+                                drawXorO(
+                                    rowIndex,
+                                    cardIndex,
+                                    isCardClicked,
+                                    card,
+                                    settingsVM
+                                )
+                            }
+                        }
                     }
                 }
             }

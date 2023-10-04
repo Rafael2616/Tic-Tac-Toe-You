@@ -43,5 +43,7 @@
     <string name="leave_game_description">Isso irá resetar todo o progresso</string>
     <string name="leave">Sair</string>
     <string name="stay">Ficar</string>
+    <string name="color_o">Cor do X</string>
+    <string name="color_x">Cor do O</string>
 
 </resources>

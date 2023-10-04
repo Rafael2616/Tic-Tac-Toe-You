@@ -1,6 +1,5 @@
 package com.rafael.tictactoe.game.presentation.game_screen.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -59,11 +58,11 @@ fun GameStateToast() {
             )
             if (!gotOld) {
                 Spacer(modifier = Modifier.width(4.dp))
-                Image(
-                    contentDescription = "Current Player Image",
-                    painter = ToastImageHandler(),
-                    modifier = Modifier.size(17.dp)
-                )
+                Box(
+                    modifier = Modifier.size(15.dp)
+                ) {
+                    ToastImageHandler()
+                }
             }
             if (winner) {
                 Spacer(modifier = Modifier.width(4.dp))

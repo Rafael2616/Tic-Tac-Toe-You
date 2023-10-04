@@ -36,14 +36,19 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
+import com.rafael.tictactoe.settings.domain.use_cases.lineColorSelectionUseCase
+import com.rafael.tictactoe.settings.domain.util.Customization
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
-fun WinnerLineColorSelectorDialog() {
+fun LineColorSelectorDialog() {
     val settingsVM = hiltViewModel<SettingsViewModel>()
     var optionsSize = listOf(0,1,2,3,4,5,6)
-    val selectedColorOption by settingsVM.selectedColorOption.collectAsState()
-        
+    val type by settingsVM.customizationType.collectAsState()
+    val selectedWinnerLineColor by settingsVM.selectedWinnerLineColor.collectAsState()
+    val selectedColorO by settingsVM.selectedColorO.collectAsState()
+    val selectedColorX by settingsVM.selectedColorX.collectAsState()
+    
     Surface(
         color = Color.Black.copy(alpha = 0.3f),
         modifier = Modifier
@@ -82,18 +87,17 @@ fun WinnerLineColorSelectorDialog() {
                             .height(60.dp)
                             .fillMaxWidth()
                             .clickable(onClick = {
-                                settingsVM.updateSelectedColorOption(option)
+                                when (type) {
+                                    Customization.WINNERLINECOLOR -> settingsVM.updateSelectedWinnerLineColor(option)
+                                    Customization.OCOLOR ->  settingsVM.updateSelectedColorO(option)
+                                    Customization.XCOLOR ->  settingsVM.updateSelectedColorX(option)
+                                }
                                 settingsVM.execUIClickSound()
-                                when (option) {
-                                    0 -> settingsVM.setWinnerLineColor(Color.Blue)
-                                    1 -> settingsVM.setWinnerLineColor(Color.Red)
-                                    2 -> settingsVM.setWinnerLineColor(Color.Yellow)
-                                    3 -> settingsVM.setWinnerLineColor(Color.Green)
-                                    4 -> settingsVM.setWinnerLineColor(Color(0xFF6400EE))
-                                    5 -> settingsVM.setWinnerLineColor(Color(0xFFB010B8))
-                                    6 -> settingsVM.setWinnerLineColor(Color.White)
-                                    else -> settingsVM.setWinnerLineColor(Color.Transparent)
-                               }
+                                lineColorSelectionUseCase(
+                                    type,
+                                    option,
+                                    settingsVM
+                                )
                            })
                         ) {
                             Row(
@@ -105,20 +109,24 @@ fun WinnerLineColorSelectorDialog() {
                                 verticalAlignment = Alignment.CenterVertically,
                             ) {
                                 RadioButton(
-                                    selected = option == selectedColorOption,
+                                    selected =
+                                        when (type) {
+                                            Customization.WINNERLINECOLOR -> option == selectedWinnerLineColor
+                                            Customization.OCOLOR -> option == selectedColorO
+                                            Customization.XCOLOR -> option == selectedColorX
+                                        },
                                     onClick = {
-                                        settingsVM.updateSelectedColorOption(option)
-                                        settingsVM.execUIClickSound()
-                                        when (option) {
-                                            0 -> settingsVM.setWinnerLineColor(Color.Blue)
-                                            1 -> settingsVM.setWinnerLineColor(Color.Red)
-                                            2 -> settingsVM.setWinnerLineColor(Color.Yellow)
-                                            3 -> settingsVM.setWinnerLineColor(Color.Green)
-                                            4 -> settingsVM.setWinnerLineColor(Color(0xFF6400EE))
-                                            5 -> settingsVM.setWinnerLineColor(Color(0xFFB010B8))
-                                            6 -> settingsVM.setWinnerLineColor(Color.White)
-                                            else -> settingsVM.setWinnerLineColor(Color.Transparent)
+                                        when (type) {
+                                            Customization.WINNERLINECOLOR -> settingsVM.updateSelectedWinnerLineColor(option)
+                                            Customization.OCOLOR ->  settingsVM.updateSelectedColorO(option)
+                                            Customization.XCOLOR ->  settingsVM.updateSelectedColorX(option)
                                         }
+                                        settingsVM.execUIClickSound()
+                                        lineColorSelectionUseCase(
+                                            type,
+                                            option,
+                                            settingsVM
+                                        )
                                     },
                                 )
                                 Text(
@@ -164,7 +172,7 @@ fun WinnerLineColorSelectorDialog() {
                 OutlinedButton(
                     onClick = {
                         settingsVM.execUIClickSound()
-                        settingsVM.showWinnerLineColorDialog(false)
+                        settingsVM.showLineColorSelectorDialog(false)
                     },
                     modifier = Modifier
                         .width(90.dp)

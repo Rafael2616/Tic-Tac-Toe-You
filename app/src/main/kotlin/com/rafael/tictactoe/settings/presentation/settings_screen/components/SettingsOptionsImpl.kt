@@ -23,7 +23,7 @@ fun SettingsOptionsImpl(paddingValues: PaddingValues) {
     var settingsGroups by rememberSaveable { mutableStateOf(List<Boolean>(4) { false }) }
     val themeGroupSize = listOf(0,1,2)
     val soundGroupSize = listOf(0,1)
-    val cutomizationGroupSize = listOf(0)
+    val cutomizationGroupSize = listOf(0,1,2)
     val otherGroupSize = listOf(0)
 
     LazyColumn(

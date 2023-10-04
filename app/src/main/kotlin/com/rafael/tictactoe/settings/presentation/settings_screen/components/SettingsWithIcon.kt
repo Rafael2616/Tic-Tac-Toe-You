@@ -3,6 +3,7 @@ package com.rafael.tictactoe.settings.presentation.settings_screen.components
 import androidx.annotation.StringRes
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -33,7 +35,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -44,6 +47,8 @@ import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.getVersionCode
 import com.rafael.tictactoe.common.domain.util.getVersionName
+import com.rafael.tictactoe.game.presentation.utils.draws.drawXPreview
+import com.rafael.tictactoe.game.presentation.utils.draws.drawOPreview
 import com.rafael.tictactoe.settings.domain.util.ComponentValidator
 import com.rafael.tictactoe.settings.domain.util.GroupType
 import com.rafael.tictactoe.settings.domain.util.SettingsIconHandler
@@ -61,6 +66,8 @@ fun SettingsWithIcon(
     val viewModel = hiltViewModel<SettingsViewModel>()
     val isAboutShown by viewModel.isAboutShown.collectAsState()
     val winnerLineColor by viewModel.winnerLineColor.collectAsState()
+    val colorO by viewModel.colorO.collectAsState()
+    val colorX by viewModel.colorX.collectAsState()
     val componentValidator = ComponentValidator()
 
     Column(
@@ -126,9 +133,35 @@ fun SettingsWithIcon(
                                 .background(winnerLineColor)
                         )
                     }
+                   if (componentValidator.validateCanvas(groupType, index)) {
+                             Canvas(
+                                 modifier = Modifier
+                                     .padding(top = 25.dp, start = 0.dp)
+                                     .height(68.dp)
+                                     .align(Alignment.CenterVertically)
+                            ) {
+                                when (index) {
+                                    1 -> drawOPreview(
+                                        center = Offset(10.dp.toPx(), 10.dp.toPx()),
+                                        radius = 15.dp,
+                                        stroke = Stroke(width = 5.dp.toPx()),
+                                        colorO = colorO
+                                    )
+                                    2 -> drawXPreview(
+                                        strokeWidth = 5.dp,
+                                        start1 = Offset(x = 0f, y = 0f),
+                                        end1 = Offset(x = 25.dp.toPx(), y = 25.dp.toPx()),
+                                        start2 = Offset(x = 25.dp.toPx(), y = 0f),
+                                        end2 = Offset(x = 0.dp.toPx(), y = 25.dp.toPx()),
+                                        colorX = colorX
+                                    )
+                                }
+                            
+                        }   
+                    }
                     Column(
                         modifier = Modifier
-                            .wrapContentSize()
+                            .width(200.dp)
                             .animateContentSize(),
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
@@ -149,12 +182,12 @@ fun SettingsWithIcon(
                                 textAlign = TextAlign.Center
                             )
                         }
-                    }           
+                    }
                     Icon(
                         imageVector = SettingsIconHandler(index, groupType),
                         contentDescription = "Icon",
        		    	 modifier = Modifier.size(35.dp)
-                    )         
+                    )
                 }
             }
             Spacer(modifier = Modifier.height(12.dp))

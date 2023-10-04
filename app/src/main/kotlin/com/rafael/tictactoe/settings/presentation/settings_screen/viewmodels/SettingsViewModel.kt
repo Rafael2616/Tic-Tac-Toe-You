@@ -10,6 +10,7 @@ import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.game.domain.util.BackgroundMusic
 import com.rafael.tictactoe.settings.domain.model.SettingsEntity
 import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
+import com.rafael.tictactoe.settings.domain.util.Customization
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
@@ -35,9 +36,14 @@ class SettingsViewModel @Inject constructor(
     private var _isFollowingSystemOn = MutableStateFlow(true)
     private var _isSoundEffectsOn = MutableStateFlow(true)
     private var _isAboutShown = MutableStateFlow(false)  
-    private var _showWinnerLineColorDialog = MutableStateFlow(false)
+    private var _showLineColorSelectorDialog = MutableStateFlow(false)
     private var _winnerLineColor = MutableStateFlow(Color.Yellow)
-    private var _selectedColorOption = MutableStateFlow(2)
+    private var _selectedWinnerLineColor = MutableStateFlow(2)
+    private var _colorX = MutableStateFlow(Color.Red)
+    private var _selectedColorX = MutableStateFlow(1)
+    private var _colorO = MutableStateFlow(Color.Green)
+    private var _selectedColorO = MutableStateFlow(3)
+    private var _customizationType = MutableStateFlow(Customization.OCOLOR)
     private var _isBMPlaying = MutableStateFlow(false)
 
 	//Variables that have same values of private vars above, but cant be modified outside this class
@@ -47,10 +53,15 @@ class SettingsViewModel @Inject constructor(
     val isFollowingSystemOn: StateFlow<Boolean> = _isFollowingSystemOn
     val isSoundEffectsOn: StateFlow<Boolean> = _isSoundEffectsOn
     val isAboutShown: StateFlow<Boolean> = _isAboutShown
-    val showWinnerLineColorDialog: StateFlow<Boolean> = _showWinnerLineColorDialog
+    val showLineColorSelectorDialog: StateFlow<Boolean> = _showLineColorSelectorDialog
     val winnerLineColor: StateFlow<Color> = _winnerLineColor
-    val selectedColorOption: StateFlow<Int> = _selectedColorOption
+    val selectedWinnerLineColor: StateFlow<Int> = _selectedWinnerLineColor
+    val colorX: StateFlow<Color> = _colorX
+    val selectedColorX: StateFlow<Int> = _selectedColorX
+    val colorO: StateFlow<Color> = _colorO
+    val selectedColorO: StateFlow<Int> = _selectedColorO
     val isBMPlaying: StateFlow<Boolean> = _isBMPlaying
+    val customizationType: StateFlow<Customization> = _customizationType
 
     //Initialize ViewModel StateFlows Variables with corresponding values in SettingsRepository
 	init {
@@ -115,18 +126,35 @@ class SettingsViewModel @Inject constructor(
         _isAboutShown.value = newValue
     }
     
-    fun showWinnerLineColorDialog(newValue: Boolean) {
-        _showWinnerLineColorDialog.value = newValue
+    fun showLineColorSelectorDialog(newValue: Boolean, newType: Customization  = Customization.OCOLOR) {
+        _showLineColorSelectorDialog.value = newValue
+        _customizationType.value = newType
     }
 
     fun setWinnerLineColor(newValue: Color) {
         _winnerLineColor.value = newValue
     }
 
-    fun updateSelectedColorOption(newValue: Int) {
-        _selectedColorOption.value = newValue
+    fun updateSelectedWinnerLineColor(newValue: Int) {
+        _selectedWinnerLineColor.value = newValue
     }
-    
+
+    fun setColorX(newValue: Color) {
+        _colorX.value = newValue
+    }
+
+    fun updateSelectedColorX(newValue: Int) {
+        _selectedColorX.value = newValue
+    }
+
+    fun setColorO(newValue: Color) {
+        _colorO.value = newValue
+    }
+
+    fun updateSelectedColorO(newValue: Int) {
+        _selectedColorO.value = newValue
+    }
+
     fun execUIClickSound() {
         if (_isSoundEffectsOn.value) {
             UiClickSound(context, player)

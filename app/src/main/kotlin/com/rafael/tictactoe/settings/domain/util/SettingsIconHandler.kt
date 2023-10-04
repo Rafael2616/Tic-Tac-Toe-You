@@ -9,9 +9,9 @@ import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
@@ -24,6 +24,8 @@ fun SettingsIconHandler(index: Int, groupType: GroupType): ImageVector {
     fun CustomizationIconHandler(index: Int): ImageVector {
         return when (index) {
             0 -> Icons.Filled.ArrowForward
+            1 -> Icons.Filled.ArrowForward
+            2 -> Icons.Filled.ArrowForward
             else -> Icons.Filled.Close
         }
     }

@@ -1,5 +1,6 @@
 package com.rafael.tictactoe.settings.domain.use_cases
 
+import com.rafael.tictactoe.settings.domain.util.Customization
 import com.rafael.tictactoe.settings.domain.util.GroupType
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
@@ -26,7 +27,9 @@ fun toggleSettingsUseCase(
 
     fun toggleCustomizationSettings(index: Int) {
         when (index) {
-            0 -> vm.showWinnerLineColorDialog(true)
+            0 -> vm.showLineColorSelectorDialog(true, Customization.WINNERLINECOLOR)
+            1 -> vm.showLineColorSelectorDialog(true, Customization.OCOLOR)
+            2 -> vm.showLineColorSelectorDialog(true, Customization.XCOLOR)
         }   
     }
 
