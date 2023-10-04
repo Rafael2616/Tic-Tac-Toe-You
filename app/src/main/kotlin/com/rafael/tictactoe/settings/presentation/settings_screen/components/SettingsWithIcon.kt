@@ -33,7 +33,6 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -42,7 +41,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.common.domain.util.getAppVersion
+import com.rafael.tictactoe.common.domain.util.getVersionName
+import com.rafael.tictactoe.common.domain.util.getVersionCode
 import com.rafael.tictactoe.settings.domain.util.ComponentValidator
 import com.rafael.tictactoe.settings.domain.util.GroupType
 import com.rafael.tictactoe.settings.domain.util.SettingsIconHandler
@@ -58,7 +58,6 @@ fun SettingsWithIcon(
     @StringRes groupName: Int
 ) {
     val viewModel = hiltViewModel<SettingsViewModel>()
-    val context = LocalContext.current
     val isAboutShown by viewModel.isAboutShown.collectAsState()
     val winnerLineColor by viewModel.winnerLineColor.collectAsState()
     val componentValidator = ComponentValidator()
@@ -141,7 +140,7 @@ fun SettingsWithIcon(
                             Text(
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onSurface,
-                                text = stringResource(R.string.app_version) +" "+ getAppVersion(context),
+                                text = stringResource(R.string.app_version) +" "+ getVersionName() + "(" + getVersionCode() + ")",
                                 modifier = Modifier.width(240.dp).padding(top = 8.dp),
                                 textAlign = TextAlign.Center
                             )
