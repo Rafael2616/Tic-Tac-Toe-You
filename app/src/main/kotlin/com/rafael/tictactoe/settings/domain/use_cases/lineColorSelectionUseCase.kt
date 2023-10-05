@@ -19,6 +19,7 @@ fun lineColorSelectionUseCase(
             4 -> settingsVM.setWinnerLineColor(Color(0xFF6400EE))
             5 -> settingsVM.setWinnerLineColor(Color.Magenta)
             6 -> settingsVM.setWinnerLineColor(Color.White)
+            7 -> settingsVM.setWinnerLineColor(Color.Cyan)
             else -> settingsVM.setWinnerLineColor(Color.Transparent)
         }
     }
@@ -32,6 +33,7 @@ fun lineColorSelectionUseCase(
             4 -> settingsVM.setColorX(Color(0xFF6400EE))
             5 -> settingsVM.setColorX(Color.Magenta)
             6 -> settingsVM.setColorX(Color.White)
+            7 -> settingsVM.setColorX(Color.Cyan)
             else -> settingsVM.setColorX(Color.Transparent)
         }
     }
@@ -45,6 +47,7 @@ fun lineColorSelectionUseCase(
             4 -> settingsVM.setColorO(Color(0xFF6400EE))
             5 -> settingsVM.setColorO(Color.Magenta)
             6 -> settingsVM.setColorO(Color.White)
+            7 -> settingsVM.setColorO(Color.Cyan)
             else -> settingsVM.setColorO(Color.Transparent)
         }
     }

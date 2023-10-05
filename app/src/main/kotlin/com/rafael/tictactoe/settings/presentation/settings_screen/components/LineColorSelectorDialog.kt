@@ -43,7 +43,7 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.Set
 @Composable
 fun LineColorSelectorDialog() {
     val settingsVM = hiltViewModel<SettingsViewModel>()
-    var optionsSize = listOf(0,1,2,3,4,5,6)
+    var optionsSize = listOf(0,1,2,3,4,5,6,7)
     val type by settingsVM.customizationType.collectAsState()
     val selectedWinnerLineColor by settingsVM.selectedWinnerLineColor.collectAsState()
     val selectedColorO by settingsVM.selectedColorO.collectAsState()
@@ -138,6 +138,7 @@ fun LineColorSelectorDialog() {
                                         4 -> stringResource(R.string.color_purple)
                                         5 -> stringResource(R.string.color_pink)
                                         6 -> stringResource(R.string.color_white)
+                                        7 -> stringResource(R.string.color_cyan)
                                         else -> "undefined_color"
                                     }
                                 )
@@ -156,9 +157,10 @@ fun LineColorSelectorDialog() {
                                                     1 -> Color.Red
                                                     2 -> Color.Yellow
                                                     3 -> Color.Green
-                                                    4 -> Color(0xFF6400EE)
-                                                    5 -> Color(0xFFB010B8)
+                                                    4 -> Color(0xFF6400EE)//Purple
+                                                    5 -> Color.Magenta
                                                     6 -> Color.White
+                                                    7 -> Color.Cyan
                                                     else -> Color.Transparent
                                                 }
                                             )

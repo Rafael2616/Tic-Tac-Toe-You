@@ -33,6 +33,7 @@
     <string name="color_purple">Roxo</string>
     <string name="color_pink">Rosa</string>
     <string name="color_white">Branco</string>
+    <string name="color_cyan">Ciano</string>
     <string name="choose_color">Escolha uma cor:</string>
     <string name="group_theme">Tema</string>
     <string name="group_sound">Som</string>

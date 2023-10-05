@@ -26,7 +26,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -192,12 +191,6 @@ fun SettingsWithIcon(
                 }
             }
             Spacer(modifier = Modifier.height(12.dp))
-        }
-    }
-    
-    DisposableEffect(Unit) {
-        onDispose {
-            viewModel.updateIsAboutShown(false)
         }
     }
 }
