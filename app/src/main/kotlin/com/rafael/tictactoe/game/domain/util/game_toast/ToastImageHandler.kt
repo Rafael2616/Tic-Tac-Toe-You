@@ -14,24 +14,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
-import com.rafael.tictactoe.game.presentation.utils.draws.drawOPreview
-import com.rafael.tictactoe.game.presentation.utils.draws.drawXPreview
+import com.rafael.tictactoe.game.presentation.utils.draws.drawOinToast
+import com.rafael.tictactoe.game.presentation.utils.draws.drawXinToast
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
-
-fun DrawScope.drawO(colorO: Color) = drawOPreview(
-    center = Offset(8.dp.toPx(), 8.dp.toPx()),
-    radius = 8.dp,
-    stroke = Stroke(width = 3.dp.toPx()),
-    colorO = colorO
-)
-fun DrawScope.drawX(colorX: Color) = drawXPreview(
-    strokeWidth = 3.dp,
-    start1 = Offset(x = 0f, y = 0f),
-    end1 = Offset(x = 15.dp.toPx(), y = 15.dp.toPx()),
-    start2 = Offset(x = 15.dp.toPx(), y = 0f),
-    end2 = Offset(x = 0.dp.toPx(), y = 15.dp.toPx()),
-    colorX = colorX
-)
 
 @Composable
 fun ToastImageHandler() {
@@ -51,24 +36,24 @@ fun ToastImageHandler() {
     ) {
         //Image showed when game not started yet (configuration fase)
     	if (!play) {
-            if (isXFor1) drawX(colorX) else drawO(colorO)
+            if (isXFor1) drawXinToast(colorX) else drawOinToast(colorO)
     	}
 
         //Image for case of game is on going
         if (play && !winner) {
-            if (isXImage) drawX(colorX) else drawO(colorO)
+            if (isXImage) drawXinToast(colorX) else drawOinToast(colorO)
         }
  
         //Image for case of has winner   
         if (winner) {
             if (is1Win && isXFor1) {
-                drawX(colorX)
+                drawXinToast(colorX)
             } else if (is1Win && !isXFor1) { 
-                drawO(colorO)
+                drawOinToast(colorO)
             } else if (!is1Win && isXFor1) {
-                drawO(colorO)
+                drawOinToast(colorO)
             } else if (!is1Win && !isXFor1) {
-                drawX(colorX)
+                drawXinToast(colorX)
             }
         }
     }

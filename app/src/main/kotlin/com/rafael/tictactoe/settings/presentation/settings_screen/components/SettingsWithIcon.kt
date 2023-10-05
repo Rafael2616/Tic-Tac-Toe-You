@@ -47,8 +47,6 @@ import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.getVersionCode
 import com.rafael.tictactoe.common.domain.util.getVersionName
-import com.rafael.tictactoe.game.presentation.utils.draws.drawXPreview
-import com.rafael.tictactoe.game.presentation.utils.draws.drawOPreview
 import com.rafael.tictactoe.settings.domain.util.ComponentValidator
 import com.rafael.tictactoe.settings.domain.util.GroupType
 import com.rafael.tictactoe.settings.domain.util.SettingsIconHandler
@@ -134,29 +132,40 @@ fun SettingsWithIcon(
                         )
                     }
                    if (componentValidator.validateCanvas(groupType, index)) {
-                             Canvas(
-                                 modifier = Modifier
-                                     .padding(top = 25.dp, start = 0.dp)
-                                     .height(68.dp)
-                                     .align(Alignment.CenterVertically)
+                       Box(
+                           modifier = Modifier
+                               .size(65.dp),
+                           contentAlignment = Alignment.Center
+                       ) {
+                           Canvas(
+                            modifier = Modifier
+                                 .padding(top = 22.dp)
+                                 .fillMaxSize()
+                                 .align(Alignment.CenterStart)
                             ) {
                                 when (index) {
-                                    1 -> drawOPreview(
+                                    1 -> drawCircle(
                                         center = Offset(10.dp.toPx(), 10.dp.toPx()),
-                                        radius = 15.dp,
-                                        stroke = Stroke(width = 5.dp.toPx()),
-                                        colorO = colorO
+                                        radius = 15.dp.toPx(),
+                                        style = Stroke(width = 5.dp.toPx()),
+                                        color = colorO
                                     )
-                                    2 -> drawXPreview(
-                                        strokeWidth = 5.dp,
-                                        start1 = Offset(x = 0f, y = 0f),
-                                        end1 = Offset(x = 25.dp.toPx(), y = 25.dp.toPx()),
-                                        start2 = Offset(x = 25.dp.toPx(), y = 0f),
-                                        end2 = Offset(x = 0.dp.toPx(), y = 25.dp.toPx()),
-                                        colorX = colorX
-                                    )
+                                    2 -> {
+                                        drawLine(
+                                            strokeWidth = 5.dp.toPx(),
+                                            start = Offset(x = 0f, y = 0f),
+                                            end = Offset(x = 25.dp.toPx(), y = 25.dp.toPx()),
+                                            color = colorX
+                                        )
+                                        drawLine(
+                                            strokeWidth = 5.dp.toPx(),
+                                            start = Offset(x = 25.dp.toPx(), y = 0f),
+                                            end = Offset(x = 0f, y = 25.dp.toPx()),
+                                            color = colorX
+                                        )
+                                    }
                                 }
-                            
+                            }
                         }   
                     }
                     Column(

@@ -57,7 +57,7 @@ fun GameStateToast() {
                 else MaterialTheme.colorScheme.error,
             )
             if (!gotOld) {
-                Spacer(modifier = Modifier.width(4.dp))
+                Spacer(modifier = Modifier.width(5.dp))
                 Box(
                     modifier = Modifier.size(15.dp)
                 ) {
@@ -65,7 +65,7 @@ fun GameStateToast() {
                 }
             }
             if (winner) {
-                Spacer(modifier = Modifier.width(4.dp))
+                Spacer(modifier = Modifier.width(5.dp))
                 Text(
                     text = stringResource(R.string.winner),
                     style = MaterialTheme.typography.titleMedium,

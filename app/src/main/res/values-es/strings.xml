@@ -43,7 +43,7 @@
     <string name="leave_game_description">Esto restablecerá todo el progreso</string>
     <string name="leave">Salir</string>
     <string name="stay">Quedarse</string>
-    <string name="color_o">Color del X</string>
-    <string name="color_x">Color del O</string>
+    <string name="color_o">Color del O</string>
+    <string name="color_x">Color del X</string>
 
 </resources>

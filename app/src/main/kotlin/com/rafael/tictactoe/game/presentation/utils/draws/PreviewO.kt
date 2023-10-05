@@ -1,6 +1,5 @@
 package com.rafael.tictactoe.game.presentation.utils.draws
 
-import androidx.compose.foundation.Canvas
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
@@ -21,3 +20,11 @@ fun DrawScope.drawOPreview(
         color = colorO
     )
 }
+
+//O Image adjusted for ToastImageHandler
+fun DrawScope.drawOinToast(colorO: Color) = drawOPreview(
+    center = Offset(8.dp.toPx(), 8.dp.toPx()),
+    radius = 8.dp,
+    stroke = Stroke(width = 3.dp.toPx()),
+    colorO = colorO
+)

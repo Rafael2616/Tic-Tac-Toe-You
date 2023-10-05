@@ -3,8 +3,9 @@ package com.rafael.tictactoe.game.presentation.game_screen.components
 import android.view.ViewTreeObserver
 import androidx.core.view.ViewCompat 
 import androidx.core.view.WindowInsetsCompat
-import androidx.compose.foundation.background
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -18,6 +19,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Card
@@ -36,7 +38,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
@@ -52,7 +56,7 @@ import com.rafael.tictactoe.game.domain.util.PlayersImagesSetter
 import com.rafael.tictactoe.game.domain.util.RandomCardSorter
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
- 
+
 @Composable
 fun GetPlayerPrefsDialog() {
     val viewModel = hiltViewModel<GameViewModel>()
@@ -72,6 +76,8 @@ fun GetPlayerPrefsDialog() {
     val bottomPadding = if (isKeyboardOpen) 160.dp else 0.dp
     val textField1State = if (isCPUMode) { if (isCPUPlayer1) true else false } else {false}
     val textField2State = if (isCPUMode) { if (isCPUPlayer1) false else true } else {false}
+    val colorX by settingsVM.colorX.collectAsState()
+    val colorO by settingsVM.colorO.collectAsState()
     
     Surface(
         color = Color.Black.copy(alpha = 0.3f),
@@ -175,13 +181,41 @@ fun GetPlayerPrefsDialog() {
                         .fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Image(
-                        contentDescription = "Player 1 Image",
-                        painter = painterResource(if (isXFor1) R.drawable.x_image else R.drawable.circle_image),
+                    Box(
                         modifier = Modifier
                             .width(120.dp)
-                            .height(60.dp)
-                    )
+                            .height(60.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Canvas(
+                            modifier = Modifier
+                                .fillMaxHeight()
+                                .padding(top = 15.dp)
+                                .align(Alignment.Center)
+                        ) {
+                            if (isXFor1) {
+                                drawLine(
+                                    strokeWidth = 5.dp.toPx(),
+                                    start = Offset(x = 0f, y = 0f),
+                                    end = Offset(x = 28.dp.toPx(), y = 28.dp.toPx()),
+                                    color = colorX
+                                )
+                                drawLine(
+                                    strokeWidth = 5.dp.toPx(),
+                                    start = Offset(x = 28.dp.toPx(), y = 0f),
+                                    end = Offset(x = 0.dp.toPx(), y = 28.dp.toPx()),
+                                    color = colorX
+                                )
+                            } else {
+                                drawCircle(
+                                    center = Offset(15.dp.toPx(), 15.dp.toPx()),
+                                    radius = 15.dp.toPx(),
+                                    style = Stroke(width = 5.dp.toPx()),
+                                    color = colorO
+                                )
+                            }
+                        }
+                    }
                     Card(
                         shape = MaterialTheme.shapes.large,
                         modifier = Modifier
@@ -199,13 +233,41 @@ fun GetPlayerPrefsDialog() {
                             painter = painterResource(R.drawable.switch_icon)
                         )
                     }
-                    Image(
-                        contentDescription = "Second Player Image",
-                        painter = painterResource(if (isXFor1) R.drawable.circle_image else R.drawable.x_image),
+                    Box(
                         modifier = Modifier
                             .width(120.dp)
-                            .height(60.dp)
-                    )
+                            .height(60.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Canvas(
+                            modifier = Modifier
+                                .fillMaxHeight()
+                                .padding(end = 55.dp, top = 15.dp)
+                                .align(Alignment.Center)
+                        ) {
+                            if (isXFor1) {
+                                drawCircle(
+                                    center = Offset(15.dp.toPx(), 15.dp.toPx()),
+                                    radius = 15.dp.toPx(),
+                                    style = Stroke(width = 5.dp.toPx()),
+                                    color = colorO
+                                )
+                            } else {
+                                drawLine(
+                                    strokeWidth = 5.dp.toPx(),
+                                    start = Offset(x = 0f, y = 0f),
+                                    end = Offset(x = 28.dp.toPx(), y = 28.dp.toPx()),
+                                    color = colorX
+                                )
+                                drawLine(
+                                    strokeWidth = 5.dp.toPx(),
+                                    start = Offset(x = 28.dp.toPx(), y = 0f),
+                                    end = Offset(x = 0.dp.toPx(), y = 28.dp.toPx()),
+                                    color = colorX
+                                )
+                            }
+                        }
+                    }
                 }
 
                 //Play button, used to start game

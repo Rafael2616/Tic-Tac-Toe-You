@@ -43,8 +43,8 @@
     <string name="leave_game_description">This will reset all progress</string>
     <string name="leave">Leave</string>
     <string name="stay">Stay</string>
-    <string name="color_o">Color of X</string>
-    <string name="color_x">Color of O</string>
+    <string name="color_o">Color of O</string>
+    <string name="color_x">Color of X</string>
 
     <string name="cpu">CPU</string>
 
