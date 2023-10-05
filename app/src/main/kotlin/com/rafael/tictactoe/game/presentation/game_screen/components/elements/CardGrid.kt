@@ -78,7 +78,6 @@ fun CardGrid() {
                             Canvas(
                                  modifier = Modifier
                                      .fillMaxSize()
-                                     //.padding(27.dp)
                                      .align(Alignment.Center)
                             ) {
                                 drawXorO(

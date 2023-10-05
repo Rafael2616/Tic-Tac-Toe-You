@@ -47,3 +47,13 @@ fun DrawScope.drawXinCounter(colorX: Color) = drawXPreview(
     end2 = Offset(x = 27.dp.toPx(), y = 16.dp.toPx()),
     colorX = colorX
 )
+
+//X Image adjusted for GetPlayersPrefsDialog
+fun DrawScope.drawXinDialog(colorX: Color) = drawXPreview(
+    strokeWidth = 5.dp,
+    start1 = Offset(x = 60.dp.toPx(), y = 15.dp.toPx()),
+    end1 = Offset(x = 88.dp.toPx(), y = 43.dp.toPx()),
+    start2 = Offset(x = 88.dp.toPx(), y = 15.dp.toPx()),
+    end2 = Offset(x = 60.dp.toPx(), y = 43.dp.toPx()),
+    colorX = colorX
+)

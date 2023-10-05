@@ -248,7 +248,7 @@ class GameViewModel @Inject constructor(
     fun showExitGameDialog(show: Boolean) {
         _showExitGameDialog.value = show
     }
-    
+
     fun reset() {
         val allFalse = List(3){List<Boolean>(3) { false }}
         resetVictoryCounter()

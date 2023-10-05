@@ -16,7 +16,7 @@ import com.rafael.tictactoe.game.presentation.game_screen.components.CardGrid
 import com.rafael.tictactoe.game.presentation.game_screen.components.ExitGameDialog
 import com.rafael.tictactoe.game.presentation.game_screen.components.ExpandButton
 import com.rafael.tictactoe.game.presentation.game_screen.components.GameStateToast
-import com.rafael.tictactoe.game.presentation.game_screen.components.GetPlayerPrefsDialog
+import com.rafael.tictactoe.game.presentation.game_screen.components.GetPlayersPrefsDialog
 import com.rafael.tictactoe.game.presentation.game_screen.components.PlayAgainButton
 import com.rafael.tictactoe.game.presentation.game_screen.components.PlayersNamesLayout
 import com.rafael.tictactoe.game.presentation.game_screen.components.RestartButton
@@ -30,6 +30,8 @@ import com.rafael.tictactoe.game.domain.util.GotOldChecker
 import com.rafael.tictactoe.game.domain.util.RestartButtonLogic
 import com.rafael.tictactoe.game.domain.util.ToastNameHandler
 import com.rafael.tictactoe.game.domain.util.WinnerChecker
+import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.settings.presentation.settings_screen.components.LineColorSelectorDialog
 
 @Composable
 fun GameScreen(
@@ -38,23 +40,18 @@ fun GameScreen(
     isCPUMode: Boolean
 ) {
     val viewModel = hiltViewModel<GameViewModel>()
+    val settingsVM = hiltViewModel<SettingsViewModel>()
     val play by viewModel.play.collectAsState()
     val isExpandButtonShown by viewModel.isExpandButtonShown.collectAsState()
     val showRestartButton by viewModel.showRestartButton.collectAsState()
     val winner by viewModel.winner.collectAsState()
     val isGameFinished by viewModel.isGameFinished.collectAsState()
     val showExitGameDialog by viewModel.showExitGameDialog.collectAsState()
+    val showLineColorSelectorDialog by settingsVM.showLineColorSelectorDialog.collectAsState()
     val playerName = gameUtil.playerName
     val context = LocalContext.current
     val update by rememberSaveable { mutableStateOf(true) }
 
-    DisposableEffect(key1 = "update") {
-        if (update) {
-            viewModel.updateIsCPUMode(isCPUMode)
-        }
-        onDispose{}
-    }
-    
 	//Handle when each UI component function will be called
 
     //When GameScreen starts
@@ -66,7 +63,7 @@ fun GameScreen(
     ToastNameHandler()
 
     AnimatedVisibility(!play) {
-		GetPlayerPrefsDialog()
+		GetPlayersPrefsDialog()
         playerName.firstPlayerName()
         playerName.secondPlayerName()
     }
@@ -89,17 +86,28 @@ fun GameScreen(
         WinnerLine()
     }
 
+    AnimatedVisibility(showLineColorSelectorDialog) {
+        LineColorSelectorDialog()
+    }
+
     AnimatedVisibility(showExitGameDialog) {
         ExitGameDialog(navController)
     }
-    
+
     //Handle when some business logic will be called
     if (play) {
         WinnerChecker(viewModel, context)
         GotOldChecker(viewModel, context)
     	RestartButtonLogic(viewModel)
     }
-    
+
+    DisposableEffect(key1 = "update") {
+        if (update) {
+            viewModel.updateIsCPUMode(isCPUMode)
+        }
+        onDispose{}
+    }
+
     BackHandler {
         viewModel.showExitGameDialog(!showExitGameDialog)  
     }

@@ -10,13 +10,13 @@ import androidx.compose.ui.unit.Dp
 fun DrawScope.drawOPreview(
     center: Offset,
     radius: Dp,
-    stroke: Stroke,
+    style: Stroke,
     colorO: Color
 ) {
     drawCircle(
         center = center,
         radius = radius.toPx(),
-        style = stroke,
+        style = style,
         color = colorO
     )
 }
@@ -25,7 +25,7 @@ fun DrawScope.drawOPreview(
 fun DrawScope.drawOinToast(colorO: Color) = drawOPreview(
     center = Offset(8.dp.toPx(), 8.dp.toPx()),
     radius = 8.dp,
-    stroke = Stroke(width = 3.dp.toPx()),
+    style = Stroke(width = 3.dp.toPx()),
     colorO = colorO
 )
 
@@ -33,6 +33,14 @@ fun DrawScope.drawOinToast(colorO: Color) = drawOPreview(
 fun DrawScope.drawOinCounter(colorO: Color) = drawOPreview(
     center = Offset(33.dp.toPx(), 10.dp.toPx()),
     radius = 7.dp,
-    stroke = Stroke(width = 3.dp.toPx()),
+    style = Stroke(width = 3.dp.toPx()),
+    colorO = colorO
+)
+
+//O Image adjusted for GetPlayersPrefsDialog
+fun DrawScope.drawOinDialog(colorO: Color) = drawOPreview(
+    center = Offset(75.dp.toPx(), 30.dp.toPx()),
+    radius = 15.dp,
+    style = Stroke(width = 5.dp.toPx()),
     colorO = colorO
 )

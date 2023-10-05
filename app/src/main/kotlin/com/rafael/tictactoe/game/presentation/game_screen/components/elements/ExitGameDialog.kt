@@ -111,6 +111,7 @@ fun ExitGameDialog(navController: NavController) {
                             if (!isExitClicked) {
                                 isExitClicked = true
                                 settingsVM.execUIClickSound()
+                                settingsVM.showLineColorSelectorDialog(false)
                                 navController.popBackStack()
                                 viewModel.reset()
                             }
