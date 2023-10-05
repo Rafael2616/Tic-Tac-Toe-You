@@ -10,14 +10,14 @@ fun DrawScope.drawX (
     color: Color
 ) {
     drawLine(
-        start = Offset(0f, 0f),
-        end = Offset(60.dp.toPx(), 60.dp.toPx()),
+        start = Offset(26.dp.toPx(),26.dp.toPx()),
+        end = Offset(90.dp.toPx(), 90.dp.toPx()),
         strokeWidth = 15.dp.toPx(),
         color = color
     )
     drawLine(
-        start = Offset(0f, 60.dp.toPx()),
-        end = Offset(60.dp.toPx(), 0f),
+        start = Offset(26.dp.toPx(), 90.dp.toPx()),
+        end = Offset(90.dp.toPx(), 26.dp.toPx()),
         strokeWidth = 15.dp.toPx(),
         color = color
     )

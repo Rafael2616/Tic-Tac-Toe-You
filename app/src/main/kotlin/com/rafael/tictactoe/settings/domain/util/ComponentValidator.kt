@@ -6,16 +6,10 @@ import android.os.Build.VERSION_CODES
 class ComponentValidator {
 
     fun validateImage(groupType: GroupType, index: Int): Boolean {
-        if (groupType != GroupType.CUSTOMIZATION) {
-            return true
-        }
-        if (groupType == GroupType.CUSTOMIZATION && index == 0) {
+        if (groupType == GroupType.CUSTOMIZATION) {
             return false
         }
-        if (groupType == GroupType.CUSTOMIZATION && index != 0) {
-            return true
-        }
-        return false
+        return true
     }
     
     fun validateBoxWithLinePreview(groupType: GroupType, index: Int): Boolean {
@@ -51,7 +45,7 @@ class ComponentValidator {
     }
     
     fun validateCanvas(groupType: GroupType, index: Int): Boolean {
-        if (groupType == GroupType.CUSTOMIZATION && index == 1 || index == 2) {
+        if (groupType == GroupType.CUSTOMIZATION && ( index == 1 || index == 2)) {
             return true
         }
         return false

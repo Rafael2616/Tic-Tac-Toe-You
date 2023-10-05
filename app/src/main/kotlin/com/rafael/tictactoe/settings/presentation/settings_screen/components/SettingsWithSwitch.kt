@@ -105,8 +105,7 @@ fun SettingsWithSwitch(
                         Image(
                             contentDescription = "Setting Image",
                             modifier = Modifier
-                                .height(55.dp)
-                                .width(55.dp),
+                                .size(55.dp),
                             painter = SettingsImageHandler(index, groupType)
                         )
                         Text(

@@ -28,3 +28,11 @@ fun DrawScope.drawOinToast(colorO: Color) = drawOPreview(
     stroke = Stroke(width = 3.dp.toPx()),
     colorO = colorO
 )
+
+//O Image adjusted for VictoryCounter
+fun DrawScope.drawOinCounter(colorO: Color) = drawOPreview(
+    center = Offset(33.dp.toPx(), 10.dp.toPx()),
+    radius = 7.dp,
+    stroke = Stroke(width = 3.dp.toPx()),
+    colorO = colorO
+)

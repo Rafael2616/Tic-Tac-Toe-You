@@ -131,46 +131,38 @@ fun SettingsWithIcon(
                                 .background(winnerLineColor)
                         )
                     }
-                   if (componentValidator.validateCanvas(groupType, index)) {
-                       Box(
-                           modifier = Modifier
-                               .size(65.dp),
-                           contentAlignment = Alignment.Center
-                       ) {
-                           Canvas(
+                    if (componentValidator.validateCanvas(groupType, index)) {
+                        Canvas(
                             modifier = Modifier
-                                 .padding(top = 22.dp)
-                                 .fillMaxSize()
-                                 .align(Alignment.CenterStart)
-                            ) {
-                                when (index) {
-                                    1 -> drawCircle(
-                                        center = Offset(10.dp.toPx(), 10.dp.toPx()),
+                                .size(55.dp)
+                        ) {
+                            when (index) {
+                                1 -> drawCircle(
+                                        center = Offset(28.dp.toPx(), 28.dp.toPx()),
                                         radius = 15.dp.toPx(),
                                         style = Stroke(width = 5.dp.toPx()),
                                         color = colorO
+                                )
+                                2 -> {
+                                    drawLine(
+                                        strokeWidth = 5.dp.toPx(),
+                                        start = Offset(x = 15.dp.toPx(), y = 15.dp.toPx()),
+                                        end = Offset(x = 40.dp.toPx(), y = 40.dp.toPx()),
+                                        color = colorX
                                     )
-                                    2 -> {
-                                        drawLine(
-                                            strokeWidth = 5.dp.toPx(),
-                                            start = Offset(x = 0f, y = 0f),
-                                            end = Offset(x = 25.dp.toPx(), y = 25.dp.toPx()),
-                                            color = colorX
-                                        )
-                                        drawLine(
-                                            strokeWidth = 5.dp.toPx(),
-                                            start = Offset(x = 25.dp.toPx(), y = 0f),
-                                            end = Offset(x = 0f, y = 25.dp.toPx()),
-                                            color = colorX
-                                        )
-                                    }
+                                    drawLine(
+                                        strokeWidth = 5.dp.toPx(),
+                                        start = Offset(x = 40.dp.toPx(), y = 15.dp.toPx()),
+                                        end = Offset(x = 15.dp.toPx(), y = 40.dp.toPx()),
+                                        color = colorX
+                                    )
                                 }
                             }
                         }   
                     }
                     Column(
                         modifier = Modifier
-                            .width(200.dp)
+                            .wrapContentSize()
                             .animateContentSize(),
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
