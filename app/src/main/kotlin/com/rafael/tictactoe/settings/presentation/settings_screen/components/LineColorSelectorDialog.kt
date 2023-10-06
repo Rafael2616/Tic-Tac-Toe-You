@@ -46,7 +46,7 @@ fun LineColorSelectorDialog() {
     var optionsSize = listOf(0,1,2,3,4,5,6,7)
     val type by settingsVM.customizationType.collectAsState()
     val selectedWinnerLineColor by settingsVM.selectedWinnerLineColor.collectAsState()
-    val selectedColorO by settingsVM.selectedColorO.collectAsState()
+    val selectedColorCircle by settingsVM.selectedColorCircle.collectAsState()
     val selectedColorX by settingsVM.selectedColorX.collectAsState()
     
     Surface(
@@ -89,8 +89,8 @@ fun LineColorSelectorDialog() {
                             .clickable(onClick = {
                                 when (type) {
                                     Customization.WINNERLINECOLOR -> settingsVM.updateSelectedWinnerLineColor(option)
-                                    Customization.OCOLOR ->  settingsVM.updateSelectedColorO(option)
-                                    Customization.XCOLOR ->  settingsVM.updateSelectedColorX(option)
+                                    Customization.COLORCIRCLE ->  settingsVM.updateSelectedColorCircle(option)
+                                    Customization.COLORX ->  settingsVM.updateSelectedColorX(option)
                                 }
                                 settingsVM.execUIClickSound()
                                 lineColorSelectionUseCase(
@@ -112,14 +112,14 @@ fun LineColorSelectorDialog() {
                                     selected =
                                         when (type) {
                                             Customization.WINNERLINECOLOR -> option == selectedWinnerLineColor
-                                            Customization.OCOLOR -> option == selectedColorO
-                                            Customization.XCOLOR -> option == selectedColorX
+                                            Customization.COLORCIRCLE -> option == selectedColorCircle
+                                            Customization.COLORX -> option == selectedColorX
                                         },
                                     onClick = {
                                         when (type) {
                                             Customization.WINNERLINECOLOR -> settingsVM.updateSelectedWinnerLineColor(option)
-                                            Customization.OCOLOR ->  settingsVM.updateSelectedColorO(option)
-                                            Customization.XCOLOR ->  settingsVM.updateSelectedColorX(option)
+                                            Customization.COLORCIRCLE ->  settingsVM.updateSelectedColorCircle(option)
+                                            Customization.COLORX ->  settingsVM.updateSelectedColorX(option)
                                         }
                                         settingsVM.execUIClickSound()
                                         lineColorSelectionUseCase(

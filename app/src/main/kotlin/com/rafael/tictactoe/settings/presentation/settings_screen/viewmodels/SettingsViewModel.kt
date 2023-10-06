@@ -41,9 +41,9 @@ class SettingsViewModel @Inject constructor(
     private var _selectedWinnerLineColor = MutableStateFlow(2)
     private var _colorX = MutableStateFlow(Color.Red)
     private var _selectedColorX = MutableStateFlow(1)
-    private var _colorO = MutableStateFlow(Color.Green)
-    private var _selectedColorO = MutableStateFlow(3)
-    private var _customizationType = MutableStateFlow(Customization.OCOLOR)
+    private var _colorCircle = MutableStateFlow(Color.Green)
+    private var _selectedColorCircle = MutableStateFlow(3)
+    private var _customizationType = MutableStateFlow(Customization.COLORX)
     private var _isBMPlaying = MutableStateFlow(false)
 
 	//Variables that have same values of private vars above, but cant be modified outside this class
@@ -58,8 +58,8 @@ class SettingsViewModel @Inject constructor(
     val selectedWinnerLineColor: StateFlow<Int> = _selectedWinnerLineColor
     val colorX: StateFlow<Color> = _colorX
     val selectedColorX: StateFlow<Int> = _selectedColorX
-    val colorO: StateFlow<Color> = _colorO
-    val selectedColorO: StateFlow<Int> = _selectedColorO
+    val colorCircle: StateFlow<Color> = _colorCircle
+    val selectedColorCircle: StateFlow<Int> = _selectedColorCircle
     val isBMPlaying: StateFlow<Boolean> = _isBMPlaying
     val customizationType: StateFlow<Customization> = _customizationType
 
@@ -126,7 +126,7 @@ class SettingsViewModel @Inject constructor(
         _isAboutShown.value = newValue
     }
     
-    fun showLineColorSelectorDialog(newValue: Boolean, newType: Customization  = Customization.OCOLOR) {
+    fun showLineColorSelectorDialog(newValue: Boolean, newType: Customization  = Customization.COLORX) {
         _showLineColorSelectorDialog.value = newValue
         _customizationType.value = newType
     }
@@ -147,12 +147,12 @@ class SettingsViewModel @Inject constructor(
         _selectedColorX.value = newValue
     }
 
-    fun setColorO(newValue: Color) {
-        _colorO.value = newValue
+    fun setColorCircle(newValue: Color) {
+        _colorCircle.value = newValue
     }
 
-    fun updateSelectedColorO(newValue: Int) {
-        _selectedColorO.value = newValue
+    fun updateSelectedColorCircle(newValue: Int) {
+        _selectedColorCircle.value = newValue
     }
 
     fun execUIClickSound() {

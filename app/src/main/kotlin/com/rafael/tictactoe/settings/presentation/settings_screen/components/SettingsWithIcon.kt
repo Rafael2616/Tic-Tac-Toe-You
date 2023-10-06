@@ -63,7 +63,7 @@ fun SettingsWithIcon(
     val viewModel = hiltViewModel<SettingsViewModel>()
     val isAboutShown by viewModel.isAboutShown.collectAsState()
     val winnerLineColor by viewModel.winnerLineColor.collectAsState()
-    val colorO by viewModel.colorO.collectAsState()
+    val colorCircle by viewModel.colorCircle.collectAsState()
     val colorX by viewModel.colorX.collectAsState()
     val componentValidator = ComponentValidator()
 
@@ -140,7 +140,7 @@ fun SettingsWithIcon(
                                         center = Offset(28.dp.toPx(), 28.dp.toPx()),
                                         radius = 15.dp.toPx(),
                                         style = Stroke(width = 5.dp.toPx()),
-                                        color = colorO
+                                        color = colorCircle
                                 )
                                 2 -> {
                                     drawLine(

@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.util.CardGridClickHandler
-import com.rafael.tictactoe.game.domain.util.drawXorO
+import com.rafael.tictactoe.game.domain.util.drawXorCircle
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import kotlinx.coroutines.launch
@@ -80,7 +80,7 @@ fun CardGrid() {
                                      .fillMaxSize()
                                      .align(Alignment.Center)
                             ) {
-                                drawXorO(
+                                drawXorCircle(
                                     rowIndex,
                                     cardIndex,
                                     isCardClicked,

@@ -38,23 +38,23 @@ fun lineColorSelectionUseCase(
         }
     }
 
-    fun setColorO(option: Int) {
+    fun setColorCircle(option: Int) {
         when (option) {
-            0 -> settingsVM.setColorO(Color.Blue)
-            1 -> settingsVM.setColorO(Color.Red)
-            2 -> settingsVM.setColorO(Color.Yellow)
-            3 -> settingsVM.setColorO(Color.Green)
-            4 -> settingsVM.setColorO(Color(0xFF6400EE))
-            5 -> settingsVM.setColorO(Color.Magenta)
-            6 -> settingsVM.setColorO(Color.White)
-            7 -> settingsVM.setColorO(Color.Cyan)
-            else -> settingsVM.setColorO(Color.Transparent)
+            0 -> settingsVM.setColorCircle(Color.Blue)
+            1 -> settingsVM.setColorCircle(Color.Red)
+            2 -> settingsVM.setColorCircle(Color.Yellow)
+            3 -> settingsVM.setColorCircle(Color.Green)
+            4 -> settingsVM.setColorCircle(Color(0xFF6400EE))
+            5 -> settingsVM.setColorCircle(Color.Magenta)
+            6 -> settingsVM.setColorCircle(Color.White)
+            7 -> settingsVM.setColorCircle(Color.Cyan)
+            else -> settingsVM.setColorCircle(Color.Transparent)
         }
     }
 
     when (customization) {
         Customization.WINNERLINECOLOR -> setWinnerLineColor(option)
-        Customization.XCOLOR -> setColorX(option)
-        Customization.OCOLOR -> setColorO(option)
+        Customization.COLORX -> setColorX(option)
+        Customization.COLORCIRCLE -> setColorCircle(option)
     }
 }

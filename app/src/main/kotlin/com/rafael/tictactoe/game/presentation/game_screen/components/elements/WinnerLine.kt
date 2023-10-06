@@ -35,8 +35,8 @@ fun WinnerLine() {
         ) {
             if (winningPositionsIndices.contains(0)) {    
                 drawWinnerLine(
-                    start = Offset(x = 2.dp.toPx(), y = size.height - 330.dp.toPx()),
-                    end = Offset(x = size.width - 2.dp.toPx(), y = size.height - 330.dp.toPx()),
+                    start = Offset(x = 2.dp.toPx(), y = size.height - 328.dp.toPx()),
+                    end = Offset(x = size.width - 2.dp.toPx(), y = size.height - 328.dp.toPx()),
                     color = winnerLineColor
                 )
             }

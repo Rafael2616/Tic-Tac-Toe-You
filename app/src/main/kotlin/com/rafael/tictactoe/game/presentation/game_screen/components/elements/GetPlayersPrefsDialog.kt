@@ -52,7 +52,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.util.PlayersImagesSetter
 import com.rafael.tictactoe.game.domain.util.RandomCardSorter
-import com.rafael.tictactoe.game.presentation.utils.draws.drawOinDialog
+import com.rafael.tictactoe.game.presentation.utils.draws.drawCircleinDialog
 import com.rafael.tictactoe.game.presentation.utils.draws.drawXinDialog
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import com.rafael.tictactoe.settings.domain.util.Customization
@@ -78,9 +78,9 @@ fun GetPlayersPrefsDialog() {
     val textField1State = if (isCPUMode) { if (isCPUPlayer1) true else false } else {false}
     val textField2State = if (isCPUMode) { if (isCPUPlayer1) false else true } else {false}
     val colorX by settingsVM.colorX.collectAsState()
-    val colorO by settingsVM.colorO.collectAsState()
-    val type1 = if (isXFor1) Customization.XCOLOR else Customization.OCOLOR
-    val type2 = if (isXFor1) Customization.OCOLOR else Customization.XCOLOR
+    val colorCircle by settingsVM.colorCircle.collectAsState()
+    val type1 = if (isXFor1) Customization.COLORX else Customization.COLORCIRCLE
+    val type2 = if (isXFor1) Customization.COLORCIRCLE else Customization.COLORX
 
     Surface(
         color = Color.Black.copy(alpha = 0.3f),
@@ -198,7 +198,7 @@ fun GetPlayersPrefsDialog() {
                         if (isXFor1) {
                             drawXinDialog(colorX)
                         } else {
-                            drawOinDialog(colorO)
+                            drawCircleinDialog(colorCircle)
                         }
                     }
                     Card(
@@ -230,7 +230,7 @@ fun GetPlayersPrefsDialog() {
                         .align(Alignment.CenterVertically)
                     ) {
                         if (isXFor1) {
-                            drawOinDialog(colorO)
+                            drawCircleinDialog(colorCircle)
                         } else {
                             drawXinDialog(colorX)
                         }

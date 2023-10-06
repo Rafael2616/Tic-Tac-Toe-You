@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
-import com.rafael.tictactoe.game.presentation.utils.draws.drawOinCounter
+import com.rafael.tictactoe.game.presentation.utils.draws.drawCircleinCounter
 import com.rafael.tictactoe.game.presentation.utils.draws.drawXinCounter
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
@@ -37,7 +37,7 @@ fun VictoryCounter() {
     val player2Wins by viewModel.player2Wins.collectAsState()
     val isXFor1 by viewModel.isXFor1.collectAsState()
     val colorX by settingsVM.colorX.collectAsState()
-    val colorO by settingsVM.colorO.collectAsState()
+    val colorCircle by settingsVM.colorCircle.collectAsState()
 
     Box(
         modifier = Modifier
@@ -77,7 +77,7 @@ fun VictoryCounter() {
                         if (isXFor1) {
                             drawXinCounter(colorX)
                         } else {
-                            drawOinCounter(colorO)
+                            drawCircleinCounter(colorCircle)
                         }
                     }
                 }
@@ -104,7 +104,7 @@ fun VictoryCounter() {
                             .align(Alignment.CenterHorizontally)
                     ) {
                         if (isXFor1) {
-                            drawOinCounter(colorO)
+                            drawCircleinCounter(colorCircle)
                          } else {
                             drawXinCounter(colorX)
                         }
