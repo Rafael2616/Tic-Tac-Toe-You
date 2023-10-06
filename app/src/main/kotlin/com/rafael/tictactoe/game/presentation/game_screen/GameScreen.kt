@@ -30,8 +30,8 @@ import com.rafael.tictactoe.game.domain.util.GotOldChecker
 import com.rafael.tictactoe.game.domain.util.RestartButtonLogic
 import com.rafael.tictactoe.game.domain.util.ToastNameHandler
 import com.rafael.tictactoe.game.domain.util.WinnerChecker
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import com.rafael.tictactoe.settings.presentation.settings_screen.components.LineColorSelectorDialog
+import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
 fun GameScreen(

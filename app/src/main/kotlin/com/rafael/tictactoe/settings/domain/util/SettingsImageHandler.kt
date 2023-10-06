@@ -36,23 +36,9 @@ fun SettingsImageHandler(index: Int, groupType: GroupType): Painter {
         } 
     }
 
-    @Composable
-    fun CustomizationCardImageHandler(index: Int): Painter {
-        return painterResource(R.drawable.transparent_image)
-    }
-
-    @Composable
-    fun OtherCardImageHandler(index: Int): Painter {
-        return when (index) {
-            0 -> painterResource(R.drawable.about_icon)
-            else -> painterResource(R.drawable.transparent_image)
-        }
-    }
-
     return when (groupType) {
         GroupType.THEME -> ThemeCardImageHandler(index)
         GroupType.SOUND -> SoundCardImageHandler(index)
-        GroupType.CUSTOMIZATION -> CustomizationCardImageHandler(index)
-        GroupType.OTHER -> OtherCardImageHandler(index)
+        else -> painterResource(R.drawable.transparent_image)
     }
 }

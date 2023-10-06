@@ -21,6 +21,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -31,9 +33,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.res.painterResource
@@ -110,24 +110,13 @@ fun SettingsWithIcon(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    if (componentValidator.validateImage(groupType, index)) {
-                        Image(
-                            contentDescription = "Setting Image",
-                            modifier = Modifier
-                                .size(55.dp),
-                            painter = SettingsImageHandler(index, groupType)
-                        )
-                    }
-                    if (componentValidator.validateBoxWithLinePreview(groupType, index)) {
-                        Spacer(modifier = Modifier.width(6.dp))
-                        Box(
-                            modifier = Modifier
-                                .height(50.dp)
-                                .width(15.dp)
-                                .padding(4.dp)
-                                .rotate(45f)
-                                .clip(RectangleShape)
-                                .background(winnerLineColor)
+                    if (componentValidator.validateFirstIcon(groupType, index)) {
+                       Icon(
+                            imageVector = Icons.Outlined.Info,
+                            contentDescription = "Icon",
+       		        	 modifier = Modifier
+                                .size(45.dp)
+                                .padding(start = 8.dp)
                         )
                     }
                     if (componentValidator.validateCanvas(groupType, index)) {
@@ -136,6 +125,12 @@ fun SettingsWithIcon(
                                 .size(55.dp)
                         ) {
                             when (index) {
+                                0 -> drawLine(
+                                        strokeWidth = 5.dp.toPx(),
+                                        start = Offset(x = 40.dp.toPx(), y = 15.dp.toPx()),
+                                        end = Offset(x = 15.dp.toPx(), y = 40.dp.toPx()),
+                                        color = winnerLineColor
+                                )
                                 1 -> drawCircle(
                                         center = Offset(28.dp.toPx(), 28.dp.toPx()),
                                         radius = 15.dp.toPx(),
@@ -170,7 +165,7 @@ fun SettingsWithIcon(
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onSurface,
                             text = SettingsTextHandler(index, groupType),
-                            modifier = Modifier.width(240.dp),
+                            modifier = Modifier.width(220.dp),
                             textAlign = TextAlign.Center
                         ) 
                         if (componentValidator.validateSubText(groupType, index, isAboutShown)) {
@@ -178,7 +173,7 @@ fun SettingsWithIcon(
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onSurface,
                                 text = stringResource(R.string.app_version) +" "+ getVersionName() + "(" + getVersionCode() + ")",
-                                modifier = Modifier.width(240.dp).padding(top = 8.dp),
+                                modifier = Modifier.width(220.dp).padding(top = 8.dp),
                                 textAlign = TextAlign.Center
                             )
                         }
@@ -186,7 +181,7 @@ fun SettingsWithIcon(
                     Icon(
                         imageVector = SettingsIconHandler(index, groupType),
                         contentDescription = "Icon",
-       		    	 modifier = Modifier.size(35.dp)
+       		    	 modifier = Modifier.size(40.dp)
                     )
                 }
             }
