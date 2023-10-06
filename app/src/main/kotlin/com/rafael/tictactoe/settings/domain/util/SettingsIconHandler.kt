@@ -1,7 +1,7 @@
 package com.rafael.tictactoe.settings.domain.util
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.ExpandLess
@@ -23,9 +23,9 @@ fun SettingsIconHandler(index: Int, groupType: GroupType): ImageVector {
     @Composable
     fun CustomizationIconHandler(index: Int): ImageVector {
         return when (index) {
-            0 -> Icons.AutoMirrored.Filled.ArrowForward
-            1 -> Icons.AutoMirrored.Filled.ArrowForward
-            2 -> Icons.AutoMirrored.Filled.ArrowForward
+            0 -> Icons.Filled.ArrowForward
+            1 -> Icons.Filled.ArrowForward
+            2 -> Icons.Filled.ArrowForward
             else -> Icons.Filled.Close
         }
     }
