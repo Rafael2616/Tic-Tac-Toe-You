@@ -5,7 +5,7 @@ import android.os.Build.VERSION_CODES
 
 class ComponentValidator {
 
-    fun validateFirstIcon(groupType: GroupType, index: Int): Boolean {
+    fun validateFirstIcon(groupType: GroupType): Boolean {
         if (groupType == GroupType.CUSTOMIZATION) {
             return false
         }
@@ -37,7 +37,7 @@ class ComponentValidator {
         return false
     }
     
-    fun validateCanvas(groupType: GroupType, index: Int): Boolean {
+    fun validateCanvas(groupType: GroupType): Boolean {
         if (groupType == GroupType.CUSTOMIZATION) {
             return true
         }
