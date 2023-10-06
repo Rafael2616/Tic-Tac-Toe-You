@@ -69,21 +69,25 @@ fun BaseButton(
                         onClickFun()
                     })
             ) {
-                if (btnImage != null) {
-                    Image(
-                        contentDescription = description,
-                        modifier = Modifier.fillMaxSize(),
-                        painter = painterResource(btnImage)
-                    )
-                }
-                if (btnIcon != null) {
-                   Icon(
-                        imageVector = btnIcon,
-                        contentDescription = "Icon",
-       		    	 modifier = Modifier
-                            .size(45.dp)
-                            .align(Alignment.CenterHorizontally)
-                    )
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    if (btnImage != null) {
+                        Image(
+                            contentDescription = description,
+                            modifier = Modifier.fillMaxSize(),
+                            painter = painterResource(btnImage)
+                        )
+                    }
+                    if (btnIcon != null) {
+                        Icon(
+                            imageVector = btnIcon,
+                            contentDescription = "Icon",
+       		        	 modifier = Modifier
+                                .size(40.dp)
+                        )
+                    }
                 }
             }
             if (btnText != null) {
