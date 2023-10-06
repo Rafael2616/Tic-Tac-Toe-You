@@ -36,7 +36,7 @@ fun SettingsTextHandler(index: Int, groupType: GroupType): String {
     fun customizationCardTextHandler(index: Int): String {
         return when (index) {
             0 -> stringResource(R.string.winner_line_color)
-            1 -> stringResource(R.string.color_o)
+            1 -> stringResource(R.string.color_circle)
             2 -> stringResource(R.string.color_x)
             else -> stringResource(R.string.index_error)
         }

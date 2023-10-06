@@ -25,7 +25,7 @@
     <string name="about_app">Sobre el App</string>
     <string name="system_theme">Sigue el Sistema</string>
     <string name="vs_cpu">Contra la CPU</string>
-    <string name="winner_line_color">Color de línea ganadora</string>
+    <string name="winner_line_color">Color de línea al ganar</string>
     <string name="color_blue">Azul</string>
     <string name="color_red">Rojo</string>
     <string name="color_yellow">Amarillo</string>
@@ -44,7 +44,7 @@
     <string name="leave_game_description">Esto restablecerá todo el progreso</string>
     <string name="leave">Salir</string>
     <string name="stay">Quedarse</string>
-    <string name="color_o">Color del O</string>
+    <string name="color_circle">Color del Círculo</string>
     <string name="color_x">Color del X</string>
 
 </resources>
