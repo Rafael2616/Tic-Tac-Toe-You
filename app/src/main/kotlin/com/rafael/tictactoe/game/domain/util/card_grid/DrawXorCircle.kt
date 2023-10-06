@@ -2,7 +2,7 @@ package com.rafael.tictactoe.game.domain.util
 
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import com.rafael.tictactoe.game.presentation.utils.draws.drawX
-import com.rafael.tictactoe.game.presentation.utils.draws.drawCircle
+import com.rafael.tictactoe.game.presentation.utils.draws.drawAnCircle
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 fun DrawScope.drawXorCircle(
@@ -19,7 +19,7 @@ fun DrawScope.drawXorCircle(
     	if (card[rowIndex][cardIndex]) {
             drawX(colorX)
         } else {
-            drawCircle(colorCircle)
+            drawAnCircle(colorCircle)
         }
 	}
 }
