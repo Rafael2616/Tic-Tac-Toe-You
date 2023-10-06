@@ -9,7 +9,17 @@ class ComponentValidator {
         if (groupType == GroupType.CUSTOMIZATION) {
             return false
         }
+        if (groupType == GroupType.THEME) {
+            return false
+        }   
         return true
+    }
+
+    fun validateImage(groupType: GroupType): Boolean {
+        if (groupType == GroupType.THEME) {
+            return true
+        }
+        return false
     }
 
     fun validateSubText(groupType: GroupType, index: Int, isAboutShown: Boolean): Boolean {

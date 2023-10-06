@@ -1,6 +1,9 @@
 package com.rafael.tictactoe.game.presentation.game_screen.components
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MusicNote
+import androidx.compose.material.icons.filled.MusicOff
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -18,8 +21,7 @@ fun SoundEffectsButton() {
 
     BaseButton(
         modifier = Modifier.padding(top = 95.dp, start = 15.dp),
-        btnImage = if (isSoundEffectsOn) R.drawable.sound_effects_on_icon
-        else R.drawable.sound_effects_off_icon,
+        btnIcon = if (isSoundEffectsOn) Icons.Filled.MusicNote else Icons.Filled.MusicOff,
         btnText = R.string.active_sound,
         description = "Sound Effects Button",
         onClickFun = { 

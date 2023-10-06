@@ -14,8 +14,6 @@ fun SettingsImageHandler(index: Int, groupType: GroupType): Painter {
     val viewModel = hiltViewModel<SettingsViewModel>()
     val isDarkThemeOn by viewModel.isDarkThemeOn.collectAsState()
     val isDynamicColorsOn by viewModel.isDynamicColorsOn.collectAsState()
-    val isBackgroundMusicOn by viewModel.isBackgroundMusicOn.collectAsState()
-    val isSoundEffectsOn by viewModel.isSoundEffectsOn.collectAsState()
     
     @Composable
     fun ThemeCardImageHandler(index: Int): Painter {
@@ -26,19 +24,9 @@ fun SettingsImageHandler(index: Int, groupType: GroupType): Painter {
            else -> painterResource(R.drawable.transparent_image)
         } 
     }
-    
-    @Composable
-    fun SoundCardImageHandler(index: Int): Painter {
-        return when (index) {
-            0 -> if (isSoundEffectsOn) painterResource(R.drawable.sound_effects_on_icon) else painterResource(R.drawable.sound_effects_off_icon)
-            1 -> if (isBackgroundMusicOn) painterResource(R.drawable.sound_on_icon) else painterResource(R.drawable.sound_off_icon)
-            else -> painterResource(R.drawable.transparent_image)
-        } 
-    }
 
     return when (groupType) {
         GroupType.THEME -> ThemeCardImageHandler(index)
-        GroupType.SOUND -> SoundCardImageHandler(index)
         else -> painterResource(R.drawable.transparent_image)
     }
 }

@@ -33,6 +33,7 @@ fun WinnerLine() {
          Canvas(
              modifier = Modifier.fillMaxWidth(),
         ) {
+            //Horizontal lines
             if (winningPositionsIndices.contains(0)) {    
                 drawWinnerLine(
                     start = Offset(x = 2.dp.toPx(), y = size.height - 328.dp.toPx()),
@@ -57,6 +58,7 @@ fun WinnerLine() {
                 )
             }
 
+            //Vertical lines
             if (winningPositionsIndices.contains(3)) {
                 drawWinnerLine(
                     start = Offset(x = size.width / 6, y = size.height),
@@ -67,8 +69,8 @@ fun WinnerLine() {
 
             if (winningPositionsIndices.contains(4)) {
                 drawWinnerLine(
-                    start = Offset(x = (size.width / 2) - 2.dp.toPx(), y = size.height),
-                    end = Offset(x = (size.width / 2) - 2.dp.toPx(), y = size.height - 395.dp.toPx()),
+                    start = Offset(x = (size.width / 2) - 1.5.dp.toPx(), y = size.height),
+                    end = Offset(x = (size.width / 2) - 1.5.dp.toPx(), y = size.height - 395.dp.toPx()),
                     color = winnerLineColor
                 )
             }
@@ -81,6 +83,7 @@ fun WinnerLine() {
                 )
             }
 
+            //Transversal lines
             if (winningPositionsIndices.contains(6)) {
                 drawWinnerLine(
                     start = Offset(x = 2.dp.toPx(),  y = size.height - 395.dp.toPx()),

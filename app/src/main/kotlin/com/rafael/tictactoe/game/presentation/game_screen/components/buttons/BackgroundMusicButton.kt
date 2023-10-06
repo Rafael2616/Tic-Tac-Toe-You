@@ -1,6 +1,9 @@
 package com.rafael.tictactoe.game.presentation.game_screen.components
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.VolumeUp
+import androidx.compose.material.icons.filled.VolumeOff
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -18,8 +21,7 @@ fun BackgroundMusicButton() {
  
     BaseButton(
         modifier = Modifier.padding(top = 165.dp, start = 15.dp),
-        btnImage = if (isBackgroundMusicOn) R.drawable.sound_on_icon
-        else  R.drawable.sound_off_icon,
+        btnIcon = if (isBackgroundMusicOn) Icons.Filled.VolumeUp else Icons.Filled.VolumeOff,
         btnText = R.string.active_music,
         description = "Background Music Button",
         onClickFun = { 

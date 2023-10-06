@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -24,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -37,8 +39,9 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.Set
 fun BaseButton(
     modifier: Modifier = Modifier,
     alignment: Alignment = Alignment.TopStart,
-    @DrawableRes btnImage: Int,
+    @DrawableRes btnImage: Int? = null,
     @StringRes btnText: Int? = null,
+    btnIcon: ImageVector? = null,
     onClickFun: () -> Unit,
     description: String = "there is no description"
 ) {
@@ -60,16 +63,28 @@ fun BaseButton(
                 modifier = Modifier
                     .size(45.dp)
                     .clip(CircleShape)
+                    .align(Alignment.CenterHorizontally)
                     .clickable(onClick = {
                         settingsVM.execUIClickSound()
                         onClickFun()
                     })
             ) {
-                Image(
-                    contentDescription = description,
-                    modifier = Modifier.fillMaxSize(),
-                    painter = painterResource(btnImage)
-                )
+                if (btnImage != null) {
+                    Image(
+                        contentDescription = description,
+                        modifier = Modifier.fillMaxSize(),
+                        painter = painterResource(btnImage)
+                    )
+                }
+                if (btnIcon != null) {
+                   Icon(
+                        imageVector = btnIcon,
+                        contentDescription = "Icon",
+       		    	 modifier = Modifier
+                            .size(45.dp)
+                            .align(Alignment.CenterHorizontally)
+                    )
+                }
             }
             if (btnText != null) {
                 Text(

@@ -41,6 +41,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.settings.domain.util.ComponentValidator
 import com.rafael.tictactoe.settings.domain.util.GroupType
+import com.rafael.tictactoe.settings.domain.util.SettingsFirstIconHandler
 import com.rafael.tictactoe.settings.domain.util.SettingsImageHandler
 import com.rafael.tictactoe.settings.domain.util.SettingsTextHandler
 import com.rafael.tictactoe.settings.domain.util.switchCheckedHandler
@@ -102,12 +103,23 @@ fun SettingsWithSwitch(
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        Image(
-                            contentDescription = "Setting Image",
-                            modifier = Modifier
-                                .size(55.dp),
-                            painter = SettingsImageHandler(index, groupType)
-                        )
+                        if (componentValidator.validateImage(groupType)) {
+                            Image(
+                                contentDescription = "Setting Image",
+                                modifier = Modifier
+                                    .size(55.dp),
+                                painter = SettingsImageHandler(index, groupType)
+                            )
+                        }
+                        if (componentValidator.validateFirstIcon(groupType)) {
+                           Icon(
+                                imageVector = SettingsFirstIconHandler(index, groupType),
+                                contentDescription = "Icon",
+       		            	 modifier = Modifier
+                                    .size(45.dp)
+                                    .padding(start = 8.dp)
+                            )
+                        }
                         Text(
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onSurface,

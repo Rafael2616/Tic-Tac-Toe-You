@@ -19,8 +19,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -46,6 +44,7 @@ import com.rafael.tictactoe.common.domain.util.getVersionName
 import com.rafael.tictactoe.settings.domain.use_cases.toggleSettingsUseCase
 import com.rafael.tictactoe.settings.domain.util.ComponentValidator
 import com.rafael.tictactoe.settings.domain.util.GroupType
+import com.rafael.tictactoe.settings.domain.util.SettingsFirstIconHandler
 import com.rafael.tictactoe.settings.domain.util.SettingsIconHandler
 import com.rafael.tictactoe.settings.domain.util.SettingsImageHandler
 import com.rafael.tictactoe.settings.domain.util.SettingsTextHandler
@@ -109,7 +108,7 @@ fun SettingsWithIcon(
                 ) {
                     if (componentValidator.validateFirstIcon(groupType)) {
                        Icon(
-                            imageVector = Icons.Outlined.Info,
+                            imageVector = SettingsFirstIconHandler(index, groupType),
                             contentDescription = "Icon",
        		        	 modifier = Modifier
                                 .size(45.dp)
