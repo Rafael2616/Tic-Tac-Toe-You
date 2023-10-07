@@ -29,7 +29,8 @@
     <string name="color_blue">Azul</string>
     <string name="color_red">Rojo</string>
     <string name="color_yellow">Amarillo</string>
-    <string name="color_green">Verde</string>
+    <string name="color_green">Verde Claro</string>
+    <string name="color_dark_green">Verde Oscuro</string>
     <string name="color_purple">Púrpura</string>
     <string name="color_pink">Rosa</string>
     <string name="color_white">Blanco</string>

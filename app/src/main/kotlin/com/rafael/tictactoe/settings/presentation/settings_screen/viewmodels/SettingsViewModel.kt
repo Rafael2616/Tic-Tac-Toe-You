@@ -42,7 +42,7 @@ class SettingsViewModel @Inject constructor(
     private var _colorX = MutableStateFlow(Color.Red)
     private var _selectedColorX = MutableStateFlow(1)
     private var _colorCircle = MutableStateFlow(Color.Green)
-    private var _selectedColorCircle = MutableStateFlow(3)
+    private var _selectedColorCircle = MutableStateFlow(4)
     private var _customizationType = MutableStateFlow(Customization.COLORX)
     private var _isBMPlaying = MutableStateFlow(false)
 

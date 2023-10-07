@@ -44,7 +44,7 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.Set
 @Composable
 fun LineColorSelectorDialog() {
     val settingsVM = hiltViewModel<SettingsViewModel>()
-    var optionsSize = listOf(0,1,2,3,4,5,6,7)
+    var optionsSize = listOf(0,1,2,3,4,5,6,7,8)
     val type by settingsVM.customizationType.collectAsState()
     val selectedWinnerLineColor by settingsVM.selectedWinnerLineColor.collectAsState()
     val selectedColorCircle by settingsVM.selectedColorCircle.collectAsState()
@@ -135,11 +135,12 @@ fun LineColorSelectorDialog() {
                                         0 -> stringResource(R.string.color_blue)
                                         1 -> stringResource(R.string.color_red)
                                         2 -> stringResource(R.string.color_yellow)
-                                        3 -> stringResource(R.string.color_green)
-                                        4 -> stringResource(R.string.color_purple)
-                                        5 -> stringResource(R.string.color_pink)
-                                        6 -> stringResource(R.string.color_white)
-                                        7 -> stringResource(R.string.color_cyan)
+                                        3 -> stringResource(R.string.color_dark_green)                                       
+                                        4 -> stringResource(R.string.color_green)
+                                        5 -> stringResource(R.string.color_purple)
+                                        6 -> stringResource(R.string.color_pink)
+                                        7 -> stringResource(R.string.color_white)
+                                        8 -> stringResource(R.string.color_cyan)
                                         else -> "undefined_color"
                                     }
                                 )
@@ -157,11 +158,12 @@ fun LineColorSelectorDialog() {
                                                     0 -> Color.Blue
                                                     1 -> Color.Red
                                                     2 -> Color.Yellow
-                                                    3 -> Color.Green
-                                                    4 -> Color(0xFF6400EE)//Purple
-                                                    5 -> Color.Magenta
-                                                    6 -> Color.White
-                                                    7 -> Color.Cyan
+                                                    3 -> Color(0xFF299961)//Dark Green
+                                                    4 -> Color.Green
+                                                    5 -> Color(0xFF6400EE)//Purple
+                                                    6 -> Color.Magenta
+                                                    7 -> Color.White
+                                                    8 -> Color.Cyan
                                                     else -> Color.Transparent
                                                 }
                                             )

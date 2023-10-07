@@ -330,7 +330,7 @@ fun GetPlayersPrefsDialog() {
                                                 else -> Icons.Filled.SentimentSatisfied
                                             },
                                             tint = when (mode) {
-                                                0 -> Color.Green//Color(0xFF299961)
+                                                0 -> Color.Green
                                                 1 -> MaterialTheme.colorScheme.error
                                                 else -> Color.Red
                                             },
