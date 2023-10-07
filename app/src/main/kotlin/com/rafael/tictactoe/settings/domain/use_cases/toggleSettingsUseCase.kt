@@ -27,9 +27,18 @@ fun toggleSettingsUseCase(
 
     fun toggleCustomizationSettings(index: Int) {
         when (index) {
-            0 -> vm.showLineColorSelectorDialog(true, Customization.WINNERLINECOLOR)
-            1 -> vm.showLineColorSelectorDialog(true, Customization.COLORCIRCLE)
-            2 -> vm.showLineColorSelectorDialog(true, Customization.COLORX)
+            0 -> {
+                vm.showLineColorSelectorDialog(true)
+                vm.setCustomizationType(Customization.WINNERLINECOLOR)
+            }
+            1 -> {
+                vm.showLineColorSelectorDialog(true)
+                vm.setCustomizationType(Customization.COLORCIRCLE)
+            }
+            2 -> {
+                vm.showLineColorSelectorDialog(true)
+                vm.setCustomizationType(Customization.COLORX)
+            }
         }   
     }
 

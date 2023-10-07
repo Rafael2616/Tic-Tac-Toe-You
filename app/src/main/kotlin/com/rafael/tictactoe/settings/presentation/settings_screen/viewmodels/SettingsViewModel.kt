@@ -125,10 +125,13 @@ class SettingsViewModel @Inject constructor(
     fun updateIsAboutShown(newValue: Boolean) {
         _isAboutShown.value = newValue
     }
-    
-    fun showLineColorSelectorDialog(newValue: Boolean, newType: Customization  = Customization.COLORX) {
-        _showLineColorSelectorDialog.value = newValue
+
+    fun setCustomizationType(newType: Customization  = Customization.COLORX) {
         _customizationType.value = newType
+    }
+    
+    fun showLineColorSelectorDialog(newValue: Boolean) {
+        _showLineColorSelectorDialog.value = newValue
     }
 
     fun setWinnerLineColor(newValue: Color) {

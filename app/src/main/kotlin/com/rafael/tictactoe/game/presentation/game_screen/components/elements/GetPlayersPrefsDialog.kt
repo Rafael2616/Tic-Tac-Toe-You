@@ -194,7 +194,8 @@ fun GetPlayersPrefsDialog() {
                         .clickable( onClick = {
                             settingsVM.execUIClickSound()
                             keyboardController?.hide()
-                            settingsVM.showLineColorSelectorDialog(true, type1)
+                            settingsVM.setCustomizationType(type1)
+                            settingsVM.showLineColorSelectorDialog(true)
                         })
                         .align(Alignment.CenterVertically)
                     ) {
@@ -229,7 +230,8 @@ fun GetPlayersPrefsDialog() {
                         .clickable( onClick = {
                             settingsVM.execUIClickSound()
                             keyboardController?.hide()
-                            settingsVM.showLineColorSelectorDialog(true, type2)
+                            settingsVM.setCustomizationType(type2)
+                            settingsVM.showLineColorSelectorDialog(true)
                         })
                         .align(Alignment.CenterVertically)
                     ) {
