@@ -252,7 +252,7 @@ fun GetPlayersPrefsDialog() {
                         viewModel.updatePlayer1Name(player1Value)
                         viewModel.updatePlayer2Name(player2Value)
                         viewModel.updateIsTimerOn(true)
-                        if (isCPUMode) && (isCPUPlayer1) {
+                        if (isCPUMode && isCPUPlayer1) {
                             viewModel.updateIsCPU(true)
                             RandomCardSorter(viewModel, context)
                         }
