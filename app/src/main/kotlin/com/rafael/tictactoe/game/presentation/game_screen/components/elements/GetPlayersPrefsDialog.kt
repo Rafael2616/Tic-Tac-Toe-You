@@ -188,16 +188,16 @@ fun GetPlayersPrefsDialog() {
                 ) {
                     Canvas(
                         modifier = Modifier
-                        .weight(1f)
-                        .width(80.dp)
-                        .height(60.dp)
-                        .clickable( onClick = {
-                            settingsVM.execUIClickSound()
-                            keyboardController?.hide()
-                            settingsVM.setCustomizationType(type1)
-                            settingsVM.showLineColorSelectorDialog(true)
-                        })
-                        .align(Alignment.CenterVertically)
+                            .weight(1f)
+                            .width(80.dp)
+                            .height(60.dp)
+                            .align(Alignment.CenterVertically)
+                            .clickable( onClick = {
+                                settingsVM.execUIClickSound()
+                                keyboardController?.hide()
+                                settingsVM.setCustomizationType(type1)
+                                settingsVM.showLineColorSelectorDialog(true)
+                           })
                     ) {
                         if (isXFor1) {
                             drawXinDialog(colorX)
@@ -224,16 +224,16 @@ fun GetPlayersPrefsDialog() {
                     }
                     Canvas(
                         modifier = Modifier
-                        .weight(1f)
-                        .width(80.dp)
-                        .height(60.dp)
-                        .clickable( onClick = {
-                            settingsVM.execUIClickSound()
-                            keyboardController?.hide()
-                            settingsVM.setCustomizationType(type2)
-                            settingsVM.showLineColorSelectorDialog(true)
-                        })
-                        .align(Alignment.CenterVertically)
+                            .weight(1f)
+                            .width(80.dp)
+                            .height(60.dp)
+                            .align(Alignment.CenterVertically)
+                            .clickable( onClick = {
+                                settingsVM.execUIClickSound()
+                                keyboardController?.hide()
+                                settingsVM.setCustomizationType(type2)
+                                settingsVM.showLineColorSelectorDialog(true)
+                            })
                     ) {
                         if (isXFor1) {
                             drawCircleinDialog(colorCircle)
@@ -252,11 +252,9 @@ fun GetPlayersPrefsDialog() {
                         viewModel.updatePlayer1Name(player1Value)
                         viewModel.updatePlayer2Name(player2Value)
                         viewModel.updateIsTimerOn(true)
-                        if (isCPUMode) {
-                            if (isCPUPlayer1) {
-                                viewModel.updateIsCPU(true)
-                                RandomCardSorter(viewModel, context)
-                            }
+                        if (isCPUMode) && (isCPUPlayer1) {
+                            viewModel.updateIsCPU(true)
+                            RandomCardSorter(viewModel, context)
                         }
                     },
                     modifier = Modifier
