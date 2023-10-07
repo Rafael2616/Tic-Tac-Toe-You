@@ -32,6 +32,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -62,7 +63,7 @@ fun LineColorSelectorDialog() {
                 shape = MaterialTheme.shapes.large,
                 border = BorderStroke(1.5.dp, Color.Gray),
                 modifier = Modifier
-                    .width(270.dp)
+                    .width(275.dp)
                     .height(325.dp)
                     .align(Alignment.Center)
             ) {
@@ -178,20 +179,15 @@ fun LineColorSelectorDialog() {
                     },
                     modifier = Modifier
                         .width(90.dp)
-                        .height(40.dp)
+                        .height(42.dp)
                         .padding(end = 12.dp, bottom  = 6.dp)
                         .align(Alignment.End),
                 ) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxHeight(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = "Ok",
-                            style = MaterialTheme.typography.bodyLarge
-                        )
-                    }
+                    Text(
+                        text = "Ok",
+                        style = MaterialTheme.typography.bodyLarge,
+                        textAlign = TextAlign.Center
+                    )
                 }
             }
         }
