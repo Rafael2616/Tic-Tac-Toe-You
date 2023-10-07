@@ -1,7 +1,8 @@
 package com.rafael.tictactoe.game.presentation.game_screen.components
 
 import android.view.ViewTreeObserver
-import androidx.core.view.ViewCompat 
+import android.widget.Toast
+import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
@@ -22,9 +23,15 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.SentimentDissatisfied
+import androidx.compose.material.icons.filled.SentimentSatisfied
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -65,24 +72,27 @@ fun GetPlayersPrefsDialog() {
     val settingsVM = hiltViewModel<SettingsViewModel>()
     val context = LocalContext.current
     val view = LocalView.current
+    val keyboardController = LocalSoftwareKeyboardController.current
+    var isKeyboardOpen by rememberSaveable {  mutableStateOf(false) }
     val isXFor1 by viewModel.isXFor1.collectAsState()
     val player1Name by viewModel.player1Name.collectAsState()
     val player2Name by viewModel.player2Name.collectAsState()
-    val maxLength = 10
     val localPlayer1 by viewModel.localPlayer1.collectAsState()
     val isCPUPlayer1 by viewModel.isCPUPlayer1.collectAsState()
-    var player1Value = if (localPlayer1) player1Name else player2Name
-    var player2Value = if (localPlayer1) player2Name else player1Name
     val isCPUMode by viewModel.isCPUMode.collectAsState()
-    var isKeyboardOpen by rememberSaveable {  mutableStateOf(false) }
-    val bottomPadding = if (isKeyboardOpen) 160.dp else 0.dp
-    val textField1State = if (isCPUMode) { if (isCPUPlayer1) true else false } else {false}
-    val textField2State = if (isCPUMode) { if (isCPUPlayer1) false else true } else {false}
     val colorX by settingsVM.colorX.collectAsState()
     val colorCircle by settingsVM.colorCircle.collectAsState()
+    val selectedDifficultyMode by viewModel.selectedDifficultyMode.collectAsState()
+    val player1Value = if (localPlayer1) player1Name else player2Name
+    val player2Value = if (localPlayer1) player2Name else player1Name
+    val textField1State = if (isCPUMode) { if (isCPUPlayer1) true else false } else {false}
+    val textField2State = if (isCPUMode) { if (isCPUPlayer1) false else true } else {false}
     val type1 = if (isXFor1) Customization.COLORX else Customization.COLORCIRCLE
     val type2 = if (isXFor1) Customization.COLORCIRCLE else Customization.COLORX
-    val keyboardController = LocalSoftwareKeyboardController.current
+    val bottomPadding = if (isKeyboardOpen) { if (isCPUMode) 190.dp else 150.dp} else {0.dp}
+    val dialogHeigth = if (isCPUMode) 285.dp else 220.dp
+    val maxLength = 10
+    val modesSize = listOf(0,1)
 
     Surface(
         color = Color.Black.copy(alpha = 0.3f),
@@ -98,8 +108,8 @@ fun GetPlayersPrefsDialog() {
                 shape = MaterialTheme.shapes.large,
                 border = BorderStroke(1.5.dp, Color.Gray),
                 modifier = Modifier
-                    .width(380.dp)
-                    .height(240.dp)
+                    .width(375.dp)
+                    .height(dialogHeigth)
                     .align(Alignment.Center)
             ) {
 
@@ -107,7 +117,7 @@ fun GetPlayersPrefsDialog() {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(12.dp),
+                        .padding(top = 8.dp, bottom = 6.dp, start = 14.dp, end = 14.dp),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     TextField(
@@ -243,6 +253,97 @@ fun GetPlayersPrefsDialog() {
                     }
                 }
 
+                //Difficulty mode selection
+                if (isCPUMode) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 2.dp, bottom = 4.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = stringResource(R.string.modes),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            textAlign = TextAlign.Center
+                        )
+                         Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(40.dp)
+                                .padding(top = 3.dp),
+                            horizontalArrangement = Arrangement.SpaceEvenly,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            modesSize.forEach { mode ->
+                                Card(
+                                    shape = MaterialTheme.shapes.medium,
+                                    border = BorderStroke(1.5.dp, Color.Gray),
+                                    colors = CardDefaults.cardColors(containerColor = Color.Transparent),
+                                    modifier = Modifier
+                                        .width(150.dp)
+                                        .height(40.dp)
+                                        .clickable(onClick = {
+                                            /*vm.updateDifficultyMode(mode)*/
+                                            when (mode) {
+                                                1 -> Toast.makeText(
+                                                    context,
+                                                    "not yet developed :(",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
+                                            }
+                                        })
+                                ) {
+                                    Row(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .height(40.dp)
+                                            .padding(end = 5.dp),
+                                        horizontalArrangement = Arrangement.SpaceBetween,
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        RadioButton(
+                                            selected = mode == selectedDifficultyMode,
+                                            onClick = {
+                                                /*vm.updateDifficultyMode(mode)*/
+                                                when (mode) {
+                                                    1 -> Toast.makeText(
+                                                        context,
+                                                        "not yet developed :(",
+                                                        Toast.LENGTH_SHORT
+                                                    ).show()
+                                                }
+                                            }
+                                        )
+                                        Text(
+                                            textAlign = TextAlign.Center,
+                                            text = when (mode) {
+                                                0 -> stringResource(R.string.mode_easy)
+                                                1 -> stringResource(R.string.mode_hard)
+                                                else -> ""
+                                            }
+                                        )
+                                        Icon(
+                                            imageVector = when (mode) {
+                                                0 -> Icons.Filled.SentimentSatisfied
+                                                1 -> Icons.Filled.SentimentDissatisfied
+                                                else -> Icons.Filled.SentimentSatisfied
+                                            },
+                                            tint = when (mode) {
+                                                0 -> Color.Green//Color(0xFF299961)
+                                                1 -> MaterialTheme.colorScheme.error
+                                                else -> Color.Red
+                                            },
+                                            contentDescription = "Icon",
+       		            	             modifier = Modifier.size(33.dp)
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
                 //Play button, used to start game
                 Button(
                     onClick = {
@@ -258,8 +359,9 @@ fun GetPlayersPrefsDialog() {
                         }
                     },
                     modifier = Modifier
-                        .width(100.dp)
+                        .width(102.dp)
                         .height(45.dp)
+                        .padding(top = 4.dp)
                         .align(Alignment.CenterHorizontally),
                 ) {
                     Text(

@@ -92,6 +92,9 @@ class GameViewModel @Inject constructor(
 	private var _winningPositionsIndices = MutableStateFlow<List<Int>>(emptyList())
 	val winningPositionsIndices: StateFlow<List<Int>> = _winningPositionsIndices
 
+    private var _selectedDifficultyMode = MutableStateFlow(0)
+    val selectedDifficultyMode: StateFlow<Int> = _selectedDifficultyMode
+
     fun updateCurrentPlayerName(newValue: String) {
         _currentPlayerName.value = newValue
     }
@@ -249,6 +252,10 @@ class GameViewModel @Inject constructor(
         _showExitGameDialog.value = show
     }
 
+    fun updateDifficultyMode(newMode: Int) {
+       _selectedDifficultyMode.value = newMode
+   }
+
     fun reset() {
         val allFalse = List(3){List<Boolean>(3) { false }}
         resetVictoryCounter()
@@ -277,5 +284,6 @@ class GameViewModel @Inject constructor(
         resetWinningPositionsIndices(emptyList())
         updatePlay(false)
         updateIsTimerOn(true)
+        updateDifficultyMode(0)
     }
 }

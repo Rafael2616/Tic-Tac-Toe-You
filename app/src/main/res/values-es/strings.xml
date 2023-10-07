@@ -46,5 +46,8 @@
     <string name="stay">Quedarse</string>
     <string name="color_circle">Color del Círculo</string>
     <string name="color_x">Color del X</string>
+    <string name="modes">Modos:</string>
+    <string name="mode_easy">Fácil</string>
+    <string name="mode_hard">Difícil</string>
 
 </resources>

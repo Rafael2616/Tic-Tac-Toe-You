@@ -46,6 +46,9 @@
     <string name="stay">Stay</string>
     <string name="color_circle">Circle color</string>
     <string name="color_x">X Color</string>
+    <string name="modes">Modes:</string>
+    <string name="mode_easy">Easy</string>
+    <string name="mode_hard">Hard</string>
 
     <string name="cpu">CPU</string>
 
