@@ -31,6 +31,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -57,7 +58,7 @@ fun SettingsWithSwitch(
     val viewModel = hiltViewModel<SettingsViewModel>()
     val isFollowingSystemOn by viewModel.isFollowingSystemOn.collectAsState()
     val componentValidator = ComponentValidator()
-    
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -115,6 +116,15 @@ fun SettingsWithSwitch(
                            Icon(
                                 imageVector = SettingsFirstIconHandler(index, groupType),
                                 contentDescription = "Icon",
+                                tint = if (switchCheckedHandler(
+                                    groupType,
+                                    index,
+                                    viewModel
+                                )) {
+                                     MaterialTheme.colorScheme.onSurface
+                                } else {
+                                     MaterialTheme.colorScheme.error
+                                },
        		            	 modifier = Modifier
                                     .size(45.dp)
                                     .padding(start = 8.dp)

@@ -42,6 +42,7 @@ fun BaseButton(
     @DrawableRes btnImage: Int? = null,
     @StringRes btnText: Int? = null,
     btnIcon: ImageVector? = null,
+    tint: Color = MaterialTheme.colorScheme.error,
     onClickFun: () -> Unit,
     description: String = "there is no description"
 ) {
@@ -84,8 +85,9 @@ fun BaseButton(
                         Icon(
                             imageVector = btnIcon,
                             contentDescription = "Icon",
+                            tint = tint,
        		        	 modifier = Modifier
-                                .size(40.dp)
+                                .size(38.dp)
                         )
                     }
                 }
