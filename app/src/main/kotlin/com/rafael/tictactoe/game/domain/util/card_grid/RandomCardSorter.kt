@@ -21,6 +21,7 @@ fun RandomCardSorter(
     val isXFor1 = vm.isXFor1.value
     val isGameFinished = vm.isGameFinished.value
     val isTimerOn = vm.isTimerOn.value
+    val delayTime = if (isTimerOn) 2300L else 500L
 
     if (isGameFinished) {
         return
@@ -37,11 +38,7 @@ fun RandomCardSorter(
 
     if (isCPU) {
         CoroutineScope(Dispatchers.IO).launch {
-            if (isTimerOn) {
-                delay(2300L)
-            } else {
-                delay(500L)
-            }
+            delay(delayTime)
             vm.updateIsXImage(!isXImage)
             vm.updateIsCPU(false)
             if (isCPUPlayer1) {
@@ -55,11 +52,7 @@ fun RandomCardSorter(
             }
         }
         CoroutineScope(Dispatchers.Main).launch {
-            if (isTimerOn) {
-                delay(2300L)
-            } else {
-                delay(500L)
-            }
+            delay(delayTime)
             vm.execCardGridSound(context)
         }
     }
