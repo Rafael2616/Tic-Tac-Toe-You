@@ -40,6 +40,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -81,6 +82,7 @@ fun GetPlayersPrefsDialog() {
     val colorCircle by settingsVM.colorCircle.collectAsState()
     val type1 = if (isXFor1) Customization.COLORX else Customization.COLORCIRCLE
     val type2 = if (isXFor1) Customization.COLORCIRCLE else Customization.COLORX
+    val keyboardController = LocalSoftwareKeyboardController.current
 
     Surface(
         color = Color.Black.copy(alpha = 0.3f),
@@ -191,6 +193,7 @@ fun GetPlayersPrefsDialog() {
                         .height(60.dp)
                         .clickable( onClick = {
                             settingsVM.execUIClickSound()
+                            keyboardController?.hide()
                             settingsVM.showLineColorSelectorDialog(true, type1)
                         })
                         .align(Alignment.CenterVertically)
@@ -225,6 +228,7 @@ fun GetPlayersPrefsDialog() {
                         .height(60.dp)
                         .clickable( onClick = {
                             settingsVM.execUIClickSound()
+                            keyboardController?.hide()
                             settingsVM.showLineColorSelectorDialog(true, type2)
                         })
                         .align(Alignment.CenterVertically)
