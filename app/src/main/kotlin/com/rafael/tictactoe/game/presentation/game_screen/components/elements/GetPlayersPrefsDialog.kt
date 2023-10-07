@@ -89,7 +89,7 @@ fun GetPlayersPrefsDialog() {
     val textField2State = if (isCPUMode) { if (isCPUPlayer1) false else true } else {false}
     val type1 = if (isXFor1) Customization.COLORX else Customization.COLORCIRCLE
     val type2 = if (isXFor1) Customization.COLORCIRCLE else Customization.COLORX
-    val bottomPadding = if (isKeyboardOpen) { if (isCPUMode) 190.dp else 150.dp} else {0.dp}
+    val bottomPadding = if (isKeyboardOpen) { if (isCPUMode) 205.dp else 150.dp} else {0.dp}
     val dialogHeigth = if (isCPUMode) 285.dp else 220.dp
     val maxLength = 10
     val modesSize = listOf(0,1)
@@ -298,7 +298,7 @@ fun GetPlayersPrefsDialog() {
                                         modifier = Modifier
                                             .fillMaxWidth()
                                             .height(40.dp)
-                                            .padding(end = 5.dp),
+                                            .padding(end = 6.dp),
                                         horizontalArrangement = Arrangement.SpaceBetween,
                                         verticalAlignment = Alignment.CenterVertically
                                     ) {
