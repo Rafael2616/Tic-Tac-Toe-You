@@ -40,10 +40,6 @@ class ComponentValidator {
         if (groupType != GroupType.THEME) {
             return true
         }
-        if (groupType == GroupType.THEME && ((index == 1 && isFollowingSystemOn) ||
-        (index == 2 && !isDynamicColorsSupported))) {
-            return false
-        }
         return false
     }
     
@@ -57,7 +53,7 @@ class ComponentValidator {
     fun validateDivider(groupType: GroupType, index: Int, isFollowingSystemOn: Boolean): Boolean {
         val isDynamicColorsSupported = VERSION.SDK_INT >= VERSION_CODES.S
 
-        if (groupType == GroupType.THEME && ((index == 0 && isFollowingSystemOn) ||
+        if (groupType == GroupType.THEME && ((index == 0 && isFollowingSystemOn && !isDynamicColorsSupported) ||
         (index == 1 && !isDynamicColorsSupported))) {
             return false
         } else {

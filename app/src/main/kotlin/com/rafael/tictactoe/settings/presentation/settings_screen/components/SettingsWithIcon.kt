@@ -103,8 +103,7 @@ fun SettingsWithIcon(
                                 index,
                                 viewModel
                             )
-                        })
-                        .padding(end = 12.dp),
+                        }),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
@@ -120,7 +119,7 @@ fun SettingsWithIcon(
                     if (componentValidator.validateCanvas(groupType)) {
                         Canvas(
                             modifier = Modifier
-                                .size(55.dp)
+                                .size(50.dp)
                         ) {
                             when (index) {
                                 0 -> drawLine(
@@ -182,7 +181,9 @@ fun SettingsWithIcon(
                     Icon(
                         imageVector = SettingsIconHandler(index, groupType),
                         contentDescription = "Icon",
-       		    	 modifier = Modifier.size(40.dp)
+       		    	 modifier = Modifier
+                        .size(40.dp)
+                        .padding(end = 8.dp)
                     )
                 }
                 if (index < (size.size - 1)) {
