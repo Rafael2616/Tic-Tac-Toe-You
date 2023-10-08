@@ -127,18 +127,18 @@ fun SettingsWithSwitch(
                                 },
        		            	 modifier = Modifier
                                     .size(45.dp)
-                                    .padding(start = 8.dp)
+                                   .padding(start = 8.dp)
                             )
                         }
                         Text(
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onSurface,
                             text = SettingsTextHandler(index, groupType),
-                            modifier = Modifier.width(240.dp),
+                            modifier = Modifier.width(220.dp),
                             textAlign = TextAlign.Center
                         )
                         Switch(
-                           modifier = Modifier.padding(12.dp),
+                            modifier = Modifier.padding(end = 8.dp),
                             checked = switchCheckedHandler(
                                 groupType,
                                 index,
