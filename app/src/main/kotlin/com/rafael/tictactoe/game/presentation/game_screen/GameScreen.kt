@@ -2,6 +2,7 @@ package com.rafael.tictactoe.game.presentation.game_screen
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
@@ -34,6 +35,7 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.components.Lin
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
+@ExperimentalMaterial3Api
 fun GameScreen(
     gameUtil: GameUtils,
     navController: NavController,
