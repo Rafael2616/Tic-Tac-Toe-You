@@ -53,4 +53,15 @@ class ComponentValidator {
         }
         return false
     }
+
+    fun validateDivider(groupType: GroupType, index: Int, isFollowingSystemOn: Boolean): Boolean {
+        val isDynamicColorsSupported = VERSION.SDK_INT >= VERSION_CODES.S
+
+        if (groupType == GroupType.THEME && ((index == 0 && isFollowingSystemOn) ||
+        (index == 1 && !isDynamicColorsSupported))) {
+            return false
+        } else {
+            return true
+        }
+    }
 }

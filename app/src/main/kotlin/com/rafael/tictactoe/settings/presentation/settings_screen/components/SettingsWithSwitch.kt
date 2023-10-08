@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -20,6 +19,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Card
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
@@ -62,6 +62,7 @@ fun SettingsWithSwitch(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .padding(bottom = 8.dp)
             .animateContentSize(),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -75,32 +76,31 @@ fun SettingsWithSwitch(
                 .padding(start = 14.dp, bottom = 6.dp)
                 .fillMaxWidth()
         )
-        size.forEachIndexed { _, index ->
-            if (componentValidator.validateCard(
-                groupType,
-                index,
-                isFollowingSystemOn
-            )) {
-                Card(
-                    shape = MaterialTheme.shapes.medium,
-                    modifier = Modifier
-                        .animateContentSize()
-                        .width(360.dp)
-                        .height(68.dp)
-                        .clip(RoundedCornerShape(26.dp))
-                        .clickable(onClick = {
-                            viewModel.execUIClickSound()
-                            toggleSettingsUseCase(
-                                groupType,
-                                index,
-                                viewModel
-                            )
-                        })
-                ) {
+        Card(
+            shape = MaterialTheme.shapes.medium,
+            modifier = Modifier
+                .animateContentSize()
+                .width(360.dp)
+                .clip(RoundedCornerShape(26.dp))
+        ) {
+            size.forEachIndexed { _, index ->
+                if (componentValidator.validateCard(
+                    groupType,
+                    index,
+                    isFollowingSystemOn
+                )) {
                     Row(
                         modifier = Modifier
+                            .height(62.dp)
                             .fillMaxSize()
-                            .padding(end = 12.dp),
+                            .clickable(onClick = {
+                                viewModel.execUIClickSound()
+                                toggleSettingsUseCase(
+                                    groupType,
+                                    index,
+                                    viewModel
+                                )
+                            }),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
@@ -138,6 +138,7 @@ fun SettingsWithSwitch(
                             textAlign = TextAlign.Center
                         )
                         Switch(
+                           modifier = Modifier.padding(12.dp),
                             checked = switchCheckedHandler(
                                 groupType,
                                 index,
@@ -168,8 +169,17 @@ fun SettingsWithSwitch(
    					     }
                         )
                     }
+                    if ((index < (size.size - 1)) && componentValidator.validateDivider(
+                        groupType,
+                        index,
+                        isFollowingSystemOn
+                    )) {
+                        HorizontalDivider(
+                            thickness = 4.dp,
+                            color = MaterialTheme.colorScheme.surface
+                        )
+                    }
                 }
-                Spacer(modifier = Modifier.height(12.dp))
             }
         }
     }

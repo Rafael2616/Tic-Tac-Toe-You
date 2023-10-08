@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -66,6 +67,7 @@ fun SettingsWithIcon(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .padding(bottom = 8.dp)
             .animateContentSize(),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -78,18 +80,22 @@ fun SettingsWithIcon(
             modifier = Modifier
                 .padding(start = 14.dp, bottom = 6.dp)
                 .fillMaxWidth()
-            )
+        )
+        Card(
+            shape = MaterialTheme.shapes.medium,
+            modifier = Modifier
+                .animateContentSize()
+                .width(360.dp)
+                .clip(RoundedCornerShape(26.dp))
+        ) {
             size.forEachIndexed { _, index ->
-                val cardHeight by animateDpAsState(
-                    if (groupType == GroupType.OTHER && index == 0 && isAboutShown) 150.dp else 68.dp
+                val rowHeight by animateDpAsState(
+                    if (groupType == GroupType.OTHER && index == 0 && isAboutShown) 150.dp else 62.dp
                 )
-                Card(
-                    shape = MaterialTheme.shapes.medium,
+                Row(
                     modifier = Modifier
-                        .animateContentSize()
-                        .width(360.dp)
-                        .height(cardHeight)
-                        .clip(RoundedCornerShape(26.dp))
+                        .height(rowHeight)
+                        .fillMaxSize()
                         .clickable(onClick = {
                             viewModel.execUIClickSound()
                             toggleSettingsUseCase(
@@ -98,16 +104,12 @@ fun SettingsWithIcon(
                                 viewModel
                             )
                         })
-                    ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxSize()
                         .padding(end = 12.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     if (componentValidator.validateFirstIcon(groupType)) {
-                       Icon(
+                        Icon(
                             imageVector = SettingsFirstIconHandler(index, groupType),
                             contentDescription = "Icon",
        		        	 modifier = Modifier
@@ -183,8 +185,10 @@ fun SettingsWithIcon(
        		    	 modifier = Modifier.size(40.dp)
                     )
                 }
+                if (index < (size.size - 1)) {
+                    HorizontalDivider(thickness = 4.dp, color = MaterialTheme.colorScheme.surface)
+                }
             }
-            Spacer(modifier = Modifier.height(12.dp))
         }
     }
 }
