@@ -22,8 +22,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
+@ExperimentalComposeUiApi
 @OptIn(ExperimentalMaterial3Api::class)
-@OptIn(ExperimentalComposeUiApi::class)
 class TicTacToeActivity : ComponentActivity() {
 
     @Inject lateinit var settingsVM: SettingsViewModel
