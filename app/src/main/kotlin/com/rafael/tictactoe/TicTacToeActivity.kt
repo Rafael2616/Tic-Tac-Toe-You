@@ -10,6 +10,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.common.presentation.navigation.NavGraph
@@ -22,6 +23,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 @OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalComposeUiApi::class)
 class TicTacToeActivity : ComponentActivity() {
 
     @Inject lateinit var settingsVM: SettingsViewModel
