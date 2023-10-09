@@ -1,25 +1,43 @@
 package com.rafael.tictactoe.game.domain.util
 
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.game.presentation.utils.draws.drawX
 import com.rafael.tictactoe.game.presentation.utils.draws.drawAnCircle
+import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
-fun DrawScope.drawXorCircle(
+@Composable
+fun DrawXorCircle(
     rowIndex: Int,
-    cardIndex: Int,
-    isCardClicked: List<List<Boolean>>,
-    card: List<List<Boolean>>,
-    viewModel: SettingsViewModel
+    cardIndex: Int
 ) {
-    val colorX = viewModel.colorX.value
-    val colorCircle = viewModel.colorCircle.value
+    val settingsVM = hiltViewModel<SettingsViewModel>()
+    val viewModel = hiltViewModel<GameViewModel>()
+    val card by viewModel.card.collectAsState()
+	val isCardClicked by viewModel.isCardClicked.collectAsState()
+    val colorX by settingsVM.colorX.collectAsState()
+    val colorCircle by settingsVM.colorCircle.collectAsState()
 
-    if (isCardClicked[rowIndex][cardIndex]) {
-    	if (card[rowIndex][cardIndex]) {
-            drawX(colorX)
-        } else {
-            drawAnCircle(colorCircle)
+    AnimatedVisibility(isCardClicked[rowIndex][cardIndex]) {
+        if (isCardClicked[rowIndex][cardIndex]) {
+            Canvas(
+                modifier = Modifier
+                    .fillMaxSize()
+            ) {
+            	if (card[rowIndex][cardIndex]) {
+                    drawX(colorX)
+                } else {
+                    drawAnCircle(colorCircle)
+                }
+        	}
         }
-	}
+    }
 }
