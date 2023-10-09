@@ -44,7 +44,7 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.Set
 @Composable
 fun LineColorSelectorDialog() {
     val settingsVM = hiltViewModel<SettingsViewModel>()
-    var optionsSize = listOf(0,1,2,3,4,5,6,7,8)
+    var colorsOptions = listOf(0,1,2,3,4,5,6,7,8)
     val type by settingsVM.customizationType.collectAsState()
     val selectedWinnerLineColor by settingsVM.selectedWinnerLineColor.collectAsState()
     val selectedColorCircle by settingsVM.selectedColorCircle.collectAsState()
@@ -82,21 +82,21 @@ fun LineColorSelectorDialog() {
                         .padding(6.dp)
                         .animateContentSize(),
                 ) {
-                    items(optionsSize.size) { option ->
+                    items(colorsOptions.size) { color ->
                         Box(
                             modifier = Modifier
                             .height(60.dp)
                             .fillMaxWidth()
                             .clickable(onClick = {
                                 when (type) {
-                                    Customization.WINNERLINECOLOR -> settingsVM.updateSelectedWinnerLineColor(option)
-                                    Customization.COLORCIRCLE ->  settingsVM.updateSelectedColorCircle(option)
-                                    Customization.COLORX ->  settingsVM.updateSelectedColorX(option)
+                                    Customization.WINNERLINECOLOR -> settingsVM.updateSelectedWinnerLineColor(color)
+                                    Customization.COLORCIRCLE ->  settingsVM.updateSelectedColorCircle(color)
+                                    Customization.COLORX ->  settingsVM.updateSelectedColorX(color)
                                 }
                                 settingsVM.execUIClickSound()
                                 lineColorSelectionUseCase(
                                     type,
-                                    option,
+                                    color,
                                     settingsVM
                                 )
                            })
@@ -112,26 +112,26 @@ fun LineColorSelectorDialog() {
                                 RadioButton(
                                     selected =
                                         when (type) {
-                                            Customization.WINNERLINECOLOR -> option == selectedWinnerLineColor
-                                            Customization.COLORCIRCLE -> option == selectedColorCircle
-                                            Customization.COLORX -> option == selectedColorX
+                                            Customization.WINNERLINECOLOR -> color == selectedWinnerLineColor
+                                            Customization.COLORCIRCLE -> color == selectedColorCircle
+                                            Customization.COLORX -> color == selectedColorX
                                         },
                                     onClick = {
                                         when (type) {
-                                            Customization.WINNERLINECOLOR -> settingsVM.updateSelectedWinnerLineColor(option)
-                                            Customization.COLORCIRCLE ->  settingsVM.updateSelectedColorCircle(option)
-                                            Customization.COLORX ->  settingsVM.updateSelectedColorX(option)
+                                            Customization.WINNERLINECOLOR -> settingsVM.updateSelectedWinnerLineColor(color)
+                                            Customization.COLORCIRCLE ->  settingsVM.updateSelectedColorCircle(color)
+                                            Customization.COLORX ->  settingsVM.updateSelectedColorX(color)
                                         }
                                         settingsVM.execUIClickSound()
                                         lineColorSelectionUseCase(
                                             type,
-                                            option,
+                                            color,
                                             settingsVM
                                         )
                                     },
                                 )
                                 Text(
-                                    text = when (option) {
+                                    text = when (color) {
                                         0 -> stringResource(R.string.color_blue)
                                         1 -> stringResource(R.string.color_red)
                                         2 -> stringResource(R.string.color_yellow)
@@ -154,7 +154,7 @@ fun LineColorSelectorDialog() {
                                             modifier = Modifier
                                             .fillMaxSize()
                                             .background(
-                                                when (option) {
+                                                when (color) {
                                                     0 -> Color.Blue
                                                     1 -> Color.Red
                                                     2 -> Color.Yellow

@@ -35,8 +35,16 @@ object SettingsModule {
 	
     @Provides
     @Singleton
-    fun provideSettingsViewModel(repository: SettingsRepository, player: ExoPlayer, context: Application): SettingsViewModel {
-        return SettingsViewModel(repository, player, context)
+    fun provideSettingsViewModel(
+        repository: SettingsRepository,
+        player: ExoPlayer,
+        context: Application
+    ): SettingsViewModel {
+        return SettingsViewModel(
+            repository,
+            player,
+            context
+        )
     }
 
     //TODO// add misssing settingsUtils here

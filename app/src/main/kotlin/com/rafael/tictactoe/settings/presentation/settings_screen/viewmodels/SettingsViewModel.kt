@@ -66,7 +66,7 @@ class SettingsViewModel @Inject constructor(
     //Initialize ViewModel StateFlows Variables with corresponding values in SettingsRepository
 	init {
   	  viewModelScope.launch(Dispatchers.IO) {
-            val settings = repository.getAllSettingsValues(1)  ?: defaultSettings
+            val settings = repository.getAllSettingsValues(1) ?: defaultSettings
    	 	_isBackgroundMusicOn.value = settings.isBackgroundMusicOn
     	    _isDarkThemeOn.value = settings.isDarkThemeOn
     	    _isDynamicColorsOn.value = settings.isDynamicColorsOn
@@ -86,7 +86,7 @@ class SettingsViewModel @Inject constructor(
         BackgroundMusic(context, this)
     }
 
-   fun updateIsDarkThemeOn(newValue: Boolean) {
+    fun updateIsDarkThemeOn(newValue: Boolean) {
         _isDarkThemeOn.value = newValue
         viewModelScope.launch(Dispatchers.IO) {
 	  	  var settings = repository.getAllSettingsValues(1) ?: defaultSettings
