@@ -126,7 +126,7 @@ class SettingsViewModel @Inject constructor(
         _isAboutShown.value = newValue
     }
 
-    fun setCustomizationType(newType: Customization  = Customization.COLORX) {
+    fun setCustomizationType(newType: Customization) {
         _customizationType.value = newType
     }
     

@@ -31,7 +31,7 @@ fun toggleSettingsUseCase(
             0 -> vm.setCustomizationType(Customization.WINNERLINECOLOR)
             1 -> vm.setCustomizationType(Customization.COLORCIRCLE)
             2 -> vm.setCustomizationType(Customization.COLORX)
-        }   
+        }
     }
 
     fun toggleOtherSettings(index: Int) {
