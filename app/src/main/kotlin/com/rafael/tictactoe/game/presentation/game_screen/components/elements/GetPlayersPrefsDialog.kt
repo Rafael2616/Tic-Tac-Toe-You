@@ -83,6 +83,7 @@ fun GetPlayersPrefsDialog() {
     val isCPUPlayer1 by viewModel.isCPUPlayer1.collectAsState()
     val isCPUMode by viewModel.isCPUMode.collectAsState()
     val colorX by settingsVM.colorX.collectAsState()
+    val isDarkThemeOn by settingsVM.isDarkThemeOn.collectAsState()
     val colorCircle by settingsVM.colorCircle.collectAsState()
     val selectedDifficultyMode by viewModel.selectedDifficultyMode.collectAsState()
     val player1Value = if (localPlayer1) player1Name else player2Name
@@ -332,8 +333,8 @@ fun GetPlayersPrefsDialog() {
                                                 else -> Icons.Filled.SentimentSatisfied
                                             },
                                             tint = when (mode) {
-                                                0 -> Color.Green
-                                                1 -> MaterialTheme.colorScheme.error
+                                                0 -> if (isDarkThemeOn) Color.Green else Color(0xFF299961)
+                                                1 -> Color.Red
                                                 else -> Color.Red
                                             },
                                             contentDescription = "Icon",
