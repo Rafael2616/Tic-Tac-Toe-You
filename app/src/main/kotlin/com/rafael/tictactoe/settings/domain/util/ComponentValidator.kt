@@ -2,6 +2,7 @@ package com.rafael.tictactoe.settings.domain.util
 
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
+import com.rafael.tictactoe.settings.domain.enums.GroupType
 
 class ComponentValidator {
 

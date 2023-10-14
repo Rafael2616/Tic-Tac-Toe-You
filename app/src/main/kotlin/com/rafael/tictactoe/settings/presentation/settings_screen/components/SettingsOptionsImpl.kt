@@ -14,13 +14,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.settings.domain.util.GroupType
+import com.rafael.tictactoe.settings.domain.enums.GroupType
 import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsWithIcon
 import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsWithSwitch
-import com.rafael.tictactoe.settings.domain.util.Customization
-import com.rafael.tictactoe.settings.domain.util.Theme
-import com.rafael.tictactoe.settings.domain.util.Sound
-import com.rafael.tictactoe.settings.domain.util.Other
 
 @Composable
 fun SettingsOptionsImpl(paddingValues: PaddingValues) {

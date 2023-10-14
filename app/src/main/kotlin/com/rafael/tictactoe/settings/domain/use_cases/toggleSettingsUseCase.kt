@@ -1,7 +1,7 @@
 package com.rafael.tictactoe.settings.domain.use_cases
 
-import com.rafael.tictactoe.settings.domain.util.Customization
-import com.rafael.tictactoe.settings.domain.util.GroupType
+import com.rafael.tictactoe.settings.domain.enums.Customization
+import com.rafael.tictactoe.settings.domain.enums.GroupType
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 fun toggleSettingsUseCase(

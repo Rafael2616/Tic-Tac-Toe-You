@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.presentation.game_screen.components
+package com.rafael.tictactoe.game.presentation.game_screen.components.ui
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement

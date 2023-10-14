@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.presentation.game_screen.components
+package com.rafael.tictactoe.game.presentation.game_screen.components.dialogs
 
 import android.view.ViewTreeObserver
 import android.widget.Toast
@@ -64,7 +64,7 @@ import com.rafael.tictactoe.game.domain.util.RandomCardSorter
 import com.rafael.tictactoe.game.presentation.utils.draws.drawCircleinDialog
 import com.rafael.tictactoe.game.presentation.utils.draws.drawXinDialog
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
-import com.rafael.tictactoe.settings.domain.util.Customization
+import com.rafael.tictactoe.settings.domain.enums.Customization
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable

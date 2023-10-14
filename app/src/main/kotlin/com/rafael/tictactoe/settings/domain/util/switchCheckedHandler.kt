@@ -1,5 +1,6 @@
 package com.rafael.tictactoe.settings.domain.util
 
+import com.rafael.tictactoe.settings.domain.enums.GroupType
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 fun switchCheckedHandler(

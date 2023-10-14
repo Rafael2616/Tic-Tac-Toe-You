@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.presentation.game_screen.components
+package com.rafael.tictactoe.game.presentation.game_screen.components.buttons
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons

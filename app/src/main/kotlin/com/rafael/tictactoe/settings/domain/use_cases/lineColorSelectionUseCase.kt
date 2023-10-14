@@ -1,7 +1,7 @@
 package com.rafael.tictactoe.settings.domain.use_cases
 
 import androidx.compose.ui.graphics.Color
-import com.rafael.tictactoe.settings.domain.util.Customization
+import com.rafael.tictactoe.settings.domain.enums.Customization
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 fun lineColorSelectionUseCase(

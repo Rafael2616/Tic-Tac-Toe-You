@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.presentation.game_screen.components
+package com.rafael.tictactoe.game.presentation.game_screen.components.dialogs
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable

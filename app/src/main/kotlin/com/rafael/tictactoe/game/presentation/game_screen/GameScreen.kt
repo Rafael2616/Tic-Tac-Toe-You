@@ -12,19 +12,19 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.rafael.tictactoe.game.presentation.game_screen.components.BackgroundMusicButton
-import com.rafael.tictactoe.game.presentation.game_screen.components.CardGrid
-import com.rafael.tictactoe.game.presentation.game_screen.components.ExitGameDialog
-import com.rafael.tictactoe.game.presentation.game_screen.components.ExpandButton
-import com.rafael.tictactoe.game.presentation.game_screen.components.GameStateToast
-import com.rafael.tictactoe.game.presentation.game_screen.components.GetPlayersPrefsDialog
-import com.rafael.tictactoe.game.presentation.game_screen.components.PlayAgainButton
-import com.rafael.tictactoe.game.presentation.game_screen.components.PlayersNamesLayout
-import com.rafael.tictactoe.game.presentation.game_screen.components.RestartButton
-import com.rafael.tictactoe.game.presentation.game_screen.components.SoundEffectsButton
-import com.rafael.tictactoe.game.presentation.game_screen.components.VictoryCounter
-import com.rafael.tictactoe.game.presentation.game_screen.components.VictoryCounterReseterButton
-import com.rafael.tictactoe.game.presentation.game_screen.components.WinnerLine
+import com.rafael.tictactoe.game.presentation.game_screen.components.buttons.BackgroundMusicButton
+import com.rafael.tictactoe.game.presentation.game_screen.components.buttons.ExpandButton
+import com.rafael.tictactoe.game.presentation.game_screen.components.buttons.PlayAgainButton
+import com.rafael.tictactoe.game.presentation.game_screen.components.buttons.RestartButton
+import com.rafael.tictactoe.game.presentation.game_screen.components.buttons.SoundEffectsButton
+import com.rafael.tictactoe.game.presentation.game_screen.components.buttons.VictoryCounterReseterButton
+import com.rafael.tictactoe.game.presentation.game_screen.components.dialogs.ExitGameDialog
+import com.rafael.tictactoe.game.presentation.game_screen.components.dialogs.GetPlayersPrefsDialog
+import com.rafael.tictactoe.game.presentation.game_screen.components.ui.CardGrid
+import com.rafael.tictactoe.game.presentation.game_screen.components.ui.GameStateToast
+import com.rafael.tictactoe.game.presentation.game_screen.components.ui.PlayersNamesLayout
+import com.rafael.tictactoe.game.presentation.game_screen.components.ui.VictoryCounter
+import com.rafael.tictactoe.game.presentation.game_screen.components.ui.WinnerLines
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import com.rafael.tictactoe.game.domain.util.GameUtils
 import com.rafael.tictactoe.game.domain.util.GotOldChecker
@@ -85,7 +85,7 @@ fun GameScreen(
     }
 
     AnimatedVisibility(winner) {
-        WinnerLine()
+        WinnerLines()
     }
 
     AnimatedVisibility(showLineColorSelectorDialog) {

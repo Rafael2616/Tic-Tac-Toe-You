@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.presentation.game_screen.components
+package com.rafael.tictactoe.game.presentation.game_screen.components.ui
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
@@ -18,7 +18,7 @@ import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewMod
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
-fun WinnerLine() {
+fun WinnerLines() {
     val viewModel = hiltViewModel<GameViewModel>()
     val settingsVM = hiltViewModel<SettingsViewModel>()
     val winningPositionsIndices = viewModel.winningPositionsIndices.value
@@ -101,8 +101,6 @@ fun WinnerLine() {
             }
         }
     }
-    val size = winningPositionsIndices.size
-    println("$size")
 }
 
 fun DrawScope.drawWinnerLine(

@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.domain.util
+package com.rafael.tictactoe.settings.domain.enums
 
 sealed class Settings(groupType: GroupType) {
     class Theme : Settings(GroupType.THEME)
