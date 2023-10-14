@@ -65,15 +65,20 @@ fun CardGrid() {
                                     CardGridClickHandler(context, viewModel, rowIndex, cardIndex)
                                 };
                             })
-                    ) {                 
-                        Box (
-                            modifier = Modifier.size(114.dp),
+                    ) {
+                       Box (
+                            modifier = Modifier.fillMaxSize().align(Alignment.CenterHorizontally),
                             contentAlignment = Alignment.Center
                         ) {
-                            DrawXorCircle(
-                                rowIndex,
-                                cardIndex
-                            )
+                            Box (
+                                modifier = Modifier.size(95.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                DrawXorCircle(
+                                    rowIndex,
+                                    cardIndex
+                                )
+                            }
                         }
                     }
                 }

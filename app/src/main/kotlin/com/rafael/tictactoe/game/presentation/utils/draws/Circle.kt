@@ -11,8 +11,8 @@ fun DrawScope.drawAnCircle(
     color: Color
 ) {
     drawCircle(
-        center = Offset(58.dp.toPx(), 58.dp.toPx()),
-        radius = 38.dp.toPx(),
+        center = Offset(47.dp.toPx(), 47.dp.toPx()),
+        radius = 34.dp.toPx(),
         style = Stroke(width = 15.dp.toPx()),
         color = color
     )
