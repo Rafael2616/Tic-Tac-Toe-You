@@ -23,7 +23,7 @@ fun WinnerLine() {
     val settingsVM = hiltViewModel<SettingsViewModel>()
     val winningPositionsIndices = viewModel.winningPositionsIndices.value
     val winnerLineColor by settingsVM.winnerLineColor.collectAsState()
- 
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -34,7 +34,7 @@ fun WinnerLine() {
              modifier = Modifier.fillMaxWidth(),
         ) {
             //Horizontal lines
-            if (winningPositionsIndices.contains(0)) {    
+            if (winningPositionsIndices.contains(0)) {
                 drawWinnerLine(
                     start = Offset(x = 2.dp.toPx(), y = size.height - 330.dp.toPx()),
                     end = Offset(x = size.width - 2.dp.toPx(), y = size.height - 330.dp.toPx()),
@@ -91,7 +91,7 @@ fun WinnerLine() {
                     color = winnerLineColor
                 )
             }
-                
+
             if (winningPositionsIndices.contains(7)) {
                 drawWinnerLine(
                     start = Offset(x = size.width - 2.dp.toPx(), y = size.height - 395.dp.toPx()),
@@ -101,6 +101,8 @@ fun WinnerLine() {
             }
         }
     }
+    val size = winningPositionsIndices.size
+    println("$size")
 }
 
 fun DrawScope.drawWinnerLine(

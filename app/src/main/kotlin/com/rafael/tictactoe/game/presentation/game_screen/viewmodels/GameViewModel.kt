@@ -229,7 +229,9 @@ class GameViewModel @Inject constructor(
     }
 
     fun updateWinningPositionsIndices(index: Int) {
-        _winningPositionsIndices.value = listOf(index)
+        val currentIndices = _winningPositionsIndices.value.toMutableList()
+        currentIndices.add(index)
+        _winningPositionsIndices.value = currentIndices
     }
 
     fun resetWinningPositionsIndices(emptyList: List<Int>) {
