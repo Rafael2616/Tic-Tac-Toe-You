@@ -114,6 +114,6 @@ fun DrawScope.drawWinnerLine(
         start = start,
         end = end,
         color = color,
-        strokeWidth = 18.dp.toPx(),
+        strokeWidth = 17.dp.toPx(),
     )
 }
