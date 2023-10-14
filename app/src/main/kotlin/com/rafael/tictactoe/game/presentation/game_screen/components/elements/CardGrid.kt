@@ -67,7 +67,9 @@ fun CardGrid() {
                             })
                     ) {
                        Box (
-                            modifier = Modifier.fillMaxSize().align(Alignment.CenterHorizontally),
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .align(Alignment.CenterHorizontally),
                             contentAlignment = Alignment.Center
                         ) {
                             Box (
