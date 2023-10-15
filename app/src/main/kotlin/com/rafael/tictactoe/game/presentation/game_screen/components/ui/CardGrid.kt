@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
@@ -61,17 +60,22 @@ fun CardGrid() {
                             .clickable(onClick = {
 				            	viewModel.showExpandButton(false)
                                 scope.launch {
-                                    CardGridClickHandler(context, viewModel, rowIndex, cardIndex)
+                                    CardGridClickHandler(
+                                        context,
+                                        viewModel,
+                                        rowIndex,
+                                        cardIndex
+                                    )
                                 };
                             })
                     ) {
-                       Box (
+                       Box(
                             modifier = Modifier
                                 .fillMaxSize()
                                 .align(Alignment.CenterHorizontally),
                             contentAlignment = Alignment.Center
                         ) {
-                            Box (
+                            Box(
                                 modifier = Modifier.size(95.dp),
                                 contentAlignment = Alignment.Center
                             ) {

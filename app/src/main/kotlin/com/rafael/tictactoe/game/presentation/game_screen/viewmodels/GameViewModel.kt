@@ -256,7 +256,7 @@ class GameViewModel @Inject constructor(
 
     fun updateDifficultyMode(newMode: Int) {
        _selectedDifficultyMode.value = newMode
-   }
+    }
 
     fun play() {
         updatePlay(true)

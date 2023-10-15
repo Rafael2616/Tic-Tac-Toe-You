@@ -18,9 +18,9 @@ suspend fun CardGridClickHandler(
     val isCPUPlayer1 = vm.isCPUPlayer1.value
     val isTimerOn = vm.isTimerOn.value
     val isCPUMode = vm.isCPUMode.value
-    val isGameFinished = vm.isGameFinished.value
     val isXFor1 = vm.isXFor1.value
-    
+    val isGameFinished = vm.isGameFinished.value
+
     if (isTimerOn) {
         return
     }
