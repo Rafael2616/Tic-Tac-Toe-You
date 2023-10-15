@@ -23,7 +23,7 @@ fun SoundEffectsButton() {
     BaseButton(
         modifier = Modifier.padding(top = 95.dp, start = 15.dp),
         btnIcon = if (isSoundEffectsOn) Icons.Filled.MusicNote else Icons.Filled.MusicOff,
-        tint = if (isSoundEffectsOn) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.error,
+        tint = if (isSoundEffectsOn) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onTertiaryContainer,
         btnText = R.string.active_sound,
         description = "Sound Effects Button",
         onClickFun = { 

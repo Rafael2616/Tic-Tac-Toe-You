@@ -24,7 +24,7 @@ fun BackgroundMusicButton() {
         modifier = Modifier.padding(top = 165.dp, start = 15.dp),
         btnIcon = if (isBackgroundMusicOn) Icons.Filled.VolumeUp else Icons.Filled.VolumeOff,
         btnText = R.string.active_music,
-        tint = if (isBackgroundMusicOn) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.error,
+        tint = if (isBackgroundMusicOn) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onTertiaryContainer,
         description = "Background Music Button",
         onClickFun = { 
             settingsVM.updateIsBackgroundMusicOn(!isBackgroundMusicOn)

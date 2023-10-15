@@ -113,7 +113,7 @@ fun SettingsWithSwitch(
                                 )) {
                                      MaterialTheme.colorScheme.onSurface
                                 } else {
-                                     MaterialTheme.colorScheme.error
+                                     MaterialTheme.colorScheme.onTertiaryContainer
                                 },
        		            	 modifier = Modifier
                                     .size(45.dp)
