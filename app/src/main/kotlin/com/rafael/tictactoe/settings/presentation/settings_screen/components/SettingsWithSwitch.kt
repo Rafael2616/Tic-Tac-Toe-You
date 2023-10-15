@@ -106,15 +106,6 @@ fun SettingsWithSwitch(
                            Icon(
                                 imageVector = SettingsFirstIconHandler(index, groupType),
                                 contentDescription = "Icon",
-                                tint = if (switchCheckedHandler(
-                                    groupType,
-                                    index,
-                                    viewModel
-                                )) {
-                                     MaterialTheme.colorScheme.onSurface
-                                } else {
-                                     MaterialTheme.colorScheme.onTertiaryContainer
-                                },
        		            	 modifier = Modifier
                                     .size(45.dp)
                                    .padding(start = 8.dp)

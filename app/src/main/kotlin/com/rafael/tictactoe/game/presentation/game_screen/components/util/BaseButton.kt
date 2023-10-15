@@ -23,7 +23,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
@@ -42,7 +41,6 @@ fun BaseButton(
     @DrawableRes btnImage: Int? = null,
     @StringRes btnText: Int? = null,
     btnIcon: ImageVector? = null,
-    tint: Color = MaterialTheme.colorScheme.error,
     onClickFun: () -> Unit,
     description: String = "there is no description"
 ) {
@@ -85,7 +83,6 @@ fun BaseButton(
                         Icon(
                             imageVector = btnIcon,
                             contentDescription = "Icon",
-                            tint = tint,
        		        	 modifier = Modifier
                                 .size(38.dp)
                         )

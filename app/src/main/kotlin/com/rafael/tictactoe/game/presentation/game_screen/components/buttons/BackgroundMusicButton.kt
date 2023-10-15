@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.material.icons.filled.VolumeOff
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -24,7 +23,6 @@ fun BackgroundMusicButton() {
         modifier = Modifier.padding(top = 165.dp, start = 15.dp),
         btnIcon = if (isBackgroundMusicOn) Icons.Filled.VolumeUp else Icons.Filled.VolumeOff,
         btnText = R.string.active_music,
-        tint = if (isBackgroundMusicOn) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onTertiaryContainer,
         description = "Background Music Button",
         onClickFun = { 
             settingsVM.updateIsBackgroundMusicOn(!isBackgroundMusicOn)
