@@ -82,7 +82,6 @@ fun ColorSelectionDialog() {
                         .fillMaxWidth()
                         .height(240.dp)
                         .padding(6.dp)
-                        .animateContentSize(),
                 ) {
                     items(colorsOptions.size) { color ->
                         Box(
