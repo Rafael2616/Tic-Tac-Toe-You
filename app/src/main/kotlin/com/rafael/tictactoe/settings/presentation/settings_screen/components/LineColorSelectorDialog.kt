@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
+import com.rafael.tictactoe.settings.domain.enums.Colors
 import com.rafael.tictactoe.settings.domain.enums.Customization
 import com.rafael.tictactoe.settings.domain.use_cases.lineColorSelectionUseCase
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
@@ -49,7 +50,8 @@ fun LineColorSelectorDialog() {
     val selectedWinnerLineColor by settingsVM.selectedWinnerLineColor.collectAsState()
     val selectedColorCircle by settingsVM.selectedColorCircle.collectAsState()
     val selectedColorX by settingsVM.selectedColorX.collectAsState()
-    
+    val colors = Colors.get()
+
     Surface(
         color = Color.Black.copy(alpha = 0.3f),
         modifier = Modifier
@@ -155,16 +157,16 @@ fun LineColorSelectorDialog() {
                                             .fillMaxSize()
                                             .background(
                                                 when (color) {
-                                                    0 -> Color.Blue
-                                                    1 -> Color.Red
-                                                    2 -> Color.Yellow
-                                                    3 -> Color(0xFF299961)//Dark Green
-                                                    4 -> Color.Green
-                                                    5 -> Color(0xFF6400EE)//Purple
-                                                    6 -> Color.Magenta
-                                                    7 -> Color.White
-                                                    8 -> Color.Cyan
-                                                    else -> Color.Transparent
+                                                    0 -> colors.blue
+                                                    1 -> colors.red
+                                                    2 -> colors.yellow
+                                                    3 -> colors.dark_green
+                                                    4 -> colors.light_green
+                                                    5 -> colors.purple
+                                                    6 -> colors.magenta
+                                                    7 -> colors.white
+                                                    8 -> colors.cyan
+                                                    else -> colors.transparent
                                                 }
                                             )
                                         )

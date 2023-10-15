@@ -1,6 +1,6 @@
 package com.rafael.tictactoe.settings.domain.use_cases
 
-import androidx.compose.ui.graphics.Color
+import com.rafael.tictactoe.settings.domain.enums.Colors
 import com.rafael.tictactoe.settings.domain.enums.Customization
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
@@ -9,49 +9,50 @@ fun lineColorSelectionUseCase(
     option: Int,
 	settingsVM: SettingsViewModel
 ) {
+    val color = Colors.get()
 
     fun setWinnerLineColor(option: Int) {
         when (option) {
-            0 -> settingsVM.setWinnerLineColor(Color.Blue)
-            1 -> settingsVM.setWinnerLineColor(Color.Red)
-            2 -> settingsVM.setWinnerLineColor(Color.Yellow)
-            3 -> settingsVM.setWinnerLineColor(Color(0xFF299961))
-            4 -> settingsVM.setWinnerLineColor(Color.Green)
-            5 -> settingsVM.setWinnerLineColor(Color(0xFF6400EE))
-            6 -> settingsVM.setWinnerLineColor(Color.Magenta)
-            7 -> settingsVM.setWinnerLineColor(Color.White)
-            8 -> settingsVM.setWinnerLineColor(Color.Cyan)
-            else -> settingsVM.setWinnerLineColor(Color.Transparent)
+            0 -> settingsVM.setWinnerLineColor(color.blue)
+            1 -> settingsVM.setWinnerLineColor(color.red)
+            2 -> settingsVM.setWinnerLineColor(color.yellow)
+            3 -> settingsVM.setWinnerLineColor(color.dark_green)
+            4 -> settingsVM.setWinnerLineColor(color.light_green)
+            5 -> settingsVM.setWinnerLineColor(color.purple)
+            6 -> settingsVM.setWinnerLineColor(color.magenta)
+            7 -> settingsVM.setWinnerLineColor(color.white)
+            8 -> settingsVM.setWinnerLineColor(color.cyan)
+            else -> settingsVM.setWinnerLineColor(color.transparent)
         }
     }
 
     fun setColorX(option: Int) {
         when (option) {
-            0 -> settingsVM.setColorX(Color.Blue)
-            1 -> settingsVM.setColorX(Color.Red)
-            2 -> settingsVM.setColorX(Color.Yellow)
-            3 -> settingsVM.setColorX(Color(0xFF299961))
-            4 -> settingsVM.setColorX(Color.Green)
-            5 -> settingsVM.setColorX(Color(0xFF6400EE))
-            6 -> settingsVM.setColorX(Color.Magenta)
-            7 -> settingsVM.setColorX(Color.White)
-            8 -> settingsVM.setColorX(Color.Cyan)
-            else -> settingsVM.setColorX(Color.Transparent)
+            0 -> settingsVM.setColorX(color.blue)
+            1 -> settingsVM.setColorX(color.red)
+            2 -> settingsVM.setColorX(color.yellow)
+            3 -> settingsVM.setColorX(color.dark_green)
+            4 -> settingsVM.setColorX(color.light_green)
+            5 -> settingsVM.setColorX(color.purple)
+            6 -> settingsVM.setColorX(color.magenta)
+            7 -> settingsVM.setColorX(color.white)
+            8 -> settingsVM.setColorX(color.cyan)
+            else -> settingsVM.setColorX(color.transparent)
         }
     }
 
     fun setColorCircle(option: Int) {
         when (option) {
-            0 -> settingsVM.setColorCircle(Color.Blue)
-            1 -> settingsVM.setColorCircle(Color.Red)
-            2 -> settingsVM.setColorCircle(Color.Yellow)
-            3 -> settingsVM.setColorCircle(Color(0xFF299961))
-            4 -> settingsVM.setColorCircle(Color.Green)
-            5 -> settingsVM.setColorCircle(Color(0xFF6400EE))
-            6 -> settingsVM.setColorCircle(Color.Magenta)
-            7 -> settingsVM.setColorCircle(Color.White)
-            8 -> settingsVM.setColorCircle(Color.Cyan)
-            else -> settingsVM.setColorCircle(Color.Transparent)
+            0 -> settingsVM.setColorCircle(color.blue)
+            1 -> settingsVM.setColorCircle(color.red)
+            2 -> settingsVM.setColorCircle(color.yellow)
+            3 -> settingsVM.setColorCircle(color.dark_green)
+            4 -> settingsVM.setColorCircle(color.light_green)
+            5 -> settingsVM.setColorCircle(color.purple)
+            6 -> settingsVM.setColorCircle(color.magenta)
+            7 -> settingsVM.setColorCircle(color.white)
+            8 -> settingsVM.setColorCircle(color.cyan)
+            else -> settingsVM.setColorCircle(color.transparent)
         }
     }
 

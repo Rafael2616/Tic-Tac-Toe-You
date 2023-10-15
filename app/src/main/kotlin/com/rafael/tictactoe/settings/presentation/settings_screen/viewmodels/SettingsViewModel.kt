@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.game.domain.util.BackgroundMusic
+import com.rafael.tictactoe.settings.domain.enums.Colors
 import com.rafael.tictactoe.settings.domain.enums.Customization
 import com.rafael.tictactoe.settings.domain.model.SettingsEntity
 import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
@@ -29,6 +30,7 @@ class SettingsViewModel @Inject constructor(
     //Get default values for settings variables from SettingsEntity (used to avoid NPEs)
     val defaultSettings = SettingsEntity.getDefaultSettings()
 
+    val color = Colors.get()
     //Private vars that are updated in update functions but only acessible in this class
     private var _isBackgroundMusicOn = MutableStateFlow(true)
     private var _isDarkThemeOn = MutableStateFlow(true)
@@ -37,11 +39,11 @@ class SettingsViewModel @Inject constructor(
     private var _isSoundEffectsOn = MutableStateFlow(true)
     private var _isAboutShown = MutableStateFlow(false)  
     private var _showLineColorSelectorDialog = MutableStateFlow(false)
-    private var _winnerLineColor = MutableStateFlow(Color.Yellow)
+    private var _winnerLineColor = MutableStateFlow(color.yellow)
     private var _selectedWinnerLineColor = MutableStateFlow(2)
-    private var _colorX = MutableStateFlow(Color.Red)
+    private var _colorX = MutableStateFlow(color.red)
     private var _selectedColorX = MutableStateFlow(1)
-    private var _colorCircle = MutableStateFlow(Color.Green)
+    private var _colorCircle = MutableStateFlow(color.light_green)
     private var _selectedColorCircle = MutableStateFlow(4)
     private var _customizationType = MutableStateFlow(Customization.COLORX)
     private var _isBMPlaying = MutableStateFlow(false)
