@@ -25,7 +25,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -45,7 +46,7 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.Set
 @Composable
 fun ColorSelectionDialog() {
     val settingsVM = hiltViewModel<SettingsViewModel>()
-    var colorsOptions = listOf(0,1,2,3,4,5,6,7,8)
+    val colorsOptions = remember { mutableStateListOf(0,1,2,3,4,5,6,7,8) }
     val type by settingsVM.customizationType.collectAsState()
     val selectedWinnerLineColor by settingsVM.selectedWinnerLineColor.collectAsState()
     val selectedCircleColor by settingsVM.selectedCircleColor.collectAsState()
