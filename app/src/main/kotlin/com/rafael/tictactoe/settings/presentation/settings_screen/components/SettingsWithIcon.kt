@@ -46,8 +46,7 @@ import com.rafael.tictactoe.settings.domain.enums.GroupType
 import com.rafael.tictactoe.settings.domain.use_cases.toggleSettingsUseCase
 import com.rafael.tictactoe.settings.domain.util.ComponentValidator
 import com.rafael.tictactoe.settings.domain.util.SettingsFirstIconHandler
-import com.rafael.tictactoe.settings.domain.util.SettingsIconHandler
-import com.rafael.tictactoe.settings.domain.util.SettingsImageHandler
+import com.rafael.tictactoe.settings.domain.util.SettingsSecondIconHandler
 import com.rafael.tictactoe.settings.domain.util.SettingsTextHandler
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
@@ -179,7 +178,7 @@ fun SettingsWithIcon(
                         }
                     }
                     Icon(
-                        imageVector = SettingsIconHandler(index, groupType),
+                        imageVector = SettingsSecondIconHandler(index, groupType),
                         contentDescription = "Icon",
        		    	 modifier = Modifier
                         .size(40.dp)

@@ -2,7 +2,6 @@ package com.rafael.tictactoe.settings.presentation.settings_screen.components
 
 import androidx.annotation.StringRes
 import androidx.compose.animation.animateContentSize
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
@@ -44,7 +43,6 @@ import com.rafael.tictactoe.settings.domain.enums.GroupType
 import com.rafael.tictactoe.settings.domain.use_cases.toggleSettingsUseCase
 import com.rafael.tictactoe.settings.domain.util.ComponentValidator
 import com.rafael.tictactoe.settings.domain.util.SettingsFirstIconHandler
-import com.rafael.tictactoe.settings.domain.util.SettingsImageHandler
 import com.rafael.tictactoe.settings.domain.util.SettingsTextHandler
 import com.rafael.tictactoe.settings.domain.util.switchCheckedHandler
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
@@ -104,14 +102,6 @@ fun SettingsWithSwitch(
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        if (componentValidator.validateImage(groupType)) {
-                            Image(
-                                contentDescription = "Setting Image",
-                                modifier = Modifier
-                                    .size(55.dp),
-                                painter = SettingsImageHandler(index, groupType)
-                            )
-                        }
                         if (componentValidator.validateFirstIcon(groupType)) {
                            Icon(
                                 imageVector = SettingsFirstIconHandler(index, groupType),

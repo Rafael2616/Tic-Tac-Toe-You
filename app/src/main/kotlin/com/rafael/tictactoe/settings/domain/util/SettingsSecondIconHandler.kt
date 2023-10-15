@@ -15,7 +15,7 @@ import com.rafael.tictactoe.settings.domain.enums.GroupType
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
-fun SettingsIconHandler(index: Int, groupType: GroupType): ImageVector {
+fun SettingsSecondIconHandler(index: Int, groupType: GroupType): ImageVector {
     val viewModel = hiltViewModel<SettingsViewModel>()
     val isAboutShown by viewModel.isAboutShown.collectAsState()
 

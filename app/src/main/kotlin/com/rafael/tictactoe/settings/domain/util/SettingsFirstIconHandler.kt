@@ -1,9 +1,13 @@
 package com.rafael.tictactoe.settings.domain.util
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.BrightnessMedium
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.DarkMode
+import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material.icons.filled.MusicNote
 import androidx.compose.material.icons.filled.MusicOff
+import androidx.compose.material.icons.filled.Palette
 import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.material.icons.filled.VolumeOff
 import androidx.compose.material.icons.outlined.Info
@@ -20,6 +24,17 @@ fun SettingsFirstIconHandler(index: Int, groupType: GroupType): ImageVector {
     val viewModel = hiltViewModel<SettingsViewModel>()
     val isSoundEffectsOn by viewModel.isSoundEffectsOn.collectAsState()
     val isBackgroundMusicOn by viewModel.isBackgroundMusicOn.collectAsState()
+    val isDarkThemeOn by viewModel.isDarkThemeOn.collectAsState()
+
+    @Composable
+    fun ThemeIconHandler(index: Int): ImageVector {
+        return when (index) {
+            0 -> Icons.Filled.BrightnessMedium
+            1 -> if (isDarkThemeOn) Icons.Filled.DarkMode else Icons.Filled.LightMode
+            2 -> Icons.Filled.Palette
+            else -> Icons.Filled.Close
+        }
+    }
 
     @Composable
     fun SoundIconHandler(index: Int): ImageVector {
@@ -39,6 +54,7 @@ fun SettingsFirstIconHandler(index: Int, groupType: GroupType): ImageVector {
     }
 
     return when (groupType) {
+        GroupType.THEME -> ThemeIconHandler(index)
         GroupType.SOUND -> SoundIconHandler(index)
         GroupType.OTHER -> OtherIconHandler(index)
         else -> Icons.Filled.Close
