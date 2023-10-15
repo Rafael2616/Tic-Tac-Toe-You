@@ -1,6 +1,5 @@
 package com.rafael.tictactoe.settings.presentation.settings_screen.components
 
-import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
