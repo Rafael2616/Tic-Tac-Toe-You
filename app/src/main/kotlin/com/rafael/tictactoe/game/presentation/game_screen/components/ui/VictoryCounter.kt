@@ -36,8 +36,8 @@ fun VictoryCounter() {
     val player1Wins by viewModel.player1Wins.collectAsState()
     val player2Wins by viewModel.player2Wins.collectAsState()
     val isXFor1 by viewModel.isXFor1.collectAsState()
-    val colorX by settingsVM.colorX.collectAsState()
-    val colorCircle by settingsVM.colorCircle.collectAsState()
+    val xColor by settingsVM.xColor.collectAsState()
+    val circleColor by settingsVM.circleColor.collectAsState()
 
     Box(
         modifier = Modifier
@@ -75,9 +75,9 @@ fun VictoryCounter() {
                             .align(Alignment.CenterHorizontally)
                     ) {
                         if (isXFor1) {
-                            drawXinCounter(colorX)
+                            drawXinCounter(xColor)
                         } else {
-                            drawCircleinCounter(colorCircle)
+                            drawCircleinCounter(circleColor)
                         }
                     }
                 }
@@ -104,9 +104,9 @@ fun VictoryCounter() {
                             .align(Alignment.CenterHorizontally)
                     ) {
                         if (isXFor1) {
-                            drawCircleinCounter(colorCircle)
+                            drawCircleinCounter(circleColor)
                          } else {
-                            drawXinCounter(colorX)
+                            drawXinCounter(xColor)
                         }
                     }
                 }

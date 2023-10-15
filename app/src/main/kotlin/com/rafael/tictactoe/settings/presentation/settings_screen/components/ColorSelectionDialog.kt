@@ -48,8 +48,8 @@ fun ColorSelectionDialog() {
     var colorsOptions = listOf(0,1,2,3,4,5,6,7,8)
     val type by settingsVM.customizationType.collectAsState()
     val selectedWinnerLineColor by settingsVM.selectedWinnerLineColor.collectAsState()
-    val selectedColorCircle by settingsVM.selectedColorCircle.collectAsState()
-    val selectedColorX by settingsVM.selectedColorX.collectAsState()
+    val selectedCircleColor by settingsVM.selectedCircleColor.collectAsState()
+    val selectedXColor by settingsVM.selectedXColor.collectAsState()
     val colors = Colors.get()
 
     Surface(
@@ -92,8 +92,8 @@ fun ColorSelectionDialog() {
                             .clickable(onClick = {
                                 when (type) {
                                     Customization.WINNERLINECOLOR -> settingsVM.updateSelectedWinnerLineColor(color)
-                                    Customization.COLORCIRCLE ->  settingsVM.updateSelectedColorCircle(color)
-                                    Customization.COLORX ->  settingsVM.updateSelectedColorX(color)
+                                    Customization.CIRCLECOLOR ->  settingsVM.updateSelectedCircleColor(color)
+                                    Customization.XCOLOR ->  settingsVM.updateSelectedXColor(color)
                                 }
                                 settingsVM.execUIClickSound()
                                 colorSelectionUseCase(
@@ -115,14 +115,14 @@ fun ColorSelectionDialog() {
                                     selected =
                                         when (type) {
                                             Customization.WINNERLINECOLOR -> color == selectedWinnerLineColor
-                                            Customization.COLORCIRCLE -> color == selectedColorCircle
-                                            Customization.COLORX -> color == selectedColorX
+                                            Customization.CIRCLECOLOR -> color == selectedCircleColor
+                                            Customization.XCOLOR -> color == selectedXColor
                                         },
                                     onClick = {
                                         when (type) {
                                             Customization.WINNERLINECOLOR -> settingsVM.updateSelectedWinnerLineColor(color)
-                                            Customization.COLORCIRCLE ->  settingsVM.updateSelectedColorCircle(color)
-                                            Customization.COLORX ->  settingsVM.updateSelectedColorX(color)
+                                            Customization.CIRCLECOLOR ->  settingsVM.updateSelectedCircleColor(color)
+                                            Customization.XCOLOR ->  settingsVM.updateSelectedXColor(color)
                                         }
                                         settingsVM.execUIClickSound()
                                         colorSelectionUseCase(

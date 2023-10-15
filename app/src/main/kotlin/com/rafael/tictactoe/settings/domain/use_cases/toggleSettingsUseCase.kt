@@ -29,8 +29,8 @@ fun toggleSettingsUseCase(
         vm.showColorSelectionDialog(true)
         when (index) {
             0 -> vm.setCustomizationType(Customization.WINNERLINECOLOR)
-            1 -> vm.setCustomizationType(Customization.COLORCIRCLE)
-            2 -> vm.setCustomizationType(Customization.COLORX)
+            1 -> vm.setCustomizationType(Customization.CIRCLECOLOR)
+            2 -> vm.setCustomizationType(Customization.XCOLOR)
         }
     }
 

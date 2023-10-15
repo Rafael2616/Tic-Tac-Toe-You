@@ -15,10 +15,9 @@ import androidx.compose.material3.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -33,8 +32,8 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun CardGrid() {
-    var cardItems by rememberSaveable { mutableStateOf(List<Boolean>(3){false})}
-    var rowItems by rememberSaveable { mutableStateOf(List<Boolean>(3){false})}
+    val cardItems = remember { mutableStateListOf(0,1,2) }
+    val rowItems = remember { mutableStateListOf(0,1,2) }
     val viewModel = hiltViewModel<GameViewModel>()
     val context = LocalContext.current
     val scope = rememberCoroutineScope()

@@ -59,8 +59,8 @@ fun SettingsWithIcon(
     val viewModel = hiltViewModel<SettingsViewModel>()
     val isAboutShown by viewModel.isAboutShown.collectAsState()
     val winnerLineColor by viewModel.winnerLineColor.collectAsState()
-    val circleColor by viewModel.colorCircle.collectAsState()
-    val xColor by viewModel.colorX.collectAsState()
+    val circleColor by viewModel.circleColor.collectAsState()
+    val xColor by viewModel.xColor.collectAsState()
     val componentValidator = ComponentValidator()
 
     Column(

@@ -22,8 +22,8 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.Set
 fun ToastImageHandler() {
     val viewModel = hiltViewModel<GameViewModel>()
     val settingsVM = hiltViewModel<SettingsViewModel>()
-    val colorX by settingsVM.colorX.collectAsState()
-    val colorCircle by settingsVM.colorCircle.collectAsState()
+    val xColor by settingsVM.xColor.collectAsState()
+    val circleColor by settingsVM.circleColor.collectAsState()
     val play by viewModel.play.collectAsState()
     val isXFor1 by viewModel.isXFor1.collectAsState()
     val is1Win by viewModel.is1Win.collectAsState()
@@ -36,24 +36,24 @@ fun ToastImageHandler() {
     ) {
         //Image showed when game not started yet (configuration fase)
     	if (!play) {
-            if (isXFor1) drawXinToast(colorX) else drawCircleinToast(colorCircle)
+            if (isXFor1) drawXinToast(xColor) else drawCircleinToast(circleColor)
     	}
 
         //Image for case of game is on going
         if (play && !winner) {
-            if (isXImage) drawXinToast(colorX) else drawCircleinToast(colorCircle)
+            if (isXImage) drawXinToast(xColor) else drawCircleinToast(circleColor)
         }
  
         //Image for case of has winner   
         if (winner) {
             if (is1Win && isXFor1) {
-                drawXinToast(colorX)
+                drawXinToast(xColor)
             } else if (is1Win && !isXFor1) { 
-                drawCircleinToast(colorCircle)
+                drawCircleinToast(circleColor)
             } else if (!is1Win && isXFor1) {
-                drawCircleinToast(colorCircle)
+                drawCircleinToast(circleColor)
             } else if (!is1Win && !isXFor1) {
-                drawXinToast(colorX)
+                drawXinToast(xColor)
             }
         }
     }

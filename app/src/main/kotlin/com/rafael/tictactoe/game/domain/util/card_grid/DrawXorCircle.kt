@@ -23,8 +23,8 @@ fun DrawXorCircle(
     val viewModel = hiltViewModel<GameViewModel>()
     val card by viewModel.card.collectAsState()
 	val isCardClicked by viewModel.isCardClicked.collectAsState()
-    val colorX by settingsVM.colorX.collectAsState()
-    val colorCircle by settingsVM.colorCircle.collectAsState()
+    val xColor by settingsVM.xColor.collectAsState()
+    val circleColor by settingsVM.circleColor.collectAsState()
 
     AnimatedVisibility(isCardClicked[rowIndex][cardIndex]) {
         if (isCardClicked[rowIndex][cardIndex]) {
@@ -33,9 +33,9 @@ fun DrawXorCircle(
                     .fillMaxSize()
             ) {
             	if (card[rowIndex][cardIndex]) {
-                    drawX(colorX)
+                    drawX(xColor)
                 } else {
-                    drawAnCircle(colorCircle)
+                    drawAnCircle(circleColor)
                 }
         	}
         }

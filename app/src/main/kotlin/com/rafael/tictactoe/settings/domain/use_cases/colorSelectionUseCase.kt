@@ -26,39 +26,39 @@ fun colorSelectionUseCase(
         }
     }
 
-    fun setColorX(option: Int) {
+    fun setXColor(option: Int) {
         when (option) {
-            0 -> settingsVM.setColorX(color.blue)
-            1 -> settingsVM.setColorX(color.red)
-            2 -> settingsVM.setColorX(color.yellow)
-            3 -> settingsVM.setColorX(color.dark_green)
-            4 -> settingsVM.setColorX(color.light_green)
-            5 -> settingsVM.setColorX(color.purple)
-            6 -> settingsVM.setColorX(color.magenta)
-            7 -> settingsVM.setColorX(color.white)
-            8 -> settingsVM.setColorX(color.cyan)
-            else -> settingsVM.setColorX(color.transparent)
+            0 -> settingsVM.setXColor(color.blue)
+            1 -> settingsVM.setXColor(color.red)
+            2 -> settingsVM.setXColor(color.yellow)
+            3 -> settingsVM.setXColor(color.dark_green)
+            4 -> settingsVM.setXColor(color.light_green)
+            5 -> settingsVM.setXColor(color.purple)
+            6 -> settingsVM.setXColor(color.magenta)
+            7 -> settingsVM.setXColor(color.white)
+            8 -> settingsVM.setXColor(color.cyan)
+            else -> settingsVM.setXColor(color.transparent)
         }
     }
 
-    fun setColorCircle(option: Int) {
+    fun setCircleColor(option: Int) {
         when (option) {
-            0 -> settingsVM.setColorCircle(color.blue)
-            1 -> settingsVM.setColorCircle(color.red)
-            2 -> settingsVM.setColorCircle(color.yellow)
-            3 -> settingsVM.setColorCircle(color.dark_green)
-            4 -> settingsVM.setColorCircle(color.light_green)
-            5 -> settingsVM.setColorCircle(color.purple)
-            6 -> settingsVM.setColorCircle(color.magenta)
-            7 -> settingsVM.setColorCircle(color.white)
-            8 -> settingsVM.setColorCircle(color.cyan)
-            else -> settingsVM.setColorCircle(color.transparent)
+            0 -> settingsVM.setCircleColor(color.blue)
+            1 -> settingsVM.setCircleColor(color.red)
+            2 -> settingsVM.setCircleColor(color.yellow)
+            3 -> settingsVM.setCircleColor(color.dark_green)
+            4 -> settingsVM.setCircleColor(color.light_green)
+            5 -> settingsVM.setCircleColor(color.purple)
+            6 -> settingsVM.setCircleColor(color.magenta)
+            7 -> settingsVM.setCircleColor(color.white)
+            8 -> settingsVM.setCircleColor(color.cyan)
+            else -> settingsVM.setCircleColor(color.transparent)
         }
     }
 
     when (customization) {
         Customization.WINNERLINECOLOR -> setWinnerLineColor(option)
-        Customization.COLORX -> setColorX(option)
-        Customization.COLORCIRCLE -> setColorCircle(option)
+        Customization.XCOLOR -> setXColor(option)
+        Customization.CIRCLECOLOR -> setCircleColor(option)
     }
 }
