@@ -8,26 +8,26 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.rafael.tictactoe.settings.presentation.settings_screen.components.ColorSelectionDialog
 import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsTopBar
-import com.rafael.tictactoe.settings.presentation.settings_screen.components.LineColorSelectorDialog
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
 @ExperimentalMaterial3Api
 fun SettingsScreen(navController: NavController) {
     val settingsVM = hiltViewModel<SettingsViewModel>()
-    val showLineColorSelectorDialog by settingsVM.showLineColorSelectorDialog.collectAsState()
+    val showColorSelectionDialog by settingsVM.showColorSelectionDialog.collectAsState()
 
     SettingsTopBar(navController)
 
-    AnimatedVisibility(showLineColorSelectorDialog) {
-        LineColorSelectorDialog()
+    AnimatedVisibility(showColorSelectionDialog) {
+        ColorSelectionDialog()
     }
 
     DisposableEffect(Unit) {
         onDispose {
             settingsVM.updateIsAboutShown(false)
-            settingsVM.showLineColorSelectorDialog(false)
+            settingsVM.showColorSelectionDialog(false)
         }
     }
 }

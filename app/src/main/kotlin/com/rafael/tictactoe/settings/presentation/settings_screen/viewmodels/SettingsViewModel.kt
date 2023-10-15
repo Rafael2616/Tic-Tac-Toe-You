@@ -38,7 +38,7 @@ class SettingsViewModel @Inject constructor(
     private var _isFollowingSystemOn = MutableStateFlow(true)
     private var _isSoundEffectsOn = MutableStateFlow(true)
     private var _isAboutShown = MutableStateFlow(false)  
-    private var _showLineColorSelectorDialog = MutableStateFlow(false)
+    private var _showColorSelectionDialog = MutableStateFlow(false)
     private var _winnerLineColor = MutableStateFlow(color.yellow)
     private var _selectedWinnerLineColor = MutableStateFlow(2)
     private var _colorX = MutableStateFlow(color.red)
@@ -55,7 +55,7 @@ class SettingsViewModel @Inject constructor(
     val isFollowingSystemOn: StateFlow<Boolean> = _isFollowingSystemOn
     val isSoundEffectsOn: StateFlow<Boolean> = _isSoundEffectsOn
     val isAboutShown: StateFlow<Boolean> = _isAboutShown
-    val showLineColorSelectorDialog: StateFlow<Boolean> = _showLineColorSelectorDialog
+    val showColorSelectionDialog: StateFlow<Boolean> = _showColorSelectionDialog
     val winnerLineColor: StateFlow<Color> = _winnerLineColor
     val selectedWinnerLineColor: StateFlow<Int> = _selectedWinnerLineColor
     val colorX: StateFlow<Color> = _colorX
@@ -132,8 +132,8 @@ class SettingsViewModel @Inject constructor(
         _customizationType.value = newType
     }
     
-    fun showLineColorSelectorDialog(newValue: Boolean) {
-        _showLineColorSelectorDialog.value = newValue
+    fun showColorSelectionDialog(newValue: Boolean) {
+        _showColorSelectionDialog.value = newValue
     }
 
     fun setWinnerLineColor(newValue: Color) {

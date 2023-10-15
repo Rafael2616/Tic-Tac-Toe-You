@@ -21,8 +21,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -39,7 +39,7 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.Set
 fun ExitGameDialog(navController: NavController) {
     val viewModel = hiltViewModel<GameViewModel>()
     val settingsVM = hiltViewModel<SettingsViewModel>()
-    var isExitClicked by remember { mutableStateOf(false) }
+    var isExitClicked by rememberSaveable { mutableStateOf(false) }
   
     Surface(
         color = Color.Black.copy(alpha = 0.3f),
@@ -111,7 +111,7 @@ fun ExitGameDialog(navController: NavController) {
                             if (!isExitClicked) {
                                 isExitClicked = true
                                 settingsVM.execUIClickSound()
-                                settingsVM.showLineColorSelectorDialog(false)
+                                settingsVM.showColorSelectionDialog(false)
                                 navController.popBackStack()
                                 viewModel.reset()
                             }

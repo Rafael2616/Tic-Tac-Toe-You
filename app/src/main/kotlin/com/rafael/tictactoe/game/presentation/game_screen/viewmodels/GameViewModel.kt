@@ -258,6 +258,12 @@ class GameViewModel @Inject constructor(
        _selectedDifficultyMode.value = newMode
    }
 
+    fun play() {
+        updatePlay(true)
+        updateIsXImage(isXFor1.value)
+        updateIsTimerOn(true)   
+    }
+
     fun reset() {
         val allFalse = List(3){List<Boolean>(3) { false }}
         resetVictoryCounter()

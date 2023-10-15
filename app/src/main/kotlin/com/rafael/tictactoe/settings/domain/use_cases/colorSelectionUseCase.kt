@@ -4,7 +4,7 @@ import com.rafael.tictactoe.settings.domain.enums.Colors
 import com.rafael.tictactoe.settings.domain.enums.Customization
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
-fun lineColorSelectionUseCase(
+fun colorSelectionUseCase(
     customization: Customization,
     option: Int,
 	settingsVM: SettingsViewModel

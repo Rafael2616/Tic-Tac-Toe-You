@@ -8,8 +8,10 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,17 +21,17 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.components.Set
 import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsWithSwitch
 
 @Composable
-fun SettingsOptionsImpl(paddingValues: PaddingValues) {
-    var settingsGroups by rememberSaveable { mutableStateOf(List<Boolean>(4) { false }) }
-    val themeGroupSize = listOf(0,1,2)
-    val soundGroupSize = listOf(0,1)
-    val cutomizationGroupSize = listOf(0,1,2)
-    val otherGroupSize = listOf(0)
+fun SettingsOptionsImpl(livePadding: PaddingValues) {
+    val settingsGroups = remember { mutableStateListOf(0,1,2,3) }
+    val themeGroupSize = remember { mutableStateListOf(0,1,2) }
+    val soundGroupSize = remember { mutableStateListOf(0,1) }
+    val cutomizationGroupSize = remember { mutableStateListOf(0,1,2) }
+    val otherGroupSize = remember { mutableStateListOf(0) }
 
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .padding(paddingValues)
+            .padding(livePadding)
             .animateContentSize(),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally

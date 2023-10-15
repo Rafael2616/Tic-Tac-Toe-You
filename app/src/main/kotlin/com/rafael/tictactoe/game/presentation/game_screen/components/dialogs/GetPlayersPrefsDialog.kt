@@ -39,11 +39,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -68,7 +70,6 @@ import com.rafael.tictactoe.settings.domain.enums.Customization
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
-@ExperimentalComposeUiApi
 fun GetPlayersPrefsDialog() {
     val viewModel = hiltViewModel<GameViewModel>()
     val settingsVM = hiltViewModel<SettingsViewModel>()
@@ -82,20 +83,20 @@ fun GetPlayersPrefsDialog() {
     val localPlayer1 by viewModel.localPlayer1.collectAsState()
     val isCPUPlayer1 by viewModel.isCPUPlayer1.collectAsState()
     val isCPUMode by viewModel.isCPUMode.collectAsState()
-    val colorX by settingsVM.colorX.collectAsState()
+    val xColor by settingsVM.colorX.collectAsState()
+    val circleColor by settingsVM.colorCircle.collectAsState()
     val isDarkThemeOn by settingsVM.isDarkThemeOn.collectAsState()
-    val colorCircle by settingsVM.colorCircle.collectAsState()
     val selectedDifficultyMode by viewModel.selectedDifficultyMode.collectAsState()
     val player1Value = if (localPlayer1) player1Name else player2Name
     val player2Value = if (localPlayer1) player2Name else player1Name
     val textField1State = if (isCPUMode) { if (isCPUPlayer1) true else false } else {false}
     val textField2State = if (isCPUMode) { if (isCPUPlayer1) false else true } else {false}
-    val type1 = if (isXFor1) Customization.COLORX else Customization.COLORCIRCLE
-    val type2 = if (isXFor1) Customization.COLORCIRCLE else Customization.COLORX
+    val customTypeforP1 = if (isXFor1) Customization.COLORX else Customization.COLORCIRCLE
+    val customTypeForP2 = if (isXFor1) Customization.COLORCIRCLE else Customization.COLORX
     val bottomPadding = if (isKeyboardOpen) { if (isCPUMode) 205.dp else 150.dp} else {0.dp}
     val dialogHeigth = if (isCPUMode) 285.dp else 220.dp
-    val maxLength = 10
-    val modesSize = listOf(0,1)
+    val maxLetterLength by rememberSaveable { mutableIntStateOf(10) }
+    val difficultyModesNumber = remember { mutableStateListOf(0,1) }
 
     Surface(
         color = Color.Black.copy(alpha = 0.3f),
@@ -126,7 +127,7 @@ fun GetPlayersPrefsDialog() {
                     TextField(
                         value = player1Value,
                         onValueChange = {
-                            if (it.length <= maxLength) {
+                            if (it.length <= maxLetterLength) {
                                 if (localPlayer1) viewModel.updatePlayer1Name(it) else viewModel.updatePlayer2Name(it)
                             }
                         },
@@ -171,7 +172,7 @@ fun GetPlayersPrefsDialog() {
                     TextField(
                         value = player2Value,
                         onValueChange = {
-                            if (it.length <= maxLength) {
+                            if (it.length <= maxLetterLength) {
                                 if (localPlayer1) viewModel.updatePlayer2Name(it) else viewModel.updatePlayer1Name(it)
                             }
                         },
@@ -208,14 +209,14 @@ fun GetPlayersPrefsDialog() {
                             .clickable( onClick = {
                                 settingsVM.execUIClickSound()
                                 keyboardController?.hide()
-                                settingsVM.setCustomizationType(type1)
-                                settingsVM.showLineColorSelectorDialog(true)
+                                settingsVM.setCustomizationType(customTypeforP1)
+                                settingsVM.showColorSelectionDialog(true)
                            })
                     ) {
                         if (isXFor1) {
-                            drawXinDialog(colorX)
+                            drawXinDialog(xColor)
                         } else {
-                            drawCircleinDialog(colorCircle)
+                            drawCircleinDialog(circleColor)
                         }
                     }
                     Card(
@@ -244,14 +245,14 @@ fun GetPlayersPrefsDialog() {
                             .clickable( onClick = {
                                 settingsVM.execUIClickSound()
                                 keyboardController?.hide()
-                                settingsVM.setCustomizationType(type2)
-                                settingsVM.showLineColorSelectorDialog(true)
+                                settingsVM.setCustomizationType(customTypeForP2)
+                                settingsVM.showColorSelectionDialog(true)
                             })
                     ) {
                         if (isXFor1) {
-                            drawCircleinDialog(colorCircle)
+                            drawCircleinDialog(circleColor)
                         } else {
-                            drawXinDialog(colorX)
+                            drawXinDialog(xColor)
                         }
                     }
                 }
@@ -278,7 +279,7 @@ fun GetPlayersPrefsDialog() {
                             horizontalArrangement = Arrangement.SpaceEvenly,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            modesSize.forEach { mode ->
+                            difficultyModesNumber.forEach { mode ->
                                 Card(
                                     shape = MaterialTheme.shapes.medium,
                                     border = BorderStroke(1.5.dp, Color.Gray),
@@ -351,11 +352,9 @@ fun GetPlayersPrefsDialog() {
                 Button(
                     onClick = {
                         settingsVM.execUIClickSound()
-                        viewModel.updatePlay(true)
-                        viewModel.updateIsXImage(isXFor1)
+                        viewModel.play()
                         viewModel.updatePlayer1Name(player1Value)
                         viewModel.updatePlayer2Name(player2Value)
-                        viewModel.updateIsTimerOn(true)
                         if (isCPUMode && isCPUPlayer1) {
                             viewModel.updateIsCPU(true)
                             RandomCardSorter(viewModel, context)

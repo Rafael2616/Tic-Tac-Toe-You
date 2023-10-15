@@ -8,7 +8,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -31,11 +30,10 @@ import com.rafael.tictactoe.game.domain.util.GotOldChecker
 import com.rafael.tictactoe.game.domain.util.RestartButtonLogic
 import com.rafael.tictactoe.game.domain.util.ToastNameHandler
 import com.rafael.tictactoe.game.domain.util.WinnerChecker
-import com.rafael.tictactoe.settings.presentation.settings_screen.components.LineColorSelectorDialog
+import com.rafael.tictactoe.settings.presentation.settings_screen.components.ColorSelectionDialog
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
-@ExperimentalComposeUiApi
 fun GameScreen(
     gameUtil: GameUtils,
     navController: NavController,
@@ -49,7 +47,7 @@ fun GameScreen(
     val winner by viewModel.winner.collectAsState()
     val isGameFinished by viewModel.isGameFinished.collectAsState()
     val showExitGameDialog by viewModel.showExitGameDialog.collectAsState()
-    val showLineColorSelectorDialog by settingsVM.showLineColorSelectorDialog.collectAsState()
+    val showColorSelectionDialog by settingsVM.showColorSelectionDialog.collectAsState()
     val playerName = gameUtil.playerName
     val context = LocalContext.current
     val update by rememberSaveable { mutableStateOf(true) }
@@ -88,8 +86,8 @@ fun GameScreen(
         WinnerLines()
     }
 
-    AnimatedVisibility(showLineColorSelectorDialog) {
-        LineColorSelectorDialog()
+    AnimatedVisibility(showColorSelectionDialog) {
+        ColorSelectionDialog()
     }
 
     AnimatedVisibility(showExitGameDialog) {

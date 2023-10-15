@@ -39,11 +39,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.settings.domain.enums.Colors
 import com.rafael.tictactoe.settings.domain.enums.Customization
-import com.rafael.tictactoe.settings.domain.use_cases.lineColorSelectionUseCase
+import com.rafael.tictactoe.settings.domain.use_cases.colorSelectionUseCase
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
-fun LineColorSelectorDialog() {
+fun ColorSelectionDialog() {
     val settingsVM = hiltViewModel<SettingsViewModel>()
     var colorsOptions = listOf(0,1,2,3,4,5,6,7,8)
     val type by settingsVM.customizationType.collectAsState()
@@ -96,7 +96,7 @@ fun LineColorSelectorDialog() {
                                     Customization.COLORX ->  settingsVM.updateSelectedColorX(color)
                                 }
                                 settingsVM.execUIClickSound()
-                                lineColorSelectionUseCase(
+                                colorSelectionUseCase(
                                     type,
                                     color,
                                     settingsVM
@@ -125,7 +125,7 @@ fun LineColorSelectorDialog() {
                                             Customization.COLORX ->  settingsVM.updateSelectedColorX(color)
                                         }
                                         settingsVM.execUIClickSound()
-                                        lineColorSelectionUseCase(
+                                        colorSelectionUseCase(
                                             type,
                                             color,
                                             settingsVM
@@ -179,7 +179,7 @@ fun LineColorSelectorDialog() {
                 OutlinedButton(
                     onClick = {
                         settingsVM.execUIClickSound()
-                        settingsVM.showLineColorSelectorDialog(false)
+                        settingsVM.showColorSelectionDialog(false)
                     },
                     modifier = Modifier
                         .width(90.dp)

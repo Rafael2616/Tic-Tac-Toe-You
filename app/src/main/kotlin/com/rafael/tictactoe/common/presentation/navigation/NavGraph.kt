@@ -6,7 +6,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.navigation.navArgument
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -22,7 +21,6 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.SettingsScreen
 
 @Composable
 @ExperimentalMaterial3Api
-@ExperimentalComposeUiApi
 fun NavGraph(gameUtil: GameUtils) {
     val navController = rememberNavController()
     val enterTransition = fadeIn(

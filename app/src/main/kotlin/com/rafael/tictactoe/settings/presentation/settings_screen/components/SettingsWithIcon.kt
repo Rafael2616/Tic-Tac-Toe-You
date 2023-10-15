@@ -59,8 +59,8 @@ fun SettingsWithIcon(
     val viewModel = hiltViewModel<SettingsViewModel>()
     val isAboutShown by viewModel.isAboutShown.collectAsState()
     val winnerLineColor by viewModel.winnerLineColor.collectAsState()
-    val colorCircle by viewModel.colorCircle.collectAsState()
-    val colorX by viewModel.colorX.collectAsState()
+    val circleColor by viewModel.colorCircle.collectAsState()
+    val xColor by viewModel.colorX.collectAsState()
     val componentValidator = ComponentValidator()
 
     Column(
@@ -131,20 +131,20 @@ fun SettingsWithIcon(
                                     center = Offset(28.dp.toPx(), 28.dp.toPx()),
                                     radius = 15.dp.toPx(),
                                     style = Stroke(width = 5.dp.toPx()),
-                                    color = colorCircle
+                                    color = circleColor
                                 )
                                 2 -> {
                                     drawLine(
                                         strokeWidth = 5.dp.toPx(),
                                         start = Offset(x = 15.dp.toPx(), y = 15.dp.toPx()),
                                         end = Offset(x = 40.dp.toPx(), y = 40.dp.toPx()),
-                                        color = colorX
+                                        color = xColor
                                     )
                                     drawLine(
                                         strokeWidth = 5.dp.toPx(),
                                         start = Offset(x = 40.dp.toPx(), y = 15.dp.toPx()),
                                         end = Offset(x = 15.dp.toPx(), y = 40.dp.toPx()),
-                                        color = colorX
+                                        color = xColor
                                     )
                                 }
                             }
