@@ -72,7 +72,7 @@ fun SettingsWithSwitch(
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Start,
             modifier = Modifier
-                .padding(start = 14.dp, bottom = 6.dp)
+                .padding(start = 15.dp, bottom = 6.dp)
                 .fillMaxWidth()
         )
         Card(
@@ -110,7 +110,7 @@ fun SettingsWithSwitch(
                                 contentDescription = "Icon",
        		            	 modifier = Modifier
                                     .size(42.dp)
-                                   .padding(start = 8.dp)
+                                   .padding(start = 10.dp)
                             )
                         }
                         Text(
@@ -121,7 +121,7 @@ fun SettingsWithSwitch(
                             textAlign = TextAlign.Center
                         )
                         Switch(
-                            modifier = Modifier.padding(end = 8.dp),
+                            modifier = Modifier.padding(end = 10.dp),
                             checked = switchCheckedHandler(
                                 groupType,
                                 index,

@@ -39,7 +39,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.getVersionCode
 import com.rafael.tictactoe.common.domain.util.getVersionName
@@ -78,7 +77,7 @@ fun SettingsWithIcon(
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Start,
             modifier = Modifier
-                .padding(start = 14.dp, bottom = 6.dp)
+                .padding(start = 15.dp, bottom = 6.dp)
                 .fillMaxWidth()
         )
         Card(
@@ -114,14 +113,14 @@ fun SettingsWithIcon(
                             contentDescription = "Icon",
        		        	 modifier = Modifier
                                 .size(42.dp)
-                                .padding(start = 8.dp)
+                                .padding(start = 10.dp)
                         )
                     }
                     if (componentValidator.validateCanvas(groupType)) {
                         Canvas(
                             modifier = Modifier
                                 .size(45.dp)
-                                .padding(start = 4.dp)
+                                .padding(start = 6.dp)
                         ) {
                             when (index) {
                                 0 -> drawLine(
@@ -185,7 +184,7 @@ fun SettingsWithIcon(
                         contentDescription = "Icon",
        		    	 modifier = Modifier
                         .size(42.dp)
-                        .padding(end = 8.dp)
+                        .padding(end = 10.dp)
                     )
                 }
                 if (index < (size.size - 1)) {
