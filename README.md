@@ -24,10 +24,10 @@ A classic tic-tac-toe game made with material you and others new android technol
 # Game Screenshots:
 
 <div style="width:100%; display:flex; justify-content:space-between;">
-[<img src="screenshots/screenshot_1.png" width=25% alt="home">](screenshots/screenshot_1.png)
-[<img src="screenshots/screenshot_2.png" width=25% alt="settings">](screenshots/screenshot_2.png)
-[<img src="screenshots/screenshot_3.png" width=25% alt ="PvP screen">](screenshots/screenshot_3.png)
-[<img src="screenshots/screenshot_4.png" width=25% alt ="PvP screen">](screenshots/screenshot_4.png)
+<img src="screenshots/screenshot_1.png" width=25% alt="home">
+<img src="screenshots/screenshot_2.png" width=25% alt="settings">
+<img src="screenshots/screenshot_3.png" width=25% alt ="PvP screen">
+<img src="screenshots/screenshot_4.png" width=25% alt ="PvP screen">
 </div>
 
 <div style="width:100%; display:flex; justify-content:space-between;">
