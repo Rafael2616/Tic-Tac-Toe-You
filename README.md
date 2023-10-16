@@ -24,17 +24,19 @@ A classic tic-tac-toe game made with material you and others new android technol
 # Game Screenshots:
 
 <div style="width:100%; display:flex; justify-content:space-between;">
-<img src="screenshots/screenshot_1.png" width=25% alt="home">
-<img src="screenshots/screenshot_2.png" width=25% alt="settings">
-<img src="screenshots/screenshot_3.png" width=25% alt ="PvP screen">
-<img src="screenshots/screenshot_4.png" width=25% alt ="PvP screen">
+<img src="screenshots/screenshot_1.png" width=33% alt="home">
+<img src="screenshots/screenshot_2.png" width=33% alt="settings">
+<img src="screenshots/screenshot_3.png" width=33% alt ="PvP screen">
+<img src="screenshots/screenshot_4.png" width=33% alt ="enter dialog">
+<img src="screenshots/screenshot_5.png" width=33% alt ="PvP screen">
 </div>
 
 <div style="width:100%; display:flex; justify-content:space-between;">
-<img src="screenshots/screenshot_6.png" width=25% alt="home">
-<img src="screenshots/screenshot_7.png" width=25% alt="settings">
-<img src="screenshots/screenshot_8.png" width=25% alt="PvP screen">
-<img src="screenshots/screenshot_9.png" width=25% alt="PvP screen">
+<img src="screenshots/screenshot_6.png" width=33% alt="home">
+<img src="screenshots/screenshot_7.png" width=33% alt="settings">
+<img src="screenshots/screenshot_8.png" width=33% alt="PvP screen">
+<img src="screenshots/screenshot_9.png" width=33% alt="enter dialog">
+<img src="screenshots/screenshot_10.png" width=33% alt="PvP screen">
 </div>
 
 # Incompletes/Bugged Features
