@@ -77,7 +77,7 @@ fun SettingsWithSwitch(
         )
         Card(
             shape = MaterialTheme.shapes.medium,
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.5f)),
             modifier = Modifier
                 .animateContentSize()
                 .width(360.dp)
