@@ -26,16 +26,11 @@ Game Screenshots:
 </h2>
 
 <div style="width:100%; display:flex; justify-content:space-between;">
-
 [<img src="screenshots/screenshot_1.png" width=25%](screenshots/screenshot_1.png)
 [<img src="screenshots/screenshot_2.png" width=25%](screenshots/screenshot_2.png)
 [<img src="screenshots/screenshot_3.png" width=25%](screenshots/screenshot_3.png)
 [<img src="screenshots/screenshot_4.png" width=25%](screenshots/screenshot_4.png)
-
 </div>
-
-<h2 align="left">
-<sub>
 
 # Incompletes/Bugged Features
 - The data is not being saved in the database
