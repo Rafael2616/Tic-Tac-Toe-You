@@ -24,17 +24,17 @@ A classic tic-tac-toe game made with material you and others new android technol
 # Game Screenshots:
 
 <div style="width:100%; display:flex; justify-content:space-between;">
-(screenshots/screenshot_1.png)
-(screenshots/screenshot_2.png)
-(screenshots/screenshot_3.png)
-(screenshots/screenshot_4.png)
+[<img src="screenshots/screenshot_1.png" width=25% alt="home"](screenshots/screenshot_1.png)
+[<img src="screenshots/screenshot_2.png" width=25% alt="settings"](screenshots/screenshot_2.png)
+[<img src="screenshots/screenshot_3.png" width=25% alt ="PvP screen"](screenshots/screenshot_3.png)
+[<img src="screenshots/screenshot_4.png" width=25% alt ="PvP screen"](screenshots/screenshot_4.png)
 </div>
 
 <div style="width:100%; display:flex; justify-content:space-between;">
-[<img src="screenshots/screenshot_6.png" width=25%](screenshots/screenshot_6.png)
-[<img src="screenshots/screenshot_7.png" width=25%](screenshots/screenshot_7.png)
-[<img src="screenshots/screenshot_8.png" width=25%](screenshots/screenshot_8.png)
-[<img src="screenshots/screenshot_9.png" width=25%](screenshots/screenshot_9.png)
+[<img src="screenshots/screenshot_6.png" width=25% alt="home"](screenshots/screenshot_6.png)
+[<img src="screenshots/screenshot_7.png" width=25% alt="settings"](screenshots/screenshot_7.png)
+[<img src="screenshots/screenshot_8.png" width=25% alt="PvP screen"](screenshots/screenshot_8.png)
+[<img src="screenshots/screenshot_9.png" width=25% alt="PvP screen"](screenshots/screenshot_.png)
 </div>
 
 # Incompletes/Bugged Features
