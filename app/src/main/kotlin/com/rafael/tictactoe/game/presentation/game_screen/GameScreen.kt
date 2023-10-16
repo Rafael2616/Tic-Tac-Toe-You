@@ -25,8 +25,8 @@ import com.rafael.tictactoe.game.presentation.game_screen.components.ui.PlayersN
 import com.rafael.tictactoe.game.presentation.game_screen.components.ui.VictoryCounter
 import com.rafael.tictactoe.game.presentation.game_screen.components.ui.WinnerLines
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
-import com.rafael.tictactoe.game.domain.util.GameUtils
 import com.rafael.tictactoe.game.domain.util.GotOldChecker
+import com.rafael.tictactoe.game.domain.util.PlayersNamesDisplay
 import com.rafael.tictactoe.game.domain.util.RestartButtonLogic
 import com.rafael.tictactoe.game.domain.util.ToastNameHandler
 import com.rafael.tictactoe.game.domain.util.WinnerChecker
@@ -35,7 +35,6 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.Set
 
 @Composable
 fun GameScreen(
-    gameUtil: GameUtils,
     navController: NavController,
     isCPUMode: Boolean
 ) {
@@ -48,7 +47,7 @@ fun GameScreen(
     val isGameFinished by viewModel.isGameFinished.collectAsState()
     val showExitGameDialog by viewModel.showExitGameDialog.collectAsState()
     val showColorSelectionDialog by settingsVM.showColorSelectionDialog.collectAsState()
-    val playerName = gameUtil.playerName
+    val playerName = PlayersNamesDisplay()
     val context = LocalContext.current
     val update by rememberSaveable { mutableStateOf(true) }
 

@@ -15,7 +15,6 @@ import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.common.presentation.navigation.NavGraph
 import com.rafael.tictactoe.common.presentation.theme.AppTheme
 import com.rafael.tictactoe.game.domain.util.BackgroundMusic
-import com.rafael.tictactoe.game.domain.util.GameUtils
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -25,7 +24,6 @@ import javax.inject.Inject
 class TicTacToeActivity : ComponentActivity() {
 
     @Inject lateinit var settingsVM: SettingsViewModel
-    @Inject lateinit var gameUtils: GameUtils
     @Inject lateinit var exoPlayer: ExoPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +36,7 @@ class TicTacToeActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background,
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    NavGraph(gameUtils)
+                    NavGraph()
                 }
             }
         }

@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.game.domain.util.CardGridSound
-import com.rafael.tictactoe.game.domain.util.GameUtils
 import com.rafael.tictactoe.game.domain.util.GotOldSound
 import com.rafael.tictactoe.game.domain.util.WinnerSound
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
@@ -16,7 +15,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 @HiltViewModel
 class GameViewModel @Inject constructor(
-    private val gameUtil : GameUtils,
     private val player: ExoPlayer,
     private val settingsVM: SettingsViewModel
 ): ViewModel() {
@@ -261,7 +259,8 @@ class GameViewModel @Inject constructor(
     fun play() {
         updatePlay(true)
         updateIsXImage(isXFor1.value)
-        updateIsTimerOn(true)   
+        updateIsTimerOn(true)
+        updateIsXImage(isXFor1.value)
     }
 
     fun reset() {

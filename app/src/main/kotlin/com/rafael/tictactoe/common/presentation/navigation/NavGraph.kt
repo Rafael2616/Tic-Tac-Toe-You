@@ -13,7 +13,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.rafael.tictactoe.common.presentation.navigation.Destinations
-import com.rafael.tictactoe.game.domain.util.GameUtils
 import com.rafael.tictactoe.game.presentation.game_screen.GameScreen
 import com.rafael.tictactoe.game.presentation.main_screen.MainScreen
 import com.rafael.tictactoe.game.presentation.splash_screen.SplashScreen
@@ -21,7 +20,7 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.SettingsScreen
 
 @Composable
 @ExperimentalMaterial3Api
-fun NavGraph(gameUtil: GameUtils) {
+fun NavGraph() {
     val navController = rememberNavController()
     val enterTransition = fadeIn(
         animationSpec = tween(durationMillis = 300)
@@ -53,7 +52,6 @@ fun NavGraph(gameUtil: GameUtils) {
             )
         ) { backStackEntry ->
             GameScreen(
-                gameUtil,
                 navController,
                 backStackEntry.arguments?.getBoolean("isCPUMode") ?: false
             )

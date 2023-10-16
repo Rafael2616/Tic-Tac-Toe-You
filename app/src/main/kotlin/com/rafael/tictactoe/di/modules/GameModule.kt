@@ -7,8 +7,6 @@ import androidx.room.Room
 import com.rafael.tictactoe.game.data.database.GameDatabase
 import com.rafael.tictactoe.game.data.repository.GameRepositoryImpl
 import com.rafael.tictactoe.game.domain.repository.GameRepository
-import com.rafael.tictactoe.game.domain.util.GameUtils
-import com.rafael.tictactoe.game.domain.util.PlayersNamesDisplay
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import dagger.Module
@@ -39,16 +37,13 @@ object GameModule {
 
     @Provides
     @Singleton
-    fun provideGameViewModel(gameUtils: GameUtils, player: ExoPlayer, settingsVM: SettingsViewModel): GameViewModel {
-        return GameViewModel(gameUtils, player, settingsVM)
-    }
-
-    //TODO// add misssing gameUtils here
-    @Provides
-    @Singleton
-    fun provideGameUtilities(): GameUtils {
-        return GameUtils(
-            playerName = PlayersNamesDisplay()
+    fun provideGameViewModel(
+        player: ExoPlayer,
+        settingsVM: SettingsViewModel
+    ): GameViewModel {
+        return GameViewModel(
+            player,
+            settingsVM
         )
     }
 }

@@ -61,7 +61,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.game.domain.util.PlayersImagesSetter
 import com.rafael.tictactoe.game.domain.util.RandomCardSorter
 import com.rafael.tictactoe.game.presentation.utils.draws.drawCircleinDialog
 import com.rafael.tictactoe.game.presentation.utils.draws.drawXinDialog
@@ -155,7 +154,6 @@ fun GetPlayersPrefsDialog() {
                             .clip(CircleShape)
                             .clickable(onClick = {
                                 settingsVM.execUIClickSound()
-                                PlayersImagesSetter(viewModel)
                                 if (!isCPUMode) {
                                     viewModel.updateLocalPlayer1(!localPlayer1)
                                 } else {
@@ -227,7 +225,6 @@ fun GetPlayersPrefsDialog() {
                             .clickable(onClick = {
                                 settingsVM.execUIClickSound()
                                 viewModel.updateIsXFor1(!isXFor1)
-    	                        PlayersImagesSetter(viewModel)
                             })
                     ) {
                         Image(
