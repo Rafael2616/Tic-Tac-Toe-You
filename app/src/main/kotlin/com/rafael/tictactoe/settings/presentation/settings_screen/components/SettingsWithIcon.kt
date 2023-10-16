@@ -5,6 +5,7 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,6 +19,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -117,40 +119,54 @@ fun SettingsWithIcon(
                         )
                     }
                     if (componentValidator.validateCanvas(groupType)) {
-                        Canvas(
+                        Box(
                             modifier = Modifier
-                                .size(45.dp)
                                 .padding(start = 6.dp)
+                                .clip(CircleShape)
+                                .background(Color.Black.copy(alpha = 0.12f))
+                                .size(40.dp)
+                                .align(Alignment.CenterVertically),
+                            contentAlignment = Alignment.Center
                         ) {
-                            when (index) {
-                                0 -> drawLine(
-                                    strokeWidth = 5.dp.toPx(),
-                                    start = Offset(x = 34.dp.toPx(), y = 11.dp.toPx()),
-                                    end = Offset(x = 11.dp.toPx(), y = 34.dp.toPx()),
-                                    color = winnerLineColor
-                                )
-                                1 -> drawCircle(
-                                    center = Offset(22.dp.toPx(), 22.dp.toPx()),
-                                    radius = 13.dp.toPx(),
-                                    style = Stroke(width = 5.dp.toPx()),
-                                    color = circleColor
-                                )
-                                2 -> {
-                                    drawLine(
-                                        strokeWidth = 5.dp.toPx(),
-                                        start = Offset(x = 11.dp.toPx(), y = 11.dp.toPx()),
-                                        end = Offset(x = 34.dp.toPx(), y = 34.dp.toPx()),
-                                        color = xColor
-                                    )
-                                    drawLine(
-                                        strokeWidth = 5.dp.toPx(),
-                                        start = Offset(x = 34.dp.toPx(), y = 11.dp.toPx()),
-                                        end = Offset(x = 11.dp.toPx(), y = 34.dp.toPx()),
-                                        color = xColor
-                                    )
-                                }
+                            Box(
+                                modifier = Modifier.size(24.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Canvas(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                ) {
+                                    when (index) {
+                                        0 -> drawLine(
+                                            strokeWidth = 5.dp.toPx(),
+                                            start = Offset(x = 24.dp.toPx(), y = 0.dp.toPx()),
+                                            end = Offset(x = 0.dp.toPx(), y = 24.dp.toPx()),
+                                            color = winnerLineColor
+                                        )
+                                        1 -> drawCircle(
+                                            center = Offset(12.dp.toPx(), 12.dp.toPx()),
+                                            radius = 12.dp.toPx(),
+                                            style = Stroke(width = 5.dp.toPx()),
+                                            color = circleColor
+                                        )
+                                        2 -> {
+                                            drawLine(
+                                                strokeWidth = 5.dp.toPx(),
+                                                start = Offset(x = 0.dp.toPx(), y = 0.dp.toPx()),
+                                                end = Offset(x = 24.dp.toPx(), y = 24.dp.toPx()),
+                                                color = xColor
+                                            )
+                                            drawLine(
+                                                strokeWidth = 5.dp.toPx(),
+                                                start = Offset(x = 24.dp.toPx(), y = 0.dp.toPx()),
+                                                end = Offset(x = 0.dp.toPx(), y = 24.dp.toPx()),
+                                                color = xColor
+                                            )
+                                        }
+                                    }
+                                }   
                             }
-                        }   
+                        }
                     }
                     Column(
                         modifier = Modifier
