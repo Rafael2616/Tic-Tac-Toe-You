@@ -3,8 +3,7 @@ package com.rafael.tictactoe.game.presentation.splash_screen.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -27,13 +26,16 @@ fun SplashImage() {
         contentAlignment = Alignment.Center
     ) {
 		Image(
-            painter = painterResource(id =
-	    	if (isDarkThemeOn) R.drawable.splash_icon_dark
-            else R.drawable.splash_icon_light),
+            painter = painterResource( id =
+                if (isDarkThemeOn) {
+                    R.drawable.splash_icon_dark
+                } else {
+                    R.drawable.splash_icon_light
+                }
+            ),
         	contentDescription = null,
        	 modifier = Modifier
-          	 .width(170.dp)
-          	 .height(170.dp)
+                .size(180.dp)
 		)
 	}
 }
