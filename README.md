@@ -21,15 +21,20 @@ A classic tic-tac-toe game made with material you and others new android technol
 - Kotlin 100%
 - Reative Programming w/ Kotlin Flows
 
-</sub>
-Game Screenshots:
-</h2>
+# Game Screenshots:
 
 <div style="width:100%; display:flex; justify-content:space-between;">
 [<img src="screenshots/screenshot_1.png" width=25%](screenshots/screenshot_1.png)
 [<img src="screenshots/screenshot_2.png" width=25%](screenshots/screenshot_2.png)
 [<img src="screenshots/screenshot_3.png" width=25%](screenshots/screenshot_3.png)
 [<img src="screenshots/screenshot_4.png" width=25%](screenshots/screenshot_4.png)
+</div>
+
+<div style="width:100%; display:flex; justify-content:space-between;">
+[<img src="screenshots/screenshot_6.png" width=25%](screenshots/screenshot_6.png)
+[<img src="screenshots/screenshot_7.png" width=25%](screenshots/screenshot_7.png)
+[<img src="screenshots/screenshot_8.png" width=25%](screenshots/screenshot_8.png)
+[<img src="screenshots/screenshot_9.png" width=25%](screenshots/screenshot_9.png)
 </div>
 
 # Incompletes/Bugged Features
