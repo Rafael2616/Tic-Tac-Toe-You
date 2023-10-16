@@ -18,6 +18,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -76,6 +77,7 @@ fun SettingsWithSwitch(
         )
         Card(
             shape = MaterialTheme.shapes.medium,
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
             modifier = Modifier
                 .animateContentSize()
                 .width(360.dp)
@@ -88,8 +90,10 @@ fun SettingsWithSwitch(
                     isFollowingSystemOn
                 )) {
                     Row(
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier
-                            .height(62.dp)
+                            .height(60.dp)
                             .fillMaxSize()
                             .clickable(onClick = {
                                 viewModel.execUIClickSound()
@@ -98,16 +102,14 @@ fun SettingsWithSwitch(
                                     index,
                                     viewModel
                                 )
-                            }),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically,
+                            })
                     ) {
                         if (componentValidator.validateFirstIcon(groupType)) {
                            Icon(
                                 imageVector = SettingsFirstIconHandler(index, groupType),
                                 contentDescription = "Icon",
        		            	 modifier = Modifier
-                                    .size(45.dp)
+                                    .size(42.dp)
                                    .padding(start = 8.dp)
                             )
                         }

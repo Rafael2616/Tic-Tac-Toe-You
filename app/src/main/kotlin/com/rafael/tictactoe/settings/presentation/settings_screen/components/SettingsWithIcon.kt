@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -82,18 +83,21 @@ fun SettingsWithIcon(
         )
         Card(
             shape = MaterialTheme.shapes.medium,
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
             modifier = Modifier
-                .animateContentSize()
                 .width(360.dp)
                 .clip(RoundedCornerShape(26.dp))
         ) {
             size.forEachIndexed { _, index ->
                 val rowHeight by animateDpAsState(
-                    if (groupType == GroupType.OTHER && index == 0 && isAboutShown) 150.dp else 62.dp
+                    if (groupType == GroupType.OTHER && index == 0 && isAboutShown) 150.dp else 60.dp
                 )
                 Row(
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier
                         .height(rowHeight)
+                        .animateContentSize()
                         .fillMaxSize()
                         .clickable(onClick = {
                             viewModel.execUIClickSound()
@@ -103,47 +107,46 @@ fun SettingsWithIcon(
                                 viewModel
                             )
                         }),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     if (componentValidator.validateFirstIcon(groupType)) {
                         Icon(
                             imageVector = SettingsFirstIconHandler(index, groupType),
                             contentDescription = "Icon",
        		        	 modifier = Modifier
-                                .size(45.dp)
+                                .size(42.dp)
                                 .padding(start = 8.dp)
                         )
                     }
                     if (componentValidator.validateCanvas(groupType)) {
                         Canvas(
                             modifier = Modifier
-                                .size(50.dp)
+                                .size(45.dp)
+                                .padding(start = 4.dp)
                         ) {
                             when (index) {
                                 0 -> drawLine(
                                     strokeWidth = 5.dp.toPx(),
-                                    start = Offset(x = 40.dp.toPx(), y = 15.dp.toPx()),
-                                    end = Offset(x = 15.dp.toPx(), y = 40.dp.toPx()),
+                                    start = Offset(x = 34.dp.toPx(), y = 11.dp.toPx()),
+                                    end = Offset(x = 11.dp.toPx(), y = 34.dp.toPx()),
                                     color = winnerLineColor
                                 )
                                 1 -> drawCircle(
-                                    center = Offset(28.dp.toPx(), 28.dp.toPx()),
-                                    radius = 15.dp.toPx(),
+                                    center = Offset(22.dp.toPx(), 22.dp.toPx()),
+                                    radius = 13.dp.toPx(),
                                     style = Stroke(width = 5.dp.toPx()),
                                     color = circleColor
                                 )
                                 2 -> {
                                     drawLine(
                                         strokeWidth = 5.dp.toPx(),
-                                        start = Offset(x = 15.dp.toPx(), y = 15.dp.toPx()),
-                                        end = Offset(x = 40.dp.toPx(), y = 40.dp.toPx()),
+                                        start = Offset(x = 11.dp.toPx(), y = 11.dp.toPx()),
+                                        end = Offset(x = 34.dp.toPx(), y = 34.dp.toPx()),
                                         color = xColor
                                     )
                                     drawLine(
                                         strokeWidth = 5.dp.toPx(),
-                                        start = Offset(x = 40.dp.toPx(), y = 15.dp.toPx()),
-                                        end = Offset(x = 15.dp.toPx(), y = 40.dp.toPx()),
+                                        start = Offset(x = 34.dp.toPx(), y = 11.dp.toPx()),
+                                        end = Offset(x = 11.dp.toPx(), y = 34.dp.toPx()),
                                         color = xColor
                                     )
                                 }
@@ -181,7 +184,7 @@ fun SettingsWithIcon(
                         imageVector = SettingsSecondIconHandler(index, groupType),
                         contentDescription = "Icon",
        		    	 modifier = Modifier
-                        .size(40.dp)
+                        .size(42.dp)
                         .padding(end = 8.dp)
                     )
                 }
