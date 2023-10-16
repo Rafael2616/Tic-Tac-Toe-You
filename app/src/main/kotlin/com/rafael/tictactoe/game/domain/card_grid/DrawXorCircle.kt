@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.domain.util
+package com.rafael.tictactoe.game.domain.card_grid
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize

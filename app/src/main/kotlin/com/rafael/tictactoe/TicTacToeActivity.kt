@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.common.presentation.navigation.NavGraph
 import com.rafael.tictactoe.common.presentation.theme.AppTheme
-import com.rafael.tictactoe.game.domain.util.BackgroundMusic
+import com.rafael.tictactoe.game.domain.audio.BackgroundMusic
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

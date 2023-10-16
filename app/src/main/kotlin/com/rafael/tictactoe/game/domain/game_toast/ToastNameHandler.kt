@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.domain.util
+package com.rafael.tictactoe.game.domain.game_toast
 
 import android.content.Context
 import androidx.compose.runtime.Composable

@@ -1,10 +1,10 @@
-package com.rafael.tictactoe.game.domain.util
+package com.rafael.tictactoe.game.domain.checkers
 
 import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.collectAsState
-import com.rafael.tictactoe.game.domain.util.GotOldSound
+import com.rafael.tictactoe.game.domain.audio.GotOldSound
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
 @Composable

@@ -1,7 +1,7 @@
-package com.rafael.tictactoe.game.domain.util
+package com.rafael.tictactoe.game.domain.card_grid
 
 import android.content.Context
-import com.rafael.tictactoe.game.domain.util.CardGridSound
+import com.rafael.tictactoe.game.domain.audio.CardGridSound
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

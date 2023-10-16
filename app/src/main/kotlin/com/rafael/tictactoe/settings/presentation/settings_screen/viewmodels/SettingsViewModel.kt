@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.common.domain.util.UiClickSound
-import com.rafael.tictactoe.game.domain.util.BackgroundMusic
+import com.rafael.tictactoe.game.domain.audio.BackgroundMusic
 import com.rafael.tictactoe.settings.domain.enums.Colors
 import com.rafael.tictactoe.settings.domain.enums.Customization
 import com.rafael.tictactoe.settings.domain.model.SettingsEntity

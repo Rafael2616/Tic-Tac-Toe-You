@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.domain.util
+package com.rafael.tictactoe.game.domain.restart_game
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue

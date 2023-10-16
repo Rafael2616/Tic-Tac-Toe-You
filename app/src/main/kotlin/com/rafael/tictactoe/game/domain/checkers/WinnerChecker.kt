@@ -1,11 +1,11 @@
-package com.rafael.tictactoe.game.domain.util
+package com.rafael.tictactoe.game.domain.checkers
 
 import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.rafael.tictactoe.game.domain.util.WinnerSound
-import com.rafael.tictactoe.game.domain.util.VictoryCounterUpdater
+import com.rafael.tictactoe.game.domain.audio.WinnerSound
+import com.rafael.tictactoe.game.domain.victory_counter.VictoryCounterUpdater
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
 @Composable

@@ -10,8 +10,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.game.domain.util.RandomCardSorter
-import com.rafael.tictactoe.game.domain.util.RestartGame
+import com.rafael.tictactoe.game.domain.card_grid.RandomCardSorter
+import com.rafael.tictactoe.game.domain.restart_game.RestartGame
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import com.rafael.tictactoe.game.presentation.game_screen.components.util.BaseButton
 

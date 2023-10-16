@@ -25,11 +25,11 @@ import com.rafael.tictactoe.game.presentation.game_screen.components.ui.PlayersN
 import com.rafael.tictactoe.game.presentation.game_screen.components.ui.VictoryCounter
 import com.rafael.tictactoe.game.presentation.game_screen.components.ui.WinnerLines
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
-import com.rafael.tictactoe.game.domain.util.GotOldChecker
-import com.rafael.tictactoe.game.domain.util.PlayersNamesDisplay
-import com.rafael.tictactoe.game.domain.util.RestartButtonLogic
-import com.rafael.tictactoe.game.domain.util.ToastNameHandler
-import com.rafael.tictactoe.game.domain.util.WinnerChecker
+import com.rafael.tictactoe.game.domain.checkers.GotOldChecker
+import com.rafael.tictactoe.game.domain.checkers.WinnerChecker
+import com.rafael.tictactoe.game.domain.game_toast.ToastNameHandler
+import com.rafael.tictactoe.game.domain.players_names.PlayersNamesDisplay
+import com.rafael.tictactoe.game.domain.restart_game.RestartButtonLogic
 import com.rafael.tictactoe.settings.presentation.settings_screen.components.ColorSelectionDialog
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 

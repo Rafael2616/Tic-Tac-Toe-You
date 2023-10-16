@@ -61,7 +61,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.game.domain.util.RandomCardSorter
+import com.rafael.tictactoe.game.domain.card_grid.RandomCardSorter
 import com.rafael.tictactoe.game.presentation.utils.draws.drawCircleinDialog
 import com.rafael.tictactoe.game.presentation.utils.draws.drawXinDialog
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel

@@ -3,9 +3,9 @@ package com.rafael.tictactoe.game.presentation.game_screen.viewmodels
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.media3.exoplayer.ExoPlayer
-import com.rafael.tictactoe.game.domain.util.CardGridSound
-import com.rafael.tictactoe.game.domain.util.GotOldSound
-import com.rafael.tictactoe.game.domain.util.WinnerSound
+import com.rafael.tictactoe.game.domain.audio.CardGridSound
+import com.rafael.tictactoe.game.domain.audio.GotOldSound
+import com.rafael.tictactoe.game.domain.audio.WinnerSound
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

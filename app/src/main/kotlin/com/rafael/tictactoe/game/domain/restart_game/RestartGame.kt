@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.domain.util
+package com.rafael.tictactoe.game.domain.restart_game
 
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 

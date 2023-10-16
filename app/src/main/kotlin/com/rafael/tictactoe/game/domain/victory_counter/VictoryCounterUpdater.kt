@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.domain.util
+package com.rafael.tictactoe.game.domain.victory_counter
 
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
