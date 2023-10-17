@@ -35,6 +35,8 @@ import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
@@ -96,6 +98,7 @@ fun GetPlayersPrefsDialog() {
     val dialogHeigth = if (isCPUMode) 285.dp else 220.dp
     val maxLetterLength by rememberSaveable { mutableIntStateOf(10) }
     val difficultyModesNumber = remember { mutableStateListOf(0,1) }
+    val containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(20.dp)
 
     Surface(
         color = Color.Black.copy(alpha = 0.3f),
@@ -110,6 +113,9 @@ fun GetPlayersPrefsDialog() {
             Card(
                 shape = MaterialTheme.shapes.large,
                 border = BorderStroke(1.5.dp, Color.Gray),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(20.dp)
+                ),
                 modifier = Modifier
                     .width(375.dp)
                     .height(dialogHeigth)
@@ -144,10 +150,18 @@ fun GetPlayersPrefsDialog() {
                             imeAction = ImeAction.Done,
                             capitalization = KeyboardCapitalization.Words
                         ),
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier.weight(1f),
+                        colors = TextFieldDefaults.colors(
+                            focusedContainerColor = containerColor,
+                            unfocusedContainerColor = containerColor,
+                            disabledContainerColor = containerColor
+                        )
                     )
                     Card(
                         shape = MaterialTheme.shapes.large,
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(20.dp)
+                        ),
                         modifier = Modifier
                             .width(60.dp)
                             .height(85.dp)
@@ -188,7 +202,12 @@ fun GetPlayersPrefsDialog() {
                             imeAction = ImeAction.Done,
                             capitalization = KeyboardCapitalization.Words
                         ),
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier.weight(1f),
+                        colors = TextFieldDefaults.colors(
+                            focusedContainerColor = containerColor,
+                            unfocusedContainerColor = containerColor,
+                            disabledContainerColor = containerColor
+                        )
                     )
                 }
 
@@ -219,6 +238,9 @@ fun GetPlayersPrefsDialog() {
                     }
                     Card(
                         shape = MaterialTheme.shapes.large,
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(20.dp)
+                        ),
                         modifier = Modifier
                             .size(60.dp)
                             .clip(CircleShape)
@@ -280,7 +302,9 @@ fun GetPlayersPrefsDialog() {
                                 Card(
                                     shape = MaterialTheme.shapes.medium,
                                     border = BorderStroke(1.5.dp, Color.Gray),
-                                    colors = CardDefaults.cardColors(containerColor = Color.Transparent),
+                                    colors = CardDefaults.cardColors(
+                                        containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(20.dp)
+                                    ),
                                     modifier = Modifier
                                         .width(150.dp)
                                         .height(40.dp)
