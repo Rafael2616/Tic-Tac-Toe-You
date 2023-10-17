@@ -146,8 +146,6 @@ fun SettingsWithSwitch(
     					                contentDescription = "Setting Switcher",
        					             modifier = Modifier.size(SwitchDefaults.IconSize)
                                     )
-                                } else {
-                                    Unit
                                 }
    					     }
                         )

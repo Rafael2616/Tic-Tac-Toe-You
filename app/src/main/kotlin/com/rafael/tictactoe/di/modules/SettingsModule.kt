@@ -19,9 +19,9 @@ object SettingsModule {
 
     @Provides
     @Singleton
-    fun provideSettingsDatabase(app: Application): SettingsDatabase {
+    fun provideSettingsDatabase(context: Application): SettingsDatabase {
         return Room.databaseBuilder(
-            app,
+            context,
             SettingsDatabase::class.java,
             SettingsDatabase.DATABASE_NAME
         ).build()
