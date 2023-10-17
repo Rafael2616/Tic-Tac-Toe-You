@@ -8,7 +8,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.game.presentation.game_screen.components.buttons.BackgroundMusicButton
@@ -48,7 +47,6 @@ fun GameScreen(
     val showExitGameDialog by viewModel.showExitGameDialog.collectAsState()
     val showColorSelectionDialog by settingsVM.showColorSelectionDialog.collectAsState()
     val playerName = PlayersNamesDisplay()
-    val context = LocalContext.current
     val update by rememberSaveable { mutableStateOf(true) }
 
 	//Handle when each UI component function will be called
@@ -95,8 +93,8 @@ fun GameScreen(
 
     //Handle when some business logic will be called
     if (play) {
-        WinnerChecker(viewModel, context)
-        GotOldChecker(viewModel, context)
+        WinnerChecker(viewModel)
+        GotOldChecker(viewModel)
     	RestartButtonLogic(viewModel)
     }
 

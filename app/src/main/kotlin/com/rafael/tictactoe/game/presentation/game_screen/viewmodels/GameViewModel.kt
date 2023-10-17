@@ -1,6 +1,6 @@
 package com.rafael.tictactoe.game.presentation.game_screen.viewmodels
 
-import android.content.Context
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.game.domain.audio.CardGridSound
@@ -16,7 +16,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 @HiltViewModel
 class GameViewModel @Inject constructor(
     private val player: ExoPlayer,
-    private val settingsVM: SettingsViewModel
+    private val settingsVM: SettingsViewModel,
+    private val context: Application
 ): ViewModel() {
 
 	private var _currentPlayerName = MutableStateFlow("")
@@ -236,15 +237,15 @@ class GameViewModel @Inject constructor(
         _winningPositionsIndices.value = emptyList
     }
 
-    fun execCardGridSound(context: Context) {
+    fun execCardGridSound() {
         CardGridSound(context, this, settingsVM, player)
     }
 
-    fun execGotOldSound(context: Context) {
+    fun execGotOldSound() {
         GotOldSound(context, this, settingsVM, player)
     }
 
-    fun execWinnerSound(context: Context) {
+    fun execWinnerSound() {
         WinnerSound(context, this, settingsVM, player)
     }
 

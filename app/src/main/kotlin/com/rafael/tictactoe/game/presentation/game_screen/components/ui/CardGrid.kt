@@ -20,7 +20,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
@@ -34,7 +33,6 @@ fun CardGrid() {
     val cardItems = remember { mutableStateListOf(0,1,2) }
     val rowItems = remember { mutableStateListOf(0,1,2) }
     val viewModel = hiltViewModel<GameViewModel>()
-    val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
     Column(
@@ -61,7 +59,6 @@ fun CardGrid() {
 				            	viewModel.showExpandButton(false)
                                 scope.launch {
                                     CardGridClickHandler(
-                                        context,
                                         viewModel,
                                         rowIndex,
                                         cardIndex

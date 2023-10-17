@@ -39,11 +39,13 @@ object GameModule {
     @Singleton
     fun provideGameViewModel(
         player: ExoPlayer,
-        settingsVM: SettingsViewModel
+        settingsVM: SettingsViewModel,
+        context: Application
     ): GameViewModel {
         return GameViewModel(
             player,
-            settingsVM
+            settingsVM,
+            context
         )
     }
 }

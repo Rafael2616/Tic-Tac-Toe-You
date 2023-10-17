@@ -6,11 +6,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.game.domain.card_grid.RandomCardSorter
+import com.rafael.tictactoe.game.domain.card_grid.EasyModeCPUCardClick
 import com.rafael.tictactoe.game.domain.restart_game.RestartGame
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import com.rafael.tictactoe.game.presentation.game_screen.components.util.BaseButton
@@ -18,10 +17,7 @@ import com.rafael.tictactoe.game.presentation.game_screen.components.util.BaseBu
 @Composable
 fun RestartButton() {
     val viewModel = hiltViewModel<GameViewModel>()
-    val context = LocalContext.current
-    val isCPUPlayer1 by viewModel.isCPUPlayer1.collectAsState()
     val isCPUMode by viewModel.isCPUMode.collectAsState()
-    val is1Win by viewModel.is1Win.collectAsState()
 
     BaseButton(
         modifier = Modifier.padding(top = 55.dp, end = 30.dp),
@@ -33,9 +29,7 @@ fun RestartButton() {
             viewModel.showExpandButton(false)
             RestartGame(viewModel)
             if (isCPUMode) {
-                if (isCPUPlayer1 && is1Win || !isCPUPlayer1 && !is1Win) {
-                    RandomCardSorter(viewModel, context)
-                }
+                EasyModeCPUCardClick(viewModel)
             }
         }
     )

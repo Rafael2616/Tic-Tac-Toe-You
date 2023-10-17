@@ -46,12 +46,4 @@ object SettingsModule {
             context
         )
     }
-
-    //TODO// add misssing settingsUtils here
-    /*@Provides
-    @Singleton
-    fun provideSettingsUtilities(repository: SettingsRepository): SettingsUtilities {
-        return SettingsUtilities(
-        )
-    }*/
 }

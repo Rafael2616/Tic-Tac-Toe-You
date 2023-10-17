@@ -1,12 +1,10 @@
 package com.rafael.tictactoe.game.domain.card_grid
 
-import android.content.Context
 import com.rafael.tictactoe.game.domain.audio.CardGridSound
-import com.rafael.tictactoe.game.domain.card_grid.RandomCardSorter
+import com.rafael.tictactoe.game.domain.card_grid.EasyModeCPUCardClick
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
 suspend fun CardGridClickHandler(
-    context: Context,
 	vm: GameViewModel,
 	rowIndex: Int,
 	cardIndex: Int
@@ -40,44 +38,52 @@ suspend fun CardGridClickHandler(
     //PvP Mode
 	if (!isCPUMode) {
         if (isPlayer1) {
+            // Exec player 1's move
  	       vm.updateCard(rowIndex, cardIndex, isXImage)
 			vm.updateIsCardClicked(rowIndex, cardIndex, true)
             vm.updateIsXImage(!isXImage)
 			vm.updateIsPlayer1(false)
         } else {
+            // Exec player 2's move
             vm.updateCard(rowIndex, cardIndex, isXImage)
             vm.updateIsCardClicked(rowIndex, cardIndex, true)
             vm.updateIsXImage(!isXImage)
             vm.updateIsPlayer1(true)
         }
-        vm.execCardGridSound(context)
+        vm.execCardGridSound()
     }
        
     //Vs CPU Mode
     if (isCPUMode) {
         if (isPlayer1) {
-            vm.updateIsXImage(!isXImage)
+            // Exec player 1's move
 	        vm.updateCard(rowIndex, cardIndex, isXFor1)
 			vm.updateIsCardClicked(rowIndex, cardIndex, true)
+            vm.updateIsXImage(!isXImage)
             vm.updateIsPlayer1(false)
+
+            // Calls CPU player's move during player 1's click if needed
             if (isCPUPlayer1) {
                 vm.updateIsCPU(false)
             } else {
-                vm.updateIsCPU(true)           
+                vm.updateIsCPU(true)
+                EasyModeCPUCardClick(vm)
             }
-            RandomCardSorter(vm, context)
         } else {
-            vm.updateIsXImage(!isXImage)
+            // Exec player 2's move
 	        vm.updateCard(rowIndex, cardIndex, !isXFor1)
 			vm.updateIsCardClicked(rowIndex, cardIndex, true)
+            vm.updateIsXImage(!isXImage)
             vm.updateIsPlayer1(true)
+
+            // Calls CPU player's move during player 2's click if needed
             if (isCPUPlayer1) {
-                vm.updateIsCPU(true)
+                vm.updateIsCPU(true) 
+                EasyModeCPUCardClick(vm)
             } else {
-                vm.updateIsCPU(false)        
+                vm.updateIsCPU(false)
             }
-            RandomCardSorter(vm, context)
         }
-        vm.execCardGridSound(context)
+        vm.execCardGridSound()
      }
 }

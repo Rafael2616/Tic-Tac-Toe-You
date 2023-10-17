@@ -61,7 +61,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.game.domain.card_grid.RandomCardSorter
+import com.rafael.tictactoe.game.domain.card_grid.EasyModeCPUCardClick
 import com.rafael.tictactoe.game.presentation.utils.draws.drawCircleinDialog
 import com.rafael.tictactoe.game.presentation.utils.draws.drawXinDialog
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
@@ -354,7 +354,7 @@ fun GetPlayersPrefsDialog() {
                         viewModel.updatePlayer2Name(player2Value)
                         if (isCPUMode && isCPUPlayer1) {
                             viewModel.updateIsCPU(true)
-                            RandomCardSorter(viewModel, context)
+                            EasyModeCPUCardClick(viewModel)
                         }
                     },
                     modifier = Modifier

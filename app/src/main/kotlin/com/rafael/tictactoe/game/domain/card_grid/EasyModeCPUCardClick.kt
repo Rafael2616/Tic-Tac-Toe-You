@@ -1,6 +1,5 @@
 package com.rafael.tictactoe.game.domain.card_grid
 
-import android.content.Context
 import com.rafael.tictactoe.game.domain.audio.CardGridSound
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import kotlinx.coroutines.delay
@@ -8,10 +7,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 
-fun RandomCardSorter(
-    vm: GameViewModel,
-    context: Context
-) {
+fun EasyModeCPUCardClick(vm: GameViewModel) {
     val isCardClicked = vm.isCardClicked.value
     var randomPosition = (0 until isCardClicked[0].size).random()
     var secRandomPosition = (0 until isCardClicked[1].size).random()
@@ -44,7 +40,7 @@ fun RandomCardSorter(
             if (isCPUPlayer1) {
                 vm.updateCard(randomPosition, secRandomPosition, isXFor1)
                 vm.updateIsCardClicked(randomPosition, secRandomPosition, true)
-                vm.updateIsPlayer1(false)           
+                vm.updateIsPlayer1(false)
             } else {
                 vm.updateCard(randomPosition, secRandomPosition, !isXFor1)
                 vm.updateIsCardClicked(randomPosition, secRandomPosition, true)
@@ -53,7 +49,7 @@ fun RandomCardSorter(
         }
         CoroutineScope(Dispatchers.Main).launch {
             delay(delayTime)
-            vm.execCardGridSound(context)
+            vm.execCardGridSound()
         }
     }
 }

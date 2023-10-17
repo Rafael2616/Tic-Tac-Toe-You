@@ -1,6 +1,5 @@
 package com.rafael.tictactoe.game.domain.checkers
 
-import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -9,10 +8,7 @@ import com.rafael.tictactoe.game.domain.victory_counter.VictoryCounterUpdater
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
 @Composable
-fun WinnerChecker(
-    vm: GameViewModel,
-    context: Context
-) {
+fun WinnerChecker(vm: GameViewModel) {
     val card by vm.card.collectAsState()
     val isCardClicked by vm.isCardClicked.collectAsState()
     val isXFor1 by vm.isXFor1.collectAsState()
@@ -47,7 +43,8 @@ fun WinnerChecker(
                     vm.updateIs1Win(false)
                 }
                 vm.updateWinningPositionsIndices(index)
-            } else if (areAllClickedByPlayer2) {
+            }
+            if (areAllClickedByPlayer2) {
                 vm.updateWinner(true)
                 if (isXFor1) {
                     vm.updateIs1Win(false)
@@ -64,6 +61,6 @@ fun WinnerChecker(
     if (hasWinner) {
         vm.updateIsGameFinished(true)
         VictoryCounterUpdater(vm)
-        vm.execWinnerSound(context)
+        vm.execWinnerSound()
     }
 }
