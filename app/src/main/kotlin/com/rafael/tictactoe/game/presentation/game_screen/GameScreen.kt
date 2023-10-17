@@ -2,6 +2,9 @@ package com.rafael.tictactoe.game.presentation.game_screen
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
@@ -79,7 +82,11 @@ fun GameScreen(
         PlayAgainButton()
     }
 
-    AnimatedVisibility(winner) {
+    AnimatedVisibility(
+        visible = winner,
+        enter = fadeIn() + scaleIn(),
+        exit = fadeOut()
+    ) {
         WinnerLines()
     }
 

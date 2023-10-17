@@ -2,10 +2,11 @@ package com.rafael.tictactoe.common.presentation.navigation
 
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.core.tween
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.IntOffset
 import androidx.navigation.navArgument
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -22,13 +23,9 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.SettingsScreen
 @ExperimentalMaterial3Api
 fun NavGraph() {
     val navController = rememberNavController()
-    val enterTransition = fadeIn(
-        animationSpec = tween(durationMillis = 300)
-    )
-    val exitTransition = fadeOut(
-        animationSpec = tween(durationMillis = 300)
-    )
-    
+    val enterTransition = fadeIn()
+    val exitTransition = fadeOut()
+
     NavHost(
         navController = navController,
         startDestination = Destinations.Splash.screen,

@@ -55,7 +55,6 @@ fun RestartGame(vm: GameViewModel) {
     vm.updateGotOld(false)
     vm.updateIsGameFinished(false)
     vm.updateAllIsCardClicked(allFalse)
-    vm.updateAllCards(allFalse)
     vm.updateIsScoreUp(false)
     vm.updateIsWinSoundPlaying(false)
     vm.updateIsGotOldSoundPlaying(false)

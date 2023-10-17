@@ -1,8 +1,12 @@
 package com.rafael.tictactoe.game.domain.card_grid
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -26,18 +30,20 @@ fun DrawXorCircle(
     val xColor by settingsVM.xColor.collectAsState()
     val circleColor by settingsVM.circleColor.collectAsState()
 
-    AnimatedVisibility(isCardClicked[rowIndex][cardIndex]) {
-        if (isCardClicked[rowIndex][cardIndex]) {
-            Canvas(
-                modifier = Modifier
-                    .fillMaxSize()
-            ) {
-            	if (card[rowIndex][cardIndex]) {
-                    drawX(xColor)
-                } else {
-                    drawAnCircle(circleColor)
-                }
-        	}
+    AnimatedVisibility(
+        visible = isCardClicked[rowIndex][cardIndex],
+        enter = fadeIn() + expandVertically(),
+        exit = fadeOut() + shrinkVertically()
+    ) {
+        Canvas(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
+        	if (card[rowIndex][cardIndex]) {
+                drawX(xColor)
+            } else {
+                drawAnCircle(circleColor)
+            }
         }
     }
 }
