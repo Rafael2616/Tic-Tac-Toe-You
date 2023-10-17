@@ -114,7 +114,7 @@ fun GetPlayersPrefsDialog() {
                 shape = MaterialTheme.shapes.large,
                 border = BorderStroke(1.5.dp, Color.Gray),
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(20.dp)
+                    containerColor = containerColor
                 ),
                 modifier = Modifier
                     .width(375.dp)
@@ -160,7 +160,7 @@ fun GetPlayersPrefsDialog() {
                     Card(
                         shape = MaterialTheme.shapes.large,
                         colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(20.dp)
+                            containerColor = containerColor
                         ),
                         modifier = Modifier
                             .width(60.dp)
@@ -239,7 +239,7 @@ fun GetPlayersPrefsDialog() {
                     Card(
                         shape = MaterialTheme.shapes.large,
                         colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(20.dp)
+                            containerColor = containerColor
                         ),
                         modifier = Modifier
                             .size(60.dp)
@@ -303,7 +303,7 @@ fun GetPlayersPrefsDialog() {
                                     shape = MaterialTheme.shapes.medium,
                                     border = BorderStroke(1.5.dp, Color.Gray),
                                     colors = CardDefaults.cardColors(
-                                        containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(20.dp)
+                                        containerColor = containerColor
                                     ),
                                     modifier = Modifier
                                         .width(150.dp)

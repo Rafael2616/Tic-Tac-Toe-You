@@ -55,7 +55,9 @@ fun MainOptions(navController: NavController) {
         options.forEachIndexed { index, _ ->
             Card(
                 shape = MaterialTheme.shapes.large,
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp)),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp)
+                ),
                 modifier = Modifier
                     .width(240.dp)
                     .height(65.dp)
