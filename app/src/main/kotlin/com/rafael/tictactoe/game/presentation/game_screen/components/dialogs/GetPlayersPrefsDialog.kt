@@ -56,6 +56,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
@@ -81,6 +82,8 @@ fun GetPlayersPrefsDialog() {
     val context = LocalContext.current
     val view = LocalView.current
     val keyboardController = LocalSoftwareKeyboardController.current
+    val density = LocalDensity.current.density
+    val densityHeight = (view.height / density ).dp
     var isKeyboardOpen by rememberSaveable {  mutableStateOf(false) }
     val isXFor1 by viewModel.isXFor1.collectAsState()
     val player1Name by viewModel.player1Name.collectAsState()
@@ -98,11 +101,17 @@ fun GetPlayersPrefsDialog() {
     val textField2State = if (isCPUMode) { if (isCPUPlayer1) false else true } else {false}
     val customTypeforP1 = if (isXFor1) Customization.XCOLOR else Customization.CIRCLECOLOR
     val customTypeForP2 = if (isXFor1) Customization.CIRCLECOLOR else Customization.XCOLOR
-    val keyboardHeight = if (isKeyboardOpen) WindowInsets.ime.asPaddingValues().calculateBottomPadding() + 8.dp else 0.dp
     val dialogHeight by animateDpAsState(if (isCPUMode) 285.dp else 220.dp)
     val maxLetterLength by rememberSaveable { mutableIntStateOf(10) }
     val difficultyModesNumber = remember { mutableStateListOf(0,1) }
-    val containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(20.dp)
+    val containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(20.dp)    
+    val keyboardHeight by animateDpAsState(
+        if (isKeyboardOpen) {
+            WindowInsets.ime.asPaddingValues().calculateBottomPadding() + 8.dp
+        } else {
+            (densityHeight / 2 - dialogHeight / 2)
+        }
+    )
 
     Surface(
         color = Color.Black.copy(alpha = 0.3f),
@@ -113,7 +122,7 @@ fun GetPlayersPrefsDialog() {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(bottom = keyboardHeight),
-            contentAlignment = if (!isKeyboardOpen) Alignment.Center else Alignment.BottomCenter
+            contentAlignment = Alignment.BottomCenter
         ) {
             Card(
                 shape = MaterialTheme.shapes.large,
@@ -372,7 +381,7 @@ fun GetPlayersPrefsDialog() {
                         }
                     }
                 }
-                
+
                 //Play button, used to start game
                 Button(
                     onClick = {
