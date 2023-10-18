@@ -4,6 +4,7 @@ import android.view.ViewTreeObserver
 import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -13,10 +14,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -94,8 +98,8 @@ fun GetPlayersPrefsDialog() {
     val textField2State = if (isCPUMode) { if (isCPUPlayer1) false else true } else {false}
     val customTypeforP1 = if (isXFor1) Customization.XCOLOR else Customization.CIRCLECOLOR
     val customTypeForP2 = if (isXFor1) Customization.CIRCLECOLOR else Customization.XCOLOR
-    val bottomPadding = if (isKeyboardOpen) { if (isCPUMode) 205.dp else 150.dp} else {0.dp}
-    val dialogHeigth = if (isCPUMode) 285.dp else 220.dp
+    val keyboardHeight = if (isKeyboardOpen) WindowInsets.ime.asPaddingValues().calculateBottomPadding() + 8.dp else 0.dp
+    val dialogHeight by animateDpAsState(if (isCPUMode) 285.dp else 220.dp)
     val maxLetterLength by rememberSaveable { mutableIntStateOf(10) }
     val difficultyModesNumber = remember { mutableStateListOf(0,1) }
     val containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(20.dp)
@@ -108,7 +112,8 @@ fun GetPlayersPrefsDialog() {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(bottom = bottomPadding)
+                .padding(bottom = keyboardHeight),
+            contentAlignment = if (!isKeyboardOpen) Alignment.Center else Alignment.BottomCenter
         ) {
             Card(
                 shape = MaterialTheme.shapes.large,
@@ -118,8 +123,7 @@ fun GetPlayersPrefsDialog() {
                 ),
                 modifier = Modifier
                     .width(375.dp)
-                    .height(dialogHeigth)
-                    .align(Alignment.Center)
+                    .height(dialogHeight)
             ) {
 
                 //TextFields to get player names
