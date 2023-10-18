@@ -101,7 +101,7 @@ fun GetPlayersPrefsDialog() {
     val textField2State = if (isCPUMode) { if (isCPUPlayer1) false else true } else {false}
     val customTypeforP1 = if (isXFor1) Customization.XCOLOR else Customization.CIRCLECOLOR
     val customTypeForP2 = if (isXFor1) Customization.CIRCLECOLOR else Customization.XCOLOR
-    val dialogHeight by animateDpAsState(if (isCPUMode) 285.dp else 220.dp)
+    val dialogHeight by animateDpAsState(if (isCPUMode) 280.dp else 215.dp)
     val maxLetterLength by rememberSaveable { mutableIntStateOf(10) }
     val difficultyModesNumber = remember { mutableStateListOf(0,1) }
     val containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(20.dp)    
