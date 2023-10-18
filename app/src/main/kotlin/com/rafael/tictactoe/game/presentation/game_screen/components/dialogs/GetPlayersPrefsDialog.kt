@@ -105,7 +105,7 @@ fun GetPlayersPrefsDialog() {
     val maxLetterLength by rememberSaveable { mutableIntStateOf(10) }
     val difficultyModesNumber = remember { mutableStateListOf(0,1) }
     val containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(20.dp)    
-    val keyboardHeight by animateDpAsState(
+    val bottomPadding by animateDpAsState(
         if (isKeyboardOpen) {
             WindowInsets.ime.asPaddingValues().calculateBottomPadding() + 8.dp
         } else {
@@ -121,7 +121,7 @@ fun GetPlayersPrefsDialog() {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(bottom = keyboardHeight),
+                .padding(bottom = bottomPadding),
             contentAlignment = Alignment.BottomCenter
         ) {
             Card(
