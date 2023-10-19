@@ -1,5 +1,6 @@
 package com.rafael.tictactoe.settings.presentation.settings_screen.components
 
+import android.content.res.Configuration
 import androidx.annotation.StringRes
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.animateDpAsState
@@ -37,6 +38,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -65,6 +67,7 @@ fun SettingsWithIcon(
     val circleColor by viewModel.circleColor.collectAsState()
     val xColor by viewModel.xColor.collectAsState()
     val componentValidator = ComponentValidator()
+    val orientation = LocalConfiguration.current.orientation
 
     Column(
         modifier = Modifier
@@ -80,8 +83,8 @@ fun SettingsWithIcon(
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Start,
             modifier = Modifier
-                .padding(start = 15.dp, bottom = 6.dp)
-                .fillMaxWidth()
+                .padding( bottom = 6.dp)
+                .fillMaxWidth(if (orientation == Configuration.ORIENTATION_LANDSCAPE) 0.7f else 0.95f)
         )
         Card(
             shape = MaterialTheme.shapes.medium,
@@ -89,7 +92,7 @@ fun SettingsWithIcon(
                 containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp)
             ),
             modifier = Modifier
-                .width(360.dp)
+                .fillMaxWidth(if (orientation == Configuration.ORIENTATION_LANDSCAPE) 0.6f else 0.9f)
                 .clip(RoundedCornerShape(26.dp))
         ) {
             size.forEachIndexed { _, index ->

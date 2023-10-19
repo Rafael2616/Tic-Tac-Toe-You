@@ -132,7 +132,7 @@ fun GetPlayersPrefsDialog() {
                     containerColor = containerColor
                 ),
                 modifier = Modifier
-                    .fillMaxWidth(0.95f)
+                    .width(395.dp)
                     .height(dialogHeight)
             ) {
 
@@ -143,6 +143,7 @@ fun GetPlayersPrefsDialog() {
                         .padding(top = 8.dp, bottom = 6.dp, start = 14.dp, end = 14.dp),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
+                
                     val textFieldColors = TextFieldDefaults.colors(
                         focusedContainerColor = containerColor,
                         unfocusedContainerColor = containerColor,

@@ -1,5 +1,6 @@
 package com.rafael.tictactoe.game.presentation.main_screen.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -29,6 +30,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -37,7 +39,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.TicTacToeActivity
 import com.rafael.tictactoe.common.presentation.navigation.Destinations
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
@@ -46,9 +47,12 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.Set
 fun MainOptions(navController: NavController) {
     val settingsVM = hiltViewModel<SettingsViewModel>()
     var options by rememberSaveable { mutableStateOf(List<Boolean>(3) { false }) }
+    val orientation = LocalConfiguration.current.orientation
 
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+        .fillMaxSize()
+        .padding(top = if (orientation == Configuration.ORIENTATION_LANDSCAPE) 45.dp else 0.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -59,7 +63,7 @@ fun MainOptions(navController: NavController) {
                     containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp)
                 ),
                 modifier = Modifier
-                    .width(240.dp)
+                    .fillMaxWidth(if (orientation == Configuration.ORIENTATION_LANDSCAPE) 0.35f else 0.6f)
                     .height(65.dp)
                     .clip(RoundedCornerShape(36.dp))
                     .clickable(onClick = {
@@ -108,7 +112,9 @@ fun MainOptions(navController: NavController) {
                     )
                 }
             }
-            Spacer(modifier = Modifier.height(20.dp))
+            if (index <= options.size - 1) {
+                Spacer(modifier = Modifier.height(18.dp))
+            }
         }
     }
 }
