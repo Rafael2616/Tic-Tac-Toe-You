@@ -2,8 +2,6 @@ package com.rafael.tictactoe.game.presentation.game_screen.components.dialogs
 
 import android.view.ViewTreeObserver
 import android.widget.Toast
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
@@ -66,6 +64,8 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.card_grid.EasyModeCPUCardClick
@@ -97,9 +97,9 @@ fun GetPlayersPrefsDialog() {
     val selectedDifficultyMode by viewModel.selectedDifficultyMode.collectAsState()
     val player1Value = if (localPlayer1) player1Name else player2Name
     val player2Value = if (localPlayer1) player2Name else player1Name
-    val textField1State = if (isCPUMode) { if (isCPUPlayer1) true else false } else {false}
-    val textField2State = if (isCPUMode) { if (isCPUPlayer1) false else true } else {false}
-    val customTypeforP1 = if (isXFor1) Customization.XCOLOR else Customization.CIRCLECOLOR
+    val textField1State = if (isCPUMode) { if (isCPUPlayer1) false else true } else {true}
+    val textField2State = if (isCPUMode) { if (isCPUPlayer1) true else false } else {true}
+    val customTypeForP1 = if (isXFor1) Customization.XCOLOR else Customization.CIRCLECOLOR
     val customTypeForP2 = if (isXFor1) Customization.CIRCLECOLOR else Customization.XCOLOR
     val dialogHeight by animateDpAsState(if (isCPUMode) 280.dp else 215.dp)
     val maxLetterLength by rememberSaveable { mutableIntStateOf(10) }
@@ -155,8 +155,7 @@ fun GetPlayersPrefsDialog() {
                         placeholder = {
                             Text( stringResource(id = if (isXFor1) R.string.player_x else R.string.player_o))
                         },
-                        readOnly = textField1State,
-                        enabled = !textField1State,
+                        enabled = textField1State,
                         keyboardOptions = KeyboardOptions(
                             autoCorrect = true,
                             keyboardType = KeyboardType.Text,
@@ -207,8 +206,7 @@ fun GetPlayersPrefsDialog() {
                         placeholder = {
                             Text( stringResource(id = if (isXFor1) R.string.player_o else R.string.player_x))
                         },
-                        readOnly = textField2State,
-                        enabled = !textField2State,
+                        enabled = textField2State,
                         keyboardOptions = KeyboardOptions(
                             autoCorrect = true,
                             keyboardType = KeyboardType.Text,
@@ -230,18 +228,25 @@ fun GetPlayersPrefsDialog() {
                         .fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
+                    val canvasOnClick = {
+                        settingsVM.execUIClickSound()
+                        keyboardController?.hide()
+                        settingsVM.showColorSelectionDialog(true)   
+                    }
+                    val canvasModifier = Modifier
+                        .weight(1f)
+                        .width(80.dp)
+                        .height(60.dp)
+                        .align(Alignment.CenterVertically)
+
                     Canvas(
-                        modifier = Modifier
-                            .weight(1f)
-                            .width(80.dp)
-                            .height(60.dp)
-                            .align(Alignment.CenterVertically)
-                            .clickable( onClick = {
-                                settingsVM.execUIClickSound()
-                                keyboardController?.hide()
-                                settingsVM.setCustomizationType(customTypeforP1)
-                                settingsVM.showColorSelectionDialog(true)
-                           })
+                        modifier = canvasModifier
+                            .then(
+                                Modifier.clickable(onClick = {
+                                    canvasOnClick()
+                                    settingsVM.setCustomizationType(customTypeForP1)
+                                })
+                            )
                     ) {
                         if (isXFor1) {
                             drawXinDialog(xColor)
@@ -261,6 +266,7 @@ fun GetPlayersPrefsDialog() {
                                 settingsVM.execUIClickSound()
                                 viewModel.updateIsXFor1(!isXFor1)
                             })
+                        
                     ) {
                         Image(
                             contentDescription = "Player Image Switcher",
@@ -269,17 +275,13 @@ fun GetPlayersPrefsDialog() {
                         )
                     }
                     Canvas(
-                        modifier = Modifier
-                            .weight(1f)
-                            .width(80.dp)
-                            .height(60.dp)
-                            .align(Alignment.CenterVertically)
-                            .clickable( onClick = {
-                                settingsVM.execUIClickSound()
-                                keyboardController?.hide()
-                                settingsVM.setCustomizationType(customTypeForP2)
-                                settingsVM.showColorSelectionDialog(true)
-                            })
+                        modifier = canvasModifier
+                            .then(
+                                Modifier.clickable(onClick = {
+                                    canvasOnClick()
+                                    settingsVM.setCustomizationType(customTypeForP2)
+                                })
+                            )
                     ) {
                         if (isXFor1) {
                             drawCircleinDialog(circleColor)

@@ -29,6 +29,7 @@ fun SettingsOptionsImpl(livePadding: PaddingValues) {
 
     LazyColumn(
         modifier = Modifier
+            .fillMaxSize()
             .padding(livePadding)
             .animateContentSize(),
         verticalArrangement = Arrangement.Top,
