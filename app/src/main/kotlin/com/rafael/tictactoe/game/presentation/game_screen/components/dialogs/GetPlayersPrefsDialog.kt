@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.SentimentDissatisfied
@@ -142,6 +143,18 @@ fun GetPlayersPrefsDialog() {
                         .padding(top = 8.dp, bottom = 6.dp, start = 14.dp, end = 14.dp),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
+                    val textFieldColors = TextFieldDefaults.colors(
+                        focusedContainerColor = containerColor,
+                        unfocusedContainerColor = containerColor,
+                        disabledContainerColor = containerColor
+                    )
+                    val keyboardOptions = KeyboardOptions(
+                        autoCorrect = true,
+                        keyboardType = KeyboardType.Text,
+                        imeAction = ImeAction.Done,
+                        capitalization = KeyboardCapitalization.Words
+                    )
+
                     TextField(
                         value = player1Value,
                         onValueChange = {
@@ -156,18 +169,9 @@ fun GetPlayersPrefsDialog() {
                             Text( stringResource(id = if (isXFor1) R.string.player_x else R.string.player_o))
                         },
                         enabled = textField1State,
-                        keyboardOptions = KeyboardOptions(
-                            autoCorrect = true,
-                            keyboardType = KeyboardType.Text,
-                            imeAction = ImeAction.Done,
-                            capitalization = KeyboardCapitalization.Words
-                        ),
-                        modifier = Modifier.weight(1f),
-                        colors = TextFieldDefaults.colors(
-                            focusedContainerColor = containerColor,
-                            unfocusedContainerColor = containerColor,
-                            disabledContainerColor = containerColor
-                        )
+                        keyboardOptions = keyboardOptions,
+                        colors = textFieldColors,
+                        modifier = Modifier.weight(1f)
                     )
                     Card(
                         shape = MaterialTheme.shapes.large,
@@ -207,18 +211,9 @@ fun GetPlayersPrefsDialog() {
                             Text( stringResource(id = if (isXFor1) R.string.player_o else R.string.player_x))
                         },
                         enabled = textField2State,
-                        keyboardOptions = KeyboardOptions(
-                            autoCorrect = true,
-                            keyboardType = KeyboardType.Text,
-                            imeAction = ImeAction.Done,
-                            capitalization = KeyboardCapitalization.Words
-                        ),
-                        modifier = Modifier.weight(1f),
-                        colors = TextFieldDefaults.colors(
-                            focusedContainerColor = containerColor,
-                            unfocusedContainerColor = containerColor,
-                            disabledContainerColor = containerColor
-                        )
+                        keyboardOptions = keyboardOptions,
+                        colors = textFieldColors,
+                        modifier = Modifier.weight(1f)
                     )
                 }
 
@@ -266,7 +261,6 @@ fun GetPlayersPrefsDialog() {
                                 settingsVM.execUIClickSound()
                                 viewModel.updateIsXFor1(!isXFor1)
                             })
-                        
                     ) {
                         Image(
                             contentDescription = "Player Image Switcher",
@@ -299,6 +293,12 @@ fun GetPlayersPrefsDialog() {
                             .padding(top = 2.dp, bottom = 4.dp),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
+                        val warningToast = Toast.makeText(
+                            context,
+                            "not yet developed :(",
+                            Toast.LENGTH_SHORT
+                            )
+
                         Text(
                             text = stringResource(R.string.modes),
                             style = MaterialTheme.typography.bodyMedium,
@@ -323,14 +323,11 @@ fun GetPlayersPrefsDialog() {
                                     modifier = Modifier
                                         .width(150.dp)
                                         .height(40.dp)
+                                        .clip(RoundedCornerShape(26.dp))
                                         .clickable(onClick = {
                                             /*vm.updateDifficultyMode(mode)*/
                                             when (mode) {
-                                                1 -> Toast.makeText(
-                                                    context,
-                                                    "not yet developed :(",
-                                                    Toast.LENGTH_SHORT
-                                                ).show()
+                                                1 -> warningToast.show()
                                             }
                                         })
                                 ) {
@@ -347,11 +344,7 @@ fun GetPlayersPrefsDialog() {
                                             onClick = {
                                                 /*vm.updateDifficultyMode(mode)*/
                                                 when (mode) {
-                                                    1 -> Toast.makeText(
-                                                        context,
-                                                        "not yet developed :(",
-                                                        Toast.LENGTH_SHORT
-                                                    ).show()
+                                                    1 -> warningToast.show()
                                                 }
                                             }
                                         )
