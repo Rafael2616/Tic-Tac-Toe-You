@@ -385,6 +385,7 @@ fun GetPlayersPrefsDialog() {
                 //Play button, used to start game
                 Button(
                     onClick = {
+                        keyboardController?.hide()
                         settingsVM.execUIClickSound()
                         viewModel.play()
                         viewModel.updatePlayer1Name(player1Value)

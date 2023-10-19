@@ -271,7 +271,6 @@ class GameViewModel @Inject constructor(
         showRestartButton(false)  
         showExitGameDialog(false)
         updateAllIsCardClicked(allFalse)
-        updateAllCards(allFalse)
         updateLocalPlayer1(true)
         updateIsPlayer1(true)
         updateIsCPUMode(false)
