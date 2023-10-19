@@ -105,7 +105,7 @@ fun GetPlayersPrefsDialog() {
     val dialogHeight by animateDpAsState(if (isCPUMode) 280.dp else 215.dp)
     val maxLetterLength by rememberSaveable { mutableIntStateOf(10) }
     val difficultyModesNumber = remember { mutableStateListOf(0,1) }
-    val containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(20.dp)    
+    val containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(20.dp)
     val bottomPadding by animateDpAsState(
         if (isKeyboardOpen) {
             WindowInsets.ime.asPaddingValues().calculateBottomPadding() + 8.dp
@@ -132,7 +132,7 @@ fun GetPlayersPrefsDialog() {
                     containerColor = containerColor
                 ),
                 modifier = Modifier
-                    .width(375.dp)
+                    .fillMaxWidth(0.95f)
                     .height(dialogHeight)
             ) {
 
@@ -217,7 +217,7 @@ fun GetPlayersPrefsDialog() {
                     )
                 }
 
-                //Images selected by players and button to switch this images 
+                //Player images preview and button to toggle them
                 Row(
                     modifier = Modifier
                         .fillMaxWidth(),
