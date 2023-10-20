@@ -24,6 +24,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
@@ -47,82 +48,77 @@ fun VictoryCounter() {
     Box(
         modifier = Modifier
             .fillMaxSize(),
-        contentAlignment = if (isInLandscape) Alignment.TopStart else Alignment.TopCenter
+          contentAlignment = if (isInLandscape) Alignment.TopStart else Alignment.TopCenter
     ) {
-        Box(
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Top,
             modifier = Modifier
-                .fillMaxWidth(if (isInLandscape) 0.48f else 1f),
-            contentAlignment = Alignment.Center
+           .fillMaxWidth(if (isInLandscape) 0.48f else 1f)
+                .padding(top = 55.dp)
         ) {
-            Column(
-                verticalArrangement = Arrangement.Center,
+            Row(
                 modifier = Modifier
-                    .wrapContentSize()
-                    .padding(top = 55.dp)
+                    .wrapContentSize(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Row(
+                Card(
+                    shape = MaterialTheme.shapes.medium,
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp)
+                    ),
                     modifier = Modifier
-                        .wrapContentSize(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
+                        .width(65.dp)
+                        .height(55.dp)
                 ) {
-                    Card(
-                        shape = MaterialTheme.shapes.medium,
-                        colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp)
-                        ),
+                    Text(
+                        text = "$player1Wins",
+                        style = MaterialTheme.typography.titleLarge,
+                        color = MaterialTheme.colorScheme.onSurface,
                         modifier = Modifier
-                            .width(65.dp)
-                            .height(55.dp)
+                            .align(Alignment.CenterHorizontally)
+                    )
+                    Canvas(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .align(Alignment.CenterHorizontally)
                     ) {
-                        Text(
-                            text = "$player1Wins",
-                            style = MaterialTheme.typography.titleLarge,
-                            color = MaterialTheme.colorScheme.onSurface,
-                            modifier = Modifier
-                                .align(Alignment.CenterHorizontally)
-                        )
-                        Canvas(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .align(Alignment.CenterHorizontally)
-                        ) {
-                            if (isXFor1) {
-                                drawXinCounter(xColor)
-                            } else {
-                                drawCircleinCounter(circleColor)
-                            }
+                        if (isXFor1) {
+                            drawXinCounter(xColor)
+                        } else {
+                            drawCircleinCounter(circleColor)
                         }
                     }
-                    Spacer(
-                        modifier = Modifier.width(6.dp)
+                }
+                Spacer(
+                    modifier = Modifier.width(6.dp)
+                )
+                Card(
+                    shape = MaterialTheme.shapes.medium,
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp)
+                    ),
+                    modifier = Modifier
+                        .width(65.dp)
+                        .height(55.dp)
+                ) {
+                    Text(
+                        text = "$player2Wins",
+                        style = MaterialTheme.typography.titleLarge,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier
+                            .align(Alignment.CenterHorizontally)
                     )
-                    Card(
-                        shape = MaterialTheme.shapes.medium,
-                        colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp)
-                        ),
+                    Canvas(
                         modifier = Modifier
                             .width(65.dp)
-                            .height(55.dp)
+                            .align(Alignment.CenterHorizontally)
                     ) {
-                        Text(
-                            text = "$player2Wins",
-                            style = MaterialTheme.typography.titleLarge,
-                            color = MaterialTheme.colorScheme.onSurface,
-                            modifier = Modifier
-                                .align(Alignment.CenterHorizontally)
-                        )
-                        Canvas(
-                            modifier = Modifier
-                                .width(65.dp)
-                                .align(Alignment.CenterHorizontally)
-                        ) {
-                            if (isXFor1) {
-                                drawCircleinCounter(circleColor)
-                             } else {
-                                drawXinCounter(xColor)
-                            }
+                        if (isXFor1) {
+                            drawCircleinCounter(circleColor)
+                         } else {
+                            drawXinCounter(xColor)
                         }
                     }
                 }

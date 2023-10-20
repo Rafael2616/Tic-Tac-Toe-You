@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -35,41 +34,37 @@ fun PlayersNamesLayout() {
             .fillMaxSize(),
         contentAlignment = if (isInLandscape) Alignment.TopStart else Alignment.TopCenter
     ) {
-        Box(
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
             modifier = Modifier
-                .fillMaxWidth(if (isInLandscape) 0.48f else 1f),
-            contentAlignment = Alignment.Center
+                .fillMaxWidth(if (isInLandscape) 0.48f else 1f)
+                .padding(top = 30.dp, end = 80.dp)
         ) {
-            Column(
-                verticalArrangement = Arrangement.Center,
-                modifier = Modifier
-                    .wrapContentSize()
-                    .padding(top = 30.dp, end = 80.dp)
-            ) {
-                Text(
-                    text = ("$showPlayer1Name"),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurface,
-                )
-            }
+            Text(
+                text = ("$showPlayer1Name"),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurface,
+            )
         }
-        Box(
+    }
+    Box(
+        modifier = Modifier
+            .fillMaxSize(),
+        contentAlignment = if (isInLandscape) Alignment.TopStart else Alignment.TopCenter
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
             modifier = Modifier
-                .fillMaxWidth(if (isInLandscape) 0.48f else 1f),
-            contentAlignment = (Alignment.TopCenter)
+                .fillMaxWidth(if (isInLandscape) 0.48f else 1f)
+                .padding(top = 30.dp, start = 80.dp)
         ) {
-            Column(
-                verticalArrangement = Arrangement.Center,
-                modifier = Modifier
-                    .wrapContentSize()
-                    .padding(top = 30.dp, start = 80.dp)
-            ) {
-                Text(
-                    text = ("$showPlayer2Name"),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurface,
-                )
-            }
+            Text(
+                text = ("$showPlayer2Name"),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurface,
+            )
         }
     }
 }
