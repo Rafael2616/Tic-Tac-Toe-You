@@ -60,6 +60,7 @@ fun WinnerChecker(vm: GameViewModel) {
 
     if (hasWinner) {
         vm.updateIsGameFinished(true)
+        vm.showVictoryCounterReseter(true)
         VictoryCounterUpdater(vm)
         vm.execWinnerSound()
     }

@@ -196,12 +196,10 @@ class GameViewModel @Inject constructor(
 
     fun updateWinner(newValue: Boolean) {
         _winner.value = newValue
-        _showVictoryCounterReseter.value = true
     }
 
     fun updateGotOld(newValue: Boolean) {
         _gotOld.value = newValue
-        _showVictoryCounterReseter.value = true
     }
 	
     fun showPlayer1Name(newValue: String) {

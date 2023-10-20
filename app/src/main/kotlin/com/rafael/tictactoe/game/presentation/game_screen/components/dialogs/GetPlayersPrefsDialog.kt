@@ -132,7 +132,7 @@ fun GetPlayersPrefsDialog() {
                     containerColor = containerColor
                 ),
                 modifier = Modifier
-                    .width(395.dp)
+                    .width(380.dp)
                     .height(dialogHeight)
             ) {
 

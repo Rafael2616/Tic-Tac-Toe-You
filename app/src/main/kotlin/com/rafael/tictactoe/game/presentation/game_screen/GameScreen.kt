@@ -102,10 +102,13 @@ fun GameScreen(
     }
 
     //Handle when some business logic will be called
-    if (play) {
+    if (play && !isGameFinished) {
         WinnerChecker(viewModel)
         GotOldChecker(viewModel)
-    	RestartButtonLogic(viewModel)
+    }
+
+    if (play) {
+   	RestartButtonLogic(viewModel)
     }
 
     DisposableEffect(key1 = "update") {
