@@ -94,16 +94,16 @@ fun WinnerLines() {
             //Transversal lines
             if (winningPositionsIndices.contains(6)) {
                 drawWinnerLine(
-                    start = Offset(x = 2.dp.toPx(),  y = size.height - 395.dp.toPx()),
-                    end = Offset(x = size.width - 2.dp.toPx(), y = size.height),
+                    start = Offset(x = 10.dp.toPx(),  y = size.height - 386.dp.toPx()),
+                    end = Offset(x = size.width - 10.dp.toPx(), y = size.height - 10.dp.toPx()),
                     color = winnerLineColor
                 )
             }
 
             if (winningPositionsIndices.contains(7)) {
                 drawWinnerLine(
-                    start = Offset(x = size.width - 2.dp.toPx(), y = size.height - 395.dp.toPx()),
-                    end = Offset(x = 2.dp.toPx(), y = size.height),
+                    start = Offset(x = size.width - 10.dp.toPx(), y = size.height - 386.dp.toPx()),
+                    end = Offset(x = 10.dp.toPx(), y = size.height - 10.dp.toPx()),
                     color = winnerLineColor
                 )
             }
