@@ -1,8 +1,10 @@
 package com.rafael.tictactoe.game.presentation.game_screen.components.ui
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
@@ -13,6 +15,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.Text
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -24,42 +27,49 @@ fun PlayersNamesLayout() {
     val viewModel = hiltViewModel<GameViewModel>()
     val showPlayer1Name by viewModel.showPlayer1Name.collectAsState()
     val showPlayer2Name by viewModel.showPlayer2Name.collectAsState()
-		
-    Box(
-        modifier = Modifier
-            .fillMaxWidth(),
-        contentAlignment = (Alignment.TopCenter)
-    ) {
-        Column(
-            verticalArrangement = Arrangement.Center,
-            modifier = Modifier
-                .wrapContentSize()
-                .padding(top = 30.dp, end = 80.dp)
-        ) {
-            Text(
-                text = ("$showPlayer1Name"),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurface,
-            )
-        }
-    }
+    val orientation = LocalConfiguration.current.orientation
+    val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
 
     Box(
         modifier = Modifier
-            .fillMaxWidth(),
-        contentAlignment = (Alignment.TopCenter)
+            .fillMaxSize(),
+        contentAlignment = if (isInLandscape) Alignment.TopStart else Alignment.TopCenter
     ) {
-        Column(
-            verticalArrangement = Arrangement.Center,
+        Box(
             modifier = Modifier
-                .wrapContentSize()
-                .padding(top = 30.dp, start = 80.dp)
+                .fillMaxWidth(if (isInLandscape) 0.48f else 1f),
+            contentAlignment = Alignment.Center
         ) {
-            Text(
-                text = ("$showPlayer2Name"),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurface,
-            )
+            Column(
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .wrapContentSize()
+                    .padding(top = 30.dp, end = 80.dp)
+            ) {
+                Text(
+                    text = ("$showPlayer1Name"),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurface,
+                )
+            }
+        }
+        Box(
+            modifier = Modifier
+                .fillMaxWidth(if (isInLandscape) 0.48f else 1f),
+            contentAlignment = (Alignment.TopCenter)
+        ) {
+            Column(
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .wrapContentSize()
+                    .padding(top = 30.dp, start = 80.dp)
+            ) {
+                Text(
+                    text = ("$showPlayer2Name"),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurface,
+                )
+            }
         }
     }
 }

@@ -1,17 +1,21 @@
 package com.rafael.tictactoe.game.presentation.game_screen.components.ui
 
+import android.content.res.Configuration
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
@@ -23,15 +27,19 @@ fun WinnerLines() {
     val settingsVM = hiltViewModel<SettingsViewModel>()
     val winningPositionsIndices = viewModel.winningPositionsIndices.value
     val winnerLineColor by settingsVM.winnerLineColor.collectAsState()
+    val orientation = LocalConfiguration.current.orientation
+    val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
 
     Column(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 8.dp, end = 8.dp, bottom = 45.dp),
-        verticalArrangement = Arrangement.Bottom
+            .fillMaxSize()
+            .padding(start = 8.dp, end = if (isInLandscape) 50.dp else 8.dp, bottom = if (isInLandscape) 0.dp else 50.dp),
+        verticalArrangement = Arrangement.Bottom,
+        horizontalAlignment = if (isInLandscape) Alignment.End else Alignment.CenterHorizontally
     ) {
          Canvas(
-             modifier = Modifier.fillMaxWidth(),
+             modifier = Modifier
+             .fillMaxWidth(if (isInLandscape) 0.52f else 1f)
         ) {
             //Horizontal lines
             if (winningPositionsIndices.contains(0)) {

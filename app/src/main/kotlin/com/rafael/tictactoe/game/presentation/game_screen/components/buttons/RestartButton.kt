@@ -1,36 +1,102 @@
 package com.rafael.tictactoe.game.presentation.game_screen.components.buttons
 
+import android.content.res.Configuration
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.card_grid.EasyModeCPUCardClick
 import com.rafael.tictactoe.game.domain.restart_game.RestartGame
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
-import com.rafael.tictactoe.game.presentation.game_screen.components.util.BaseButton
+import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
 fun RestartButton() {
+    val settingsVM = hiltViewModel<SettingsViewModel>()
+    val orientation = LocalConfiguration.current.orientation
+    val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
     val viewModel = hiltViewModel<GameViewModel>()
     val isCPUMode by viewModel.isCPUMode.collectAsState()
 
-    BaseButton(
-        modifier = Modifier.padding(top = 55.dp, end = 30.dp),
-        alignment = Alignment.TopEnd,
-        btnImage = R.drawable.reset_icon,
-        btnText = R.string.restart,
-        description = "Restart Button",
-        onClickFun = {
-            viewModel.showExpandButton(false)
-            RestartGame(viewModel)
-            if (isCPUMode) {
-                EasyModeCPUCardClick(viewModel)
+    Box(
+        modifier = Modifier
+            .fillMaxSize(),
+        contentAlignment = if (isInLandscape) Alignment.TopStart else Alignment.TopEnd
+    ) {
+        Box(
+            modifier = Modifier
+                 .padding(top = 55.dp, end = 30.dp)
+                .fillMaxWidth(if (isInLandscape) 0.46f else 1f),
+            contentAlignment = Alignment.TopEnd
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.wrapContentSize()
+            ) {
+                Card(
+                    shape = MaterialTheme.shapes.medium,
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp)
+                    ),
+                    modifier = Modifier
+                        .size(45.dp)
+                        .align(Alignment.CenterHorizontally)
+                        .clip(CircleShape)
+                        .clickable(onClick = {
+                            settingsVM.execUIClickSound()
+                            viewModel.showExpandButton(false)
+                            RestartGame(viewModel)
+                            if (isCPUMode) {
+                                EasyModeCPUCardClick(viewModel)
+                            }
+                        })
+                ) {
+                    Box(
+                        contentAlignment = Alignment.Center,
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        Image(
+                            contentDescription = "Restart Button",
+                            modifier = Modifier.fillMaxSize(),
+                            painter = painterResource(R.drawable.reset_icon)
+                        )
+                    }
+                }
+                Text(
+                    text = stringResource(R.string.restart),
+                    style = MaterialTheme.typography.bodyMedium.copy(fontSize = 12.sp),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .padding(top = 5.dp)
+                )
             }
         }
-    )
+    }
 }

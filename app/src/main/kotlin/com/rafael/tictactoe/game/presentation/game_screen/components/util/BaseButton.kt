@@ -1,5 +1,6 @@
 package com.rafael.tictactoe.game.presentation.game_screen.components.util
 
+import android.content.res.Configuration
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
@@ -7,10 +8,10 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -24,12 +25,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
@@ -38,7 +38,6 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.Set
 @Composable
 fun BaseButton(
     modifier: Modifier = Modifier,
-    alignment: Alignment = Alignment.TopStart,
     @DrawableRes btnImage: Int? = null,
     @StringRes btnText: Int? = null,
     btnIcon: ImageVector? = null,
@@ -46,17 +45,17 @@ fun BaseButton(
     description: String = "there is no description"
 ) {
     val settingsVM = hiltViewModel<SettingsViewModel>()
+    val orientation = LocalConfiguration.current.orientation
+    val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
 
     Box(
         modifier = modifier
-            .fillMaxSize(),
-        contentAlignment = alignment
+            .fillMaxWidth(if (isInLandscape) 0.48f else 1f),
+        contentAlignment = Alignment.TopStart
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-            modifier = Modifier
-                .wrapContentSize()
+            verticalArrangement = Arrangement.Center
         ) {
             Card(
                 shape = MaterialTheme.shapes.medium,
@@ -66,7 +65,6 @@ fun BaseButton(
                 modifier = Modifier
                     .size(45.dp)
                     .clip(CircleShape)
-                    .align(Alignment.CenterHorizontally)
                     .clickable(onClick = {
                         settingsVM.execUIClickSound()
                         onClickFun()
@@ -87,7 +85,7 @@ fun BaseButton(
                         Icon(
                             imageVector = btnIcon,
                             contentDescription = "Icon",
-       		        	 modifier = Modifier
+                            modifier = Modifier
                                 .size(38.dp)
                         )
                     }

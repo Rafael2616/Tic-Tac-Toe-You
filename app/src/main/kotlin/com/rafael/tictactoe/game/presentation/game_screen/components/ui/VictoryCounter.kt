@@ -1,5 +1,6 @@
 package com.rafael.tictactoe.game.presentation.game_screen.components.ui
 
+import android.content.res.Configuration
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -22,7 +23,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
@@ -40,81 +41,88 @@ fun VictoryCounter() {
     val isXFor1 by viewModel.isXFor1.collectAsState()
     val xColor by settingsVM.xColor.collectAsState()
     val circleColor by settingsVM.circleColor.collectAsState()
+    val orientation = LocalConfiguration.current.orientation
+    val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
 
     Box(
         modifier = Modifier
-            .fillMaxWidth(),
-        contentAlignment = (Alignment.TopCenter)
+            .fillMaxSize(),
+        contentAlignment = if (isInLandscape) Alignment.TopStart else Alignment.TopCenter
     ) {
-        Column(
-            verticalArrangement = Arrangement.Center,
+        Box(
             modifier = Modifier
-                .wrapContentSize()
-                .padding(top = 55.dp)
+                .fillMaxWidth(if (isInLandscape) 0.48f else 1f),
+            contentAlignment = Alignment.Center
         ) {
-            Row(
+            Column(
+                verticalArrangement = Arrangement.Center,
                 modifier = Modifier
-                    .wrapContentSize(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+                    .wrapContentSize()
+                    .padding(top = 55.dp)
             ) {
-                Card(
-                    shape = MaterialTheme.shapes.medium,
-                    colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp)
-                    ),
+                Row(
                     modifier = Modifier
-                        .width(65.dp)
-                        .height(55.dp)
+                        .wrapContentSize(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(
-                        text = "$player1Wins",
-                        style = MaterialTheme.typography.titleLarge,
-                        color = MaterialTheme.colorScheme.onSurface,
-                        modifier = Modifier
-                            .align(Alignment.CenterHorizontally)
-                    )
-                    Canvas(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .align(Alignment.CenterHorizontally)
-                    ) {
-                        if (isXFor1) {
-                            drawXinCounter(xColor)
-                        } else {
-                            drawCircleinCounter(circleColor)
-                        }
-                    }
-                }
-                Spacer(
-                    modifier = Modifier
-                        .padding(6.dp)
-                )
-                Card(
-                    shape = MaterialTheme.shapes.medium,
-                    colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp)
-                    ),
-                    modifier = Modifier
-                        .width(65.dp)
-                        .height(55.dp)
-                ) {
-                    Text(
-                        text = "$player2Wins",
-                        style = MaterialTheme.typography.titleLarge,
-                        color = MaterialTheme.colorScheme.onSurface,
-                        modifier = Modifier
-                            .align(Alignment.CenterHorizontally)
-                    )
-                    Canvas(
+                    Card(
+                        shape = MaterialTheme.shapes.medium,
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp)
+                        ),
                         modifier = Modifier
                             .width(65.dp)
-                            .align(Alignment.CenterHorizontally)
+                            .height(55.dp)
                     ) {
-                        if (isXFor1) {
-                            drawCircleinCounter(circleColor)
-                         } else {
-                            drawXinCounter(xColor)
+                        Text(
+                            text = "$player1Wins",
+                            style = MaterialTheme.typography.titleLarge,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            modifier = Modifier
+                                .align(Alignment.CenterHorizontally)
+                        )
+                        Canvas(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .align(Alignment.CenterHorizontally)
+                        ) {
+                            if (isXFor1) {
+                                drawXinCounter(xColor)
+                            } else {
+                                drawCircleinCounter(circleColor)
+                            }
+                        }
+                    }
+                    Spacer(
+                        modifier = Modifier.width(6.dp)
+                    )
+                    Card(
+                        shape = MaterialTheme.shapes.medium,
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp)
+                        ),
+                        modifier = Modifier
+                            .width(65.dp)
+                            .height(55.dp)
+                    ) {
+                        Text(
+                            text = "$player2Wins",
+                            style = MaterialTheme.typography.titleLarge,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            modifier = Modifier
+                                .align(Alignment.CenterHorizontally)
+                        )
+                        Canvas(
+                            modifier = Modifier
+                                .width(65.dp)
+                                .align(Alignment.CenterHorizontally)
+                        ) {
+                            if (isXFor1) {
+                                drawCircleinCounter(circleColor)
+                             } else {
+                                drawXinCounter(xColor)
+                            }
                         }
                     }
                 }
