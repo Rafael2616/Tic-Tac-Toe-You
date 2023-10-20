@@ -21,6 +21,7 @@ fun VictoryCounterReseterButton() {
         btnText = R.string.reset,
         description = "Victory Counter Reseter Button",
         onClickFun = {
+            viewModel.showVictoryCounterReseter(false)
             viewModel.resetVictoryCounter()
         }
     )

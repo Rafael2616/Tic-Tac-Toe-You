@@ -40,7 +40,10 @@ class GameViewModel @Inject constructor(
     
     private var _isTimerOn = MutableStateFlow(true)
 	val isTimerOn: StateFlow<Boolean> = _isTimerOn
-    
+
+    private var _showVictoryCounterReseter = MutableStateFlow(false)
+	val showVictoryCounterReseter: StateFlow<Boolean> = _showVictoryCounterReseter
+
 	private var _play = MutableStateFlow(false)
 	val play: StateFlow<Boolean> = _play
 	private var _isXImage = MutableStateFlow(true)
@@ -193,10 +196,12 @@ class GameViewModel @Inject constructor(
 
     fun updateWinner(newValue: Boolean) {
         _winner.value = newValue
+        _showVictoryCounterReseter.value = true
     }
 
     fun updateGotOld(newValue: Boolean) {
         _gotOld.value = newValue
+        _showVictoryCounterReseter.value = true
     }
 	
     fun showPlayer1Name(newValue: String) {
@@ -255,6 +260,10 @@ class GameViewModel @Inject constructor(
 
     fun updateDifficultyMode(newMode: Int) {
        _selectedDifficultyMode.value = newMode
+    }
+
+    fun showVictoryCounterReseter(newValue:  Boolean) {
+       _showVictoryCounterReseter.value = newValue
     }
 
     fun play() {

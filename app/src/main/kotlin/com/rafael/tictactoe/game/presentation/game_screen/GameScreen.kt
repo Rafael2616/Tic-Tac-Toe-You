@@ -49,6 +49,7 @@ fun GameScreen(
     val isGameFinished by viewModel.isGameFinished.collectAsState()
     val showExitGameDialog by viewModel.showExitGameDialog.collectAsState()
     val showColorSelectionDialog by settingsVM.showColorSelectionDialog.collectAsState()
+    val showVictoryCounterReseter by viewModel.showVictoryCounterReseter.collectAsState()
     val playerName = PlayersNamesDisplay()
     val update by rememberSaveable { mutableStateOf(true) }
 
@@ -78,8 +79,10 @@ fun GameScreen(
 	}
 
     AnimatedVisibility(isGameFinished) {
-        VictoryCounterReseterButton()
         PlayAgainButton()
+        AnimatedVisibility(showVictoryCounterReseter) {
+            VictoryCounterReseterButton()
+        }
     }
 
     AnimatedVisibility(

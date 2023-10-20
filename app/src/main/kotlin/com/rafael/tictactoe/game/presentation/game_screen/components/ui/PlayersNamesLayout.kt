@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -19,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.material3.Text
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
@@ -43,13 +45,14 @@ fun PlayersNamesLayout() {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth(if (isInLandscape) 0.48f else 1f)
-                .statusBarsPadding()
-                .padding(top = 4.dp)
+                //.statusBarsPadding()
+                .padding(top = 20.dp)
         ) {
-            playersSize.forEachIndexed { player, _ ->
+            playersSize.forEach { player ->
                 Box(
                     modifier = Modifier
-                        .padding(6.dp),
+                        .padding(6.dp)
+                        .width(70.dp),
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
@@ -59,7 +62,9 @@ fun PlayersNamesLayout() {
                             else -> ""
                         },
                         style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurface
+                        color = MaterialTheme.colorScheme.onSurface,
+                        overflow = TextOverflow.Ellipsis,
+                        maxLines = 1
                     )
                 }
             }

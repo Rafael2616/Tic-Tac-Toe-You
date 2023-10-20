@@ -56,10 +56,10 @@ fun VictoryCounter() {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth(if (isInLandscape) 0.48f else 1f)
-                .statusBarsPadding()
-                .padding(top = 30.dp)
+               // .statusBarsPadding()
+                .padding(top = 45.dp)
         ) {
-            countersSize.forEachIndexed { counter, _ ->
+            countersSize.forEach { counter ->
                 Box(
                     modifier = Modifier.padding(6.dp)
                 ) {
