@@ -297,7 +297,7 @@ fun GetPlayersPrefsDialog() {
                             context,
                             "not yet developed :(",
                             Toast.LENGTH_SHORT
-                            )
+                        )
 
                         Text(
                             text = stringResource(R.string.modes),
