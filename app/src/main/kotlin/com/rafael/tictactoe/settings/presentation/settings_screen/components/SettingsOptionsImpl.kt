@@ -37,7 +37,7 @@ fun SettingsOptionsImpl(livePadding: PaddingValues) {
     ) {
         items(settingsGroups.size) { group ->
             when (group) {
-              0 -> SettingsWithSwitch(
+                0 -> SettingsWithSwitch(
                     size = themeGroupSize,
                     groupType = GroupType.THEME,
                     groupName = R.string.group_theme

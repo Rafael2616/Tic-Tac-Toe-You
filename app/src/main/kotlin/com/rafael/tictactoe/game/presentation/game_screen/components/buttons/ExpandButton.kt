@@ -41,7 +41,6 @@ fun ExpandButton() {
                 .size(45.dp)
                 .clip(CircleShape)
                 .clickable(onClick = { 
-                    settingsVM.execUIClickSound()
                     viewModel.showExpandButton(!isExpandButtonShown)
             })
         )      
