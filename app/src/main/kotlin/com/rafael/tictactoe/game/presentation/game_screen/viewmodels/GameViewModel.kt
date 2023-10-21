@@ -268,7 +268,6 @@ class GameViewModel @Inject constructor(
         updatePlay(true)
         updateIsXImage(isXFor1.value)
         updateIsTimerOn(true)
-        updateIsXImage(isXFor1.value)
     }
 
     fun reset() {

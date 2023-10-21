@@ -60,6 +60,7 @@ fun SettingsWithSwitch(
     val isFollowingSystemOn by viewModel.isFollowingSystemOn.collectAsState()
     val componentValidator = ComponentValidator()
     val orientation = LocalConfiguration.current.orientation
+    val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
 
     Column(
         modifier = Modifier
@@ -76,7 +77,7 @@ fun SettingsWithSwitch(
             textAlign = TextAlign.Start,
             modifier = Modifier
                 .padding(bottom = 6.dp)
-                .fillMaxWidth(if (orientation == Configuration.ORIENTATION_LANDSCAPE) 0.7f else 0.95f)
+                .fillMaxWidth(if (isInLandscape) 0.7f else 0.95f)
         )
         Card(
             shape = MaterialTheme.shapes.medium,
@@ -85,7 +86,7 @@ fun SettingsWithSwitch(
             ),
             modifier = Modifier
                 .animateContentSize()
-                .fillMaxWidth(if (orientation == Configuration.ORIENTATION_LANDSCAPE) 0.6f else 0.9f)
+                .fillMaxWidth(if (isInLandscape) 0.6f else 0.9f)
                 .clip(RoundedCornerShape(26.dp))
         ) {
             size.forEachIndexed { _, index ->

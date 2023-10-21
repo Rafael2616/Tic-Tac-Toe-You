@@ -19,12 +19,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
 @Composable
 fun ExpandButton() {
-    val settingsVM = hiltViewModel<SettingsViewModel>()
     val viewModel = hiltViewModel<GameViewModel>()
     val isExpandButtonShown by viewModel.isExpandButtonShown.collectAsState()
 
@@ -43,6 +41,6 @@ fun ExpandButton() {
                 .clickable(onClick = { 
                     viewModel.showExpandButton(!isExpandButtonShown)
             })
-        )      
+        )
     }
 }
