@@ -16,6 +16,8 @@ android {
         targetSdk = 34
         versionCode = 3
         versionName = "1.2.0"
+        
+        buildConfigField("Boolean", "ROOM_USE_INCREMENTAL_COMPILATION", "true")
     }
 	
     signingConfigs {
@@ -78,7 +80,7 @@ android {
 	}
 
     room {
-        schemaDirectory("schemas")
+        schemaDirectory("projectDir/schemas")
     }
 }
 

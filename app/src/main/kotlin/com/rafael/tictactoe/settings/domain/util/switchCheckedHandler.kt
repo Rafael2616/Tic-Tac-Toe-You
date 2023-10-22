@@ -1,34 +1,48 @@
 package com.rafael.tictactoe.settings.domain.util
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.settings.domain.enums.GroupType
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
+@Composable
 fun switchCheckedHandler(
     groupType: GroupType,
-    index: Int,
-    viewModel: SettingsViewModel
+    index: Int
 ): Boolean {
-   
-    fun themeSwitchCheckedHandler(index: Int, vm: SettingsViewModel): Boolean {
+    val vm = hiltViewModel<SettingsViewModel>()
+
+    @Composable
+    fun themeSwitchCheckedHandler(index: Int): Boolean {
+   	 val isFollowingSystemOn by vm.isFollowingSystemOn.collectAsState()
+ 	   val isDarkThemeOn by vm.isDarkThemeOn.collectAsState()
+   	 val isDynamicColorsOn by vm.isDynamicColorsOn.collectAsState()
+
         return when (index) {
-   		 0 -> vm.isFollowingSystemOn.value
- 		   1 -> vm.isDarkThemeOn.value
-   	     2 -> vm.isDynamicColorsOn.value
-        	else -> false 
+   		 0 -> isFollowingSystemOn
+ 		   1 -> isDarkThemeOn
+   	     2 -> isDynamicColorsOn
+        	else -> false
         } 
     }
-   
-    fun audioSwitchCheckedHandler(index: Int, vm: SettingsViewModel): Boolean {
+
+    @Composable
+    fun audioSwitchCheckedHandler(index: Int): Boolean {
+    	val isSoundEffectsOn by vm.isSoundEffectsOn.collectAsState()
+        val isBackgroundMusicOn by vm.isBackgroundMusicOn.collectAsState()
+
 		return when (index) {
-    		0 -> vm.isSoundEffectsOn.value
-     	   1 -> vm.isBackgroundMusicOn.value
+    		0 -> isSoundEffectsOn
+     	   1 -> isBackgroundMusicOn
             else -> false
         }
     }
 
     return when (groupType) {
-        GroupType.THEME -> themeSwitchCheckedHandler(index, viewModel)
-        GroupType.SOUND -> audioSwitchCheckedHandler(index, viewModel)
+        GroupType.THEME -> themeSwitchCheckedHandler(index)
+        GroupType.SOUND -> audioSwitchCheckedHandler(index)
         else -> false
     }  
 }

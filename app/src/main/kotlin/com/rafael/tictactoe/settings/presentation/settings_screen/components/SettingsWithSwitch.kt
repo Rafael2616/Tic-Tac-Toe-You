@@ -130,8 +130,7 @@ fun SettingsWithSwitch(
                             modifier = Modifier.padding(end = 10.dp),
                             checked = switchCheckedHandler(
                                 groupType,
-                                index,
-                                viewModel
+                                index
                             ),
                             onCheckedChange = {
                                 toggleSettingsUseCase(
@@ -144,8 +143,7 @@ fun SettingsWithSwitch(
                             thumbContent = {
                                  if (switchCheckedHandler(
                                         groupType,
-                                        index,
-                                        viewModel
+                                        index
                                     )) {
                                     Icon(
      					               imageVector = Icons.Filled.Check,
