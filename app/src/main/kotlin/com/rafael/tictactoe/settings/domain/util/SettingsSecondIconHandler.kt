@@ -19,6 +19,7 @@ fun SettingsSecondIconHandler(index: Int, groupType: GroupType): ImageVector {
     val viewModel = hiltViewModel<SettingsViewModel>()
     val isAboutShown by viewModel.isAboutShown.collectAsState()
 
+    @Composable
     fun CustomizationIconHandler(index: Int): ImageVector {
         return when (index) {
             0 -> Icons.Filled.ArrowForward
@@ -28,6 +29,7 @@ fun SettingsSecondIconHandler(index: Int, groupType: GroupType): ImageVector {
         }
     }
 
+    @Composable
     fun OtherIconHandler(index: Int): ImageVector {
         return when (index) {
             0 -> if (isAboutShown) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore

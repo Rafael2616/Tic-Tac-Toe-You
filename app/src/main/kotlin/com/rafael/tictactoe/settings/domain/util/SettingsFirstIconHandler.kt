@@ -26,6 +26,7 @@ fun SettingsFirstIconHandler(index: Int, groupType: GroupType): ImageVector {
     val isBackgroundMusicOn by viewModel.isBackgroundMusicOn.collectAsState()
     val isDarkThemeOn by viewModel.isDarkThemeOn.collectAsState()
 
+    @Composable
     fun ThemeIconHandler(index: Int): ImageVector {
         return when (index) {
             0 -> Icons.Filled.BrightnessMedium
@@ -35,6 +36,7 @@ fun SettingsFirstIconHandler(index: Int, groupType: GroupType): ImageVector {
         }
     }
 
+    @Composable
     fun SoundIconHandler(index: Int): ImageVector {
         return when (index) {
             0 -> if (isSoundEffectsOn) Icons.Filled.MusicNote else Icons.Filled.MusicOff
@@ -43,6 +45,7 @@ fun SettingsFirstIconHandler(index: Int, groupType: GroupType): ImageVector {
         }
     }
 
+    @Composable
     fun OtherIconHandler(index: Int): ImageVector {
         return when (index) {
             0 -> Icons.Outlined.Info
