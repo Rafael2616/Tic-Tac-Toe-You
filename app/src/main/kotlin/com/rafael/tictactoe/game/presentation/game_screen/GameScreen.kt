@@ -121,7 +121,7 @@ fun GameScreen(
         }
         onDispose{}
     }
-
+    
     BackHandler {
         viewModel.onEvent(GameEvent.toggleExitDialog)
     }

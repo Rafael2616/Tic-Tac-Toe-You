@@ -1,8 +1,6 @@
 package com.rafael.tictactoe.game.domain.checkers
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import com.rafael.tictactoe.game.domain.audio.WinnerSound
 import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.domain.victory_counter.VictoryCounterUpdater
@@ -59,10 +57,8 @@ fun WinnerChecker(
             }
         }
     }
-    
-    val hasWinner = state.winner
 
-    if (hasWinner) {
+    if (state.winner) {
         vm.updateIsGameFinished(true)
         vm.showVictoryCounterReseter(true)
         VictoryCounterUpdater(vm, state)

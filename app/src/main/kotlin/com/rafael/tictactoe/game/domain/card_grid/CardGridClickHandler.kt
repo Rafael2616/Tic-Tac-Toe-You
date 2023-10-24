@@ -1,12 +1,13 @@
 package com.rafael.tictactoe.game.domain.card_grid
 
 import com.rafael.tictactoe.game.domain.audio.CardGridSound
-import com.rafael.tictactoe.game.domain.card_grid.EasyModeCPUCardClick
+import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
-suspend fun CardGridClickHandler(
+fun CardGridClickHandler(
     state: GameState,
+    onEvent: (GameEvent) -> Unit,
 	vm: GameViewModel,
 	rowIndex: Int,
 	cardIndex: Int
@@ -68,7 +69,7 @@ suspend fun CardGridClickHandler(
                 vm.updateIsCPU(false)
             } else {
                 vm.updateIsCPU(true)
-                EasyModeCPUCardClick(vm, state)
+                onEvent(GameEvent.execEasyModeCPUCardClick)
             }
         } else {
             // Exec player 2's move
@@ -80,7 +81,7 @@ suspend fun CardGridClickHandler(
             // Calls CPU player's move during player 2's click if needed
             if (isCPUPlayer1) {
                 vm.updateIsCPU(true)
-                EasyModeCPUCardClick(vm, state)
+                onEvent(GameEvent.execEasyModeCPUCardClick)
             } else {
                 vm.updateIsCPU(false)
             }

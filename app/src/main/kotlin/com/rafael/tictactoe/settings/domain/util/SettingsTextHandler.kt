@@ -1,7 +1,6 @@
 package com.rafael.tictactoe.settings.domain.util
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
 import com.rafael.tictactoe.R

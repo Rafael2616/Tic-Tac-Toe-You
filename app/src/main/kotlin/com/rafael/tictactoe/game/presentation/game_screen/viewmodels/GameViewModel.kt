@@ -23,7 +23,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
 
 @HiltViewModel
 class GameViewModel @Inject constructor(
@@ -93,17 +92,19 @@ class GameViewModel @Inject constructor(
             }
             is GameEvent.clickOnCardGrid -> {
                 _state.update { it.copy(
-                	isExpandButtonShown = false
-                )}
-                viewModelScope.launch(Dispatchers.IO) {
-                    CardGridClickHandler(
-                        state.value,
-                        this@GameViewModel,
-                        event.rowIndex,
-                        event.cardIndex
-                    )
+                	isExpandButtonShown = false)
                 }
+                CardGridClickHandler(
+                    state.value,
+                    this::onEvent,
+                    this@GameViewModel,
+                    event.rowIndex,
+                    event.cardIndex
+                )
                 execCardGridSound()
+            }
+            GameEvent.execEasyModeCPUCardClick -> {
+                EasyModeCPUCardClick(this, state.value)
             }
             GameEvent.resetVictoryCounter -> {
                 _state.update { it.copy(

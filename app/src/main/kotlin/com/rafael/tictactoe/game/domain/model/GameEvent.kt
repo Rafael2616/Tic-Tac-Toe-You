@@ -6,6 +6,7 @@ sealed interface GameEvent {
     object switchPlayerPositions : GameEvent
     object startGame : GameEvent
     data class clickOnCardGrid(val rowIndex: Int, val cardIndex: Int) : GameEvent
+    object execEasyModeCPUCardClick : GameEvent
     object resetVictoryCounter : GameEvent
     object playAgain : GameEvent
     object toggleBgMusicButton : GameEvent
