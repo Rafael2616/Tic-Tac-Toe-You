@@ -5,27 +5,28 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.material.icons.filled.VolumeOff
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.presentation.game_screen.components.util.BaseButton
+import com.rafael.tictactoe.settings.domain.model.SettingsState
 
 @Composable
-fun BackgroundMusicButton() {
-    val settingsVM = hiltViewModel<SettingsViewModel>()
-    val isBackgroundMusicOn by settingsVM.isBackgroundMusicOn.collectAsState()
+fun BackgroundMusicButton(
+    onEvent: (GameEvent) -> Unit,
+    settingsState: SettingsState
+) {
+    val isBackgroundMusicOn = settingsState.isBackgroundMusicOn
  
     BaseButton(
         modifier = Modifier.padding(top = 165.dp, start = 15.dp),
         btnIcon = if (isBackgroundMusicOn) Icons.Filled.VolumeUp else Icons.Filled.VolumeOff,
         btnText = R.string.active_music,
         description = "Background Music Button",
-        onClickFun = { 
-            settingsVM.updateIsBackgroundMusicOn(!isBackgroundMusicOn)
+        onEvent = { 
+            onEvent(GameEvent.toggleBgMusicButton)
         }
     )
 }

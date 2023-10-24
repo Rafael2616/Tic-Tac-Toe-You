@@ -1,13 +1,17 @@
 package com.rafael.tictactoe.game.domain.restart_game
 
+import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
-fun RestartGame(vm: GameViewModel) {
+fun RestartGame(
+    vm: GameViewModel,
+    state: GameState
+) {
     val allFalse = List(3){List<Boolean>(3) { false }}
-    val is1Win = vm.is1Win.value
-    val isXFor1 = vm.isXFor1.value
-    val isCPUMode = vm.isCPUMode.value
-    val isCPUPlayer1 = vm.isCPUPlayer1.value
+    val is1Win = state.is1Win
+    val isXFor1 = state.isXFor1
+    val isCPUMode = state.isCPUMode
+    val isCPUPlayer1 = state.isCPUPlayer1
 
     /*
      *Defines which player will start next match in PvP Mode

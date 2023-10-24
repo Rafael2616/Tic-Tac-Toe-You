@@ -6,14 +6,18 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import com.rafael.tictactoe.game.domain.audio.GotOldSound
+import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
 @Composable
-fun GotOldChecker(vm: GameViewModel) {
-    val isCardClicked by vm.isCardClicked.collectAsState()   
-    val winner by vm.winner.collectAsState()
-    val player1Wins by vm.player1Wins.collectAsState()
-    val player2Wins by vm.player2Wins.collectAsState()
+fun GotOldChecker(
+    vm: GameViewModel,
+    state: GameState
+) {
+    val isCardClicked = state.isCardClicked
+    val winner = state.winner
+    val player1Wins = state.player1Wins
+    val player2Wins = state.player2Wins
     val isCounterReset by remember {
         derivedStateOf { player1Wins + player2Wins }
     }
@@ -24,7 +28,7 @@ fun GotOldChecker(vm: GameViewModel) {
 		vm.updateGotOld(false)
 	}
 
-    val hasGotOld by vm.gotOld.collectAsState()
+    val hasGotOld = state.gotOld
 
     if (hasGotOld && !winner) {
         vm.updateIsGameFinished(true)

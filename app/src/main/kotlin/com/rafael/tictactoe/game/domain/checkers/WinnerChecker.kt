@@ -4,14 +4,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.rafael.tictactoe.game.domain.audio.WinnerSound
+import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.domain.victory_counter.VictoryCounterUpdater
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
 @Composable
-fun WinnerChecker(vm: GameViewModel) {
-    val card by vm.card.collectAsState()
-    val isCardClicked by vm.isCardClicked.collectAsState()
-    val isXFor1 by vm.isXFor1.collectAsState()
+fun WinnerChecker(
+    vm: GameViewModel,
+    state: GameState
+) {
+    val card = state.card
+    val isCardClicked = state.isCardClicked
+    val isXFor1 = state.isXFor1
 
     val winningPositions = listOf(
         // Lines
@@ -56,12 +60,12 @@ fun WinnerChecker(vm: GameViewModel) {
         }
     }
     
-    val hasWinner by vm.winner.collectAsState()
+    val hasWinner = state.winner
 
     if (hasWinner) {
         vm.updateIsGameFinished(true)
         vm.showVictoryCounterReseter(true)
-        VictoryCounterUpdater(vm)
+        VictoryCounterUpdater(vm, state)
         vm.execWinnerSound()
     }
 }

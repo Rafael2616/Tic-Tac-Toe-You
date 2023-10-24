@@ -25,7 +25,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
@@ -38,21 +37,23 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.settings.domain.enums.Colors
 import com.rafael.tictactoe.settings.domain.enums.Customization
 import com.rafael.tictactoe.settings.domain.use_cases.colorSelectionUseCase
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.settings.domain.model.SettingsState
 
 @Composable
-fun ColorSelectionDialog() {
-    val settingsVM = hiltViewModel<SettingsViewModel>()
+fun ColorSelectionDialog(
+    onEvent: (SettingsEvent) -> Unit,
+    state: SettingsState
+) {
     val colorsOptions = remember { mutableStateListOf(0,1,2,3,4,5,6,7,8) }
-    val type by settingsVM.customizationType.collectAsState()
-    val selectedWinnerLineColor by settingsVM.selectedWinnerLineColor.collectAsState()
-    val selectedCircleColor by settingsVM.selectedCircleColor.collectAsState()
-    val selectedXColor by settingsVM.selectedXColor.collectAsState()
+    val type = state.customizationType
+    val selectedWinnerLineColor = state.selectedWinnerLineColor
+    val selectedCircleColor = state.selectedCircleColor
+    val selectedXColor = state.selectedXColor
     val colors = Colors.get()
 
     Surface(
@@ -96,15 +97,14 @@ fun ColorSelectionDialog() {
                             .fillMaxWidth()
                             .clickable(onClick = {
                                 when (type) {
-                                    Customization.WINNERLINECOLOR -> settingsVM.updateSelectedWinnerLineColor(color)
-                                    Customization.CIRCLECOLOR ->  settingsVM.updateSelectedCircleColor(color)
-                                    Customization.XCOLOR ->  settingsVM.updateSelectedXColor(color)
+                                    Customization.WINNERLINECOLOR -> onEvent(SettingsEvent.selectedWinnerLineColor(color))
+                                    Customization.CIRCLECOLOR ->  onEvent(SettingsEvent.selectedCircleColor(color))
+                                    Customization.XCOLOR ->  onEvent(SettingsEvent.selectedXColor(color))
                                 }
-                                settingsVM.execUIClickSound()
                                 colorSelectionUseCase(
                                     type,
                                     color,
-                                    settingsVM
+                                    onEvent
                                 )
                            })
                         ) {
@@ -125,15 +125,14 @@ fun ColorSelectionDialog() {
                                         },
                                     onClick = {
                                         when (type) {
-                                            Customization.WINNERLINECOLOR -> settingsVM.updateSelectedWinnerLineColor(color)
-                                            Customization.CIRCLECOLOR ->  settingsVM.updateSelectedCircleColor(color)
-                                            Customization.XCOLOR ->  settingsVM.updateSelectedXColor(color)
+                                            Customization.WINNERLINECOLOR -> onEvent(SettingsEvent.selectedWinnerLineColor(color))
+                                            Customization.CIRCLECOLOR ->  onEvent(SettingsEvent.selectedCircleColor(color))
+                                            Customization.XCOLOR ->  onEvent(SettingsEvent.selectedXColor(color))
                                         }
-                                        settingsVM.execUIClickSound()
                                         colorSelectionUseCase(
                                             type,
                                             color,
-                                            settingsVM
+                                            onEvent
                                         )
                                     },
                                 )
@@ -183,8 +182,7 @@ fun ColorSelectionDialog() {
                 }
                 OutlinedButton(
                     onClick = {
-                        settingsVM.execUIClickSound()
-                        settingsVM.showColorSelectionDialog(false)
+                        onEvent(SettingsEvent.showColorSelectionDialog(false))
                     },
                     modifier = Modifier
                         .width(90.dp)

@@ -17,8 +17,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateListOf
@@ -26,22 +24,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
+import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.presentation.utils.draws.drawCircleinCounter
 import com.rafael.tictactoe.game.presentation.utils.draws.drawXinCounter
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.settings.domain.model.SettingsState
 
 @Composable
-fun VictoryCounter() {
-    val viewModel = hiltViewModel<GameViewModel>()
-    val settingsVM = hiltViewModel<SettingsViewModel>()
-    val player1Wins by viewModel.player1Wins.collectAsState()
-    val player2Wins by viewModel.player2Wins.collectAsState()
-    val isXFor1 by viewModel.isXFor1.collectAsState()
-    val xColor by settingsVM.xColor.collectAsState()
-    val circleColor by settingsVM.circleColor.collectAsState()
+fun VictoryCounter(
+    state: GameState,
+    settingsState: SettingsState
+) {
+    val player1Wins = state.player1Wins
+    val player2Wins = state.player2Wins
+    val isXFor1 = state.isXFor1
+    val xColor = settingsState.xColor
+    val circleColor = settingsState.circleColor
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
     val countersSize = remember { mutableStateListOf(0,1) }

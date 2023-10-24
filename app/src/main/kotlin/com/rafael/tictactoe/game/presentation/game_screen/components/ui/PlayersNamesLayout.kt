@@ -11,26 +11,22 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.material3.Text
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
+import com.rafael.tictactoe.game.domain.model.GameState
 
 @Composable
-fun PlayersNamesLayout() {
-    val viewModel = hiltViewModel<GameViewModel>()
-    val showPlayer1Name by viewModel.showPlayer1Name.collectAsState()
-    val showPlayer2Name by viewModel.showPlayer2Name.collectAsState()
+fun PlayersNamesLayout(state: GameState) {
+    val showPlayer1Name = state.showPlayer1Name
+    val showPlayer2Name = state.showPlayer2Name
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
     val playersSize = remember { mutableStateListOf(0,1) }

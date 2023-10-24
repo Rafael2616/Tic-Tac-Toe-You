@@ -28,8 +28,6 @@ import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -40,24 +38,25 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.settings.domain.enums.GroupType
+import com.rafael.tictactoe.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.settings.domain.model.SettingsState
 import com.rafael.tictactoe.settings.domain.use_cases.toggleSettingsUseCase
 import com.rafael.tictactoe.settings.domain.util.ComponentValidator
 import com.rafael.tictactoe.settings.domain.util.SettingsFirstIconHandler
 import com.rafael.tictactoe.settings.domain.util.SettingsTextHandler
 import com.rafael.tictactoe.settings.domain.util.switchCheckedHandler
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
 fun SettingsWithSwitch(
+    state: SettingsState,
+    onEvent: (SettingsEvent) -> Unit,
     size: List<Int>,
     groupType: GroupType,
     @StringRes groupName: Int
 ) {
-    val viewModel = hiltViewModel<SettingsViewModel>()
-    val isFollowingSystemOn by viewModel.isFollowingSystemOn.collectAsState()
+    val isFollowingSystemOn = state.isFollowingSystemOn
     val componentValidator = ComponentValidator()
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
@@ -102,17 +101,17 @@ fun SettingsWithSwitch(
                             .height(60.dp)
                             .fillMaxSize()
                             .clickable(onClick = {
-                                viewModel.execUIClickSound()
                                 toggleSettingsUseCase(
                                     groupType,
                                     index,
-                                    viewModel
+                                    state,
+                                    onEvent
                                 )
                             })
                     ) {
                         if (componentValidator.validateFirstIcon(groupType)) {
                            Icon(
-                                imageVector = SettingsFirstIconHandler(index, groupType),
+                                imageVector = SettingsFirstIconHandler(index, groupType, state),
                                 contentDescription = "Icon",
        		            	 modifier = Modifier
                                     .size(42.dp)
@@ -122,7 +121,7 @@ fun SettingsWithSwitch(
                         Text(
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onSurface,
-                            text = SettingsTextHandler(index, groupType),
+                            text = SettingsTextHandler(index, groupType, state),
                             modifier = Modifier.width(220.dp),
                             textAlign = TextAlign.Center
                         )
@@ -130,20 +129,22 @@ fun SettingsWithSwitch(
                             modifier = Modifier.padding(end = 10.dp),
                             checked = switchCheckedHandler(
                                 groupType,
-                                index
+                                index,
+                                state
                             ),
                             onCheckedChange = {
                                 toggleSettingsUseCase(
                                     groupType,
                                     index,
-                                    viewModel
+                                    state,
+                                    onEvent
                                 )
-                                viewModel.execUIClickSound()
                             },
                             thumbContent = {
                                  if (switchCheckedHandler(
                                         groupType,
-                                        index
+                                        index,
+                                        state
                                     )) {
                                     Icon(
      					               imageVector = Icons.Filled.Check,

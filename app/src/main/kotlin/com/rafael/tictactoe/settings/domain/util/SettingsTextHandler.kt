@@ -4,15 +4,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.settings.domain.enums.GroupType
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.settings.domain.model.SettingsState
 
 @Composable
-fun SettingsTextHandler(index: Int, groupType: GroupType): String {
-    val settingsVM = hiltViewModel<SettingsViewModel>()
-    val isAboutShown by settingsVM.isAboutShown.collectAsState()
+fun SettingsTextHandler(
+    index: Int,
+    groupType: GroupType,
+    state: SettingsState
+): String {
+    val isAboutShown = state.isAboutShown
 
    @Composable
     fun themeCardTextHandler(index: Int): String {

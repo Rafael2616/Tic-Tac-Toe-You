@@ -11,6 +11,8 @@ import com.rafael.tictactoe.game.domain.audio.BackgroundMusic
 import com.rafael.tictactoe.settings.domain.enums.Colors
 import com.rafael.tictactoe.settings.domain.enums.Customization
 import com.rafael.tictactoe.settings.domain.model.SettingsEntity
+import com.rafael.tictactoe.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.settings.domain.model.SettingsState
 import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -18,7 +20,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.update
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
@@ -30,143 +34,154 @@ class SettingsViewModel @Inject constructor(
     //Get default values for settings variables from SettingsEntity (used to avoid NPEs)
     val defaultSettings = SettingsEntity.getDefaultSettings()
 
-    val color = Colors.get()
-    //Private vars that are updated in update functions but only acessible in this class
-    private var _isBackgroundMusicOn = MutableStateFlow(true)
-    private var _isDarkThemeOn = MutableStateFlow(true)
-    private var _isDynamicColorsOn = MutableStateFlow(true)
-    private var _isFollowingSystemOn = MutableStateFlow(true)
-    private var _isSoundEffectsOn = MutableStateFlow(true)
-    private var _isAboutShown = MutableStateFlow(false)  
-    private var _showColorSelectionDialog = MutableStateFlow(false)
-    private var _winnerLineColor = MutableStateFlow(color.yellow)
-    private var _selectedWinnerLineColor = MutableStateFlow(2)
-    private var _xColor = MutableStateFlow(color.red)
-    private var _selectedXColor = MutableStateFlow(1)
-    private var _circleColor = MutableStateFlow(color.light_green)
-    private var _selectedCircleColor = MutableStateFlow(4)
-    private var _customizationType = MutableStateFlow(Customization.XCOLOR)
-    private var _isBMPlaying = MutableStateFlow(false)
-
-	//Variables that have same values of private vars above, but cant be modified outside this class
-    val isBackgroundMusicOn: StateFlow<Boolean> = _isBackgroundMusicOn
-    val isDarkThemeOn: StateFlow<Boolean> = _isDarkThemeOn
-    val isDynamicColorsOn: StateFlow<Boolean> = _isDynamicColorsOn
-    val isFollowingSystemOn: StateFlow<Boolean> = _isFollowingSystemOn
-    val isSoundEffectsOn: StateFlow<Boolean> = _isSoundEffectsOn
-    val isAboutShown: StateFlow<Boolean> = _isAboutShown
-    val showColorSelectionDialog: StateFlow<Boolean> = _showColorSelectionDialog
-    val winnerLineColor: StateFlow<Color> = _winnerLineColor
-    val selectedWinnerLineColor: StateFlow<Int> = _selectedWinnerLineColor
-    val xColor: StateFlow<Color> = _xColor
-    val selectedXColor: StateFlow<Int> = _selectedXColor
-    val circleColor: StateFlow<Color> = _circleColor
-    val selectedCircleColor: StateFlow<Int> = _selectedCircleColor
-    val isBMPlaying: StateFlow<Boolean> = _isBMPlaying
-    val customizationType: StateFlow<Customization> = _customizationType
+    private val _state = MutableStateFlow(SettingsState())
+    val state = _state.asStateFlow()
 
     //Initialize ViewModel StateFlows Variables with corresponding values in SettingsRepository
 	init {
   	  viewModelScope.launch(Dispatchers.IO) {
             val settings = repository.getAllSettingsValues(1) ?: defaultSettings
-   	 	_isBackgroundMusicOn.value = settings.isBackgroundMusicOn
-    	    _isDarkThemeOn.value = settings.isDarkThemeOn
-    	    _isDynamicColorsOn.value = settings.isDynamicColorsOn
-            _isFollowingSystemOn.value = settings.isFollowingSystemOn
-            _isSoundEffectsOn.value = settings.isSoundEffectsOn
+            _state.update { it.copy(
+   	 	    isBackgroundMusicOn = settings.isBackgroundMusicOn,
+    	        isDarkThemeOn = settings.isDarkThemeOn,
+    	        isDynamicColorsOn = settings.isDynamicColorsOn,
+                isFollowingSystemOn = settings.isFollowingSystemOn,
+                isSoundEffectsOn = settings.isSoundEffectsOn
+            )}
   	  }
 	}
 	
-    //Functions to update values in SettingsRepository and SettingsViewModel StateFlows
-	fun updateIsBackgroundMusicOn(newValue: Boolean) {
- 	   _isBackgroundMusicOn.value = newValue
-		viewModelScope.launch(Dispatchers.IO) {
-            var settings = repository.getAllSettingsValues(1) ?: defaultSettings
-            settings.isBackgroundMusicOn = newValue
-			repository.setAllSettingsValues(settings)
+	fun onEvent(event: SettingsEvent) {
+        when (event) {
+ 	       SettingsEvent.toggleIsBackgroundMusicOn -> {
+                _state.update { it.copy(
+                    isBackgroundMusicOn = !state.value.isBackgroundMusicOn
+                )}
+	    	    viewModelScope.launch(Dispatchers.IO) {
+                    var settings = repository.getAllSettingsValues(1) ?: defaultSettings
+                    settings.isBackgroundMusicOn = state.value.isBackgroundMusicOn
+			        repository.setAllSettingsValues(settings)
+                }
+                execUIClickSound()
+                BackgroundMusic(context, this::onEvent, state.value)
+            }
+ 	       is SettingsEvent.toggleIsDarkThemeOn -> {
+                _state.update { it.copy(
+                    isDarkThemeOn = event.value
+                )}
+	    	    viewModelScope.launch(Dispatchers.IO) {
+                    var settings = repository.getAllSettingsValues(1) ?: defaultSettings
+                    settings.isDarkThemeOn = state.value.isDarkThemeOn
+			        repository.setAllSettingsValues(settings)
+                }
+                if (event.withSound) {
+                    execUIClickSound()
+                }
+            }
+ 	       SettingsEvent.toggleIsDynamicColorsOn -> {
+                _state.update { it.copy(
+                    isDynamicColorsOn = !state.value.isDynamicColorsOn
+                )}
+	    	    viewModelScope.launch(Dispatchers.IO) {
+                    var settings = repository.getAllSettingsValues(1) ?: defaultSettings
+                    settings.isDynamicColorsOn = state.value.isDynamicColorsOn
+			        repository.setAllSettingsValues(settings)
+                }
+                execUIClickSound()
+            }
+ 	       SettingsEvent.toggleIsFollowingSystemOn -> {
+                _state.update { it.copy(
+                    isFollowingSystemOn = !state.value.isFollowingSystemOn
+                )}
+	    	    viewModelScope.launch(Dispatchers.IO) {
+                    var settings = repository.getAllSettingsValues(1) ?: defaultSettings
+                    settings.isFollowingSystemOn = state.value.isFollowingSystemOn
+			        repository.setAllSettingsValues(settings)
+                }
+                execUIClickSound()
+            }
+ 	       SettingsEvent.toggleIsSoundEffectsOn -> {
+                _state.update { it.copy(
+                    isSoundEffectsOn = !state.value.isSoundEffectsOn
+                )}
+	    	    viewModelScope.launch(Dispatchers.IO) {
+                    var settings = repository.getAllSettingsValues(1) ?: defaultSettings
+                    settings.isSoundEffectsOn = state.value.isSoundEffectsOn
+			        repository.setAllSettingsValues(settings)
+                }
+                execUIClickSound()
+            }
+ 	       SettingsEvent.onSettingsScreenDestroyment -> {
+                _state.update { it.copy(
+                    isAboutShown = false,
+                    showColorSelectionDialog = false
+                )}
+            }
+ 	       is SettingsEvent.updateIsAboutShown -> {
+                _state.update { it.copy(
+                    isAboutShown = event.value
+                )}
+                execUIClickSound()
+            }
+ 	       is SettingsEvent.setCustomizationType -> {
+                _state.update { it.copy(
+                    customizationType = event.type
+                )}
+                execUIClickSound()
+            }
+ 	       is SettingsEvent.showColorSelectionDialog -> {
+                _state.update { it.copy(
+                    showColorSelectionDialog = event.value
+                )}
+                execUIClickSound()
+            }
+ 	       is SettingsEvent.setWinnerLineColor -> {
+                _state.update { it.copy(
+                    winnerLineColor = event.color
+                )}
+                execUIClickSound()
+            }
+ 	       is SettingsEvent.setXColor -> {
+                _state.update { it.copy(
+                    xColor = event.color
+                )}
+                execUIClickSound()
+            }
+ 	       is SettingsEvent.setCircleColor -> {
+                _state.update { it.copy(
+                    circleColor = event.color
+                )}
+                execUIClickSound()
+            }
+ 	       is SettingsEvent.selectedWinnerLineColor -> {
+                _state.update { it.copy(
+                    selectedWinnerLineColor = event.value
+                )}
+                execUIClickSound()
+            }
+ 	       is SettingsEvent.selectedXColor -> {
+                _state.update { it.copy(
+                    selectedXColor = event.value
+                )}
+                execUIClickSound()
+            }
+ 	       is SettingsEvent.selectedCircleColor -> {
+                _state.update { it.copy(
+                    selectedCircleColor = event.value
+                )}
+                execUIClickSound()
+            }
+ 	       is SettingsEvent.isBGMusicPlaying -> {
+                _state.update { it.copy(
+                    isBMPlaying = event.value
+                )}
+            }
 		}
-        BackgroundMusic(context, this)
-    }
-
-    fun updateIsDarkThemeOn(newValue: Boolean) {
-        _isDarkThemeOn.value = newValue
-        viewModelScope.launch(Dispatchers.IO) {
-	  	  var settings = repository.getAllSettingsValues(1) ?: defaultSettings
-    		settings.isDarkThemeOn = newValue
-			repository.setAllSettingsValues(settings)
-        }
-    }
-
-    fun updateIsDynamicColorsOn(newValue: Boolean) {
-        _isDynamicColorsOn.value = newValue
-        viewModelScope.launch(Dispatchers.IO) {
-            var settings = repository.getAllSettingsValues(1) ?: defaultSettings
-    		settings.isDynamicColorsOn = newValue
-			repository.setAllSettingsValues(settings)
-        }
-    }
-
-    fun updateIsFollowingSystemOn(newValue: Boolean) {
-        _isFollowingSystemOn.value = newValue
-        viewModelScope.launch(Dispatchers.IO) {
-	  	  var settings = repository.getAllSettingsValues(1) ?: defaultSettings
-    		settings.isFollowingSystemOn = newValue
-			repository.setAllSettingsValues(settings)
-        }
-    }
-   
-    fun updateIsSoundEffectsOn(newValue: Boolean) {
-        _isSoundEffectsOn.value = newValue
-        viewModelScope.launch(Dispatchers.IO) {
-            var settings = repository.getAllSettingsValues(1) ?: defaultSettings
-			settings.isSoundEffectsOn = newValue
-			repository.setAllSettingsValues(settings)
-        }
-    }
- 
-    fun updateIsAboutShown(newValue: Boolean) {
-        _isAboutShown.value = newValue
-    }
-
-    fun setCustomizationType(newType: Customization) {
-        _customizationType.value = newType
-    }
-    
-    fun showColorSelectionDialog(newValue: Boolean) {
-        _showColorSelectionDialog.value = newValue
-    }
-
-    fun setWinnerLineColor(newColor: Color) {
-        _winnerLineColor.value = newColor
-    }
-
-    fun updateSelectedWinnerLineColor(newValue: Int) {
-        _selectedWinnerLineColor.value = newValue
-    }
-
-    fun setXColor(newColor: Color) {
-        _xColor.value = newColor
-    }
-
-    fun updateSelectedXColor(newValue: Int) {
-        _selectedXColor.value = newValue
-    }
-
-    fun setCircleColor(newColor: Color) {
-        _circleColor.value = newColor
-    }
-
-    fun updateSelectedCircleColor(newValue: Int) {
-        _selectedCircleColor.value = newValue
     }
 
     fun execUIClickSound() {
-        if (_isSoundEffectsOn.value) {
+        if (state.value.isSoundEffectsOn) {
             UiClickSound(context, player)
         }
-    }
-
-    fun updateIsBMPlaying(newValue: Boolean) {
-        _isBMPlaying.value = newValue
     }
 }

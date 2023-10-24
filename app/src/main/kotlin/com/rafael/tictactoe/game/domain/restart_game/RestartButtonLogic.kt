@@ -2,14 +2,14 @@ package com.rafael.tictactoe.game.domain.restart_game
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.collectAsState
+import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
 @Composable
-fun RestartButtonLogic(vm: GameViewModel) {
-    val isCardClicked by vm.isCardClicked.collectAsState()   
-    val isGameFinished by vm.isGameFinished.collectAsState()   
-    val play by vm.play.collectAsState()   
+fun RestartButtonLogic(vm: GameViewModel, state: GameState) {
+    val isCardClicked = state.isCardClicked   
+    val isGameFinished = state.isGameFinished   
+    val play = state.play  
 
 	if (isCardClicked.flatten().all {!it} || isGameFinished || !play) {
   	  vm.showRestartButton(false)

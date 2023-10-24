@@ -29,20 +29,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.game.domain.card_grid.EasyModeCPUCardClick
-import com.rafael.tictactoe.game.domain.restart_game.RestartGame
-import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.game.domain.model.GameEvent
 
 @Composable
-fun RestartButton() {
-    val settingsVM = hiltViewModel<SettingsViewModel>()
+fun RestartButton(
+    onEvent: (GameEvent) -> Unit
+) {
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
-    val viewModel = hiltViewModel<GameViewModel>()
-    val isCPUMode by viewModel.isCPUMode.collectAsState()
 
     Box(
         modifier = Modifier
@@ -69,12 +64,7 @@ fun RestartButton() {
                         .align(Alignment.CenterHorizontally)
                         .clip(CircleShape)
                         .clickable(onClick = {
-                            settingsVM.execUIClickSound()
-                            viewModel.showExpandButton(false)
-                            RestartGame(viewModel)
-                            if (isCPUMode) {
-                                EasyModeCPUCardClick(viewModel)
-                            }
+                            onEvent(GameEvent.playAgain)
                         })
                 ) {
                     Box(

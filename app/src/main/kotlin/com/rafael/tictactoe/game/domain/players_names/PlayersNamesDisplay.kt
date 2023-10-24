@@ -7,23 +7,24 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
+import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
 class PlayersNamesDisplay() {
 
     @Composable
-    fun firstPlayerName() {
+    fun firstPlayerName(state: GameState) {
         val vm = hiltViewModel<GameViewModel>()
         val context = LocalContext.current
-        val isXFor1 by vm.isXFor1.collectAsState()
-        val player1Name by vm.player1Name.collectAsState()
-        val player2Name by vm.player2Name.collectAsState()
+        val isXFor1 = state.isXFor1
+        val player1Name = state.player1Name
+        val player2Name = state.player2Name
         val genericPlayerX = context.getString(R.string.player_x)
         val genericPlayerO = context.getString(R.string.player_o)
-        val isCPUMode by vm.isCPUMode.collectAsState()
-        val isCPUPlayer1 by vm.isCPUPlayer1.collectAsState()
-        val localPlayer1 by vm.localPlayer1.collectAsState()
-        val play by vm.play.collectAsState()
+        val isCPUMode = state.isCPUMode
+        val isCPUPlayer1 = state.isCPUPlayer1
+        val localPlayer1 = state.localPlayer1
+        val play = state.play
         val emptyPlayerName = context.getString(R.string.player)
         val cpuName = context.getString(R.string.cpu)
 
@@ -76,18 +77,18 @@ class PlayersNamesDisplay() {
     }
 
     @Composable
-    fun secondPlayerName() {
+    fun secondPlayerName(state: GameState) {
         val vm = hiltViewModel<GameViewModel>()
         val context = LocalContext.current
-        val isXFor1 by vm.isXFor1.collectAsState()
-        val player1Name by vm.player1Name.collectAsState()
-        val player2Name by vm.player2Name.collectAsState()
+        val isXFor1 = state.isXFor1
+        val player1Name = state.player1Name
+        val player2Name = state.player2Name
         val genericPlayerO = context.getString(R.string.player_o)
-        val isCPUMode by vm.isCPUMode.collectAsState()
-        val isCPUPlayer1 by vm.isCPUPlayer1.collectAsState()
+        val isCPUMode = state.isCPUMode
+        val isCPUPlayer1 = state.isCPUPlayer1
         val genericPlayerX = context.getString(R.string.player_x)
-        val localPlayer1 by vm.localPlayer1.collectAsState()
-        val play by vm.play.collectAsState()
+        val localPlayer1 = state.localPlayer1
+        val play = state.play
         val emptyPlayerName = context.getString(R.string.player)
         val cpuName = context.getString(R.string.cpu)
 

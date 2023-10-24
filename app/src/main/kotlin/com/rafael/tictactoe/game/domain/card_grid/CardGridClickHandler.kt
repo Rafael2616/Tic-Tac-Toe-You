@@ -2,22 +2,24 @@ package com.rafael.tictactoe.game.domain.card_grid
 
 import com.rafael.tictactoe.game.domain.audio.CardGridSound
 import com.rafael.tictactoe.game.domain.card_grid.EasyModeCPUCardClick
+import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
 suspend fun CardGridClickHandler(
+    state: GameState,
 	vm: GameViewModel,
 	rowIndex: Int,
 	cardIndex: Int
 ) {
-	val play = vm.play.value
-    val isCardClicked = vm.isCardClicked.value
-    val isXImage = vm.isXImage.value
-    val isPlayer1 = vm.isPlayer1.value
-    val isCPUPlayer1 = vm.isCPUPlayer1.value
-    val isTimerOn = vm.isTimerOn.value
-    val isCPUMode = vm.isCPUMode.value
-    val isXFor1 = vm.isXFor1.value
-    val isGameFinished = vm.isGameFinished.value
+	val play = state.play
+    val isCardClicked = state.isCardClicked
+    val isXImage = state.isXImage
+    val isPlayer1 = state.isPlayer1
+    val isCPUPlayer1 = state.isCPUPlayer1
+    val isTimerOn = state.isTimerOn
+    val isCPUMode = state.isCPUMode
+    val isXFor1 = state.isXFor1
+    val isGameFinished = state.isGameFinished
 
     if (isTimerOn) {
         return
@@ -50,7 +52,6 @@ suspend fun CardGridClickHandler(
             vm.updateIsXImage(!isXImage)
             vm.updateIsPlayer1(true)
         }
-        vm.execCardGridSound()
     }
        
     //Vs CPU Mode
@@ -67,7 +68,7 @@ suspend fun CardGridClickHandler(
                 vm.updateIsCPU(false)
             } else {
                 vm.updateIsCPU(true)
-                EasyModeCPUCardClick(vm)
+                EasyModeCPUCardClick(vm, state)
             }
         } else {
             // Exec player 2's move
@@ -78,12 +79,11 @@ suspend fun CardGridClickHandler(
 
             // Calls CPU player's move during player 2's click if needed
             if (isCPUPlayer1) {
-                vm.updateIsCPU(true) 
-                EasyModeCPUCardClick(vm)
+                vm.updateIsCPU(true)
+                EasyModeCPUCardClick(vm, state)
             } else {
                 vm.updateIsCPU(false)
             }
         }
-        vm.execCardGridSound()
-     }
+    }
 }

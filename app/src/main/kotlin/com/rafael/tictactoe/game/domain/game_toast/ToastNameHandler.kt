@@ -10,28 +10,29 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
+import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
-fun ToastNameHandler() {
+fun ToastNameHandler(state: GameState) {
     val vm = hiltViewModel<GameViewModel>()
     val context = LocalContext.current
-	val winner by vm.winner.collectAsState()
-    val gotOld by vm.gotOld.collectAsState()
-    val play by vm.play.collectAsState()
-    val player1Name by vm.player1Name.collectAsState()
-    val player2Name by vm.player2Name.collectAsState()
-    val isCPUPlayer1 by vm.isCPUPlayer1.collectAsState()
-    val isPlayer1 by vm.isPlayer1.collectAsState()
-    val is1Win by vm.is1Win.collectAsState()
-    val isTimerOn by vm.isTimerOn.collectAsState()
+	val winner = state.winner
+    val gotOld = state.gotOld
+    val play = state.play
+    val player1Name = state.player1Name
+    val player2Name = state.player2Name
+    val isCPUPlayer1 = state.isCPUPlayer1
+    val isPlayer1 = state.isPlayer1
+    val is1Win = state.is1Win
+    val isTimerOn = state.isTimerOn
+    val isCPUMode = state.isCPUMode
+    val localPlayer1 = state.localPlayer1
     var timer by rememberSaveable { mutableIntStateOf(4) }
-    val isCPUMode by vm.isCPUMode.collectAsState()
-    val localPlayer1 by vm.localPlayer1.collectAsState()
     val emptyPlayerName = context.getString(R.string.player)
     val cpuName = context.getString(R.string.cpu)
     
@@ -60,7 +61,7 @@ fun ToastNameHandler() {
     if (!play) {
         if (localPlayer1) {
             if (player1Name.isEmpty()) {
-               vm.updateCurrentPlayerName(emptyPlayerName)
+                vm.updateCurrentPlayerName(emptyPlayerName)
            } else {
                 vm.updateCurrentPlayerName(player1Name)
            }         
@@ -78,7 +79,7 @@ fun ToastNameHandler() {
         CoroutineScope(Dispatchers.IO).launch {          
             while (isTimerOn) {
                 delay(500L)
-                synchronized(context) {
+               synchronized(context) {
                     timer--
                     if (timer >= 0) {
                         vm.updateCurrentPlayerName(timer.toString())

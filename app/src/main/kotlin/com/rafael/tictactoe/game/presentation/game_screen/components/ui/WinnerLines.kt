@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,16 +16,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.game.domain.model.GameState
+import com.rafael.tictactoe.settings.domain.model.SettingsState
 
 @Composable
-fun WinnerLines() {
-    val viewModel = hiltViewModel<GameViewModel>()
-    val settingsVM = hiltViewModel<SettingsViewModel>()
-    val winningPositionsIndices = viewModel.winningPositionsIndices.value
-    val winnerLineColor by settingsVM.winnerLineColor.collectAsState()
+fun WinnerLines(
+    state: GameState,
+    settingsState: SettingsState
+) {
+    val winningPositionsIndices = state.winningPositionsIndices
+    val winnerLineColor = settingsState.winnerLineColor
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
 

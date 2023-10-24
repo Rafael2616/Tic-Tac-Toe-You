@@ -3,7 +3,6 @@ package com.rafael.tictactoe.game.domain.game_toast
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -11,24 +10,24 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
+import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.presentation.utils.draws.drawCircleinToast
 import com.rafael.tictactoe.game.presentation.utils.draws.drawXinToast
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.settings.domain.model.SettingsState
 
 @Composable
-fun ToastImageHandler() {
-    val viewModel = hiltViewModel<GameViewModel>()
-    val settingsVM = hiltViewModel<SettingsViewModel>()
-    val xColor by settingsVM.xColor.collectAsState()
-    val circleColor by settingsVM.circleColor.collectAsState()
-    val play by viewModel.play.collectAsState()
-    val isXFor1 by viewModel.isXFor1.collectAsState()
-    val is1Win by viewModel.is1Win.collectAsState()
-    val winner by viewModel.winner.collectAsState()
-    val isXImage by viewModel.isXImage.collectAsState()
+fun ToastImageHandler(
+    state: GameState,
+    settingsState: SettingsState
+) {
+    val xColor = settingsState.xColor
+    val circleColor = settingsState.circleColor
+    val play = state.play
+    val isXFor1 = state.isXFor1
+    val is1Win = state.is1Win
+    val winner = state.winner
+    val isXImage = state.isXImage
 
     Canvas(
          modifier = Modifier

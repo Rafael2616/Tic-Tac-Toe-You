@@ -12,7 +12,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -21,16 +20,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.R
+import com.rafael.tictactoe.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.settings.domain.model.SettingsState
 import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsOptionsImpl
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
 @ExperimentalMaterial3Api
-fun SettingsTopBar(navController: NavController) {
-    val viewModel = hiltViewModel<SettingsViewModel>()
+fun SettingsTopBar(
+    navController: NavController,
+    onEvent: (SettingsEvent) -> Unit,
+    state: SettingsState
+) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     var isGoBackClicked by rememberSaveable { mutableStateOf(false) }
 
@@ -48,8 +50,7 @@ fun SettingsTopBar(navController: NavController) {
                         onClick = {
                             if (!isGoBackClicked) {
                                 isGoBackClicked = true
-                        	    viewModel.execUIClickSound()
-				                viewModel.updateIsAboutShown(false)
+                                onEvent(SettingsEvent.updateIsAboutShown(false))
                                 navController.popBackStack()
                             }
                         }
@@ -64,6 +65,10 @@ fun SettingsTopBar(navController: NavController) {
             )
         }
     ) { paddingValues ->
-        SettingsOptionsImpl(paddingValues)
+        SettingsOptionsImpl(
+            paddingValues,
+            onEvent,
+            state
+        )
     }
 }

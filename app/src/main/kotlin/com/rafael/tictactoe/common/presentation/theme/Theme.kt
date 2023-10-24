@@ -19,6 +19,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.rafael.tictactoe.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 private val LightColors = lightColorScheme(
@@ -92,9 +93,10 @@ fun AppTheme(
     content: @Composable () -> Unit
 ) {
     val viewModel = hiltViewModel<SettingsViewModel>()
-    val isDarkThemeOn by viewModel.isDarkThemeOn.collectAsState()
-    val isFollowingSystemOn by viewModel.isFollowingSystemOn.collectAsState()
-    val isDynamicColorsOn by viewModel.isDynamicColorsOn.collectAsState()
+    val state by viewModel.state.collectAsState()
+    val isDarkThemeOn = state.isDarkThemeOn
+    val isFollowingSystemOn = state.isFollowingSystemOn
+    val isDynamicColorsOn = state.isDynamicColorsOn
     val context = LocalContext.current
     val isAndroidS = VERSION.SDK_INT >= VERSION_CODES.S 
 
@@ -134,9 +136,9 @@ fun AppTheme(
 
     //Sync dark theme var with value of system theme
     if (isSystemInDarkTheme && isFollowingSystemOn) {
-        viewModel.updateIsDarkThemeOn(true)
+        viewModel.onEvent(SettingsEvent.toggleIsDarkThemeOn(true, false))
     } else if (!isSystemInDarkTheme && isFollowingSystemOn) {
-        viewModel.updateIsDarkThemeOn(false)
+        viewModel.onEvent(SettingsEvent.toggleIsDarkThemeOn(false, false))
     }
 
     //Set System Bars Colors

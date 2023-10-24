@@ -70,14 +70,23 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.card_grid.EasyModeCPUCardClick
+import com.rafael.tictactoe.game.domain.model.GameEvent
+import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.presentation.utils.draws.drawCircleinDialog
 import com.rafael.tictactoe.game.presentation.utils.draws.drawXinDialog
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import com.rafael.tictactoe.settings.domain.enums.Customization
+import com.rafael.tictactoe.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.settings.domain.model.SettingsState
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
-fun GetPlayersPrefsDialog() {
+fun GetPlayersPrefsDialog(
+    onEvent: (GameEvent) -> Unit,
+    onSettingsEvent: (SettingsEvent) -> Unit,
+    state: GameState,
+    settingsState: SettingsState
+) {
     val viewModel = hiltViewModel<GameViewModel>()
     val settingsVM = hiltViewModel<SettingsViewModel>()
     val context = LocalContext.current
@@ -86,22 +95,18 @@ fun GetPlayersPrefsDialog() {
     val density = LocalDensity.current.density
     val densityHeight = (view.height / density ).dp
     var isKeyboardOpen by rememberSaveable {  mutableStateOf(false) }
-    val isXFor1 by viewModel.isXFor1.collectAsState()
-    val player1Name by viewModel.player1Name.collectAsState()
-    val player2Name by viewModel.player2Name.collectAsState()
-    val localPlayer1 by viewModel.localPlayer1.collectAsState()
-    val isCPUPlayer1 by viewModel.isCPUPlayer1.collectAsState()
-    val isCPUMode by viewModel.isCPUMode.collectAsState()
-    val xColor by settingsVM.xColor.collectAsState()
-    val circleColor by settingsVM.circleColor.collectAsState()
-    val isDarkThemeOn by settingsVM.isDarkThemeOn.collectAsState()
-    val selectedDifficultyMode by viewModel.selectedDifficultyMode.collectAsState()
-    val player1Value = if (localPlayer1) player1Name else player2Name
-    val player2Value = if (localPlayer1) player2Name else player1Name
-    val textField1State = if (isCPUMode) { if (isCPUPlayer1) false else true } else {true}
-    val textField2State = if (isCPUMode) { if (isCPUPlayer1) true else false } else {true}
-    val customTypeForP1 = if (isXFor1) Customization.XCOLOR else Customization.CIRCLECOLOR
-    val customTypeForP2 = if (isXFor1) Customization.CIRCLECOLOR else Customization.XCOLOR
+    val isXFor1 = state.isXFor1
+    val isCPUMode = state.isCPUMode
+    val xColor = settingsState.xColor
+    val circleColor = settingsState.circleColor
+    val isDarkThemeOn = settingsState.isDarkThemeOn
+    val selectedDifficultyMode = state.selectedDifficultyMode
+    val player1Value = if (state.localPlayer1) state.player1Name else state.player2Name
+    val player2Value = if (state.localPlayer1) state.player2Name else state.player1Name
+    val textField1State = if (state.isCPUMode) { if (state.isCPUPlayer1) false else true } else {true}
+    val textField2State = if (state.isCPUMode) { if (state.isCPUPlayer1) true else false } else {true}
+    val customTypeForP1 = if (state.isXFor1) Customization.XCOLOR else Customization.CIRCLECOLOR
+    val customTypeForP2 = if (state.isXFor1) Customization.CIRCLECOLOR else Customization.XCOLOR
     val dialogHeight by animateDpAsState(if (isCPUMode) 280.dp else 215.dp)
     val maxLetterLength by rememberSaveable { mutableIntStateOf(10) }
     val difficultyModesNumber = remember { mutableStateListOf(0,1) }
@@ -159,7 +164,7 @@ fun GetPlayersPrefsDialog() {
                         value = player1Value,
                         onValueChange = {
                             if (it.length <= maxLetterLength) {
-                                if (localPlayer1) viewModel.updatePlayer1Name(it) else viewModel.updatePlayer2Name(it)
+                                onEvent(GameEvent.getFirstPlayerName(it))
                             }
                         },
                         label = {
@@ -183,12 +188,7 @@ fun GetPlayersPrefsDialog() {
                             .height(85.dp)
                             .clip(CircleShape)
                             .clickable(onClick = {
-                                settingsVM.execUIClickSound()
-                                if (!isCPUMode) {
-                                    viewModel.updateLocalPlayer1(!localPlayer1)
-                                } else {
-                                    viewModel.updateIsCPUPlayer1(!isCPUPlayer1)
-                               }
+                                onEvent(GameEvent.switchPlayerPositions)
                            })
                     ) {
                         Image(
@@ -201,14 +201,14 @@ fun GetPlayersPrefsDialog() {
                         value = player2Value,
                         onValueChange = {
                             if (it.length <= maxLetterLength) {
-                                if (localPlayer1) viewModel.updatePlayer2Name(it) else viewModel.updatePlayer1Name(it)
+                                onEvent(GameEvent.getSecondPlayerName(it))
                             }
                         },
                         label = {
                             Text( stringResource(id = R.string.player2_name))
                         },
                         placeholder = {
-                            Text( stringResource(id = if (isXFor1) R.string.player_o else R.string.player_x))
+                            Text( stringResource(id = if (state.isXFor1) R.string.player_o else R.string.player_x))
                         },
                         enabled = textField2State,
                         keyboardOptions = keyboardOptions,
@@ -224,9 +224,8 @@ fun GetPlayersPrefsDialog() {
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     val canvasOnClick = {
-                        settingsVM.execUIClickSound()
                         keyboardController?.hide()
-                        settingsVM.showColorSelectionDialog(true)   
+                        onSettingsEvent(SettingsEvent.showColorSelectionDialog(true))
                     }
                     val canvasModifier = Modifier
                         .weight(1f)
@@ -239,7 +238,7 @@ fun GetPlayersPrefsDialog() {
                             .then(
                                 Modifier.clickable(onClick = {
                                     canvasOnClick()
-                                    settingsVM.setCustomizationType(customTypeForP1)
+                                    onSettingsEvent(SettingsEvent.setCustomizationType(customTypeForP1))
                                 })
                             )
                     ) {
@@ -273,7 +272,7 @@ fun GetPlayersPrefsDialog() {
                             .then(
                                 Modifier.clickable(onClick = {
                                     canvasOnClick()
-                                    settingsVM.setCustomizationType(customTypeForP2)
+                                    onSettingsEvent(SettingsEvent.setCustomizationType(customTypeForP2))
                                 })
                             )
                     ) {
@@ -381,14 +380,9 @@ fun GetPlayersPrefsDialog() {
                 Button(
                     onClick = {
                         keyboardController?.hide()
-                        settingsVM.execUIClickSound()
-                        viewModel.play()
                         viewModel.updatePlayer1Name(player1Value)
                         viewModel.updatePlayer2Name(player2Value)
-                        if (isCPUMode && isCPUPlayer1) {
-                            viewModel.updateIsCPU(true)
-                            EasyModeCPUCardClick(viewModel)
-                        }
+                        onEvent(GameEvent.startGame)
                     },
                     modifier = Modifier
                         .width(102.dp)

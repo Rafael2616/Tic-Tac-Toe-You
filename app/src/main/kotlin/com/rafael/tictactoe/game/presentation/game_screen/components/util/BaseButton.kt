@@ -31,9 +31,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
 fun BaseButton(
@@ -41,10 +39,9 @@ fun BaseButton(
     @DrawableRes btnImage: Int? = null,
     @StringRes btnText: Int? = null,
     btnIcon: ImageVector? = null,
-    onClickFun: () -> Unit,
+    onEvent: () -> Unit,
     description: String = "there is no description"
 ) {
-    val settingsVM = hiltViewModel<SettingsViewModel>()
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
 
@@ -66,8 +63,7 @@ fun BaseButton(
                     .size(45.dp)
                     .clip(CircleShape)
                     .clickable(onClick = {
-                        settingsVM.execUIClickSound()
-                        onClickFun()
+                        onEvent()
                     })
             ) {
                 Box(

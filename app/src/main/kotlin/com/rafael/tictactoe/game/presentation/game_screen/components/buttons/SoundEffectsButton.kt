@@ -5,27 +5,28 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MusicNote
 import androidx.compose.material.icons.filled.MusicOff
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.presentation.game_screen.components.util.BaseButton
+import com.rafael.tictactoe.settings.domain.model.SettingsState
 
 @Composable
-fun SoundEffectsButton() {
-    val settingsVM = hiltViewModel<SettingsViewModel>()
-    val isSoundEffectsOn by settingsVM.isSoundEffectsOn.collectAsState()
+fun SoundEffectsButton(
+    onEvent: (GameEvent) -> Unit,
+    settingsState: SettingsState
+) {
+    val isSoundEffectsOn = settingsState.isSoundEffectsOn
 
     BaseButton(
         modifier = Modifier.padding(top = 95.dp, start = 15.dp),
         btnIcon = if (isSoundEffectsOn) Icons.Filled.MusicNote else Icons.Filled.MusicOff,
         btnText = R.string.active_sound,
         description = "Sound Effects Button",
-        onClickFun = { 
-            settingsVM.updateIsSoundEffectsOn(!isSoundEffectsOn)
+        onEvent = { 
+            onEvent(GameEvent.toggleSoundEffectsButton)
         }
     )
 }

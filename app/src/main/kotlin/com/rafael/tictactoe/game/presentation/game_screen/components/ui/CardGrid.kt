@@ -20,25 +20,25 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.game.domain.card_grid.CardGridClickHandler
 import com.rafael.tictactoe.game.domain.card_grid.DrawXorCircle
-import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
-import kotlinx.coroutines.launch
+import com.rafael.tictactoe.game.domain.model.GameEvent
+import com.rafael.tictactoe.game.domain.model.GameState
+import com.rafael.tictactoe.settings.domain.model.SettingsState
 
 @Composable
-fun CardGrid() {
+fun CardGrid(
+    onEvent: (GameEvent) -> Unit,
+    state: GameState,
+    settingsState: SettingsState
+) {
     val cardItems = remember { mutableStateListOf(0,1,2) }
     val rowItems = remember { mutableStateListOf(0,1,2) }
-    val viewModel = hiltViewModel<GameViewModel>()
-    val scope = rememberCoroutineScope()
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
 
@@ -66,14 +66,7 @@ fun CardGrid() {
                             .size(114.dp)
                             .clip(RoundedCornerShape(26.dp))
                             .clickable(onClick = {
-				            	viewModel.showExpandButton(false)
-                                scope.launch {
-                                    CardGridClickHandler(
-                                        viewModel,
-                                        rowIndex,
-                                        cardIndex
-                                    )
-                                };
+                                    onEvent(GameEvent.clickOnCardGrid(rowIndex, cardIndex))
                             })
                     ) {
                        Box(
@@ -88,7 +81,9 @@ fun CardGrid() {
                             ) {
                                 DrawXorCircle(
                                     rowIndex,
-                                    cardIndex
+                                    cardIndex,
+                                    state,
+                                    settingsState
                                 )
                             }
                         }

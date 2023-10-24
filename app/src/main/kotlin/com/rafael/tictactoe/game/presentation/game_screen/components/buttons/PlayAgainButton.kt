@@ -28,18 +28,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.game.domain.card_grid.EasyModeCPUCardClick
-import com.rafael.tictactoe.game.domain.restart_game.RestartGame
-import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.game.domain.model.GameEvent
 
 @Composable
-fun PlayAgainButton() {
-    val viewModel = hiltViewModel<GameViewModel>()
-    val settingsVM = hiltViewModel<SettingsViewModel>()
-    val isCPUMode by viewModel.isCPUMode.collectAsState()
+fun PlayAgainButton(
+    onEvent: (GameEvent) -> Unit
+) {
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
 
@@ -63,12 +58,7 @@ fun PlayAgainButton() {
                     .size(75.dp)
                     .clip(CircleShape)
                     .clickable(onClick = {
-                        viewModel.showExpandButton(false)
-						settingsVM.execUIClickSound()
-             		   RestartGame(viewModel)
-                        if (isCPUMode) {
-                            EasyModeCPUCardClick(viewModel)
-                        }
+                        onEvent(GameEvent.playAgain)
                     })
             ) {
                 Image(

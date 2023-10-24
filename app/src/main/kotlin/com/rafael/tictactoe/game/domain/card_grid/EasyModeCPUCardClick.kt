@@ -1,22 +1,26 @@
 package com.rafael.tictactoe.game.domain.card_grid
 
 import com.rafael.tictactoe.game.domain.audio.CardGridSound
+import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 
-fun EasyModeCPUCardClick(vm: GameViewModel) {
-    val isCardClicked = vm.isCardClicked.value
+fun EasyModeCPUCardClick(
+    vm: GameViewModel,
+    state: GameState
+) {
+    val isCardClicked = state.isCardClicked
     var randomPosition = (0 until isCardClicked[0].size).random()
     var secRandomPosition = (0 until isCardClicked[1].size).random()
-    val isCPU = vm.isCPU.value
-    val isCPUPlayer1 = vm.isCPUPlayer1.value
-    val isXImage = vm.isXImage.value
-    val isXFor1 = vm.isXFor1.value
-    val isGameFinished = vm.isGameFinished.value
-    val isTimerOn = vm.isTimerOn.value
+    val isCPU = state.isCPU
+    val isCPUPlayer1 = state.isCPUPlayer1
+    val isXImage = state.isXImage
+    val isXFor1 = state.isXFor1
+    val isGameFinished = state.isGameFinished
+    val isTimerOn = state.isTimerOn
     val delayTime = if (isTimerOn) 2300L else 500L
 
     if (isGameFinished) {

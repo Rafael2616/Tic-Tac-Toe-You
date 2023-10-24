@@ -16,11 +16,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.settings.domain.enums.GroupType
+import com.rafael.tictactoe.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.settings.domain.model.SettingsState
 import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsWithIcon
 import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsWithSwitch
 
 @Composable
-fun SettingsOptionsImpl(livePadding: PaddingValues) {
+fun SettingsOptionsImpl(
+    livePadding: PaddingValues,
+    onEvent: (SettingsEvent) -> Unit,
+    state: SettingsState
+) {
     val settingsGroups = remember { mutableStateListOf(0,1,2,3) }
     val themeGroupSize = remember { mutableStateListOf(0,1,2) }
     val soundGroupSize = remember { mutableStateListOf(0,1) }
@@ -38,21 +44,29 @@ fun SettingsOptionsImpl(livePadding: PaddingValues) {
         items(settingsGroups.size) { group ->
             when (group) {
                 0 -> SettingsWithSwitch(
+                    state = state,
+                    onEvent = onEvent,
                     size = themeGroupSize,
                     groupType = GroupType.THEME,
                     groupName = R.string.group_theme
 				)
                 1 -> SettingsWithSwitch(
+                    state = state,
+                    onEvent = onEvent,
                     size = soundGroupSize,
                     groupType = GroupType.SOUND,
                     groupName = R.string.group_sound
                 )
                 2 -> SettingsWithIcon(
+                    state = state,
+                    onEvent = onEvent,
                     size = cutomizationGroupSize,
                     groupType = GroupType.CUSTOMIZATION,
                     groupName = R.string.group_customization
                 )
                 3 -> SettingsWithIcon(
+                    state = state,
+                    onEvent = onEvent,
                     size = otherGroupSize,
                     groupType = GroupType.OTHER,
                     groupName = R.string.group_others

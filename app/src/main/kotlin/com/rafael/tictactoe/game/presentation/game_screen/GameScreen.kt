@@ -30,6 +30,7 @@ import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewMod
 import com.rafael.tictactoe.game.domain.checkers.GotOldChecker
 import com.rafael.tictactoe.game.domain.checkers.WinnerChecker
 import com.rafael.tictactoe.game.domain.game_toast.ToastNameHandler
+import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.players_names.PlayersNamesDisplay
 import com.rafael.tictactoe.game.domain.restart_game.RestartButtonLogic
 import com.rafael.tictactoe.settings.presentation.settings_screen.components.ColorSelectionDialog
@@ -42,73 +43,76 @@ fun GameScreen(
 ) {
     val viewModel = hiltViewModel<GameViewModel>()
     val settingsVM = hiltViewModel<SettingsViewModel>()
-    val play by viewModel.play.collectAsState()
-    val isExpandButtonShown by viewModel.isExpandButtonShown.collectAsState()
-    val showRestartButton by viewModel.showRestartButton.collectAsState()
-    val winner by viewModel.winner.collectAsState()
-    val isGameFinished by viewModel.isGameFinished.collectAsState()
-    val showExitGameDialog by viewModel.showExitGameDialog.collectAsState()
-    val showColorSelectionDialog by settingsVM.showColorSelectionDialog.collectAsState()
-    val showVictoryCounterReseter by viewModel.showVictoryCounterReseter.collectAsState()
     val playerName = PlayersNamesDisplay()
     val update by rememberSaveable { mutableStateOf(true) }
+    val state by viewModel.state.collectAsState()
+    val settingsState by settingsVM.state.collectAsState()
 
 	//Handle when each UI component function will be called
 
     //When GameScreen starts
-    CardGrid()
-    ExpandButton()
-    VictoryCounter()
-    PlayersNamesLayout()
-    GameStateToast()
-    ToastNameHandler()
+    CardGrid(
+        viewModel::onEvent,
+        state,
+        settingsState
+    )
+    ExpandButton(viewModel::onEvent, state)
+    VictoryCounter(state, settingsState)
+    PlayersNamesLayout(state)
+    GameStateToast(state, settingsState)
+    ToastNameHandler(state)
 
-    AnimatedVisibility(!play) {
-		GetPlayersPrefsDialog()
-        playerName.firstPlayerName()
-        playerName.secondPlayerName()
+    AnimatedVisibility(!state.play) {
+		GetPlayersPrefsDialog(
+            viewModel::onEvent,
+            settingsVM::onEvent,
+            state,
+            settingsState
+        )
+        playerName.firstPlayerName(state)
+        playerName.secondPlayerName(state)
     }
 
-    AnimatedVisibility(isExpandButtonShown) {
-        BackgroundMusicButton()
-        SoundEffectsButton()
+    AnimatedVisibility(state.isExpandButtonShown) {
+        BackgroundMusicButton(viewModel::onEvent, settingsState)
+        SoundEffectsButton(viewModel::onEvent, settingsState)
     }
 
-    AnimatedVisibility(showRestartButton) {
-		RestartButton()
+    AnimatedVisibility(state.showRestartButton) {
+		RestartButton(viewModel::onEvent)
 	}
 
-    AnimatedVisibility(isGameFinished) {
-        PlayAgainButton()
-        AnimatedVisibility(showVictoryCounterReseter) {
-            VictoryCounterReseterButton()
+    AnimatedVisibility(state.isGameFinished) {
+        PlayAgainButton(viewModel::onEvent)
+        AnimatedVisibility(state.showVictoryCounterReseter) {
+            VictoryCounterReseterButton(viewModel::onEvent)
         }
     }
 
     AnimatedVisibility(
-        visible = winner,
+        visible = state.winner,
         enter = fadeIn() + scaleIn(),
         exit = fadeOut()
     ) {
-        WinnerLines()
+        WinnerLines(state, settingsState)
     }
 
-    AnimatedVisibility(showColorSelectionDialog) {
-        ColorSelectionDialog()
+    AnimatedVisibility(settingsState.showColorSelectionDialog) {
+        ColorSelectionDialog(settingsVM::onEvent, settingsState)
     }
 
-    AnimatedVisibility(showExitGameDialog) {
-        ExitGameDialog(navController)
+    AnimatedVisibility(state.showExitGameDialog) {
+        ExitGameDialog(navController, viewModel::onEvent)
     }
 
     //Handle when some business logic will be called
-    if (play && !isGameFinished) {
-        WinnerChecker(viewModel)
-        GotOldChecker(viewModel)
+    if (state.play && !state.isGameFinished) {
+        WinnerChecker(viewModel, state)
+        GotOldChecker(viewModel, state)
     }
 
-    if (play) {
-   	RestartButtonLogic(viewModel)
+    if (state.play) {
+    	RestartButtonLogic(viewModel, state)
     }
 
     DisposableEffect(key1 = "update") {
@@ -119,6 +123,6 @@ fun GameScreen(
     }
 
     BackHandler {
-        viewModel.showExitGameDialog(!showExitGameDialog)  
+        viewModel.onEvent(GameEvent.toggleExitDialog)
     }
 }

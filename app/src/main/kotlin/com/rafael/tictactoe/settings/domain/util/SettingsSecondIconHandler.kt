@@ -7,17 +7,17 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.settings.domain.enums.GroupType
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.settings.domain.model.SettingsState
 
 @Composable
-fun SettingsSecondIconHandler(index: Int, groupType: GroupType): ImageVector {
-    val viewModel = hiltViewModel<SettingsViewModel>()
-    val isAboutShown by viewModel.isAboutShown.collectAsState()
+fun SettingsSecondIconHandler(
+    index: Int,
+    groupType: GroupType,
+    state: SettingsState
+): ImageVector {
+    val isAboutShown = state.isAboutShown
 
     @Composable
     fun CustomizationIconHandler(index: Int): ImageVector {

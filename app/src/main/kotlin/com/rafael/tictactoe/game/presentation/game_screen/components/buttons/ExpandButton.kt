@@ -17,15 +17,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
+import com.rafael.tictactoe.game.domain.model.GameEvent
+import com.rafael.tictactoe.game.domain.model.GameState
 
 @Composable
-fun ExpandButton() {
-    val viewModel = hiltViewModel<GameViewModel>()
-    val isExpandButtonShown by viewModel.isExpandButtonShown.collectAsState()
-
+fun ExpandButton(
+    onEvent: (GameEvent) -> Unit,
+    state: GameState
+) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -33,13 +33,13 @@ fun ExpandButton() {
         contentAlignment = Alignment.TopStart
     ) {
         Icon(
-            imageVector = if (isExpandButtonShown) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore,
+            imageVector = if (state.isExpandButtonShown) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore,
             contentDescription = "Expand Button",
        	 modifier = Modifier
                 .size(45.dp)
                 .clip(CircleShape)
                 .clickable(onClick = { 
-                    viewModel.showExpandButton(!isExpandButtonShown)
+                    onEvent(GameEvent.toggleExpandButton)
             })
         )
     }

@@ -30,7 +30,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,29 +42,30 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.getVersionCode
 import com.rafael.tictactoe.common.domain.util.getVersionName
 import com.rafael.tictactoe.settings.domain.enums.GroupType
+import com.rafael.tictactoe.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.settings.domain.model.SettingsState
 import com.rafael.tictactoe.settings.domain.use_cases.toggleSettingsUseCase
 import com.rafael.tictactoe.settings.domain.util.ComponentValidator
 import com.rafael.tictactoe.settings.domain.util.SettingsFirstIconHandler
 import com.rafael.tictactoe.settings.domain.util.SettingsSecondIconHandler
 import com.rafael.tictactoe.settings.domain.util.SettingsTextHandler
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
 fun SettingsWithIcon(
+    state: SettingsState,
+    onEvent: (SettingsEvent) -> Unit,
     size: List<Int>,
     groupType: GroupType,
     @StringRes groupName: Int
 ) {
-    val viewModel = hiltViewModel<SettingsViewModel>()
-    val isAboutShown by viewModel.isAboutShown.collectAsState()
-    val winnerLineColor by viewModel.winnerLineColor.collectAsState()
-    val circleColor by viewModel.circleColor.collectAsState()
-    val xColor by viewModel.xColor.collectAsState()
+    val isAboutShown = state.isAboutShown
+    val winnerLineColor = state.winnerLineColor
+    val circleColor = state.circleColor
+    val xColor = state.xColor
     val componentValidator = ComponentValidator()
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
@@ -108,17 +108,17 @@ fun SettingsWithIcon(
                         .animateContentSize()
                         .fillMaxSize()
                         .clickable(onClick = {
-                            viewModel.execUIClickSound()
                             toggleSettingsUseCase(
                                 groupType,
                                 index,
-                                viewModel
+                                state,
+                                onEvent
                             )
                         }),
                 ) {
                     if (componentValidator.validateFirstIcon(groupType)) {
                         Icon(
-                            imageVector = SettingsFirstIconHandler(index, groupType),
+                            imageVector = SettingsFirstIconHandler(index, groupType, state),
                             contentDescription = "Icon",
        		        	 modifier = Modifier
                                 .size(42.dp)
@@ -185,7 +185,7 @@ fun SettingsWithIcon(
                         Text(
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onSurface,
-                            text = SettingsTextHandler(index, groupType),
+                            text = SettingsTextHandler(index, groupType, state),
                             modifier = Modifier.width(220.dp),
                             textAlign = TextAlign.Center
                         ) 
@@ -203,7 +203,7 @@ fun SettingsWithIcon(
                         }
                     }
                     Icon(
-                        imageVector = SettingsSecondIconHandler(index, groupType),
+                        imageVector = SettingsSecondIconHandler(index, groupType, state),
                         contentDescription = "Icon",
        		    	 modifier = Modifier
                         .size(42.dp)

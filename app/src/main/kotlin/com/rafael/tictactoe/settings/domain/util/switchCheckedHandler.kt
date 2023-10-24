@@ -1,24 +1,21 @@
 package com.rafael.tictactoe.settings.domain.util
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.settings.domain.enums.GroupType
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.settings.domain.model.SettingsState
 
 @Composable
 fun switchCheckedHandler(
     groupType: GroupType,
-    index: Int
+    index: Int,
+    state: SettingsState
 ): Boolean {
-    val vm = hiltViewModel<SettingsViewModel>()
 
     @Composable
     fun themeSwitchCheckedHandler(index: Int): Boolean {
-   	 val isFollowingSystemOn by vm.isFollowingSystemOn.collectAsState()
- 	   val isDarkThemeOn by vm.isDarkThemeOn.collectAsState()
-   	 val isDynamicColorsOn by vm.isDynamicColorsOn.collectAsState()
+   	 val isFollowingSystemOn = state.isFollowingSystemOn
+ 	   val isDarkThemeOn = state.isDarkThemeOn
+   	 val isDynamicColorsOn = state.isDynamicColorsOn
 
         return when (index) {
    		 0 -> isFollowingSystemOn
@@ -30,8 +27,8 @@ fun switchCheckedHandler(
 
     @Composable
     fun audioSwitchCheckedHandler(index: Int): Boolean {
-    	val isSoundEffectsOn by vm.isSoundEffectsOn.collectAsState()
-        val isBackgroundMusicOn by vm.isBackgroundMusicOn.collectAsState()
+    	val isSoundEffectsOn = state.isSoundEffectsOn
+        val isBackgroundMusicOn = state.isBackgroundMusicOn
 
 		return when (index) {
     		0 -> isSoundEffectsOn

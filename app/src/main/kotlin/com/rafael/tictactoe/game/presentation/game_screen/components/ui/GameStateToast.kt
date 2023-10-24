@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,20 +22,18 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.game_toast.ToastImageHandler
-import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.game.domain.model.GameState
+import com.rafael.tictactoe.settings.domain.model.SettingsState
 
 @Composable
-fun GameStateToast() {
-    val viewModel = hiltViewModel<GameViewModel>()
-    val settingsVM = hiltViewModel<SettingsViewModel>()
-    val currentPlayerName by viewModel.currentPlayerName.collectAsState()
-    val winner by viewModel.winner.collectAsState()
-    val gotOld by viewModel.gotOld.collectAsState()
-    val isDarkThemeOn by settingsVM.isDarkThemeOn.collectAsState()
+fun GameStateToast(
+    state: GameState,
+    settingsState: SettingsState
+) {
+    val currentPlayerName = state.currentPlayerName
+    val isDarkThemeOn = settingsState.isDarkThemeOn
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
 
@@ -57,18 +54,18 @@ fun GameStateToast() {
                 text = "$currentPlayerName",
                 style = MaterialTheme.typography.titleMedium,
                 textAlign = TextAlign.Center,
-                color = if (!gotOld) MaterialTheme.colorScheme.onSurface
+                color = if (!state.gotOld) MaterialTheme.colorScheme.onSurface
                 else MaterialTheme.colorScheme.error,
             )
-            if (!gotOld) {
+            if (!state.gotOld) {
                 Spacer(modifier = Modifier.width(5.dp))
                 Box(
                     modifier = Modifier.size(15.dp)
                 ) {
-                    ToastImageHandler()
+                    ToastImageHandler(state, settingsState)
                 }
             }
-            if (winner) {
+            if (state.winner) {
                 Spacer(modifier = Modifier.width(5.dp))
                 Text(
                     text = stringResource(R.string.winner),

@@ -5,19 +5,19 @@ import android.net.Uri
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.common.MediaItem
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.game.domain.model.GameState
+import com.rafael.tictactoe.settings.domain.model.SettingsState
 
 fun CardGridSound(
 	context: Context,
-    viewModel: GameViewModel,
-    settingsVM: SettingsViewModel,
+    state: GameState,
+    settingsState: SettingsState,
     exoPlayer: ExoPlayer
 ) {
-    val isPlayer1 = viewModel.isPlayer1.value
-    val isSoundEffectsOn = settingsVM.isSoundEffectsOn.value
-    val isGameFinished = viewModel.isGameFinished.value
-    
+    val isPlayer1 = state.isPlayer1
+    val isGameFinished = state.isGameFinished
+    val isSoundEffectsOn = settingsState.isSoundEffectsOn
+
     //Avoid click sound if it action is perfomed by @RandomCardSorter,
     //This is needed due a bug in mentioned component.
     if (isGameFinished) {

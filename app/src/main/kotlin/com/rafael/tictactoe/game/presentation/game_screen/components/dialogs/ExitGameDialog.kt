@@ -31,16 +31,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.game.domain.model.GameEvent
 
 @Composable
-fun ExitGameDialog(navController: NavController) {
-    val viewModel = hiltViewModel<GameViewModel>()
-    val settingsVM = hiltViewModel<SettingsViewModel>()
+fun ExitGameDialog(
+    navController: NavController,
+    onEvent: (GameEvent) -> Unit
+) {
     var isExitClicked by rememberSaveable { mutableStateOf(false) }
   
     Surface(
@@ -97,8 +96,7 @@ fun ExitGameDialog(navController: NavController) {
                 ) {
                     OutlinedButton(
                         onClick = {
-                            settingsVM.execUIClickSound()
-                            viewModel.showExitGameDialog(false)
+                            onEvent(GameEvent.dimissExitDialog)
                         },
                         modifier = Modifier
                             .width(100.dp)
@@ -115,10 +113,8 @@ fun ExitGameDialog(navController: NavController) {
                         onClick = {
                             if (!isExitClicked) {
                                 isExitClicked = true
-                                settingsVM.execUIClickSound()
-                                settingsVM.showColorSelectionDialog(false)
+                                onEvent(GameEvent.exitGame)
                                 navController.popBackStack()
-                                viewModel.reset()
                             }
                         },
                         modifier = Modifier
