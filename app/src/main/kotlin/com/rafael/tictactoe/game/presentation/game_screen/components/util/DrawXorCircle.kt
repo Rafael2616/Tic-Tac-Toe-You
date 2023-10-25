@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.domain.card_grid
+package com.rafael.tictactoe.game.presentation.game_screen.components.util
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically

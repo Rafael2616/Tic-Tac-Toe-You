@@ -26,9 +26,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.game.domain.card_grid.DrawXorCircle
 import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameState
+import com.rafael.tictactoe.game.presentation.game_screen.components.util.DrawXorCircle
 import com.rafael.tictactoe.settings.domain.model.SettingsState
 
 @Composable
