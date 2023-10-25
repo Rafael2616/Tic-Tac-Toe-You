@@ -27,6 +27,7 @@ fun ToastNameHandler(state: GameState) {
     val isPlayer1 = state.isPlayer1
     val is1Win = state.is1Win
     val isTimerOn = state.isTimerOn
+    val isGameFinished = state.isGameFinished
     val isCPUMode = state.isCPUMode
     val localPlayer1 = state.localPlayer1
     var timer by rememberSaveable { mutableIntStateOf(3) }
@@ -41,11 +42,11 @@ fun ToastNameHandler(state: GameState) {
         currentGamePhase = CurrentPlayerName.nameForSetupPhaseForCPUMode
     } else if (play && isTimerOn) {
         currentGamePhase = CurrentPlayerName.counterAfterGameStarts
-    } else if (play && !winner && !isTimerOn) {
+    } else if (play && !isTimerOn && !isGameFinished) {
         currentGamePhase = CurrentPlayerName.nameForGameInProgress
     } else if (winner) {
         currentGamePhase = CurrentPlayerName.nameWhenThereWinner
-    } else if (gotOld && !winner) {
+    } else if (gotOld) {
         currentGamePhase = CurrentPlayerName.nameWhenGotOld
     }
 

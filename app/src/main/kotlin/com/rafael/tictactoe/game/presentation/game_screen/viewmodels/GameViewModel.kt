@@ -62,10 +62,10 @@ class GameViewModel @Inject constructor(
             }
             GameEvent.switchPlayerPositions -> {
                 _state.update {
-                    if (!isCPUMode) {
-                        it.copy(localPlayer1 = !it.localPlayer1)
-                    } else {
+                    if (isCPUMode) {
                         it.copy(isCPUPlayer1 = !it.isCPUPlayer1)
+                    } else {
+                        it.copy(localPlayer1 = !it.localPlayer1)
                     }
                 }
                 settingsVM.execUIClickSound()
