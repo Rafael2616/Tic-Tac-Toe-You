@@ -26,6 +26,6 @@ fun WinnerSound(
 		exoPlayer.prepare()
         exoPlayer.setMediaItem(winnerSound)
 		exoPlayer.play()
-   	 onEvent(GameEvent.updateIsWinSoundPlaying(true))
+   	 onEvent(GameEvent.UpdateIsWinSoundPlaying(true))
 	}
 }

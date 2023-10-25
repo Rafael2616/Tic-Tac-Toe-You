@@ -53,7 +53,7 @@ class SettingsViewModel @Inject constructor(
 	
 	fun onEvent(event: SettingsEvent) {
         when (event) {
- 	       SettingsEvent.toggleIsBackgroundMusicOn -> {
+ 	       SettingsEvent.ToggleIsBackgroundMusicOn -> {
                 _state.update { it.copy(isBackgroundMusicOn = !it.isBackgroundMusicOn) }
 
 	    	    viewModelScope.launch(Dispatchers.IO) {
@@ -64,19 +64,17 @@ class SettingsViewModel @Inject constructor(
                 execUIClickSound()
                 BackgroundMusic(context, this::onEvent, state.value)
             }
- 	       is SettingsEvent.toggleIsDarkThemeOn -> {
-                _state.update { it.copy(isDarkThemeOn = event.value) }
+ 	       SettingsEvent.ToggleIsDarkThemeOn -> {
+                _state.update { it.copy(isDarkThemeOn = !it.isDarkThemeOn) }
 
 	    	    viewModelScope.launch(Dispatchers.IO) {
                     var settings = repository.getAllSettingsValues(1) ?: defaultSettings
                     settings.isDarkThemeOn = state.value.isDarkThemeOn
 			        repository.setAllSettingsValues(settings)
                 }
-                if (event.withSound) {
                     execUIClickSound()
-                }
             }
- 	       SettingsEvent.toggleIsDynamicColorsOn -> {
+ 	       SettingsEvent.ToggleIsDynamicColorsOn -> {
                 _state.update { it.copy(isDynamicColorsOn = !it.isDynamicColorsOn) }
 
 	    	    viewModelScope.launch(Dispatchers.IO) {
@@ -86,7 +84,7 @@ class SettingsViewModel @Inject constructor(
                 }
                 execUIClickSound()
             }
- 	       SettingsEvent.toggleIsFollowingSystemOn -> {
+ 	       SettingsEvent.ToggleIsFollowingSystemOn -> {
                 _state.update { it.copy(isFollowingSystemOn = !it.isFollowingSystemOn) }
 
 	    	    viewModelScope.launch(Dispatchers.IO) {
@@ -96,7 +94,7 @@ class SettingsViewModel @Inject constructor(
                 }
                 execUIClickSound()
             }
- 	       SettingsEvent.toggleIsSoundEffectsOn -> {
+ 	       SettingsEvent.ToggleIsSoundEffectsOn -> {
                 _state.update { it.copy(isSoundEffectsOn = !it.isSoundEffectsOn) }
 
 	    	    viewModelScope.launch(Dispatchers.IO) {
@@ -106,49 +104,58 @@ class SettingsViewModel @Inject constructor(
                 }
                 execUIClickSound()
             }
- 	       SettingsEvent.onSettingsScreenDestroyment -> {
+ 	       is SettingsEvent.SetIsDarkThemeOn -> {
+                _state.update { it.copy(isDarkThemeOn = event.value) }
+
+	    	    viewModelScope.launch(Dispatchers.IO) {
+                    var settings = repository.getAllSettingsValues(1) ?: defaultSettings
+                    settings.isDarkThemeOn = state.value.isDarkThemeOn
+			        repository.setAllSettingsValues(settings)
+                }
+            }
+ 	       SettingsEvent.OnSettingsScreenDestroyment -> {
                 _state.update { it.copy(
                     isAboutShown = false,
                     showColorSelectionDialog = false
                 )}
             }
- 	       is SettingsEvent.updateIsAboutShown -> {
+ 	       is SettingsEvent.ShowAboutAppCard -> {
                 _state.update { it.copy(isAboutShown = event.value)}
                 execUIClickSound()
             }
- 	       is SettingsEvent.setCustomizationType -> {
+ 	       is SettingsEvent.SetCustomizationType -> {
                 _state.update { it.copy(customizationType = event.type) }
                 execUIClickSound()
             }
- 	       is SettingsEvent.showColorSelectionDialog -> {
+ 	       is SettingsEvent.ShowColorSelectionDialog -> {
                 _state.update { it.copy(showColorSelectionDialog = event.value)}
                 execUIClickSound()
             }
- 	       is SettingsEvent.setWinnerLineColor -> {
+ 	       is SettingsEvent.SetWinnerLineColor -> {
                 _state.update { it.copy(winnerLineColor = event.color) }
                 execUIClickSound()
             }
- 	       is SettingsEvent.setXColor -> {
+ 	       is SettingsEvent.SetXColor -> {
                 _state.update { it.copy(xColor = event.color)}
                 execUIClickSound()
             }
- 	       is SettingsEvent.setCircleColor -> {
+ 	       is SettingsEvent.SetCircleColor -> {
                 _state.update { it.copy(circleColor = event.color) }
                 execUIClickSound()
             }
- 	       is SettingsEvent.selectedWinnerLineColor -> {
+ 	       is SettingsEvent.SelectedWinnerLineColor -> {
                 _state.update { it.copy(selectedWinnerLineColor = event.value) }
                 execUIClickSound()
             }
- 	       is SettingsEvent.selectedXColor -> {
+ 	       is SettingsEvent.SelectedXColor -> {
                 _state.update { it.copy(selectedXColor = event.value) }
                 execUIClickSound()
             }
- 	       is SettingsEvent.selectedCircleColor -> {
+ 	       is SettingsEvent.SelectedCircleColor -> {
                 _state.update { it.copy(selectedCircleColor = event.value) }
                 execUIClickSound()
             }
- 	       is SettingsEvent.isBGMusicPlaying -> {
+ 	       is SettingsEvent.IsBGMusicPlaying -> {
                 _state.update { it.copy(isBMPlaying = event.value) }
             }
 		}

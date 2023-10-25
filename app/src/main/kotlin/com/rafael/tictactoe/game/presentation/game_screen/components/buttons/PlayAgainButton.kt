@@ -56,7 +56,7 @@ fun PlayAgainButton(
                     .size(75.dp)
                     .clip(CircleShape)
                     .clickable(onClick = {
-                        onEvent(GameEvent.playAgain)
+                        onEvent(GameEvent.PlayAgain)
                     })
             ) {
                 Image(

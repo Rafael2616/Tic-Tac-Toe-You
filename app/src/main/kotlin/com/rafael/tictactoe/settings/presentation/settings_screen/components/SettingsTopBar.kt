@@ -50,7 +50,7 @@ fun SettingsTopBar(
                         onClick = {
                             if (!isGoBackClicked) {
                                 isGoBackClicked = true
-                                onEvent(SettingsEvent.updateIsAboutShown(false))
+                                onEvent(SettingsEvent.ShowAboutAppCard(false))
                                 navController.popBackStack()
                             }
                         }

@@ -69,7 +69,7 @@ fun CardGridClickHandler(
                 vm.updateIsCPU(false)
             } else {
                 vm.updateIsCPU(true)
-                onEvent(GameEvent.execEasyModeCPUCardClick)
+                onEvent(GameEvent.ExecEasyModeCPUCardClick)
             }
         } else {
             // Exec player 2's move
@@ -81,7 +81,7 @@ fun CardGridClickHandler(
             // Calls CPU player's move during player 2's click if needed
             if (isCPUPlayer1) {
                 vm.updateIsCPU(true)
-                onEvent(GameEvent.execEasyModeCPUCardClick)
+                onEvent(GameEvent.ExecEasyModeCPUCardClick)
             } else {
                 vm.updateIsCPU(false)
             }

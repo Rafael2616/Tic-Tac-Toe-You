@@ -99,6 +99,7 @@ fun AppTheme(
     val isDynamicColorsOn = state.isDynamicColorsOn
     val context = LocalContext.current
     val isAndroidS = VERSION.SDK_INT >= VERSION_CODES.S 
+    val onEvent = viewModel::onEvent
 
     //Handle with color will be applied according with some settings toggles
     val colors = if (isFollowingSystemOn) {
@@ -134,11 +135,11 @@ fun AppTheme(
    	 content = content,
 	)
 
-    //Sync dark theme var with value of system theme
+    //Sync dark theme with value of system theme
     if (isSystemInDarkTheme && isFollowingSystemOn) {
-        viewModel.onEvent(SettingsEvent.toggleIsDarkThemeOn(true, false))
+        onEvent(SettingsEvent.SetIsDarkThemeOn(true))
     } else if (!isSystemInDarkTheme && isFollowingSystemOn) {
-        viewModel.onEvent(SettingsEvent.toggleIsDarkThemeOn(false, false))
+        onEvent(SettingsEvent.SetIsDarkThemeOn(false))
     }
 
     //Set System Bars Colors

@@ -123,6 +123,6 @@ fun GameScreen(
     }
 
     BackHandler {
-        viewModel.onEvent(GameEvent.toggleExitDialog)
+        viewModel.onEvent(GameEvent.ToggleExitDialog)
     }
 }

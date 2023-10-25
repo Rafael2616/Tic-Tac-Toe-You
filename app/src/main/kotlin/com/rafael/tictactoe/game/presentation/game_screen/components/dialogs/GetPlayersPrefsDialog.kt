@@ -164,7 +164,7 @@ fun GetPlayersPrefsDialog(
                         value = player1Value,
                         onValueChange = {
                             if (it.length <= maxLetterLength) {
-                                onEvent(GameEvent.getFirstPlayerName(it))
+                                onEvent(GameEvent.GetFirstPlayerName(it))
                             }
                         },
                         label = {
@@ -188,7 +188,7 @@ fun GetPlayersPrefsDialog(
                             .height(85.dp)
                             .clip(CircleShape)
                             .clickable(onClick = {
-                                onEvent(GameEvent.switchPlayerPositions)
+                                onEvent(GameEvent.SwitchPlayerPositions)
                            })
                     ) {
                         Image(
@@ -201,7 +201,7 @@ fun GetPlayersPrefsDialog(
                         value = player2Value,
                         onValueChange = {
                             if (it.length <= maxLetterLength) {
-                                onEvent(GameEvent.getSecondPlayerName(it))
+                                onEvent(GameEvent.GetSecondPlayerName(it))
                             }
                         },
                         label = {
@@ -225,7 +225,7 @@ fun GetPlayersPrefsDialog(
                 ) {
                     val canvasOnClick = {
                         keyboardController?.hide()
-                        onSettingsEvent(SettingsEvent.showColorSelectionDialog(true))
+                        onSettingsEvent(SettingsEvent.ShowColorSelectionDialog(true))
                     }
                     val canvasModifier = Modifier
                         .weight(1f)
@@ -238,7 +238,7 @@ fun GetPlayersPrefsDialog(
                             .then(
                                 Modifier.clickable(onClick = {
                                     canvasOnClick()
-                                    onSettingsEvent(SettingsEvent.setCustomizationType(customTypeForP1))
+                                    onSettingsEvent(SettingsEvent.SetCustomizationType(customTypeForP1))
                                 })
                             )
                     ) {
@@ -272,7 +272,7 @@ fun GetPlayersPrefsDialog(
                             .then(
                                 Modifier.clickable(onClick = {
                                     canvasOnClick()
-                                    onSettingsEvent(SettingsEvent.setCustomizationType(customTypeForP2))
+                                    onSettingsEvent(SettingsEvent.SetCustomizationType(customTypeForP2))
                                 })
                             )
                     ) {
@@ -382,7 +382,7 @@ fun GetPlayersPrefsDialog(
                         keyboardController?.hide()
                         viewModel.updatePlayer1Name(player1Value)
                         viewModel.updatePlayer2Name(player2Value)
-                        onEvent(GameEvent.startGame)
+                        onEvent(GameEvent.StartGame)
                     },
                     modifier = Modifier
                         .width(102.dp)

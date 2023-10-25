@@ -13,46 +13,46 @@ fun colorSelectionUseCase(
 
     fun setWinnerLineColor(option: Int) {
         when (option) {
-            0 -> onEvent(SettingsEvent.setWinnerLineColor(color.blue))
-            1 -> onEvent(SettingsEvent.setWinnerLineColor(color.red))
-            2 -> onEvent(SettingsEvent.setWinnerLineColor(color.yellow))
-            3 -> onEvent(SettingsEvent.setWinnerLineColor(color.dark_green))
-            4 -> onEvent(SettingsEvent.setWinnerLineColor(color.light_green))
-            5 -> onEvent(SettingsEvent.setWinnerLineColor(color.purple))
-            6 -> onEvent(SettingsEvent.setWinnerLineColor(color.magenta))
-            7 -> onEvent(SettingsEvent.setWinnerLineColor(color.white))
-            8 -> onEvent(SettingsEvent.setWinnerLineColor(color.cyan))
-            else -> onEvent(SettingsEvent.setWinnerLineColor(color.transparent))
+            0 -> onEvent(SettingsEvent.SetWinnerLineColor(color.blue))
+            1 -> onEvent(SettingsEvent.SetWinnerLineColor(color.red))
+            2 -> onEvent(SettingsEvent.SetWinnerLineColor(color.yellow))
+            3 -> onEvent(SettingsEvent.SetWinnerLineColor(color.dark_green))
+            4 -> onEvent(SettingsEvent.SetWinnerLineColor(color.light_green))
+            5 -> onEvent(SettingsEvent.SetWinnerLineColor(color.purple))
+            6 -> onEvent(SettingsEvent.SetWinnerLineColor(color.magenta))
+            7 -> onEvent(SettingsEvent.SetWinnerLineColor(color.white))
+            8 -> onEvent(SettingsEvent.SetWinnerLineColor(color.cyan))
+            else -> onEvent(SettingsEvent.SetWinnerLineColor(color.transparent))
         }
     }
 
     fun setXColor(option: Int) {
         when (option) {
-            0 -> onEvent(SettingsEvent.setXColor(color.blue))
-            1 -> onEvent(SettingsEvent.setXColor(color.red))
-            2 -> onEvent(SettingsEvent.setXColor(color.yellow))
-            3 -> onEvent(SettingsEvent.setXColor(color.dark_green))
-            4 -> onEvent(SettingsEvent.setXColor(color.light_green))
-            5 -> onEvent(SettingsEvent.setXColor(color.purple))
-            6 -> onEvent(SettingsEvent.setXColor(color.magenta))
-            7 -> onEvent(SettingsEvent.setXColor(color.white))
-            8 -> onEvent(SettingsEvent.setXColor(color.cyan))
-            else -> onEvent(SettingsEvent.setXColor(color.transparent))
+            0 -> onEvent(SettingsEvent.SetXColor(color.blue))
+            1 -> onEvent(SettingsEvent.SetXColor(color.red))
+            2 -> onEvent(SettingsEvent.SetXColor(color.yellow))
+            3 -> onEvent(SettingsEvent.SetXColor(color.dark_green))
+            4 -> onEvent(SettingsEvent.SetXColor(color.light_green))
+            5 -> onEvent(SettingsEvent.SetXColor(color.purple))
+            6 -> onEvent(SettingsEvent.SetXColor(color.magenta))
+            7 -> onEvent(SettingsEvent.SetXColor(color.white))
+            8 -> onEvent(SettingsEvent.SetXColor(color.cyan))
+            else -> onEvent(SettingsEvent.SetXColor(color.transparent))
         }
     }
 
     fun setCircleColor(option: Int) {
         when (option) {
-            0 -> onEvent(SettingsEvent.setCircleColor(color.blue))
-            1 -> onEvent(SettingsEvent.setCircleColor(color.red))
-            2 -> onEvent(SettingsEvent.setCircleColor(color.yellow))
-            3 -> onEvent(SettingsEvent.setCircleColor(color.dark_green))
-            4 -> onEvent(SettingsEvent.setCircleColor(color.light_green))
-            5 -> onEvent(SettingsEvent.setCircleColor(color.purple))
-            6 -> onEvent(SettingsEvent.setCircleColor(color.magenta))
-            7 -> onEvent(SettingsEvent.setCircleColor(color.white))
-            8 -> onEvent(SettingsEvent.setCircleColor(color.cyan))
-            else -> onEvent(SettingsEvent.setCircleColor(color.transparent))
+            0 -> onEvent(SettingsEvent.SetCircleColor(color.blue))
+            1 -> onEvent(SettingsEvent.SetCircleColor(color.red))
+            2 -> onEvent(SettingsEvent.SetCircleColor(color.yellow))
+            3 -> onEvent(SettingsEvent.SetCircleColor(color.dark_green))
+            4 -> onEvent(SettingsEvent.SetCircleColor(color.light_green))
+            5 -> onEvent(SettingsEvent.SetCircleColor(color.purple))
+            6 -> onEvent(SettingsEvent.SetCircleColor(color.magenta))
+            7 -> onEvent(SettingsEvent.SetCircleColor(color.white))
+            8 -> onEvent(SettingsEvent.SetCircleColor(color.cyan))
+            else -> onEvent(SettingsEvent.SetCircleColor(color.transparent))
         }
     }
 

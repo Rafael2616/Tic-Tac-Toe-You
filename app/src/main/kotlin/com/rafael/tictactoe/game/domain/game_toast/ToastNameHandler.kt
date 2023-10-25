@@ -33,25 +33,25 @@ fun ToastNameHandler(state: GameState) {
     var timer by rememberSaveable { mutableIntStateOf(3) }
     val emptyPlayerName = stringResource(R.string.player)
     val cpuName = stringResource(R.string.cpu)
-    var currentGamePhase: CurrentPlayerName = CurrentPlayerName.nameForSetupPhase
+    var currentGamePhase: CurrentPlayerName = CurrentPlayerName.NameForSetupPhase
 
     //Update game phase
     if (!play && !isCPUMode) {
-        currentGamePhase = CurrentPlayerName.nameForSetupPhase
+        currentGamePhase = CurrentPlayerName.NameForSetupPhase
     } else if (!play && isCPUMode) {
-        currentGamePhase = CurrentPlayerName.nameForSetupPhaseForCPUMode
+        currentGamePhase = CurrentPlayerName.NameForSetupPhaseForCPUMode
     } else if (play && isTimerOn) {
-        currentGamePhase = CurrentPlayerName.counterAfterGameStarts
+        currentGamePhase = CurrentPlayerName.CounterAfterGameStarts
     } else if (play && !isTimerOn && !isGameFinished) {
-        currentGamePhase = CurrentPlayerName.nameForGameInProgress
+        currentGamePhase = CurrentPlayerName.NameForGameInProgress
     } else if (winner) {
-        currentGamePhase = CurrentPlayerName.nameWhenThereWinner
+        currentGamePhase = CurrentPlayerName.NameWhenThereWinner
     } else if (gotOld) {
-        currentGamePhase = CurrentPlayerName.nameWhenGotOld
+        currentGamePhase = CurrentPlayerName.NameWhenGotOld
     }
 
     when (currentGamePhase) {
-        CurrentPlayerName.nameForSetupPhase -> {
+        CurrentPlayerName.NameForSetupPhase -> {
             if (localPlayer1) {
                 if (player1Name.isEmpty()) {
                     vm.updateCurrentPlayerName(emptyPlayerName)
@@ -66,7 +66,7 @@ fun ToastNameHandler(state: GameState) {
                 }
             }
         }
-        CurrentPlayerName.nameForSetupPhaseForCPUMode -> {
+        CurrentPlayerName.NameForSetupPhaseForCPUMode -> {
             if (isCPUMode) {
                 if (isCPUPlayer1) {
                     vm.updatePlayer1Name(cpuName)
@@ -94,7 +94,7 @@ fun ToastNameHandler(state: GameState) {
                 }
             }
         }
-        CurrentPlayerName.counterAfterGameStarts -> {
+        CurrentPlayerName.CounterAfterGameStarts -> {
             LaunchedEffect(Unit) {
                 while (isTimerOn) {
                     if (timer > 0) {
@@ -108,7 +108,7 @@ fun ToastNameHandler(state: GameState) {
                 }
             }
         }
-        CurrentPlayerName.nameForGameInProgress -> {
+        CurrentPlayerName.NameForGameInProgress -> {
             if (isPlayer1) {
                 if (player1Name.isEmpty()) {
                     vm.updateCurrentPlayerName(emptyPlayerName)
@@ -125,14 +125,14 @@ fun ToastNameHandler(state: GameState) {
                 }
             }
         }
-        CurrentPlayerName.nameWhenThereWinner -> {
+        CurrentPlayerName.NameWhenThereWinner -> {
             if (is1Win) {
                 vm.updateCurrentPlayerName(player1Name)
             } else {
                 vm.updateCurrentPlayerName(player2Name)
             }
         }
-        CurrentPlayerName.nameWhenGotOld -> {
+        CurrentPlayerName.NameWhenGotOld -> {
     		vm.updateCurrentPlayerName(stringResource(R.string.got_old))
         }
     }

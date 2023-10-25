@@ -31,7 +31,7 @@ fun SettingsScreen(navController: NavController) {
 
     DisposableEffect(Unit) {
         onDispose {
-            settingsVM.onEvent(SettingsEvent.onSettingsScreenDestroyment)
+            settingsVM.onEvent(SettingsEvent.OnSettingsScreenDestroyment)
         }
     }
 }

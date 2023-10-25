@@ -97,9 +97,9 @@ fun ColorSelectionDialog(
                             .fillMaxWidth()
                             .clickable(onClick = {
                                 when (type) {
-                                    Customization.WINNERLINECOLOR -> onEvent(SettingsEvent.selectedWinnerLineColor(color))
-                                    Customization.CIRCLECOLOR ->  onEvent(SettingsEvent.selectedCircleColor(color))
-                                    Customization.XCOLOR ->  onEvent(SettingsEvent.selectedXColor(color))
+                                    Customization.WINNERLINECOLOR -> onEvent(SettingsEvent.SelectedWinnerLineColor(color))
+                                    Customization.CIRCLECOLOR ->  onEvent(SettingsEvent.SelectedCircleColor(color))
+                                    Customization.XCOLOR ->  onEvent(SettingsEvent.SelectedXColor(color))
                                 }
                                 colorSelectionUseCase(
                                     type,
@@ -125,9 +125,9 @@ fun ColorSelectionDialog(
                                         },
                                     onClick = {
                                         when (type) {
-                                            Customization.WINNERLINECOLOR -> onEvent(SettingsEvent.selectedWinnerLineColor(color))
-                                            Customization.CIRCLECOLOR ->  onEvent(SettingsEvent.selectedCircleColor(color))
-                                            Customization.XCOLOR ->  onEvent(SettingsEvent.selectedXColor(color))
+                                            Customization.WINNERLINECOLOR -> onEvent(SettingsEvent.SelectedWinnerLineColor(color))
+                                            Customization.CIRCLECOLOR ->  onEvent(SettingsEvent.SelectedCircleColor(color))
+                                            Customization.XCOLOR ->  onEvent(SettingsEvent.SelectedXColor(color))
                                         }
                                         colorSelectionUseCase(
                                             type,
@@ -182,7 +182,7 @@ fun ColorSelectionDialog(
                 }
                 OutlinedButton(
                     onClick = {
-                        onEvent(SettingsEvent.showColorSelectionDialog(false))
+                        onEvent(SettingsEvent.ShowColorSelectionDialog(false))
                     },
                     modifier = Modifier
                         .width(90.dp)

@@ -26,7 +26,7 @@ fun SoundEffectsButton(
         btnText = R.string.active_sound,
         description = "Sound Effects Button",
         onEvent = { 
-            onEvent(GameEvent.toggleSoundEffectsButton)
+            onEvent(GameEvent.ToggleSoundEffectsButton)
         }
     )
 }

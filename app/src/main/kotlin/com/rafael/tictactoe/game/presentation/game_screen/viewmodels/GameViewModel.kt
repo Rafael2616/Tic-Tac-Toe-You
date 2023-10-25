@@ -39,7 +39,7 @@ class GameViewModel @Inject constructor(
         val isCPUPlayer1 = state.value.isCPUPlayer1
 
         when (event) {
-            is GameEvent.getFirstPlayerName -> {
+            is GameEvent.GetFirstPlayerName -> {
                 _state.update { 
                     if (localPlayer1) {
                         it.copy(player1Name = event.name)
@@ -48,7 +48,7 @@ class GameViewModel @Inject constructor(
                     }
                 }
             }
-            is GameEvent.getSecondPlayerName -> {
+            is GameEvent.GetSecondPlayerName -> {
                 _state.update {
                     if (localPlayer1) {
                         it.copy(player2Name = event.name)
@@ -57,7 +57,7 @@ class GameViewModel @Inject constructor(
                     }
                 }
             }
-            GameEvent.switchPlayerPositions -> {
+            GameEvent.SwitchPlayerPositions -> {
                 _state.update {
                     if (isCPUMode) {
                         it.copy(isCPUPlayer1 = !it.isCPUPlayer1)
@@ -67,7 +67,7 @@ class GameViewModel @Inject constructor(
                 }
                 settingsVM.execUIClickSound()
             }
-            GameEvent.startGame -> {
+            GameEvent.StartGame -> {
                 _state.update { it.copy(
                     play = true,
                     isXImage = it.isXFor1,
@@ -79,7 +79,7 @@ class GameViewModel @Inject constructor(
                 }
                 settingsVM.execUIClickSound()
             }
-            is GameEvent.clickOnCardGrid -> {
+            is GameEvent.ClickOnCardGrid -> {
                 _state.update { it.copy(isExpandButtonShown = false) }
                 CardGridClickHandler(
                     state.value,
@@ -90,10 +90,10 @@ class GameViewModel @Inject constructor(
                 )
                 execCardGridSound()
             }
-            GameEvent.execEasyModeCPUCardClick -> {
+            GameEvent.ExecEasyModeCPUCardClick -> {
                 EasyModeCPUCardClick(this, state.value)
             }
-            GameEvent.resetVictoryCounter -> {
+            GameEvent.ResetVictoryCounter -> {
                 _state.update { it.copy(
                     showVictoryCounterReseter = false,
                     player1Wins = 0,
@@ -101,7 +101,7 @@ class GameViewModel @Inject constructor(
                 }
                 settingsVM.execUIClickSound()
             }
-            GameEvent.playAgain -> {
+            GameEvent.PlayAgain -> {
                 _state.update { it.copy(isExpandButtonShown = false) }     
                 RestartGame(
                     this,
@@ -112,17 +112,17 @@ class GameViewModel @Inject constructor(
                 }
                 settingsVM.execUIClickSound()
             }
-            GameEvent.toggleBgMusicButton -> {
-                settingsVM.onEvent(SettingsEvent.toggleIsBackgroundMusicOn)
+            GameEvent.ToggleBgMusicButton -> {
+                settingsVM.onEvent(SettingsEvent.ToggleIsBackgroundMusicOn)
             }
-            GameEvent.toggleSoundEffectsButton -> {
-                settingsVM.onEvent(SettingsEvent.toggleIsSoundEffectsOn)
+            GameEvent.ToggleSoundEffectsButton -> {
+                settingsVM.onEvent(SettingsEvent.ToggleIsSoundEffectsOn)
             }
-            GameEvent.toggleExpandButton -> {
+            GameEvent.ToggleExpandButton -> {
                 _state.update { it.copy(isExpandButtonShown = !it.isExpandButtonShown)}
             }
-            GameEvent.exitGame -> {
-                settingsVM.onEvent(SettingsEvent.showColorSelectionDialog(false))
+            GameEvent.ExitGame -> {
+                settingsVM.onEvent(SettingsEvent.ShowColorSelectionDialog(false))
                 val cardState = state.value.card
                 _state.update { GameState() }
 
@@ -130,17 +130,17 @@ class GameViewModel @Inject constructor(
                 _state.update { it.copy(card = cardState)}
                 settingsVM.execUIClickSound()
             }
-            GameEvent.dimissExitDialog -> {
+            GameEvent.DimissExitDialog -> {
                 _state.update { it.copy(showExitGameDialog = false )}
                 settingsVM.execUIClickSound()
             }
-            GameEvent.toggleExitDialog -> {
+            GameEvent.ToggleExitDialog -> {
                 _state.update { it.copy(showExitGameDialog = !it.showExitGameDialog )}
             }
-            is GameEvent.updateIsGotOldSoundPlaying -> {
+            is GameEvent.UpdateIsGotOldSoundPlaying -> {
                 _state.update { it.copy(isGotOldSoundPlaying = event.value )}
             }
-            is GameEvent.updateIsWinSoundPlaying -> {
+            is GameEvent.UpdateIsWinSoundPlaying -> {
                 _state.update { it.copy(isWinSoundPlaying = event.value )}
             }
         }

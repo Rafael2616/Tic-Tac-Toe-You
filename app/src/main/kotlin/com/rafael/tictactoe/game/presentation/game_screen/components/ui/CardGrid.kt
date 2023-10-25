@@ -65,7 +65,7 @@ fun CardGrid(
                             .size(114.dp)
                             .clip(RoundedCornerShape(26.dp))
                             .clickable(onClick = {
-                                    onEvent(GameEvent.clickOnCardGrid(rowIndex, cardIndex))
+                                    onEvent(GameEvent.ClickOnCardGrid(rowIndex, cardIndex))
                             })
                     ) {
                        Box(

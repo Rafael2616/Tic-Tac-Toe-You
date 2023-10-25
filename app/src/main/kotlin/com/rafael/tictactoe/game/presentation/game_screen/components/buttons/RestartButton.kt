@@ -62,7 +62,7 @@ fun RestartButton(
                         .align(Alignment.CenterHorizontally)
                         .clip(CircleShape)
                         .clickable(onClick = {
-                            onEvent(GameEvent.playAgain)
+                            onEvent(GameEvent.PlayAgain)
                         })
                 ) {
                     Box(

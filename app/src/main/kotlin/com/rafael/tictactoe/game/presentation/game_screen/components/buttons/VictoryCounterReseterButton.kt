@@ -19,7 +19,7 @@ fun VictoryCounterReseterButton(
         btnText = R.string.reset,
         description = "Victory Counter Reseter Button",
         onEvent = {
-            onEvent(GameEvent.resetVictoryCounter)
+            onEvent(GameEvent.ResetVictoryCounter)
         }
     )
 }

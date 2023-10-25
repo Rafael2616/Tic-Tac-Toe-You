@@ -26,6 +26,6 @@ fun GotOldSound(
  	   exoPlayer.prepare()
         exoPlayer.setMediaItem(gotOldSound)
 		exoPlayer.play()
-        onEvent(GameEvent.updateIsGotOldSoundPlaying(true))
+        onEvent(GameEvent.UpdateIsGotOldSoundPlaying(true))
     }
 }

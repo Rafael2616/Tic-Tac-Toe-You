@@ -14,31 +14,31 @@ fun toggleSettingsUseCase(
 
     fun toggleThemeSettings(index: Int) {
         when (index) {
-            0 -> onEvent(SettingsEvent.toggleIsFollowingSystemOn)
-            1 -> onEvent(SettingsEvent.toggleIsDarkThemeOn(!state.isDarkThemeOn))
-            2 -> onEvent(SettingsEvent.toggleIsDynamicColorsOn)
+            0 -> onEvent(SettingsEvent.ToggleIsFollowingSystemOn)
+            1 -> onEvent(SettingsEvent.ToggleIsDarkThemeOn)
+            2 -> onEvent(SettingsEvent.ToggleIsDynamicColorsOn)
         }
     }
 
     fun toggleSoundSettings(index: Int) {
         when (index) {
-            0 -> onEvent(SettingsEvent.toggleIsSoundEffectsOn)
-            1 -> onEvent(SettingsEvent.toggleIsBackgroundMusicOn)
+            0 -> onEvent(SettingsEvent.ToggleIsSoundEffectsOn)
+            1 -> onEvent(SettingsEvent.ToggleIsBackgroundMusicOn)
         }
     }
 
     fun toggleCustomizationSettings(index: Int) {
-        onEvent(SettingsEvent.showColorSelectionDialog(true))
+        onEvent(SettingsEvent.ShowColorSelectionDialog(true))
         when (index) {
-            0 -> onEvent(SettingsEvent.setCustomizationType(Customization.WINNERLINECOLOR))
-            1 -> onEvent(SettingsEvent.setCustomizationType(Customization.CIRCLECOLOR))
-            2 -> onEvent(SettingsEvent.setCustomizationType(Customization.XCOLOR))
+            0 -> onEvent(SettingsEvent.SetCustomizationType(Customization.WINNERLINECOLOR))
+            1 -> onEvent(SettingsEvent.SetCustomizationType(Customization.CIRCLECOLOR))
+            2 -> onEvent(SettingsEvent.SetCustomizationType(Customization.XCOLOR))
         }
     }
 
     fun toggleOtherSettings(index: Int) {
         when (index) {
-            0 -> onEvent(SettingsEvent.updateIsAboutShown(!state.isAboutShown))
+            0 -> onEvent(SettingsEvent.ShowAboutAppCard(!state.isAboutShown))
         }   
     }
 

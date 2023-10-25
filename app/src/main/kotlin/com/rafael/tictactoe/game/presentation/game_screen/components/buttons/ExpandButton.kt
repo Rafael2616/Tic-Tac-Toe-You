@@ -37,7 +37,7 @@ fun ExpandButton(
                 .size(45.dp)
                 .clip(CircleShape)
                 .clickable(onClick = { 
-                    onEvent(GameEvent.toggleExpandButton)
+                    onEvent(GameEvent.ToggleExpandButton)
             })
         )
     }

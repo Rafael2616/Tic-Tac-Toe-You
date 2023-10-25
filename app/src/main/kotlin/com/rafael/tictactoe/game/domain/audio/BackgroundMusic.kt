@@ -22,14 +22,14 @@ fun BackgroundMusic(
 	    if (isBackgroundMusicOn && !isServiceRunning(context, MusicService::class.java)) {
             if  (!isBMPlaying) {
             	context.startService(serviceIntent)
-                onEvent(SettingsEvent.isBGMusicPlaying(true))
+                onEvent(SettingsEvent.IsBGMusicPlaying(true))
             }
     	} else {
    	     context.stopService(serviceIntent)
-            onEvent(SettingsEvent.isBGMusicPlaying(false))
+            onEvent(SettingsEvent.IsBGMusicPlaying(false))
         }
     } else {
    	 context.stopService(serviceIntent)
-        onEvent(SettingsEvent.isBGMusicPlaying(false))
+        onEvent(SettingsEvent.IsBGMusicPlaying(false))
 	}
 }

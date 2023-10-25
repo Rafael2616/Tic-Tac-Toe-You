@@ -95,7 +95,7 @@ fun ExitGameDialog(
                 ) {
                     OutlinedButton(
                         onClick = {
-                            onEvent(GameEvent.dimissExitDialog)
+                            onEvent(GameEvent.DimissExitDialog)
                         },
                         modifier = Modifier
                             .width(100.dp)
@@ -112,7 +112,7 @@ fun ExitGameDialog(
                         onClick = {
                             if (!isExitClicked) {
                                 isExitClicked = true
-                                onEvent(GameEvent.exitGame)
+                                onEvent(GameEvent.ExitGame)
                                 navController.popBackStack()
                             }
                         },

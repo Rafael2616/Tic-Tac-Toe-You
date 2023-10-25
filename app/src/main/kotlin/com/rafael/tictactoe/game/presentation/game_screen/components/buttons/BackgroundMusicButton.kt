@@ -26,7 +26,7 @@ fun BackgroundMusicButton(
         btnText = R.string.active_music,
         description = "Background Music Button",
         onEvent = { 
-            onEvent(GameEvent.toggleBgMusicButton)
+            onEvent(GameEvent.ToggleBgMusicButton)
         }
     )
 }
