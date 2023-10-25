@@ -34,13 +34,11 @@ class GameViewModel @Inject constructor(
     private val _state = MutableStateFlow(GameState())
     val state = _state.asStateFlow()
 
-    val localPlayer1  = state.value.localPlayer1
-    val isCPUMode = state.value.isCPUMode
-    val isCPUPlayer1 = state.value.isCPUPlayer1
-    val isCPU = state.value.isCPU
-    val isGameFinished = state.value.isGameFinished
-
     fun onEvent(event: GameEvent) {
+        val localPlayer1  = state.value.localPlayer1
+        val isCPUMode = state.value.isCPUMode
+        val isCPUPlayer1 = state.value.isCPUPlayer1
+
         when (event) {
             is GameEvent.getFirstPlayerName -> {
                 _state.update { 
@@ -150,6 +148,9 @@ class GameViewModel @Inject constructor(
     }
 
     fun updateIsCardClicked(rowIndex: Int, cardIndex: Int, newValue: Boolean) {
+        val isCPU = state.value.isCPU
+        val isGameFinished = state.value.isGameFinished
+
         if (!isCPU && !isGameFinished) {
             _state.update { it.copy(
                 isCardClicked = it.isCardClicked.toMutableList().apply {
@@ -162,6 +163,9 @@ class GameViewModel @Inject constructor(
     }
 
     fun updateCard(rowIndex: Int, cardIndex: Int, newValue: Boolean) {
+        val isCPU = state.value.isCPU
+        val isGameFinished = state.value.isGameFinished
+
         if (!isCPU && !isGameFinished) {
             _state.update { it.copy(
                 card = it.card.toMutableList().apply {
