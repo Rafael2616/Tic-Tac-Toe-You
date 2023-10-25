@@ -4,7 +4,7 @@ sealed interface GameEvent {
     data class GetFirstPlayerName(val name: String) : GameEvent
     data class GetSecondPlayerName(val name: String) : GameEvent
     object SwitchPlayerPositions : GameEvent
-    object StartGame : GameEvent
+    data class StartGame(val player1Value: String, val player2Value: String): GameEvent
     data class ClickOnCardGrid(val rowIndex: Int, val cardIndex: Int) : GameEvent
     object ExecEasyModeCPUCardClick : GameEvent
     object ResetVictoryCounter : GameEvent
@@ -13,6 +13,7 @@ sealed interface GameEvent {
     object ToggleSoundEffectsButton : GameEvent
     object ToggleExpandButton : GameEvent
     object ToggleExitDialog : GameEvent
+    object ToggleIsXForPlayer1 : GameEvent
     object ExitGame : GameEvent
     object DimissExitDialog : GameEvent
     data class UpdateIsGotOldSoundPlaying(val value: Boolean) : GameEvent

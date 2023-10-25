@@ -66,18 +66,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.card_grid.EasyModeCPUCardClick
 import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.presentation.utils.draws.drawCircleinDialog
 import com.rafael.tictactoe.game.presentation.utils.draws.drawXinDialog
-import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import com.rafael.tictactoe.settings.domain.enums.Customization
 import com.rafael.tictactoe.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.domain.model.SettingsState
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
 fun GetPlayersPrefsDialog(
@@ -86,8 +83,6 @@ fun GetPlayersPrefsDialog(
     state: GameState,
     settingsState: SettingsState
 ) {
-    val viewModel = hiltViewModel<GameViewModel>()
-    val settingsVM = hiltViewModel<SettingsViewModel>()
     val context = LocalContext.current
     val view = LocalView.current
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -257,8 +252,7 @@ fun GetPlayersPrefsDialog(
                             .size(60.dp)
                             .clip(CircleShape)
                             .clickable(onClick = {
-                                settingsVM.execUIClickSound()
-                                viewModel.updateIsXFor1(!isXFor1)
+                                onEvent(GameEvent.ToggleIsXForPlayer1)
                             })
                     ) {
                         Image(
@@ -380,9 +374,7 @@ fun GetPlayersPrefsDialog(
                 Button(
                     onClick = {
                         keyboardController?.hide()
-                        viewModel.updatePlayer1Name(player1Value)
-                        viewModel.updatePlayer2Name(player2Value)
-                        onEvent(GameEvent.StartGame)
+                        onEvent(GameEvent.StartGame(player1Value, player2Value))
                     },
                     modifier = Modifier
                         .width(102.dp)

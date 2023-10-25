@@ -67,11 +67,13 @@ class GameViewModel @Inject constructor(
                 }
                 settingsVM.execUIClickSound()
             }
-            GameEvent.StartGame -> {
+            is GameEvent.StartGame -> {
                 _state.update { it.copy(
                     play = true,
                     isXImage = it.isXFor1,
-                    isTimerOn = true)
+                    isTimerOn = true,
+                    player1Name = event.player1Value,
+                    player2Name = event.player2Value)
                 }
                 if (isCPUMode && isCPUPlayer1) {
                    _state.update { it.copy(isCPU = true) }
@@ -136,6 +138,10 @@ class GameViewModel @Inject constructor(
             }
             GameEvent.ToggleExitDialog -> {
                 _state.update { it.copy(showExitGameDialog = !it.showExitGameDialog )}
+            }
+            GameEvent.ToggleIsXForPlayer1 -> {
+                _state.update { it.copy(isXFor1 = !it.isXFor1 )}
+                settingsVM.execUIClickSound()
             }
             is GameEvent.UpdateIsGotOldSoundPlaying -> {
                 _state.update { it.copy(isGotOldSoundPlaying = event.value )}
