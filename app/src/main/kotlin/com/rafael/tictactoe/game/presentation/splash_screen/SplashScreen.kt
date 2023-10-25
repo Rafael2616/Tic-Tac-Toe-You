@@ -19,7 +19,7 @@ fun SplashScreen(navController: NavController) {
     SplashImage(settingsState)
     
     LaunchedEffect(Unit) {
-        delay(1000)
+        delay(900)
         navController.popBackStack()
         navController.navigate(Destinations.Main.screen)
     }
