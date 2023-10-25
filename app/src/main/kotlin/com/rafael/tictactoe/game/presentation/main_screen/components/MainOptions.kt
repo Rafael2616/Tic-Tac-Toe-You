@@ -2,7 +2,6 @@ package com.rafael.tictactoe.game.presentation.main_screen.components
 
 import android.content.res.Configuration
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,13 +14,19 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Memory
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -29,8 +34,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -47,6 +52,7 @@ fun MainOptions(navController: NavController) {
     val settingsVM = hiltViewModel<SettingsViewModel>()
     var options by rememberSaveable { mutableStateOf(List<Boolean>(3) { false }) }
     val orientation = LocalConfiguration.current.orientation
+    val state by settingsVM.state.collectAsState()
 
     Column(
         modifier = Modifier
@@ -76,24 +82,27 @@ fun MainOptions(navController: NavController) {
             ) {
                 Row(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(6.dp)
-                        .padding(end = 10.dp),
+                        .fillMaxSize()
+                        .padding(end = 10.dp, start = 10.dp),
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Image(
-                        contentDescription = null,
-                        modifier = Modifier
-                            .size(50.dp),
-                        painter = painterResource(
-                            id = when (index) {
-                                0 -> R.drawable.play_icon
-                                1 -> R.drawable.cpu_icon
-                                2 -> R.drawable.settings_icon
-                                else -> R.drawable.transparent_image
-                            }
-                        )
+                     Icon(
+                        imageVector = when (index) {
+                            0 -> Icons.Filled.PlayArrow
+                            1 -> Icons.Filled.Memory
+                            2 -> Icons.Filled.Settings
+                            else -> Icons.Filled.Settings
+                        },
+                        contentDescription = "Icon",
+                        tint = when (index) {
+                            0 -> if (state.isDarkThemeOn) Color.Green else Color(0xFF299961)
+                            1 -> Color.Red
+                            else -> MaterialTheme.colorScheme.onSurface
+                        },
+       		    	 modifier = Modifier
+                            .size(42.dp)
+                            .padding(end = 3.dp)
                     )
                     Text(
                         modifier = Modifier.wrapContentSize(),
