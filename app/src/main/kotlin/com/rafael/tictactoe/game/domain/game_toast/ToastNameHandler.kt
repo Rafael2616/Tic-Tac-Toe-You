@@ -95,7 +95,7 @@ fun ToastNameHandler(state: GameState) {
             }
         }
         CurrentPlayerName.CounterAfterGameStarts -> {
-            LaunchedEffect(Unit) {
+            LaunchedEffect(currentGamePhase) {
                 while (isTimerOn) {
                     if (timer > 0) {
                         vm.updateCurrentPlayerName(timer.toString())
