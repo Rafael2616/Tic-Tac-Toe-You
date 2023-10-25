@@ -34,11 +34,15 @@ class GameViewModel @Inject constructor(
     private val _state = MutableStateFlow(GameState())
     val state = _state.asStateFlow()
 
+    val localPlayer1  = state.value.localPlayer1
+    val isCPUMode = state.value.isCPUMode
+    val isCPUPlayer1 = state.value.isCPUPlayer1
+    val isCPU = state.value.isCPU
+    val isGameFinished = state.value.isGameFinished
+
     fun onEvent(event: GameEvent) {
         when (event) {
             is GameEvent.getFirstPlayerName -> {
-                val localPlayer1  = state.value.localPlayer1
-
                 _state.update { 
                     if (localPlayer1) {
                         it.copy(player1Name = event.name)
@@ -48,8 +52,6 @@ class GameViewModel @Inject constructor(
                 }
             }
             is GameEvent.getSecondPlayerName -> {
-                val localPlayer1 = state.value.localPlayer1
-
                 _state.update {
                     if (localPlayer1) {
                         it.copy(player2Name = event.name)
@@ -59,30 +61,20 @@ class GameViewModel @Inject constructor(
                 }
             }
             GameEvent.switchPlayerPositions -> {
-                val isCPUMode = state.value.isCPUMode
-                val isCPUPlayer1 = state.value.isCPUPlayer1
-                val localPlayer1 = state.value.localPlayer1
-
                 _state.update {
                     if (!isCPUMode) {
-                        it.copy(localPlayer1 = !localPlayer1)
+                        it.copy(localPlayer1 = !it.localPlayer1)
                     } else {
-                        it.copy(isCPUPlayer1 = !isCPUPlayer1)
+                        it.copy(isCPUPlayer1 = !it.isCPUPlayer1)
                     }
                 }
                 settingsVM.execUIClickSound()
             }
             GameEvent.startGame -> {
-                val isXFor1 = state.value.isXFor1
-                val isCPUMode = state.value.isCPUMode
-                val isCPUPlayer1 = state.value.isCPUPlayer1
-
-                _state.update {
-                    it.copy(
-                        play = true,
-                        isXImage = isXFor1,
-                        isTimerOn = true
-                    )
+                _state.update { it.copy(
+                    play = true,
+                    isXImage = it.isXFor1,
+                    isTimerOn = true)
                 }
                 if (isCPUMode && isCPUPlayer1) {
                    _state.update { it.copy(isCPU = true) }
@@ -91,9 +83,7 @@ class GameViewModel @Inject constructor(
                 settingsVM.execUIClickSound()
             }
             is GameEvent.clickOnCardGrid -> {
-                _state.update { it.copy(
-                	isExpandButtonShown = false)
-                }
+                _state.update { it.copy(isExpandButtonShown = false) }
                 CardGridClickHandler(
                     state.value,
                     this::onEvent,
@@ -110,20 +100,20 @@ class GameViewModel @Inject constructor(
                 _state.update { it.copy(
                     showVictoryCounterReseter = false,
                     player1Wins = 0,
-                    player2Wins = 0
-                )}
+                    player2Wins = 0)
+                }
                 settingsVM.execUIClickSound()
             }
             GameEvent.playAgain -> {
-                val isCPUMode = state.value.isCPUMode
-
-                _state.update { it.copy(isExpandButtonShown = false)}
-                settingsVM.execUIClickSound()
-                RestartGame(this, state.value)
-
+                _state.update { it.copy(isExpandButtonShown = false) }     
+                RestartGame(
+                    this,
+                    state.value
+                )
                 if (isCPUMode) {
                     EasyModeCPUCardClick(this, state.value)
                 }
+                settingsVM.execUIClickSound()
             }
             GameEvent.toggleBgMusicButton -> {
                 settingsVM.onEvent(SettingsEvent.toggleIsBackgroundMusicOn)
@@ -132,21 +122,23 @@ class GameViewModel @Inject constructor(
                 settingsVM.onEvent(SettingsEvent.toggleIsSoundEffectsOn)
             }
             GameEvent.toggleExpandButton -> {
-                val isExpandButtonShown = state.value.isExpandButtonShown
-                _state.update { it.copy(isExpandButtonShown = !isExpandButtonShown)}
+                _state.update { it.copy(isExpandButtonShown = !it.isExpandButtonShown)}
             }
             GameEvent.exitGame -> {
-                settingsVM.execUIClickSound()
                 settingsVM.onEvent(SettingsEvent.showColorSelectionDialog(false))
+                val cardState = state.value.card
                 _state.update { GameState() }
+
+                //Keep card variable state
+                _state.update { it.copy(card = cardState)}
+                settingsVM.execUIClickSound()
             }
             GameEvent.dimissExitDialog -> {
-                settingsVM.execUIClickSound()
                 _state.update { it.copy(showExitGameDialog = false )}
+                settingsVM.execUIClickSound()
             }
             GameEvent.toggleExitDialog -> {
-                val showExitGameDialog = state.value.showExitGameDialog
-                _state.update { it.copy(showExitGameDialog = !showExitGameDialog )}
+                _state.update { it.copy(showExitGameDialog = !it.showExitGameDialog )}
             }
             is GameEvent.updateIsGotOldSoundPlaying -> {
                 _state.update { it.copy(isGotOldSoundPlaying = event.value )}
@@ -158,29 +150,21 @@ class GameViewModel @Inject constructor(
     }
 
     fun updateIsCardClicked(rowIndex: Int, cardIndex: Int, newValue: Boolean) {
-        val isCPU = state.value.isCPU
-        val isGameFinished = state.value.isGameFinished
-        var isCardClicked = state.value.isCardClicked
-
         if (!isCPU && !isGameFinished) {
             _state.update { it.copy(
-                isCardClicked = isCardClicked.toMutableList().apply {
+                isCardClicked = it.isCardClicked.toMutableList().apply {
                     this[rowIndex] = this[rowIndex].toMutableList().apply {
                         this[cardIndex] = newValue
                     }
                 }
             )}
-         }
+        }
     }
 
     fun updateCard(rowIndex: Int, cardIndex: Int, newValue: Boolean) {
-        val isCPU = state.value.isCPU
-        val isGameFinished = state.value.isGameFinished
-        var card = state.value.card
-
         if (!isCPU && !isGameFinished) {
             _state.update { it.copy(
-                card = card.toMutableList().apply {
+                card = it.card.toMutableList().apply {
                     this[rowIndex] = this[rowIndex].toMutableList().apply {
                         this[cardIndex] = newValue
                     }

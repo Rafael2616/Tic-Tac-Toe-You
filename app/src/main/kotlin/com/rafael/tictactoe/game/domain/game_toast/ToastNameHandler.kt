@@ -34,6 +34,7 @@ fun ToastNameHandler(state: GameState) {
     val cpuName = stringResource(R.string.cpu)
     var currentGamePhase: CurrentPlayerName = CurrentPlayerName.nameForSetupPhase
 
+    //Update game phase
     if (!play && !isCPUMode) {
         currentGamePhase = CurrentPlayerName.nameForSetupPhase
     } else if (!play && isCPUMode) {
@@ -98,7 +99,7 @@ fun ToastNameHandler(state: GameState) {
                     if (timer > 0) {
                         vm.updateCurrentPlayerName(timer.toString())
                     }
-                    delay(550L)
+                    delay(500L)
                     timer --
                     if (timer == 0) {
                         vm.updateIsTimerOn(false)
