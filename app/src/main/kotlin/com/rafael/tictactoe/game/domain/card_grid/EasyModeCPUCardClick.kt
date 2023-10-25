@@ -21,7 +21,7 @@ fun EasyModeCPUCardClick(
     val isXFor1 = state.isXFor1
     val isGameFinished = state.isGameFinished
     val isTimerOn = state.isTimerOn
-    val delayTime = if (isTimerOn) 2300L else 500L
+    val delayTime = if (isTimerOn) 2300L else 600L
 
     if (isGameFinished) {
         return
