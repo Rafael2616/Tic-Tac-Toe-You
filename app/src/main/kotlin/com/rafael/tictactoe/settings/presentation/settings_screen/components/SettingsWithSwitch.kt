@@ -100,14 +100,14 @@ fun SettingsWithSwitch(
                         modifier = Modifier
                             .height(60.dp)
                             .fillMaxSize()
-                            .clickable(onClick = {
+                            .clickable {
                                 toggleSettingsUseCase(
                                     groupType,
                                     index,
                                     state,
                                     onEvent
                                 )
-                            })
+                            }
                     ) {
                         if (componentValidator.validateFirstIcon(groupType)) {
                            Icon(

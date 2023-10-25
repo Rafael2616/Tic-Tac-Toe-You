@@ -182,9 +182,9 @@ fun GetPlayersPrefsDialog(
                             .width(60.dp)
                             .height(85.dp)
                             .clip(CircleShape)
-                            .clickable(onClick = {
+                            .clickable {
                                 onEvent(GameEvent.SwitchPlayerPositions)
-                           })
+                           }
                     ) {
                         Image(
                             contentDescription = "Switch Player Position",
@@ -231,10 +231,10 @@ fun GetPlayersPrefsDialog(
                     Canvas(
                         modifier = canvasModifier
                             .then(
-                                Modifier.clickable(onClick = {
+                                Modifier.clickable {
                                     canvasOnClick()
                                     onSettingsEvent(SettingsEvent.SetCustomizationType(customTypeForP1))
-                                })
+                                }
                             )
                     ) {
                         if (isXFor1) {
@@ -251,9 +251,9 @@ fun GetPlayersPrefsDialog(
                         modifier = Modifier
                             .size(60.dp)
                             .clip(CircleShape)
-                            .clickable(onClick = {
+                            .clickable {
                                 onEvent(GameEvent.ToggleIsXForPlayer1)
-                            })
+                            }
                     ) {
                         Image(
                             contentDescription = "Player Image Switcher",
@@ -264,10 +264,10 @@ fun GetPlayersPrefsDialog(
                     Canvas(
                         modifier = canvasModifier
                             .then(
-                                Modifier.clickable(onClick = {
+                                Modifier.clickable {
                                     canvasOnClick()
                                     onSettingsEvent(SettingsEvent.SetCustomizationType(customTypeForP2))
-                                })
+                                }
                             )
                     ) {
                         if (isXFor1) {
@@ -317,12 +317,12 @@ fun GetPlayersPrefsDialog(
                                         .width(150.dp)
                                         .height(40.dp)
                                         .clip(RoundedCornerShape(26.dp))
-                                        .clickable(onClick = {
+                                        .clickable {
                                             /*vm.updateDifficultyMode(mode)*/
                                             when (mode) {
                                                 1 -> warningToast.show()
                                             }
-                                        })
+                                        }
                                 ) {
                                     Row(
                                         modifier = Modifier

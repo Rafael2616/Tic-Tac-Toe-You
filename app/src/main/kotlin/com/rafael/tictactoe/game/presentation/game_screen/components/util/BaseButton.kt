@@ -56,9 +56,9 @@ fun BaseButton(
                 modifier = Modifier
                     .size(45.dp)
                     .clip(CircleShape)
-                    .clickable(onClick = {
+                    .clickable {
                         onEvent()
-                    })
+                    }
             ) {
                 Box(
                     contentAlignment = Alignment.Center,

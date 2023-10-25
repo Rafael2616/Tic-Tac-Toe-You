@@ -55,9 +55,9 @@ fun PlayAgainButton(
                 modifier = Modifier
                     .size(75.dp)
                     .clip(CircleShape)
-                    .clickable(onClick = {
+                    .clickable {
                         onEvent(GameEvent.PlayAgain)
-                    })
+                    }
             ) {
                 Image(
                     contentDescription = null,

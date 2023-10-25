@@ -95,7 +95,7 @@ fun ColorSelectionDialog(
                             modifier = Modifier
                             .height(60.dp)
                             .fillMaxWidth()
-                            .clickable(onClick = {
+                            .clickable {
                                 when (type) {
                                     Customization.WINNERLINECOLOR -> onEvent(SettingsEvent.SelectedWinnerLineColor(color))
                                     Customization.CIRCLECOLOR ->  onEvent(SettingsEvent.SelectedCircleColor(color))
@@ -106,7 +106,7 @@ fun ColorSelectionDialog(
                                     color,
                                     onEvent
                                 )
-                           })
+                            }
                         ) {
                             Row(
                                 modifier = Modifier

@@ -71,14 +71,14 @@ fun MainOptions(navController: NavController) {
                     .fillMaxWidth(if (orientation == Configuration.ORIENTATION_LANDSCAPE) 0.35f else 0.6f)
                     .height(65.dp)
                     .clip(RoundedCornerShape(36.dp))
-                    .clickable(onClick = {
+                    .clickable {
                         settingsVM.execUIClickSound()
                         when (index) {
                             0 -> navController.navigate(Destinations.Game.screen + "/false")
                             1 -> navController.navigate(Destinations.Game.screen + "/true")
                             2 -> navController.navigate(Destinations.Settings.screen)
                         }
-                    })
+                    }
             ) {
                 Row(
                     modifier = Modifier

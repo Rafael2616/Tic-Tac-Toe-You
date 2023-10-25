@@ -107,14 +107,14 @@ fun SettingsWithIcon(
                         .height(rowHeight)
                         .animateContentSize()
                         .fillMaxSize()
-                        .clickable(onClick = {
+                        .clickable {
                             toggleSettingsUseCase(
                                 groupType,
                                 index,
                                 state,
                                 onEvent
                             )
-                        }),
+                        },
                 ) {
                     if (componentValidator.validateFirstIcon(groupType)) {
                         Icon(

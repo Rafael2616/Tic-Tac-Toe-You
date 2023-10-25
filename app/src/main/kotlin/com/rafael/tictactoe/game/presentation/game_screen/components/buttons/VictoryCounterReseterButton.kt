@@ -54,9 +54,9 @@ fun VictoryCounterReseterButton(
                 modifier = Modifier
                     .size(45.dp)
                     .clip(CircleShape)
-                    .clickable(onClick = {
+                    .clickable {
                         onEvent(GameEvent.ResetVictoryCounter)
-                    })
+                    }
             ) {
                 Box(
                     contentAlignment = Alignment.Center,
