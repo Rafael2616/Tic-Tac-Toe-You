@@ -18,7 +18,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,8 +36,8 @@ fun CardGrid(
     state: GameState,
     settingsState: SettingsState
 ) {
-    val cardItems = remember { mutableStateListOf(0,1,2) }
-    val rowItems = remember { mutableStateListOf(0,1,2) }
+    val cardItems = remember { listOf(0,1,2) }
+    val rowItems = remember { listOf(0,1,2) }
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
 

@@ -8,10 +8,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.rafael.tictactoe.R
@@ -27,11 +24,11 @@ fun SettingsOptionsImpl(
     onEvent: (SettingsEvent) -> Unit,
     state: SettingsState
 ) {
-    val settingsGroups = remember { mutableStateListOf(0,1,2,3) }
-    val themeGroupSize = remember { mutableStateListOf(0,1,2) }
-    val soundGroupSize = remember { mutableStateListOf(0,1) }
-    val cutomizationGroupSize = remember { mutableStateListOf(0,1,2) }
-    val otherGroupSize = remember { mutableStateListOf(0) }
+    val settingsGroups = remember { listOf(0,1,2,3) }
+    val themeGroupSize = remember { listOf(0,1,2) }
+    val soundGroupSize = remember { listOf(0,1) }
+    val cutomizationGroupSize = remember { listOf(0,1,2) }
+    val otherGroupSize = remember { listOf(0) }
 
     LazyColumn(
         modifier = Modifier
