@@ -17,11 +17,9 @@ fun SoundEffectsButton(
     onEvent: (GameEvent) -> Unit,
     settingsState: SettingsState
 ) {
-    val isSoundEffectsOn = settingsState.isSoundEffectsOn
-
     BaseButton(
         modifier = Modifier.padding(top = 95.dp, start = 15.dp),
-        btnIcon = if (isSoundEffectsOn) Icons.Filled.MusicNote else Icons.Filled.MusicOff,
+        btnIcon = if (settingsState.isSoundEffectsOn) Icons.Filled.MusicNote else Icons.Filled.MusicOff,
         btnText = R.string.active_sound,
         description = "Sound Effects Button",
         onEvent = { 

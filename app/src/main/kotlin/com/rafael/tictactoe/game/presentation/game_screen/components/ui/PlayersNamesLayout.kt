@@ -25,8 +25,6 @@ import com.rafael.tictactoe.game.domain.model.GameState
 
 @Composable
 fun PlayersNamesLayout(state: GameState) {
-    val showPlayer1Name = state.showPlayer1Name
-    val showPlayer2Name = state.showPlayer2Name
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
     val playersSize = remember { mutableStateListOf(0,1) }
@@ -53,8 +51,8 @@ fun PlayersNamesLayout(state: GameState) {
                 ) {
                     Text(
                         text = when (player) {
-                            0 -> ("$showPlayer1Name")
-                            1 -> ("$showPlayer2Name")
+                            0 -> ("${state.showPlayer1Name}")
+                            1 -> ("${state.showPlayer2Name}")
                             else -> ""
                         },
                         style = MaterialTheme.typography.bodyMedium,

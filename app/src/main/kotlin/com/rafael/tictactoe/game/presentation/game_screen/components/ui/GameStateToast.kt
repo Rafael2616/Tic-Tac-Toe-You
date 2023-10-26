@@ -32,8 +32,6 @@ fun GameStateToast(
     state: GameState,
     settingsState: SettingsState
 ) {
-    val currentPlayerName = state.currentPlayerName
-    val isDarkThemeOn = settingsState.isDarkThemeOn
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
 
@@ -51,7 +49,7 @@ fun GameStateToast(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "$currentPlayerName",
+                text = "${state.currentPlayerName}",
                 style = MaterialTheme.typography.titleMedium,
                 textAlign = TextAlign.Center,
                 color = if (!state.gotOld) MaterialTheme.colorScheme.onSurface
@@ -71,7 +69,7 @@ fun GameStateToast(
                     text = stringResource(R.string.winner),
                     style = MaterialTheme.typography.titleMedium,
                     textAlign = TextAlign.Center,
-                    color = if (isDarkThemeOn) Color.Green else Color(0xFF229A00)
+                    color = if (settingsState.isDarkThemeOn) Color.Green else Color(0xFF229A00)
                 )
             }
         }
