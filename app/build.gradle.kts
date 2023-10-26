@@ -9,7 +9,7 @@ plugins {
 android {
     compileSdk = 34
     namespace = "com.rafael.tictactoe"
-   
+
     defaultConfig {
         applicationId = "com.rafael.tictactoe"
         minSdk = 26
@@ -19,7 +19,7 @@ android {
         
         buildConfigField("Boolean", "ROOM_USE_INCREMENTAL_COMPILATION", "true")
     }
-	
+
     signingConfigs {
         create("release") {
             storeFile = file("tictactoekey.jks")
@@ -42,7 +42,7 @@ android {
             resValue("string", "app_name_beta", "Jogo da Velha - Beta")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
-		
+
         named("debug") {
             isMinifyEnabled = false
             signingConfig = signingConfigs.getByName("release")
@@ -51,7 +51,7 @@ android {
             resValue("string", "app_name_debug", "Jogo da Velha - Debug")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
-		
+
 		named("release") {
 			isMinifyEnabled = true
 			signingConfig = signingConfigs.getByName("release")
@@ -89,7 +89,7 @@ dependencies {
     val room_version = "2.6.0"
     val hilt_version = "2.48.1"
 	val media3_version = "1.1.1"
-    
+
     //Kotlin
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     //Android Core
