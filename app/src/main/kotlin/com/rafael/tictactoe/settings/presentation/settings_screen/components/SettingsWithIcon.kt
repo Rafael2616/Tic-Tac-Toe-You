@@ -58,7 +58,7 @@ import com.rafael.tictactoe.settings.domain.util.SettingsTextHandler
 fun SettingsWithIcon(
     state: SettingsState,
     onEvent: (SettingsEvent) -> Unit,
-    size: List<Int>,
+    groupSize: Int,
     groupType: GroupType,
     @StringRes groupName: Int
 ) {
@@ -96,7 +96,7 @@ fun SettingsWithIcon(
                 .fillMaxWidth(if (isInLandscape) 0.6f else 0.9f)
                 .clip(RoundedCornerShape(26.dp))
         ) {
-            size.forEachIndexed { _, index ->
+            for (index in 0 until groupSize) {
                 val rowHeight by animateDpAsState(
                     if (groupType == GroupType.OTHER && index == 0 && isAboutShown) 150.dp else 60.dp
                 )
@@ -210,7 +210,7 @@ fun SettingsWithIcon(
                         .padding(end = 10.dp)
                     )
                 }
-                if (index < (size.size - 1)) {
+                if (index < (groupSize - 1)) {
                     HorizontalDivider(thickness = 4.dp, color = MaterialTheme.colorScheme.surface)
                 }
             }

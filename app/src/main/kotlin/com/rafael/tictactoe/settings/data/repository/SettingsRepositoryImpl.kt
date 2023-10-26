@@ -10,7 +10,7 @@ class SettingsRepositoryImpl @Inject constructor(
     private val settingsDao: SettingsDao
 ) : SettingsRepository {
 
-	init{
+	init {
 		println("Settings repository has been initialized")
 	}
 
@@ -19,6 +19,6 @@ class SettingsRepositoryImpl @Inject constructor(
     }
 
     override suspend fun setAllSettingsValues(settingsEntity: SettingsEntity) {
-        settingsDao.setSettingsValues(settingsEntity)
+        settingsDao.setAllSettingsValues(settingsEntity)
     }
 }

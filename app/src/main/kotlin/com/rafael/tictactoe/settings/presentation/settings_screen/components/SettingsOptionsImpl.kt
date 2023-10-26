@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,11 +26,11 @@ fun SettingsOptionsImpl(
     onEvent: (SettingsEvent) -> Unit,
     state: SettingsState
 ) {
-    val settingsGroups = remember { listOf(0,1,2,3) }
-    val themeGroupSize = remember { listOf(0,1,2) }
-    val soundGroupSize = remember { listOf(0,1) }
-    val cutomizationGroupSize = remember { listOf(0,1,2) }
-    val otherGroupSize = remember { listOf(0) }
+    val settingsGroups by remember { mutableIntStateOf(4) }
+    val themeGroupSize by remember { mutableIntStateOf(3) }
+    val soundGroupSize by remember { mutableIntStateOf(2) }
+    val customizationGroupSize by remember { mutableIntStateOf(3) }
+    val otherGroupSize by remember { mutableIntStateOf(1) }
 
     LazyColumn(
         modifier = Modifier
@@ -38,33 +40,33 @@ fun SettingsOptionsImpl(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        items(settingsGroups.size) { group ->
+        items(settingsGroups) { group ->
             when (group) {
                 0 -> SettingsWithSwitch(
                     state = state,
                     onEvent = onEvent,
-                    size = themeGroupSize,
+                    groupSize = themeGroupSize,
                     groupType = GroupType.THEME,
                     groupName = R.string.group_theme
 				)
                 1 -> SettingsWithSwitch(
                     state = state,
                     onEvent = onEvent,
-                    size = soundGroupSize,
+                    groupSize = soundGroupSize,
                     groupType = GroupType.SOUND,
                     groupName = R.string.group_sound
                 )
                 2 -> SettingsWithIcon(
                     state = state,
                     onEvent = onEvent,
-                    size = cutomizationGroupSize,
+                    groupSize = customizationGroupSize,
                     groupType = GroupType.CUSTOMIZATION,
                     groupName = R.string.group_customization
                 )
                 3 -> SettingsWithIcon(
                     state = state,
                     onEvent = onEvent,
-                    size = otherGroupSize,
+                    groupSize = otherGroupSize,
                     groupType = GroupType.OTHER,
                     groupName = R.string.group_others
                 )

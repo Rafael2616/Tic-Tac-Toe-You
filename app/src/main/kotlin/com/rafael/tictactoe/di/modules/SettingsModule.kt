@@ -32,7 +32,7 @@ object SettingsModule {
     fun provideSettingsRepository(database: SettingsDatabase): SettingsRepository {
         return SettingsRepositoryImpl(database.settingsDao)
     }
-	
+
     @Provides
     @Singleton
     fun provideSettingsViewModel(

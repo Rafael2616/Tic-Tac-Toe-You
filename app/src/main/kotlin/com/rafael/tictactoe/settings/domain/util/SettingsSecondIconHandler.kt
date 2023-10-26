@@ -1,7 +1,7 @@
 package com.rafael.tictactoe.settings.domain.util
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.ExpandLess
@@ -17,28 +17,22 @@ fun SettingsSecondIconHandler(
     groupType: GroupType,
     state: SettingsState
 ): ImageVector {
-    val isAboutShown = state.isAboutShown
 
     @Composable
-    fun CustomizationIconHandler(index: Int): ImageVector {
-        return when (index) {
-            0 -> Icons.Filled.ArrowForward
-            1 -> Icons.Filled.ArrowForward
-            2 -> Icons.Filled.ArrowForward
-            else -> Icons.Filled.Close
-        }
+    fun CustomizationIconHandler(): ImageVector {
+        return Icons.AutoMirrored.Filled.ArrowForward
     }
 
     @Composable
     fun OtherIconHandler(index: Int): ImageVector {
         return when (index) {
-            0 -> if (isAboutShown) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore
+            0 -> if (state.isAboutShown) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore
             else -> Icons.Filled.Close
         }
     }
 
     return when (groupType) {
-        GroupType.CUSTOMIZATION -> CustomizationIconHandler(index)
+        GroupType.CUSTOMIZATION -> CustomizationIconHandler()
         GroupType.OTHER -> OtherIconHandler(index)
         else -> Icons.Filled.Close
     }

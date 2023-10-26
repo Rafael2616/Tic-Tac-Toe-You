@@ -52,7 +52,7 @@ import com.rafael.tictactoe.settings.domain.util.switchCheckedHandler
 fun SettingsWithSwitch(
     state: SettingsState,
     onEvent: (SettingsEvent) -> Unit,
-    size: List<Int>,
+    groupSize: Int,
     groupType: GroupType,
     @StringRes groupName: Int
 ) {
@@ -88,7 +88,7 @@ fun SettingsWithSwitch(
                 .fillMaxWidth(if (isInLandscape) 0.6f else 0.9f)
                 .clip(RoundedCornerShape(26.dp))
         ) {
-            size.forEachIndexed { _, index ->
+            for (index in 0 until groupSize) {
                 if (componentValidator.validateCard(
                     groupType,
                     index,
@@ -155,7 +155,7 @@ fun SettingsWithSwitch(
    					     }
                         )
                     }
-                    if ((index < (size.size - 1)) && componentValidator.validateDivider(
+                    if ((index < (groupSize - 1)) && componentValidator.validateDivider(
                         groupType,
                         index,
                         isFollowingSystemOn

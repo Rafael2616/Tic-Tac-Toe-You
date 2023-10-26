@@ -17,5 +17,5 @@ interface SettingsDao {
 	suspend fun getSettingsValues(id: Int): SettingsEntity?
 
 	@Upsert
-	suspend fun setSettingsValues(settingsEntity: SettingsEntity)
+	suspend fun setAllSettingsValues(settingsEntity: SettingsEntity)
 }
