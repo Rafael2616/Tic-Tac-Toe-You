@@ -1,7 +1,6 @@
 package com.rafael.tictactoe.game.presentation.game_screen.components.dialogs
 
 import android.view.ViewTreeObserver
-import android.widget.Toast
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
@@ -53,7 +52,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.LocalView
@@ -67,7 +65,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.game.domain.card_grid.EasyModeCPUCardClick
+import com.rafael.tictactoe.game.domain.model.CPUDifficultyLevel
 import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.presentation.utils.draws.drawCircleinDialog
@@ -83,7 +81,6 @@ fun GetPlayersPrefsDialog(
     state: GameState,
     settingsState: SettingsState
 ) {
-    val context = LocalContext.current
     val view = LocalView.current
     val keyboardController = LocalSoftwareKeyboardController.current
     val density = LocalDensity.current.density
@@ -286,12 +283,6 @@ fun GetPlayersPrefsDialog(
                             .padding(top = 2.dp, bottom = 4.dp),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        val warningToast = Toast.makeText(
-                            context,
-                            "not yet developed :(",
-                            Toast.LENGTH_SHORT
-                        )
-
                         Text(
                             text = stringResource(R.string.modes),
                             style = MaterialTheme.typography.bodyMedium,
@@ -318,9 +309,9 @@ fun GetPlayersPrefsDialog(
                                         .height(40.dp)
                                         .clip(RoundedCornerShape(26.dp))
                                         .clickable {
-                                            /*vm.updateDifficultyMode(mode)*/
                                             when (mode) {
-                                                1 -> warningToast.show()
+                                                0 -> onEvent(GameEvent.SelectCPUDifficultyMode(CPUDifficultyLevel.easy, 0))
+                                                1 -> onEvent(GameEvent.SelectCPUDifficultyMode(CPUDifficultyLevel.hard, 1))
                                             }
                                         }
                                 ) {
@@ -335,9 +326,9 @@ fun GetPlayersPrefsDialog(
                                         RadioButton(
                                             selected = mode == selectedDifficultyMode,
                                             onClick = {
-                                                /*vm.updateDifficultyMode(mode)*/
                                                 when (mode) {
-                                                    1 -> warningToast.show()
+                                                    0 -> onEvent(GameEvent.SelectCPUDifficultyMode(CPUDifficultyLevel.easy, 0))
+                                                    1 -> onEvent(GameEvent.SelectCPUDifficultyMode(CPUDifficultyLevel.hard, 1))
                                                 }
                                             }
                                         )

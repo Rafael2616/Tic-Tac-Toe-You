@@ -54,7 +54,7 @@ fun CardGridClickHandler(
             vm.updateIsPlayer1(true)
         }
     }
-       
+
     //Vs CPU Mode
     if (isCPUMode) {
         if (isPlayer1) {

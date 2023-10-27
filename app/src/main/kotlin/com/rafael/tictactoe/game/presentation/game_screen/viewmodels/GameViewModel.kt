@@ -8,7 +8,7 @@ import com.rafael.tictactoe.game.domain.audio.CardGridSound
 import com.rafael.tictactoe.game.domain.audio.GotOldSound
 import com.rafael.tictactoe.game.domain.audio.WinnerSound
 import com.rafael.tictactoe.game.domain.card_grid.CardGridClickHandler
-import com.rafael.tictactoe.game.domain.card_grid.EasyModeCPUCardClick
+import com.rafael.tictactoe.game.domain.card_grid.CPUMoveLevelsHandler
 import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.domain.restart_game.RestartGame
@@ -77,7 +77,7 @@ class GameViewModel @Inject constructor(
                 }
                 if (isCPUMode && isCPUPlayer1) {
                    _state.update { it.copy(isCPU = true) }
-                   EasyModeCPUCardClick(this, state.value)
+                   CPUMoveLevelsHandler(this, state.value)
                 }
                 settingsVM.execUIClickSound()
             }
@@ -93,7 +93,7 @@ class GameViewModel @Inject constructor(
                 execCardGridSound()
             }
             GameEvent.ExecEasyModeCPUCardClick -> {
-                EasyModeCPUCardClick(this, state.value)
+                CPUMoveLevelsHandler(this, state.value)
             }
             GameEvent.ResetVictoryCounter -> {
                 _state.update { it.copy(
@@ -110,7 +110,7 @@ class GameViewModel @Inject constructor(
                     state.value
                 )
                 if (isCPUMode) {
-                    EasyModeCPUCardClick(this, state.value)
+                    CPUMoveLevelsHandler(this, state.value)
                 }
                 settingsVM.execUIClickSound()
             }
@@ -148,6 +148,10 @@ class GameViewModel @Inject constructor(
             }
             is GameEvent.UpdateIsWinSoundPlaying -> {
                 _state.update { it.copy(isWinSoundPlaying = event.value )}
+            }
+            is GameEvent.SelectCPUDifficultyMode -> {
+                _state.update { it.copy(cpuDifficultyLevel = event.mode )}
+                _state.update { it.copy(selectedDifficultyMode = event.selectedMode)}
             }
         }
     }
@@ -278,10 +282,6 @@ class GameViewModel @Inject constructor(
 
     fun resetWinningPositionsIndices(emptyList: List<Int>) {
         _state.update { it.copy(winningPositionsIndices = emptyList)}
-    }
-
-    fun updateDifficultyMode(newMode: Int) {
-        _state.update { it.copy(selectedDifficultyMode = newMode)}
     }
 
     fun showVictoryCounterReseter(newValue:  Boolean) {

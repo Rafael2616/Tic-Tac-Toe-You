@@ -1,5 +1,7 @@
 package com.rafael.tictactoe.game.domain.model
 
+import com.rafael.tictactoe.game.domain.model.CPUDifficultyLevel
+
 data class GameState(
 	val currentPlayerName: String = "",
     val player1Name: String = "",
@@ -28,6 +30,7 @@ data class GameState(
 	val showPlayer2Name: String = "",
 	val isCPU: Boolean = false,
 	val isCPUMode: Boolean = false,
+	val cpuDifficultyLevel: CPUDifficultyLevel = CPUDifficultyLevel.easy,
 	val isCPUPlayer1: Boolean = false,
 	val showExitGameDialog: Boolean = false,
 	val winningPositionsIndices: List<Int> = emptyList(),

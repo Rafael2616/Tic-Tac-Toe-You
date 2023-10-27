@@ -1,5 +1,7 @@
 package com.rafael.tictactoe.game.domain.model
 
+import com.rafael.tictactoe.game.domain.model.CPUDifficultyLevel
+
 sealed interface GameEvent {
     data class GetFirstPlayerName(val name: String) : GameEvent
     data class GetSecondPlayerName(val name: String) : GameEvent
@@ -16,6 +18,7 @@ sealed interface GameEvent {
     object ToggleIsXForPlayer1 : GameEvent
     object ExitGame : GameEvent
     object DimissExitDialog : GameEvent
+    data class SelectCPUDifficultyMode(val mode: CPUDifficultyLevel, val selectedMode: Int) : GameEvent
     data class UpdateIsGotOldSoundPlaying(val value: Boolean) : GameEvent
     data class UpdateIsWinSoundPlaying(val value: Boolean) : GameEvent
 }
