@@ -19,10 +19,12 @@ fun RestartGame(
      *Defines which player will start next match in PvP Mode
      *based on who was the winner in the previous match
      */
-    if (winner && is1Win) {
-        vm.updateIsPlayer1(true)
-    } else {
-        vm.updateIsPlayer1(false)
+    if (winner) {
+        if (is1Win) {
+            vm.updateIsPlayer1(true)
+        } else {
+            vm.updateIsPlayer1(false)
+        }
     }
 
     if (!winner && !isPlayer1) {
@@ -52,6 +54,7 @@ fun RestartGame(
             vm.updateIsXImage(false)
         }
     }
+
     /*
      *Defines which player will start next match in CPU Mode, 
      *considering the possibility of the player being the CPU player,
