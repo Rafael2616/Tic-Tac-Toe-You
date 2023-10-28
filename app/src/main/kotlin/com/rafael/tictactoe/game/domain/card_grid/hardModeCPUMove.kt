@@ -96,47 +96,165 @@ fun hardModeCPUMove(state: GameState): Pair<Int, Int> {
     }
 
     //Choose one side based in which side is cliked when center [1][1] is already clicked too and which player has been clicked
-    if ((card[center.first][center.second] && isClicked[center.first][center.second]) ||
-    (!card[center.first][center.second] && isClicked[center.first][center.second])) {
-
-        if (card[sides[0].first][sides[0].second] && isClicked[sides[0].first][sides[0].second]) {
-            if (!isClicked[2][1]) {
-                return Pair(2,1)
-            }
-        } else if (!card[sides[0].first][sides[0].second] && isClicked[sides[0].first][sides[0].second]) {
-            if (!isClicked[2][1]) {
-                return Pair(2,1)
-            }
+    if ((card[center.first][center.second] && isClicked[center.first][center.second]) &&
+    (card[sides[0].first][sides[0].second] && isClicked[sides[0].first][sides[0].second])) {
+        if (!isClicked[2][1]) {
+            return Pair(2,1)
         }
-
-        if (card[sides[1].first][sides[1].second] && isClicked[sides[1].first][sides[1].second]) {
-            if (!isClicked[1][2]) {
-                return Pair(1,2)
-            }
-        } else if (!card[sides[1].first][sides[1].second] && isClicked[sides[1].first][sides[1].second]) {
-            if (!isClicked[1][2]) {
-                return Pair(1,2)
-            }
+    } else if ((!card[center.first][center.second] && isClicked[center.first][center.second]) &&
+    (!card[sides[0].first][sides[0].second] && isClicked[sides[0].first][sides[0].second])) {
+        if (!isClicked[2][1]) {
+            return Pair(2,1)
         }
+    }
 
-       if (card[sides[2].first][sides[2].second] && isClicked[sides[2].first][sides[2].second]) {
-            if (!isClicked[1][0]) {
-                return Pair(1,0)
-            }
-        } else if (!card[sides[2].first][sides[2].second] && isClicked[sides[2].first][sides[2].second]) {
-            if (!isClicked[1][0]) {
-                return Pair(1,0)
-            }
+    if ((card[center.first][center.second] && isClicked[center.first][center.second]) &&
+    (card[sides[1].first][sides[1].second] && isClicked[sides[1].first][sides[1].second])) {
+        if (!isClicked[1][2]) {
+            return Pair(1,2)
         }
+    } else if ((!card[center.first][center.second] && isClicked[center.first][center.second]) &&
+    (!card[sides[1].first][sides[1].second] && isClicked[sides[1].first][sides[1].second])) {
+        if (!isClicked[1][2]) {
+            return Pair(1,2)
+        }
+    }
 
-       if (card[sides[3].first][sides[3].second] && isClicked[sides[3].first][sides[3].second]) {
-            if (!isClicked[0][1]) {
-                return Pair(0,1)
-            }
-        } else if (!card[sides[3].first][sides[3].second] && isClicked[sides[3].first][sides[3].second]) {
-            if (!isClicked[0][1]) {
-                return Pair(0,1)
-            }
+    if ((card[center.first][center.second] && isClicked[center.first][center.second]) &&
+    (card[sides[2].first][sides[2].second] && isClicked[sides[2].first][sides[2].second])) {
+        if (!isClicked[1][0]) {
+            return Pair(1,0)
+        }
+    } else if ((!card[center.first][center.second] && isClicked[center.first][center.second]) &&
+    (!card[sides[2].first][sides[2].second] && isClicked[sides[2].first][sides[2].second])) {
+        if (!isClicked[1][0]) {
+            return Pair(1,0)
+        }
+    }
+        
+    if ((card[center.first][center.second] && isClicked[center.first][center.second]) &&
+    (card[sides[3].first][sides[3].second] && isClicked[sides[3].first][sides[3].second])) {
+        if (!isClicked[0][1]) {
+            return Pair(0,1)
+        }
+    } else if ((!card[center.first][center.second] && isClicked[center.first][center.second]) &&
+    (!card[sides[3].first][sides[3].second] && isClicked[sides[3].first][sides[3].second])) {
+        if (!isClicked[0][1]) {
+            return Pair(0,1)
+        }
+    }
+    
+    //Choose one side based in which corner is cliked when center [1][1] is already clicked too and which player has been clicked
+    if ((card[center.first][center.second] && isClicked[center.first][center.second]) &&
+    (card[corners[0].first][corners[0].second] && isClicked[corners[0].first][corners[0].second])) {
+        if (!isClicked[2][2]) {
+            return Pair(2,2)
+        }
+    } else if ((!card[center.first][center.second] && isClicked[center.first][center.second]) &&
+     (!card[corners[0].first][corners[0].second] && isClicked[corners[0].first][corners[0].second])) {
+        if (!isClicked[2][2]) {
+            return Pair(2,2)
+        }
+    }
+
+    if ((card[center.first][center.second] && isClicked[center.first][center.second]) &&
+    (card[corners[1].first][corners[1].second] && isClicked[corners[1].first][corners[1].second])) {
+        if (!isClicked[2][0]) {
+            return Pair(2,0)
+        }
+    } else if ((!card[center.first][center.second] && isClicked[center.first][center.second]) &&
+    (!card[corners[1].first][corners[1].second] && isClicked[corners[1].first][corners[1].second])) {
+        if (!isClicked[2][0]) {
+            return Pair(2,0)
+        }
+    }
+            
+    if ((card[center.first][center.second] && isClicked[center.first][center.second]) &&
+    (card[corners[2].first][corners[2].second] && isClicked[corners[2].first][corners[2].second])) {
+        if (!isClicked[0][2]) {
+            return Pair(0,2)
+        }
+    } else if ((!card[center.first][center.second] && isClicked[center.first][center.second]) &&
+    (!card[corners[2].first][corners[2].second] && isClicked[corners[2].first][corners[2].second])) {
+        if (!isClicked[0][2]) {
+            return Pair(0,2)
+        }
+    }
+        
+    if ((card[center.first][center.second] && isClicked[center.first][center.second]) &&
+    (card[corners[3].first][corners[3].second] && isClicked[corners[3].first][corners[3].second])) {
+        if (!isClicked[0][0]) {
+            return Pair(0,0)
+        }
+    } else if ((!card[center.first][center.second] && isClicked[center.first][center.second]) &&     
+    (!card[corners[3].first][corners[3].second] && isClicked[corners[3].first][corners[3].second])) {
+        if (!isClicked[0][0]) {
+            return Pair(0,0)
+        }
+    }
+
+   //Choose one corner based in which side and corner is cliked and which player has been clicked
+    if (((card[corners[0].first][corners[0].second] && isClicked[corners[0].first][corners[0].second]) &&
+    (card[sides[0].first][sides[0].second] && isClicked[sides[0].first][sides[0].second])) ||
+    ((card[corners[3].first][corners[3].second] && isClicked[corners[3].first][corners[3].second]) &&
+    (card[sides[2].first][sides[2].second] && isClicked[sides[2].first][sides[2].second]))) {
+        if (!isClicked[0][2]) {
+            return Pair(0,2)
+        }
+    } else if (((!card[corners[0].first][corners[0].second] && isClicked[corners[0].first][corners[0].second]) &&
+    (!card[sides[0].first][sides[0].second] && isClicked[sides[0].first][sides[0].second])) ||
+    ((!card[corners[3].first][corners[3].second] && isClicked[corners[3].first][corners[3].second]) &&
+    (!card[sides[2].first][sides[2].second] && isClicked[sides[2].first][sides[2].second]))) {
+        if (!isClicked[0][2]) {
+            return Pair(0,2)
+        }
+    }
+
+    if (((card[corners[1].first][corners[1].second] && isClicked[corners[1].first][corners[1].second]) &&
+    (card[sides[0].first][sides[0].second] && isClicked[sides[0].first][sides[0].second])) ||
+    ((card[corners[2].first][corners[2].second] && isClicked[corners[2].first][corners[2].second]) &&
+    (card[sides[1].first][sides[1].second] && isClicked[sides[1].first][sides[1].second]))) {
+        if (!isClicked[0][0]) {
+            return Pair(0,0)
+        }
+    } else if (((!card[corners[1].first][corners[1].second] && isClicked[corners[1].first][corners[1].second]) &&
+    (!card[sides[0].first][sides[0].second] && isClicked[sides[0].first][sides[0].second])) ||
+    ((!card[corners[2].first][corners[2].second] && isClicked[corners[2].first][corners[2].second]) &&
+    (!card[sides[1].first][sides[1].second] && isClicked[sides[1].first][sides[1].second]))) {
+        if (!isClicked[0][0]) {
+            return Pair(0,0)
+        }
+    }
+
+    if (((card[corners[2].first][corners[2].second] && isClicked[corners[2].first][corners[2].second]) &&
+    (card[sides[3].first][sides[3].second] && isClicked[sides[3].first][sides[3].second])) ||
+    ((card[corners[1].first][corners[1].second] && isClicked[corners[1].first][corners[1].second]) &&
+    (card[sides[2].first][sides[2].second] && isClicked[sides[2].first][sides[2].second]))) {
+        if (!isClicked[2][2]) {
+            return Pair(2,2)
+        }
+    } else if (((!card[corners[2].first][corners[2].second] && isClicked[corners[2].first][corners[2].second]) &&
+    (!card[sides[3].first][sides[3].second] && isClicked[sides[3].first][sides[3].second])) ||
+    ((!card[corners[1].first][corners[1].second] && isClicked[corners[1].first][corners[1].second]) &&
+    (!card[sides[2].first][sides[2].second] && isClicked[sides[2].first][sides[2].second]))) {
+        if (!isClicked[2][2]) {
+            return Pair(2,2)
+        }
+    }
+
+    if (((card[corners[0].first][corners[0].second] && isClicked[corners[0].first][corners[0].second]) &&
+    (card[sides[1].first][sides[1].second] && isClicked[sides[1].first][sides[1].second])) ||
+    ((card[corners[3].first][corners[3].second] && isClicked[corners[3].first][corners[3].second]) &&
+    (card[sides[3].first][sides[3].second] && isClicked[sides[3].first][sides[3].second]))) {
+        if (!isClicked[2][0]) {
+            return Pair(2,0)
+        }
+    } else if (((!card[corners[0].first][corners[0].second] && isClicked[corners[0].first][corners[0].second]) &&
+    (!card[sides[1].first][sides[1].second] && isClicked[sides[1].first][sides[1].second])) ||
+    ((!card[corners[3].first][corners[3].second] && isClicked[corners[3].first][corners[3].second]) &&
+    (!card[sides[3].first][sides[3].second] && isClicked[sides[3].first][sides[3].second]))) {
+        if (!isClicked[2][0]) {
+            return Pair(2,0)
         }
     }
 
@@ -230,14 +348,14 @@ fun hardModeCPUMove(state: GameState): Pair<Int, Int> {
                 } 
             }
         }
-        
+
         //Choose center, if not clicked
         //the choose is not performed always, but with an probability
         //to make the game more human
 
-        val useCenterStrategy = (0 until 2).random()
+        val useCenterStrategy = (0 until 3).random()
 
-        if (!isClicked[1][1] && useCenterStrategy == 0) {
+        if (!isClicked[1][1] && (useCenterStrategy == 0 || useCenterStrategy ==1)) {
             return Pair(1, 1)
         }
 
@@ -247,10 +365,9 @@ fun hardModeCPUMove(state: GameState): Pair<Int, Int> {
     }
 
     // Choose an side, if is not clicked yet
-    for (side in sides) {
-        if (!isClicked[side.first][side.second]) {
-            return side
-        }
+    val side = sides.random()
+    if (!isClicked[side.first][side.second]) {
+        return side
     }
 
    //Shoudn't reach here
