@@ -103,7 +103,7 @@ fun GetPlayersPrefsDialog(
     val customTypeForP2 = if (isXFor1) Customization.CIRCLECOLOR else Customization.XCOLOR
     val dialogHeight by animateDpAsState(if (isCPUMode) 280.dp else 215.dp)
     val maxLetterLength by rememberSaveable { mutableIntStateOf(10) }
-    val difficultyModesNumber = remember { mutableStateListOf(0,1,2) }
+    val CPUDifficultyLevels = remember { mutableStateListOf(0,1,2) }
     val containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(18.dp)
     val bottomPadding by animateDpAsState(
         if (isKeyboardOpen) {
@@ -286,7 +286,7 @@ fun GetPlayersPrefsDialog(
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Text(
-                            text = stringResource(R.string.modes),
+                            text = stringResource(R.string.levels),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurface,
                             textAlign = TextAlign.Center
@@ -309,12 +309,12 @@ fun GetPlayersPrefsDialog(
                             ) {
                                 Row(
                                 modifier = Modifier
-                                    .width(3700.dp)
+                                    .width(370.dp)
                                     .height(40.dp),
                                 horizontalArrangement = Arrangement.SpaceBetween,
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                difficultyModesNumber.forEach { level ->
+                                 CPUDifficultyLevels.forEach { level ->
                                     Row(
                                         modifier = Modifier
                                             .weight(1f)
