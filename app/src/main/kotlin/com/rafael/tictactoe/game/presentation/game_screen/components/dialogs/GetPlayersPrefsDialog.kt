@@ -297,7 +297,7 @@ fun GetPlayersPrefsDialog(
                             horizontalArrangement = Arrangement.SpaceEvenly,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            difficultyModesNumber.forEach { mode ->
+                            difficultyModesNumber.forEach { level ->
                                 Card(
                                     shape = MaterialTheme.shapes.medium,
                                     border = BorderStroke(1.5.dp, Color.Gray),
@@ -309,9 +309,19 @@ fun GetPlayersPrefsDialog(
                                         .height(40.dp)
                                         .clip(RoundedCornerShape(26.dp))
                                         .clickable {
-                                            when (mode) {
-                                                0 -> onEvent(GameEvent.SelectCPUDifficultyMode(CPUDifficultyLevel.easy, 0))
-                                                1 -> onEvent(GameEvent.SelectCPUDifficultyMode(CPUDifficultyLevel.hard, 1))
+                                            when (level) {
+                                                0 -> onEvent(GameEvent.SelectCPUDifficultyMode(
+                                                    level = CPUDifficultyLevel.Easy,
+                                                    selectedLevel = 0,
+                                                    icon = Icons.Filled.SentimentSatisfied,
+                                                    name = R.string.mode_easy
+                                                ))
+                                                1 -> onEvent(GameEvent.SelectCPUDifficultyMode(
+                                                    level = CPUDifficultyLevel.Hard,
+                                                    selectedLevel = 1,
+                                                    icon = Icons.Filled.SentimentDissatisfied,
+                                                    name = R.string.mode_hard
+                                                ))
                                             }
                                         }
                                 ) {
@@ -324,29 +334,39 @@ fun GetPlayersPrefsDialog(
                                         verticalAlignment = Alignment.CenterVertically
                                     ) {
                                         RadioButton(
-                                            selected = mode == selectedDifficultyMode,
+                                            selected = level == selectedDifficultyMode,
                                             onClick = {
-                                                when (mode) {
-                                                    0 -> onEvent(GameEvent.SelectCPUDifficultyMode(CPUDifficultyLevel.easy, 0))
-                                                    1 -> onEvent(GameEvent.SelectCPUDifficultyMode(CPUDifficultyLevel.hard, 1))
+                                                when (level) {
+                                                    0 -> onEvent(GameEvent.SelectCPUDifficultyMode(
+                                                        level = CPUDifficultyLevel.Easy,
+                                                        selectedLevel = 0,
+                                                        icon = Icons.Filled.SentimentSatisfied,
+                                                        name = R.string.mode_easy
+                                                    ))
+                                                    1 -> onEvent(GameEvent.SelectCPUDifficultyMode(
+                                                        level = CPUDifficultyLevel.Hard,
+                                                        selectedLevel = 1,
+                                                        icon = Icons.Filled.SentimentDissatisfied,
+                                                        name = R.string.mode_hard
+                                                    ))
                                                 }
                                             }
                                         )
                                         Text(
                                             textAlign = TextAlign.Center,
-                                            text = when (mode) {
+                                            text = when (level) {
                                                 0 -> stringResource(R.string.mode_easy)
                                                 1 -> stringResource(R.string.mode_hard)
                                                 else -> ""
                                             }
                                         )
                                         Icon(
-                                            imageVector = when (mode) {
+                                            imageVector = when (level) {
                                                 0 -> Icons.Filled.SentimentSatisfied
                                                 1 -> Icons.Filled.SentimentDissatisfied
                                                 else -> Icons.Filled.SentimentSatisfied
                                             },
-                                            tint = when (mode) {
+                                            tint = when (level) {
                                                 0 -> if (isDarkThemeOn) Color.Green else Color(0xFF299961)
                                                 1 -> Color.Red
                                                 else -> Color.Red

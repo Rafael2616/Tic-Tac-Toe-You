@@ -29,13 +29,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.model.GameEvent
+import com.rafael.tictactoe.game.domain.model.GameState
 
 @Composable
 fun RestartButton(
-    onEvent: (GameEvent) -> Unit
+    onEvent: (GameEvent) -> Unit,
+    state: GameState
 ) {
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
+    val isCPUMode = state.isCPUMode
 
     Box(
         modifier = Modifier
@@ -44,7 +47,7 @@ fun RestartButton(
     ) {
         Box(
             modifier = Modifier
-                 .padding(top = 55.dp, end = 30.dp)
+                .padding(top = if (isCPUMode) 70.dp else 55.dp, end = if (isCPUMode) 45.dp else 30.dp)
                 .fillMaxWidth(if (isInLandscape) 0.46f else 1f),
             contentAlignment = Alignment.TopEnd
         ) {

@@ -5,7 +5,7 @@ import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
-fun CardGridClickHandler(
+fun cardGridClickHandler(
     state: GameState,
     onEvent: (GameEvent) -> Unit,
 	vm: GameViewModel,
@@ -69,7 +69,7 @@ fun CardGridClickHandler(
                 vm.updateIsCPU(false)
             } else {
                 vm.updateIsCPU(true)
-                onEvent(GameEvent.ExecEasyModeCPUCardClick)
+                onEvent(GameEvent.ExecCPUMove)
             }
         } else {
             // Exec player 2's move
@@ -81,7 +81,7 @@ fun CardGridClickHandler(
             // Calls CPU player's move during player 2's click if needed
             if (isCPUPlayer1) {
                 vm.updateIsCPU(true)
-                onEvent(GameEvent.ExecEasyModeCPUCardClick)
+                onEvent(GameEvent.ExecCPUMove)
             } else {
                 vm.updateIsCPU(false)
             }

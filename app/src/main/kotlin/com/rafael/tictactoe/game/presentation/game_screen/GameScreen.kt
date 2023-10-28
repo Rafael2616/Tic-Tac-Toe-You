@@ -22,6 +22,7 @@ import com.rafael.tictactoe.game.presentation.game_screen.components.buttons.Vic
 import com.rafael.tictactoe.game.presentation.game_screen.components.dialogs.ExitGameDialog
 import com.rafael.tictactoe.game.presentation.game_screen.components.dialogs.GetPlayersPrefsDialog
 import com.rafael.tictactoe.game.presentation.game_screen.components.ui.CardGrid
+import com.rafael.tictactoe.game.presentation.game_screen.components.ui.DifficultyLevelIndicator
 import com.rafael.tictactoe.game.presentation.game_screen.components.ui.GameStateToast
 import com.rafael.tictactoe.game.presentation.game_screen.components.ui.PlayersNamesLayout
 import com.rafael.tictactoe.game.presentation.game_screen.components.ui.VictoryCounter
@@ -61,6 +62,10 @@ fun GameScreen(
     PlayersNamesLayout(state)
     GameStateToast(state, settingsState)
     ToastNameHandler(state)
+    
+    if (state.isCPUMode) {
+        DifficultyLevelIndicator(state, settingsState)
+    }
 
     AnimatedVisibility(!state.play) {
 		GetPlayersPrefsDialog(
@@ -79,7 +84,7 @@ fun GameScreen(
     }
 
     AnimatedVisibility(state.showRestartButton) {
-		RestartButton(viewModel::onEvent)
+		RestartButton(viewModel::onEvent, state)
 	}
 
     AnimatedVisibility(state.isGameFinished) {

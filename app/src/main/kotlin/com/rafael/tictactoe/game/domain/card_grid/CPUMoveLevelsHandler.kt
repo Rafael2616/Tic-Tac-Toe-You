@@ -42,11 +42,11 @@ fun CPUMoveLevelsHandler(
                 vm.updateIsPlayer1(false)
                 
                 when (level) {
-                    CPUDifficultyLevel.easy -> {
+                    CPUDifficultyLevel.Easy -> {
                         vm.updateCard(easy.first, easy.second, isXFor1)
                         vm.updateIsCardClicked(easy.first, easy.second, true)
                     }
-                    CPUDifficultyLevel.hard -> {
+                    CPUDifficultyLevel.Hard -> {
                         vm.updateCard(hard.first, hard.second, isXFor1)
                         vm.updateIsCardClicked(hard.first, hard.second, true)
                     }
@@ -54,11 +54,11 @@ fun CPUMoveLevelsHandler(
             } else {
                 vm.updateIsPlayer1(true)
                 when (level) {
-                    CPUDifficultyLevel.easy -> {
+                    CPUDifficultyLevel.Easy -> {
                         vm.updateCard(easy.first, easy.second, !isXFor1)
                         vm.updateIsCardClicked(easy.first, easy.second, true)
                     }
-                    CPUDifficultyLevel.hard -> {
+                    CPUDifficultyLevel.Hard -> {
                         vm.updateCard(hard.first, hard.second, !isXFor1)
                         vm.updateIsCardClicked(hard.first, hard.second, true)
                     }

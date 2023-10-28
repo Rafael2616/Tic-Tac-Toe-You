@@ -4,7 +4,6 @@ import com.rafael.tictactoe.game.domain.model.GameState
 
 fun easyModeCPUMove(state: GameState): Pair<Int, Int> {
     val isCardClicked = state.isCardClicked
-    val isGameFinished = state.isGameFinished
     var firstPosition = (0 until isCardClicked[0].size).random()
     var secondPosition = (0 until isCardClicked[1].size).random()
 

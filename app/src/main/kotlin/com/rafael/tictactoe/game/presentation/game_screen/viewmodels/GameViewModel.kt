@@ -7,7 +7,7 @@ import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.game.domain.audio.CardGridSound
 import com.rafael.tictactoe.game.domain.audio.GotOldSound
 import com.rafael.tictactoe.game.domain.audio.WinnerSound
-import com.rafael.tictactoe.game.domain.card_grid.CardGridClickHandler
+import com.rafael.tictactoe.game.domain.card_grid.cardGridClickHandler
 import com.rafael.tictactoe.game.domain.card_grid.CPUMoveLevelsHandler
 import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameState
@@ -83,7 +83,7 @@ class GameViewModel @Inject constructor(
             }
             is GameEvent.ClickOnCardGrid -> {
                 _state.update { it.copy(isExpandButtonShown = false) }
-                CardGridClickHandler(
+                cardGridClickHandler(
                     state.value,
                     this::onEvent,
                     this@GameViewModel,
@@ -92,7 +92,7 @@ class GameViewModel @Inject constructor(
                 )
                 execCardGridSound()
             }
-            GameEvent.ExecEasyModeCPUCardClick -> {
+            GameEvent.ExecCPUMove -> {
                 CPUMoveLevelsHandler(this, state.value)
             }
             GameEvent.ResetVictoryCounter -> {
@@ -150,8 +150,10 @@ class GameViewModel @Inject constructor(
                 _state.update { it.copy(isWinSoundPlaying = event.value )}
             }
             is GameEvent.SelectCPUDifficultyMode -> {
-                _state.update { it.copy(cpuDifficultyLevel = event.mode )}
-                _state.update { it.copy(selectedDifficultyMode = event.selectedMode)}
+                _state.update { it.copy(cpuDifficultyLevel = event.level )}
+                _state.update { it.copy(selectedDifficultyMode = event.selectedLevel )}
+                _state.update { it.copy(difficultyLevelName = event.name )}
+                _state.update { it.copy(difficultyLevelIcon = event.icon )}
             }
         }
     }
