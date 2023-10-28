@@ -72,6 +72,7 @@ import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.presentation.utils.draws.drawCircleinDialog
 import com.rafael.tictactoe.game.presentation.utils.draws.drawXinDialog
+import com.rafael.tictactoe.settings.domain.enums.Colors
 import com.rafael.tictactoe.settings.domain.enums.Customization
 import com.rafael.tictactoe.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.domain.model.SettingsState
@@ -402,7 +403,7 @@ fun GetPlayersPrefsDialog(
                                                 },
                                                 tint = when (level) {
                                                     0 -> if (isDarkThemeOn) Color.Green else Color(0xFF299961)
-                                                    1 -> Color.Yellow
+                                                    1 -> if (isDarkThemeOn) Color.Yellow else Colors.get().orange
                                                     2 -> Color.Red
                                                     else -> Color.Red
                                                 },

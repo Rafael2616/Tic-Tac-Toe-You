@@ -12,37 +12,52 @@ fun RestartGame(
     val isXFor1 = state.isXFor1
     val isCPUMode = state.isCPUMode
     val isCPUPlayer1 = state.isCPUPlayer1
+    val winner = state.winner
+    val isPlayer1 = state.isPlayer1
 
     /*
      *Defines which player will start next match in PvP Mode
      *based on who was the winner in the previous match
      */
-    if (is1Win) {
+    if (winner && is1Win) {
         vm.updateIsPlayer1(true)
     } else {
         vm.updateIsPlayer1(false)
     }
-    
+
+    if (!winner && !isPlayer1) {
+        vm.updateIsPlayer1(true)
+    }
+
     /*
      *Defines which image will be showed in when next match starts
      *based on image of winner of previous match
      */
-    if (is1Win && isXFor1) {
-        vm.updateIsXImage(true)
-    } else if (is1Win && !isXFor1){
-        vm.updateIsXImage(false)
-    } else if (!is1Win && isXFor1) {
-        vm.updateIsXImage(false)
-    } else {
-        vm.updateIsXImage(true)
+    if (winner) {
+        if (is1Win && isXFor1) {
+            vm.updateIsXImage(true)
+        } else if (is1Win && !isXFor1){
+            vm.updateIsXImage(false)
+        } else if (!is1Win && isXFor1) {
+            vm.updateIsXImage(false)
+        } else {
+            vm.updateIsXImage(true)
+        }
     }
 
+    if (!winner) {
+        if (isXFor1) {
+            vm.updateIsXImage(true)
+        } else {
+            vm.updateIsXImage(false)
+        }
+    }
     /*
      *Defines which player will start next match in CPU Mode, 
      *considering the possibility of the player being the CPU player,
      *based on who was the winner in the previous match
      */       
-    if (isCPUMode) {
+    if (isCPUMode && winner) {
         if (is1Win && isCPUPlayer1) {
             vm.updateIsCPU(true)
         } else if (is1Win && !isCPUPlayer1) {
@@ -54,6 +69,14 @@ fun RestartGame(
         }
     }
 
+    if (isCPUMode && !winner) {
+        if (isCPUPlayer1) {
+            vm.updateIsCPU(true)
+        } else {
+            vm.updateIsCPU(false)
+        }
+    }
+        
     //Common actions, executed in all cases
     vm.updateWinner(false)
     vm.updateGotOld(false)

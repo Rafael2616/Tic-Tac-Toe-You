@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rafael.tictactoe.game.domain.model.CPUDifficultyLevel
 import com.rafael.tictactoe.game.domain.model.GameState
+import com.rafael.tictactoe.settings.domain.enums.Colors
 import com.rafael.tictactoe.settings.domain.model.SettingsState
 
 @Composable
@@ -78,7 +79,7 @@ fun DifficultyLevelIndicator(
                         imageVector = state.difficultyLevelIcon,
                         tint = when (level) {
                             CPUDifficultyLevel.Easy -> if (settingsState.isDarkThemeOn) Color.Green else Color(0xFF299961)
-                            CPUDifficultyLevel.Medium -> Color.Yellow
+                            CPUDifficultyLevel.Medium -> if (settingsState.isDarkThemeOn) Color.Yellow else Colors.get().orange
                             CPUDifficultyLevel.Hard -> Color.Red
                         },
                         contentDescription = "Icon",
