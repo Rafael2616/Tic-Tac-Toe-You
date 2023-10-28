@@ -364,10 +364,19 @@ fun hardModeCPUMove(state: GameState): Pair<Int, Int> {
         }
     }
 
-    // Choose an side, if is not clicked yet
+    //Choose an side, if is not clicked yet
     val side = sides.random()
     if (!isClicked[side.first][side.second]) {
         return side
+    }
+
+    //Returns any value if all strategies above fail
+    for (i in 0 until 3) {
+        for (j in 0 until 3) {
+            if (!isClicked[i][j]) {
+                return Pair(i, j)
+            }
+        }
     }
 
    //Shoudn't reach here
