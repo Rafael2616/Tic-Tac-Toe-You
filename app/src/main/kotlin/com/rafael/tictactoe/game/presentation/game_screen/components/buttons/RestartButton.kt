@@ -47,7 +47,7 @@ fun RestartButton(
     ) {
         Box(
             modifier = Modifier
-                .padding(top = if (isCPUMode) 70.dp else 55.dp, end = if (isCPUMode) 45.dp else 30.dp)
+                .padding(top = if (isCPUMode) 70.dp else 55.dp, end = if (isCPUMode) 40.dp else 30.dp)
                 .fillMaxWidth(if (isInLandscape) 0.46f else 1f),
             contentAlignment = Alignment.TopEnd
         ) {
