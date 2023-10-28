@@ -27,6 +27,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.SentimentDissatisfied
+import androidx.compose.material.icons.filled.SentimentNeutral
 import androidx.compose.material.icons.filled.SentimentSatisfied
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -38,6 +39,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -101,8 +103,8 @@ fun GetPlayersPrefsDialog(
     val customTypeForP2 = if (isXFor1) Customization.CIRCLECOLOR else Customization.XCOLOR
     val dialogHeight by animateDpAsState(if (isCPUMode) 280.dp else 215.dp)
     val maxLetterLength by rememberSaveable { mutableIntStateOf(10) }
-    val difficultyModesNumber = remember { mutableStateListOf(0,1) }
-    val containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(20.dp)
+    val difficultyModesNumber = remember { mutableStateListOf(0,1,2) }
+    val containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(18.dp)
     val bottomPadding by animateDpAsState(
         if (isKeyboardOpen) {
             WindowInsets.ime.asPaddingValues().calculateBottomPadding() + 8.dp
@@ -275,7 +277,7 @@ fun GetPlayersPrefsDialog(
                     }
                 }
 
-                //Difficulty mode selection
+                //Difficulty level selection
                 if (isCPUMode) {
                     Column(
                         modifier = Modifier
@@ -289,7 +291,7 @@ fun GetPlayersPrefsDialog(
                             color = MaterialTheme.colorScheme.onSurface,
                             textAlign = TextAlign.Center
                         )
-                         Row(
+                        Row(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .height(40.dp)
@@ -297,82 +299,122 @@ fun GetPlayersPrefsDialog(
                             horizontalArrangement = Arrangement.SpaceEvenly,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            difficultyModesNumber.forEach { level ->
-                                Card(
-                                    shape = MaterialTheme.shapes.medium,
-                                    border = BorderStroke(1.5.dp, Color.Gray),
-                                    colors = CardDefaults.cardColors(
-                                        containerColor = containerColor
-                                    ),
-                                    modifier = Modifier
-                                        .width(150.dp)
-                                        .height(40.dp)
-                                        .clip(RoundedCornerShape(26.dp))
-                                        .clickable {
-                                            when (level) {
-                                                0 -> onEvent(GameEvent.SelectCPUDifficultyMode(
-                                                    level = CPUDifficultyLevel.Easy,
-                                                    selectedLevel = 0,
-                                                    icon = Icons.Filled.SentimentSatisfied,
-                                                    name = R.string.mode_easy
-                                                ))
-                                                1 -> onEvent(GameEvent.SelectCPUDifficultyMode(
-                                                    level = CPUDifficultyLevel.Hard,
-                                                    selectedLevel = 1,
-                                                    icon = Icons.Filled.SentimentDissatisfied,
-                                                    name = R.string.mode_hard
-                                                ))
-                                            }
-                                        }
-                                ) {
+                            Card(
+                                shape = MaterialTheme.shapes.medium,
+                                border = BorderStroke(1.dp, Color.Gray),
+                                modifier = Modifier
+                                    .width(370.dp)
+                                    .height(40.dp)
+                                    .clip(RoundedCornerShape(26.dp))
+                            ) {
+                                Row(
+                                modifier = Modifier
+                                    .width(3700.dp)
+                                    .height(40.dp),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                difficultyModesNumber.forEach { level ->
                                     Row(
                                         modifier = Modifier
-                                            .fillMaxWidth()
+                                            .weight(1f)
                                             .height(40.dp)
-                                            .padding(end = 6.dp),
-                                        horizontalArrangement = Arrangement.SpaceBetween,
-                                        verticalAlignment = Alignment.CenterVertically
-                                    ) {
-                                        RadioButton(
-                                            selected = level == selectedDifficultyMode,
-                                            onClick = {
+                                            .clickable {
                                                 when (level) {
                                                     0 -> onEvent(GameEvent.SelectCPUDifficultyMode(
                                                         level = CPUDifficultyLevel.Easy,
                                                         selectedLevel = 0,
                                                         icon = Icons.Filled.SentimentSatisfied,
-                                                        name = R.string.mode_easy
+                                                        name = R.string.level_easy
                                                     ))
                                                     1 -> onEvent(GameEvent.SelectCPUDifficultyMode(
-                                                        level = CPUDifficultyLevel.Hard,
+                                                        level = CPUDifficultyLevel.Medium,
                                                         selectedLevel = 1,
+                                                        icon = Icons.Filled.SentimentNeutral,
+                                                        name = R.string.level_medium
+                                                    ))
+                                                    2 -> onEvent(GameEvent.SelectCPUDifficultyMode(
+                                                        level = CPUDifficultyLevel.Hard,
+                                                        selectedLevel = 2,
                                                         icon = Icons.Filled.SentimentDissatisfied,
-                                                        name = R.string.mode_hard
+                                                        name = R.string.level_hard
                                                     ))
                                                 }
                                             }
-                                        )
-                                        Text(
-                                            textAlign = TextAlign.Center,
-                                            text = when (level) {
-                                                0 -> stringResource(R.string.mode_easy)
-                                                1 -> stringResource(R.string.mode_hard)
-                                                else -> ""
-                                            }
-                                        )
-                                        Icon(
-                                            imageVector = when (level) {
-                                                0 -> Icons.Filled.SentimentSatisfied
-                                                1 -> Icons.Filled.SentimentDissatisfied
-                                                else -> Icons.Filled.SentimentSatisfied
-                                            },
-                                            tint = when (level) {
-                                                0 -> if (isDarkThemeOn) Color.Green else Color(0xFF299961)
-                                                1 -> Color.Red
-                                                else -> Color.Red
-                                            },
-                                            contentDescription = "Icon",
-       		            	             modifier = Modifier.size(33.dp)
+                                            .background(
+                                                 when (level) {
+                                                    0 -> { if (selectedDifficultyMode == 0) {
+                                                        MaterialTheme.colorScheme.onSecondary } else containerColor
+                                                    }
+                                                    1 -> { if (selectedDifficultyMode == 1) {
+                                                        MaterialTheme.colorScheme.onSecondary } else containerColor
+                                                    }
+                                                    2 -> { if (selectedDifficultyMode == 2) {
+                                                        MaterialTheme.colorScheme.onSecondary } else containerColor
+                                                    }
+                                                    else -> containerColor
+                                                }
+                                            ),
+                                            horizontalArrangement = Arrangement.SpaceBetween,
+                                            verticalAlignment = Alignment.CenterVertically
+                                        ) {
+                                            RadioButton(
+                                                selected = level == selectedDifficultyMode,
+                                                onClick = {
+                                                    when (level) {
+                                                        0 -> onEvent(GameEvent.SelectCPUDifficultyMode(
+                                                            level = CPUDifficultyLevel.Easy,
+                                                            selectedLevel = 0,
+                                                            icon = Icons.Filled.SentimentSatisfied,
+                                                            name = R.string.level_easy
+                                                        ))
+                                                        1 -> onEvent(GameEvent.SelectCPUDifficultyMode(
+                                                            level = CPUDifficultyLevel.Medium,
+                                                            selectedLevel = 1,
+                                                            icon = Icons.Filled.SentimentDissatisfied,
+                                                            name = R.string.level_medium
+                                                        ))
+                                                        2 -> onEvent(GameEvent.SelectCPUDifficultyMode(
+                                                            level = CPUDifficultyLevel.Hard,
+                                                            selectedLevel = 2,
+                                                            icon = Icons.Filled.SentimentDissatisfied,
+                                                            name = R.string.level_hard
+                                                        ))
+                                                    }
+                                                }
+                                            )
+                                            Text(
+                                                textAlign = TextAlign.Start,
+                                                style = MaterialTheme.typography.bodyMedium,
+                                                text = when (level) {
+                                                    0 -> stringResource(R.string.level_easy)
+                                                    1 -> stringResource(R.string.level_medium)
+                                                    2 -> stringResource(R.string.level_hard)
+                                                    else -> ""
+                                                }
+                                            )
+                                            Icon(
+                                                imageVector = when (level) {
+                                                    0 -> Icons.Filled.SentimentSatisfied
+                                                    1 -> Icons.Filled.SentimentNeutral
+                                                    2 -> Icons.Filled.SentimentDissatisfied
+                                                    else -> Icons.Filled.SentimentSatisfied
+                                                },
+                                                tint = when (level) {
+                                                    0 -> if (isDarkThemeOn) Color.Green else Color(0xFF299961)
+                                                    1 -> Color.Yellow
+                                                    2 -> Color.Red
+                                                    else -> Color.Red
+                                                },
+                                                contentDescription = "Icon",
+       		            	                 modifier = Modifier
+                                                    .size(32.dp)
+                                                    .padding(end = 3.dp)
+                                            )
+                                        }
+                                        VerticalDivider(
+                                            thickness = 1.5.dp,
+                                            color = Color.Gray
                                         )
                                     }
                                 }

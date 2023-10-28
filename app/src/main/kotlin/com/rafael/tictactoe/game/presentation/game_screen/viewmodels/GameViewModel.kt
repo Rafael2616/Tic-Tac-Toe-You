@@ -7,8 +7,8 @@ import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.game.domain.audio.CardGridSound
 import com.rafael.tictactoe.game.domain.audio.GotOldSound
 import com.rafael.tictactoe.game.domain.audio.WinnerSound
-import com.rafael.tictactoe.game.domain.card_grid.cardGridClickHandler
-import com.rafael.tictactoe.game.domain.card_grid.CPUMoveLevelsHandler
+import com.rafael.tictactoe.game.domain.card_grid.cardGridMovesHandler
+import com.rafael.tictactoe.game.domain.card_grid.cpuMoveLevelsHandler
 import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.domain.restart_game.RestartGame
@@ -77,13 +77,17 @@ class GameViewModel @Inject constructor(
                 }
                 if (isCPUMode && isCPUPlayer1) {
                    _state.update { it.copy(isCPU = true) }
-                   CPUMoveLevelsHandler(this, state.value)
+                   cpuMoveLevelsHandler(
+                       this,
+                       state.value,
+                       this::onEvent
+                   )
                 }
                 settingsVM.execUIClickSound()
             }
             is GameEvent.ClickOnCardGrid -> {
                 _state.update { it.copy(isExpandButtonShown = false) }
-                cardGridClickHandler(
+                cardGridMovesHandler(
                     state.value,
                     this::onEvent,
                     this@GameViewModel,
@@ -93,7 +97,11 @@ class GameViewModel @Inject constructor(
                 execCardGridSound()
             }
             GameEvent.ExecCPUMove -> {
-                CPUMoveLevelsHandler(this, state.value)
+                cpuMoveLevelsHandler(
+                    this,
+                    state.value,
+                    this::onEvent
+                )
             }
             GameEvent.ResetVictoryCounter -> {
                 _state.update { it.copy(
@@ -110,7 +118,11 @@ class GameViewModel @Inject constructor(
                     state.value
                 )
                 if (isCPUMode) {
-                    CPUMoveLevelsHandler(this, state.value)
+                    cpuMoveLevelsHandler(
+                        this,
+                        state.value,
+                        this::onEvent
+                        )
                 }
                 settingsVM.execUIClickSound()
             }
@@ -154,6 +166,10 @@ class GameViewModel @Inject constructor(
                 _state.update { it.copy(selectedDifficultyMode = event.selectedLevel )}
                 _state.update { it.copy(difficultyLevelName = event.name )}
                 _state.update { it.copy(difficultyLevelIcon = event.icon )}
+                settingsVM.execUIClickSound()
+            }
+            is GameEvent.UseEasyLevel -> {
+                _state.update { it.copy(isUsingEasyLevel = event.value )}
             }
         }
     }

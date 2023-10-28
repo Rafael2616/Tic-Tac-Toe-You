@@ -19,6 +19,7 @@ sealed interface GameEvent {
     object ToggleIsXForPlayer1 : GameEvent
     object ExitGame : GameEvent
     object DimissExitDialog : GameEvent
+    data class UseEasyLevel(val value: Boolean) : GameEvent
     data class SelectCPUDifficultyMode(val level: CPUDifficultyLevel, val selectedLevel: Int, val icon: ImageVector, val name: Int) : GameEvent
     data class UpdateIsGotOldSoundPlaying(val value: Boolean) : GameEvent
     data class UpdateIsWinSoundPlaying(val value: Boolean) : GameEvent

@@ -5,7 +5,7 @@ import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
-fun cardGridClickHandler(
+fun cardGridMovesHandler(
     state: GameState,
     onEvent: (GameEvent) -> Unit,
 	vm: GameViewModel,

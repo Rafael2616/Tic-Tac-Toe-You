@@ -30,7 +30,7 @@
     <string name="color_red">Vermelho</string>
     <string name="color_yellow">Amarelo</string>
     <string name="color_green">Verde Claro</string>
-   <string name="color_dark_green">Verde Escuro</string>
+    <string name="color_dark_green">Verde Escuro</string>
     <string name="color_purple">Roxo</string>
     <string name="color_pink">Rosa</string>
     <string name="color_white">Branco</string>
@@ -48,7 +48,8 @@
     <string name="color_circle">Cor do Círculo</string>
     <string name="color_x">Cor do X</string>
     <string name="modes">Modos:</string>
-    <string name="mode_easy">Fácil</string>
-    <string name="mode_hard">Difícil</string>
+    <string name="level_easy">Fácil</string>
+    <string name="level_medium">Médio</string>
+    <string name="level_hard">Difícil</string>
 
 </resources>

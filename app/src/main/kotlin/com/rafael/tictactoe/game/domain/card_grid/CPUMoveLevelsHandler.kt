@@ -2,6 +2,7 @@ package com.rafael.tictactoe.game.domain.card_grid
 
 import com.rafael.tictactoe.game.domain.audio.CardGridSound
 import com.rafael.tictactoe.game.domain.model.CPUDifficultyLevel
+import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -9,9 +10,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-fun CPUMoveLevelsHandler(
+fun cpuMoveLevelsHandler(
     vm: GameViewModel,
-    state: GameState
+    state: GameState,
+    onEvent: (GameEvent) -> Unit
 ) {
     val isCardClicked = state.isCardClicked
     val isCPU = state.isCPU
@@ -23,6 +25,7 @@ fun CPUMoveLevelsHandler(
     val delayTime = if (isTimerOn) 2300L else 570L
     val level = state.cpuDifficultyLevel
     val easy = easyModeCPUMove(state)
+    val medium = mediumModeCPUMove(state, onEvent)
     val hard = hardModeCPUMove(state)
 
     if (isGameFinished) {
@@ -46,6 +49,10 @@ fun CPUMoveLevelsHandler(
                         vm.updateCard(easy.first, easy.second, isXFor1)
                         vm.updateIsCardClicked(easy.first, easy.second, true)
                     }
+                    CPUDifficultyLevel.Medium -> {
+                        vm.updateCard(medium.first, medium.second, isXFor1)
+                        vm.updateIsCardClicked(medium.first, medium.second, true)
+                    }
                     CPUDifficultyLevel.Hard -> {
                         vm.updateCard(hard.first, hard.second, isXFor1)
                         vm.updateIsCardClicked(hard.first, hard.second, true)
@@ -57,6 +64,10 @@ fun CPUMoveLevelsHandler(
                     CPUDifficultyLevel.Easy -> {
                         vm.updateCard(easy.first, easy.second, !isXFor1)
                         vm.updateIsCardClicked(easy.first, easy.second, true)
+                    }
+                    CPUDifficultyLevel.Medium -> {
+                        vm.updateCard(medium.first, medium.second, !isXFor1)
+                        vm.updateIsCardClicked(medium.first, medium.second, true)
                     }
                     CPUDifficultyLevel.Hard -> {
                         vm.updateCard(hard.first, hard.second, !isXFor1)
