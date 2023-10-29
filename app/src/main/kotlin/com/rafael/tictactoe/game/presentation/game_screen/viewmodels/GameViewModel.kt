@@ -37,6 +37,7 @@ class GameViewModel @Inject constructor(
         val localPlayer1  = state.value.localPlayer1
         val isCPUMode = state.value.isCPUMode
         val isCPUPlayer1 = state.value.isCPUPlayer1
+        val hasLastWinningPlayer = state.value.hasLastWinningPlayer
 
         when (event) {
             is GameEvent.GetFirstPlayerName -> {
@@ -117,12 +118,15 @@ class GameViewModel @Inject constructor(
                     this,
                     state.value
                 )
+                if (!hasLastWinningPlayer) {
+                    _state.update{ it.copy(isPlayer1 = true) }
+                }
                 if (isCPUMode) {
                     cpuMoveLevelsHandler(
                         this,
                         state.value,
                         this::onEvent
-                        )
+                    )
                 }
                 settingsVM.execUIClickSound()
             }
@@ -145,31 +149,34 @@ class GameViewModel @Inject constructor(
                 settingsVM.execUIClickSound()
             }
             GameEvent.DimissExitDialog -> {
-                _state.update { it.copy(showExitGameDialog = false )}
+                _state.update { it.copy(showExitGameDialog = false) }
                 settingsVM.execUIClickSound()
             }
             GameEvent.ToggleExitDialog -> {
-                _state.update { it.copy(showExitGameDialog = !it.showExitGameDialog )}
+                _state.update { it.copy(showExitGameDialog = !it.showExitGameDialog) }
             }
             GameEvent.ToggleIsXForPlayer1 -> {
-                _state.update { it.copy(isXFor1 = !it.isXFor1 )}
+                _state.update { it.copy(isXFor1 = !it.isXFor1) }
                 settingsVM.execUIClickSound()
             }
             is GameEvent.UpdateIsGotOldSoundPlaying -> {
-                _state.update { it.copy(isGotOldSoundPlaying = event.value )}
+                _state.update { it.copy(isGotOldSoundPlaying = event.value) }
             }
             is GameEvent.UpdateIsWinSoundPlaying -> {
-                _state.update { it.copy(isWinSoundPlaying = event.value )}
+                _state.update { it.copy(isWinSoundPlaying = event.value) }
             }
             is GameEvent.SelectCPUDifficultyMode -> {
-                _state.update { it.copy(cpuDifficultyLevel = event.level )}
-                _state.update { it.copy(selectedDifficultyMode = event.selectedLevel )}
-                _state.update { it.copy(difficultyLevelName = event.name )}
-                _state.update { it.copy(difficultyLevelIcon = event.icon )}
+                _state.update { it.copy(cpuDifficultyLevel = event.level) }
+                _state.update { it.copy(selectedDifficultyLevel = event.selectedLevel) }
+                _state.update { it.copy(difficultyLevelName = event.name) }
+                _state.update { it.copy(difficultyLevelIcon = event.icon) }
                 settingsVM.execUIClickSound()
             }
             is GameEvent.UseEasyLevel -> {
-                _state.update { it.copy(isUsingEasyLevel = event.value )}
+                _state.update { it.copy(isUsingEasyLevel = event.value) }
+            }
+            is GameEvent.UpdateIsPlayer1 -> {
+                _state.update { it.copy(isPlayer1 = event.value) }
             }
         }
     }
@@ -302,8 +309,12 @@ class GameViewModel @Inject constructor(
         _state.update { it.copy(winningPositionsIndices = emptyList)}
     }
 
-    fun showVictoryCounterReseter(newValue:  Boolean) {
+    fun showVictoryCounterReseter(newValue: Boolean) {
         _state.update { it.copy(showVictoryCounterReseter = newValue)}
+    }
+
+    fun updateLastWinningPlayer(player: Boolean) {
+         _state.update { it.copy(hasLastWinningPlayer = player)}
     }
 
     fun execCardGridSound() {

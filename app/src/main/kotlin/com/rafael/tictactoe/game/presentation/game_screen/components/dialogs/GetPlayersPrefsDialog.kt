@@ -94,7 +94,7 @@ fun GetPlayersPrefsDialog(
     val xColor = settingsState.xColor
     val circleColor = settingsState.circleColor
     val isDarkThemeOn = settingsState.isDarkThemeOn
-    val selectedDifficultyMode = state.selectedDifficultyMode
+    val selectedDifficultyLevel = state.selectedDifficultyLevel
     val isCPUPlayer1 = state.isCPUPlayer1
     val player1Value = if (state.localPlayer1) state.player1Name else state.player2Name
     val player2Value = if (state.localPlayer1) state.player2Name else state.player1Name
@@ -127,7 +127,7 @@ fun GetPlayersPrefsDialog(
         ) {
             Card(
                 shape = MaterialTheme.shapes.large,
-                border = BorderStroke(1.5.dp, Color.Gray),
+                border = BorderStroke(1.25.dp, Color.Gray),
                 colors = CardDefaults.cardColors(
                     containerColor = containerColor
                 ),
@@ -344,13 +344,13 @@ fun GetPlayersPrefsDialog(
                                             }
                                             .background(
                                                  when (level) {
-                                                    0 -> { if (selectedDifficultyMode == 0) {
+                                                    0 -> { if (selectedDifficultyLevel == 0) {
                                                         MaterialTheme.colorScheme.onSecondary } else containerColor
                                                     }
-                                                    1 -> { if (selectedDifficultyMode == 1) {
+                                                    1 -> { if (selectedDifficultyLevel == 1) {
                                                         MaterialTheme.colorScheme.onSecondary } else containerColor
                                                     }
-                                                    2 -> { if (selectedDifficultyMode == 2) {
+                                                    2 -> { if (selectedDifficultyLevel == 2) {
                                                         MaterialTheme.colorScheme.onSecondary } else containerColor
                                                     }
                                                     else -> containerColor
@@ -360,7 +360,7 @@ fun GetPlayersPrefsDialog(
                                             verticalAlignment = Alignment.CenterVertically
                                         ) {
                                             RadioButton(
-                                                selected = level == selectedDifficultyMode,
+                                                selected = level == selectedDifficultyLevel,
                                                 onClick = {
                                                     when (level) {
                                                         0 -> onEvent(GameEvent.SelectCPUDifficultyMode(

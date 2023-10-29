@@ -13,7 +13,8 @@ fun RestartGame(
     val isCPUMode = state.isCPUMode
     val isCPUPlayer1 = state.isCPUPlayer1
     val winner = state.winner
-    val isPlayer1 = state.isPlayer1
+    val hasLastWinningPlayer = state.hasLastWinningPlayer
+    val localPlayer1 = state.localPlayer1
 
     /*
      *Defines which player will start next match in PvP Mode
@@ -25,10 +26,19 @@ fun RestartGame(
         } else {
             vm.updateIsPlayer1(false)
         }
+        vm.updateLastWinningPlayer(true)
     }
 
-    if (!winner && !isPlayer1) {
-        vm.updateIsPlayer1(true)
+    if (!winner) {
+        if (!hasLastWinningPlayer) {
+            vm.updateIsPlayer1(localPlayer1)
+        } else {
+            if (is1Win) {
+                vm.updateIsPlayer1(true)
+            } else {
+                vm.updateIsPlayer1(false)
+            }
+        }
     }
 
     /*
@@ -48,10 +58,14 @@ fun RestartGame(
     }
 
     if (!winner) {
-        if (isXFor1) {
+        if (isXFor1 && localPlayer1) {
             vm.updateIsXImage(true)
-        } else {
+        } else if (isXFor1 && !localPlayer1) {
             vm.updateIsXImage(false)
+        } else if (!isXFor1 && localPlayer1) {
+            vm.updateIsXImage(false)
+        } else {
+            vm.updateIsXImage(true)
         }
     }
 
@@ -90,4 +104,5 @@ fun RestartGame(
     vm.updateIsGotOldSoundPlaying(false)
     vm.resetWinningPositionsIndices(emptyList())
     vm.showRestartButton(false)
+    println("$state")
 }
