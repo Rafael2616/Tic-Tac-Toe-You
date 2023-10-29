@@ -136,7 +136,7 @@ fun GameScreen(
         onDispose{}
     }
     
- //  Text(text = "$state", modifier = Modifier.padding(top = 25.dp))
+//   Text(text = "$state", modifier = Modifier.padding(top = 40.dp))
 
     BackHandler {
         viewModel.onEvent(GameEvent.ToggleExitDialog)

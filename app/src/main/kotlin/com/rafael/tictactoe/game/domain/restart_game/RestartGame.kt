@@ -13,87 +13,45 @@ fun RestartGame(
     val isXFor1 = state.isXFor1
     val isCPUMode = state.isCPUMode
     val isCPUPlayer1 = state.isCPUPlayer1
-    val winner = state.winner
-    val hasLastWinningPlayer = state.hasLastWinningPlayer
-    val localPlayer1 = state.localPlayer1
-    val isPlayer1 = state.isPlayer1
-    var gameMode: GameMode = GameMode.PvP
-    
-    if (isCPUMode) {
-        gameMode = GameMode.VsCPU
-    } else {
-        gameMode = GameMode.PvP
-    }
 
-     /*
+    /*
      *Defines which player will start next match in PvP Mode
      *based on who was the winner in the previous match
      */
+    if (is1Win) {
+        vm.updateIsPlayer1(true)
+    } else {
+        vm.updateIsPlayer1(false)
+    }
+    
+    /*
+     *Defines which image will be showed in when next match starts
+     *based on image of winner of previous match
+     */
+    if (is1Win && isXFor1) {
+        vm.updateIsXImage(true)
+    } else if (is1Win && !isXFor1){
+        vm.updateIsXImage(false)
+    } else if (!is1Win && isXFor1) {
+        vm.updateIsXImage(false)
+    } else {
+        vm.updateIsXImage(true)
+    }
 
-      when (gameMode) {
-         GameMode.PvP -> {
-            if (winner) {
-                if (is1Win) {
-                    vm.updateIsPlayer1(true)
-                } else {
-                    vm.updateIsPlayer1(false)
-                }
-                vm.updateLastWinningPlayer(true)
-            }
-
-            if (!winner) {
-                if (!hasLastWinningPlayer) {
-                    vm.updateIsPlayer1(true)
-                } else {
-                    if (is1Win) {
-                        vm.updateIsPlayer1(true)
-                    } else {
-                        vm.updateIsPlayer1(false)
-                    }
-                }
-            }
-        }
-        GameMode.VsCPU -> {
-            if (winner) {
-                if (is1Win) {
-                    vm.updateIsPlayer1(true)
-                } else {
-                    vm.updateIsPlayer1(false)
-                }
-                 if (is1Win && isCPUPlayer1) {
-                    vm.updateIsCPU(true)
-                } else if (!is1Win && isCPUPlayer1) {
-                    vm.updateIsCPU(false)
-                } else if (is1Win && !isCPUPlayer1) {
-                    vm.updateIsCPU(false)
-                } else {
-                    vm.updateIsCPU(true)
-                }
-            }
-
-            if (!winner) {
-                if (!hasLastWinningPlayer) {
-                    if (isCPUPlayer1) {
-                        vm.updateIsCPU(true)
-                    } else {
-                        vm.updateIsCPU(false)
-                    }
-                    vm.updateIsPlayer1(true)
-                } else {
-                    if (isCPUPlayer1 && isPlayer1) {
-                        vm.updateIsCPU(true)
-                    } else if (!isCPUPlayer1 && !isPlayer1) {
-                        vm.updateIsCPU(true)
-                    } else {
-                        vm.updateIsCPU(false)
-                    }
-                    if (is1Win) {
-                        vm.updateIsPlayer1(true)
-                    } else {
-                        vm.updateIsPlayer1(false)
-                    }
-                }
-            }
+    /*
+     *Defines which player will start next match in CPU Mode, 
+     *considering the possibility of the player being the CPU player,
+     *based on who was the winner in the previous match
+     */       
+    if (isCPUMode) {
+        if (is1Win && isCPUPlayer1) {
+            vm.updateIsCPU(true)
+        } else if (is1Win && !isCPUPlayer1) {
+            vm.updateIsCPU(false)
+        } else if (!is1Win && isCPUPlayer1) {
+            vm.updateIsCPU(false)
+        } else {
+            vm.updateIsCPU(true)
         }
     }
 
@@ -107,5 +65,4 @@ fun RestartGame(
     vm.updateIsGotOldSoundPlaying(false)
     vm.resetWinningPositionsIndices(emptyList())
     vm.showRestartButton(false)
-    println("$state")
 }

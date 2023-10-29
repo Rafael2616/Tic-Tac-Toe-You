@@ -37,7 +37,6 @@ class GameViewModel @Inject constructor(
         val localPlayer1  = state.value.localPlayer1
         val isCPUMode = state.value.isCPUMode
         val isCPUPlayer1 = state.value.isCPUPlayer1
-        val hasLastWinningPlayer = state.value.hasLastWinningPlayer
 
         when (event) {
             is GameEvent.GetFirstPlayerName -> {
@@ -118,9 +117,6 @@ class GameViewModel @Inject constructor(
                     this,
                     state.value
                 )
-                if (!hasLastWinningPlayer) {
-                    _state.update{ it.copy(isPlayer1 = true) }
-                }
                 if (isCPUMode) {
                     cpuMoveLevelsHandler(
                         this,
