@@ -42,13 +42,13 @@ fun cardGridMovesHandler(
 	if (!isCPUMode) {
         if (isPlayer1) {
             // Exec player 1's move
- 	       vm.updateCard(rowIndex, cardIndex, isXImage)
+ 	       vm.updateCard(rowIndex, cardIndex, isXFor1)
 			vm.updateIsCardClicked(rowIndex, cardIndex, true)
             vm.updateIsXImage(!isXImage)
 			vm.updateIsPlayer1(false)
         } else {
             // Exec player 2's move
-            vm.updateCard(rowIndex, cardIndex, isXImage)
+            vm.updateCard(rowIndex, cardIndex, !isXFor1)
             vm.updateIsCardClicked(rowIndex, cardIndex, true)
             vm.updateIsXImage(!isXImage)
             vm.updateIsPlayer1(true)
