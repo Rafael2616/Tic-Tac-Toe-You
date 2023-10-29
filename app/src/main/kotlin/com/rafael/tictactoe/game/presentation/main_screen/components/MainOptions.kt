@@ -15,9 +15,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Memory
-import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.outlined.Memory
+import androidx.compose.material.icons.outlined.PlayArrow
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -87,12 +87,12 @@ fun MainOptions(navController: NavController) {
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                     Icon(
+                    Icon(
                         imageVector = when (index) {
-                            0 -> Icons.Filled.PlayArrow
-                            1 -> Icons.Filled.Memory
-                            2 -> Icons.Filled.Settings
-                            else -> Icons.Filled.Settings
+                            0 -> Icons.Outlined.PlayArrow
+                            1 -> Icons.Outlined.Memory
+                            2 -> Icons.Outlined.Settings
+                            else -> Icons.Outlined.Settings
                         },
                         contentDescription = "Icon",
                         tint = when (index) {

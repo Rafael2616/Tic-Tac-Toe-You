@@ -2,8 +2,8 @@ package com.rafael.tictactoe.game.presentation.game_screen.components.buttons
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.VolumeUp
-import androidx.compose.material.icons.automirrored.filled.VolumeOff
+import androidx.compose.material.icons.automirrored.outlined.VolumeUp
+import androidx.compose.material.icons.automirrored.outlined.VolumeOff
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -19,7 +19,7 @@ fun BackgroundMusicButton(
 ) { 
     BaseButton(
         modifier = Modifier.padding(top = 165.dp, start = 15.dp),
-        btnIcon = if (settingsState.isBackgroundMusicOn) Icons.AutoMirrored.Filled.VolumeUp else Icons.AutoMirrored.Filled.VolumeOff,
+        btnIcon = if (settingsState.isBackgroundMusicOn) Icons.AutoMirrored.Outlined.VolumeUp else Icons.AutoMirrored.Outlined.VolumeOff,
         btnText = R.string.active_music,
         description = "Background Music Button",
         onEvent = { 

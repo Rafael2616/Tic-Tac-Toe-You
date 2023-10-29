@@ -84,11 +84,15 @@ fun GameScreen(
     }
 
     AnimatedVisibility(state.showRestartButton) {
-		RestartButton(viewModel::onEvent, state)
+		RestartButton(
+            viewModel::onEvent,
+            state,
+            settingsState
+        )
 	}
 
     AnimatedVisibility(state.isGameFinished) {
-        PlayAgainButton(viewModel::onEvent)
+        PlayAgainButton(viewModel::onEvent, settingsState)
         AnimatedVisibility(state.showVictoryCounterReseter) {
             VictoryCounterReseterButton(viewModel::onEvent)
         }

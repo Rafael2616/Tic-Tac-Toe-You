@@ -175,9 +175,6 @@ class GameViewModel @Inject constructor(
             is GameEvent.UseEasyLevel -> {
                 _state.update { it.copy(isUsingEasyLevel = event.value) }
             }
-            is GameEvent.UpdateIsPlayer1 -> {
-                _state.update { it.copy(isPlayer1 = event.value) }
-            }
         }
     }
 

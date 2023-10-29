@@ -6,7 +6,6 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -29,6 +28,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.SentimentDissatisfied
 import androidx.compose.material.icons.filled.SentimentNeutral
 import androidx.compose.material.icons.filled.SentimentSatisfied
+import androidx.compose.material.icons.outlined.SwapHoriz
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -186,11 +186,19 @@ fun GetPlayersPrefsDialog(
                                 onEvent(GameEvent.SwitchPlayerPositions)
                            }
                     ) {
-                        Image(
-                            contentDescription = "Switch Player Position",
-                            modifier = Modifier.fillMaxSize(),
-                            painter = painterResource(R.drawable.switch_icon)
-                        )
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier
+                                .fillMaxSize()
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.SwapHoriz,
+                                tint = if (isDarkThemeOn) Color.Cyan else Colors.get().blue,
+                                contentDescription = "Switch Player Position",
+                                modifier = Modifier
+                                    .size(45.dp)
+                            )
+                        }
                     }
                     TextField(
                         value = player2Value,
@@ -255,11 +263,19 @@ fun GetPlayersPrefsDialog(
                                 onEvent(GameEvent.ToggleIsXForPlayer1)
                             }
                     ) {
-                        Image(
-                            contentDescription = "Player Image Switcher",
-                            modifier = Modifier.fillMaxSize(),
-                            painter = painterResource(R.drawable.switch_icon)
-                        )
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier
+                                .fillMaxSize()
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.SwapHoriz,
+                                tint = if (isDarkThemeOn) Color.Cyan else Colors.get().blue,
+                                contentDescription = "Player Image Switcher",
+                                modifier = Modifier
+                                    .size(45.dp)
+                            )
+                        }
                     }
                     Canvas(
                         modifier = canvasModifier
