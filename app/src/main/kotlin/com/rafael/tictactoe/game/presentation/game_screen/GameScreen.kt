@@ -37,11 +37,6 @@ import com.rafael.tictactoe.game.domain.restart_game.RestartButtonLogic
 import com.rafael.tictactoe.settings.presentation.settings_screen.components.ColorSelectionDialog
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
-import androidx.compose.material3.Text
-import androidx.compose.ui.unit.dp
-import androidx.compose.foundation.layout.padding
-import androidx.compose.ui.Modifier
-
 @Composable
 fun GameScreen(
     navController: NavController,
@@ -135,8 +130,6 @@ fun GameScreen(
         }
         onDispose{}
     }
-    
-//   Text(text = "$state", modifier = Modifier.padding(top = 40.dp))
 
     BackHandler {
         viewModel.onEvent(GameEvent.ToggleExitDialog)

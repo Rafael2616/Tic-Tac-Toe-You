@@ -63,5 +63,6 @@ fun WinnerChecker(
         vm.showVictoryCounterReseter(true)
         VictoryCounterUpdater(vm, state)
         vm.execWinnerSound()
+        vm.updateLastWinningPlayer(true)
     }
 }
