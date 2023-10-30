@@ -80,12 +80,10 @@ fun RestartGame(
             if (winner) {
                  if (is1Win && isCPUPlayer1) {
                     vm.updateIsCPU(true)
-                } else if (!is1Win && isCPUPlayer1) {
-                    vm.updateIsCPU(false)
-                } else if (is1Win && !isCPUPlayer1) {
-                    vm.updateIsCPU(false)
-                } else {
+                } else if (!is1Win && !isCPUPlayer1) {
                     vm.updateIsCPU(true)
+                } else {
+                    vm.updateIsCPU(false)
                 }
             }
 
