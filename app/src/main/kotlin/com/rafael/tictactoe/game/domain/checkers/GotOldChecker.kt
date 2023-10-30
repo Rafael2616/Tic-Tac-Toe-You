@@ -14,22 +14,20 @@ fun GotOldChecker(
     state: GameState
 ) {
     val isCardClicked = state.isCardClicked
-    val winner = state.winner
+    val hasWinner = state.hasWinner
     val player1Wins = state.player1Wins
     val player2Wins = state.player2Wins
     val isCounterReset by remember {
         derivedStateOf { player1Wins + player2Wins }
     }
 
-	if ((isCardClicked.flatten().all { it }) && (!winner)) {
+	if ((isCardClicked.flatten().all { it }) && (!hasWinner)) {
 		vm.updateGotOld(true)
     } else {
 		vm.updateGotOld(false)
 	}
 
-    val hasGotOld = state.gotOld
-
-    if (hasGotOld && !winner) {
+    if (state.gotOld && !hasWinner) {
         vm.updateIsGameFinished(true)
         vm.execGotOldSound()
         if (isCounterReset > 0) {

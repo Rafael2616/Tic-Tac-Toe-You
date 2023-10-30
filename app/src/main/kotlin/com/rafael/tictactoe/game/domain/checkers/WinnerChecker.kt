@@ -38,7 +38,7 @@ fun WinnerChecker(
 
         if (areAllClicked) {
             if (areAllClickedByPlayer1) {
-                vm.updateWinner(true)
+                vm.updateHasWinner(true)
                 if (isXFor1) {
                     vm.updateIs1Win(true)
                 } else {
@@ -47,7 +47,7 @@ fun WinnerChecker(
                 vm.updateWinningPositionsIndices(index)
             }
             if (areAllClickedByPlayer2) {
-                vm.updateWinner(true)
+                vm.updateHasWinner(true)
                 if (isXFor1) {
                     vm.updateIs1Win(false)
                 } else {
@@ -58,11 +58,11 @@ fun WinnerChecker(
         }
     }
 
-    if (state.winner) {
+    if (state.hasWinner) {
         vm.updateIsGameFinished(true)
         vm.showVictoryCounterReseter(true)
         VictoryCounterUpdater(vm, state)
         vm.execWinnerSound()
-        vm.updateLastWinningPlayer(true)
+        vm.updateHasLastWinningPlayer(true)
     }
 }

@@ -99,7 +99,7 @@ fun GameScreen(
     }
 
     AnimatedVisibility(
-        visible = state.winner,
+        visible = state.hasWinner,
         enter = fadeIn() + scaleIn(),
         exit = fadeOut()
     ) {

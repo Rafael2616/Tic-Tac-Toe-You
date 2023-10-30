@@ -260,8 +260,8 @@ class GameViewModel @Inject constructor(
         _state.update { it.copy(isGotOldSoundPlaying = newValue)}
     }
 
-    fun updateWinner(newValue: Boolean) {
-        _state.update { it.copy(winner = newValue)}
+    fun updateHasWinner(newValue: Boolean) {
+        _state.update { it.copy(hasWinner = newValue)}
     }
 
     fun updateGotOld(newValue: Boolean) {
@@ -306,7 +306,7 @@ class GameViewModel @Inject constructor(
         _state.update { it.copy(showVictoryCounterReseter = newValue)}
     }
 
-    fun updateLastWinningPlayer(player: Boolean) {
+    fun updateHasLastWinningPlayer(player: Boolean) {
          _state.update { it.copy(hasLastWinningPlayer = player)}
     }
 

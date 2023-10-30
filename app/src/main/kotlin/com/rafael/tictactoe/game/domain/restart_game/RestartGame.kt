@@ -13,7 +13,7 @@ fun RestartGame(
     val isXFor1 = state.isXFor1
     val isCPUMode = state.isCPUMode
     val isCPUPlayer1 = state.isCPUPlayer1
-    val winner = state.winner
+    val hasWinner = state.hasWinner
     val hasLastWinningPlayer = state.hasLastWinningPlayer
     var gameMode: GameMode
 
@@ -27,7 +27,7 @@ fun RestartGame(
      * Defines which image will be showed in when next match
      * based on image of winner of previous match, for eg.
      */
-    if (winner || hasLastWinningPlayer) {
+    if (hasWinner || hasLastWinningPlayer) {
         if (is1Win && isXFor1) {
             vm.updateIsXImage(true)
         } else if (!is1Win && !isXFor1) {
@@ -49,7 +49,7 @@ fun RestartGame(
      * Defines which player will start the new match based on factors such as; 
      * if there have been past winners and who was the last winner
      */
-    if (winner) {
+    if (hasWinner) {
         if (is1Win) {
             vm.updateIsPlayer1(true)
         } else {
@@ -57,7 +57,7 @@ fun RestartGame(
         }
     }
 
-    if (!winner) {
+    if (!hasWinner) {
         if (!hasLastWinningPlayer) {
             vm.updateIsPlayer1(true)
         } else {
@@ -77,7 +77,7 @@ fun RestartGame(
         */
         }
         GameMode.VsCPU -> {
-            if (winner) {
+            if (hasWinner) {
                  if (is1Win && isCPUPlayer1) {
                     vm.updateIsCPU(true)
                 } else if (!is1Win && !isCPUPlayer1) {
@@ -87,7 +87,7 @@ fun RestartGame(
                 }
             }
 
-            if (!winner) {
+            if (!hasWinner) {
                 if (!hasLastWinningPlayer) {
                     if (isCPUPlayer1) {
                         vm.updateIsCPU(true)
@@ -108,7 +108,7 @@ fun RestartGame(
     }
 
     //Others common actions, executed in all cases
-    vm.updateWinner(false)
+    vm.updateHasWinner(false)
     vm.updateGotOld(false)
     vm.updateIsGameFinished(false)
     vm.updateAllIsCardClicked(allFalse)

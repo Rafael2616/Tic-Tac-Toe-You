@@ -194,7 +194,7 @@ fun GetPlayersPrefsDialog(
                             Icon(
                                 imageVector = Icons.Outlined.SwapHoriz,
                                 tint = if (isDarkThemeOn) Color.Cyan else Colors.get().blue,
-                                contentDescription = "Switch Player Position",
+                                contentDescription = "Player Position Switch",
                                 modifier = Modifier
                                     .size(45.dp)
                             )
@@ -271,7 +271,7 @@ fun GetPlayersPrefsDialog(
                             Icon(
                                 imageVector = Icons.Outlined.SwapHoriz,
                                 tint = if (isDarkThemeOn) Color.Cyan else Colors.get().blue,
-                                contentDescription = "Player Image Switcher",
+                                contentDescription = "Player Icon Switch",
                                 modifier = Modifier
                                     .size(45.dp)
                             )

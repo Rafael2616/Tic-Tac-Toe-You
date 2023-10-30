@@ -18,7 +18,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun ToastNameHandler(state: GameState) {
     val vm = hiltViewModel<GameViewModel>()
-	val winner = state.winner
+	val hasWinner = state.hasWinner
     val gotOld = state.gotOld
     val play = state.play
     val player1Name = state.player1Name
@@ -44,7 +44,7 @@ fun ToastNameHandler(state: GameState) {
         currentGamePhase = CurrentPlayerName.CounterAfterGameStarts
     } else if (play && !isTimerOn && !isGameFinished) {
         currentGamePhase = CurrentPlayerName.NameForGameInProgress
-    } else if (winner) {
+    } else if (hasWinner) {
         currentGamePhase = CurrentPlayerName.NameWhenThereWinner
     } else if (gotOld) {
         currentGamePhase = CurrentPlayerName.NameWhenGotOld

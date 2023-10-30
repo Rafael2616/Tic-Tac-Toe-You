@@ -26,7 +26,7 @@ fun ToastImageHandler(
     val play = state.play
     val isXFor1 = state.isXFor1
     val is1Win = state.is1Win
-    val winner = state.winner
+    val hasWinner = state.hasWinner
     val isXImage = state.isXImage
 
     Canvas(
@@ -39,12 +39,12 @@ fun ToastImageHandler(
     	}
 
         //Image for case of game is on going
-        if (play && !winner) {
+        if (play && !hasWinner) {
             if (isXImage) drawXinToast(xColor) else drawCircleinToast(circleColor)
         }
 
         //Image for case of has winner   
-        if (winner) {
+        if (hasWinner) {
             if (is1Win && isXFor1) {
                 drawXinToast(xColor)
             } else if (is1Win && !isXFor1) { 

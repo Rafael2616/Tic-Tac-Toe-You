@@ -63,7 +63,7 @@ fun GameStateToast(
                     ToastImageHandler(state, settingsState)
                 }
             }
-            if (state.winner) {
+            if (state.hasWinner) {
                 Spacer(modifier = Modifier.width(5.dp))
                 Text(
                     text = stringResource(R.string.winner),

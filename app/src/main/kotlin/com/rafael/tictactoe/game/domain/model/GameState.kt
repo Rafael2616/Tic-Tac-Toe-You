@@ -27,7 +27,7 @@ data class GameState(
 	val showRestartButton: Boolean = false,
 	val isWinSoundPlaying: Boolean = false,
 	val isGotOldSoundPlaying: Boolean = false,
-	val winner: Boolean = false,
+	val hasWinner: Boolean = false,
 	val gotOld: Boolean = false,
 	val isGameFinished: Boolean = false,
 	val showPlayer1Name: String = "",
