@@ -15,7 +15,6 @@ fun RestartGame(
     val isCPUPlayer1 = state.isCPUPlayer1
     val winner = state.winner
     val hasLastWinningPlayer = state.hasLastWinningPlayer
-    val isPlayer1 = state.isPlayer1
     var gameMode: GameMode
 
     if (isCPUMode) {
