@@ -7,7 +7,7 @@ import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.game.domain.audio.CardGridSound
 import com.rafael.tictactoe.game.domain.audio.GotOldSound
 import com.rafael.tictactoe.game.domain.audio.WinnerSound
-import com.rafael.tictactoe.game.domain.card_grid.cardGridMovesHandler
+import com.rafael.tictactoe.game.domain.card_grid.boardMovesHandler
 import com.rafael.tictactoe.game.domain.card_grid.cpuMoveLevelsHandler
 import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameMode
@@ -91,9 +91,9 @@ class GameViewModel @Inject constructor(
                 }
                 settingsVM.execUIClickSound()
             }
-            is GameEvent.ClickOnCardGrid -> {
+            is GameEvent.ClickOnGameBoard -> {
                 _state.update { it.copy(isExpandButtonShown = false) }
-                cardGridMovesHandler(
+                boardMovesHandler(
                     state.value,
                     this::onEvent,
                     this@GameViewModel,

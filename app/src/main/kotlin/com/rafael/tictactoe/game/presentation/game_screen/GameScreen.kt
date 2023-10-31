@@ -21,8 +21,8 @@ import com.rafael.tictactoe.game.presentation.game_screen.components.buttons.Sou
 import com.rafael.tictactoe.game.presentation.game_screen.components.buttons.VictoryCounterReseterButton
 import com.rafael.tictactoe.game.presentation.game_screen.components.dialogs.ExitGameDialog
 import com.rafael.tictactoe.game.presentation.game_screen.components.dialogs.GetPlayersPrefsDialog
-import com.rafael.tictactoe.game.presentation.game_screen.components.ui.CardGrid
 import com.rafael.tictactoe.game.presentation.game_screen.components.ui.DifficultyLevelIndicator
+import com.rafael.tictactoe.game.presentation.game_screen.components.ui.GameBoard
 import com.rafael.tictactoe.game.presentation.game_screen.components.ui.GameStateToast
 import com.rafael.tictactoe.game.presentation.game_screen.components.ui.PlayersNamesLayout
 import com.rafael.tictactoe.game.presentation.game_screen.components.ui.VictoryCounter
@@ -52,7 +52,7 @@ fun GameScreen(
 	//Handle when each UI component function will be called
 
     //When GameScreen starts
-    CardGrid(
+    GameBoard(
         viewModel::onEvent,
         state,
         settingsState

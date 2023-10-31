@@ -8,7 +8,7 @@ sealed interface GameEvent {
     data class GetSecondPlayerName(val name: String) : GameEvent
     object SwitchPlayerPositions : GameEvent
     data class StartGame(val player1Value: String, val player2Value: String): GameEvent
-    data class ClickOnCardGrid(val rowIndex: Int, val cardIndex: Int) : GameEvent
+    data class ClickOnGameBoard(val rowIndex: Int, val cardIndex: Int) : GameEvent
     object ExecCPUMove : GameEvent
     object ResetVictoryCounter : GameEvent
     object PlayAgain : GameEvent

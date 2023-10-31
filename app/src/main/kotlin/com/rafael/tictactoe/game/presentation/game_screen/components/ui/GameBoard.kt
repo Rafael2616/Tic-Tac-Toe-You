@@ -31,7 +31,7 @@ import com.rafael.tictactoe.game.presentation.game_screen.components.util.DrawXo
 import com.rafael.tictactoe.settings.domain.model.SettingsState
 
 @Composable
-fun CardGrid(
+fun GameBoard(
     onEvent: (GameEvent) -> Unit,
     state: GameState,
     settingsState: SettingsState
@@ -65,7 +65,7 @@ fun CardGrid(
                             .size(114.dp)
                             .clip(RoundedCornerShape(26.dp))
                             .clickable {
-                                onEvent(GameEvent.ClickOnCardGrid(rowIndex, cardIndex))
+                                onEvent(GameEvent.ClickOnGameBoard(rowIndex, cardIndex))
                             }
                     ) {
                        Box(
