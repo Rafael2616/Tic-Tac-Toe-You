@@ -49,7 +49,7 @@ fun RestartGame(
      * Defines which player will start the new match based on factors such as; 
      * if there have been past winners and who was the last winner
      */
-    if (hasWinner) {
+    if (hasWinner || hasLastWinningPlayer) {
         if (is1Win) {
             vm.updateIsPlayer1(true)
         } else {
@@ -57,16 +57,8 @@ fun RestartGame(
         }
     }
 
-    if (!hasWinner) {
-        if (!hasLastWinningPlayer) {
-            vm.updateIsPlayer1(true)
-        } else {
-            if (is1Win) {
-                vm.updateIsPlayer1(true)
-            } else {
-                vm.updateIsPlayer1(false)
-            }
-        }
+    if (!hasWinner && !hasLastWinningPlayer) {
+        vm.updateIsPlayer1(true)
     }
 
     when (gameMode) {
