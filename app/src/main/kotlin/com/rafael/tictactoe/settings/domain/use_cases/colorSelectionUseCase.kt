@@ -18,12 +18,13 @@ fun colorSelectionUseCase(
             0 -> color.blue
             1 -> color.red
             2 -> color.yellow
-            3 -> color.dark_green
-            4 -> color.light_green
-            5 -> color.purple
-            6 -> color.magenta
-            7 -> color.white
-            8 -> color.cyan
+            3 -> color.burnt_yellow
+            4 -> color.dark_green
+            5 -> color.light_green
+            6 -> color.purple
+            7 -> color.magenta
+            8 -> color.white
+            9 -> color.cyan
             else -> color.transparent
         }
     }

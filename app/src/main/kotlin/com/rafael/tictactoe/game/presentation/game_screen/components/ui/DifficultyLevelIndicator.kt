@@ -79,7 +79,7 @@ fun DifficultyLevelIndicator(
                         imageVector = state.difficultyLevelIcon,
                         tint = when (level) {
                             CPUDifficultyLevel.Easy -> if (settingsState.isDarkThemeOn) Color.Green else Color(0xFF299961)
-                            CPUDifficultyLevel.Medium -> if (settingsState.isDarkThemeOn) Color.Yellow else Colors.get().orange
+                            CPUDifficultyLevel.Medium -> if (settingsState.isDarkThemeOn) Color.Yellow else Colors.get().burnt_yellow
                             CPUDifficultyLevel.Hard -> Color.Red
                         },
                         contentDescription = "Icon",

@@ -419,7 +419,7 @@ fun GetPlayersPrefsDialog(
                                                 },
                                                 tint = when (level) {
                                                     0 -> if (isDarkThemeOn) Color.Green else Color(0xFF299961)
-                                                    1 -> if (isDarkThemeOn) Color.Yellow else Colors.get().orange
+                                                    1 -> if (isDarkThemeOn) Color.Yellow else Colors.get().burnt_yellow
                                                     2 -> Color.Red
                                                     else -> Color.Red
                                                 },

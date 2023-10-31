@@ -35,6 +35,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rafael.tictactoe.R
@@ -49,7 +50,7 @@ fun ColorSelectionDialog(
     onEvent: (SettingsEvent) -> Unit,
     state: SettingsState
 ) {
-    val colorsOptions = remember { mutableStateListOf(0,1,2,3,4,5,6,7,8) }
+    val colorsOptions = remember { mutableStateListOf(0,1,2,3,4,5,6,7,8,9) }
     val type = state.customizationType
     val selectedWinnerLineColor = state.selectedWinnerLineColor
     val selectedCircleColor = state.selectedCircleColor
@@ -112,7 +113,7 @@ fun ColorSelectionDialog(
                                 modifier = Modifier
                                     .height(60.dp)
                                     .fillMaxWidth()
-                                    .padding(10.dp),
+                                    .padding(8.dp),
                                 horizontalArrangement = Arrangement.SpaceBetween,
                                 verticalAlignment = Alignment.CenterVertically,
                             ) {
@@ -141,14 +142,18 @@ fun ColorSelectionDialog(
                                         0 -> stringResource(R.string.color_blue)
                                         1 -> stringResource(R.string.color_red)
                                         2 -> stringResource(R.string.color_yellow)
-                                        3 -> stringResource(R.string.color_dark_green)                                       
-                                        4 -> stringResource(R.string.color_green)
-                                        5 -> stringResource(R.string.color_purple)
-                                        6 -> stringResource(R.string.color_pink)
-                                        7 -> stringResource(R.string.color_white)
-                                        8 -> stringResource(R.string.color_cyan)
+                                        3 -> stringResource(R.string.color_burnt_yellow)
+                                        4 -> stringResource(R.string.color_dark_green)                                       
+                                        5 -> stringResource(R.string.color_green)
+                                        6 -> stringResource(R.string.color_purple)
+                                        7 -> stringResource(R.string.color_pink)
+                                        8 -> stringResource(R.string.color_white)
+                                        9 -> stringResource(R.string.color_cyan)
                                         else -> "undefined_color"
-                                    }
+                                    },
+                                    overflow = TextOverflow.Ellipsis,
+                                    textAlign = TextAlign.Center,
+                                    modifier = Modifier.width(135.dp)
                                 )
                                 Box(
                                     modifier = Modifier
@@ -164,12 +169,13 @@ fun ColorSelectionDialog(
                                                     0 -> colors.blue
                                                     1 -> colors.red
                                                     2 -> colors.yellow
-                                                    3 -> colors.dark_green
-                                                    4 -> colors.light_green
-                                                    5 -> colors.purple
-                                                    6 -> colors.magenta
-                                                    7 -> colors.white
-                                                    8 -> colors.cyan
+                                                    3 -> colors.burnt_yellow
+                                                    4 -> colors.dark_green
+                                                    5 -> colors.light_green
+                                                    6 -> colors.purple
+                                                    7 -> colors.magenta
+                                                    8 -> colors.white
+                                                    9 -> colors.cyan
                                                     else -> colors.transparent
                                                 }
                                             )

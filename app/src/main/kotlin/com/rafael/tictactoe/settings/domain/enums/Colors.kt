@@ -12,8 +12,8 @@ data class Colors(
     val magenta: Color,
     val white: Color,
     val cyan: Color,
-    val transparent: Color,
-    val orange: Color
+    val burnt_yellow: Color,
+    val transparent: Color
 ) {
     companion object {
         fun get(): Colors {
@@ -27,7 +27,7 @@ data class Colors(
                 magenta = Color.Magenta,
                 white = Color.White,
                 cyan = Color.Cyan,
-                orange = Color(0xFFFBBC04),
+                burnt_yellow = Color(0xFFFBBC04),
                 transparent = Color.Transparent
             )   
         }
