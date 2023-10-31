@@ -5,6 +5,7 @@ import androidx.compose.material.icons.filled.SentimentNeutral
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.model.CPUDifficultyLevel
+import com.rafael.tictactoe.game.domain.model.GameMode
 
 data class GameState(
 	val currentPlayerName: String = "",
@@ -34,6 +35,7 @@ data class GameState(
 	val showPlayer2Name: String = "",
 	val isCPU: Boolean = false,
 	val isCPUMode: Boolean = false,
+    val gameMode: GameMode = GameMode.PvP,
 	val cpuDifficultyLevel: CPUDifficultyLevel = CPUDifficultyLevel.Medium,
 	val isCPUPlayer1: Boolean = false,
 	val isUsingEasyLevel: Boolean = false,

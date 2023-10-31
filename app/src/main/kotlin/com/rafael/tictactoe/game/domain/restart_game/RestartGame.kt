@@ -11,17 +11,10 @@ fun RestartGame(
     val allFalse = List(3){List<Boolean>(3) { false }}
     val is1Win = state.is1Win
     val isXFor1 = state.isXFor1
-    val isCPUMode = state.isCPUMode
     val isCPUPlayer1 = state.isCPUPlayer1
     val hasWinner = state.hasWinner
     val hasLastWinningPlayer = state.hasLastWinningPlayer
-    var gameMode: GameMode
-
-    if (isCPUMode) {
-        gameMode = GameMode.VsCPU
-    } else {
-        gameMode = GameMode.PvP
-    }
+    val gameMode = state.gameMode
 
     /*
      * Defines which image will be showed in when next match

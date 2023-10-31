@@ -1,6 +1,5 @@
 package com.rafael.tictactoe.game.domain.card_grid
 
-import com.rafael.tictactoe.game.domain.audio.CardGridSound
 import com.rafael.tictactoe.game.domain.model.CPUDifficultyLevel
 import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameState
@@ -41,38 +40,20 @@ fun cpuMoveLevelsHandler(
             delay(delayTime)
             vm.updateIsXImage(!isXImage)
             vm.updateIsCPU(false)
-            if (isCPUPlayer1) {
-                vm.updateIsPlayer1(false)
-                
-                when (level) {
-                    CPUDifficultyLevel.Easy -> {
-                        vm.updateCard(easy.first, easy.second, isXFor1)
-                        vm.updateIsCardClicked(easy.first, easy.second, true)
-                    }
-                    CPUDifficultyLevel.Medium -> {
-                        vm.updateCard(medium.first, medium.second, isXFor1)
-                        vm.updateIsCardClicked(medium.first, medium.second, true)
-                    }
-                    CPUDifficultyLevel.Hard -> {
-                        vm.updateCard(hard.first, hard.second, isXFor1)
-                        vm.updateIsCardClicked(hard.first, hard.second, true)
-                    }
+            vm.updateIsPlayer1(!isCPUPlayer1)
+
+            when (level) {
+                CPUDifficultyLevel.Easy -> {
+                    vm.updateCard(easy.first, easy.second, isXImage)
+                    vm.updateIsCardClicked(easy.first, easy.second, true)
                 }
-            } else {
-                vm.updateIsPlayer1(true)
-                when (level) {
-                    CPUDifficultyLevel.Easy -> {
-                        vm.updateCard(easy.first, easy.second, !isXFor1)
-                        vm.updateIsCardClicked(easy.first, easy.second, true)
-                    }
-                    CPUDifficultyLevel.Medium -> {
-                        vm.updateCard(medium.first, medium.second, !isXFor1)
-                        vm.updateIsCardClicked(medium.first, medium.second, true)
-                    }
-                    CPUDifficultyLevel.Hard -> {
-                        vm.updateCard(hard.first, hard.second, !isXFor1)
-                        vm.updateIsCardClicked(hard.first, hard.second, true)
-                    }
+                CPUDifficultyLevel.Medium -> {
+                    vm.updateCard(medium.first, medium.second, isXImage)
+                    vm.updateIsCardClicked(medium.first, medium.second, true)
+                }
+                CPUDifficultyLevel.Hard -> {
+                    vm.updateCard(hard.first, hard.second, isXImage)
+                    vm.updateIsCardClicked(hard.first, hard.second, true)
                 }
             }
         }

@@ -1,7 +1,7 @@
 package com.rafael.tictactoe.game.domain.card_grid
 
-import com.rafael.tictactoe.game.domain.audio.CardGridSound
 import com.rafael.tictactoe.game.domain.model.GameEvent
+import com.rafael.tictactoe.game.domain.model.GameMode
 import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
@@ -18,9 +18,8 @@ fun cardGridMovesHandler(
     val isPlayer1 = state.isPlayer1
     val isCPUPlayer1 = state.isCPUPlayer1
     val isTimerOn = state.isTimerOn
-    val isCPUMode = state.isCPUMode
-    val isXFor1 = state.isXFor1
     val isGameFinished = state.isGameFinished
+    val gameMode = state.gameMode
 
     if (isTimerOn) {
         return
@@ -38,48 +37,22 @@ fun cardGridMovesHandler(
         return
     }
 
-    //PvP Mode
-	if (!isCPUMode) {
-        if (isPlayer1) {
-            // Exec player 1's move
- 	       vm.updateCard(rowIndex, cardIndex, isXFor1)
-			vm.updateIsCardClicked(rowIndex, cardIndex, true)
+	when (gameMode) {
+        GameMode.PvP -> {
             vm.updateIsXImage(!isXImage)
-			vm.updateIsPlayer1(false)
-        } else {
-            // Exec player 2's move
-            vm.updateCard(rowIndex, cardIndex, !isXFor1)
-            vm.updateIsCardClicked(rowIndex, cardIndex, true)
-            vm.updateIsXImage(!isXImage)
-            vm.updateIsPlayer1(true)
+     	   vm.updateCard(rowIndex, cardIndex, isXImage)
+	    	vm.updateIsCardClicked(rowIndex, cardIndex, true)
+	    	vm.updateIsPlayer1(!isPlayer1)
         }
-    }
-
-    //Vs CPU Mode
-    if (isCPUMode) {
-        if (isPlayer1) {
-            // Exec player 1's move
-	        vm.updateCard(rowIndex, cardIndex, isXFor1)
-			vm.updateIsCardClicked(rowIndex, cardIndex, true)
+        GameMode.VsCPU -> {
+            // Exec human player move when needed 
             vm.updateIsXImage(!isXImage)
-            vm.updateIsPlayer1(false)
+    	    vm.updateCard(rowIndex, cardIndex, isXImage)
+	    	vm.updateIsCardClicked(rowIndex, cardIndex, true)
+            vm.updateIsPlayer1(!isPlayer1)
 
-            // Calls CPU player's move during player 1's click if needed
-            if (isCPUPlayer1) {
-                vm.updateIsCPU(false)
-            } else {
-                vm.updateIsCPU(true)
-                onEvent(GameEvent.ExecCPUMove)
-            }
-        } else {
-            // Exec player 2's move
-	        vm.updateCard(rowIndex, cardIndex, !isXFor1)
-			vm.updateIsCardClicked(rowIndex, cardIndex, true)
-            vm.updateIsXImage(!isXImage)
-            vm.updateIsPlayer1(true)
-
-            // Calls CPU player's move during player 2's click if needed
-            if (isCPUPlayer1) {
+            // Calls CPU player's move when needed
+            if ((isCPUPlayer1 && !isPlayer1) || (!isCPUPlayer1 && isPlayer1)) {
                 vm.updateIsCPU(true)
                 onEvent(GameEvent.ExecCPUMove)
             } else {

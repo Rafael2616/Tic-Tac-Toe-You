@@ -1,7 +1,6 @@
 package com.rafael.tictactoe.game.domain.checkers
 
 import androidx.compose.runtime.Composable
-import com.rafael.tictactoe.game.domain.audio.WinnerSound
 import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.domain.victory_counter.VictoryCounterUpdater
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel

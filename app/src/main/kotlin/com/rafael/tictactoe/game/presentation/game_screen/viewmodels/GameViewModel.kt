@@ -10,6 +10,7 @@ import com.rafael.tictactoe.game.domain.audio.WinnerSound
 import com.rafael.tictactoe.game.domain.card_grid.cardGridMovesHandler
 import com.rafael.tictactoe.game.domain.card_grid.cpuMoveLevelsHandler
 import com.rafael.tictactoe.game.domain.model.GameEvent
+import com.rafael.tictactoe.game.domain.model.GameMode
 import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.domain.restart_game.RestartGame
 import com.rafael.tictactoe.settings.domain.model.SettingsEvent
@@ -82,6 +83,11 @@ class GameViewModel @Inject constructor(
                        state.value,
                        this::onEvent
                    )
+                }
+                if (isCPUMode) {
+                    _state.update { it.copy(gameMode = GameMode.VsCPU) }
+                } else {
+                    _state.update { it.copy(gameMode = GameMode.PvP) }
                 }
                 settingsVM.execUIClickSound()
             }
