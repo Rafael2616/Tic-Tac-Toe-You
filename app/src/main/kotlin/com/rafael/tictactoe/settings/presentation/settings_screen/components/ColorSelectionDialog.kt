@@ -82,8 +82,8 @@ fun ColorSelectionDialog(
                     style = MaterialTheme.typography.titleMedium.copy(fontSize = 20.sp),
                     color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier
-                    .padding(8.dp)
-                    .padding(start = 10.dp)
+                        .padding(8.dp)
+                        .padding(start = 10.dp)
                 )
                 LazyColumn(
                     modifier = Modifier
@@ -94,20 +94,20 @@ fun ColorSelectionDialog(
                     items(colorsOptions.size) { color ->
                         Box(
                             modifier = Modifier
-                            .height(60.dp)
-                            .fillMaxWidth()
-                            .clickable {
-                                when (type) {
-                                    Customization.WINNERLINECOLOR -> onEvent(SettingsEvent.SelectedWinnerLineColor(color))
-                                    Customization.CIRCLECOLOR ->  onEvent(SettingsEvent.SelectedCircleColor(color))
-                                    Customization.XCOLOR ->  onEvent(SettingsEvent.SelectedXColor(color))
+                                .height(60.dp)
+                                .fillMaxWidth()
+                                .clickable {
+                                    when (type) {
+                                        Customization.WINNERLINECOLOR -> onEvent(SettingsEvent.SelectedWinnerLineColor(color))
+                                        Customization.CIRCLECOLOR ->  onEvent(SettingsEvent.SelectedCircleColor(color))
+                                        Customization.XCOLOR ->  onEvent(SettingsEvent.SelectedXColor(color))
+                                    }
+                                    colorSelectionUseCase(
+                                        type,
+                                        color,
+                                        onEvent
+                                    )
                                 }
-                                colorSelectionUseCase(
-                                    type,
-                                    color,
-                                    onEvent
-                                )
-                            }
                         ) {
                             Row(
                                 modifier = Modifier

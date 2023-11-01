@@ -1,5 +1,6 @@
 package com.rafael.tictactoe.game.domain.game_toast
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -15,8 +16,8 @@ fun ToastImageHandler(
     state: GameState,
     settingsState: SettingsState
 ) {
-    val xColor = settingsState.xColor
-    val circleColor = settingsState.circleColor
+    val xColor by animateColorAsState(settingsState.xColor)
+    val circleColor by animateColorAsState(settingsState.circleColor)
     val play = state.play
     val isXFor1 = state.isXFor1
     val is1Win = state.is1Win

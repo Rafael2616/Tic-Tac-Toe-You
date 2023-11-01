@@ -2,6 +2,7 @@ package com.rafael.tictactoe.settings.presentation.settings_screen.components
 
 import android.content.res.Configuration
 import androidx.annotation.StringRes
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Canvas
@@ -63,9 +64,9 @@ fun SettingsWithIcon(
     @StringRes groupName: Int
 ) {
     val isAboutShown = state.isAboutShown
-    val winnerLineColor = state.winnerLineColor
-    val circleColor = state.circleColor
-    val xColor = state.xColor
+    val winnerLineColor by animateColorAsState(state.winnerLineColor)
+    val circleColor by animateColorAsState(state.circleColor)
+    val xColor by animateColorAsState(state.xColor)
     val componentValidator = ComponentValidator()
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)

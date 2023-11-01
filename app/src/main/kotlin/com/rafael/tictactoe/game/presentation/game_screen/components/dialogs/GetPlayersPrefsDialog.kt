@@ -1,6 +1,7 @@
 package com.rafael.tictactoe.game.presentation.game_screen.components.dialogs
 
 import android.view.ViewTreeObserver
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
@@ -91,8 +92,8 @@ fun GetPlayersPrefsDialog(
     var isKeyboardOpen by rememberSaveable {  mutableStateOf(false) }
     val isXFor1 = state.isXFor1
     val isCPUMode = state.isCPUMode
-    val xColor = settingsState.xColor
-    val circleColor = settingsState.circleColor
+    val xColor by animateColorAsState(settingsState.xColor)
+    val circleColor by animateColorAsState(settingsState.circleColor)
     val isDarkThemeOn = settingsState.isDarkThemeOn
     val selectedDifficultyLevel = state.selectedDifficultyLevel
     val isCPUPlayer1 = state.isCPUPlayer1

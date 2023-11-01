@@ -1,6 +1,7 @@
 package com.rafael.tictactoe.game.presentation.game_screen.components.ui
 
 import android.content.res.Configuration
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,6 +18,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateListOf
@@ -38,8 +40,8 @@ fun VictoryCounter(
     val player1Wins = state.player1Wins
     val player2Wins = state.player2Wins
     val isXFor1 = state.isXFor1
-    val xColor = settingsState.xColor
-    val circleColor = settingsState.circleColor
+    val xColor by animateColorAsState(settingsState.xColor)
+    val circleColor by animateColorAsState(settingsState.circleColor)
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
     val countersSize = remember { mutableStateListOf(0,1) }
