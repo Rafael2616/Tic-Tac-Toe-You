@@ -88,7 +88,9 @@ fun VictoryCounter(
                                 .align(Alignment.CenterHorizontally)
                         )
                         Box(
-                            modifier =Modifier.fillMaxWidth(),
+                            modifier =Modifier
+                                .padding(top = 4.dp)
+                                .fillMaxWidth(),
                             contentAlignment = Alignment.Center
                         ) {
                             Canvas(
