@@ -1,14 +1,16 @@
-package com.rafael.tictactoe.game.domain.card_grid
+package com.rafael.tictactoe.game.domain.board.levels
 
+import com.rafael.tictactoe.game.domain.board.levels.easyLevelCPUMove
+import com.rafael.tictactoe.game.domain.board.levels.hardLevelCPUMove
 import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameState
 
-fun mediumModeCPUMove(
+fun mediumLevelCPUMove(
     state: GameState,
     onEvent: (GameEvent) -> Unit
 ): Pair<Int, Int> {
-    val easy = easyModeCPUMove(state)
-    val hard = hardModeCPUMove(state)
+    val easy = easyLevelCPUMove(state)
+    val hard = hardLevelCPUMove(state)
     val isUsingEasyLevel = state.isUsingEasyLevel
 
     //Select which mode will be used in next cpu move

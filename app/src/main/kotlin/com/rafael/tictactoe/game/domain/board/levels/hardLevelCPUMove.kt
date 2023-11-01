@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.domain.card_grid
+package com.rafael.tictactoe.game.domain.board.levels
 
 import com.rafael.tictactoe.game.domain.model.GameState
 
@@ -10,7 +10,7 @@ takes into account which player (real or machine) blocked and
  found the best way to win the game
 */
 
-fun hardModeCPUMove(state: GameState): Pair<Int, Int> {
+fun hardLevelCPUMove(state: GameState): Pair<Int, Int> {
 
     //Represents the clicked state of the card
     val isClicked = state.isCardClicked
