@@ -31,7 +31,7 @@ fun DrawScope.drawCircleinToast(color: Color) = drawCircle(
 
 //Circle Image adjusted for VictoryCounter
 fun DrawScope.drawCircleinCounter(color: Color) = drawCircle(
-    center = Offset(35.5.dp.toPx(), 10.dp.toPx()),
+    center = Offset(7.5.dp.toPx(), 10.dp.toPx()),
     radius = 7.dp,
     style = Stroke(width = 3.dp.toPx()),
     color = color

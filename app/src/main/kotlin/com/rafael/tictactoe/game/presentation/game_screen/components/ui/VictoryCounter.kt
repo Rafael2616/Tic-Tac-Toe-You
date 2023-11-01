@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
@@ -86,22 +87,26 @@ fun VictoryCounter(
                             modifier = Modifier
                                 .align(Alignment.CenterHorizontally)
                         )
-                        Canvas(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .align(Alignment.CenterHorizontally)
+                        Box(
+                            modifier =Modifier.fillMaxWidth(),
+                            contentAlignment = Alignment.Center
                         ) {
-                            if (isXFor1) {
-                                when (counter) {
-                                    0 -> drawXinCounter(xColor)
-                                    1 -> drawCircleinCounter(circleColor)
-                                    else -> Unit
-                                }
-                            } else {
-                                when (counter) {
-                                    0 -> drawCircleinCounter(circleColor)
-                                    1 -> drawXinCounter(xColor)
-                                    else -> Unit
+                            Canvas(
+                                modifier = Modifier
+                                    .size(15.dp)
+                            ) {
+                                if (isXFor1) {
+                                    when (counter) {
+                                        0 -> drawXinCounter(xColor)
+                                        1 -> drawCircleinCounter(circleColor)
+                                        else -> Unit
+                                    }
+                                } else {
+                                    when (counter) {
+                                        0 -> drawCircleinCounter(circleColor)
+                                        1 -> drawXinCounter(xColor)
+                                        else -> Unit
+                                    }
                                 }
                             }
                         }
