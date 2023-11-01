@@ -2,6 +2,9 @@ package com.rafael.tictactoe.game.presentation.game_screen.components.ui
 
 import android.content.res.Configuration
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -69,7 +72,7 @@ fun VictoryCounter(
                             containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp)
                         ),
                         modifier = Modifier
-                            .width(65.dp)
+                            .width(70.dp)
                             .height(55.dp)
                     ) {
                         Text(

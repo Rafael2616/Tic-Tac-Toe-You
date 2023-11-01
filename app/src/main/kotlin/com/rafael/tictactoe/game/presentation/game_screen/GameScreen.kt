@@ -24,7 +24,7 @@ import com.rafael.tictactoe.game.presentation.game_screen.components.dialogs.Get
 import com.rafael.tictactoe.game.presentation.game_screen.components.ui.DifficultyLevelIndicator
 import com.rafael.tictactoe.game.presentation.game_screen.components.ui.GameBoard
 import com.rafael.tictactoe.game.presentation.game_screen.components.ui.GameStateToast
-import com.rafael.tictactoe.game.presentation.game_screen.components.ui.PlayersNamesLayout
+import com.rafael.tictactoe.game.presentation.game_screen.components.ui.PlayersNamesOnCounter
 import com.rafael.tictactoe.game.presentation.game_screen.components.ui.VictoryCounter
 import com.rafael.tictactoe.game.presentation.game_screen.components.ui.WinnerLines
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
@@ -32,7 +32,6 @@ import com.rafael.tictactoe.game.domain.checkers.GotOldChecker
 import com.rafael.tictactoe.game.domain.checkers.WinnerChecker
 import com.rafael.tictactoe.game.domain.game_toast.ToastNameHandler
 import com.rafael.tictactoe.game.domain.model.GameEvent
-import com.rafael.tictactoe.game.domain.players_names.PlayersNamesDisplay
 import com.rafael.tictactoe.game.domain.restart_game.RestartButtonLogic
 import com.rafael.tictactoe.settings.presentation.settings_screen.components.ColorSelectionDialog
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
@@ -44,7 +43,6 @@ fun GameScreen(
 ) {
     val viewModel = hiltViewModel<GameViewModel>()
     val settingsVM = hiltViewModel<SettingsViewModel>()
-    val playerName = PlayersNamesDisplay()
     val update by rememberSaveable { mutableStateOf(true) }
     val state by viewModel.state.collectAsState()
     val settingsState by settingsVM.state.collectAsState()
@@ -59,7 +57,7 @@ fun GameScreen(
     )
     ExpandButton(viewModel::onEvent, state)
     VictoryCounter(state, settingsState)
-    PlayersNamesLayout(state)
+    PlayersNamesOnCounter(state)
     GameStateToast(state, settingsState)
     ToastNameHandler(state)
     
@@ -74,8 +72,6 @@ fun GameScreen(
             state,
             settingsState
         )
-        playerName.firstPlayerName(state)
-        playerName.secondPlayerName(state)
     }
 
     AnimatedVisibility(state.isExpandButtonShown) {

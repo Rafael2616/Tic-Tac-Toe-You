@@ -9,7 +9,7 @@ import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
-class PlayersNamesDisplay() {
+class PlayerNamesOnCounterHandler() {
 
     @Composable
     fun firstPlayerName(state: GameState) {

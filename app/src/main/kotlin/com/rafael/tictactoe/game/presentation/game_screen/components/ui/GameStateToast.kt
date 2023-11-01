@@ -1,6 +1,10 @@
 package com.rafael.tictactoe.game.presentation.game_screen.components.ui
 
 import android.content.res.Configuration
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -34,7 +38,7 @@ fun GameStateToast(
 ) {
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
-
+    
     Box(
         modifier = Modifier
             .fillMaxSize(),
@@ -48,13 +52,20 @@ fun GameStateToast(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
-                text = "${state.currentPlayerName}",
-                style = MaterialTheme.typography.titleMedium,
-                textAlign = TextAlign.Center,
-                color = if (!state.gotOld) MaterialTheme.colorScheme.onSurface
-                else MaterialTheme.colorScheme.error,
-            )
+            AnimatedContent(
+                targetState = state.currentPlayerName,
+                transitionSpec = {
+                    fadeIn() togetherWith fadeOut()
+                }
+            ) { currentPlayerName ->
+                Text(
+                    text = "$currentPlayerName",
+                    style = MaterialTheme.typography.titleMedium,
+                    textAlign = TextAlign.Center,
+                    color = if (!state.gotOld) MaterialTheme.colorScheme.onSurface
+                    else MaterialTheme.colorScheme.error,
+                )
+            }
             if (!state.gotOld) {
                 Spacer(modifier = Modifier.width(5.dp))
                 Box(

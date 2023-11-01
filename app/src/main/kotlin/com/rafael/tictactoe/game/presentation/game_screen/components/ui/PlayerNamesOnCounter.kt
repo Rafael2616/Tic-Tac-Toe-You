@@ -1,6 +1,10 @@
 package com.rafael.tictactoe.game.presentation.game_screen.components.ui
 
 import android.content.res.Configuration
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -22,12 +26,17 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.model.GameState
+import com.rafael.tictactoe.game.domain.players_names.PlayerNamesOnCounterHandler
 
 @Composable
-fun PlayersNamesLayout(state: GameState) {
+fun PlayersNamesOnCounter(state: GameState) {
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
     val playersSize = remember { mutableStateListOf(0,1) }
+    val nameOnCounter = PlayerNamesOnCounterHandler()
+
+    nameOnCounter.firstPlayerName(state)
+    nameOnCounter.secondPlayerName(state)
 
      Box(
         modifier = Modifier
@@ -46,20 +55,26 @@ fun PlayersNamesLayout(state: GameState) {
                 Box(
                     modifier = Modifier
                         .padding(6.dp)
-                        .width(70.dp),
+                        .width(75.dp),
                     contentAlignment = Alignment.Center
                 ) {
-                    Text(
-                        text = when (player) {
-                            0 -> ("${state.showPlayer1Name}")
-                            1 -> ("${state.showPlayer2Name}")
-                            else -> ""
+                    AnimatedContent(
+                        targetState = when (player) {
+                            0 -> state.showPlayer1Name
+                            else -> state.showPlayer2Name
                         },
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurface,
-                        overflow = TextOverflow.Ellipsis,
-                        maxLines = 1
-                    )
+                        transitionSpec = {
+                            fadeIn() togetherWith fadeOut()
+                        }
+                    ) { playerName ->
+                        Text(
+                            text = playerName,
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            overflow = TextOverflow.Ellipsis,
+                            maxLines = 1
+                        )
+                    }
                 }
             }
         }

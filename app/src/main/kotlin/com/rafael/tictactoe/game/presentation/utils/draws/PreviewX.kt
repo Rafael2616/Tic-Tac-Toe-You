@@ -41,10 +41,10 @@ fun DrawScope.drawXinToast(colorX: Color) = drawXPreview(
 //X Image adjusted for VictoryCounter
 fun DrawScope.drawXinCounter(colorX: Color) = drawXPreview(
     strokeWidth = 3.dp,
-    start1 = Offset(x = 27.dp.toPx(), y = 3.dp.toPx()),
-    end1 = Offset(x = 40.dp.toPx(), y = 16.dp.toPx()),
-    start2 = Offset(x = 40.dp.toPx(), y = 3.dp.toPx()),
-    end2 = Offset(x = 27.dp.toPx(), y = 16.dp.toPx()),
+    start1 = Offset(x = 29.dp.toPx(), y = 3.dp.toPx()),
+    end1 = Offset(x = 42.dp.toPx(), y = 16.dp.toPx()),
+    start2 = Offset(x = 42.dp.toPx(), y = 3.dp.toPx()),
+    end2 = Offset(x = 29.dp.toPx(), y = 16.dp.toPx()),
     colorX = colorX
 )
 
