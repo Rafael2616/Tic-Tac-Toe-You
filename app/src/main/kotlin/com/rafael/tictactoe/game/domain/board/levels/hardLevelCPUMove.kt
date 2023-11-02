@@ -3,12 +3,12 @@ package com.rafael.tictactoe.game.domain.board.levels
 import com.rafael.tictactoe.game.domain.model.GameState
 
 /*
-@author Rafael de Moura Nascimento in 2023/10/27
-
-algorothm to execute the best move for "CPU player"
-takes into account which player (real or machine) blocked and
- found the best way to win the game
-*/
+ * @author Rafael de Moura Nascimento in 2023/10/27
+ *
+ * Algorithm to execute the best move for "CPU player"
+ * takes into account which player (real or machine) to block and
+ * found the best way to win the game
+ */
 
 fun hardLevelCPUMove(state: GameState): Pair<Int, Int> {
 

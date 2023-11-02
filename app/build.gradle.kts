@@ -99,7 +99,7 @@ dependencies {
     //Dagger Hilt
     implementation("com.google.dagger:hilt-android:$hilt_version")
     ksp("com.google.dagger:hilt-android-compiler:$hilt_version")
-    implementation("androidx.hilt:hilt-navigation-compose:1.1.0-rc01")
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
     //Jetpack Compose
     implementation(platform("androidx.compose:compose-bom:2023.10.01"))
     implementation("androidx.compose.animation:animation")

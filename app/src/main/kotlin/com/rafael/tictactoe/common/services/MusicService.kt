@@ -25,15 +25,15 @@ class MusicService : Service() {
 		startBackgroundMusic()
     	return START_STICKY
     }
-	
+
 	fun startBackgroundMusic(){
-	    exoPlayer = ExoPlayer.Builder(this).build()
+        exoPlayer = ExoPlayer.Builder(this).build()
 		exoPlayer.addMediaItem(backgroundMusic)
     	exoPlayer.prepare()
 		exoPlayer.setRepeatMode(ExoPlayer.REPEAT_MODE_ALL)
 		exoPlayer.play()
 	}
-	
+
     override fun onDestroy() {
     	exoPlayer.stop()
         exoPlayer.release()

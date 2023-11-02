@@ -11,10 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:hardwareAccelerated="true"
+        android:enableOnBackInvokedCallback="true"
         android:resizeableActivity="false"
         android:theme="@style/AppTheme">
-    
-        <service android:name=".common.services.MusicService" />
+
+        <service android:name=".common.services.MusicService"/>
 
         <activity
             android:name=".TicTacToeActivity"
