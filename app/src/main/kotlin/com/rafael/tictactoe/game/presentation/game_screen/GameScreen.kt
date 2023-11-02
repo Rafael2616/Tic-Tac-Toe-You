@@ -13,11 +13,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.rafael.tictactoe.game.presentation.game_screen.components.buttons.BackgroundMusicButton
-import com.rafael.tictactoe.game.presentation.game_screen.components.buttons.ExpandButton
 import com.rafael.tictactoe.game.presentation.game_screen.components.buttons.PlayAgainButton
 import com.rafael.tictactoe.game.presentation.game_screen.components.buttons.RestartButton
-import com.rafael.tictactoe.game.presentation.game_screen.components.buttons.SoundEffectsButton
+import com.rafael.tictactoe.game.presentation.game_screen.components.buttons.SoundAndMusicButtons
 import com.rafael.tictactoe.game.presentation.game_screen.components.buttons.VictoryCounterReseterButton
 import com.rafael.tictactoe.game.presentation.game_screen.components.dialogs.ExitGameDialog
 import com.rafael.tictactoe.game.presentation.game_screen.components.dialogs.GetPlayersPrefsDialog
@@ -55,7 +53,11 @@ fun GameScreen(
         state,
         settingsState
     )
-    ExpandButton(viewModel::onEvent, state)
+    SoundAndMusicButtons(
+        viewModel::onEvent,
+        state,
+        settingsState
+    )
     VictoryCounter(state, settingsState)
     PlayersNamesOnCounter(state)
     GameStateToast(state, settingsState)
@@ -72,11 +74,6 @@ fun GameScreen(
             state,
             settingsState
         )
-    }
-
-    AnimatedVisibility(state.isExpandButtonShown) {
-        BackgroundMusicButton(viewModel::onEvent, settingsState)
-        SoundEffectsButton(viewModel::onEvent, settingsState)
     }
 
     AnimatedVisibility(state.showRestartButton) {
