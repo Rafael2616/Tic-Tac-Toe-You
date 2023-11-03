@@ -139,6 +139,7 @@ class GameViewModel @Inject constructor(
                 settingsVM.onEvent(SettingsEvent.ToggleIsSoundEffectsOn)
             }
             GameEvent.ToggleExpandButton -> {
+                settingsVM.execUIClickSound()
                 _state.update { it.copy(isExpandButtonShown = !it.isExpandButtonShown)}
             }
             GameEvent.ExitGame -> {

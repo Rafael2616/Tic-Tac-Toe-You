@@ -109,7 +109,7 @@ fun GetPlayersPrefsDialog(
     val containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(18.dp)
     val bottomPadding by animateDpAsState(
         if (isKeyboardOpen) {
-            WindowInsets.ime.asPaddingValues().calculateBottomPadding() + 8.dp
+            WindowInsets.ime.asPaddingValues().calculateBottomPadding().plus(8.dp)
         } else {
             (densityHeight / 2 - dialogHeight / 2)
         }

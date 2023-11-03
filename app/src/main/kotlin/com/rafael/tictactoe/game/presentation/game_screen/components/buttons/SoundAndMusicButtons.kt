@@ -1,6 +1,5 @@
 package com.rafael.tictactoe.game.presentation.game_screen.components.buttons
 
-import android.content.res.Configuration
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -34,7 +33,6 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -49,13 +47,11 @@ fun SoundAndMusicButtons(
     state: GameState,
     settingsState: SettingsState
 ) {
-    val orientation = LocalConfiguration.current.orientation
-    val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
     val buttons = remember { mutableStateListOf(0,1) }
 
     Box(
         modifier = Modifier
-            .fillMaxWidth(if (isInLandscape) 0.48f else 1f)
+            .fillMaxWidth()
             .padding(start = 15.dp, top = 55.dp),
         contentAlignment = Alignment.TopStart
     ) {
