@@ -55,7 +55,7 @@ fun GameStateToast(
             AnimatedContent(
                 targetState = state.currentPlayerName,
                 transitionSpec = {
-                    fadeIn() togetherWith fadeOut()
+                    fadeIn() togetherWith fadeOut()// + slideOutHorizontally()
                 }
             ) { currentPlayerName ->
                 Text(

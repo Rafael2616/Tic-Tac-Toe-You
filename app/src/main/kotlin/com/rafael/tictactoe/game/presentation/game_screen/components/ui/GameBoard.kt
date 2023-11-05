@@ -5,9 +5,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -40,11 +40,13 @@ fun GameBoard(
     val rowItems = remember { listOf(0,1,2) }
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
+    val pPadding = PaddingValues(start = 8.dp, end = 8.dp, bottom = 50.dp)
+    val lPadding = PaddingValues(start = 8.dp, end = 40.dp, bottom = 8.dp)
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(start = 8.dp, end = if (isInLandscape) 50.dp else 8.dp, bottom = if (isInLandscape) 0.dp else 50.dp),
+            .padding(if (isInLandscape) lPadding else pPadding),
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = if (isInLandscape) Alignment.End else Alignment.CenterHorizontally
     ) {
