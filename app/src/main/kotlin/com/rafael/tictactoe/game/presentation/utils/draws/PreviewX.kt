@@ -58,7 +58,7 @@ fun DrawScope.drawXinDialog(colorX: Color) = drawXPreview(
     colorX = colorX
 )
 
-//X Image adjusted for ToastImageHandler
+//X Image adjusted for ColorSelectionDialog
 fun DrawScope.drawXinColorDialog(colorX: Color) = drawXPreview(
     strokeWidth = 4.dp,
     start1 = Offset(x = 0.dp.toPx(), y = 0.dp.toPx()),

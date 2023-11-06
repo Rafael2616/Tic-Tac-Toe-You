@@ -46,7 +46,7 @@ fun DrawScope.drawCircleinDialog(color: Color) = drawCircle(
 )
 
 
-//Cirlce Image adjusted for ToastImageHandler
+//Cirlce Image adjusted for ColorSelectionDialog
 fun DrawScope.drawCircleinColorDialog(color: Color) = drawCircle(
     center = Offset(10.dp.toPx(), 10.dp.toPx()),
     radius = 10.dp,

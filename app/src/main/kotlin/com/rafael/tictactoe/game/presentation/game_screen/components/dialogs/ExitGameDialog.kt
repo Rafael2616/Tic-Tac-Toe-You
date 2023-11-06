@@ -52,12 +52,12 @@ fun ExitGameDialog(
         ) {
             Card(
                 shape = MaterialTheme.shapes.large,
-                border = BorderStroke(1.5.dp, Color.Gray),
+                border = BorderStroke(1.25.dp, Color.Gray),
                 colors = CardDefaults.cardColors(
                     containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(20.dp)
                 ),
                 modifier = Modifier
-                    .width(340.dp)
+                    .width(350.dp)
                     .height(170.dp)
                     .padding(12.dp)
                     .align(Alignment.Center)
@@ -77,8 +77,8 @@ fun ExitGameDialog(
                     )
                     Text(
                         text = stringResource(R.string.leave_game_description),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurface,
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier
                         .padding(top = 8.dp)
                     )

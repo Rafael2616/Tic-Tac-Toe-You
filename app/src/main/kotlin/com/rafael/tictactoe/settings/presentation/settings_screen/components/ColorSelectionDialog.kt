@@ -37,6 +37,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -87,13 +89,17 @@ fun ColorSelectionDialog(
                     .align(Alignment.Center)
             ) {
                 Row(
-                    modifier = Modifier.height(40.dp),
+                    modifier = Modifier.height(40.dp).fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Start
+                    horizontalArrangement = Arrangement.Center
                 ) {
                     Text(
                         text = stringResource(R.string.choose_color),
-                        style = MaterialTheme.typography.titleMedium.copy(fontSize = 20.sp),
+                        style = MaterialTheme.typography.titleMedium.copy(
+                            fontSize = 20.sp,
+                            fontFamily = FontFamily.Serif,
+                            fontWeight = FontWeight.Light
+                        ),
                         color = MaterialTheme.colorScheme.onSurface,
                         modifier = Modifier.padding(start = 16.dp)
                     )
