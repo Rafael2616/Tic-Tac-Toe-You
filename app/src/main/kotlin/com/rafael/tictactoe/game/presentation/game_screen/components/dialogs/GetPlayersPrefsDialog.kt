@@ -242,6 +242,7 @@ fun GetPlayersPrefsDialog(
                         contentAlignment = Alignment.Center,
                         modifier = Modifier
                             .size(40.dp)
+                            .clip(CircleShape)
                             .clickable {
                                 canvasOnClick()
                                 onSettingsEvent(SettingsEvent.SetCustomizationType(customTypeForP1))
@@ -324,6 +325,7 @@ fun GetPlayersPrefsDialog(
                         contentAlignment = Alignment.Center,
                         modifier = Modifier
                             .size(40.dp)
+                            .clip(CircleShape)
                             .clickable {
                                 canvasOnClick()
                                 onSettingsEvent(SettingsEvent.SetCustomizationType(customTypeForP2))

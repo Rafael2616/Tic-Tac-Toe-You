@@ -44,3 +44,12 @@ fun DrawScope.drawCircleinDialog(color: Color) = drawCircle(
     style = Stroke(width = 5.dp.toPx()),
     color = color
 )
+
+
+//Cirlce Image adjusted for ToastImageHandler
+fun DrawScope.drawCircleinColorDialog(color: Color) = drawCircle(
+    center = Offset(10.dp.toPx(), 10.dp.toPx()),
+    radius = 10.dp,
+    style = Stroke(width = 4.dp.toPx()),
+    color = color
+)

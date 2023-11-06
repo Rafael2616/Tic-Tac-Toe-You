@@ -57,3 +57,13 @@ fun DrawScope.drawXinDialog(colorX: Color) = drawXPreview(
     end2 = Offset(x = 3.dp.toPx(), y = 32.dp.toPx()),
     colorX = colorX
 )
+
+//X Image adjusted for ToastImageHandler
+fun DrawScope.drawXinColorDialog(colorX: Color) = drawXPreview(
+    strokeWidth = 4.dp,
+    start1 = Offset(x = 0.dp.toPx(), y = 0.dp.toPx()),
+    end1 = Offset(x = 20.dp.toPx(), y = 20.dp.toPx()),
+    start2 = Offset(x = 20.dp.toPx(), y = 0f),
+    end2 = Offset(x = 0.dp.toPx(), y = 20.dp.toPx()),
+    colorX = colorX
+)
