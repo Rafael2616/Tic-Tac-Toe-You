@@ -39,7 +39,7 @@ fun DrawScope.drawCircleinCounter(color: Color) = drawCircle(
 
 //Circle Image adjusted for GetPlayersPrefsDialog
 fun DrawScope.drawCircleinDialog(color: Color) = drawCircle(
-    center = Offset(75.dp.toPx(), 30.dp.toPx()),
+    center = Offset(18.dp.toPx(), 18.dp.toPx()),
     radius = 15.dp,
     style = Stroke(width = 5.dp.toPx()),
     color = color

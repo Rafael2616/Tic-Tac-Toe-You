@@ -69,7 +69,7 @@ fun PlayAgainButton(
                     contentAlignment = Alignment.Center,
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(bottom = 5.dp)
+                        .padding(bottom = 4.dp)
                 ) {
                     Icon(
                         imageVector = Icons.Filled.Replay,

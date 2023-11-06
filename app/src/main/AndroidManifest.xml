@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <application
         android:name=".TicTacToeApp"
         android:allowBackup="true"
@@ -11,13 +11,13 @@
         android:hardwareAccelerated="true"
         android:resizeableActivity="false"
         android:theme="@style/AppTheme">
-        <service android:name=".common.services.MusicService" />
+        <service android:name=".common.services.MusicService"/>
         <activity
             android:name=".TicTacToeActivity"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
     </application>

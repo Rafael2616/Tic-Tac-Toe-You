@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -29,6 +30,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.SentimentDissatisfied
 import androidx.compose.material.icons.filled.SentimentNeutral
 import androidx.compose.material.icons.filled.SentimentSatisfied
+import androidx.compose.material.icons.outlined.Brush
 import androidx.compose.material.icons.outlined.SwapHoriz
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -225,33 +227,53 @@ fun GetPlayersPrefsDialog(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
                 ) {
                     val canvasOnClick = {
                         keyboardController?.hide()
                         onSettingsEvent(SettingsEvent.ShowColorSelectionDialog(true))
                     }
                     val canvasModifier = Modifier
-                        .weight(1f)
-                        .width(80.dp)
-                        .height(60.dp)
+                        .size(50.dp)
                         .align(Alignment.CenterVertically)
 
-                    Canvas(
-                        modifier = canvasModifier
-                            .then(
-                                Modifier.clickable {
-                                    canvasOnClick()
-                                    onSettingsEvent(SettingsEvent.SetCustomizationType(customTypeForP1))
-                                }
-                            )
+                   Box(
+                        contentAlignment = Alignment.Center,
+                        modifier = Modifier
+                            .size(40.dp)
+                            .clickable {
+                                canvasOnClick()
+                                onSettingsEvent(SettingsEvent.SetCustomizationType(customTypeForP1))
+                            }
                     ) {
-                        if (isXFor1) {
-                            drawXinDialog(xColor)
-                        } else {
-                            drawCircleinDialog(circleColor)
+                        Icon(
+                            imageVector = Icons.Outlined.Brush,
+                            contentDescription = "Color image picker",
+                            modifier = Modifier
+                                .size(25.dp)
+                        )
+                    }
+                    Box(
+                        modifier = canvasModifier,
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Box(
+                            modifier = Modifier.size(35.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Canvas(
+                                modifier = Modifier.fillMaxSize()
+                            ) {
+                                if (isXFor1) {
+                                    drawXinDialog(xColor)
+                                } else {
+                                    drawCircleinDialog(circleColor)
+                                }
+                            }
                         }
                     }
+                    Spacer(modifier = Modifier.width(40.dp))
                     Card(
                         shape = MaterialTheme.shapes.large,
                         colors = CardDefaults.cardColors(
@@ -278,20 +300,41 @@ fun GetPlayersPrefsDialog(
                             )
                         }
                     }
-                    Canvas(
-                        modifier = canvasModifier
-                            .then(
-                                Modifier.clickable {
-                                    canvasOnClick()
-                                    onSettingsEvent(SettingsEvent.SetCustomizationType(customTypeForP2))
-                                }
-                            )
+                    Spacer(modifier = Modifier.width(40.dp))
+                    Box(
+                        modifier = canvasModifier,
+                        contentAlignment = Alignment.Center
                     ) {
-                        if (isXFor1) {
-                            drawCircleinDialog(circleColor)
-                        } else {
-                            drawXinDialog(xColor)
+                        Box(
+                            modifier = Modifier.size(35.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Canvas(
+                                modifier = Modifier.fillMaxSize()
+                            ) {
+                                if (isXFor1) {
+                                    drawCircleinDialog(circleColor)
+                                } else {
+                                    drawXinDialog(xColor)
+                                }
+                            }
                         }
+                    }
+                    Box(
+                        contentAlignment = Alignment.Center,
+                        modifier = Modifier
+                            .size(40.dp)
+                            .clickable {
+                                canvasOnClick()
+                                onSettingsEvent(SettingsEvent.SetCustomizationType(customTypeForP2))
+                            }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Brush,
+                            contentDescription = "Color image picker",
+                            modifier = Modifier
+                                .size(25.dp)
+                        )
                     }
                 }
 
@@ -326,53 +369,42 @@ fun GetPlayersPrefsDialog(
                                     .clip(RoundedCornerShape(26.dp))
                             ) {
                                 Row(
-                                modifier = Modifier
-                                    .width(370.dp)
-                                    .height(40.dp),
-                                horizontalArrangement = Arrangement.SpaceBetween,
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                 CPUDifficultyLevels.forEach { level ->
-                                    Row(
-                                        modifier = Modifier
-                                            .weight(1f)
-                                            .height(40.dp)
-                                            .clickable {
-                                                when (level) {
-                                                    0 -> onEvent(GameEvent.SelectCPUDifficultyMode(
-                                                        level = CPUDifficultyLevel.Easy,
-                                                        selectedLevel = 0,
-                                                        icon = Icons.Filled.SentimentSatisfied,
-                                                        name = R.string.level_easy
-                                                    ))
-                                                    1 -> onEvent(GameEvent.SelectCPUDifficultyMode(
-                                                        level = CPUDifficultyLevel.Medium,
-                                                        selectedLevel = 1,
-                                                        icon = Icons.Filled.SentimentNeutral,
-                                                        name = R.string.level_medium
-                                                    ))
-                                                    2 -> onEvent(GameEvent.SelectCPUDifficultyMode(
-                                                        level = CPUDifficultyLevel.Hard,
-                                                        selectedLevel = 2,
-                                                        icon = Icons.Filled.SentimentDissatisfied,
-                                                        name = R.string.level_hard
-                                                    ))
+                                    modifier = Modifier
+                                        .width(370.dp)
+                                        .height(40.dp),
+                                    horizontalArrangement = Arrangement.SpaceBetween,
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                     CPUDifficultyLevels.forEach { level ->
+                                        Row(
+                                            modifier = Modifier
+                                                .weight(1f)
+                                                .height(40.dp)
+                                                .clickable {
+                                                    when (level) {
+                                                        0 -> onEvent(GameEvent.SelectCPUDifficultyMode(
+                                                            level = CPUDifficultyLevel.Easy,
+                                                            selectedLevel = 0,
+                                                            icon = Icons.Filled.SentimentSatisfied,
+                                                            name = R.string.level_easy
+                                                        ))
+                                                        1 -> onEvent(GameEvent.SelectCPUDifficultyMode(
+                                                            level = CPUDifficultyLevel.Medium,
+                                                            selectedLevel = 1,
+                                                            icon = Icons.Filled.SentimentNeutral,
+                                                            name = R.string.level_medium
+                                                        ))
+                                                        2 -> onEvent(GameEvent.SelectCPUDifficultyMode(
+                                                            level = CPUDifficultyLevel.Hard,
+                                                            selectedLevel = 2,
+                                                            icon = Icons.Filled.SentimentDissatisfied,
+                                                            name = R.string.level_hard
+                                                        ))
+                                                    }
                                                 }
-                                            }
-                                            .background(
-                                                 when (level) {
-                                                    0 -> { if (selectedDifficultyLevel == 0) {
-                                                        MaterialTheme.colorScheme.onSecondary } else containerColor
-                                                    }
-                                                    1 -> { if (selectedDifficultyLevel == 1) {
-                                                        MaterialTheme.colorScheme.onSecondary } else containerColor
-                                                    }
-                                                    2 -> { if (selectedDifficultyLevel == 2) {
-                                                        MaterialTheme.colorScheme.onSecondary } else containerColor
-                                                    }
-                                                    else -> containerColor
-                                                }
-                                            ),
+                                                .background(if (level == selectedDifficultyLevel) {
+                                                    MaterialTheme.colorScheme.onSecondary } else containerColor
+                                                ),
                                             horizontalArrangement = Arrangement.SpaceBetween,
                                             verticalAlignment = Alignment.CenterVertically
                                         ) {
