@@ -7,6 +7,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -56,8 +57,12 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
@@ -87,9 +92,11 @@ fun GetPlayersPrefsDialog(
     settingsState: SettingsState
 ) {
     val view = LocalView.current
+    val focusManager = LocalFocusManager.current
     val keyboardController = LocalSoftwareKeyboardController.current
     val density = LocalDensity.current.density
     val densityHeight = (view.height / density ).dp
+    val focusRequester = remember { FocusRequester() }
     var isKeyboardOpen by rememberSaveable {  mutableStateOf(false) }
     val isXFor1 = state.isXFor1
     val isCPUMode = state.isCPUMode
@@ -120,6 +127,13 @@ fun GetPlayersPrefsDialog(
         color = Color.Black.copy(alpha = 0.3f),
         modifier = Modifier
             .fillMaxSize()
+            .pointerInput(Unit) {
+                detectTapGestures(
+                    onTap = {
+                        focusManager.clearFocus()
+                    }
+                )
+            }
     ) {
         Box(
             modifier = Modifier
@@ -173,7 +187,9 @@ fun GetPlayersPrefsDialog(
                         enabled = textField1State,
                         keyboardOptions = keyboardOptions,
                         colors = textFieldColors,
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier
+                            .weight(1f)
+                            .focusRequester(focusRequester)
                     )
                     Card(
                         shape = MaterialTheme.shapes.large,
@@ -230,6 +246,7 @@ fun GetPlayersPrefsDialog(
                     horizontalArrangement = Arrangement.Center
                 ) {
                     val canvasOnClick = {
+                        focusManager.clearFocus()
                         keyboardController?.hide()
                         onSettingsEvent(SettingsEvent.ShowColorSelectionDialog(true))
                     }
@@ -477,6 +494,7 @@ fun GetPlayersPrefsDialog(
                 //Play button, used to start game
                 Button(
                     onClick = {
+                        focusManager.clearFocus()
                         keyboardController?.hide()
                         onEvent(GameEvent.StartGame(player1Value, player2Value))
                     },
@@ -507,5 +525,12 @@ fun GetPlayersPrefsDialog(
         onDispose { 
             view.viewTreeObserver.removeOnGlobalLayoutListener(listener)
         }
+    }
+
+    //Give focus to firdt plaher text field immediately after game screen load
+    DisposableEffect(Unit) {
+        focusRequester.requestFocus()
+
+        onDispose{}
     }
 }
