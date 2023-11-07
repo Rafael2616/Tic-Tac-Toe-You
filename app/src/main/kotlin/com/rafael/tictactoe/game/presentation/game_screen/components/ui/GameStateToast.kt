@@ -2,8 +2,11 @@ package com.rafael.tictactoe.game.presentation.game_screen.components.ui
 
 import android.content.res.Configuration
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -38,7 +41,13 @@ fun GameStateToast(
 ) {
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
-    
+    val color = if (!state.gotOld) {
+        MaterialTheme.colorScheme.onSurface
+    } else MaterialTheme.colorScheme.error
+    val textColor by animateColorAsState(color)
+    val winnerString = stringResource(R.string.winner)
+    val winnerState = if (state.hasWinner) winnerString else ""
+
     Box(
         modifier = Modifier
             .fillMaxSize(),
@@ -62,12 +71,13 @@ fun GameStateToast(
                     text = "$currentPlayerName",
                     style = MaterialTheme.typography.titleMedium,
                     textAlign = TextAlign.Center,
-                    color = if (!state.gotOld) MaterialTheme.colorScheme.onSurface
-                    else MaterialTheme.colorScheme.error,
+                    color = textColor
                 )
             }
             if (!state.gotOld) {
-                Spacer(modifier = Modifier.width(5.dp))
+                Spacer(
+                    modifier = Modifier.width(5.dp)
+                )
                 Box(
                     modifier = Modifier.size(15.dp)
                 ) {
@@ -75,9 +85,18 @@ fun GameStateToast(
                 }
             }
             if (state.hasWinner) {
-                Spacer(modifier = Modifier.width(5.dp))
+                Spacer(
+                    modifier = Modifier.width(5.dp)
+                )
+            }
+            AnimatedContent(
+                targetState = winnerState,
+                transitionSpec = {
+                    slideInHorizontally() togetherWith slideOutHorizontally()
+                }
+            ) { winnerText ->
                 Text(
-                    text = stringResource(R.string.winner),
+                    text = winnerText,
                     style = MaterialTheme.typography.titleMedium,
                     textAlign = TextAlign.Center,
                     color = if (settingsState.isDarkThemeOn) Color.Green else Color(0xFF229A00)

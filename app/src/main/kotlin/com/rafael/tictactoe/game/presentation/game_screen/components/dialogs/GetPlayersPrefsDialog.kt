@@ -527,7 +527,7 @@ fun GetPlayersPrefsDialog(
         }
     }
 
-    //Give focus to firdt plaher text field immediately after game screen load
+    //Give focus to first player text field immediately after game screen load
     DisposableEffect(Unit) {
         focusRequester.requestFocus()
 

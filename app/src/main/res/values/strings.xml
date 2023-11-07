@@ -6,7 +6,7 @@
     <string name="settings">Settings</string>
     <string name="creator_message">Developed by: Rafael de Moura Nascimento</string>
     <string name="player">Player</string>
-    <string name="winner">WINNER !!!</string>
+    <string name="winner">Winner !!!</string>
     <string name="index_error">index error</string>   
     <string name="play_again">Play again</string>   
     <string name="got_old">Got old :(</string>     
