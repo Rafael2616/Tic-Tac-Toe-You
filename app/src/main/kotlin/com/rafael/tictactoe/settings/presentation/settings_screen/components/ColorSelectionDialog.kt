@@ -49,9 +49,9 @@ import com.rafael.tictactoe.game.presentation.utils.draws.drawXinColorDialog
 import com.rafael.tictactoe.game.presentation.utils.draws.drawWinnerLineinColorDialog
 import com.rafael.tictactoe.settings.domain.enums.Colors
 import com.rafael.tictactoe.settings.domain.enums.Customization
-import com.rafael.tictactoe.settings.domain.use_cases.colorSelectionUseCase
 import com.rafael.tictactoe.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.domain.model.SettingsState
+import com.rafael.tictactoe.settings.domain.use_cases.colorSelectionUseCase
 
 @Composable
 fun ColorSelectionDialog(
@@ -89,7 +89,9 @@ fun ColorSelectionDialog(
                     .align(Alignment.Center)
             ) {
                 Row(
-                    modifier = Modifier.height(40.dp).fillMaxWidth(),
+                    modifier = Modifier
+                        .height(40.dp)
+                        .fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
                 ) {
@@ -101,13 +103,16 @@ fun ColorSelectionDialog(
                             fontWeight = FontWeight.Light
                         ),
                         color = MaterialTheme.colorScheme.onSurface,
-                        modifier = Modifier.padding(start = 16.dp)
+                        modifier = Modifier
+                            .padding(start = 16.dp)
                     )
                     Spacer(
-                        modifier = Modifier.width(15.dp)
+                        modifier = Modifier
+                            .width(15.dp)
                     )
                     Box(
-                        modifier = Modifier.size(40.dp),
+                        modifier = Modifier
+                            .size(40.dp),
                         contentAlignment = Alignment.CenterStart
                     ) {
                         Box(
@@ -117,7 +122,8 @@ fun ColorSelectionDialog(
                             contentAlignment = Alignment.Center
                         ) {
                             Canvas(
-                                modifier = Modifier.fillMaxSize()
+                                modifier = Modifier
+                                    .fillMaxSize()
                             ) {
                                 when (type) {
                                     Customization.XCOLOR -> {
@@ -202,7 +208,8 @@ fun ColorSelectionDialog(
                                     },
                                     overflow = TextOverflow.Ellipsis,
                                     textAlign = TextAlign.Center,
-                                    modifier = Modifier.width(135.dp)
+                                    modifier = Modifier
+                                        .width(135.dp)
                                 )
                                 Box(
                                     modifier = Modifier
