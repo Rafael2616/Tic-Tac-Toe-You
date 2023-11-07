@@ -15,13 +15,13 @@ fun SettingsTextHandler(
 ): String {
     val isAboutShown = state.isAboutShown
 
-   @Composable
+    @Composable
     fun themeCardTextHandler(index: Int): String {
         return when (index) {
             0 -> stringResource(R.string.system_theme)
             1 -> stringResource(R.string.dark_theme)
             2 -> stringResource(R.string.material_you)
-           else -> stringResource(R.string.index_error)
+           else -> "unhedged index"
         } 
     }
     
@@ -30,7 +30,7 @@ fun SettingsTextHandler(
         return when (index) {
             0 -> stringResource(R.string.sound_effects)
             1 -> stringResource(R.string.background_music)
-           else -> stringResource(R.string.index_error)
+           else -> "unhedged index"
         } 
     }
 
@@ -40,7 +40,7 @@ fun SettingsTextHandler(
             0 -> stringResource(R.string.winner_line_color)
             1 -> stringResource(R.string.color_circle)
             2 -> stringResource(R.string.color_x)
-            else -> stringResource(R.string.index_error)
+            else -> "unhedged index"
         }
     }
 
@@ -48,7 +48,7 @@ fun SettingsTextHandler(
     fun otherCardTextHandler(index: Int): String {
         return when (index) {
             0 -> stringResource(id = if (!isAboutShown) R.string.about_app else R.string.creator_message)
-            else -> stringResource(R.string.index_error)
+            else -> "unhedged index"
         }
     }
 

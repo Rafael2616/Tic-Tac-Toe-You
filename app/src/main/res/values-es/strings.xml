@@ -7,7 +7,6 @@
     <string name="creator_message">Desarrollado por: Rafael de Moura Nascimento</string>
     <string name="player">Jugador</string>
     <string name="winner">Ganó !!!</string>
-    <string name="index_error">index error</string>   
     <string name="play_again">Juega de nuevo</string>   
     <string name="got_old">Deu viejo :(</string>     
     <string name="restart">Reiniciar</string>

@@ -113,9 +113,9 @@ fun ToastNameHandler(state: GameState) {
                 if (player1Name.isEmpty()) {
                     vm.updateCurrentPlayerName(emptyPlayerName)
                     vm.updatePlayer1Name(emptyPlayerName)
-               } else {
+                } else {
                     vm.updateCurrentPlayerName(player1Name)
-               }
+                }
             } else {
                 if (player2Name.isEmpty()) {
                     vm.updateCurrentPlayerName(emptyPlayerName)

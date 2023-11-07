@@ -2,16 +2,19 @@ package com.rafael.tictactoe.game.presentation.game_screen.components.ui
 
 import android.content.res.Configuration
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -75,9 +78,13 @@ fun GameStateToast(
                 )
             }
             if (!state.gotOld) {
-                Spacer(
-                    modifier = Modifier.width(5.dp)
-                )
+                Spacer(Modifier.width(6.dp))
+            }
+            AnimatedVisibility(
+                visible = !state.gotOld,
+                enter = scaleIn(),
+                exit = scaleOut()
+            ) {
                 Box(
                     modifier = Modifier.size(15.dp)
                 ) {
@@ -85,9 +92,7 @@ fun GameStateToast(
                 }
             }
             if (state.hasWinner) {
-                Spacer(
-                    modifier = Modifier.width(5.dp)
-                )
+                Spacer(Modifier.width(6.dp))
             }
             AnimatedContent(
                 targetState = winnerState,
