@@ -71,7 +71,7 @@ fun GameStateToast(
                 }
             ) { currentPlayerName ->
                 Text(
-                    text = "$currentPlayerName",
+                    text = currentPlayerName,
                     style = MaterialTheme.typography.titleMedium,
                     textAlign = TextAlign.Center,
                     color = textColor

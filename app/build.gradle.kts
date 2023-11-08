@@ -14,8 +14,8 @@ android {
         applicationId = "com.rafael.tictactoe"
         minSdk = 26
         targetSdk = 34
-        versionCode = 3
-        versionName = "1.3.0"
+        versionCode = 4
+        versionName = "1.3.1"
         
         buildConfigField("Boolean", "ROOM_USE_INCREMENTAL_COMPILATION", "true")
     }
