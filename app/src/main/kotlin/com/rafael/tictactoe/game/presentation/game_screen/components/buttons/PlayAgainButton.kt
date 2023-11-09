@@ -51,7 +51,7 @@ fun PlayAgainButton(
             modifier = Modifier
                 .fillMaxWidth(if (isInLandscape) 0.48f else 1f)
                 .padding(top = 210.dp)
-        ) {
+        ) { 
             Card(
                 shape = MaterialTheme.shapes.large,
                 colors = CardDefaults.cardColors(

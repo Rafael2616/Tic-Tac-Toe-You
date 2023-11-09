@@ -28,9 +28,7 @@ import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -50,18 +48,17 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.Set
 @ExperimentalMaterial3Api
 fun MainOptions(navController: NavController) {
     val settingsVM = hiltViewModel<SettingsViewModel>()
-    var options by rememberSaveable { mutableStateOf(List<Boolean>(3) { false }) }
     val orientation = LocalConfiguration.current.orientation
     val state by settingsVM.state.collectAsState()
 
     Column(
         modifier = Modifier
-        .fillMaxSize()
-        .padding(top = if (orientation == Configuration.ORIENTATION_LANDSCAPE) 45.dp else 0.dp),
+            .fillMaxSize()
+            .padding(top = if (orientation == Configuration.ORIENTATION_LANDSCAPE) 45.dp else 0.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        options.forEachIndexed { index, _ ->
+        Screen.values().forEachIndexed { index, screen ->
             Card(
                 shape = MaterialTheme.shapes.large,
                 colors = CardDefaults.cardColors(
@@ -73,10 +70,10 @@ fun MainOptions(navController: NavController) {
                     .clip(RoundedCornerShape(36.dp))
                     .clickable {
                         settingsVM.execUIClickSound()
-                        when (index) {
-                            0 -> navController.navigate(Destinations.Game.screen + "/false")
-                            1 -> navController.navigate(Destinations.Game.screen + "/true")
-                            2 -> navController.navigate(Destinations.Settings.screen)
+                        when (screen) {
+                            Screen.PVP_MODE -> navController.navigate(Destinations.Game.screen + "/false")
+                            Screen.CPU_MODE -> navController.navigate(Destinations.Game.screen + "/true")
+                            Screen.SETTINGS -> navController.navigate(Destinations.Settings.screen)
                         }
                     }
             ) {
@@ -88,17 +85,16 @@ fun MainOptions(navController: NavController) {
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Icon(
-                        imageVector = when (index) {
-                            0 -> Icons.Outlined.PlayArrow
-                            1 -> Icons.Outlined.Memory
-                            2 -> Icons.Outlined.Settings
-                            else -> Icons.Outlined.Settings
+                        imageVector = when (screen) {
+                            Screen.PVP_MODE -> Icons.Outlined.PlayArrow
+                            Screen.CPU_MODE -> Icons.Outlined.Memory
+                            Screen.SETTINGS -> Icons.Outlined.Settings
                         },
                         contentDescription = "Icon",
-                        tint = when (index) {
-                            0 -> if (state.isDarkThemeOn) Color.Green else Color(0xFF299961)
-                            1 -> Color.Red
-                            else -> MaterialTheme.colorScheme.onSurface
+                        tint = when (screen) {
+                            Screen.PVP_MODE -> if (state.isDarkThemeOn) Color.Green else Color(0xFF299961)
+                            Screen.CPU_MODE -> Color.Red
+                            Screen.SETTINGS -> MaterialTheme.colorScheme.onSurface
                         },
        		    	 modifier = Modifier
                             .size(42.dp)
@@ -111,18 +107,23 @@ fun MainOptions(navController: NavController) {
                         overflow = TextOverflow.Ellipsis,
                         textAlign = TextAlign.Center,
                         softWrap = true,
-                        text = when (index) {
-                            0 -> stringResource(id = R.string.play)
-                            1 -> stringResource(id = R.string.vs_cpu)
-                            2 -> stringResource(id = R.string.settings)
-                            else -> "index error"
+                        text = when (screen) {
+                            Screen.PVP_MODE -> stringResource(R.string.play)
+                            Screen.CPU_MODE -> stringResource(R.string.vs_cpu)
+                            Screen.SETTINGS -> stringResource(R.string.settings)
                         }
                     )
                 }
             }
-            if (index <= options.size - 1) {
+            if (index <= Screen.values().size - 1) {
                 Spacer(modifier = Modifier.height(18.dp))
             }
         }
     }
+}
+
+enum class Screen {
+    PVP_MODE,
+    CPU_MODE,
+    SETTINGS
 }

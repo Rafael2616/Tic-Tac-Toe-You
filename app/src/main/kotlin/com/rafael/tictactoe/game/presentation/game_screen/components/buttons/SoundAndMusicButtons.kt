@@ -27,9 +27,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -47,8 +44,6 @@ fun SoundAndMusicButtons(
     state: GameState,
     settingsState: SettingsState
 ) {
-    val buttons = remember { mutableStateListOf(0,1) }
-
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -77,8 +72,8 @@ fun SoundAndMusicButtons(
                 )
             }
             if (state.isExpandButtonShown) {
-                Spacer(modifier = Modifier.height(3.dp))
-                buttons.forEach { button ->
+                Spacer(Modifier.height(3.dp))
+                Buttons.values().forEachIndexed { _ , button ->
                     Card(
                         shape = MaterialTheme.shapes.medium,
                         colors = CardDefaults.cardColors(
@@ -89,8 +84,8 @@ fun SoundAndMusicButtons(
                             .clip(CircleShape)
                             .clickable {
                                 when (button) {
-                                    0 -> onEvent(GameEvent.ToggleSoundEffectsButton)
-                                    else -> onEvent(GameEvent.ToggleBgMusicButton)
+                                    Buttons.SOUND_EFFECTS -> onEvent(GameEvent.ToggleSoundEffectsButton)
+                                    Buttons.BG_MUSIC -> onEvent(GameEvent.ToggleBgMusicButton)
                                 }
                             }
                     ) {
@@ -100,12 +95,12 @@ fun SoundAndMusicButtons(
                         ) {
                             Icon(
                                 imageVector = when (button) {
-                                    0 -> if (settingsState.isSoundEffectsOn) Icons.Outlined.MusicNote else Icons.Outlined.MusicOff
-                                    else -> if (settingsState.isBackgroundMusicOn) Icons.AutoMirrored.Outlined.VolumeUp else Icons.AutoMirrored.Outlined.VolumeOff
+                                    Buttons.SOUND_EFFECTS -> if (settingsState.isSoundEffectsOn) Icons.Outlined.MusicNote else Icons.Outlined.MusicOff
+                                    Buttons.BG_MUSIC -> if (settingsState.isBackgroundMusicOn) Icons.AutoMirrored.Outlined.VolumeUp else Icons.AutoMirrored.Outlined.VolumeOff
                                 },
                                 contentDescription = when (button) {
-                                    0 -> "Sound Effects Button"
-                                    else ->  "Background Music Button"
+                                    Buttons.SOUND_EFFECTS -> "Sound Effects Button"
+                                    Buttons.BG_MUSIC ->  "Background Music Button"
                                 },
                                 modifier = Modifier.size(38.dp)
                             )
@@ -113,8 +108,8 @@ fun SoundAndMusicButtons(
                     }
                     Text(
                         text = stringResource(when (button) {
-                            0 -> R.string.active_sound
-                            else -> R.string.active_music
+                            Buttons.SOUND_EFFECTS -> R.string.active_sound
+                            Buttons.BG_MUSIC -> R.string.active_music
                         }),
                         style = MaterialTheme.typography.bodyMedium.copy(fontSize = 12.sp),
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -126,4 +121,9 @@ fun SoundAndMusicButtons(
             }
         }
     }
+}
+
+enum class Buttons {
+    SOUND_EFFECTS,
+    BG_MUSIC
 }

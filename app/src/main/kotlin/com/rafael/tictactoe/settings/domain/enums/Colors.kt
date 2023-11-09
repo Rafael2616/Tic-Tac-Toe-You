@@ -33,3 +33,16 @@ data class Colors(
         }
     }
 }
+
+enum class IColor {
+    BLUE,
+    RED,
+    YELLOW,
+    BURNT_YELLOW,
+    DARK_GREEN,
+    LIGHT_GREEN,
+    PURPLE,
+    MAGENTA,
+    WHITE,
+    CYAN
+}

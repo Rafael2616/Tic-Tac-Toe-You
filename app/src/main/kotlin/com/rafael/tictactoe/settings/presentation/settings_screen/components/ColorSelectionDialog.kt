@@ -17,7 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -30,8 +30,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -49,6 +47,7 @@ import com.rafael.tictactoe.game.presentation.utils.draws.drawXinColorDialog
 import com.rafael.tictactoe.game.presentation.utils.draws.drawWinnerLineinColorDialog
 import com.rafael.tictactoe.settings.domain.enums.Colors
 import com.rafael.tictactoe.settings.domain.enums.Customization
+import com.rafael.tictactoe.settings.domain.enums.IColor
 import com.rafael.tictactoe.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.domain.model.SettingsState
 import com.rafael.tictactoe.settings.domain.use_cases.colorSelectionUseCase
@@ -58,7 +57,6 @@ fun ColorSelectionDialog(
     onEvent: (SettingsEvent) -> Unit,
     state: SettingsState
 ) {
-    val colorsOptions = remember { mutableStateListOf(0,1,2,3,4,5,6,7,8,9) }
     val type = state.customizationType
     val selectedWinnerLineColor = state.selectedWinnerLineColor
     val selectedCircleColor = state.selectedCircleColor
@@ -146,16 +144,16 @@ fun ColorSelectionDialog(
                         .height(240.dp)
                         .padding(6.dp)
                 ) {
-                    items(colorsOptions.size) { color ->
+                    itemsIndexed(IColor.values()) { index, color ->
                         Box(
                             modifier = Modifier
                                 .height(60.dp)
                                 .fillMaxWidth()
                                 .clickable {
                                     when (type) {
-                                        Customization.WINNERLINECOLOR -> onEvent(SettingsEvent.SelectedWinnerLineColor(color))
-                                        Customization.CIRCLECOLOR ->  onEvent(SettingsEvent.SelectedCircleColor(color))
-                                        Customization.XCOLOR ->  onEvent(SettingsEvent.SelectedXColor(color))
+                                        Customization.WINNERLINECOLOR -> onEvent(SettingsEvent.SelectedWinnerLineColor(index))
+                                        Customization.CIRCLECOLOR ->  onEvent(SettingsEvent.SelectedCircleColor(index))
+                                        Customization.XCOLOR ->  onEvent(SettingsEvent.SelectedXColor(index))
                                     }
                                     colorSelectionUseCase(
                                         type,
@@ -175,15 +173,15 @@ fun ColorSelectionDialog(
                                 RadioButton(
                                     selected =
                                         when (type) {
-                                            Customization.WINNERLINECOLOR -> color == selectedWinnerLineColor
-                                            Customization.CIRCLECOLOR -> color == selectedCircleColor
-                                            Customization.XCOLOR -> color == selectedXColor
+                                            Customization.WINNERLINECOLOR -> index == selectedWinnerLineColor
+                                            Customization.CIRCLECOLOR -> index == selectedCircleColor
+                                            Customization.XCOLOR -> index == selectedXColor
                                         },
                                     onClick = {
                                         when (type) {
-                                            Customization.WINNERLINECOLOR -> onEvent(SettingsEvent.SelectedWinnerLineColor(color))
-                                            Customization.CIRCLECOLOR ->  onEvent(SettingsEvent.SelectedCircleColor(color))
-                                            Customization.XCOLOR ->  onEvent(SettingsEvent.SelectedXColor(color))
+                                            Customization.WINNERLINECOLOR -> onEvent(SettingsEvent.SelectedWinnerLineColor(index))
+                                            Customization.CIRCLECOLOR ->  onEvent(SettingsEvent.SelectedCircleColor(index))
+                                            Customization.XCOLOR ->  onEvent(SettingsEvent.SelectedXColor(index))
                                         }
                                         colorSelectionUseCase(
                                             type,
@@ -194,17 +192,16 @@ fun ColorSelectionDialog(
                                 )
                                 Text(
                                     text = when (color) {
-                                        0 -> stringResource(R.string.color_blue)
-                                        1 -> stringResource(R.string.color_red)
-                                        2 -> stringResource(R.string.color_yellow)
-                                        3 -> stringResource(R.string.color_burnt_yellow)
-                                        4 -> stringResource(R.string.color_dark_green)                                       
-                                        5 -> stringResource(R.string.color_green)
-                                        6 -> stringResource(R.string.color_purple)
-                                        7 -> stringResource(R.string.color_pink)
-                                        8 -> stringResource(R.string.color_white)
-                                        9 -> stringResource(R.string.color_cyan)
-                                        else -> "undefined_color"
+                                        IColor.BLUE -> stringResource(R.string.color_blue)
+                                        IColor.RED -> stringResource(R.string.color_red)
+                                        IColor.YELLOW -> stringResource(R.string.color_yellow)
+                                        IColor.BURNT_YELLOW -> stringResource(R.string.color_burnt_yellow)
+                                        IColor.DARK_GREEN -> stringResource(R.string.color_dark_green)                                       
+                                        IColor.LIGHT_GREEN -> stringResource(R.string.color_green)
+                                        IColor.PURPLE -> stringResource(R.string.color_purple)
+                                        IColor.MAGENTA -> stringResource(R.string.color_pink)
+                                        IColor.WHITE -> stringResource(R.string.color_white)
+                                        IColor.CYAN -> stringResource(R.string.color_cyan)
                                     },
                                     overflow = TextOverflow.Ellipsis,
                                     textAlign = TextAlign.Center,
@@ -222,17 +219,16 @@ fun ColorSelectionDialog(
                                             .fillMaxSize()
                                             .background(
                                                 when (color) {
-                                                    0 -> colors.blue
-                                                    1 -> colors.red
-                                                    2 -> colors.yellow
-                                                    3 -> colors.burnt_yellow
-                                                    4 -> colors.dark_green
-                                                    5 -> colors.light_green
-                                                    6 -> colors.purple
-                                                    7 -> colors.magenta
-                                                    8 -> colors.white
-                                                    9 -> colors.cyan
-                                                    else -> colors.transparent
+                                                    IColor.BLUE -> colors.blue
+                                                    IColor.RED -> colors.red
+                                                    IColor.YELLOW -> colors.yellow
+                                                    IColor.BURNT_YELLOW -> colors.burnt_yellow
+                                                    IColor.DARK_GREEN -> colors.dark_green
+                                                    IColor.LIGHT_GREEN -> colors.light_green
+                                                    IColor.PURPLE -> colors.purple
+                                                    IColor.MAGENTA -> colors.magenta
+                                                    IColor.WHITE -> colors.white
+                                                    IColor.CYAN -> colors.cyan
                                                 }
                                             )
                                         )

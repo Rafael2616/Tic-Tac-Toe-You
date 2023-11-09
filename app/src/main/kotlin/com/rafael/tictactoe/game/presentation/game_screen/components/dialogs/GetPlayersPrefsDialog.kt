@@ -50,7 +50,6 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -113,7 +112,6 @@ fun GetPlayersPrefsDialog(
     val customTypeForP2 = if (isXFor1) Customization.CIRCLECOLOR else Customization.XCOLOR
     val dialogHeight by animateDpAsState(if (isCPUMode) 280.dp else 215.dp)
     val maxLetterLength by rememberSaveable { mutableIntStateOf(10) }
-    val CPUDifficultyLevels = remember { mutableStateListOf(0,1,2) }
     val containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(18.dp)
     val bottomPadding by animateDpAsState(
         if (isKeyboardOpen) {
@@ -393,26 +391,31 @@ fun GetPlayersPrefsDialog(
                                     horizontalArrangement = Arrangement.SpaceBetween,
                                     verticalAlignment = Alignment.CenterVertically
                                 ) {
-                                     CPUDifficultyLevels.forEach { level ->
+                                    val levels = listOf(
+                                        CPUDifficultyLevel.Easy,
+                                        CPUDifficultyLevel.Medium,
+                                        CPUDifficultyLevel.Hard
+                                    )
+                                     levels.forEachIndexed { index, level ->
                                         Row(
                                             modifier = Modifier
                                                 .weight(1f)
                                                 .height(40.dp)
                                                 .clickable {
                                                     when (level) {
-                                                        0 -> onEvent(GameEvent.SelectCPUDifficultyMode(
+                                                        CPUDifficultyLevel.Easy -> onEvent(GameEvent.SelectCPUDifficultyMode(
                                                             level = CPUDifficultyLevel.Easy,
                                                             selectedLevel = 0,
                                                             icon = Icons.Filled.SentimentSatisfied,
                                                             name = R.string.level_easy
                                                         ))
-                                                        1 -> onEvent(GameEvent.SelectCPUDifficultyMode(
+                                                        CPUDifficultyLevel.Medium -> onEvent(GameEvent.SelectCPUDifficultyMode(
                                                             level = CPUDifficultyLevel.Medium,
                                                             selectedLevel = 1,
                                                             icon = Icons.Filled.SentimentNeutral,
                                                             name = R.string.level_medium
                                                         ))
-                                                        2 -> onEvent(GameEvent.SelectCPUDifficultyMode(
+                                                        CPUDifficultyLevel.Hard -> onEvent(GameEvent.SelectCPUDifficultyMode(
                                                             level = CPUDifficultyLevel.Hard,
                                                             selectedLevel = 2,
                                                             icon = Icons.Filled.SentimentDissatisfied,
@@ -420,29 +423,29 @@ fun GetPlayersPrefsDialog(
                                                         ))
                                                     }
                                                 }
-                                                .background(if (level == selectedDifficultyLevel) {
+                                                .background(if (index == selectedDifficultyLevel) {
                                                     MaterialTheme.colorScheme.onSecondary } else containerColor
                                                 ),
                                             horizontalArrangement = Arrangement.SpaceBetween,
                                             verticalAlignment = Alignment.CenterVertically
                                         ) {
                                             RadioButton(
-                                                selected = level == selectedDifficultyLevel,
+                                                selected = index == selectedDifficultyLevel,
                                                 onClick = {
                                                     when (level) {
-                                                        0 -> onEvent(GameEvent.SelectCPUDifficultyMode(
+                                                        CPUDifficultyLevel.Easy -> onEvent(GameEvent.SelectCPUDifficultyMode(
                                                             level = CPUDifficultyLevel.Easy,
                                                             selectedLevel = 0,
                                                             icon = Icons.Filled.SentimentSatisfied,
                                                             name = R.string.level_easy
                                                         ))
-                                                        1 -> onEvent(GameEvent.SelectCPUDifficultyMode(
+                                                        CPUDifficultyLevel.Medium -> onEvent(GameEvent.SelectCPUDifficultyMode(
                                                             level = CPUDifficultyLevel.Medium,
                                                             selectedLevel = 1,
                                                             icon = Icons.Filled.SentimentDissatisfied,
                                                             name = R.string.level_medium
                                                         ))
-                                                        2 -> onEvent(GameEvent.SelectCPUDifficultyMode(
+                                                        CPUDifficultyLevel.Hard -> onEvent(GameEvent.SelectCPUDifficultyMode(
                                                             level = CPUDifficultyLevel.Hard,
                                                             selectedLevel = 2,
                                                             icon = Icons.Filled.SentimentDissatisfied,
@@ -455,24 +458,21 @@ fun GetPlayersPrefsDialog(
                                                 textAlign = TextAlign.Start,
                                                 style = MaterialTheme.typography.bodyMedium,
                                                 text = when (level) {
-                                                    0 -> stringResource(R.string.level_easy)
-                                                    1 -> stringResource(R.string.level_medium)
-                                                    2 -> stringResource(R.string.level_hard)
-                                                    else -> ""
+                                                    CPUDifficultyLevel.Easy -> stringResource(R.string.level_easy)
+                                                    CPUDifficultyLevel.Medium -> stringResource(R.string.level_medium)
+                                                    CPUDifficultyLevel.Hard -> stringResource(R.string.level_hard)
                                                 }
                                             )
                                             Icon(
                                                 imageVector = when (level) {
-                                                    0 -> Icons.Filled.SentimentSatisfied
-                                                    1 -> Icons.Filled.SentimentNeutral
-                                                    2 -> Icons.Filled.SentimentDissatisfied
-                                                    else -> Icons.Filled.SentimentSatisfied
+                                                    CPUDifficultyLevel.Easy -> Icons.Filled.SentimentSatisfied
+                                                    CPUDifficultyLevel.Medium -> Icons.Filled.SentimentNeutral
+                                                    CPUDifficultyLevel.Hard -> Icons.Filled.SentimentDissatisfied
                                                 },
                                                 tint = when (level) {
-                                                    0 -> if (isDarkThemeOn) Color.Green else Color(0xFF299961)
-                                                    1 -> if (isDarkThemeOn) Color.Yellow else Colors.get().burnt_yellow
-                                                    2 -> Color.Red
-                                                    else -> Color.Red
+                                                    CPUDifficultyLevel.Easy -> if (isDarkThemeOn) Color.Green else Color(0xFF299961)
+                                                    CPUDifficultyLevel.Medium -> if (isDarkThemeOn) Color.Yellow else Colors.get().burnt_yellow
+                                                    CPUDifficultyLevel.Hard -> Color.Red
                                                 },
                                                 contentDescription = "Icon",
        		            	                 modifier = Modifier
