@@ -23,9 +23,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
@@ -48,7 +46,6 @@ fun VictoryCounter(
     val circleColor by animateColorAsState(settingsState.circleColor)
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
-    val countersSize = remember { mutableStateListOf(0,1) }
 
     Box(
         modifier = Modifier
@@ -63,7 +60,7 @@ fun VictoryCounter(
                // .statusBarsPadding()
                 .padding(top = 45.dp)
         ) {
-            countersSize.forEach { counter ->
+            Counters.values().forEachIndexed { _, counter ->
                 Box(
                     modifier = Modifier.padding(6.dp)
                 ) {
@@ -77,10 +74,9 @@ fun VictoryCounter(
                             .height(55.dp)
                     ) {
                         Text(
-                            text =  when (counter) {
-                                0 -> "$player1Wins"
-                                1 -> "$player2Wins"
-                                else -> ""
+                            text = when (counter) {
+                                Counters.FIRST -> "$player1Wins"
+                                Counters.SECOND -> "$player2Wins"
                             },
                             style = MaterialTheme.typography.titleLarge,
                             color = MaterialTheme.colorScheme.onSurface,
@@ -99,15 +95,13 @@ fun VictoryCounter(
                             ) {
                                 if (isXFor1) {
                                     when (counter) {
-                                        0 -> drawXinCounter(xColor)
-                                        1 -> drawCircleinCounter(circleColor)
-                                        else -> Unit
+                                        Counters.FIRST -> drawXinCounter(xColor)
+                                        Counters.SECOND -> drawCircleinCounter(circleColor)
                                     }
                                 } else {
                                     when (counter) {
-                                        0 -> drawCircleinCounter(circleColor)
-                                        1 -> drawXinCounter(xColor)
-                                        else -> Unit
+                                        Counters.FIRST -> drawCircleinCounter(circleColor)
+                                        Counters.SECOND -> drawXinCounter(xColor)
                                     }
                                 }
                             }
@@ -117,4 +111,9 @@ fun VictoryCounter(
             }
         }
     }
+}
+
+enum class Counters {
+    FIRST,
+    SECOND
 }

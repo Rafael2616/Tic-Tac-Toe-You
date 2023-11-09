@@ -16,9 +16,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
@@ -32,7 +29,6 @@ import com.rafael.tictactoe.game.domain.players_names.PlayerNamesOnCounterHandle
 fun PlayersNamesOnCounter(state: GameState) {
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
-    val playersSize = remember { mutableStateListOf(0,1) }
     val nameOnCounter = PlayerNamesOnCounterHandler()
 
     nameOnCounter.firstPlayerName(state)
@@ -51,7 +47,7 @@ fun PlayersNamesOnCounter(state: GameState) {
                 //.statusBarsPadding()
                 .padding(top = 20.dp)
         ) {
-            playersSize.forEach { player ->
+            Players.values().forEachIndexed { _, player ->
                 Box(
                     modifier = Modifier
                         .padding(6.dp)
@@ -60,8 +56,8 @@ fun PlayersNamesOnCounter(state: GameState) {
                 ) {
                     AnimatedContent(
                         targetState = when (player) {
-                            0 -> state.showPlayer1Name
-                            else -> state.showPlayer2Name
+                            Players.FIRST -> state.showPlayer1Name
+                            Players.SECOND -> state.showPlayer2Name
                         },
                         transitionSpec = {
                             fadeIn() togetherWith fadeOut()
@@ -79,4 +75,9 @@ fun PlayersNamesOnCounter(state: GameState) {
             }
         }
     }
+}
+
+enum class Players {
+    FIRST,
+    SECOND
 }
