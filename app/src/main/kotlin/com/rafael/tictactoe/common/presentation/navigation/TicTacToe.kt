@@ -3,6 +3,9 @@ package com.rafael.tictactoe.common.presentation.navigation
 import androidx.activity.ComponentActivity
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.EaseIn
+import androidx.compose.animation.core.EaseOut
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -27,8 +30,18 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.SettingsScreen
 @ExperimentalMaterial3Api
 fun TicTacToe(context: ComponentActivity) {
     val navController = rememberNavController()
-    val enterTransition = fadeIn()
-    val exitTransition = fadeOut()
+    val enterTransition = fadeIn(
+        animationSpec = tween(
+            durationMillis = 280,
+            easing = EaseIn
+        )
+    )
+    val exitTransition = fadeOut(
+        animationSpec = tween(
+            durationMillis = 280,
+            easing = EaseOut
+        )
+    )
 
     AppTheme(context) {
         Surface(

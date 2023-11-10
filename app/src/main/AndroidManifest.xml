@@ -14,7 +14,9 @@
         <service android:name=".common.services.MusicService"/>
         <activity
             android:name=".TicTacToeActivity"
-            android:exported="true">
+            android:exported="true"
+            android:configChanges="orientation"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
