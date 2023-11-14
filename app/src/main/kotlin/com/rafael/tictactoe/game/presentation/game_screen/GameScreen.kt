@@ -7,7 +7,6 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -26,11 +25,13 @@ import com.rafael.tictactoe.game.presentation.game_screen.components.ui.GameStat
 import com.rafael.tictactoe.game.presentation.game_screen.components.ui.PlayersNamesOnCounter
 import com.rafael.tictactoe.game.presentation.game_screen.components.ui.VictoryCounter
 import com.rafael.tictactoe.game.presentation.game_screen.components.ui.WinnerLines
+import com.rafael.tictactoe.game.presentation.game_screen.components.ui.SearchingForPlayersSurface
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import com.rafael.tictactoe.game.domain.checkers.GotOldChecker
 import com.rafael.tictactoe.game.domain.checkers.WinnerChecker
 import com.rafael.tictactoe.game.domain.game_toast.ToastNameHandler
 import com.rafael.tictactoe.game.domain.model.GameEvent
+import com.rafael.tictactoe.game.domain.model.GameMode
 import com.rafael.tictactoe.game.domain.restart_game.RestartButtonLogic
 import com.rafael.tictactoe.settings.presentation.settings_screen.components.ColorSelectionDialog
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
@@ -104,6 +105,13 @@ fun GameScreen(
         ColorSelectionDialog(settingsVM::onEvent, settingsState)
     }
 
+    if (state.play && state.gameMode == GameMode.Online) {
+        SearchingForPlayersSurface(
+            state,
+            viewModel::onEvent
+        )
+    }
+
     AnimatedVisibility(state.showExitGameDialog) {
         ExitGameDialog(navController, viewModel::onEvent)
     }
@@ -117,11 +125,7 @@ fun GameScreen(
     if (state.play) {
     	RestartButtonLogic(viewModel, state)
     }
-    
-    LaunchedEffect(Unit) {
-        viewModel.onEvent(GameEvent.GetRemotePlayers)
-    }
- 
+
     DisposableEffect(key1 = "update") {
         if (update) {
             viewModel.updateIsCPUMode(isCPUMode)

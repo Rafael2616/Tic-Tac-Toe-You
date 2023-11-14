@@ -26,12 +26,14 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import java.io.IOException
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flow
+//import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import retrofit2.HttpException
 import retrofit2.Response
@@ -52,6 +54,7 @@ class GameViewModel @Inject constructor(
     val gameService = retrofit.create(OnlineGameDao::class.java)
     var availablePlayers: Flow<List<Player>> = flow { emit(emptyList()) }
     var onlineGameState: Flow<OnlineGameState>? = null
+  //  val secondPlayer: Flow<Player> = availablePlayers.first()
 
     fun onEvent(event: GameEvent) {
         val localPlayer1  = state.value.localPlayer1
@@ -59,8 +62,13 @@ class GameViewModel @Inject constructor(
         val isCPUPlayer1 = state.value.isCPUPlayer1
 
         when (event) {
+            is GameEvent.SetGameMode -> {
+                _state.update {
+                    it.copy(gameMode = event.mode)
+                }
+            }
             is GameEvent.GetFirstPlayerName -> {
-                _state.update { 
+                _state.update {
                     if (localPlayer1) {
                         it.copy(player1Name = event.name)
                     } else {
@@ -102,11 +110,6 @@ class GameViewModel @Inject constructor(
                        state.value,
                        this::onEvent
                    )
-                }
-                if (isCPUMode) {
-                    _state.update { it.copy(gameMode = GameMode.VsCPU) }
-                } else {
-                    _state.update { it.copy(gameMode = GameMode.PvP) }
                 }
                 settingsVM.execUIClickSound()
             }
@@ -201,19 +204,25 @@ class GameViewModel @Inject constructor(
 	            viewModelScope.launch(Dispatchers.IO) {
                     try {
                         val response = gameService.getPlayers()
+                        delay(2000L)
                         if (response.isSuccessful && response.body() != null) {
                             availablePlayers = response.body()!!
                             _state.update { it.copy(requestState = RequestState.Success) }
                         } else {
-                            Log.e("GameViewModel", "Unable to get players from server")
-                            _state.update { it.copy(requestState = RequestState.Failure(Error.NoPlayers)) }
+                            if (!response.isSuccessful) {
+                               val e = Log.e("GameViewModel", "Unable to connect to the server")
+                                _state.update { it.copy(requestState = RequestState.Failure(Error.UnableToConnect, e.toString())) }
+                            }else if (response.body() == null) {
+                               val e = Log.e("GameViewModel", "No players avaliable in server")
+                                _state.update { it.copy(requestState = RequestState.Failure(Error.NoPlayers, e.toString())) }                            
+                            }           
                         }
                     } catch(e: IOException) {
                          Log.e("GameViewModel", "IO error: $e")
-                         _state.update { it.copy(requestState = RequestState.Failure(Error.IOError)) }
+                         _state.update { it.copy(requestState = RequestState.Failure(Error.IOError, e.toString())) }
                     } catch(e: HttpException) {
                          Log.e("GameViewModel", "HTTP error: ${e.code()}, ${e.message()}")
-                         _state.update { it.copy(requestState = RequestState.Failure(Error.HttpError)) }
+                         _state.update { it.copy(requestState = RequestState.Failure(Error.HttpError, e.message(), e.code())) }
                     }
                 }
             }
@@ -230,8 +239,8 @@ class GameViewModel @Inject constructor(
                                     settingsVM.state.value.xColor
                                 } else settingsVM.state.value.circleColor,
                                     isXImage = state.value.isXImage
-                                )
                             )
+                        )
                         if (response.isSuccessful) {
                             _state.update { it.copy(requestState = RequestState.Success) }
                         } else {
@@ -285,7 +294,7 @@ class GameViewModel @Inject constructor(
                             	isGameFinished = false
                             )
                         )
-                       if (response.isSuccessful) {
+                        if (response.isSuccessful) {
                             _state.update { it.copy(requestState = RequestState.Success) }
                         } else {
                             Log.e("GameViewModel", "Unable to remove player from server")
@@ -523,6 +532,10 @@ class GameViewModel @Inject constructor(
 
     fun updateHasLastWinningPlayer(player: Boolean) {
          _state.update { it.copy(hasLastWinningPlayer = player)}
+    }
+
+    fun updateIsOnlinePlayerTurn(newValue: Boolean) {
+         _state.update { it.copy(isOnlinePlayerTurn = newValue)}
     }
 
     fun execCardGridSound() {

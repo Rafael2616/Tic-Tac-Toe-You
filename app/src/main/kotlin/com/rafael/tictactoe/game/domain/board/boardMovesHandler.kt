@@ -20,6 +20,7 @@ fun boardMovesHandler(
     val isTimerOn = state.isTimerOn
     val isGameFinished = state.isGameFinished
     val gameMode = state.gameMode
+    val isOnlinePlayerTurn = state.isOnlinePlayerTurn
 
     if (isTimerOn) {
         return
@@ -58,6 +59,16 @@ fun boardMovesHandler(
             } else {
                 vm.updateIsCPU(false)
             }
+        }
+        GameMode.Online -> {
+            if (isOnlinePlayerTurn) {
+                return
+            }
+            vm.updateIsXImage(!isXImage)
+     	   vm.updateCard(rowIndex, cardIndex, isXImage)
+	    	vm.updateIsCardClicked(rowIndex, cardIndex, true)
+	    	vm.updateIsPlayer1(!isPlayer1)
+            vm.updateIsOnlinePlayerTurn(true)
         }
     }
 }

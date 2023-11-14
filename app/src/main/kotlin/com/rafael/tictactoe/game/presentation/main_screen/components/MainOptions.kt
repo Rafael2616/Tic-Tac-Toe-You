@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Group
 import androidx.compose.material.icons.outlined.Memory
 import androidx.compose.material.icons.outlined.PlayArrow
 import androidx.compose.material.icons.outlined.Settings
@@ -42,6 +43,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.presentation.navigation.Destinations
+import com.rafael.tictactoe.game.domain.model.GameEvent
+import com.rafael.tictactoe.game.domain.model.GameMode
+import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
@@ -50,6 +54,8 @@ fun MainOptions(navController: NavController) {
     val settingsVM = hiltViewModel<SettingsViewModel>()
     val orientation = LocalConfiguration.current.orientation
     val state by settingsVM.state.collectAsState()
+    val viewModel = hiltViewModel<GameViewModel>()
+    val onEvent = viewModel::onEvent
 
     Column(
         modifier = Modifier
@@ -65,15 +71,25 @@ fun MainOptions(navController: NavController) {
                     containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp)
                 ),
                 modifier = Modifier
-                    .fillMaxWidth(if (orientation == Configuration.ORIENTATION_LANDSCAPE) 0.35f else 0.6f)
+                    .fillMaxWidth(if (orientation == Configuration.ORIENTATION_LANDSCAPE) 0.35f else 0.65f)
                     .height(65.dp)
                     .clip(RoundedCornerShape(36.dp))
                     .clickable {
                         settingsVM.execUIClickSound()
                         when (screen) {
-                            Screen.PVP_MODE -> navController.navigate(Destinations.Game.screen + "/false")
-                            Screen.CPU_MODE -> navController.navigate(Destinations.Game.screen + "/true")
-                            Screen.SETTINGS -> navController.navigate(Destinations.Settings.screen)
+                            Screen.PvP_Mode -> {
+                                navController.navigate(Destinations.Game.screen + "/false")
+                                onEvent(GameEvent.SetGameMode(GameMode.PvP))
+                            }
+                            Screen.CPU_Mode -> {
+                                navController.navigate(Destinations.Game.screen + "/true")
+                                onEvent(GameEvent.SetGameMode(GameMode.VsCPU))
+                            }
+                            Screen.Online_Mode -> {
+                                navController.navigate(Destinations.Game.screen + "/false")
+                                onEvent(GameEvent.SetGameMode(GameMode.Online))
+                            }
+                            Screen.Settings -> navController.navigate(Destinations.Settings.screen)
                         }
                     }
             ) {
@@ -86,15 +102,17 @@ fun MainOptions(navController: NavController) {
                 ) {
                     Icon(
                         imageVector = when (screen) {
-                            Screen.PVP_MODE -> Icons.Outlined.PlayArrow
-                            Screen.CPU_MODE -> Icons.Outlined.Memory
-                            Screen.SETTINGS -> Icons.Outlined.Settings
+                            Screen.PvP_Mode -> Icons.Outlined.PlayArrow
+                            Screen.CPU_Mode -> Icons.Outlined.Memory
+                            Screen.Online_Mode -> Icons.Outlined.Group
+                            Screen.Settings -> Icons.Outlined.Settings
                         },
                         contentDescription = "Icon",
                         tint = when (screen) {
-                            Screen.PVP_MODE -> if (state.isDarkThemeOn) Color.Green else Color(0xFF299961)
-                            Screen.CPU_MODE -> Color.Red
-                            Screen.SETTINGS -> MaterialTheme.colorScheme.onSurface
+                            Screen.PvP_Mode -> if (state.isDarkThemeOn) Color.Green else Color(0xFF299961)
+                            Screen.CPU_Mode -> Color.Red
+                            Screen.Online_Mode -> MaterialTheme.colorScheme.onSurface
+                            Screen.Settings -> MaterialTheme.colorScheme.onSurface
                         },
        		    	 modifier = Modifier
                             .size(42.dp)
@@ -108,22 +126,24 @@ fun MainOptions(navController: NavController) {
                         textAlign = TextAlign.Center,
                         softWrap = true,
                         text = when (screen) {
-                            Screen.PVP_MODE -> stringResource(R.string.play)
-                            Screen.CPU_MODE -> stringResource(R.string.vs_cpu)
-                            Screen.SETTINGS -> stringResource(R.string.settings)
+                            Screen.PvP_Mode -> stringResource(R.string.play)
+                            Screen.CPU_Mode -> stringResource(R.string.vs_cpu)
+                            Screen.Online_Mode -> "Partida Online"
+                            Screen.Settings -> stringResource(R.string.settings)
                         }
                     )
                 }
             }
             if (index <= Screen.values().size - 1) {
-                Spacer(modifier = Modifier.height(18.dp))
+                Spacer(modifier = Modifier.height(15.dp))
             }
         }
     }
 }
 
 enum class Screen {
-    PVP_MODE,
-    CPU_MODE,
-    SETTINGS
+    PvP_Mode,
+    CPU_Mode,
+    Online_Mode,
+    Settings
 }

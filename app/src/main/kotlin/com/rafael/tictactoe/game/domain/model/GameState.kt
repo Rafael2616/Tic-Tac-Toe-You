@@ -47,5 +47,6 @@ data class GameState(
     val hasLastWinningPlayer: Boolean = false,
     val requestState : RequestState = RequestState.Loading,
     val playerID: Int = 0,
-    val matchID : Int = 0
+    val matchID : Int = 0,
+    val isOnlinePlayerTurn: Boolean = false
 )

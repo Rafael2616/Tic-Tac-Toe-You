@@ -55,12 +55,6 @@ fun RestartGame(
     }
 
     when (gameMode) {
-        GameMode.PvP -> {
-       /*
-        * All actions related to PvP mode are the same
-        * as those being shared in the code above
-        */
-        }
         GameMode.VsCPU -> {
             if (hasWinner) {
                  if (is1Win && isCPUPlayer1) {
@@ -89,6 +83,12 @@ fun RestartGame(
                     }
                 }
             }
+        }
+        else -> {
+        /*
+         * All actions related to PvP and Online mode are the same
+         * as those being shared in the code above
+         */
         }
     }
 

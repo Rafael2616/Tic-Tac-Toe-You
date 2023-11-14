@@ -75,6 +75,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.model.CPUDifficultyLevel
 import com.rafael.tictactoe.game.domain.model.GameEvent
+import com.rafael.tictactoe.game.domain.model.GameMode
 import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.presentation.utils.draws.drawCircleinDialog
 import com.rafael.tictactoe.game.presentation.utils.draws.drawXinDialog
@@ -110,7 +111,12 @@ fun GetPlayersPrefsDialog(
     val textField2State = if (isCPUMode) { if (isCPUPlayer1) true else false } else {true}
     val customTypeForP1 = if (isXFor1) Customization.XCOLOR else Customization.CIRCLECOLOR
     val customTypeForP2 = if (isXFor1) Customization.CIRCLECOLOR else Customization.XCOLOR
-    val dialogHeight by animateDpAsState(if (isCPUMode) 280.dp else 215.dp)
+    val dialogHeight by animateDpAsState( when (state.gameMode) {
+        GameMode.VsCPU -> 280.dp
+        GameMode.PvP -> 215.dp
+        GameMode.Online -> 240.dp
+    })
+    val dialogWidth by animateDpAsState(if (state.gameMode == GameMode.Online) 280.dp else 380.dp)
     val maxLetterLength by rememberSaveable { mutableIntStateOf(10) }
     val containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(18.dp)
     val bottomPadding by animateDpAsState(
@@ -146,7 +152,7 @@ fun GetPlayersPrefsDialog(
                     containerColor = containerColor
                 ),
                 modifier = Modifier
-                    .width(380.dp)
+                    .width(dialogWidth)
                     .height(dialogHeight)
             ) {
 
@@ -154,7 +160,12 @@ fun GetPlayersPrefsDialog(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 8.dp, bottom = 6.dp, start = 14.dp, end = 14.dp),
+                        .padding(top = 8.dp, bottom = 6.dp, start = 14.dp, end = 14.dp)
+                        .then(
+                            if (state.gameMode == GameMode.Online) {
+                                Modifier.padding(horizontal = 20.dp)
+                            } else Modifier
+                        ),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     val textFieldColors = TextFieldDefaults.colors(
@@ -189,6 +200,7 @@ fun GetPlayersPrefsDialog(
                             .weight(1f)
                             .focusRequester(focusRequester)
                     )
+                    if (state.gameMode != GameMode.Online) {
                     Card(
                         shape = MaterialTheme.shapes.large,
                         colors = CardDefaults.cardColors(
@@ -234,6 +246,7 @@ fun GetPlayersPrefsDialog(
                         colors = textFieldColors,
                         modifier = Modifier.weight(1f)
                     )
+                }
                 }
 
                 //Player images preview and button to toggle them
@@ -288,6 +301,7 @@ fun GetPlayersPrefsDialog(
                             }
                         }
                     }
+                   if (state.gameMode != GameMode.Online) {
                     Spacer(modifier = Modifier.width(40.dp))
                     Card(
                         shape = MaterialTheme.shapes.large,
@@ -353,7 +367,32 @@ fun GetPlayersPrefsDialog(
                         )
                     }
                 }
-
+                }
+                if (state.gameMode == GameMode.Online) {
+                    Box(
+                        contentAlignment = Alignment.Center,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                    ) {
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier
+                                .size(60.dp)
+                                .clip(CircleShape)
+                                .clickable {
+                                    onEvent(GameEvent.ToggleIsXForPlayer1)
+                                }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.SwapHoriz,
+                                tint = if (isDarkThemeOn) Color.Cyan else Colors.get().blue,
+                                contentDescription = "Player Icon Switch",
+                                modifier = Modifier
+                                    .size(45.dp)
+                            )
+                        }
+                    }
+                }
                 //Difficulty level selection
                 if (isCPUMode) {
                     Column(

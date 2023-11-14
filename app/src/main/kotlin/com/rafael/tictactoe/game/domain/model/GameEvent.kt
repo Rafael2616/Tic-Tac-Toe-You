@@ -2,8 +2,10 @@ package com.rafael.tictactoe.game.domain.model
 
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.rafael.tictactoe.game.domain.model.CPUDifficultyLevel
+import com.rafael.tictactoe.game.domain.model.GameMode
 
 sealed interface GameEvent {
+    data class SetGameMode(val mode: GameMode = GameMode.PvP) : GameEvent
     data class GetFirstPlayerName(val name: String) : GameEvent
     data class GetSecondPlayerName(val name: String) : GameEvent
     object SwitchPlayerPositions : GameEvent
