@@ -1,12 +1,5 @@
 package com.rafael.tictactoe.game.domain.model
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.SentimentNeutral
-import androidx.compose.ui.graphics.vector.ImageVector
-import com.rafael.tictactoe.R
-import com.rafael.tictactoe.game.domain.model.CPUDifficultyLevel
-import com.rafael.tictactoe.game.domain.model.GameMode
-
 data class OnlineGameState(
     val player1Wins: Int = 0,
 	val player2Wins: Int = 0,

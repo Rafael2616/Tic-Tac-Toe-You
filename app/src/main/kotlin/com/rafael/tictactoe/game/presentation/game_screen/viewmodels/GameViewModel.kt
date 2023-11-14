@@ -388,7 +388,7 @@ class GameViewModel @Inject constructor(
             }
         }
     }
-    
+
     fun updateIsCardClicked(rowIndex: Int, cardIndex: Int, newValue: Boolean) {
         val isCPU = state.value.isCPU
         val isGameFinished = state.value.isGameFinished

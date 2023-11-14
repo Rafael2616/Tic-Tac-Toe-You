@@ -13,7 +13,6 @@ import dagger.Provides
 import dagger.hilt.components.SingletonComponent
 import dagger.hilt.InstallIn
 import javax.inject.Singleton
-import javax.inject.Inject
 import retrofit2.Retrofit
 
 @Module
