@@ -1,6 +1,5 @@
 package com.rafael.tictactoe.di
 
-//import android.app.Activity
 import android.app.Application
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.room.Room
@@ -14,6 +13,8 @@ import dagger.Provides
 import dagger.hilt.components.SingletonComponent
 import dagger.hilt.InstallIn
 import javax.inject.Singleton
+import javax.inject.Inject
+import retrofit2.Retrofit
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -31,8 +32,12 @@ object GameModule {
 
     @Provides
     @Singleton
-    fun provideGameRepository(database: GameDatabase): GameRepository {
-        return GameRepositoryImpl(database.gameDao)
+    fun provideGameRepository(
+        database: GameDatabase
+    ) : GameRepository {
+        return GameRepositoryImpl(
+            database.gameDao
+        )
     }
 
     @Provides
@@ -40,12 +45,16 @@ object GameModule {
     fun provideGameViewModel(
         player: ExoPlayer,
         settingsVM: SettingsViewModel,
-        context: Application
-    ): GameViewModel {
+        context: Application,
+        repository: GameRepository,
+        retrofit: Retrofit
+    ) : GameViewModel {
         return GameViewModel(
             player,
             settingsVM,
-            context
+            context,
+            repository,
+            retrofit
         )
     }
 }

@@ -6,7 +6,7 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.Dp
 
-fun DrawScope.drawXPreview (
+fun DrawScope.drawXPreview(
     strokeWidth: Dp,
     start1: Offset,
     start2: Offset,

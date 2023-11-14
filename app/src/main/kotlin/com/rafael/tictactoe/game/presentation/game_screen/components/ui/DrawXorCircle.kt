@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.presentation.game_screen.components.util
+package com.rafael.tictactoe.game.presentation.game_screen.components.ui
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn

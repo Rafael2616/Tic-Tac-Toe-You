@@ -7,6 +7,7 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -116,7 +117,11 @@ fun GameScreen(
     if (state.play) {
     	RestartButtonLogic(viewModel, state)
     }
-
+    
+    LaunchedEffect(Unit) {
+        viewModel.onEvent(GameEvent.GetRemotePlayers)
+    }
+ 
     DisposableEffect(key1 = "update") {
         if (update) {
             viewModel.updateIsCPUMode(isCPUMode)

@@ -44,5 +44,8 @@ data class GameState(
 	val showExitGameDialog: Boolean = false,
 	val winningPositionsIndices: List<Int> = emptyList(),
     val selectedDifficultyLevel: Int = 1,
-    val hasLastWinningPlayer: Boolean = false
+    val hasLastWinningPlayer: Boolean = false,
+    val requestState : RequestState = RequestState.Loading,
+    val playerID: Int = 0,
+    val matchID : Int = 0
 )

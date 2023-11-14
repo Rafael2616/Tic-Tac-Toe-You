@@ -23,4 +23,11 @@ sealed interface GameEvent {
     data class SelectCPUDifficultyMode(val level: CPUDifficultyLevel, val selectedLevel: Int, val icon: ImageVector, val name: Int) : GameEvent
     data class UpdateIsGotOldSoundPlaying(val value: Boolean) : GameEvent
     data class UpdateIsWinSoundPlaying(val value: Boolean) : GameEvent
+    object GetRemotePlayers : GameEvent
+    object PostRemotePlayer : GameEvent
+    object RemoveRemotePlayer : GameEvent
+    object SendInitialOnlineGameState : GameEvent
+    object GetOnlineGameState : GameEvent
+    object UpdateOnlineGameState : GameEvent
+    object EndOnlineMatch : GameEvent
 }

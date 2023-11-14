@@ -19,7 +19,7 @@ class ComponentValidator {
         }
         return false
     }
-    
+
     fun validateCard(groupType: GroupType, index: Int, isFollowingSystemOn: Boolean): Boolean {
         val isDynamicColorsSupported = VERSION.SDK_INT >= VERSION_CODES.S
 
@@ -33,7 +33,7 @@ class ComponentValidator {
         }
         return false
     }
-    
+
     fun validateCanvas(groupType: GroupType): Boolean {
         if (groupType == GroupType.CUSTOMIZATION) {
             return true

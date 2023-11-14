@@ -10,11 +10,11 @@ class GameRepositoryImpl @Inject constructor(
 	private val gameDao: GameDao
 ) : GameRepository {
 
-	init{
+	init {
 		println("Game repository has been initialized")
 	}
 	
-	 override fun getGameValues(): Flow<GameEntity> {
+    override fun getGameValues(): Flow<GameEntity> {
         return gameDao.getGameValues()
     }
 	

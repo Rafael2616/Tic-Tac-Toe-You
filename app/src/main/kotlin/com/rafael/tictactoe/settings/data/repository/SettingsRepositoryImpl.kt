@@ -4,7 +4,6 @@ import com.rafael.tictactoe.settings.domain.model.SettingsEntity
 import com.rafael.tictactoe.settings.data.dao.SettingsDao
 import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
 import javax.inject.Inject
-import kotlinx.coroutines.flow.Flow
 
 class SettingsRepositoryImpl @Inject constructor(
     private val settingsDao: SettingsDao

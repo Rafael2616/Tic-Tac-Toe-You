@@ -1,38 +1,57 @@
 package com.rafael.tictactoe.game.presentation.game_screen.viewmodels
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.media3.exoplayer.ExoPlayer
+import com.rafael.tictactoe.game.data.dao.OnlineGameDao
 import com.rafael.tictactoe.game.domain.audio.CardGridSound
 import com.rafael.tictactoe.game.domain.audio.GotOldSound
 import com.rafael.tictactoe.game.domain.audio.WinnerSound
 import com.rafael.tictactoe.game.domain.card_grid.boardMovesHandler
 import com.rafael.tictactoe.game.domain.card_grid.cpuMoveLevelsHandler
+import com.rafael.tictactoe.game.domain.repository.GameRepository
+import com.rafael.tictactoe.game.domain.model.Error
 import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameMode
 import com.rafael.tictactoe.game.domain.model.GameState
+import com.rafael.tictactoe.game.domain.model.OnlineGameState
+import com.rafael.tictactoe.game.domain.model.Player
+import com.rafael.tictactoe.game.domain.model.RequestState
 import com.rafael.tictactoe.game.domain.restart_game.RestartGame
 import com.rafael.tictactoe.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.io.IOException
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.update
+import retrofit2.HttpException
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.create
 
 @HiltViewModel
 class GameViewModel @Inject constructor(
     private val player: ExoPlayer,
     private val settingsVM: SettingsViewModel,
-    private val context: Application
-): ViewModel() {
+    private val context: Application,
+    private val repository: GameRepository,
+    private val retrofit: Retrofit
+) : ViewModel() {
 
     private val _state = MutableStateFlow(GameState())
     val state = _state.asStateFlow()
+    val gameService = retrofit.create(OnlineGameDao::class.java)
+    var availablePlayers: Flow<List<Player>> = flow { emit(emptyList()) }
+    var onlineGameState: Flow<OnlineGameState>? = null
 
     fun onEvent(event: GameEvent) {
         val localPlayer1  = state.value.localPlayer1
@@ -178,9 +197,198 @@ class GameViewModel @Inject constructor(
             is GameEvent.UseEasyLevel -> {
                 _state.update { it.copy(isUsingEasyLevel = event.value) }
             }
+            GameEvent.GetRemotePlayers -> {
+	            viewModelScope.launch(Dispatchers.IO) {
+                    try {
+                        val response = gameService.getPlayers()
+                        if (response.isSuccessful && response.body() != null) {
+                            availablePlayers = response.body()!!
+                            _state.update { it.copy(requestState = RequestState.Success) }
+                        } else {
+                            Log.e("GameViewModel", "Unable to get players from server")
+                            _state.update { it.copy(requestState = RequestState.Failure(Error.NoPlayers)) }
+                        }
+                    } catch(e: IOException) {
+                         Log.e("GameViewModel", "IO error: $e")
+                         _state.update { it.copy(requestState = RequestState.Failure(Error.IOError)) }
+                    } catch(e: HttpException) {
+                         Log.e("GameViewModel", "HTTP error: ${e.code()}, ${e.message()}")
+                         _state.update { it.copy(requestState = RequestState.Failure(Error.HttpError)) }
+                    }
+                }
+            }
+            GameEvent.PostRemotePlayer -> {
+	            viewModelScope.launch(Dispatchers.IO) {
+                    try {
+                        val response = gameService.postPlayer(
+                            Player(
+                                id = 1,
+                                name = if (state.value.localPlayer1) {
+                                    state.value.player1Name
+                                } else state.value.player2Name,
+                                color = if (state.value.isXFor1) {
+                                    settingsVM.state.value.xColor
+                                } else settingsVM.state.value.circleColor,
+                                    isXImage = state.value.isXImage
+                                )
+                            )
+                        if (response.isSuccessful) {
+                            _state.update { it.copy(requestState = RequestState.Success) }
+                        } else {
+                            Log.e("GameViewModel", "Unable to post player in server")
+                            _state.update { it.copy(requestState = RequestState.Failure(Error.NoPlayers)) }
+                        }
+                    } catch(e: IOException) {
+                         Log.e("GameViewModel", "IO error: $e")
+                         _state.update { it.copy(requestState = RequestState.Failure(Error.IOError)) }
+                    } catch(e: HttpException) {
+                         Log.e("GameViewModel", "HTTP error: ${e.code()}, ${e.message()}")
+                         _state.update { it.copy(requestState = RequestState.Failure(Error.HttpError)) }
+                    }
+                }
+            }
+            GameEvent.RemoveRemotePlayer -> {
+    	        viewModelScope.launch(Dispatchers.IO) {
+                    try {
+                        val response = gameService.removePlayer(state.value.playerID)
+                        if (response.isSuccessful) {
+                            _state.update { it.copy(requestState = RequestState.Success) }
+                        } else {
+                            Log.e("GameViewModel", "Unable to remove player from server")
+                            _state.update { it.copy(requestState = RequestState.Failure(Error.NoPlayers)) }
+                        }
+                    } catch(e: IOException) {
+                         Log.e("GameViewModel", "IO error: $e")
+                         _state.update { it.copy(requestState = RequestState.Failure(Error.IOError)) }
+                    } catch(e: HttpException) {
+                         Log.e("GameViewModel", "HTTP error: ${e.code()}, ${e.message()}")
+                         _state.update { it.copy(requestState = RequestState.Failure(Error.HttpError)) }
+                    }
+                }
+            }
+            GameEvent.SendInitialOnlineGameState -> {
+      	      viewModelScope.launch(Dispatchers.IO) {
+                    try {
+                        val response = gameService.postInitialGameState(
+                            OnlineGameState(
+                                player1Wins = 0,
+                            	player2Wins = 0,
+                            	card = List(3){ List<Boolean>(3){false} },
+                            	isCardClicked = List(3){ List<Boolean>(3){false} },
+                                play = false,
+                            	isXImage = true,
+                            	is1Win = false,
+                            	isXFor1 = true,
+                            	isPlayer1 = true,
+                            	hasWinner = false,
+                            	gotOld = false,
+                            	isGameFinished = false
+                            )
+                        )
+                       if (response.isSuccessful) {
+                            _state.update { it.copy(requestState = RequestState.Success) }
+                        } else {
+                            Log.e("GameViewModel", "Unable to remove player from server")
+                            _state.update { it.copy(requestState = RequestState.Failure(Error.NoPlayers)) }
+                        }
+                    } catch(e: IOException) {
+                         Log.e("GameViewModel", "IO error: $e")
+                         _state.update { it.copy(requestState = RequestState.Failure(Error.IOError)) }
+                    } catch(e: HttpException) {
+                         Log.e("GameViewModel", "HTTP error: ${e.code()}, ${e.message()}")
+                         _state.update { it.copy(requestState = RequestState.Failure(Error.HttpError)) }
+                    }
+                }
+            }
+            GameEvent.GetOnlineGameState -> {
+	            viewModelScope.launch(Dispatchers.IO) {
+                    try {
+                        val response = gameService.getGameState()
+                        if (response.isSuccessful && response.body() != null) {
+                            onlineGameState = response.body()!!
+                            _state.update { it.copy(
+                                requestState = RequestState.Success,
+                               /* player1Wins = onlineGameState.player1Wins.value,
+                                player2Wins = onlineGameState.player2Wins.value,
+                                card = onlineGameState.card.value,
+                                isCardClicked = onlineGameState.isCardClicked.value,
+                                play = onlineGameState.play.value,
+                                isXImage = onlineGameState.isXImage.value,
+                                isXFor1 = onlineGameState.isXFor1.value,
+                                isPlayer1 = onlineGameState.isPlayer1.value,
+                                hasWinner = onlineGameState.hasWinner.value,
+                                gotOld = onlineGameState.gotOld.value,
+                                isGameFinished = onlineGameState.isGameFinished.value*/
+                            )}   
+                        } else {
+                            Log.e("GameViewModel", "Unable to get players from server")
+                            _state.update { it.copy(requestState = RequestState.Failure(Error.NoPlayers)) }
+                        }
+                    } catch(e: IOException) {
+                         Log.e("GameViewModel", "IO error: $e")
+                         _state.update { it.copy(requestState = RequestState.Failure(Error.IOError)) }
+                    } catch(e: HttpException) {
+                         Log.e("GameViewModel", "HTTP error: ${e.code()}, ${e.message()}")
+                         _state.update { it.copy(requestState = RequestState.Failure(Error.HttpError)) }
+                    }
+                }
+            }
+            GameEvent.UpdateOnlineGameState -> {
+	            viewModelScope.launch(Dispatchers.IO) {
+                    try {
+                        val response = gameService.updateGameState(
+                            OnlineGameState(   
+                                player1Wins = state.value.player1Wins,
+                                player2Wins = state.value.player2Wins,
+                                card = state.value.card,
+                                isCardClicked = state.value.isCardClicked,
+                                play = state.value.play,
+                                isXImage = state.value.isXImage,
+                                isXFor1 = state.value.isXFor1,
+                                isPlayer1 = state.value.isPlayer1,
+                                hasWinner = state.value.hasWinner,
+                                gotOld = state.value.gotOld,
+                                isGameFinished = state.value.isGameFinished
+                            )                   
+                        )
+                        if (response.isSuccessful && response.body() != null) {
+                            onlineGameState = response.body()!!
+                            _state.update { it.copy(requestState = RequestState.Success) }
+                          } else {
+                            Log.e("GameViewModel", "Unable to get players from server")
+                            _state.update { it.copy(requestState = RequestState.Failure(Error.NoPlayers)) }
+                        }
+                    } catch(e: IOException) {
+                         Log.e("GameViewModel", "IO error: $e")
+                         _state.update { it.copy(requestState = RequestState.Failure(Error.IOError)) }
+                    } catch(e: HttpException) {
+                         Log.e("GameViewModel", "HTTP error: ${e.code()}, ${e.message()}")
+                         _state.update { it.copy(requestState = RequestState.Failure(Error.HttpError)) }
+                    }
+                }
+            }
+            GameEvent.EndOnlineMatch -> {
+  	          viewModelScope.launch(Dispatchers.IO) {
+                    try {
+                        val response = gameService.endMatch(state.value.matchID)
+                        if (response.isSuccessful) {
+                            _state.update { it.copy(requestState = RequestState.Success) }
+                        } else {
+                            Log.e("GameViewModel", "Unable to finish match in server")
+                            _state.update { it.copy(requestState = RequestState.Failure(Error.NoPlayers)) }
+                        }
+                    } catch(e: IOException) {
+                         Log.e("GameViewModel", "IO error: $e")
+                         _state.update { it.copy(requestState = RequestState.Failure(Error.IOError)) }
+                    } catch(e: HttpException) {
+                         Log.e("GameViewModel", "HTTP error: ${e.code()}, ${e.message()}")
+                         _state.update { it.copy(requestState = RequestState.Failure(Error.HttpError)) }
+                    }
+                }
+            }
         }
     }
-
+    
     fun updateIsCardClicked(rowIndex: Int, cardIndex: Int, newValue: Boolean) {
         val isCPU = state.value.isCPU
         val isGameFinished = state.value.isGameFinished
