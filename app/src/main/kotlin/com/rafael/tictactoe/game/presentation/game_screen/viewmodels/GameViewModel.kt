@@ -54,7 +54,7 @@ class GameViewModel @Inject constructor(
     val gameService = retrofit.create(OnlineGameDao::class.java)
     var availablePlayers: Flow<List<Player>> = flow { emit(emptyList()) }
     var onlineGameState: Flow<OnlineGameState>? = null
-  //  val secondPlayer: Flow<Player> = availablePlayers.first()
+   //val secondPlayer: Flow<Player> = availablePlayers.first()
 
     fun onEvent(event: GameEvent) {
         val localPlayer1  = state.value.localPlayer1
@@ -97,9 +97,7 @@ class GameViewModel @Inject constructor(
             }
             is GameEvent.StartGame -> {
                 _state.update { it.copy(
-                    play = true,
                     isXImage = it.isXFor1,
-                    isTimerOn = true,
                     player1Name = event.player1Value,
                     player2Name = event.player2Value)
                 }
@@ -110,6 +108,15 @@ class GameViewModel @Inject constructor(
                        state.value,
                        this::onEvent
                    )
+                }
+                if (state.value.gameMode != GameMode.Online) {
+                    _state.update { it.copy(
+                        isTimerOn = true,
+                        play = true
+                    )}
+                } else {
+                    _state.update { it.copy(showGetPrefsDialog = false)}
+                    this@GameViewModel.onEvent(GameEvent.UpdateIsYouPlayer1)
                 }
                 settingsVM.execUIClickSound()
             }
@@ -168,7 +175,7 @@ class GameViewModel @Inject constructor(
                 settingsVM.onEvent(SettingsEvent.ShowColorSelectionDialog(false))
                 val cardState = state.value.card
                 _state.update { GameState() }
-
+            
                 //Keep card variable state
                 _state.update { it.copy(card = cardState)}
                 settingsVM.execUIClickSound()
@@ -207,14 +214,20 @@ class GameViewModel @Inject constructor(
                         delay(2000L)
                         if (response.isSuccessful && response.body() != null) {
                             availablePlayers = response.body()!!
-                            _state.update { it.copy(requestState = RequestState.Success) }
+                            _state.update { it.copy(
+                                requestState = RequestState.Success,
+                                isTimerOn = true,
+                                play = true
+                            )}
                         } else {
                             if (!response.isSuccessful) {
-                               val e = Log.e("GameViewModel", "Unable to connect to the server")
-                                _state.update { it.copy(requestState = RequestState.Failure(Error.UnableToConnect, e.toString())) }
+                               val message = "Unable to connect to the server"
+                                Log.e("GameViewModel", message)
+                                _state.update { it.copy(requestState = RequestState.Failure(Error.UnableToConnect, message)) }
                             }else if (response.body() == null) {
-                               val e = Log.e("GameViewModel", "No players avaliable in server")
-                                _state.update { it.copy(requestState = RequestState.Failure(Error.NoPlayers, e.toString())) }                            
+                                val message = "No players avaliable in server"
+                                Log.e("GameViewModel", message)
+                                _state.update { it.copy(requestState = RequestState.Failure(Error.NoPlayers, message)) }                            
                             }           
                         }
                     } catch(e: IOException) {
@@ -394,6 +407,19 @@ class GameViewModel @Inject constructor(
                          _state.update { it.copy(requestState = RequestState.Failure(Error.HttpError)) }
                     }
                 }
+            }
+            is GameEvent.UpdateRequestState -> {
+                _state.update { it.copy(requestState = event.state) }
+            }
+            GameEvent.UpdateIsYouPlayer1 -> {
+                val isYouPlayer1 = (1..3).random()
+                val value = if (isYouPlayer1 == 1) true else false
+
+                _state.update { it.copy(
+                    isYouPlayer1 = value,
+                    localPlayer1 = value,
+                    isPlayer1 = value
+                )}
             }
         }
     }

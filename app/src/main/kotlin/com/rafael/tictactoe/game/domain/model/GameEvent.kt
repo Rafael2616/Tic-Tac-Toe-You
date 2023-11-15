@@ -3,6 +3,7 @@ package com.rafael.tictactoe.game.domain.model
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.rafael.tictactoe.game.domain.model.CPUDifficultyLevel
 import com.rafael.tictactoe.game.domain.model.GameMode
+import com.rafael.tictactoe.game.domain.model.RequestState
 
 sealed interface GameEvent {
     data class SetGameMode(val mode: GameMode = GameMode.PvP) : GameEvent
@@ -25,6 +26,7 @@ sealed interface GameEvent {
     data class SelectCPUDifficultyMode(val level: CPUDifficultyLevel, val selectedLevel: Int, val icon: ImageVector, val name: Int) : GameEvent
     data class UpdateIsGotOldSoundPlaying(val value: Boolean) : GameEvent
     data class UpdateIsWinSoundPlaying(val value: Boolean) : GameEvent
+    data class UpdateRequestState(val state: RequestState) : GameEvent
     object GetRemotePlayers : GameEvent
     object PostRemotePlayer : GameEvent
     object RemoveRemotePlayer : GameEvent
@@ -32,4 +34,5 @@ sealed interface GameEvent {
     object GetOnlineGameState : GameEvent
     object UpdateOnlineGameState : GameEvent
     object EndOnlineMatch : GameEvent
+    object UpdateIsYouPlayer1 : GameEvent
 }

@@ -55,21 +55,25 @@ fun GameScreen(
         state,
         settingsState
     )
+
     SoundAndMusicButtons(
         viewModel::onEvent,
         state,
         settingsState
     )
+
     VictoryCounter(state, settingsState)
     PlayersNamesOnCounter(state)
     GameStateToast(state, settingsState)
     ToastNameHandler(state)
-    
+
     if (state.isCPUMode) {
         DifficultyLevelIndicator(state, settingsState)
     }
 
-    AnimatedVisibility(!state.play) {
+    val showDialog = if (!state.play && state.showGetPrefsDialog) true else false
+
+    AnimatedVisibility(showDialog) {
 		GetPlayersPrefsDialog(
             viewModel::onEvent,
             settingsVM::onEvent,
@@ -105,9 +109,10 @@ fun GameScreen(
         ColorSelectionDialog(settingsVM::onEvent, settingsState)
     }
 
-    if (state.play && state.gameMode == GameMode.Online) {
+    if (!state.showGetPrefsDialog && state.gameMode == GameMode.Online) {
         SearchingForPlayersSurface(
             state,
+            settingsState,
             viewModel::onEvent
         )
     }

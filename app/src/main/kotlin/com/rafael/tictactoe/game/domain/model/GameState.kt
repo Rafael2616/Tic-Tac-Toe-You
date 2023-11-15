@@ -15,7 +15,7 @@ data class GameState(
 	val player2Wins: Int = 0,
 	val card: List<List<Boolean>> = List(3){ List<Boolean>(3){false} },
 	val isCardClicked: List<List<Boolean>> = List(3){ List<Boolean>(3){false} },
-	val isTimerOn: Boolean = true,
+	val isTimerOn: Boolean = false,
     val showVictoryCounterReseter: Boolean = false,
 	val play: Boolean = false,
 	val isXImage: Boolean = true,
@@ -48,5 +48,7 @@ data class GameState(
     val requestState : RequestState = RequestState.Loading,
     val playerID: Int = 0,
     val matchID : Int = 0,
-    val isOnlinePlayerTurn: Boolean = false
+    val isOnlinePlayerTurn: Boolean = false,
+    val isYouPlayer1: Boolean = true,
+    val showGetPrefsDialog: Boolean = true
 )

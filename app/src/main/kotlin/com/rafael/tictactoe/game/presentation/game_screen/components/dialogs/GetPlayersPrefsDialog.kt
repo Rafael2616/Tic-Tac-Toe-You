@@ -99,7 +99,7 @@ fun GetPlayersPrefsDialog(
     val focusRequester = remember { FocusRequester() }
     var isKeyboardOpen by rememberSaveable {  mutableStateOf(false) }
     val isXFor1 = state.isXFor1
-    val isCPUMode = state.isCPUMode
+    val gameMode = state.gameMode
     val xColor by animateColorAsState(settingsState.xColor)
     val circleColor by animateColorAsState(settingsState.circleColor)
     val isDarkThemeOn = settingsState.isDarkThemeOn
@@ -107,16 +107,16 @@ fun GetPlayersPrefsDialog(
     val isCPUPlayer1 = state.isCPUPlayer1
     val player1Value = if (state.localPlayer1) state.player1Name else state.player2Name
     val player2Value = if (state.localPlayer1) state.player2Name else state.player1Name
-    val textField1State = if (isCPUMode) { if (isCPUPlayer1) false else true } else {true}
-    val textField2State = if (isCPUMode) { if (isCPUPlayer1) true else false } else {true}
+    val textField1State = if (gameMode == GameMode.VsCPU) { if (isCPUPlayer1) false else true } else {true}
+    val textField2State = if (gameMode == GameMode.VsCPU) { if (isCPUPlayer1) true else false } else {true}
     val customTypeForP1 = if (isXFor1) Customization.XCOLOR else Customization.CIRCLECOLOR
     val customTypeForP2 = if (isXFor1) Customization.CIRCLECOLOR else Customization.XCOLOR
-    val dialogHeight by animateDpAsState( when (state.gameMode) {
+    val dialogHeight by animateDpAsState( when (gameMode) {
         GameMode.VsCPU -> 280.dp
         GameMode.PvP -> 215.dp
         GameMode.Online -> 240.dp
     })
-    val dialogWidth by animateDpAsState(if (state.gameMode == GameMode.Online) 280.dp else 380.dp)
+    val dialogWidth by animateDpAsState(if (gameMode == GameMode.Online) 245.dp else 380.dp)
     val maxLetterLength by rememberSaveable { mutableIntStateOf(10) }
     val containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(18.dp)
     val bottomPadding by animateDpAsState(
@@ -163,7 +163,7 @@ fun GetPlayersPrefsDialog(
                         .padding(top = 8.dp, bottom = 6.dp, start = 14.dp, end = 14.dp)
                         .then(
                             if (state.gameMode == GameMode.Online) {
-                                Modifier.padding(horizontal = 20.dp)
+                                Modifier.padding(horizontal = 15.dp)
                             } else Modifier
                         ),
                     horizontalArrangement = Arrangement.SpaceBetween
@@ -188,7 +188,11 @@ fun GetPlayersPrefsDialog(
                             }
                         },
                         label = {
-                            Text( stringResource(id = R.string.player1_name))
+                            Text(
+                                text = stringResource(id =
+                                    if (state.gameMode == GameMode.Online) R.string.type_your_name else R.string.player1_name
+                                )
+                            )
                         },
                         placeholder = {
                             Text( stringResource(id = if (isXFor1) R.string.player_x else R.string.player_o))
@@ -200,53 +204,55 @@ fun GetPlayersPrefsDialog(
                             .weight(1f)
                             .focusRequester(focusRequester)
                     )
-                    if (state.gameMode != GameMode.Online) {
-                    Card(
-                        shape = MaterialTheme.shapes.large,
-                        colors = CardDefaults.cardColors(
-                            containerColor = containerColor
-                        ),
-                        modifier = Modifier
-                            .width(60.dp)
-                            .height(85.dp)
-                            .clip(CircleShape)
-                            .clickable {
-                                onEvent(GameEvent.SwitchPlayerPositions)
-                           }
-                    ) {
-                        Box(
-                            contentAlignment = Alignment.Center,
+                    
+                    // Show an second Textfield and toggle only in PvP and CPU Modes
+                    if (gameMode != GameMode.Online) {
+                        Card(
+                            shape = MaterialTheme.shapes.large,
+                            colors = CardDefaults.cardColors(
+                                containerColor = containerColor
+                            ),
                             modifier = Modifier
-                                .fillMaxSize()
+                                .width(60.dp)
+                                .height(85.dp)
+                                .clip(CircleShape)
+                                .clickable {
+                                    onEvent(GameEvent.SwitchPlayerPositions)
+                               }
                         ) {
-                            Icon(
-                                imageVector = Icons.Outlined.SwapHoriz,
-                                tint = if (isDarkThemeOn) Color.Cyan else Colors.get().blue,
-                                contentDescription = "Player Position Switch",
+                            Box(
+                                contentAlignment = Alignment.Center,
                                 modifier = Modifier
-                                    .size(45.dp)
-                            )
-                        }
-                    }
-                    TextField(
-                        value = player2Value,
-                        onValueChange = {
-                            if (it.length <= maxLetterLength) {
-                                onEvent(GameEvent.GetSecondPlayerName(it))
+                                    .fillMaxSize()
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Outlined.SwapHoriz,
+                                    tint = if (isDarkThemeOn) Color.Cyan else Colors.get().blue,
+                                    contentDescription = "Player Position Switch",
+                                    modifier = Modifier
+                                        .size(45.dp)
+                                )
                             }
-                        },
-                        label = {
-                            Text( stringResource(id = R.string.player2_name))
-                        },
-                        placeholder = {
-                            Text( stringResource(id = if (state.isXFor1) R.string.player_o else R.string.player_x))
-                        },
-                        enabled = textField2State,
-                        keyboardOptions = keyboardOptions,
-                        colors = textFieldColors,
-                        modifier = Modifier.weight(1f)
-                    )
-                }
+                        }
+                        TextField(
+                            value = player2Value,
+                            onValueChange = {
+                                if (it.length <= maxLetterLength) {
+                                    onEvent(GameEvent.GetSecondPlayerName(it))
+                                }
+                            },
+                            label = {
+                                Text( stringResource(id = R.string.player2_name))
+                            },
+                            placeholder = {
+                                Text( stringResource(id = if (state.isXFor1) R.string.player_o else R.string.player_x))
+                            },
+                            enabled = textField2State,
+                            keyboardOptions = keyboardOptions,
+                            colors = textFieldColors,
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
                 }
 
                 //Player images preview and button to toggle them
@@ -301,74 +307,78 @@ fun GetPlayersPrefsDialog(
                             }
                         }
                     }
-                   if (state.gameMode != GameMode.Online) {
-                    Spacer(modifier = Modifier.width(40.dp))
-                    Card(
-                        shape = MaterialTheme.shapes.large,
-                        colors = CardDefaults.cardColors(
-                            containerColor = containerColor
-                        ),
-                        modifier = Modifier
-                            .size(60.dp)
-                            .clip(CircleShape)
-                            .clickable {
-                                onEvent(GameEvent.ToggleIsXForPlayer1)
-                            }
-                    ) {
-                        Box(
-                            contentAlignment = Alignment.Center,
+            
+                    // Show an second Image and toggle only in PvP and CPU Modes
+                    if (gameMode != GameMode.Online) {
+                        Spacer(modifier = Modifier.width(40.dp))
+                        Card(
+                            shape = MaterialTheme.shapes.large,
+                            colors = CardDefaults.cardColors(
+                                containerColor = containerColor
+                            ),
                             modifier = Modifier
-                                .fillMaxSize()
+                                .size(60.dp)
+                                .clip(CircleShape)
+                                .clickable {
+                                    onEvent(GameEvent.ToggleIsXForPlayer1)
+                                }
                         ) {
-                            Icon(
-                                imageVector = Icons.Outlined.SwapHoriz,
-                                tint = if (isDarkThemeOn) Color.Cyan else Colors.get().blue,
-                                contentDescription = "Player Icon Switch",
+                            Box(
+                                contentAlignment = Alignment.Center,
                                 modifier = Modifier
-                                    .size(45.dp)
-                            )
+                                    .fillMaxSize()
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Outlined.SwapHoriz,
+                                    tint = if (isDarkThemeOn) Color.Cyan else Colors.get().blue,
+                                    contentDescription = "Player Icon Switch",
+                                    modifier = Modifier
+                                        .size(45.dp)
+                                )
+                            }
                         }
-                    }
-                    Spacer(modifier = Modifier.width(40.dp))
-                    Box(
-                        modifier = canvasModifier,
-                        contentAlignment = Alignment.Center
-                    ) {
+                        Spacer(modifier = Modifier.width(40.dp))
                         Box(
-                            modifier = Modifier.size(35.dp),
+                            modifier = canvasModifier,
                             contentAlignment = Alignment.Center
                         ) {
-                            Canvas(
-                                modifier = Modifier.fillMaxSize()
+                            Box(
+                                modifier = Modifier.size(35.dp),
+                                contentAlignment = Alignment.Center
                             ) {
-                                if (isXFor1) {
-                                    drawCircleinDialog(circleColor)
-                                } else {
-                                    drawXinDialog(xColor)
+                                Canvas(
+                                    modifier = Modifier.fillMaxSize()
+                                ) {
+                                    if (isXFor1) {
+                                        drawCircleinDialog(circleColor)
+                                    } else {
+                                        drawXinDialog(xColor)
+                                    }
                                 }
                             }
                         }
-                    }
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier
-                            .size(40.dp)
-                            .clip(CircleShape)
-                            .clickable {
-                                canvasOnClick()
-                                onSettingsEvent(SettingsEvent.SetCustomizationType(customTypeForP2))
-                            }
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.Brush,
-                            contentDescription = "Color image picker",
+                        Box(
+                            contentAlignment = Alignment.Center,
                             modifier = Modifier
-                                .size(25.dp)
-                        )
+                                .size(40.dp)
+                                .clip(CircleShape)
+                                .clickable {
+                                    canvasOnClick()
+                                    onSettingsEvent(SettingsEvent.SetCustomizationType(customTypeForP2))
+                                }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.Brush,
+                                contentDescription = "Color image picker",
+                                modifier = Modifier
+                                    .size(25.dp)
+                            )
+                        }
                     }
                 }
-                }
-                if (state.gameMode == GameMode.Online) {
+
+                // Show Image toggle bellow player image if in Online Mode
+                if (gameMode == GameMode.Online) {
                     Box(
                         contentAlignment = Alignment.Center,
                         modifier = Modifier
@@ -393,8 +403,9 @@ fun GetPlayersPrefsDialog(
                         }
                     }
                 }
-                //Difficulty level selection
-                if (isCPUMode) {
+    
+                // Difficulty level selection
+                if (gameMode == GameMode.VsCPU) {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
