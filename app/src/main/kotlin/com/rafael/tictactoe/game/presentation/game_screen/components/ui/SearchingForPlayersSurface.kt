@@ -25,10 +25,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.model.Error
 import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameState
@@ -55,7 +57,7 @@ fun SearchingForPlayersSurface(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Row(
-               modifier = Modifier
+                modifier = Modifier
                     .padding(top = 70.dp)
                     .fillMaxWidth()
                     .height(45.dp),
@@ -66,7 +68,7 @@ fun SearchingForPlayersSurface(
                        .padding(end = 20.dp)
                        .size(45.dp),
                     onClick = {
-                    onEvent(GameEvent.GetRemotePlayers)
+                        onEvent(GameEvent.GetRemotePlayers)
                         onEvent(GameEvent.UpdateRequestState(RequestState.Loading))
                     }
                 ) {
@@ -96,18 +98,18 @@ fun SearchingForPlayersSurface(
                  modifier = Modifier
                      .fillMaxWidth(0.8f)
                      .padding(top = 20.dp),
-                 text = when (gameState.requestState) {
-                 RequestState.Loading -> "Procurando um jogador a sua altura..."
+                 text = stringResource( id = when (gameState.requestState) {
+                 RequestState.Loading -> R.string.searching_for_players
                      is RequestState.Failure -> {
                          when (gameState.requestState.type) {
-                             Error.IOError -> "Incapaz de conectar ao servidor, Verifique sua conexão com a internet"
-                             Error.NoPlayers -> "Não achamos um jogador digno :("
-                             Error.UnableToConnect -> "Não foi possivel conectar ao servidor"
-                             Error.HttpError -> "Um problema ocorreu durante a conexão com o servidor remoto"
+                             Error.IOError -> R.string.connection_error
+                             Error.NoPlayers -> R.string.cannot_find_player
+                             Error.UnableToConnect -> R.string.unable_connect_server
+                             Error.HttpError -> R.string.problem_during_server_connection
                          }
                      }
-                     RequestState.Success -> "Jogador encontrado: "
-                 },
+                     RequestState.Success -> R.string.player_found
+                 }),
                  style = MaterialTheme.typography.titleMedium.copy(
                      fontSize = 25.sp,
                      fontWeight = FontWeight.Bold
@@ -155,9 +157,9 @@ fun SearchingForPlayersSurface(
                 modifier = Modifier
                     .padding(top = 110.dp)
                     .fillMaxWidth(0.9f),
-                text = if (gameState.isYouPlayer1) {
-                    "Você começará o jogo :)"
-                } else "Você será o segundo jogador",
+                text = stringResource( id = if (gameState.isYouPlayer1) {
+                    R.string.you_will_start_game
+                } else R.string.you_will_be_second_player),
                 style = MaterialTheme.typography.titleMedium,
                 textAlign = TextAlign.Center
             )
@@ -168,8 +170,8 @@ fun SearchingForPlayersSurface(
                 text = when (gameState.requestState) {
                     is RequestState.Failure -> {
                         when (gameState.requestState.type) {
-                            Error.HttpError -> "Failure:\ncode: ${gameState.requestState.code}\nmessage: ${gameState.requestState.message}"
-                            else -> "Failure:\nmessage: ${gameState.requestState.message}"
+                            Error.HttpError -> "Failure: ${gameState.requestState.message}\nCode: ${gameState.requestState.code}"
+                            else -> "Failure: ${gameState.requestState.message}"
                         }
                     }
                     else -> ""

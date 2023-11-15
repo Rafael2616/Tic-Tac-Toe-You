@@ -52,6 +52,15 @@
     <string name="level_medium">Medium</string>
     <string name="level_hard">Hard</string>
     <string name="type_your_name">Type your name</string>
+    <string name="searching_for_players">Looking for a player at your level...</string>
+    <string name="connection_error">Unable to connect to the server. Check your internet connection</string>
+    <string name="cannot_find_player">We did not find a worthy player :(</string>
+    <string name="unable_connect_server">Unable to connect to the server</string>
+    <string name="problem_during_server_connection">A problem occurred while connecting to the remote server</string>
+    <string name="player_found">Player found: </string>
+    <string name="you_will_start_game">You will start the game :)</string>
+    <string name="you_will_be_second_player">You will be the second player</string>
+
     <string name="cpu">CPU</string>
 
 </resources>

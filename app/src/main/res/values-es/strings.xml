@@ -51,5 +51,14 @@
     <string name="level_easy">Fácil</string>
     <string name="level_medium">Medio</string>
     <string name="level_hard">Difícil</string>
+    <string name="type_your_name">Ingresa tu nombre</string>
+    <string name="searching_for_players">Buscando un jugador a tu altura...</string>
+    <string name="connection_error">No se pudo conectar al servidor. Verifica tu conexión a internet</string>
+    <string name="cannot_find_player">No se encontró un jugador digno :(</string>
+    <string name="unable_connect_server">No se pudo conectar al servidor</string>
+    <string name="problem_during_server_connection">Ocurrió un problema durante la conexión al servidor remoto</string>
+    <string name="player_found">Jugador encontrado: </string>
+    <string name="you_will_start_game">Comenzarás el juego :)</string>
+    <string name="you_will_be_second_player">Serás el segundo jugador</string>
 
 </resources>
