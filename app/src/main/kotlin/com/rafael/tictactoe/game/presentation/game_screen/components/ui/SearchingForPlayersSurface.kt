@@ -21,6 +21,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,6 +41,7 @@ import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.domain.model.RequestState
 import com.rafael.tictactoe.settings.domain.model.SettingsState
+import kotlinx.coroutines.delay
 
 @Composable
 fun SearchingForPlayersSurface(
@@ -117,6 +123,38 @@ fun SearchingForPlayersSurface(
                  color = MaterialTheme.colorScheme.onSurface,
                  textAlign = TextAlign.Center
             )
+            if (gameState.requestState == RequestState.Success) {            
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth(0.9f)
+                        .padding(top = 15.dp),
+                    text = stringResource(id = R.string.player_n) + " " + "<Nome do Jogador>",// + state.secondPlayer
+                    style = MaterialTheme.typography.titleMedium,
+                    textAlign = TextAlign.Center,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+
+                var timer by rememberSaveable { mutableIntStateOf(4) }
+                LaunchedEffect(Unit) {
+                    while(timer >= 0) {
+                        timer --
+                        delay(900L)
+                        if (timer == 0) {
+                            onEvent(GameEvent.StartOnlineMatch)
+                        }
+                    }
+                }
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth(0.9f)
+                        .padding(top = 15.dp),
+                    text = stringResource(id = R.string.game_will_start) + " " + timer.toString(),
+                    style = MaterialTheme.typography.titleMedium,
+                    textAlign = TextAlign.Center,
+                    color = Color.Green
+                )
+            }
+
             Box(
                 modifier = Modifier
                     .padding(top = 150.dp)

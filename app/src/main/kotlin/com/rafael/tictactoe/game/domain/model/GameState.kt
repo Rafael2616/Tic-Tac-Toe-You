@@ -50,5 +50,7 @@ data class GameState(
     val matchID : Int = 0,
     val isOnlinePlayerTurn: Boolean = false,
     val isYouPlayer1: Boolean = true,
-    val showGetPrefsDialog: Boolean = true
+    val showGetPrefsDialog: Boolean = true,
+    val showSearchForPlayersSurface: Boolean = false
+
 )

@@ -60,5 +60,7 @@
     <string name="player_found">Jogador encontrado: </string>
     <string name="you_will_start_game">Você vai começar o jogo :)</string>
     <string name="you_will_be_second_player">Você será o segundo jogador</string>
+    <string name="game_will_start">O jogo começará em:</string>
+    <string name="player_n">Jogador:</string>
 
 </resources>

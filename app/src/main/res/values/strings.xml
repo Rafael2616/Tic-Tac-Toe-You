@@ -60,6 +60,8 @@
     <string name="player_found">Player found: </string>
     <string name="you_will_start_game">You will start the game :)</string>
     <string name="you_will_be_second_player">You will be the second player</string>
+    <string name="game_will_start">The game will start in:</string>
+    <string name="player_n">Player:</string>
 
     <string name="cpu">CPU</string>
 

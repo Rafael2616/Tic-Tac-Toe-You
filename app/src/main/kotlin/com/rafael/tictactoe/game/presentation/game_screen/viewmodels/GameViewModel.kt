@@ -26,6 +26,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import java.io.IOException
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.Flow
@@ -96,8 +97,9 @@ class GameViewModel @Inject constructor(
                 _state.update { it.copy(
                     isXImage = it.isXFor1,
                     player1Name = event.player1Value,
-                    player2Name = event.player2Value)
-                }
+                    player2Name = event.player2Value,
+                    showGetPrefsDialog = false
+                )}
                 if (isCPUMode && isCPUPlayer1) {
                    _state.update { it.copy(isCPU = true) }
                    cpuMoveLevelsHandler(
@@ -112,7 +114,9 @@ class GameViewModel @Inject constructor(
                         play = true
                     )}
                 } else {
-                    _state.update { it.copy(showGetPrefsDialog = false)}
+                    _state.update { it.copy(
+                        showSearchForPlayersSurface = true
+                    )}
                     this@GameViewModel.onEvent(GameEvent.UpdateIsYouPlayer1)
                 }
                 settingsVM.execUIClickSound()
@@ -139,8 +143,8 @@ class GameViewModel @Inject constructor(
                 _state.update { it.copy(
                     showVictoryCounterReseter = false,
                     player1Wins = 0,
-                    player2Wins = 0)
-                }
+                    player2Wins = 0
+                )}
                 settingsVM.execUIClickSound()
             }
             GameEvent.PlayAgain -> {
@@ -209,18 +213,13 @@ class GameViewModel @Inject constructor(
                     try {
                         val response = gameService.getPlayers()
                         delay(2000L)
-                        if (response.isSuccessful && response.body() != null) {
-                            availablePlayers = response.body()!!
-                            _state.update { it.copy(
-                                requestState = RequestState.Success,
-                                isTimerOn = true,
-                                play = true
-                            )}
+                        if (!response.isSuccessful && response.body() == null) {
+                            //availablePlayers = response.body()!!
+                            _state.update { it.copy(requestState = RequestState.Success)}
                         } else {
                             if (!response.isSuccessful) {
-                               val message = "Unable to connect to the server"
-                                Log.e("GameViewModel", message)
-                                _state.update { it.copy(requestState = RequestState.Failure(Error.UnableToConnect, message)) }
+                                _state.update { it.copy(requestState = RequestState.Failure(Error.IOError, response.code().toString())) }
+                                throw IOException("Request failed with code: " + response.code())
                             }else if (response.body() == null) {
                                 val message = "No players avaliable in server"
                                 Log.e("GameViewModel", message)
@@ -229,7 +228,7 @@ class GameViewModel @Inject constructor(
                         }
                     } catch(e: IOException) {
                          Log.e("GameViewModel", "IO error: $e")
-                         _state.update { it.copy(requestState = RequestState.Failure(Error.IOError, e.toString())) }
+                         _state.update { it.copy(requestState = RequestState.Failure(Error.UnableToConnect, e.toString())) }
                     } catch(e: HttpException) {
                          Log.e("GameViewModel", "HTTP error: ${e.code()}, ${e.message()}")
                          _state.update { it.copy(requestState = RequestState.Failure(Error.HttpError, e.message(), e.code())) }
@@ -254,8 +253,8 @@ class GameViewModel @Inject constructor(
                         if (response.isSuccessful) {
                             _state.update { it.copy(requestState = RequestState.Success) }
                         } else {
-                            Log.e("GameViewModel", "Unable to post player in server")
-                            _state.update { it.copy(requestState = RequestState.Failure(Error.NoPlayers)) }
+                            _state.update { it.copy(requestState = RequestState.Failure(Error.UnableToConnect, response.code().toString())) }
+                            throw IOException("Request failed with code: " + response.code())
                         }
                     } catch(e: IOException) {
                          Log.e("GameViewModel", "IO error: $e")
@@ -273,8 +272,8 @@ class GameViewModel @Inject constructor(
                         if (response.isSuccessful) {
                             _state.update { it.copy(requestState = RequestState.Success) }
                         } else {
-                            Log.e("GameViewModel", "Unable to remove player from server")
-                            _state.update { it.copy(requestState = RequestState.Failure(Error.NoPlayers)) }
+                            _state.update { it.copy(requestState = RequestState.Failure(Error.UnableToConnect, response.code().toString())) }
+                            throw IOException("Request failed with code: " + response.code())
                         }
                     } catch(e: IOException) {
                          Log.e("GameViewModel", "IO error: $e")
@@ -307,8 +306,8 @@ class GameViewModel @Inject constructor(
                         if (response.isSuccessful) {
                             _state.update { it.copy(requestState = RequestState.Success) }
                         } else {
-                            Log.e("GameViewModel", "Unable to remove player from server")
-                            _state.update { it.copy(requestState = RequestState.Failure(Error.NoPlayers)) }
+                            _state.update { it.copy(requestState = RequestState.Failure(Error.UnableToConnect, response.code().toString())) }
+                            throw IOException("Request failed with code: " + response.code())
                         }
                     } catch(e: IOException) {
                          Log.e("GameViewModel", "IO error: $e")
@@ -340,8 +339,8 @@ class GameViewModel @Inject constructor(
                                 isGameFinished = onlineGameState.isGameFinished.value*/
                             )}   
                         } else {
-                            Log.e("GameViewModel", "Unable to get players from server")
-                            _state.update { it.copy(requestState = RequestState.Failure(Error.NoPlayers)) }
+                            _state.update { it.copy(requestState = RequestState.Failure(Error.UnableToConnect, response.code().toString())) }
+                            throw IOException("Request failed with code: " + response.code())
                         }
                     } catch(e: IOException) {
                          Log.e("GameViewModel", "IO error: $e")
@@ -374,8 +373,8 @@ class GameViewModel @Inject constructor(
                             onlineGameState = response.body()!!
                             _state.update { it.copy(requestState = RequestState.Success) }
                           } else {
-                            Log.e("GameViewModel", "Unable to get players from server")
-                            _state.update { it.copy(requestState = RequestState.Failure(Error.NoPlayers)) }
+                            _state.update { it.copy(requestState = RequestState.Failure(Error.UnableToConnect, response.code().toString())) }
+                            throw IOException("Request failed with code: " + response.code())
                         }
                     } catch(e: IOException) {
                          Log.e("GameViewModel", "IO error: $e")
@@ -393,8 +392,8 @@ class GameViewModel @Inject constructor(
                         if (response.isSuccessful) {
                             _state.update { it.copy(requestState = RequestState.Success) }
                         } else {
-                            Log.e("GameViewModel", "Unable to finish match in server")
-                            _state.update { it.copy(requestState = RequestState.Failure(Error.NoPlayers)) }
+                            _state.update { it.copy(requestState = RequestState.Failure(Error.UnableToConnect, response.code().toString())) }
+                            throw IOException("Request failed with code: " + response.code())
                         }
                     } catch(e: IOException) {
                          Log.e("GameViewModel", "IO error: $e")
@@ -414,8 +413,15 @@ class GameViewModel @Inject constructor(
 
                 _state.update { it.copy(
                     isYouPlayer1 = value,
-                    localPlayer1 = value,
-                    isPlayer1 = value
+                    localPlayer1 = value
+                )}
+            }
+            GameEvent.StartOnlineMatch -> {
+                _state.update {it.copy(
+                    play = true,
+                    isTimerOn = true,
+                    isPlayer1 = state.value.localPlayer1,
+                    showSearchForPlayersSurface = false
                 )}
             }
         }

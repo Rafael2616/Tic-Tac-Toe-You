@@ -31,7 +31,6 @@ import com.rafael.tictactoe.game.domain.checkers.GotOldChecker
 import com.rafael.tictactoe.game.domain.checkers.WinnerChecker
 import com.rafael.tictactoe.game.domain.game_toast.ToastNameHandler
 import com.rafael.tictactoe.game.domain.model.GameEvent
-import com.rafael.tictactoe.game.domain.model.GameMode
 import com.rafael.tictactoe.game.domain.restart_game.RestartButtonLogic
 import com.rafael.tictactoe.settings.presentation.settings_screen.components.ColorSelectionDialog
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
@@ -109,7 +108,7 @@ fun GameScreen(
         ColorSelectionDialog(settingsVM::onEvent, settingsState)
     }
 
-    if (!state.showGetPrefsDialog && state.gameMode == GameMode.Online) {
+    if (state.showSearchForPlayersSurface) {
         SearchingForPlayersSurface(
             state,
             settingsState,

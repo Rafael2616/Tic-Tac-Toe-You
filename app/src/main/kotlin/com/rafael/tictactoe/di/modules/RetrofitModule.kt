@@ -41,7 +41,6 @@ class RetrofitModule {
     }
 
     @Provides
-    @Singleton
     fun provideGameService(retrofit: Retrofit): OnlineGameDao {
         return retrofit.create(OnlineGameDao::class.java)
     }
