@@ -37,8 +37,6 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.update
 import retrofit2.HttpException
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.create
 
 @HiltViewModel
 class GameViewModel @Inject constructor(
@@ -46,12 +44,11 @@ class GameViewModel @Inject constructor(
     private val settingsVM: SettingsViewModel,
     private val context: Application,
     private val repository: GameRepository,
-    private val retrofit: Retrofit
+    private val gameService: OnlineGameDao
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(GameState())
     val state = _state.asStateFlow()
-    val gameService = retrofit.create(OnlineGameDao::class.java)
     var availablePlayers: Flow<List<Player>> = flow { emit(emptyList()) }
     var onlineGameState: Flow<OnlineGameState>? = null
    //val secondPlayer: Flow<Player> = availablePlayers.first()
