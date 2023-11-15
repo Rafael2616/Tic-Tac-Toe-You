@@ -176,7 +176,7 @@ class GameViewModel @Inject constructor(
                 settingsVM.onEvent(SettingsEvent.ShowColorSelectionDialog(false))
                 val cardState = state.value.card
                 _state.update { GameState() }
-            
+
                 //Keep card variable state
                 _state.update { it.copy(card = cardState)}
                 settingsVM.execUIClickSound()
@@ -213,8 +213,8 @@ class GameViewModel @Inject constructor(
                     try {
                         val response = gameService.getPlayers()
                         delay(2000L)
-                        if (!response.isSuccessful && response.body() == null) {
-                            //availablePlayers = response.body()!!
+                        if (response.isSuccessful && response.body() != null) {
+                            availablePlayers = response.body()!!
                             _state.update { it.copy(requestState = RequestState.Success)}
                         } else {
                             if (!response.isSuccessful) {
@@ -224,7 +224,7 @@ class GameViewModel @Inject constructor(
                                 val message = "No players avaliable in server"
                                 Log.e("GameViewModel", message)
                                 _state.update { it.copy(requestState = RequestState.Failure(Error.NoPlayers, message)) }                            
-                            }           
+                            }
                         }
                     } catch(e: IOException) {
                          Log.e("GameViewModel", "IO error: $e")
