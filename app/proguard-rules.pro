@@ -19,3 +19,23 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# Rules for Room DB
+-keepattributes RoomDatabase, Entity, PrimaryKey, Dao, TypeConverters
+
+-keep class * extends androidx.room.RoomDatabase
+-keep class * extends androidx.room.RoomDatabase.Builder
+-keep class * extends androidx.room.migration.Migration
+-keep class * extends androidx.room.InvalidationTracker
+-keep class * extends androidx.room.RoomSQLiteQuery
+-keep class * extends androidx.room.util.CursorUtil
+-keep class * extends androidx.room.RoomSQLiteOpenHelper
+-keep class * extends androidx.room.util.TableInfo
+
+# Add rules to improve performance
+-keepclassmembers class * extends androidx.room.RoomDatabase {
+    public static void destroyInstance(android.content.Context, java.lang.String);
+}
+-keepclasseswithmembers class * extends androidx.room.RoomDatabase {
+    public static void clearAllTables(android.content.Context, java.lang.String);
+}
