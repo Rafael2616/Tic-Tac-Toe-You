@@ -30,7 +30,7 @@ object SettingsModule {
     @Provides
     @Singleton
     fun provideSettingsRepository(database: SettingsDatabase): SettingsRepository {
-        return SettingsRepositoryImpl(database.settingsDao)
+        return SettingsRepositoryImpl(database.settingsDao())
     }
 
     @Provides

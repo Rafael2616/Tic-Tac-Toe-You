@@ -12,9 +12,9 @@ import com.rafael.tictactoe.game.domain.model.GameEntity
 ) 
 abstract class GameDatabase : RoomDatabase() {
 
-	abstract val gameDao: GameDao
+	abstract fun gameDao(): GameDao
 
 	companion object {
-   	 const val DATABASE_NAME = "game_database"
+   	 const val DATABASE_NAME = "game"
 	}
 }

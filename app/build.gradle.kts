@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     id("androidx.room")
     id("com.android.application")
@@ -14,10 +16,16 @@ android {
         applicationId = "com.rafael.tictactoe"
         minSdk = 26
         targetSdk = 34
-        versionCode = 4
-        versionName = "1.3.1"
-        
-        buildConfigField("Boolean", "ROOM_USE_INCREMENTAL_COMPILATION", "true")
+        versionCode = 5
+        versionName = "1.4.0"
+
+        tasks.withType<KotlinCompile>().configureEach {
+            ksp {
+                arg("room.schemaLocation", "$projectDir/schemas")
+                arg("room.incremental", "true")
+                arg("room.generateKotlin", "true")
+            }
+        }
     }
 
     signingConfigs {
@@ -81,7 +89,7 @@ android {
 	}
 
     room {
-        schemaDirectory("schemas")
+        schemaDirectory("$projectDir/schemas")
     }
 }
 

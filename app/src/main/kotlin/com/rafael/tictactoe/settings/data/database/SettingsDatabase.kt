@@ -11,9 +11,10 @@ import com.rafael.tictactoe.settings.domain.model.SettingsEntity
     exportSchema = false
 ) 
 abstract class SettingsDatabase : RoomDatabase() {
-    abstract val settingsDao: SettingsDao
+
+    abstract fun settingsDao(): SettingsDao
 
     companion object {
-        const val DATABASE_NAME = "settings_database"
+        const val DATABASE_NAME = "settings"
     }
 }

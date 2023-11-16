@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface GameDao {
 
-	@Query("SELECT * FROM GameEntity")
+	@Query("SELECT * FROM game")
 	fun getGameValues(): Flow<GameEntity>
 
 	@Upsert

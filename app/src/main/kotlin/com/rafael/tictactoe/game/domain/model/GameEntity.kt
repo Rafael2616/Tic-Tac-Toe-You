@@ -3,7 +3,7 @@ package com.rafael.tictactoe.game.domain.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "game")
 data class GameEntity(
     @PrimaryKey
     var currentPlayerName: String,

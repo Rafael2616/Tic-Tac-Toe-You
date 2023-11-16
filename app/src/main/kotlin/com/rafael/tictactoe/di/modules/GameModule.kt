@@ -35,7 +35,7 @@ object GameModule {
         database: GameDatabase
     ) : GameRepository {
         return GameRepositoryImpl(
-            database.gameDao
+            database.gameDao()
         )
     }
 
@@ -47,7 +47,7 @@ object GameModule {
         context: Application,
         repository: GameRepository,
         gameService: OnlineGameDao
-    ) : GameViewModel {
+    ): GameViewModel {
         return GameViewModel(
             player,
             settingsVM,
