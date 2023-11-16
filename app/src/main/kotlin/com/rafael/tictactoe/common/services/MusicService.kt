@@ -9,9 +9,10 @@ import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.R
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class MusicService : Service() {
+class MusicService @Inject constructor() : Service() {
 
     private lateinit var exoPlayer: ExoPlayer
 	val backgroundMusicFile = R.raw.background_music

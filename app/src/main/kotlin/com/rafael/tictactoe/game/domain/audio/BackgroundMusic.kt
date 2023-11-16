@@ -8,13 +8,14 @@ import com.rafael.tictactoe.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.domain.model.SettingsState
 
 fun BackgroundMusic(
+    service: MusicService,
     context: Context,
     onEvent: (SettingsEvent) -> Unit,
     state: SettingsState,
     isAppInOnStop: Boolean = false
 ) {
 	val isServiceRunning = ::RunningServiceVerifier
-    val serviceIntent = Intent(context, MusicService::class.java)
+    val serviceIntent = Intent(context, service::class.java)
     val isBMPlaying = state.isBMPlaying
     val isBackgroundMusicOn = state.isBackgroundMusicOn
 

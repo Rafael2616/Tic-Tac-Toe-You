@@ -8,6 +8,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.common.presentation.navigation.TicTacToe
+import com.rafael.tictactoe.common.services.MusicService
 import com.rafael.tictactoe.game.domain.audio.BackgroundMusic
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,6 +20,7 @@ class TicTacToeActivity : ComponentActivity() {
 
     @Inject lateinit var settingsVM: SettingsViewModel
     @Inject lateinit var exoPlayer: ExoPlayer
+    @Inject lateinit var musicService: MusicService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,24 +33,36 @@ class TicTacToeActivity : ComponentActivity() {
         }
     }
 
-    override fun onStop() {
-        BackgroundMusic(
-            context = this,
-            onEvent = settingsVM::onEvent,
-            state = settingsVM.state.value,
-            isAppInOnStop = true
-        )
-        super.onStop()
-    }
-    
+    var focusHasChanged = false
+
     override fun onResume() {
         BackgroundMusic(
+            service = musicService,
             context = this,
             onEvent = settingsVM::onEvent,
             state = settingsVM.state.value,
             isAppInOnStop = false
         )
         super.onResume()
+    }
+
+    override fun onStop() {
+        BackgroundMusic(
+            service = musicService,
+            context = this,
+            onEvent = settingsVM::onEvent,
+            state = settingsVM.state.value,
+            isAppInOnStop = if (focusHasChanged) false else true
+        )
+        super.onStop()
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+
+        if (hasFocus) {
+            focusHasChanged = true
+        } else focusHasChanged = false
     }
 
     override fun onDestroy() {

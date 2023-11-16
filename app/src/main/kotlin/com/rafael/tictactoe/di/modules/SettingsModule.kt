@@ -3,6 +3,7 @@ package com.rafael.tictactoe.di
 import android.app.Application
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.room.Room
+import com.rafael.tictactoe.common.services.MusicService
 import com.rafael.tictactoe.settings.data.database.SettingsDatabase
 import com.rafael.tictactoe.settings.data.repository.SettingsRepositoryImpl
 import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
@@ -38,12 +39,14 @@ object SettingsModule {
     fun provideSettingsViewModel(
         repository: SettingsRepository,
         player: ExoPlayer,
-        context: Application
+        context: Application,
+        service: MusicService
     ): SettingsViewModel {
         return SettingsViewModel(
             repository,
             player,
-            context
+            context,
+            service
         )
     }
 }

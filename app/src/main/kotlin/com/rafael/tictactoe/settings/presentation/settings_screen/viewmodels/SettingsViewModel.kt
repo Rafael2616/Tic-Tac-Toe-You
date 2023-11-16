@@ -6,6 +6,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.media3.exoplayer.ExoPlayer
+import com.rafael.tictactoe.common.services.MusicService
 import com.rafael.tictactoe.common.domain.util.UiClickSound
 import com.rafael.tictactoe.game.domain.audio.BackgroundMusic
 import com.rafael.tictactoe.settings.domain.enums.Colors
@@ -28,8 +29,9 @@ import kotlinx.coroutines.flow.update
 class SettingsViewModel @Inject constructor(
     private val repository: SettingsRepository,
     private val player: ExoPlayer,
-    private val context: Application
-) : ViewModel() {
+    private val context: Application,
+    private val service: MusicService
+): ViewModel() {
 
     //Get default values for settings variables from SettingsEntity (used to avoid NPEs)
     val defaultSettings = SettingsEntity.getDefaultSettings()
@@ -62,7 +64,12 @@ class SettingsViewModel @Inject constructor(
 			        repository.setAllSettingsValues(settings)
                 }
                 execUIClickSound()
-                BackgroundMusic(context, this::onEvent, state.value)
+                BackgroundMusic(
+                    context = context,
+                    onEvent = this::onEvent,
+                    state = state.value,
+                    service = service
+                )
             }
  	       SettingsEvent.ToggleIsDarkThemeOn -> {
                 _state.update { it.copy(isDarkThemeOn = !it.isDarkThemeOn) }
