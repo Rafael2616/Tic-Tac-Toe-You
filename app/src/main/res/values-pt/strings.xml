@@ -57,6 +57,7 @@
     <string name="cannot_find_player">Não achamos um jogador digno :(</string>
     <string name="unable_connect_server">Não foi possivel conectar ao servidor</string>
     <string name="problem_during_server_connection">Um problema ocorreu durante a conexão com o servidor remoto</string>
+    <string name="unknown_error">Erro desconhecido enquanto procurávamos por jogadores</string>
     <string name="player_found">Jogador encontrado: </string>
     <string name="you_will_start_game">Você vai começar o jogo :)</string>
     <string name="you_will_be_second_player">Você será o segundo jogador</string>

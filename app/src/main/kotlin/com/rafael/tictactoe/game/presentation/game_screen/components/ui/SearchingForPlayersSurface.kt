@@ -50,6 +50,7 @@ fun SearchingForPlayersSurface(
     onEvent: (GameEvent) -> Unit
 ) {
     onEvent(GameEvent.GetRemotePlayers)
+    val requestState = gameState.requestState
 
     Surface(
         color = Color.Black.copy(alpha = if (settingsState.isDarkThemeOn) 0.5f else 0.3f),
@@ -104,17 +105,23 @@ fun SearchingForPlayersSurface(
                  modifier = Modifier
                      .fillMaxWidth(0.8f)
                      .padding(top = 20.dp),
-                 text = stringResource( id = when (gameState.requestState) {
-                 RequestState.Loading -> R.string.searching_for_players
+                 text = stringResource( id = when (requestState) {
+                     RequestState.Loading -> R.string.searching_for_players
+                     RequestState.Success -> R.string.player_found
                      is RequestState.Failure -> {
-                         when (gameState.requestState.type) {
-                             Error.IOError -> R.string.connection_error
-                             Error.NoPlayers -> R.string.cannot_find_player
-                             Error.UnableToConnect -> R.string.unable_connect_server
+                         when (requestState.type) {
+                             Error.IOError -> {
+                                 if (requestState.message.contains("404") && !requestState.message.contains("No players")) {
+                                      R.string.unable_connect_server
+                                  } else if (requestState.message.contains("UnknownHostException")) {
+                                      R.string.connection_error
+                                  } else if (requestState.message.contains("No players")) {
+                                      R.string.cannot_find_player
+                                 } else R.string.unknown_error
+                             }
                              Error.HttpError -> R.string.problem_during_server_connection
                          }
                      }
-                     RequestState.Success -> R.string.player_found
                  }),
                  style = MaterialTheme.typography.titleMedium.copy(
                      fontSize = 25.sp,
@@ -123,7 +130,7 @@ fun SearchingForPlayersSurface(
                  color = MaterialTheme.colorScheme.onSurface,
                  textAlign = TextAlign.Center
             )
-            if (gameState.requestState == RequestState.Success) {            
+            if (requestState == RequestState.Success) {            
                 Text(
                     modifier = Modifier
                         .fillMaxWidth(0.9f)
@@ -162,7 +169,7 @@ fun SearchingForPlayersSurface(
                     .height(70.dp),
                  contentAlignment = Alignment.Center
             ) {
-                when (gameState.requestState) {
+                when (requestState) {
                     RequestState.Loading -> {
                         CircularProgressIndicator(
                             modifier = Modifier
@@ -181,7 +188,7 @@ fun SearchingForPlayersSurface(
                         )
                     }
                     RequestState.Success -> {
-                       Icon(
+                        Icon(
                             imageVector = Icons.Outlined.Check,
                             contentDescription = null,
                             modifier = Modifier
@@ -205,11 +212,11 @@ fun SearchingForPlayersSurface(
                 modifier = Modifier
                     .padding(top = 60.dp)
                     .fillMaxWidth(0.9f),
-                text = when (gameState.requestState) {
+                text = when (requestState) {
                     is RequestState.Failure -> {
-                        when (gameState.requestState.type) {
-                            Error.HttpError -> "Failure: ${gameState.requestState.message}\nCode: ${gameState.requestState.code}"
-                            else -> "Failure: ${gameState.requestState.message}"
+                        when (requestState.type) {
+                            Error.HttpError -> "Failure: ${requestState.message}\nCode: ${requestState.code}"
+                            Error.IOError -> "Failure: ${requestState.message}"
                         }
                     }
                     else -> ""

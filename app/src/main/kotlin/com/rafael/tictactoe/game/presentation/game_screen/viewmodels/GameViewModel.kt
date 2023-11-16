@@ -26,7 +26,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import java.io.IOException
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.Flow
@@ -38,6 +37,8 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.update
 import retrofit2.HttpException
 import retrofit2.Response
+
+const val TAG = "GameViewModel"
 
 @HiltViewModel
 class GameViewModel @Inject constructor(
@@ -218,19 +219,18 @@ class GameViewModel @Inject constructor(
                             _state.update { it.copy(requestState = RequestState.Success)}
                         } else {
                             if (!response.isSuccessful) {
-                                _state.update { it.copy(requestState = RequestState.Failure(Error.IOError, response.code().toString())) }
-                                throw IOException("Request failed with code: " + response.code())
-                            }else if (response.body() == null) {
-                                val message = "No players avaliable in server"
-                                Log.e("GameViewModel", message)
-                                _state.update { it.copy(requestState = RequestState.Failure(Error.NoPlayers, message)) }                            
+                                throw IOException("Request failed with code: " + response.code() + response.message())
+                            } else if (response.body() == null) {
+                                val message = " message: No players avaliable in server"
+                                Log.e(TAG, message)
+                                throw IOException("Request failed with code: " + response.code() + message)
                             }
                         }
                     } catch(e: IOException) {
-                         Log.e("GameViewModel", "IO error: $e")
-                         _state.update { it.copy(requestState = RequestState.Failure(Error.UnableToConnect, e.toString())) }
+                         Log.e(TAG, "IO error: $e")
+                         _state.update { it.copy(requestState = RequestState.Failure(Error.IOError, e.toString())) }
                     } catch(e: HttpException) {
-                         Log.e("GameViewModel", "HTTP error: ${e.code()}, ${e.message()}")
+                         Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
                          _state.update { it.copy(requestState = RequestState.Failure(Error.HttpError, e.message(), e.code())) }
                     }
                 }
@@ -253,15 +253,14 @@ class GameViewModel @Inject constructor(
                         if (response.isSuccessful) {
                             _state.update { it.copy(requestState = RequestState.Success) }
                         } else {
-                            _state.update { it.copy(requestState = RequestState.Failure(Error.UnableToConnect, response.code().toString())) }
                             throw IOException("Request failed with code: " + response.code())
                         }
                     } catch(e: IOException) {
-                         Log.e("GameViewModel", "IO error: $e")
-                         _state.update { it.copy(requestState = RequestState.Failure(Error.IOError)) }
+                         Log.e(TAG, "IO error: $e")
+                         _state.update { it.copy(requestState = RequestState.Failure(Error.IOError, e.toString())) }
                     } catch(e: HttpException) {
-                         Log.e("GameViewModel", "HTTP error: ${e.code()}, ${e.message()}")
-                         _state.update { it.copy(requestState = RequestState.Failure(Error.HttpError)) }
+                         Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
+                         _state.update { it.copy(requestState = RequestState.Failure(Error.HttpError, e.message(), e.code())) }
                     }
                 }
             }
@@ -272,15 +271,14 @@ class GameViewModel @Inject constructor(
                         if (response.isSuccessful) {
                             _state.update { it.copy(requestState = RequestState.Success) }
                         } else {
-                            _state.update { it.copy(requestState = RequestState.Failure(Error.UnableToConnect, response.code().toString())) }
                             throw IOException("Request failed with code: " + response.code())
                         }
                     } catch(e: IOException) {
-                         Log.e("GameViewModel", "IO error: $e")
-                         _state.update { it.copy(requestState = RequestState.Failure(Error.IOError)) }
+                         Log.e(TAG, "IO error: $e")
+                         _state.update { it.copy(requestState = RequestState.Failure(Error.IOError, e.toString())) }
                     } catch(e: HttpException) {
-                         Log.e("GameViewModel", "HTTP error: ${e.code()}, ${e.message()}")
-                         _state.update { it.copy(requestState = RequestState.Failure(Error.HttpError)) }
+                         Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
+                         _state.update { it.copy(requestState = RequestState.Failure(Error.HttpError, e.message(), e.code())) }
                     }
                 }
             }
@@ -306,15 +304,14 @@ class GameViewModel @Inject constructor(
                         if (response.isSuccessful) {
                             _state.update { it.copy(requestState = RequestState.Success) }
                         } else {
-                            _state.update { it.copy(requestState = RequestState.Failure(Error.UnableToConnect, response.code().toString())) }
                             throw IOException("Request failed with code: " + response.code())
                         }
                     } catch(e: IOException) {
-                         Log.e("GameViewModel", "IO error: $e")
-                         _state.update { it.copy(requestState = RequestState.Failure(Error.IOError)) }
+                         Log.e(TAG, "IO error: $e")
+                         _state.update { it.copy(requestState = RequestState.Failure(Error.IOError, e.toString())) }
                     } catch(e: HttpException) {
-                         Log.e("GameViewModel", "HTTP error: ${e.code()}, ${e.message()}")
-                         _state.update { it.copy(requestState = RequestState.Failure(Error.HttpError)) }
+                         Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
+                         _state.update { it.copy(requestState = RequestState.Failure(Error.HttpError, e.message(), e.code())) }
                     }
                 }
             }
@@ -339,15 +336,14 @@ class GameViewModel @Inject constructor(
                                 isGameFinished = onlineGameState.isGameFinished.value*/
                             )}   
                         } else {
-                            _state.update { it.copy(requestState = RequestState.Failure(Error.UnableToConnect, response.code().toString())) }
                             throw IOException("Request failed with code: " + response.code())
                         }
                     } catch(e: IOException) {
-                         Log.e("GameViewModel", "IO error: $e")
-                         _state.update { it.copy(requestState = RequestState.Failure(Error.IOError)) }
+                         Log.e(TAG, "IO error: $e")
+                         _state.update { it.copy(requestState = RequestState.Failure(Error.IOError, e.toString())) }
                     } catch(e: HttpException) {
-                         Log.e("GameViewModel", "HTTP error: ${e.code()}, ${e.message()}")
-                         _state.update { it.copy(requestState = RequestState.Failure(Error.HttpError)) }
+                         Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
+                         _state.update { it.copy(requestState = RequestState.Failure(Error.HttpError, e.message(), e.code())) }
                     }
                 }
             }
@@ -373,15 +369,14 @@ class GameViewModel @Inject constructor(
                             onlineGameState = response.body()!!
                             _state.update { it.copy(requestState = RequestState.Success) }
                           } else {
-                            _state.update { it.copy(requestState = RequestState.Failure(Error.UnableToConnect, response.code().toString())) }
                             throw IOException("Request failed with code: " + response.code())
                         }
                     } catch(e: IOException) {
-                         Log.e("GameViewModel", "IO error: $e")
-                         _state.update { it.copy(requestState = RequestState.Failure(Error.IOError)) }
+                         Log.e(TAG, "IO error: $e")
+                         _state.update { it.copy(requestState = RequestState.Failure(Error.IOError, e.toString())) }
                     } catch(e: HttpException) {
-                         Log.e("GameViewModel", "HTTP error: ${e.code()}, ${e.message()}")
-                         _state.update { it.copy(requestState = RequestState.Failure(Error.HttpError)) }
+                         Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
+                         _state.update { it.copy(requestState = RequestState.Failure(Error.HttpError, e.message(), e.code())) }
                     }
                 }
             }
@@ -392,15 +387,14 @@ class GameViewModel @Inject constructor(
                         if (response.isSuccessful) {
                             _state.update { it.copy(requestState = RequestState.Success) }
                         } else {
-                            _state.update { it.copy(requestState = RequestState.Failure(Error.UnableToConnect, response.code().toString())) }
                             throw IOException("Request failed with code: " + response.code())
                         }
                     } catch(e: IOException) {
-                         Log.e("GameViewModel", "IO error: $e")
-                         _state.update { it.copy(requestState = RequestState.Failure(Error.IOError)) }
+                         Log.e(TAG, "IO error: $e")
+                         _state.update { it.copy(requestState = RequestState.Failure(Error.IOError, e.toString())) }
                     } catch(e: HttpException) {
-                         Log.e("GameViewModel", "HTTP error: ${e.code()}, ${e.message()}")
-                         _state.update { it.copy(requestState = RequestState.Failure(Error.HttpError)) }
+                         Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
+                         _state.update { it.copy(requestState = RequestState.Failure(Error.HttpError, e.message(), e.code())) }
                     }
                 }
             }

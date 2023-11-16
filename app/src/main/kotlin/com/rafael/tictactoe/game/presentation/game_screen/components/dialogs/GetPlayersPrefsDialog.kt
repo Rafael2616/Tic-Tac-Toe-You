@@ -60,7 +60,6 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.LocalView
@@ -94,8 +93,6 @@ fun GetPlayersPrefsDialog(
     val view = LocalView.current
     val focusManager = LocalFocusManager.current
     val keyboardController = LocalSoftwareKeyboardController.current
-    val density = LocalDensity.current.density
-    val densityHeight = (view.height / density ).dp
     val focusRequester = remember { FocusRequester() }
     var isKeyboardOpen by rememberSaveable {  mutableStateOf(false) }
     val isXFor1 = state.isXFor1
@@ -123,7 +120,7 @@ fun GetPlayersPrefsDialog(
         if (isKeyboardOpen) {
             WindowInsets.ime.asPaddingValues().calculateBottomPadding().plus(8.dp)
         } else {
-            (densityHeight / 2 - dialogHeight / 2)
+            0.dp
         }
     )
 
@@ -143,7 +140,7 @@ fun GetPlayersPrefsDialog(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(bottom = bottomPadding),
-            contentAlignment = Alignment.BottomCenter
+            contentAlignment =if (isKeyboardOpen) Alignment.BottomCenter else Alignment.Center
         ) {
             Card(
                 shape = MaterialTheme.shapes.large,
