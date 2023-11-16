@@ -62,7 +62,9 @@ class TicTacToeActivity : ComponentActivity() {
 
         if (hasFocus) {
             focusHasChanged = true
-        } else focusHasChanged = false
+        } else {
+            focusHasChanged = false
+        }
     }
 
     override fun onDestroy() {

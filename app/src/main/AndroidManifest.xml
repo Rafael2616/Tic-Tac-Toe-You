@@ -14,17 +14,19 @@
         android:hardwareAccelerated="true"
         android:resizeableActivity="false"
         android:theme="@style/AppTheme">
+
         <service android:name=".common.services.MusicService"/>
+    
         <activity
             android:name=".TicTacToeActivity"
             android:exported="true"
-            android:configChanges="orientation"
-            >
+            android:configChanges="uiMode" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+    
     </application>
 
 </manifest>
