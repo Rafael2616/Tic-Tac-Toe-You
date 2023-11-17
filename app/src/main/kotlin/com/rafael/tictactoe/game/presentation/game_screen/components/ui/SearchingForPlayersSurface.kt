@@ -209,10 +209,12 @@ fun SearchingForPlayersSurface(
             Text(
                 modifier = Modifier
                     .weight(0.8f)
-                    .fillMaxWidth(0.9f),
-                text = stringResource( id = if (gameState.isYouPlayer1) {
+                    .fillMaxWidth(0.95f),
+                text = ">>>  " + stringResource( id = if (gameState.isYouPlayer1) {
                     R.string.you_will_start_game
-                } else R.string.you_will_be_second_player),
+                } else {
+                    R.string.you_will_be_second_player
+                }) + "  <<<",
                 style = MaterialTheme.typography.titleMedium,
                 textAlign = TextAlign.Center
             )
@@ -229,7 +231,7 @@ fun SearchingForPlayersSurface(
                     }
                     else -> ""
                 },
-                style = MaterialTheme.typography.bodyLarge,
+                style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
