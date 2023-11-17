@@ -71,7 +71,7 @@ fun SearchingForPlayersSurface(
         ) {
             Row(
                 modifier = Modifier
-                    .weight(1.2f)
+                    .weight(1f)
                     .fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.End
@@ -110,7 +110,7 @@ fun SearchingForPlayersSurface(
             Text(
                  modifier = Modifier
                      .fillMaxWidth(0.8f)
-                     .weight(0.65f),
+                     .weight(1.4f),
                  text = stringResource( id = when (requestState) {
                      RequestState.Loading -> R.string.searching_for_players
                      RequestState.Success -> R.string.player_found
@@ -173,7 +173,7 @@ fun SearchingForPlayersSurface(
             )
             Box(
                 modifier = Modifier
-                    .weight(4f)
+                    .weight(3.3f)
                     .fillMaxWidth(),
                  contentAlignment = Alignment.Center
             ) {
@@ -208,7 +208,7 @@ fun SearchingForPlayersSurface(
             }
             Text(
                 modifier = Modifier
-                    .weight(0.8f)
+                    .weight(1.5f)
                     .fillMaxWidth(0.95f),
                 text = ">>>  " + stringResource( id = if (gameState.isYouPlayer1) {
                     R.string.you_will_start_game
@@ -220,7 +220,7 @@ fun SearchingForPlayersSurface(
             )
             Text(
                 modifier = Modifier
-                    .weight(1.1f)
+                    .weight(1f)
                     .fillMaxWidth(0.9f),
                 text = when (requestState) {
                     is RequestState.Failure -> {
