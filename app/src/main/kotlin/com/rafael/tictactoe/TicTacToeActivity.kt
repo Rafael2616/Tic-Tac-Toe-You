@@ -23,12 +23,11 @@ class TicTacToeActivity : ComponentActivity() {
     @Inject lateinit var musicService: MusicService
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
         setContent {
-            enableEdgeToEdge()
-            
-            //Navigation graph
+            // Navigation graph
             TicTacToe(this)
         }
     }
