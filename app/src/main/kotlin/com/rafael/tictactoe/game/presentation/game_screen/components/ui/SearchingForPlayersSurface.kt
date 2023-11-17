@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -20,6 +19,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -53,7 +53,9 @@ fun SearchingForPlayersSurface(
     val requestState = gameState.requestState
 
     Surface(
-        color = Color.Black.copy(alpha = if (settingsState.isDarkThemeOn) 0.5f else 0.3f),
+        color = if (settingsState.isDarkThemeOn) {
+            Color.Black.copy(alpha = 0.5f)
+        } else MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp).copy(alpha = 0.5f),
         modifier = Modifier
             .fillMaxSize()
     ) {
@@ -65,9 +67,9 @@ fun SearchingForPlayersSurface(
         ) {
             Row(
                 modifier = Modifier
-                    .padding(top = 70.dp)
-                    .fillMaxWidth()
-                    .height(45.dp),
+                    .weight(1.5f)
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.End
             ) {
                 IconButton(
@@ -104,7 +106,7 @@ fun SearchingForPlayersSurface(
             Text(
                  modifier = Modifier
                      .fillMaxWidth(0.8f)
-                     .padding(top = 20.dp),
+                     .weight(0.65f),
                  text = stringResource( id = when (requestState) {
                      RequestState.Loading -> R.string.searching_for_players
                      RequestState.Success -> R.string.player_found
@@ -130,19 +132,21 @@ fun SearchingForPlayersSurface(
                  color = MaterialTheme.colorScheme.onSurface,
                  textAlign = TextAlign.Center
             )
-            if (requestState == RequestState.Success) {            
-                Text(
-                    modifier = Modifier
-                        .fillMaxWidth(0.9f)
-                        .padding(top = 15.dp),
-                    text = stringResource(id = R.string.player_n) + " " + "<Nome do Jogador>",// + state.secondPlayer
-                    style = MaterialTheme.typography.titleMedium,
-                    textAlign = TextAlign.Center,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth(0.9f)
+                    .weight(0.35f),
+                text = if (requestState == RequestState.Success) {
+                     stringResource(id = R.string.player_n) + " " + "<Nome do Jogador>"// + state.secondPlayer
+                 } else "",
+                style = MaterialTheme.typography.titleMedium,
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
 
-                var timer by rememberSaveable { mutableIntStateOf(4) }
-                LaunchedEffect(Unit) {
+            var timer by rememberSaveable { mutableIntStateOf(4) }
+            LaunchedEffect(Unit) {
+                if (requestState == RequestState.Success) {
                     while(timer >= 0) {
                         timer --
                         delay(900L)
@@ -151,22 +155,22 @@ fun SearchingForPlayersSurface(
                         }
                     }
                 }
-                Text(
-                    modifier = Modifier
-                        .fillMaxWidth(0.9f)
-                        .padding(top = 15.dp),
-                    text = stringResource(id = R.string.game_will_start) + " " + timer.toString(),
-                    style = MaterialTheme.typography.titleMedium,
-                    textAlign = TextAlign.Center,
-                    color = Color.Green
-                )
             }
-
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth(0.9f)
+                    .weight(0.35f),
+                text = if (requestState == RequestState.Success) {
+                    stringResource(id = R.string.game_will_start) + " " + timer.toString()
+                } else "",
+                style = MaterialTheme.typography.titleMedium,
+                textAlign = TextAlign.Center,
+                color = Color.Green
+            )
             Box(
                 modifier = Modifier
-                    .padding(top = 150.dp)
-                    .fillMaxWidth()
-                    .height(70.dp),
+                    .weight(4f)
+                    .fillMaxWidth(),
                  contentAlignment = Alignment.Center
             ) {
                 when (requestState) {
@@ -194,13 +198,13 @@ fun SearchingForPlayersSurface(
                             modifier = Modifier
                                 .size(70.dp),
                             tint = Color.Green
-                        )    
+                        )
                     }
                 }
             }
             Text(
                 modifier = Modifier
-                    .padding(top = 110.dp)
+                    .weight(0.8f)
                     .fillMaxWidth(0.9f),
                 text = stringResource( id = if (gameState.isYouPlayer1) {
                     R.string.you_will_start_game
@@ -210,7 +214,7 @@ fun SearchingForPlayersSurface(
             )
             Text(
                 modifier = Modifier
-                    .padding(top = 60.dp)
+                    .weight(1.5f)
                     .fillMaxWidth(0.9f),
                 text = when (requestState) {
                     is RequestState.Failure -> {
@@ -222,7 +226,8 @@ fun SearchingForPlayersSurface(
                     else -> ""
                 },
                 style = MaterialTheme.typography.bodyLarge,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
     }
