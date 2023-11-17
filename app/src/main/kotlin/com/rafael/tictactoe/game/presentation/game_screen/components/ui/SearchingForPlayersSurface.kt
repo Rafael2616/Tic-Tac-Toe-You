@@ -6,8 +6,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.Logout
 import androidx.compose.material.icons.outlined.Check
@@ -61,20 +63,22 @@ fun SearchingForPlayersSurface(
     ) {
         Column(
             modifier = Modifier
-                .fillMaxSize(),
+                .fillMaxSize()
+                .statusBarsPadding()
+                .navigationBarsPadding(),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Row(
                 modifier = Modifier
-                    .weight(1.5f)
+                    .weight(1.2f)
                     .fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.End
             ) {
                 IconButton(
                     modifier = Modifier
-                       .padding(end = 20.dp)
+                       .padding(end = 15.dp)
                        .size(45.dp),
                     onClick = {
                         onEvent(GameEvent.GetRemotePlayers)
@@ -89,7 +93,7 @@ fun SearchingForPlayersSurface(
                 }
                 IconButton(
                     modifier = Modifier
-                        .padding(end = 15.dp)
+                        .padding(end = 20.dp)
                         .size(45.dp),
                     onClick = {
                         onEvent(GameEvent.ToggleExitDialog)
@@ -214,7 +218,7 @@ fun SearchingForPlayersSurface(
             )
             Text(
                 modifier = Modifier
-                    .weight(1.5f)
+                    .weight(1.1f)
                     .fillMaxWidth(0.9f),
                 text = when (requestState) {
                     is RequestState.Failure -> {
