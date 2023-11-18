@@ -100,14 +100,6 @@ class GameViewModel @Inject constructor(
                     player2Name = event.player2Value,
                     showGetPrefsDialog = false
                 )}
-                if (isCPUMode && isCPUPlayer1) {
-                   _state.update { it.copy(isCPU = true) }
-                   cpuMoveLevelsHandler(
-                       this,
-                       state.value,
-                       this::onEvent
-                   )
-                }
                 if (state.value.gameMode != GameMode.Online) {
                     _state.update { it.copy(
                         isTimerOn = true,
@@ -118,6 +110,14 @@ class GameViewModel @Inject constructor(
                         showSearchForPlayersSurface = true
                     )}
                     this@GameViewModel.onEvent(GameEvent.UpdateIsYouPlayer1)
+                }
+                if (isCPUMode && isCPUPlayer1) {
+                   _state.update { it.copy(isCPU = true) }
+                   cpuMoveLevelsHandler(
+                       this,
+                       state.value,
+                       this::onEvent
+                   )
                 }
                 settingsVM.execUIClickSound()
             }
