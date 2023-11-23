@@ -249,7 +249,7 @@ fun ColorSelectionDialog(
                         .align(Alignment.End),
                 ) {
                     Text(
-                        text = "Ok",
+                        text = stringResource(android.R.string.ok),
                         style = MaterialTheme.typography.bodyLarge,
                         textAlign = TextAlign.Center
                     )

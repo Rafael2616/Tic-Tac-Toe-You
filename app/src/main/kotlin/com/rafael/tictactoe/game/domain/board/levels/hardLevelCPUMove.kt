@@ -22,7 +22,7 @@ fun hardLevelCPUMove(state: GameState): Pair<Int, Int> {
     val corners = listOf(Pair(0, 0), Pair(0, 2), Pair(2, 0), Pair(2, 2))
     val center = Pair(1,1)
 
-    //Choose best side if two sides are clicked
+    //Choose best side if two corners are clicked
     if ((card[corners[0].first][corners[0].second] && isClicked[corners[0].first][corners[0].second]) &&
     (card[corners[1].first][corners[1].second] && isClicked[corners[1].first][corners[1].second])){
         if (!isClicked[0][1]) {
@@ -95,7 +95,7 @@ fun hardLevelCPUMove(state: GameState): Pair<Int, Int> {
         }
     }
 
-    //Choose one side based in which side is cliked when center [1][1] is already clicked too and which player has been clicked
+    //Choose the best side based in which side is cliked when center [1][1] is already clicked too and which player has been clicked
     if ((card[center.first][center.second] && isClicked[center.first][center.second]) &&
     (card[sides[0].first][sides[0].second] && isClicked[sides[0].first][sides[0].second])) {
         if (!isClicked[2][1]) {
@@ -144,7 +144,7 @@ fun hardLevelCPUMove(state: GameState): Pair<Int, Int> {
         }
     }
     
-    //Choose one side based in which corner is cliked when center [1][1] is already clicked too and which player has been clicked
+    //Choose the best corner based in which corner is cliked when center [1][1] is already clicked too and which player has been clicked
     if ((card[center.first][center.second] && isClicked[center.first][center.second]) &&
     (card[corners[0].first][corners[0].second] && isClicked[corners[0].first][corners[0].second])) {
         if (!isClicked[2][2]) {
@@ -193,7 +193,7 @@ fun hardLevelCPUMove(state: GameState): Pair<Int, Int> {
         }
     }
 
-   //Choose one corner based in which side and corner is cliked and which player has been clicked
+   //Choose the best corner based in which side and corner is cliked and which player has been clicked
     if (((card[corners[0].first][corners[0].second] && isClicked[corners[0].first][corners[0].second]) &&
     (card[sides[0].first][sides[0].second] && isClicked[sides[0].first][sides[0].second])) ||
     ((card[corners[3].first][corners[3].second] && isClicked[corners[3].first][corners[3].second]) &&

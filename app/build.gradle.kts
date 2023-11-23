@@ -46,18 +46,17 @@ android {
         create("beta") {
             isMinifyEnabled = true
             signingConfig = signingConfigs.getByName("release")
+            applicationIdSuffix = ".beta"
             versionNameSuffix = "-beta"
             resValue("string", "app_name_beta", "Jogo da Velha - Beta")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
 
         named("debug") {
-            isMinifyEnabled = false
             signingConfig = signingConfigs.getByName("release")
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
             resValue("string", "app_name_debug", "Jogo da Velha - Debug")
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
 
 		named("release") {

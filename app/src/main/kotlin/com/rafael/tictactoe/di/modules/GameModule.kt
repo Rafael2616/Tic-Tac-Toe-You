@@ -32,10 +32,12 @@ object GameModule {
     @Provides
     @Singleton
     fun provideGameRepository(
-        database: GameDatabase
+        database: GameDatabase,
+        dao: OnlineGameDao
     ) : GameRepository {
         return GameRepositoryImpl(
-            database.gameDao()
+            database.gameDao(),
+            dao
         )
     }
 
