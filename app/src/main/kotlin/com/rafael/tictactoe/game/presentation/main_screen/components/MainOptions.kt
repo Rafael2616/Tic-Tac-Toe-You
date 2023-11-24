@@ -49,7 +49,6 @@ import com.rafael.tictactoe.game.domain.model.ScreenItem
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
-
 @Composable
 @ExperimentalMaterial3Api
 fun MainOptions(navController: NavController) {

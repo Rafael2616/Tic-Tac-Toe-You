@@ -25,7 +25,7 @@ interface OnlineGameDao {
 
 
     @POST("/postInitialGameState")
-    suspend fun postInitialGameState(@Body gameState: OnlineGameState) : Response<OnlineGameState>
+    suspend fun postInitialGameState(@Body gameState: OnlineGameState) : Response<Unit>
 
     @GET("/getGameState")
     suspend fun getGameState() : Response<Flow<OnlineGameState>>

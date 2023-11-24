@@ -219,115 +219,43 @@ class GameViewModel @Inject constructor(
             }
             GameEvent.PostRemotePlayer -> {
 	            viewModelScope.launch(Dispatchers.IO) {
-                    val randomicID = (1 until 99999).random()
-                    try {
-                        val response = gameService.postPlayer(
-                            Player(
-                                id = randomicID,
-                                name = if (state.value.localPlayer1) {
-                                    state.value.player1Name
-                                } else state.value.player2Name,
-                                color = if (state.value.isXFor1) {
-                                    settingsVM.state.value.xColor
-                                } else settingsVM.state.value.circleColor,
-                                    isXImage = state.value.isXImage
-                            )
-                        )
-                        if (response.isSuccessful) {
-                            _state.update { it.copy(requestState = RequestState.Success) }
-                        } else {
-                            throw IOException("Request failed with code: " + response.code())
-                        }
-                    } catch(e: IOException) {
-                         Log.e(TAG, "IO error: $e")
-                         _state.update { it.copy(requestState = RequestState.Failure(Error.IOError, e.toString())) }
-                    } catch(e: HttpException) {
-                         Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
-                         _state.update { it.copy(requestState = RequestState.Failure(Error.HttpError, e.message(), e.code())) }
-                    }
+                    val response = repository.postPlayer(state.value, settingsVM.state.value)
+                    _state.update { it.copy(requestState = response.second) }
                 }
             }
             GameEvent.RemoveRemotePlayer -> {
     	        viewModelScope.launch(Dispatchers.IO) {
-                    try {
-                        val response = gameService.removePlayer(state.value.playerID)
-                        if (response.isSuccessful) {
-                            _state.update { it.copy(requestState = RequestState.Success) }
-                        } else {
-                            throw IOException("Request failed with code: " + response.code())
-                        }
-                    } catch(e: IOException) {
-                         Log.e(TAG, "IO error: $e")
-                         _state.update { it.copy(requestState = RequestState.Failure(Error.IOError, e.toString())) }
-                    } catch(e: HttpException) {
-                         Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
-                         _state.update { it.copy(requestState = RequestState.Failure(Error.HttpError, e.message(), e.code())) }
-                    }
+                    val response = repository.removePlayer(state.value.playerID)
+                    _state.update { it.copy(requestState = response) }
                 }
             }
             GameEvent.SendInitialOnlineGameState -> {
       	      viewModelScope.launch(Dispatchers.IO) {
-                    try {
-                        val response = gameService.postInitialGameState(
-                            OnlineGameState(
-                                player1Wins = 0,
-                            	player2Wins = 0,
-                            	card = List(3){ List<Boolean>(3){false} },
-                            	isCardClicked = List(3){ List<Boolean>(3){false} },
-                                play = false,
-                            	isXImage = true,
-                            	is1Win = false,
-                            	isXFor1 = true,
-                            	isPlayer1 = true,
-                            	hasWinner = false,
-                            	gotOld = false,
-                            	isGameFinished = false
-                            )
-                        )
-                        if (response.isSuccessful) {
-                            _state.update { it.copy(requestState = RequestState.Success) }
-                        } else {
-                            throw IOException("Request failed with code: " + response.code())
-                        }
-                    } catch(e: IOException) {
-                         Log.e(TAG, "IO error: $e")
-                         _state.update { it.copy(requestState = RequestState.Failure(Error.IOError, e.toString())) }
-                    } catch(e: HttpException) {
-                         Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
-                         _state.update { it.copy(requestState = RequestState.Failure(Error.HttpError, e.message(), e.code())) }
-                    }
+                    val response = repository.postInitialGameState()
+                    _state.update { it.copy(requestState = response) }
                 }
             }
             GameEvent.GetOnlineGameState -> {
 	            viewModelScope.launch(Dispatchers.IO) {
-                    try {
-                        val response = gameService.getGameState()
-                        if (response.isSuccessful && response.body() != null) {
-                            onlineGameState = response.body()!!
-                            _state.update { it.copy(
-                                requestState = RequestState.Success,
-                               /* player1Wins = onlineGameState.player1Wins.value,
-                                player2Wins = onlineGameState.player2Wins.value,
-                                card = onlineGameState.card.value,
-                                isCardClicked = onlineGameState.isCardClicked.value,
-                                play = onlineGameState.play.value,
-                                isXImage = onlineGameState.isXImage.value,
-                                isXFor1 = onlineGameState.isXFor1.value,
-                                isPlayer1 = onlineGameState.isPlayer1.value,
-                                hasWinner = onlineGameState.hasWinner.value,
-                                gotOld = onlineGameState.gotOld.value,
-                                isGameFinished = onlineGameState.isGameFinished.value*/
-                            )}   
-                        } else {
-                            throw IOException("Request failed with code: " + response.code())
-                        }
-                    } catch(e: IOException) {
-                         Log.e(TAG, "IO error: $e")
-                         _state.update { it.copy(requestState = RequestState.Failure(Error.IOError, e.toString())) }
-                    } catch(e: HttpException) {
-                         Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
-                         _state.update { it.copy(requestState = RequestState.Failure(Error.HttpError, e.message(), e.code())) }
+                val response = repository.getGameState()
+                    if (response.first != null) {
+                        onlineGameState = response.first
+                        _state.update { it.copy(
+                            requestState = RequestState.Success,
+                           /* player1Wins = onlineGameState.player1Wins.value,
+                            player2Wins = onlineGameState.player2Wins.value,
+                            card = onlineGameState.card.value,
+                            isCardClicked = onlineGameState.isCardClicked.value,
+                            play = onlineGameState.play.value,
+                            isXImage = onlineGameState.isXImage.value,
+                            isXFor1 = onlineGameState.isXFor1.value,
+                            isPlayer1 = onlineGameState.isPlayer1.value,
+                            hasWinner = onlineGameState.hasWinner.value,
+                            gotOld = onlineGameState.gotOld.value,
+                            isGameFinished = onlineGameState.isGameFinished.value*/
+                        )}
                     }
+                    _state.update { it.copy(requestState = response.second) }
                 }
             }
             GameEvent.UpdateOnlineGameState -> {
