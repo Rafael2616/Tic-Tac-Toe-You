@@ -38,7 +38,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.settings.domain.enums.GroupType
+import com.rafael.tictactoe.settings.domain.enums.SettingsGroup
 import com.rafael.tictactoe.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.domain.model.SettingsItem
 import com.rafael.tictactoe.settings.domain.model.SettingsState
@@ -46,10 +46,10 @@ import com.rafael.tictactoe.settings.domain.use_cases.toggleSettingsUseCase
 import com.rafael.tictactoe.settings.domain.util.ComponentValidator
 
 @Composable
-fun SettingsWithSwitch(
+fun SettingsBlockWithSwitch(
     state: SettingsState,
     onEvent: (SettingsEvent) -> Unit,
-    groupType: GroupType,
+    groupType: SettingsGroup,
     @StringRes groupName: Int,
     settings: List<SettingsItem>
 ) {

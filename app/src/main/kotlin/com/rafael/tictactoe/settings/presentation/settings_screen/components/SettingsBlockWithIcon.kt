@@ -46,7 +46,7 @@ import androidx.compose.ui.unit.sp
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.getVersionCode
 import com.rafael.tictactoe.common.domain.util.getVersionName
-import com.rafael.tictactoe.settings.domain.enums.GroupType
+import com.rafael.tictactoe.settings.domain.enums.SettingsGroup
 import com.rafael.tictactoe.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.domain.model.SettingsItem
 import com.rafael.tictactoe.settings.domain.model.SettingsState
@@ -54,10 +54,10 @@ import com.rafael.tictactoe.settings.domain.use_cases.toggleSettingsUseCase
 import com.rafael.tictactoe.settings.domain.util.ComponentValidator
 
 @Composable
-fun SettingsWithIcon(
+fun SettingsBlockWithIcon(
     state: SettingsState,
     onEvent: (SettingsEvent) -> Unit,
-    groupType: GroupType,
+    groupType: SettingsGroup,
     @StringRes groupName: Int,
     settings: List<SettingsItem>
 ) {
@@ -97,7 +97,7 @@ fun SettingsWithIcon(
         ) {
             settings.forEachIndexed { index, setting ->
                 val rowHeight by animateDpAsState(
-                    if (groupType == GroupType.OTHER && index == 0 && isAboutShown) 150.dp else 60.dp
+                    if (groupType == SettingsGroup.Others && index == 0 && isAboutShown) 150.dp else 60.dp
                 )
                 Row(
                     horizontalArrangement = Arrangement.SpaceBetween,

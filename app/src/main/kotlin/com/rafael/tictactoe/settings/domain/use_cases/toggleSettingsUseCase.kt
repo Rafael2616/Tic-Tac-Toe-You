@@ -1,12 +1,12 @@
 package com.rafael.tictactoe.settings.domain.use_cases
 
 import com.rafael.tictactoe.settings.domain.enums.Customization
-import com.rafael.tictactoe.settings.domain.enums.GroupType
+import com.rafael.tictactoe.settings.domain.enums.SettingsGroup
 import com.rafael.tictactoe.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.domain.model.SettingsState
 
 fun toggleSettingsUseCase(
-    groupType: GroupType,
+    groupType: SettingsGroup,
 	index: Int,
 	state: SettingsState,
     onEvent: (SettingsEvent) -> Unit
@@ -43,9 +43,9 @@ fun toggleSettingsUseCase(
     }
 
     when (groupType) {
-        GroupType.THEME -> toggleThemeSettings(index)
-        GroupType.SOUND -> toggleSoundSettings(index)
-        GroupType.CUSTOMIZATION -> toggleCustomizationSettings(index)
-        GroupType.OTHER -> toggleOtherSettings(index)
+        SettingsGroup.Theme -> toggleThemeSettings(index)
+        SettingsGroup.Sound -> toggleSoundSettings(index)
+        SettingsGroup.Customization -> toggleCustomizationSettings(index)
+        SettingsGroup.Others -> toggleOtherSettings(index)
     }
 }

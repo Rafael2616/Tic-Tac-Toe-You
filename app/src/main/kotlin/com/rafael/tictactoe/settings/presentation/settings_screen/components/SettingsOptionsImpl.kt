@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.automirrored.outlined.VolumeUp
@@ -25,12 +26,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.settings.domain.enums.GroupType
+import com.rafael.tictactoe.settings.domain.enums.SettingsGroup
 import com.rafael.tictactoe.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.domain.model.SettingsItem
 import com.rafael.tictactoe.settings.domain.model.SettingsState
-import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsWithIcon
-import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsWithSwitch
+import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsBlockWithIcon
+import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsBlockWithSwitch
 
 @Composable
 fun SettingsOptionsImpl(
@@ -110,33 +111,33 @@ fun SettingsOptionsImpl(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        items(GroupType.values()) { group ->
+        items(SettingsGroup.values()) { group ->
             when (group) {
-                GroupType.THEME -> SettingsWithSwitch(
+                SettingsGroup.Theme -> SettingsBlockWithSwitch(
                     state = state,
                     onEvent = onEvent,
-                    groupType = GroupType.THEME,
+                    groupType = SettingsGroup.Theme,
                     groupName = R.string.group_theme,
                     settings = themeSettings
 				)
-                GroupType.SOUND -> SettingsWithSwitch(
+                SettingsGroup.Sound -> SettingsBlockWithSwitch(
                     state = state,
                     onEvent = onEvent,
-                    groupType = GroupType.SOUND,
+                    groupType = SettingsGroup.Sound,
                     groupName = R.string.group_sound,
                     settings = soundSettings
                 )
-                GroupType.CUSTOMIZATION -> SettingsWithIcon(
+                SettingsGroup.Customization -> SettingsBlockWithIcon(
                     state = state,
                     onEvent = onEvent,
-                    groupType = GroupType.CUSTOMIZATION,
+                    groupType = SettingsGroup.Customization,
                     groupName = R.string.group_customization,
                     settings = customizationSettings
                 )
-                GroupType.OTHER -> SettingsWithIcon(
+                SettingsGroup.Others -> SettingsBlockWithIcon(
                     state = state,
                     onEvent = onEvent,
-                    groupType = GroupType.OTHER,
+                    groupType = SettingsGroup.Others,
                     groupName = R.string.group_others,
                     settings = otherSettings
                 )
