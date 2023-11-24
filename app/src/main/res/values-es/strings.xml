@@ -63,5 +63,6 @@
     <string name="you_will_be_second_player">Serás el segundo jugador</string>
     <string name="game_will_start">El juego comenzará en:</string>
     <string name="player_n">Jugador:</string>
+    <string name="online_match">Partida Online</string>
 
 </resources>
