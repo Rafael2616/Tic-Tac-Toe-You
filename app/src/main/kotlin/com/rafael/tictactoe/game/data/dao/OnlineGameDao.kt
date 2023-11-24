@@ -34,5 +34,5 @@ interface OnlineGameDao {
     suspend fun updateGameState(@Body gameState: OnlineGameState) : Response<Flow<OnlineGameState>>
 
     @DELETE("endMatch/{id}")
-    suspend fun endMatch(@Path("id") matchId: Int): Response<Unit>
+    suspend fun endMatch(@Path("id") matchID: Int): Response<Unit>
 }

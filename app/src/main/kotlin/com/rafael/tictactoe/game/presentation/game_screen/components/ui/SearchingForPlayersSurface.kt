@@ -51,7 +51,6 @@ fun SearchingForPlayersSurface(
     settingsState: SettingsState,
     onEvent: (GameEvent) -> Unit
 ) {
-    onEvent(GameEvent.GetRemotePlayers)
     val requestState = gameState.requestState
 
     Surface(
@@ -81,8 +80,8 @@ fun SearchingForPlayersSurface(
                        .padding(end = 15.dp)
                        .size(45.dp),
                     onClick = {
-                        onEvent(GameEvent.GetRemotePlayers)
                         onEvent(GameEvent.UpdateRequestState(RequestState.Loading))
+                        onEvent(GameEvent.GetRemotePlayers)
                     }
                 ) {
                     Icon(

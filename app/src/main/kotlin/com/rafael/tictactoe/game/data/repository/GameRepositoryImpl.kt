@@ -156,4 +156,52 @@ class GameRepositoryImpl @Inject constructor(
              return Pair(null, RequestState.Failure(Error.HttpError, e.message(), e.code()))
         }
     }
+
+    override suspend fun updateGameState(state: GameState): Pair<Flow<OnlineGameState>?, RequestState> {
+        try {
+            val response = gameService.updateGameState(
+                OnlineGameState(   
+                    player1Wins = state.player1Wins,
+                    player2Wins = state.player2Wins,
+                    card = state.card,
+                    isCardClicked = state.isCardClicked,
+                    play = state.play,
+                    isXImage = state.isXImage,
+                    isXFor1 = state.isXFor1,
+                    isPlayer1 = state.isPlayer1,
+                    hasWinner = state.hasWinner,
+                    gotOld = state.gotOld,
+                    isGameFinished = state.isGameFinished
+                )                   
+            )
+            if (response.isSuccessful && response.body() != null) {
+                return Pair(response.body()!!, RequestState.Success)
+            } else {
+                throw IOException("Request failed with code: " + response.code())
+            }
+        } catch(e: IOException) {
+             Log.e(TAG, "IO error: $e")
+             return Pair(null, RequestState.Failure(Error.IOError, e.toString()))
+        } catch(e: HttpException) {
+             Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
+             return Pair(null, RequestState.Failure(Error.HttpError, e.message(), e.code()))
+        }
+    }
+
+    override suspend fun endMatch(matchID: Int): RequestState {
+       try {
+            val response = gameService.endMatch(matchID)
+            if (response.isSuccessful) {
+                return RequestState.Success
+            } else {
+                throw IOException("Request failed with code: " + response.code())
+            }
+        } catch(e: IOException) {
+             Log.e(TAG, "IO error: $e")
+             return RequestState.Failure(Error.IOError, e.toString())
+        } catch(e: HttpException) {
+             Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
+             return RequestState.Failure(Error.HttpError, e.message(), e.code())
+        }
+    }
 }

@@ -34,7 +34,7 @@ object GameModule {
     fun provideGameRepository(
         database: GameDatabase,
         dao: OnlineGameDao
-    ) : GameRepository {
+    ): GameRepository {
         return GameRepositoryImpl(
             database.gameDao(),
             dao
@@ -47,15 +47,13 @@ object GameModule {
         player: ExoPlayer,
         settingsVM: SettingsViewModel,
         context: Application,
-        repository: GameRepository,
-        gameService: OnlineGameDao
+        repository: GameRepository
     ): GameViewModel {
         return GameViewModel(
             player,
             settingsVM,
             context,
-            repository,
-            gameService
+            repository
         )
     }
 }

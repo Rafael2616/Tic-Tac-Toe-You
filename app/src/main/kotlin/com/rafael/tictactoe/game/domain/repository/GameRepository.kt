@@ -22,4 +22,6 @@ interface GameRepository {
     
     suspend fun postInitialGameState(): RequestState
     suspend fun getGameState() : Pair<Flow<OnlineGameState>?, RequestState>
+    suspend fun updateGameState(state: GameState): Pair<Flow<OnlineGameState>?, RequestState>
+    suspend fun endMatch(matchID: Int): RequestState
 }

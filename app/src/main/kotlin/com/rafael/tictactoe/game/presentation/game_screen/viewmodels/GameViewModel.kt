@@ -1,18 +1,15 @@
 package com.rafael.tictactoe.game.presentation.game_screen.viewmodels
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.media3.exoplayer.ExoPlayer
-import com.rafael.tictactoe.game.data.dao.OnlineGameDao
 import com.rafael.tictactoe.game.domain.audio.CardGridSound
 import com.rafael.tictactoe.game.domain.audio.GotOldSound
 import com.rafael.tictactoe.game.domain.audio.WinnerSound
 import com.rafael.tictactoe.game.domain.card_grid.boardMovesHandler
 import com.rafael.tictactoe.game.domain.card_grid.cpuMoveLevelsHandler
 import com.rafael.tictactoe.game.domain.repository.GameRepository
-import com.rafael.tictactoe.game.domain.model.Error
 import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameMode
 import com.rafael.tictactoe.game.domain.model.GameState
@@ -23,7 +20,6 @@ import com.rafael.tictactoe.game.domain.restart_game.RestartGame
 import com.rafael.tictactoe.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.io.IOException
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -34,18 +30,13 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flow
 //import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
-import retrofit2.HttpException
-import retrofit2.Response
-
-const val TAG = "GameViewModel"
 
 @HiltViewModel
 class GameViewModel @Inject constructor(
     private val player: ExoPlayer,
     private val settingsVM: SettingsViewModel,
     private val context: Application,
-    private val repository: GameRepository,
-    private val gameService: OnlineGameDao
+    private val repository: GameRepository
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(GameState())
@@ -110,6 +101,7 @@ class GameViewModel @Inject constructor(
                         showSearchForPlayersSurface = true
                     )}
                     this@GameViewModel.onEvent(GameEvent.UpdateIsYouPlayer1)
+                    this@GameViewModel.onEvent(GameEvent.GetRemotePlayers)
                 }
                 if (isCPUMode && isCPUPlayer1) {
                    _state.update { it.copy(isCPU = true) }
@@ -199,10 +191,12 @@ class GameViewModel @Inject constructor(
                 _state.update { it.copy(isWinSoundPlaying = event.value) }
             }
             is GameEvent.SelectCPUDifficultyMode -> {
-                _state.update { it.copy(cpuDifficultyLevel = event.level) }
-                _state.update { it.copy(selectedDifficultyLevel = event.selectedLevel) }
-                _state.update { it.copy(difficultyLevelName = event.name) }
-                _state.update { it.copy(difficultyLevelIcon = event.icon) }
+                _state.update { it.copy(
+                    cpuDifficultyLevel = event.level,
+                    selectedDifficultyLevel = event.selectedLevel,
+                    difficultyLevelName = event.name,
+                    difficultyLevelIcon = event.icon
+                )}
                 settingsVM.execUIClickSound()
             }
             is GameEvent.UseEasyLevel -> {
@@ -260,53 +254,15 @@ class GameViewModel @Inject constructor(
             }
             GameEvent.UpdateOnlineGameState -> {
 	            viewModelScope.launch(Dispatchers.IO) {
-                    try {
-                        val response = gameService.updateGameState(
-                            OnlineGameState(   
-                                player1Wins = state.value.player1Wins,
-                                player2Wins = state.value.player2Wins,
-                                card = state.value.card,
-                                isCardClicked = state.value.isCardClicked,
-                                play = state.value.play,
-                                isXImage = state.value.isXImage,
-                                isXFor1 = state.value.isXFor1,
-                                isPlayer1 = state.value.isPlayer1,
-                                hasWinner = state.value.hasWinner,
-                                gotOld = state.value.gotOld,
-                                isGameFinished = state.value.isGameFinished
-                            )                   
-                        )
-                        if (response.isSuccessful && response.body() != null) {
-                            onlineGameState = response.body()!!
-                            _state.update { it.copy(requestState = RequestState.Success) }
-                          } else {
-                            throw IOException("Request failed with code: " + response.code())
-                        }
-                    } catch(e: IOException) {
-                         Log.e(TAG, "IO error: $e")
-                         _state.update { it.copy(requestState = RequestState.Failure(Error.IOError, e.toString())) }
-                    } catch(e: HttpException) {
-                         Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
-                         _state.update { it.copy(requestState = RequestState.Failure(Error.HttpError, e.message(), e.code())) }
-                    }
+                    val response = repository.updateGameState(state.value)
+                    _state.update { it.copy(requestState = response.second) }
+                    onlineGameState = response.first!!
                 }
             }
             GameEvent.EndOnlineMatch -> {
   	          viewModelScope.launch(Dispatchers.IO) {
-                    try {
-                        val response = gameService.endMatch(state.value.matchID)
-                        if (response.isSuccessful) {
-                            _state.update { it.copy(requestState = RequestState.Success) }
-                        } else {
-                            throw IOException("Request failed with code: " + response.code())
-                        }
-                    } catch(e: IOException) {
-                         Log.e(TAG, "IO error: $e")
-                         _state.update { it.copy(requestState = RequestState.Failure(Error.IOError, e.toString())) }
-                    } catch(e: HttpException) {
-                         Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
-                         _state.update { it.copy(requestState = RequestState.Failure(Error.HttpError, e.message(), e.code())) }
-                    }
+                    val response = repository.endMatch(state.value.matchID)
+                    _state.update { it.copy(requestState = response) }
                 }
             }
             is GameEvent.UpdateRequestState -> {
