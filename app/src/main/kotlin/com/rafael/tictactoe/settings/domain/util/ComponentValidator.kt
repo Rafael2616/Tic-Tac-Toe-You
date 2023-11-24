@@ -6,13 +6,6 @@ import com.rafael.tictactoe.settings.domain.enums.GroupType
 
 class ComponentValidator {
 
-    fun validateFirstIcon(groupType: GroupType): Boolean {
-        if (groupType == GroupType.CUSTOMIZATION) {
-            return false
-        }
-        return true
-    }
-
     fun validateSubText(groupType: GroupType, index: Int, isAboutShown: Boolean): Boolean {
         if (groupType == GroupType.OTHER && index == 0 && isAboutShown) {
             return true

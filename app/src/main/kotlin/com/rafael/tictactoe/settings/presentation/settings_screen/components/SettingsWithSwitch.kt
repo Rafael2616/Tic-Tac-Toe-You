@@ -40,20 +40,18 @@ import androidx.compose.ui.unit.sp
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.settings.domain.enums.GroupType
 import com.rafael.tictactoe.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.settings.domain.model.SettingsItem
 import com.rafael.tictactoe.settings.domain.model.SettingsState
 import com.rafael.tictactoe.settings.domain.use_cases.toggleSettingsUseCase
 import com.rafael.tictactoe.settings.domain.util.ComponentValidator
-import com.rafael.tictactoe.settings.domain.util.SettingsFirstIconHandler
-import com.rafael.tictactoe.settings.domain.util.SettingsTextHandler
-import com.rafael.tictactoe.settings.domain.util.switchCheckedHandler
 
 @Composable
 fun SettingsWithSwitch(
     state: SettingsState,
     onEvent: (SettingsEvent) -> Unit,
-    groupSize: Int,
     groupType: GroupType,
-    @StringRes groupName: Int
+    @StringRes groupName: Int,
+    settings: List<SettingsItem>
 ) {
     val isFollowingSystemOn = state.isFollowingSystemOn
     val componentValidator = ComponentValidator()
@@ -87,7 +85,7 @@ fun SettingsWithSwitch(
                 .fillMaxWidth(if (isInLandscape) 0.6f else 0.9f)
                 .clip(RoundedCornerShape(26.dp))
         ) {
-            for (index in 0 until groupSize) {
+            settings.forEachIndexed { index, setting ->
                 if (componentValidator.validateCard(
                     groupType,
                     index,
@@ -108,29 +106,23 @@ fun SettingsWithSwitch(
                                 )
                             }
                     ) {
-                        if (componentValidator.validateFirstIcon(groupType)) {
-                           Icon(
-                                imageVector = SettingsFirstIconHandler(index, groupType, state),
-                                contentDescription = "Icon",
-       		            	 modifier = Modifier
-                                    .size(42.dp)
-                                   .padding(start = 10.dp)
-                            )
-                        }
+                       Icon(
+                            imageVector = setting.leadingIcon!!,
+                            contentDescription = "Icon",
+       		        	 modifier = Modifier
+                                .size(42.dp)
+                                .padding(start = 10.dp)
+                        )
                         Text(
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onSurface,
-                            text = SettingsTextHandler(index, groupType, state),
+                            text = stringResource(setting.text),
                             modifier = Modifier.width(220.dp),
                             textAlign = TextAlign.Center
                         )
                         Switch(
                             modifier = Modifier.padding(end = 10.dp),
-                            checked = switchCheckedHandler(
-                                groupType,
-                                index,
-                                state
-                            ),
+                            checked = setting.isChecked!!,
                             onCheckedChange = {
                                 toggleSettingsUseCase(
                                     groupType,
@@ -140,11 +132,7 @@ fun SettingsWithSwitch(
                                 )
                             },
                             thumbContent = {
-                                 if (switchCheckedHandler(
-                                        groupType,
-                                        index,
-                                        state
-                                    )) {
+                                 if (setting.isChecked) {
                                     Icon(
      					               imageVector = Icons.Filled.Check,
     					                contentDescription = "Setting Switcher",
@@ -154,7 +142,7 @@ fun SettingsWithSwitch(
    					     }
                         )
                     }
-                    if ((index < (groupSize - 1)) && componentValidator.validateDivider(
+                    if ((index < (settings.size - 1)) && componentValidator.validateDivider(
                         groupType,
                         index,
                         isFollowingSystemOn

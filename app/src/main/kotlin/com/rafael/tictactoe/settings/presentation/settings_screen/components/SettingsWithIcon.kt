@@ -48,20 +48,18 @@ import com.rafael.tictactoe.common.domain.util.getVersionCode
 import com.rafael.tictactoe.common.domain.util.getVersionName
 import com.rafael.tictactoe.settings.domain.enums.GroupType
 import com.rafael.tictactoe.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.settings.domain.model.SettingsItem
 import com.rafael.tictactoe.settings.domain.model.SettingsState
 import com.rafael.tictactoe.settings.domain.use_cases.toggleSettingsUseCase
 import com.rafael.tictactoe.settings.domain.util.ComponentValidator
-import com.rafael.tictactoe.settings.domain.util.SettingsFirstIconHandler
-import com.rafael.tictactoe.settings.domain.util.SettingsSecondIconHandler
-import com.rafael.tictactoe.settings.domain.util.SettingsTextHandler
 
 @Composable
 fun SettingsWithIcon(
     state: SettingsState,
     onEvent: (SettingsEvent) -> Unit,
-    groupSize: Int,
     groupType: GroupType,
-    @StringRes groupName: Int
+    @StringRes groupName: Int,
+    settings: List<SettingsItem>
 ) {
     val isAboutShown = state.isAboutShown
     val winnerLineColor by animateColorAsState(state.winnerLineColor)
@@ -97,7 +95,7 @@ fun SettingsWithIcon(
                 .fillMaxWidth(if (isInLandscape) 0.6f else 0.9f)
                 .clip(RoundedCornerShape(26.dp))
         ) {
-            for (index in 0 until groupSize) {
+            settings.forEachIndexed { index, setting ->
                 val rowHeight by animateDpAsState(
                     if (groupType == GroupType.OTHER && index == 0 && isAboutShown) 150.dp else 60.dp
                 )
@@ -117,9 +115,9 @@ fun SettingsWithIcon(
                             )
                         },
                 ) {
-                    if (componentValidator.validateFirstIcon(groupType)) {
+                    if (setting.leadingIcon != null) {
                         Icon(
-                            imageVector = SettingsFirstIconHandler(index, groupType, state),
+                            imageVector = setting.leadingIcon,
                             contentDescription = "Icon",
        		        	 modifier = Modifier
                                 .size(42.dp)
@@ -186,7 +184,7 @@ fun SettingsWithIcon(
                         Text(
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onSurface,
-                            text = SettingsTextHandler(index, groupType, state),
+                            text = stringResource(setting.text),
                             modifier = Modifier.width(220.dp),
                             textAlign = TextAlign.Center
                         ) 
@@ -204,15 +202,18 @@ fun SettingsWithIcon(
                         }
                     }
                     Icon(
-                        imageVector = SettingsSecondIconHandler(index, groupType, state),
+                        imageVector = setting.trailingIcon!!,
                         contentDescription = "Icon",
        		    	 modifier = Modifier
-                        .size(42.dp)
-                        .padding(end = 10.dp)
+                            .size(42.dp)
+                            .padding(end = 10.dp)
                     )
                 }
-                if (index < (groupSize - 1)) {
-                    HorizontalDivider(thickness = 4.dp, color = MaterialTheme.colorScheme.surface)
+                if (index < (settings.size - 1)) {
+                    HorizontalDivider(
+                        thickness = 4.dp,
+                        color = MaterialTheme.colorScheme.surface
+                    )
                 }
             }
         }
