@@ -138,7 +138,7 @@ fun SearchingForPlayersSurface(
             Text(
                 modifier = Modifier
                     .fillMaxWidth(0.5f)
-                    .weight(0.3f),
+                    .weight(0.4f),
                 text = stringResource(R.string.match_id) + " ${gameState.matchID}",
                 style = MaterialTheme.typography.bodyLarge,
                 textAlign = TextAlign.Center,
@@ -147,7 +147,7 @@ fun SearchingForPlayersSurface(
             Text(
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
-                    .weight(0.35f),
+                    .weight(0.4f),
                 text = if (requestState == RequestState.Success) {
                      stringResource(R.string.player_n) + " ${gameState.secondPlayer!!.name}"
                  } else "",
@@ -171,7 +171,7 @@ fun SearchingForPlayersSurface(
             Text(
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
-                    .weight(0.35f),
+                    .weight(0.4f),
                 text = if (requestState == RequestState.Success) {
                     stringResource(id = R.string.game_will_start) + " " + timer.toString()
                 } else "",
@@ -181,7 +181,7 @@ fun SearchingForPlayersSurface(
             )
             Box(
                 modifier = Modifier
-                    .weight(3.3f)
+                    .weight(2.8f)
                     .fillMaxWidth(),
                  contentAlignment = Alignment.Center
             ) {
@@ -216,7 +216,7 @@ fun SearchingForPlayersSurface(
             }
             Text(
                 modifier = Modifier
-                    .weight(1.5f)
+                    .weight(1f)
                     .fillMaxWidth(0.95f),
                 text = ">>>  " + stringResource(id = if (gameState.isYouPlayer1) {
                     R.string.you_will_start_game
