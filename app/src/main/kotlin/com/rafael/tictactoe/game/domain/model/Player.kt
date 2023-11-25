@@ -6,5 +6,6 @@ data class Player(
     val id : Int,
     val name: String,
     val color : Color,
-    val isXImage: Boolean
+    val isXImage: Boolean,
+    val isPlayer1: Boolean
 )

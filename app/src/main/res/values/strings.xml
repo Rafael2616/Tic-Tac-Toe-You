@@ -64,6 +64,7 @@
     <string name="game_will_start">The game will start in:</string>
     <string name="player_n">Player:</string>
     <string name="online_match">Online Match</string>
+    <string name="match_id">Match ID:</string>
 
     <string name="cpu">CPU</string>
 

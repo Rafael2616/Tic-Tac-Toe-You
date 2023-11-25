@@ -63,18 +63,18 @@ class GameRepositoryImpl @Inject constructor(
     }
 
     override suspend fun postPlayer(state: GameState, settingsState: SettingsState): Pair<Player?, RequestState> {
-        val randomicID = (1 until 99999).random()
             try {
                 val response = gameService.postPlayer(
                 Player(
-                    id = randomicID,
+                    id = state.matchID,
                     name = if (state.localPlayer1) {
                         state.player1Name
                     } else state.player2Name,
                     color = if (state.isXFor1) {
                         settingsState.xColor
                     } else settingsState.circleColor,
-                    isXImage = state.isXImage
+                    isXImage = state.isXImage,
+                    isPlayer1 = state.isYouPlayer1
                 )
             )
             if (response.isSuccessful) {
@@ -108,17 +108,16 @@ class GameRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun postInitialGameState(): RequestState {
+    override suspend fun postInitialGameState(matchID: Int): RequestState {
         try {
             val response = gameService.postInitialGameState(
                 OnlineGameState(
+                    matchID = matchID,
                     player1Wins = 0,
                 	player2Wins = 0,
                 	card = List(3){ List<Boolean>(3){false} },
                 	isCardClicked = List(3){ List<Boolean>(3){false} },
                     play = false,
-                	isXImage = true,
-                	is1Win = false,
                 	isXFor1 = true,
                 	isPlayer1 = true,
                 	hasWinner = false,
@@ -160,13 +159,13 @@ class GameRepositoryImpl @Inject constructor(
     override suspend fun updateGameState(state: GameState): Pair<Flow<OnlineGameState>?, RequestState> {
         try {
             val response = gameService.updateGameState(
-                OnlineGameState(   
+                OnlineGameState(
+                    matchID = state.matchID,
                     player1Wins = state.player1Wins,
                     player2Wins = state.player2Wins,
                     card = state.card,
                     isCardClicked = state.isCardClicked,
                     play = state.play,
-                    isXImage = state.isXImage,
                     isXFor1 = state.isXFor1,
                     isPlayer1 = state.isPlayer1,
                     hasWinner = state.hasWinner,

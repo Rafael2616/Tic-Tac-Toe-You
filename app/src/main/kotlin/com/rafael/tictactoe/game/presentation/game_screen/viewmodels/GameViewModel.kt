@@ -27,8 +27,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
-//import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 
 @HiltViewModel
@@ -43,7 +45,6 @@ class GameViewModel @Inject constructor(
     val state = _state.asStateFlow()
     var availablePlayers: Flow<List<Player>> = flow { emit(emptyList()) }
     var onlineGameState: Flow<OnlineGameState>? = null
-   //val secondPlayer: Flow<Player> = availablePlayers.first()
 
     fun onEvent(event: GameEvent) {
         val localPlayer1  = state.value.localPlayer1
@@ -97,8 +98,10 @@ class GameViewModel @Inject constructor(
                         play = true
                     )}
                 } else {
+                    val randomicID = (1 until 99999).random()
                     _state.update { it.copy(
-                        showSearchForPlayersSurface = true
+                        showSearchForPlayersSurface = true,
+                        matchID = randomicID
                     )}
                     this@GameViewModel.onEvent(GameEvent.UpdateIsYouPlayer1)
                     this@GameViewModel.onEvent(GameEvent.GetRemotePlayers)
@@ -207,6 +210,11 @@ class GameViewModel @Inject constructor(
                     val response = repository.getRemotePlayers()
                     if (response.first != null) {
                         availablePlayers = response.first!!
+                        val possiblePlayers: List<Player> = availablePlayers.map { it.filter { players ->
+                            players.isPlayer1 == !state.value.isYouPlayer1
+                        }}.first()
+                        val randomPlayer = (0..possiblePlayers.size - 1).random()
+                        _state.update { it.copy(secondPlayer = possiblePlayers[randomPlayer]) }
                     }
                     _state.update { it.copy(requestState = response.second) }
                 }
@@ -219,13 +227,13 @@ class GameViewModel @Inject constructor(
             }
             GameEvent.RemoveRemotePlayer -> {
     	        viewModelScope.launch(Dispatchers.IO) {
-                    val response = repository.removePlayer(state.value.playerID)
+                    val response = repository.removePlayer(state.value.matchID)
                     _state.update { it.copy(requestState = response) }
                 }
             }
             GameEvent.SendInitialOnlineGameState -> {
       	      viewModelScope.launch(Dispatchers.IO) {
-                    val response = repository.postInitialGameState()
+                    val response = repository.postInitialGameState(state.value.matchID)
                     _state.update { it.copy(requestState = response) }
                 }
             }
@@ -235,14 +243,12 @@ class GameViewModel @Inject constructor(
                     if (response.first != null) {
                         onlineGameState = response.first
                         _state.update { it.copy(
-                            requestState = RequestState.Success,
-                           /* player1Wins = onlineGameState.player1Wins.value,
+                            requestState = RequestState.Success
+                            /*player1Wins = onlineGameState.player1Wins.value,
                             player2Wins = onlineGameState.player2Wins.value,
                             card = onlineGameState.card.value,
                             isCardClicked = onlineGameState.isCardClicked.value,
                             play = onlineGameState.play.value,
-                            isXImage = onlineGameState.isXImage.value,
-                            isXFor1 = onlineGameState.isXFor1.value,
                             isPlayer1 = onlineGameState.isPlayer1.value,
                             hasWinner = onlineGameState.hasWinner.value,
                             gotOld = onlineGameState.gotOld.value,

@@ -64,5 +64,6 @@
     <string name="game_will_start">O jogo começará em:</string>
     <string name="player_n">Jogador:</string>
     <string name="online_match">Partida Online</string>
+    <string name="match_id">ID da partida:</string>
 
 </resources>

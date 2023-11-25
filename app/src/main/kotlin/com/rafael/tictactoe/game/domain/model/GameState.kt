@@ -6,6 +6,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.model.CPUDifficultyLevel
 import com.rafael.tictactoe.game.domain.model.GameMode
+import com.rafael.tictactoe.game.domain.model.Player
 
 data class GameState(
 	val currentPlayerName: String = "",
@@ -46,8 +47,8 @@ data class GameState(
     val selectedDifficultyLevel: Int = 1,
     val hasLastWinningPlayer: Boolean = false,
     val requestState : RequestState = RequestState.Loading,
-    val playerID: Int = 0,
     val matchID : Int = 0,
+    val secondPlayer: Player? = null,
     val isOnlinePlayerTurn: Boolean = false,
     val isYouPlayer1: Boolean = true,
     val showGetPrefsDialog: Boolean = true,

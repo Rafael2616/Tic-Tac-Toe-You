@@ -110,7 +110,7 @@ fun SearchingForPlayersSurface(
                  modifier = Modifier
                      .fillMaxWidth(0.8f)
                      .weight(1.4f),
-                 text = stringResource( id = when (requestState) {
+                 text = stringResource(id = when (requestState) {
                      RequestState.Loading -> R.string.searching_for_players
                      RequestState.Success -> R.string.player_found
                      is RequestState.Failure -> {
@@ -137,10 +137,19 @@ fun SearchingForPlayersSurface(
             )
             Text(
                 modifier = Modifier
+                    .fillMaxWidth(0.5f)
+                    .weight(0.3f),
+                text = stringResource(R.string.match_id) + " ${gameState.matchID}",
+                style = MaterialTheme.typography.bodyLarge,
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            Text(
+                modifier = Modifier
                     .fillMaxWidth(0.9f)
                     .weight(0.35f),
                 text = if (requestState == RequestState.Success) {
-                     stringResource(id = R.string.player_n) + " " + "<Nome do Jogador>"// + state.secondPlayer
+                     stringResource(R.string.player_n) + " ${gameState.secondPlayer!!.name}"
                  } else "",
                 style = MaterialTheme.typography.titleMedium,
                 textAlign = TextAlign.Center,
@@ -209,7 +218,7 @@ fun SearchingForPlayersSurface(
                 modifier = Modifier
                     .weight(1.5f)
                     .fillMaxWidth(0.95f),
-                text = ">>>  " + stringResource( id = if (gameState.isYouPlayer1) {
+                text = ">>>  " + stringResource(id = if (gameState.isYouPlayer1) {
                     R.string.you_will_start_game
                 } else {
                     R.string.you_will_be_second_player
