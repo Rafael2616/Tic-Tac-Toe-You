@@ -27,7 +27,7 @@ class MusicService @Inject constructor() : Service() {
     	return START_STICKY
     }
 
-	fun startBackgroundMusic(){
+	fun startBackgroundMusic() {
         exoPlayer = ExoPlayer.Builder(this).build()
 		exoPlayer.addMediaItem(backgroundMusic)
     	exoPlayer.prepare()

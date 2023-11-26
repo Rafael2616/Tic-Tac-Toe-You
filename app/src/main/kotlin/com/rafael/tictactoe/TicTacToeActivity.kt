@@ -51,7 +51,7 @@ class TicTacToeActivity : ComponentActivity() {
             context = this,
             onEvent = settingsVM::onEvent,
             state = settingsVM.state.value,
-            isAppInOnStop = if (focusHasChanged) false else true
+            isAppInOnStop = true// if (focusHasChanged) false else true
         )
         super.onStop()
     }

@@ -13,9 +13,12 @@
         android:supportsRtl="false"
         android:hardwareAccelerated="true"
         android:resizeableActivity="false"
+        android:isGame="true"
         android:theme="@style/AppTheme">
 
-        <service android:name=".common.services.MusicService"/>
+        <service
+        android:name=".common.services.MusicService"
+        android:foregroundServiceType="mediaPlayback"/>
 
         <activity
             android:name=".TicTacToeActivity"
