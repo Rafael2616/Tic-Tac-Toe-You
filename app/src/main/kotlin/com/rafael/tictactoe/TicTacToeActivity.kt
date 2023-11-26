@@ -32,8 +32,6 @@ class TicTacToeActivity : ComponentActivity() {
         }
     }
 
-    var focusHasChanged = false
-
     override fun onResume() {
         BackgroundMusic(
             service = musicService,
@@ -51,19 +49,9 @@ class TicTacToeActivity : ComponentActivity() {
             context = this,
             onEvent = settingsVM::onEvent,
             state = settingsVM.state.value,
-            isAppInOnStop = true// if (focusHasChanged) false else true
+            isAppInOnStop = true
         )
         super.onStop()
-    }
-
-    override fun onWindowFocusChanged(hasFocus: Boolean) {
-        super.onWindowFocusChanged(hasFocus)
-
-        if (hasFocus) {
-            focusHasChanged = true
-        } else {
-            focusHasChanged = false
-        }
     }
 
     override fun onDestroy() {

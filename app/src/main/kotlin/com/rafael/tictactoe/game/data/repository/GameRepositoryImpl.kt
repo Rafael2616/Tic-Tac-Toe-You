@@ -15,8 +15,8 @@ import java.io.IOException
 import javax.inject.Inject
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
-import retrofit2.Response
 import retrofit2.HttpException
+import retrofit2.Response
 
 const val TAG = "GameRepository"
 
@@ -29,6 +29,7 @@ class GameRepositoryImpl @Inject constructor(
 		println("Game repository has been initialized")
 	}
 	
+    // Local data from Room
     override fun getGameValues(): Flow<GameEntity> {
         return gameDao.getGameValues()
     }
@@ -37,6 +38,7 @@ class GameRepositoryImpl @Inject constructor(
         return gameDao.setGameValues(gameEntity)
     }
 
+    // Internet data by Retrofit
     override suspend fun getRemotePlayers(): Pair<Flow<List<Player>>?, RequestState> {
         try {
             val response = gameService.getPlayers()
