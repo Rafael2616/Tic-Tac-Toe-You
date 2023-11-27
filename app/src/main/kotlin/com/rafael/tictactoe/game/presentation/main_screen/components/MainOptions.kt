@@ -22,7 +22,6 @@ import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
@@ -39,7 +38,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.presentation.navigation.Destinations
@@ -50,12 +48,13 @@ import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewMod
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
-@ExperimentalMaterial3Api
-fun MainOptions(navController: NavController) {
-    val settingsVM = hiltViewModel<SettingsViewModel>()
+fun MainOptions(
+    navController: NavController,
+    settingsVM: SettingsViewModel,
+    viewModel: GameViewModel
+) {
     val orientation = LocalConfiguration.current.orientation
     val state by settingsVM.state.collectAsState()
-    val viewModel = hiltViewModel<GameViewModel>()
     val onEvent = viewModel::onEvent
 
     val items = listOf(
