@@ -111,7 +111,7 @@ dependencies {
     //Jetpack Compose
     implementation(platform("androidx.compose:compose-bom:2023.10.01"))
     implementation("androidx.compose.animation:animation:1.6.0-beta01")
-    implementation("androidx.compose.foundation:foundation:1.6.0-beta01")
+    implementation("androidx.compose.foundation:foundation:1.6.0-beta02")
     implementation("androidx.compose.material:material-icons-extended:1.6.0-beta01")
     implementation("androidx.compose.material3:material3:1.2.0-alpha11")
     implementation("androidx.compose.runtime:runtime:1.6.0-beta01")
