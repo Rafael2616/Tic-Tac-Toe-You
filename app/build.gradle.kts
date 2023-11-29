@@ -99,7 +99,7 @@ dependencies {
 	val media3_version = "1.2.0"
 
     // Todo: remove this when compose bom 2023.12.00 is released
-    val m3_version = "1.6.0-beta01"
+    val m3_version = "1.6.0-beta02"
 
     //Kotlin
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
