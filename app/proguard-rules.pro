@@ -39,3 +39,8 @@
 -keepclasseswithmembers class * extends androidx.room.RoomDatabase {
     public static void clearAllTables(android.content.Context, java.lang.String);
 }
+
+# Retrofit
+-keep class retrofit2.** { *; }
+-keepattributes Signature, InnerClasses, EnclosingMethod
+-keepattributes Exceptions
