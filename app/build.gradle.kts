@@ -98,6 +98,9 @@ dependencies {
     val hilt_version = "2.48.1"
 	val media3_version = "1.2.0"
 
+    // Todo: remove this when compose bom 2023.12.00 is released
+    val m3_version = "1.6.0-beta01"
+
     //Kotlin
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     //Android Core
@@ -110,12 +113,12 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
     //Jetpack Compose
     implementation(platform("androidx.compose:compose-bom:2023.10.01"))
-    implementation("androidx.compose.animation:animation:1.6.0-beta01")
-    implementation("androidx.compose.foundation:foundation:1.6.0-beta01")
-    implementation("androidx.compose.material:material-icons-extended:1.6.0-beta01")
+    implementation("androidx.compose.animation:animation:$m3_version")
+    implementation("androidx.compose.foundation:foundation:$m3_version")
+    implementation("androidx.compose.material:material-icons-extended:$m3_version")
     implementation("androidx.compose.material3:material3:1.2.0-alpha11")
-    implementation("androidx.compose.runtime:runtime:1.6.0-beta01")
-    implementation("androidx.compose.ui:ui:1.6.0-beta01")
+    implementation("androidx.compose.runtime:runtime:$m3_version")
+    implementation("androidx.compose.ui:ui:$m3_version")
     //Navigation
     implementation("androidx.navigation:navigation-compose:2.7.5")
     //Lifecycle
@@ -134,7 +137,7 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     //Test Unit
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:$m3_version")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
 }
