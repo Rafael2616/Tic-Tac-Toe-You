@@ -126,6 +126,15 @@ class SettingsViewModel @Inject constructor(
                     showColorSelectionDialog = false
                 )}
             }
+            is SettingsEvent.StartBackgroundMusic -> {
+                BackgroundMusic(
+                    context = context,
+                    onEvent = this::onEvent,
+                    state = state.value,
+                    service = service,
+                    isAppInOnStop = event.value
+                )
+            }
  	       is SettingsEvent.ShowAboutAppCard -> {
                 _state.update { it.copy(isAboutShown = event.value)}
                 execUIClickSound()
