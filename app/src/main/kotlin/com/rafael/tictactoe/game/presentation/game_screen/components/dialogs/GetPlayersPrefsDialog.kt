@@ -203,7 +203,6 @@ fun GetPlayersPrefsDialog(
                         modifier = Modifier
                             .weight(1f)
                             .focusRequester(focusRequester)
-                            .clickable {focusRequester.requestFocus()}
                     )
                     
                     // Show an second Textfield and toggle only in PvP and CPU Modes

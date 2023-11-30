@@ -15,7 +15,7 @@
         android:hardwareAccelerated="true"
         android:resizeableActivity="false"
         android:isGame="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppSplash">
 
         <service
         android:name=".common.services.MusicService"

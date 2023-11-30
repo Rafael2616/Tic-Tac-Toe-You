@@ -23,7 +23,6 @@ import com.rafael.tictactoe.common.presentation.navigation.Destinations
 import com.rafael.tictactoe.common.presentation.theme.AppTheme
 import com.rafael.tictactoe.game.presentation.game_screen.GameScreen
 import com.rafael.tictactoe.game.presentation.main_screen.MainScreen
-import com.rafael.tictactoe.game.presentation.splash_screen.SplashScreen
 import com.rafael.tictactoe.settings.presentation.settings_screen.SettingsScreen
 
 @Composable
@@ -50,13 +49,10 @@ fun TicTacToe(context: ComponentActivity) {
         ) {
             NavHost(
                 navController = navController,
-                startDestination = Destinations.Splash.screen,
+                startDestination = Destinations.Main.screen,
                 enterTransition = { enterTransition },
                 exitTransition = { exitTransition }
              ) {
-                composable(Destinations.Splash.screen) {
-                    SplashScreen(navController)
-                }
                 composable(Destinations.Main.screen) {
                     MainScreen(navController)
                 }
