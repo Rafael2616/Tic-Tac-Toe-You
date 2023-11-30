@@ -54,7 +54,10 @@ fun TicTacToe(context: ComponentActivity) {
                 exitTransition = { exitTransition }
              ) {
                 composable(Destinations.Main.screen) {
-                    MainScreen(navController)
+                    MainScreen(
+                        navController = navController,
+                        activity = context
+                    )
                 }
                 composable(
                     route = Destinations.Game.screen + "/{isCPUMode}",

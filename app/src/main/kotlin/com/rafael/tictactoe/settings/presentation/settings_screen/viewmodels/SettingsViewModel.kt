@@ -68,14 +68,16 @@ class SettingsViewModel @Inject constructor(
                     var settings = repository.getAllSettingsValues(1) ?: defaultSettings
                     settings.isBackgroundMusicOn = state.value.isBackgroundMusicOn
 			        repository.setAllSettingsValues(settings)
+
+                    BackgroundMusic(
+                        context = context,
+                        onEvent = this@SettingsViewModel::onEvent,
+                        isBMPlaying = state.value.isBMPlaying,
+                        isBackgroundMusicOn = state.value.isBackgroundMusicOn,
+                        service = service
+                    )
                 }
                 execUIClickSound()
-                BackgroundMusic(
-                    context = context,
-                    onEvent = this::onEvent,
-                    state = state.value,
-                    service = service
-                )
             }
  	       SettingsEvent.ToggleIsDarkThemeOn -> {
                 _state.update { it.copy(isDarkThemeOn = !it.isDarkThemeOn) }
@@ -85,7 +87,7 @@ class SettingsViewModel @Inject constructor(
                     settings.isDarkThemeOn = state.value.isDarkThemeOn
 			        repository.setAllSettingsValues(settings)
                 }
-                    execUIClickSound()
+                execUIClickSound()
             }
  	       SettingsEvent.ToggleIsDynamicColorsOn -> {
                 _state.update { it.copy(isDynamicColorsOn = !it.isDynamicColorsOn) }
@@ -133,13 +135,17 @@ class SettingsViewModel @Inject constructor(
                 )}
             }
             is SettingsEvent.StartBackgroundMusic -> {
-                BackgroundMusic(
-                    context = context,
-                    onEvent = this::onEvent,
-                    state = state.value,
-                    service = service,
-                    isAppInOnStop = event.value
-                )
+	    	    viewModelScope.launch(Dispatchers.IO) {
+                    var settings = repository.getAllSettingsValues(1) ?: defaultSettings
+                    BackgroundMusic(
+                        context = context,
+                        isBMPlaying = state.value.isBMPlaying,
+                        isBackgroundMusicOn = settings.isBackgroundMusicOn,
+                        onEvent = this@SettingsViewModel::onEvent,
+                        service = service,
+                        isAppInOnStop = event.value
+                    )
+                }
             }
  	       is SettingsEvent.ShowAboutAppCard -> {
                 _state.update { it.copy(isAboutShown = event.value)}
