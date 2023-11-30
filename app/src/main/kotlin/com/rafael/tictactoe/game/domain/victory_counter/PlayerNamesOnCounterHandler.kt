@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.domain.players_names
+package com.rafael.tictactoe.game.domain.victory_counter
 
 import android.content.Context
 import androidx.compose.runtime.Composable
@@ -30,9 +30,9 @@ class PlayerNamesOnCounterHandler() {
         //Apply "CPU" name for first player name when needed in CPU Mode
         if (isCPUMode) {
             if (isCPUPlayer1) {
-                vm.showPlayer1Name(cpuName)
+                vm.updatePlayer1NameOnCounter(cpuName)
             } else {
-                vm.showPlayer1Name("")
+                vm.updatePlayer1NameOnCounter("")
             }
         }
 
@@ -41,22 +41,22 @@ class PlayerNamesOnCounterHandler() {
             if (localPlayer1) {
                 if (player1Name.isEmpty()) {
                     if (isXFor1) {
-                        vm.showPlayer1Name(genericPlayerX)
+                        vm.updatePlayer1NameOnCounter(genericPlayerX)
                     } else {
-                        vm.showPlayer1Name(genericPlayerO)
+                        vm.updatePlayer1NameOnCounter(genericPlayerO)
                     }
                 } else {
-                    vm.showPlayer1Name(player1Name)
+                    vm.updatePlayer1NameOnCounter(player1Name)
                 }
             } else {
                 if (player2Name.isEmpty()) {
                     if (isXFor1) {
-                        vm.showPlayer1Name(genericPlayerX)
+                        vm.updatePlayer1NameOnCounter(genericPlayerX)
                     } else {
-                        vm.showPlayer1Name(genericPlayerO)
+                        vm.updatePlayer1NameOnCounter(genericPlayerO)
                     }
                 } else {
-                    vm.showPlayer1Name(player2Name)
+                    vm.updatePlayer1NameOnCounter(player2Name)
                 }
             }
         }
@@ -65,12 +65,12 @@ class PlayerNamesOnCounterHandler() {
         if (play) {
             if (player1Name.isEmpty() || player1Name == emptyPlayerName) {
                 if (isXFor1) {
-                    vm.showPlayer1Name(genericPlayerX)
+                    vm.updatePlayer1NameOnCounter(genericPlayerX)
                 } else {
-                    vm.showPlayer1Name(genericPlayerO)
+                    vm.updatePlayer1NameOnCounter(genericPlayerO)
                 }
             } else {
-                vm.showPlayer1Name(player1Name)
+                vm.updatePlayer1NameOnCounter(player1Name)
             }
         }
     }
@@ -94,9 +94,9 @@ class PlayerNamesOnCounterHandler() {
         //Apply "CPU" name for second player name when needed in CPU Mode
         if (isCPUMode) {
             if (!isCPUPlayer1) {
-                vm.showPlayer2Name(cpuName)
+                vm.updatePlayer2NameOnCounter(cpuName)
             } else {
-                vm.showPlayer2Name("")
+                vm.updatePlayer2NameOnCounter("")
             }
         }
 
@@ -105,22 +105,22 @@ class PlayerNamesOnCounterHandler() {
             if (localPlayer1) {
                 if (player2Name.isEmpty()) {
                     if (isXFor1) {
-                        vm.showPlayer2Name(genericPlayerO)
+                        vm.updatePlayer2NameOnCounter(genericPlayerO)
                     } else {
-                        vm.showPlayer2Name(genericPlayerX)
+                        vm.updatePlayer2NameOnCounter(genericPlayerX)
                     }
                 } else {
-                    vm.showPlayer2Name(player2Name)
+                    vm.updatePlayer2NameOnCounter(player2Name)
                 }
             } else {
                 if (player1Name.isEmpty()) {
                     if (isXFor1) {
-                        vm.showPlayer2Name(genericPlayerO)
+                        vm.updatePlayer2NameOnCounter(genericPlayerO)
                     } else {
-                        vm.showPlayer2Name(genericPlayerX)
+                        vm.updatePlayer2NameOnCounter(genericPlayerX)
                     }
                 } else {
-                    vm.showPlayer2Name(player1Name)
+                    vm.updatePlayer2NameOnCounter(player1Name)
                 }
             }
         }
@@ -129,12 +129,12 @@ class PlayerNamesOnCounterHandler() {
         if (play) {
             if (player2Name.isEmpty() || player2Name == emptyPlayerName) {
                 if (isXFor1) {
-                    vm.showPlayer2Name(genericPlayerO)
+                    vm.updatePlayer2NameOnCounter(genericPlayerO)
                 } else {
-                    vm.showPlayer2Name(genericPlayerX)
+                    vm.updatePlayer2NameOnCounter(genericPlayerX)
                 }
             } else {
-                vm.showPlayer2Name(player2Name)
+                vm.updatePlayer2NameOnCounter(player2Name)
             }
         }
     }

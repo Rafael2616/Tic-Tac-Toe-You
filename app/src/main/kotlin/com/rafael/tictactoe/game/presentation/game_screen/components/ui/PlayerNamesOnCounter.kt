@@ -23,7 +23,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.model.GameState
-import com.rafael.tictactoe.game.domain.players_names.PlayerNamesOnCounterHandler
+import com.rafael.tictactoe.game.domain.victory_counter.PlayerNamesOnCounterHandler
 
 @Composable
 fun PlayersNamesOnCounter(state: GameState) {
@@ -56,8 +56,8 @@ fun PlayersNamesOnCounter(state: GameState) {
                 ) {
                     AnimatedContent(
                         targetState = when (player) {
-                            Players.FIRST -> state.showPlayer1Name
-                            Players.SECOND -> state.showPlayer2Name
+                            Players.First -> state.player1NameOnCounter
+                            Players.Second -> state.player2NameOnCounter
                         },
                         transitionSpec = {
                             fadeIn() togetherWith fadeOut()
@@ -78,6 +78,6 @@ fun PlayersNamesOnCounter(state: GameState) {
 }
 
 enum class Players {
-    FIRST,
-    SECOND
+    First,
+    Second
 }

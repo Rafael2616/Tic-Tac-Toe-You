@@ -388,12 +388,12 @@ class GameViewModel @Inject constructor(
         _state.update { it.copy(gotOld = newValue)}
     }
 	
-    fun showPlayer1Name(newValue: String) {
-        _state.update { it.copy(showPlayer1Name = newValue)}
+    fun updatePlayer1NameOnCounter(newValue: String) {
+        _state.update { it.copy(player1NameOnCounter = newValue)}
     }
 
-    fun showPlayer2Name(newValue: String) {
-        _state.update { it.copy(showPlayer2Name = newValue)}
+    fun updatePlayer2NameOnCounter(newValue: String) {
+        _state.update { it.copy(player2NameOnCounter = newValue)}
     }
 
     fun updateIsGameFinished(newValue: Boolean) {

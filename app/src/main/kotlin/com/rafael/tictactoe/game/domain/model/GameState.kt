@@ -32,8 +32,8 @@ data class GameState(
 	val hasWinner: Boolean = false,
 	val gotOld: Boolean = false,
 	val isGameFinished: Boolean = false,
-	val showPlayer1Name: String = "",
-	val showPlayer2Name: String = "",
+	val player1NameOnCounter: String = "",
+	val player2NameOnCounter: String = "",
 	val isCPU: Boolean = false,
 	val isCPUMode: Boolean = false,
     val gameMode: GameMode = GameMode.PvP,
@@ -53,5 +53,4 @@ data class GameState(
     val isYouPlayer1: Boolean = true,
     val showGetPrefsDialog: Boolean = true,
     val showSearchForPlayersSurface: Boolean = false
-
 )
