@@ -31,7 +31,7 @@ class SettingsViewModel @Inject constructor(
     private val player: ExoPlayer,
     private val context: Application,
     private val service: MusicService
-): ViewModel() {
+) : ViewModel() {
 
     //Get default values for settings variables from SettingsEntity (used to avoid NPEs)
     val defaultSettings = SettingsEntity.getDefaultSettings()
@@ -48,7 +48,13 @@ class SettingsViewModel @Inject constructor(
     	        isDarkThemeOn = settings.isDarkThemeOn,
     	        isDynamicColorsOn = settings.isDynamicColorsOn,
                 isFollowingSystemOn = settings.isFollowingSystemOn,
-                isSoundEffectsOn = settings.isSoundEffectsOn
+                isSoundEffectsOn = settings.isSoundEffectsOn,
+                selectedWinnerLineColor = settings.selectedWinnerLineColor,
+                selectedXColor = settings.selectedXColor,
+                selectedCircleColor = settings.selectedCircleColor,
+                winnerLineColor = Color(settings.selectedWinnerLineColor),
+                xColor = Color(settings.selectedXColor),
+                circleColor = Color(settings.selectedCircleColor)
             )}
   	  }
 	}
@@ -152,6 +158,7 @@ class SettingsViewModel @Inject constructor(
                 execUIClickSound()
             }
  	       is SettingsEvent.SetXColor -> {
+
                 _state.update { it.copy(xColor = event.color)}
                 execUIClickSound()
             }
@@ -160,14 +167,29 @@ class SettingsViewModel @Inject constructor(
                 execUIClickSound()
             }
  	       is SettingsEvent.SelectedWinnerLineColor -> {
+                viewModelScope.launch(Dispatchers.IO) {
+                    var settings = repository.getAllSettingsValues(1) ?: defaultSettings
+                    settings.selectedWinnerLineColor = event.value
+			        repository.setAllSettingsValues(settings)
+                }
                 _state.update { it.copy(selectedWinnerLineColor = event.value) }
                 execUIClickSound()
             }
  	       is SettingsEvent.SelectedXColor -> {
+                viewModelScope.launch(Dispatchers.IO) {
+                    var settings = repository.getAllSettingsValues(1) ?: defaultSettings
+                    settings.selectedXColor = event.value
+			        repository.setAllSettingsValues(settings)
+                }
                 _state.update { it.copy(selectedXColor = event.value) }
                 execUIClickSound()
             }
  	       is SettingsEvent.SelectedCircleColor -> {
+                viewModelScope.launch(Dispatchers.IO) {
+                    var settings = repository.getAllSettingsValues(1) ?: defaultSettings
+                    settings.selectedCircleColor = event.value
+			        repository.setAllSettingsValues(settings)
+                }
                 _state.update { it.copy(selectedCircleColor = event.value) }
                 execUIClickSound()
             }
@@ -175,6 +197,22 @@ class SettingsViewModel @Inject constructor(
                 _state.update { it.copy(isBMPlaying = event.value) }
             }
 		}
+    }
+
+    fun Color(option: Int): Color {
+        val color = Colors.get()
+        return when (option) {
+            0 -> color.blue
+            1 -> color.red
+            2 -> color.yellow
+            3 -> color.burnt_yellow
+            4 -> color.dark_green
+            5 -> color.light_green
+            6 -> color.purple
+            7 -> color.magenta
+            8 -> color.white
+            else -> color.cyan
+        }
     }
 
     fun execUIClickSound() {

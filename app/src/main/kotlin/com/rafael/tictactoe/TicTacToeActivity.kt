@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.common.presentation.navigation.TicTacToe
+import com.rafael.tictactoe.common.services.MusicService
 import com.rafael.tictactoe.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import dagger.hilt.android.AndroidEntryPoint

@@ -11,7 +11,10 @@ data class SettingsEntity(
     var isDarkThemeOn: Boolean,
     var isDynamicColorsOn: Boolean,
     var isFollowingSystemOn: Boolean,
-    var isSoundEffectsOn: Boolean
+    var isSoundEffectsOn: Boolean,
+    var selectedWinnerLineColor: Int,
+    var selectedXColor: Int,
+    var selectedCircleColor: Int
 ) {
     companion object {
         fun getDefaultSettings(): SettingsEntity {
@@ -21,7 +24,10 @@ data class SettingsEntity(
                 isDarkThemeOn = true,
                 isDynamicColorsOn = true,
                 isFollowingSystemOn = true,
-                isSoundEffectsOn = true
+                isSoundEffectsOn = true,
+                selectedWinnerLineColor = 2,
+                selectedXColor = 1,
+                selectedCircleColor = 5
             )
         }
     }
