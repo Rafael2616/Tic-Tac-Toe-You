@@ -73,7 +73,7 @@ class SettingsViewModel @Inject constructor(
                         context = context,
                         onEvent = this@SettingsViewModel::onEvent,
                         isBMPlaying = state.value.isBMPlaying,
-                        isBackgroundMusicOn = state.value.isBackgroundMusicOn,
+                        isBackgroundMusicOn = settings.isBackgroundMusicOn,
                         service = service
                     )
                 }

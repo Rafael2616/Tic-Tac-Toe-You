@@ -11,6 +11,7 @@ import com.rafael.tictactoe.common.services.MusicService
 import com.rafael.tictactoe.game.presentation.main_screen.components.MainOptions
 import com.rafael.tictactoe.game.presentation.main_screen.components.MainTopBar
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
+import com.rafael.tictactoe.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 
 @Composable
@@ -31,6 +32,7 @@ fun MainScreen(
     )
 
     BackHandler {
+        settingsVM.onEvent(SettingsEvent.IsBGMusicPlaying(false))
         activity.finish()
         context.stopService(serviceIntent)
     }
