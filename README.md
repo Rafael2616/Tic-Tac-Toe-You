@@ -41,8 +41,5 @@ A classic tic-tac-toe game made with material you and others new android technol
 <img src="screenshots/screenshot_12.png" width=31% alt ="color selector dialog">
 </div>
 
-# Incompletes/Bugged Features
-- The data is not being saved in the database
-
 # Follow me on Instagram
 [Instagram](https://www.instagram.com/rafael_mourana/)
