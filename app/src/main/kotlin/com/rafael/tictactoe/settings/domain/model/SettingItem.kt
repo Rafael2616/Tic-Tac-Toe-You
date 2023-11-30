@@ -5,7 +5,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 
 data class SettingsItem(
     val leadingIcon: ImageVector? = null,
-    val text: Int,
+    @StringRes val text: Int,
     val trailingIcon: ImageVector? = null,
     val isChecked: Boolean? = null
 )
