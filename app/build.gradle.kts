@@ -95,7 +95,7 @@ android {
 dependencies {
     val lifecycle_version = "2.6.2"
     val room_version = "2.6.1"
-    val hilt_version = "2.48.1"
+    val hilt_version = "2.49"
 	val media3_version = "1.2.0"
 
     // Todo: remove this when compose bom 2023.12.00 is released
