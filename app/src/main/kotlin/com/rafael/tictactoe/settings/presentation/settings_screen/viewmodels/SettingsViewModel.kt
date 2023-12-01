@@ -68,15 +68,14 @@ class SettingsViewModel @Inject constructor(
                     var settings = repository.getAllSettingsValues(1) ?: defaultSettings
                     settings.isBackgroundMusicOn = state.value.isBackgroundMusicOn
 			        repository.setAllSettingsValues(settings)
-
-                    BackgroundMusic(
-                        context = context,
-                        onEvent = this@SettingsViewModel::onEvent,
-                        isBMPlaying = state.value.isBMPlaying,
-                        isBackgroundMusicOn = settings.isBackgroundMusicOn,
-                        service = service
-                    )
                 }
+                BackgroundMusic(
+                    context = context,
+                    onEvent = this::onEvent,
+                    isBMPlaying = state.value.isBMPlaying,
+                    isBackgroundMusicOn = state.value.isBackgroundMusicOn,
+                    service = service
+                )
                 execUIClickSound()
             }
  	       SettingsEvent.ToggleIsDarkThemeOn -> {
@@ -135,17 +134,14 @@ class SettingsViewModel @Inject constructor(
                 )}
             }
             is SettingsEvent.StartBackgroundMusic -> {
-	    	    viewModelScope.launch(Dispatchers.IO) {
-                    var settings = repository.getAllSettingsValues(1) ?: defaultSettings
-                    BackgroundMusic(
-                        context = context,
-                        isBMPlaying = state.value.isBMPlaying,
-                        isBackgroundMusicOn = settings.isBackgroundMusicOn,
-                        onEvent = this@SettingsViewModel::onEvent,
-                        service = service,
-                        isAppInOnStop = event.value
-                    )
-                }
+                BackgroundMusic(
+                    context = context,
+                    isBMPlaying = state.value.isBMPlaying,
+                    isBackgroundMusicOn = state.value.isBackgroundMusicOn,
+                    onEvent = this::onEvent,
+                    service = service,
+                    isAppInOnStop = event.value
+                )
             }
  	       is SettingsEvent.ShowAboutAppCard -> {
                 _state.update { it.copy(isAboutShown = event.value)}
