@@ -22,13 +22,7 @@ fun colorSelectionUseCase(
 fun Color(option: IColor): Color {
     val color = Colors.get()
 
-    return if (option == IColor.BLUE) {
-        color.blue
-    } else {
-        color.red
-    }
-    
-    /*when (option) {
+    return when (option) {
         IColor.BLUE -> color.blue
         IColor.RED -> color.red
         IColor.YELLOW -> color.yellow
@@ -39,5 +33,5 @@ fun Color(option: IColor): Color {
         IColor.MAGENTA -> color.magenta
         IColor.WHITE -> color.white
         IColor.CYAN -> color.cyan
-    }*/
+    }
 }
