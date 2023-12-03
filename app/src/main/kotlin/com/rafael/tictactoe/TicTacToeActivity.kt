@@ -35,8 +35,8 @@ class TicTacToeActivity : ComponentActivity() {
     }
 
     override fun onResume() {
-        settingsVM.onEvent(SettingsEvent.StartBackgroundMusic(false))
         super.onResume()
+        settingsVM.onEvent(SettingsEvent.StartBackgroundMusic(false))
     }
 
     override fun onStop() {
