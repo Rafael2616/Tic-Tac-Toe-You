@@ -58,7 +58,7 @@ class SettingsViewModel @Inject constructor(
             )}
   	  }
 	}
-	
+
 	fun onEvent(event: SettingsEvent) {
         when (event) {
  	       SettingsEvent.ToggleIsBackgroundMusicOn -> {
