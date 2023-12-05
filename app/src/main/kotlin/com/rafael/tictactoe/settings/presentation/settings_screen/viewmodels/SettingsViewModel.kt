@@ -134,16 +134,11 @@ class SettingsViewModel @Inject constructor(
                 )}
             }
             is SettingsEvent.StartBackgroundMusic -> {
-	    	    viewModelScope.launch(Dispatchers.IO) {
-                    var settings = repository.getAllSettingsValues(1) ?: defaultSettings
-                    settings.isBackgroundMusicOn = state.value.isBackgroundMusicOn
-			        repository.setAllSettingsValues(settings)
-                }
                 BackgroundMusic(
                     context = context,
                     isBMPlaying = state.value.isBMPlaying,
                     isBackgroundMusicOn = state.value.isBackgroundMusicOn,
-                    onEvent = this::onEvent,
+                    onEvent = ::onEvent,
                     service = service,
                     isAppInOnStop = event.value
                 )
@@ -165,7 +160,6 @@ class SettingsViewModel @Inject constructor(
                 execUIClickSound()
             }
  	       is SettingsEvent.SetXColor -> {
-
                 _state.update { it.copy(xColor = event.color)}
                 execUIClickSound()
             }

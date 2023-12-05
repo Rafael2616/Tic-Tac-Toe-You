@@ -6,6 +6,13 @@ on:
   pull_request:
     branches: [ "main" ]
 
+env:
+    # Signing secrets
+    KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+    KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+    KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+    KEYSTORE: ${{ secrets.KEYSTORE }}
+
 jobs:
   build:
 
@@ -26,8 +33,8 @@ jobs:
     - name: Build Release APK
       run: ./gradlew assembleRelease
 
-    # - name: Upload APK
-      # uses: actions/upload-artifact@v3
-      # with:
-        # name: app-release
-        # path: app/build/outputs/apk/release/app-release.apk
+    - name: Upload APK
+      uses: actions/upload-artifact@v3
+      with:
+        name: app-release
+        path: app/build/outputs/apk/release/app-release.apk

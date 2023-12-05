@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowOutward
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.automirrored.outlined.VolumeUp
 import androidx.compose.material.icons.automirrored.outlined.VolumeOff
@@ -25,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.rafael.tictactoe.R
+import com.rafael.tictactoe.common.presentation.icons.material.Github
 import com.rafael.tictactoe.settings.domain.enums.SettingsGroup
 import com.rafael.tictactoe.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.domain.model.SettingsItem
@@ -68,7 +70,7 @@ fun SettingsOptionsImpl(
             isChecked = state.isSoundEffectsOn
         ),
         // Background Music
-        SettingsItem(
+       SettingsItem(
             leadingIcon = if (state.isBackgroundMusicOn) Icons.AutoMirrored.Outlined.VolumeUp else Icons.AutoMirrored.Outlined.VolumeOff,
             text = R.string.background_music,
             isChecked = state.isBackgroundMusicOn
@@ -99,6 +101,12 @@ fun SettingsOptionsImpl(
             leadingIcon = Icons.Outlined.Info,
             text = if (!state.isAboutShown) R.string.about_app else R.string.creator_message,
             trailingIcon = if (state.isAboutShown) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore
+        ),
+        // Github repo
+        SettingsItem(
+            leadingIcon = Icons.Rounded.Github,
+            text = R.string.view_on_github,
+            trailingIcon = Icons.Filled.ArrowOutward
         )
     )
 

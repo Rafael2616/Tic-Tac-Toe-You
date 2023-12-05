@@ -1,5 +1,5 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.util.Properties
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("androidx.room")
@@ -49,7 +49,6 @@ android {
 		    enableV3Signing = true
         }
     }
-    
 
     buildTypes {
         create("beta") {

@@ -99,6 +99,7 @@ fun SettingsBlockWithSwitch(
                             .fillMaxSize()
                             .clickable {
                                 toggleSettingsUseCase(
+                                    null,
                                     groupType,
                                     index,
                                     state,
@@ -125,6 +126,7 @@ fun SettingsBlockWithSwitch(
                             checked = setting.isChecked!!,
                             onCheckedChange = {
                                 toggleSettingsUseCase(
+                                    null,
                                     groupType,
                                     index,
                                     state,

@@ -1,6 +1,8 @@
 package com.rafael.tictactoe.settings.presentation.settings_screen.components
 
 import android.content.res.Configuration
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.StringRes
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
@@ -68,6 +70,7 @@ fun SettingsBlockWithIcon(
     val componentValidator = ComponentValidator()
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
+    val launcher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { }
 
     Column(
         modifier = Modifier
@@ -108,6 +111,7 @@ fun SettingsBlockWithIcon(
                         .fillMaxSize()
                         .clickable {
                             toggleSettingsUseCase(
+                                launcher,
                                 groupType,
                                 index,
                                 state,
