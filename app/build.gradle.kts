@@ -42,7 +42,13 @@ android {
 		    enableV3Signing = true
         }
     } else {
-        signingConfigs["debug"]
+        signingConfigs.create("release") {
+            storeFile = file("tictactoekey.jks")
+            storePassword = System.getenv("KEYSTORE_PASSWORD")
+            keyAlias = System.getenv("KEY_ALIAS")
+            keyPassword = System.getenv("KEY_PASSWORD")
+		    enableV3Signing = true
+        }
     }
     
 
