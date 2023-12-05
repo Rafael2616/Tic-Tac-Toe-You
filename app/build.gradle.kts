@@ -33,7 +33,6 @@ android {
     val props = Properties()
     val releaseSigningConfig = if (releaseSigningConfigsFile.exists()) {
         props.load(releaseSigningConfigsFile.inputStream())
-
         signingConfigs.create("release") {
             storeFile = file(props.getProperty("KEYSTORE"))
             storePassword = props.getProperty("KEYSTORE_PASSWORD")

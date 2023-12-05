@@ -134,6 +134,11 @@ class SettingsViewModel @Inject constructor(
                 )}
             }
             is SettingsEvent.StartBackgroundMusic -> {
+	    	    viewModelScope.launch(Dispatchers.IO) {
+                    var settings = repository.getAllSettingsValues(1) ?: defaultSettings
+                    settings.isBackgroundMusicOn = state.value.isBackgroundMusicOn
+			        repository.setAllSettingsValues(settings)
+                }
                 BackgroundMusic(
                     context = context,
                     isBMPlaying = state.value.isBMPlaying,

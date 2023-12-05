@@ -6,6 +6,13 @@ on:
   pull_request:
     branches: [ "dev" ]
 
+env:
+  # Signing secrets
+  KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+  KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+  KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+  KEYSTORE: ${{ secrets.KEYSTORE }}
+
 jobs:
   build:
 
