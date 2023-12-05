@@ -28,26 +28,28 @@ android {
             }
         }
     }
-    signingConfigs {
-        val releaseSigningConfigs = rootProject.file(".env")
-        val props = Properties()
-        if (releaseSigningConfigs.exists()) {
-            props.load(releaseSigningConfigs.inputStream())
 
-            create("release") {
-                storeFile = file(props.getProperty("KEYSTORE"))
-                storePassword = props.getProperty("KEYSTORE_PASSWORD")
-                keyAlias = props.getProperty("KEY_ALIAS")
-                keyPassword = props.getProperty("KEY_PASSWORD")
-			    enableV3Signing = true
-            }
+    val releaseSigningConfigsFile = rootProject.file(".env")
+    val props = Properties()
+    val releaseSigningConfig = if (releaseSigningConfigsFile.exists()) {
+        props.load(releaseSigningConfigsFile.inputStream())
+
+        signingConfigs.create("release") {
+            storeFile = file(props.getProperty("KEYSTORE"))
+            storePassword = props.getProperty("KEYSTORE_PASSWORD")
+            keyAlias = props.getProperty("KEY_ALIAS")
+            keyPassword = props.getProperty("KEY_PASSWORD")
+		    enableV3Signing = true
         }
+    } else {
+        signingConfigs["debug"]
     }
+    
 
     buildTypes {
         create("beta") {
             isMinifyEnabled = true
-            signingConfig = signingConfigs.getByName("release")
+            signingConfig = releaseSigningConfig
             applicationIdSuffix = ".beta"
             versionNameSuffix = "-beta"
             resValue("string", "app_name_beta", "Jogo da Velha - Beta")
@@ -55,7 +57,7 @@ android {
         }
 
         named("debug") {
-            signingConfig = signingConfigs.getByName("release")
+            signingConfig = releaseSigningConfig
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
             resValue("string", "app_name_debug", "Jogo da Velha - Debug")
@@ -63,7 +65,7 @@ android {
 
 		named("release") {
 			isMinifyEnabled = true
-			signingConfig = signingConfigs.getByName("release")
+			signingConfig = releaseSigningConfig
 			proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
