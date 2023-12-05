@@ -84,6 +84,6 @@ lint/tmp/
 # lint/reports/
 
 # Others files
-
 .git/
 .androidide/
+.env

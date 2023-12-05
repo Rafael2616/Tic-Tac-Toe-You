@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import java.util.Properties
 
 plugins {
     id("androidx.room")
@@ -27,18 +28,19 @@ android {
             }
         }
     }
-
     signingConfigs {
-        create("release") {
-            storeFile = file("tictactoekey.jks")
-            storePassword = "rafael1800"
-            keyAlias = "tictactoekey"
-            keyPassword = "rafael1800"
-			enableV3Signing = true
-        }
+        val releaseSigningConfigs = rootProject.file(".env")
+        val props = Properties()
+        if (releaseSigningConfigs.exists()) {
+            props.load(releaseSigningConfigs.inputStream())
 
-        named("debug") {
-            enableV3Signing = true
+            create("release") {
+                storeFile = file(props.getProperty("KEYSTORE"))
+                storePassword = props.getProperty("KEYSTORE_PASSWORD")
+                keyAlias = props.getProperty("KEY_ALIAS")
+                keyPassword = props.getProperty("KEY_PASSWORD")
+			    enableV3Signing = true
+            }
         }
     }
 

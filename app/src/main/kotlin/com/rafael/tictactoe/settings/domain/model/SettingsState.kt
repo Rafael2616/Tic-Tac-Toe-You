@@ -6,7 +6,7 @@ import com.rafael.tictactoe.settings.domain.enums.Customization
 
 data class SettingsState(
     val color : Colors = Colors.get(),
-    val isBackgroundMusicOn: Boolean = true,
+    val isBackgroundMusicOn: Boolean = false,
     val isDarkThemeOn: Boolean = true,
     val isDynamicColorsOn: Boolean = true,
     val isFollowingSystemOn: Boolean = true,
