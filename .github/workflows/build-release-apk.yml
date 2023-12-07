@@ -30,8 +30,10 @@ jobs:
       run: chmod +x gradlew
 
     - name: Build Release APK
-      with:
-        gradle-home-cache-cleanup: true
+    - uses: gradle/gradle-build-action@v2
+        with:
+          gradle-home-cache-cleanup: true
+          arguments: --build-cache
       run: ./gradlew assembleRelease
 
     - name: Upload APK
