@@ -29,13 +29,13 @@ class SettingsViewModel @Inject constructor(
     private val service: MusicService,
 ) : ViewModel() {
 
-    // Get default values for settings variables from SettingsEntity (used to avoid NPEs)
+    // Get default values for settings from SettingsEntity for first app usage
     val defaultSettings = SettingsEntity.getDefaultSettings()
 
     private val _state = MutableStateFlow(SettingsState())
     val state = _state.asStateFlow()
 
-    // Initialize ViewModel StateFlows Variables with corresponding values in SettingsRepository
+    // Initialize ViewModel StateFlows variables with corresponding values from SettingsRepository
     init {
         viewModelScope.launch(Dispatchers.IO) {
             val settings = repository.getAllSettingsValues(1) ?: defaultSettings
