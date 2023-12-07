@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.presentation.settings_screen
+package com.rafael.tictactoe.settings.presentation.settingsScreen
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
@@ -10,9 +10,9 @@ import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.presentation.settings_screen.components.ColorSelectionDialog
-import com.rafael.tictactoe.settings.presentation.settings_screen.components.SettingsTopBar
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.settings.presentation.settingsScreen.components.ColorSelectionDialog
+import com.rafael.tictactoe.settings.presentation.settingsScreen.components.SettingsTopBar
+import com.rafael.tictactoe.settings.presentation.settingsScreen.viewmodels.SettingsViewModel
 
 @Composable
 @ExperimentalMaterial3Api
@@ -23,7 +23,7 @@ fun SettingsScreen(navController: NavController) {
     SettingsTopBar(
         navController,
         settingsVM::onEvent,
-        state
+        state,
     )
 
     AnimatedVisibility(state.showColorSelectionDialog) {

@@ -1,12 +1,12 @@
-package com.rafael.tictactoe.game.presentation.main_screen.components
+package com.rafael.tictactoe.game.presentation.mainScreen.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -25,12 +25,12 @@ fun MainTopBar() {
             .fillMaxSize()
             .statusBarsPadding()
             .padding(top = 10.dp),
-        contentAlignment = Alignment.TopCenter
+        contentAlignment = Alignment.TopCenter,
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
                 text = stringResource(id = R.string.inapp_title),
@@ -38,7 +38,7 @@ fun MainTopBar() {
                 color = MaterialTheme.colorScheme.onSurface,
             )
             Spacer(
-                modifier = Modifier.height(3.dp)
+                modifier = Modifier.height(3.dp),
             )
             Text(
                 text = "Material You",

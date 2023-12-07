@@ -11,8 +11,8 @@ import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewMod
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.components.SingletonComponent
 import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
@@ -25,7 +25,7 @@ object GameModule {
         return Room.databaseBuilder(
             app,
             GameDatabase::class.java,
-            GameDatabase.DATABASE_NAME
+            GameDatabase.DATABASE_NAME,
         ).build()
     }
 
@@ -33,11 +33,11 @@ object GameModule {
     @Singleton
     fun provideGameRepository(
         database: GameDatabase,
-        dao: OnlineGameDao
+        dao: OnlineGameDao,
     ): GameRepository {
         return GameRepositoryImpl(
             database.gameDao(),
-            dao
+            dao,
         )
     }
 
@@ -47,13 +47,13 @@ object GameModule {
         player: ExoPlayer,
         settingsVM: SettingsViewModel,
         context: Application,
-        repository: GameRepository
+        repository: GameRepository,
     ): GameViewModel {
         return GameViewModel(
             player,
             settingsVM,
             context,
-            repository
+            repository,
         )
     }
 }

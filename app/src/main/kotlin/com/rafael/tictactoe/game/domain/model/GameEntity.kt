@@ -10,16 +10,16 @@ data class GameEntity(
     var player1Name: String,
     var player2Name: String,
     var player1Wins: Int,
-    var player2Wins: Int
+    var player2Wins: Int,
 ) {
     companion object {
         fun defaultGameValues(): GameEntity {
-			return GameEntity(
-      	      currentPlayerName = "",
-      	      player1Name = "",
-      	      player2Name = "",
-       	     player1Wins = 0,
-      	      player2Wins = 0,
+            return GameEntity(
+                currentPlayerName = "",
+                player1Name = "",
+                player2Name = "",
+                player1Wins = 0,
+                player2Wins = 0,
             )
         }
     }

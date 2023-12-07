@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.domain.game_toast
+package com.rafael.tictactoe.game.domain.toast
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.Canvas
@@ -14,7 +14,7 @@ import com.rafael.tictactoe.settings.domain.model.SettingsState
 @Composable
 fun ToastImageHandler(
     state: GameState,
-    settingsState: SettingsState
+    settingsState: SettingsState,
 ) {
     val xColor by animateColorAsState(settingsState.xColor)
     val circleColor by animateColorAsState(settingsState.circleColor)
@@ -25,24 +25,24 @@ fun ToastImageHandler(
     val isXImage = state.isXImage
 
     Canvas(
-         modifier = Modifier
-         .fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize(),
     ) {
-        //Image showed when game not started yet (configuration fase)
-    	if (!play) {
+        // Image showed when game not started yet (configuration fase)
+        if (!play) {
             if (isXFor1) drawXinToast(xColor) else drawCircleinToast(circleColor)
-    	}
+        }
 
-        //Image for case of game is on going
+        // Image for case of game is on going
         if (play && !hasWinner) {
             if (isXImage) drawXinToast(xColor) else drawCircleinToast(circleColor)
         }
 
-        //Image for case of has winner   
+        // Image for case of has winner
         if (hasWinner) {
             if (is1Win && isXFor1) {
                 drawXinToast(xColor)
-            } else if (is1Win && !isXFor1) { 
+            } else if (is1Win && !isXFor1) {
                 drawCircleinToast(circleColor)
             } else if (!is1Win && isXFor1) {
                 drawCircleinToast(circleColor)

@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.domain.use_cases
+package com.rafael.tictactoe.settings.domain.useCases
 
 import androidx.compose.ui.graphics.Color
 import com.rafael.tictactoe.settings.domain.enums.Colors
@@ -9,13 +9,12 @@ import com.rafael.tictactoe.settings.domain.model.SettingsEvent
 fun colorSelectionUseCase(
     customization: Customization,
     option: IColor,
-    onEvent: (SettingsEvent) -> Unit
+    onEvent: (SettingsEvent) -> Unit,
 ) {
-
     when (customization) {
         Customization.WINNERLINECOLOR -> onEvent(SettingsEvent.SetWinnerLineColor(Color(option)))
         Customization.XCOLOR -> onEvent(SettingsEvent.SetXColor(Color(option)))
-        Customization.CIRCLECOLOR ->  onEvent(SettingsEvent.SetCircleColor(Color(option)))
+        Customization.CIRCLECOLOR -> onEvent(SettingsEvent.SetCircleColor(Color(option)))
     }
 }
 

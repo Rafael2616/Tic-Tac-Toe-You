@@ -13,7 +13,7 @@ data class Colors(
     val white: Color,
     val cyan: Color,
     val burnt_yellow: Color,
-    val transparent: Color
+    val transparent: Color,
 ) {
     companion object {
         fun get(): Colors {
@@ -28,8 +28,8 @@ data class Colors(
                 white = Color.White,
                 cyan = Color.Cyan,
                 burnt_yellow = Color(0xFFFBBC04),
-                transparent = Color.Transparent
-            )   
+                transparent = Color.Transparent,
+            )
         }
     }
 }
@@ -44,5 +44,5 @@ enum class IColor {
     PURPLE,
     MAGENTA,
     WHITE,
-    CYAN
+    CYAN,
 }

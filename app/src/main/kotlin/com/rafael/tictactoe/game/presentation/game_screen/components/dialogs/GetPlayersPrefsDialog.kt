@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.presentation.game_screen.components.dialogs
+package com.rafael.tictactoe.game.presentation.gameScreen.components.dialogs
 
 import android.view.ViewTreeObserver
 import androidx.compose.animation.animateColorAsState
@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -23,7 +22,6 @@ import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -51,8 +49,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -89,7 +87,7 @@ fun GetPlayersPrefsDialog(
     onEvent: (GameEvent) -> Unit,
     onSettingsEvent: (SettingsEvent) -> Unit,
     state: GameState,
-    settingsState: SettingsState
+    settingsState: SettingsState,
 ) {
     val view = LocalView.current
     val focusManager = LocalFocusManager.current
@@ -97,7 +95,7 @@ fun GetPlayersPrefsDialog(
     val density = LocalDensity.current.density
     val densityHeight = (view.height / density).dp
     val focusRequester = remember { FocusRequester() }
-    var isKeyboardOpen by rememberSaveable {  mutableStateOf(false) }
+    var isKeyboardOpen by rememberSaveable { mutableStateOf(false) }
     val isXFor1 = state.isXFor1
     val gameMode = state.gameMode
     val xColor by animateColorAsState(settingsState.xColor)
@@ -107,15 +105,25 @@ fun GetPlayersPrefsDialog(
     val isCPUPlayer1 = state.isCPUPlayer1
     val player1Value = if (state.localPlayer1) state.player1Name else state.player2Name
     val player2Value = if (state.localPlayer1) state.player2Name else state.player1Name
-    val textField1State = if (gameMode == GameMode.VsCPU) { if (isCPUPlayer1) false else true } else {true}
-    val textField2State = if (gameMode == GameMode.VsCPU) { if (isCPUPlayer1) true else false } else {true}
+    val textField1State = if (gameMode == GameMode.VsCPU) {
+        if (isCPUPlayer1) false else true
+    } else {
+        true
+    }
+    val textField2State = if (gameMode == GameMode.VsCPU) {
+        if (isCPUPlayer1) true else false
+    } else {
+        true
+    }
     val customTypeForP1 = if (isXFor1) Customization.XCOLOR else Customization.CIRCLECOLOR
     val customTypeForP2 = if (isXFor1) Customization.CIRCLECOLOR else Customization.XCOLOR
-    val dialogHeight by animateDpAsState( when (gameMode) {
-        GameMode.VsCPU -> 280.dp
-        GameMode.PvP -> 215.dp
-        GameMode.Online -> 240.dp
-    })
+    val dialogHeight by animateDpAsState(
+        when (gameMode) {
+            GameMode.VsCPU -> 280.dp
+            GameMode.PvP -> 215.dp
+            GameMode.Online -> 240.dp
+        },
+    )
     val dialogWidth by animateDpAsState(if (gameMode == GameMode.Online) 245.dp else 380.dp)
     val maxLetterLength by rememberSaveable { mutableIntStateOf(10) }
     val containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(18.dp)
@@ -124,7 +132,7 @@ fun GetPlayersPrefsDialog(
             WindowInsets.ime.asPaddingValues().calculateBottomPadding().plus(8.dp)
         } else {
             densityHeight / 2 - dialogHeight / 2
-        }
+        },
     )
 
     Surface(
@@ -135,28 +143,27 @@ fun GetPlayersPrefsDialog(
                 detectTapGestures(
                     onTap = {
                         focusManager.clearFocus()
-                    }
+                    },
                 )
-            }
+            },
     ) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(bottom = bottomPadding),
-            contentAlignment = Alignment.BottomCenter
+            contentAlignment = Alignment.BottomCenter,
         ) {
             Card(
                 shape = MaterialTheme.shapes.large,
                 border = BorderStroke(1.25.dp, Color.Gray),
                 colors = CardDefaults.cardColors(
-                    containerColor = containerColor
+                    containerColor = containerColor,
                 ),
                 modifier = Modifier
                     .width(dialogWidth)
-                    .height(dialogHeight)
+                    .height(dialogHeight),
             ) {
-
-                //TextFields to get player names
+                // TextFields to get player names
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -164,20 +171,22 @@ fun GetPlayersPrefsDialog(
                         .then(
                             if (state.gameMode == GameMode.Online) {
                                 Modifier.padding(horizontal = 15.dp)
-                            } else Modifier
+                            } else {
+                                Modifier
+                            },
                         ),
-                    horizontalArrangement = Arrangement.SpaceBetween
+                    horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
                     val textFieldColors = TextFieldDefaults.colors(
                         focusedContainerColor = containerColor,
                         unfocusedContainerColor = containerColor,
-                        disabledContainerColor = containerColor
+                        disabledContainerColor = containerColor,
                     )
                     val keyboardOptions = KeyboardOptions(
                         autoCorrect = true,
                         keyboardType = KeyboardType.Text,
                         imeAction = ImeAction.Done,
-                        capitalization = KeyboardCapitalization.Words
+                        capitalization = KeyboardCapitalization.Words,
                     )
 
                     TextField(
@@ -189,28 +198,29 @@ fun GetPlayersPrefsDialog(
                         },
                         label = {
                             Text(
-                                text = stringResource(id =
-                                    if (state.gameMode == GameMode.Online) R.string.type_your_name else R.string.player1_name
-                                )
+                                text = stringResource(
+                                    id =
+                                    if (state.gameMode == GameMode.Online) R.string.type_your_name else R.string.player1_name,
+                                ),
                             )
                         },
                         placeholder = {
-                            Text( stringResource(id = if (isXFor1) R.string.player_x else R.string.player_o))
+                            Text(stringResource(id = if (isXFor1) R.string.player_x else R.string.player_o))
                         },
                         enabled = textField1State,
                         keyboardOptions = keyboardOptions,
                         colors = textFieldColors,
                         modifier = Modifier
                             .weight(1f)
-                            .focusRequester(focusRequester)
+                            .focusRequester(focusRequester),
                     )
-                    
+
                     // Show an second Textfield and toggle only in PvP and CPU Modes
                     if (gameMode != GameMode.Online) {
                         Card(
                             shape = MaterialTheme.shapes.large,
                             colors = CardDefaults.cardColors(
-                                containerColor = containerColor
+                                containerColor = containerColor,
                             ),
                             modifier = Modifier
                                 .width(60.dp)
@@ -218,19 +228,19 @@ fun GetPlayersPrefsDialog(
                                 .clip(CircleShape)
                                 .clickable {
                                     onEvent(GameEvent.SwitchPlayerPositions)
-                               }
+                                },
                         ) {
                             Box(
                                 contentAlignment = Alignment.Center,
                                 modifier = Modifier
-                                    .fillMaxSize()
+                                    .fillMaxSize(),
                             ) {
                                 Icon(
                                     imageVector = Icons.Outlined.SwapHoriz,
                                     tint = if (isDarkThemeOn) Color.Cyan else Colors.get().blue,
                                     contentDescription = "Player Position Switch",
                                     modifier = Modifier
-                                        .size(45.dp)
+                                        .size(45.dp),
                                 )
                             }
                         }
@@ -242,25 +252,25 @@ fun GetPlayersPrefsDialog(
                                 }
                             },
                             label = {
-                                Text( stringResource(id = R.string.player2_name))
+                                Text(stringResource(id = R.string.player2_name))
                             },
                             placeholder = {
-                                Text( stringResource(id = if (state.isXFor1) R.string.player_o else R.string.player_x))
+                                Text(stringResource(id = if (state.isXFor1) R.string.player_o else R.string.player_x))
                             },
                             enabled = textField2State,
                             keyboardOptions = keyboardOptions,
                             colors = textFieldColors,
-                            modifier = Modifier.weight(1f)
+                            modifier = Modifier.weight(1f),
                         )
                     }
                 }
 
-                //Player images preview and button to toggle them
+                // Player images preview and button to toggle them
                 Row(
                     modifier = Modifier
                         .fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center
+                    horizontalArrangement = Arrangement.Center,
                 ) {
                     val canvasOnClick = {
                         focusManager.clearFocus()
@@ -271,7 +281,7 @@ fun GetPlayersPrefsDialog(
                         .size(50.dp)
                         .align(Alignment.CenterVertically)
 
-                   Box(
+                    Box(
                         contentAlignment = Alignment.Center,
                         modifier = Modifier
                             .size(40.dp)
@@ -279,25 +289,25 @@ fun GetPlayersPrefsDialog(
                             .clickable {
                                 canvasOnClick()
                                 onSettingsEvent(SettingsEvent.SetCustomizationType(customTypeForP1))
-                            }
+                            },
                     ) {
                         Icon(
                             imageVector = Icons.Outlined.Brush,
                             contentDescription = "Color image picker",
                             modifier = Modifier
-                                .size(25.dp)
+                                .size(25.dp),
                         )
                     }
                     Box(
                         modifier = canvasModifier,
-                        contentAlignment = Alignment.Center
+                        contentAlignment = Alignment.Center,
                     ) {
                         Box(
                             modifier = Modifier.size(35.dp),
-                            contentAlignment = Alignment.Center
+                            contentAlignment = Alignment.Center,
                         ) {
                             Canvas(
-                                modifier = Modifier.fillMaxSize()
+                                modifier = Modifier.fillMaxSize(),
                             ) {
                                 if (isXFor1) {
                                     drawXinDialog(xColor)
@@ -307,47 +317,47 @@ fun GetPlayersPrefsDialog(
                             }
                         }
                     }
-            
+
                     // Show an second Image and toggle only in PvP and CPU Modes
                     if (gameMode != GameMode.Online) {
                         Spacer(modifier = Modifier.width(40.dp))
                         Card(
                             shape = MaterialTheme.shapes.large,
                             colors = CardDefaults.cardColors(
-                                containerColor = containerColor
+                                containerColor = containerColor,
                             ),
                             modifier = Modifier
                                 .size(60.dp)
                                 .clip(CircleShape)
                                 .clickable {
                                     onEvent(GameEvent.ToggleIsXForPlayer1)
-                                }
+                                },
                         ) {
                             Box(
                                 contentAlignment = Alignment.Center,
                                 modifier = Modifier
-                                    .fillMaxSize()
+                                    .fillMaxSize(),
                             ) {
                                 Icon(
                                     imageVector = Icons.Outlined.SwapHoriz,
                                     tint = if (isDarkThemeOn) Color.Cyan else Colors.get().blue,
                                     contentDescription = "Player Icon Switch",
                                     modifier = Modifier
-                                        .size(45.dp)
+                                        .size(45.dp),
                                 )
                             }
                         }
                         Spacer(modifier = Modifier.width(40.dp))
                         Box(
                             modifier = canvasModifier,
-                            contentAlignment = Alignment.Center
+                            contentAlignment = Alignment.Center,
                         ) {
                             Box(
                                 modifier = Modifier.size(35.dp),
-                                contentAlignment = Alignment.Center
+                                contentAlignment = Alignment.Center,
                             ) {
                                 Canvas(
-                                    modifier = Modifier.fillMaxSize()
+                                    modifier = Modifier.fillMaxSize(),
                                 ) {
                                     if (isXFor1) {
                                         drawCircleinDialog(circleColor)
@@ -365,13 +375,13 @@ fun GetPlayersPrefsDialog(
                                 .clickable {
                                     canvasOnClick()
                                     onSettingsEvent(SettingsEvent.SetCustomizationType(customTypeForP2))
-                                }
+                                },
                         ) {
                             Icon(
                                 imageVector = Icons.Outlined.Brush,
                                 contentDescription = "Color image picker",
                                 modifier = Modifier
-                                    .size(25.dp)
+                                    .size(25.dp),
                             )
                         }
                     }
@@ -382,7 +392,7 @@ fun GetPlayersPrefsDialog(
                     Box(
                         contentAlignment = Alignment.Center,
                         modifier = Modifier
-                            .fillMaxWidth()
+                            .fillMaxWidth(),
                     ) {
                         Box(
                             contentAlignment = Alignment.Center,
@@ -391,32 +401,32 @@ fun GetPlayersPrefsDialog(
                                 .clip(CircleShape)
                                 .clickable {
                                     onEvent(GameEvent.ToggleIsXForPlayer1)
-                                }
+                                },
                         ) {
                             Icon(
                                 imageVector = Icons.Outlined.SwapHoriz,
                                 tint = if (isDarkThemeOn) Color.Cyan else Colors.get().blue,
                                 contentDescription = "Player Icon Switch",
                                 modifier = Modifier
-                                    .size(45.dp)
+                                    .size(45.dp),
                             )
                         }
                     }
                 }
-    
+
                 // Difficulty level selection
                 if (gameMode == GameMode.VsCPU) {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(top = 2.dp, bottom = 4.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally
+                        horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
                         Text(
                             text = stringResource(R.string.levels),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurface,
-                            textAlign = TextAlign.Center
+                            textAlign = TextAlign.Center,
                         )
                         Row(
                             modifier = Modifier
@@ -424,7 +434,7 @@ fun GetPlayersPrefsDialog(
                                 .height(40.dp)
                                 .padding(top = 3.dp),
                             horizontalArrangement = Arrangement.SpaceEvenly,
-                            verticalAlignment = Alignment.CenterVertically
+                            verticalAlignment = Alignment.CenterVertically,
                         ) {
                             Card(
                                 shape = MaterialTheme.shapes.medium,
@@ -432,77 +442,93 @@ fun GetPlayersPrefsDialog(
                                 modifier = Modifier
                                     .width(370.dp)
                                     .height(40.dp)
-                                    .clip(RoundedCornerShape(26.dp))
+                                    .clip(RoundedCornerShape(26.dp)),
                             ) {
                                 Row(
                                     modifier = Modifier
                                         .width(370.dp)
                                         .height(40.dp),
                                     horizontalArrangement = Arrangement.SpaceBetween,
-                                    verticalAlignment = Alignment.CenterVertically
+                                    verticalAlignment = Alignment.CenterVertically,
                                 ) {
                                     val levels = listOf(
                                         CPUDifficultyLevel.Easy,
                                         CPUDifficultyLevel.Medium,
-                                        CPUDifficultyLevel.Hard
+                                        CPUDifficultyLevel.Hard,
                                     )
-                                     levels.forEachIndexed { index, level ->
+                                    levels.forEachIndexed { index, level ->
                                         Row(
                                             modifier = Modifier
                                                 .weight(1f)
                                                 .height(40.dp)
                                                 .clickable {
                                                     when (level) {
-                                                        CPUDifficultyLevel.Easy -> onEvent(GameEvent.SelectCPUDifficultyMode(
-                                                            level = CPUDifficultyLevel.Easy,
-                                                            selectedLevel = 0,
-                                                            icon = Icons.Filled.SentimentSatisfied,
-                                                            name = R.string.level_easy
-                                                        ))
-                                                        CPUDifficultyLevel.Medium -> onEvent(GameEvent.SelectCPUDifficultyMode(
-                                                            level = CPUDifficultyLevel.Medium,
-                                                            selectedLevel = 1,
-                                                            icon = Icons.Filled.SentimentNeutral,
-                                                            name = R.string.level_medium
-                                                        ))
-                                                        CPUDifficultyLevel.Hard -> onEvent(GameEvent.SelectCPUDifficultyMode(
-                                                            level = CPUDifficultyLevel.Hard,
-                                                            selectedLevel = 2,
-                                                            icon = Icons.Filled.SentimentDissatisfied,
-                                                            name = R.string.level_hard
-                                                        ))
+                                                        CPUDifficultyLevel.Easy -> onEvent(
+                                                            GameEvent.SelectCPUDifficultyMode(
+                                                                level = CPUDifficultyLevel.Easy,
+                                                                selectedLevel = 0,
+                                                                icon = Icons.Filled.SentimentSatisfied,
+                                                                name = R.string.level_easy,
+                                                            ),
+                                                        )
+                                                        CPUDifficultyLevel.Medium -> onEvent(
+                                                            GameEvent.SelectCPUDifficultyMode(
+                                                                level = CPUDifficultyLevel.Medium,
+                                                                selectedLevel = 1,
+                                                                icon = Icons.Filled.SentimentNeutral,
+                                                                name = R.string.level_medium,
+                                                            ),
+                                                        )
+                                                        CPUDifficultyLevel.Hard -> onEvent(
+                                                            GameEvent.SelectCPUDifficultyMode(
+                                                                level = CPUDifficultyLevel.Hard,
+                                                                selectedLevel = 2,
+                                                                icon = Icons.Filled.SentimentDissatisfied,
+                                                                name = R.string.level_hard,
+                                                            ),
+                                                        )
                                                     }
                                                 }
-                                                .background(if (index == selectedDifficultyLevel) {
-                                                    MaterialTheme.colorScheme.onSecondary } else containerColor
+                                                .background(
+                                                    if (index == selectedDifficultyLevel) {
+                                                        MaterialTheme.colorScheme.onSecondary
+                                                    } else {
+                                                        containerColor
+                                                    },
                                                 ),
                                             horizontalArrangement = Arrangement.SpaceBetween,
-                                            verticalAlignment = Alignment.CenterVertically
+                                            verticalAlignment = Alignment.CenterVertically,
                                         ) {
                                             RadioButton(
                                                 selected = index == selectedDifficultyLevel,
                                                 onClick = {
                                                     when (level) {
-                                                        CPUDifficultyLevel.Easy -> onEvent(GameEvent.SelectCPUDifficultyMode(
-                                                            level = CPUDifficultyLevel.Easy,
-                                                            selectedLevel = 0,
-                                                            icon = Icons.Filled.SentimentSatisfied,
-                                                            name = R.string.level_easy
-                                                        ))
-                                                        CPUDifficultyLevel.Medium -> onEvent(GameEvent.SelectCPUDifficultyMode(
-                                                            level = CPUDifficultyLevel.Medium,
-                                                            selectedLevel = 1,
-                                                            icon = Icons.Filled.SentimentDissatisfied,
-                                                            name = R.string.level_medium
-                                                        ))
-                                                        CPUDifficultyLevel.Hard -> onEvent(GameEvent.SelectCPUDifficultyMode(
-                                                            level = CPUDifficultyLevel.Hard,
-                                                            selectedLevel = 2,
-                                                            icon = Icons.Filled.SentimentDissatisfied,
-                                                            name = R.string.level_hard
-                                                        ))
+                                                        CPUDifficultyLevel.Easy -> onEvent(
+                                                            GameEvent.SelectCPUDifficultyMode(
+                                                                level = CPUDifficultyLevel.Easy,
+                                                                selectedLevel = 0,
+                                                                icon = Icons.Filled.SentimentSatisfied,
+                                                                name = R.string.level_easy,
+                                                            ),
+                                                        )
+                                                        CPUDifficultyLevel.Medium -> onEvent(
+                                                            GameEvent.SelectCPUDifficultyMode(
+                                                                level = CPUDifficultyLevel.Medium,
+                                                                selectedLevel = 1,
+                                                                icon = Icons.Filled.SentimentDissatisfied,
+                                                                name = R.string.level_medium,
+                                                            ),
+                                                        )
+                                                        CPUDifficultyLevel.Hard -> onEvent(
+                                                            GameEvent.SelectCPUDifficultyMode(
+                                                                level = CPUDifficultyLevel.Hard,
+                                                                selectedLevel = 2,
+                                                                icon = Icons.Filled.SentimentDissatisfied,
+                                                                name = R.string.level_hard,
+                                                            ),
+                                                        )
                                                     }
-                                                }
+                                                },
                                             )
                                             Text(
                                                 textAlign = TextAlign.Start,
@@ -511,7 +537,7 @@ fun GetPlayersPrefsDialog(
                                                     CPUDifficultyLevel.Easy -> stringResource(R.string.level_easy)
                                                     CPUDifficultyLevel.Medium -> stringResource(R.string.level_medium)
                                                     CPUDifficultyLevel.Hard -> stringResource(R.string.level_hard)
-                                                }
+                                                },
                                             )
                                             Icon(
                                                 imageVector = when (level) {
@@ -525,14 +551,14 @@ fun GetPlayersPrefsDialog(
                                                     CPUDifficultyLevel.Hard -> Color.Red
                                                 },
                                                 contentDescription = "Icon",
-       		            	                 modifier = Modifier
+                                                modifier = Modifier
                                                     .size(32.dp)
-                                                    .padding(end = 3.dp)
+                                                    .padding(end = 3.dp),
                                             )
                                         }
                                         VerticalDivider(
                                             thickness = 1.5.dp,
-                                            color = Color.Gray
+                                            color = Color.Gray,
                                         )
                                     }
                                 }
@@ -541,7 +567,7 @@ fun GetPlayersPrefsDialog(
                     }
                 }
 
-                //Play button, used to start game
+                // Play button, used to start game
                 Button(
                     onClick = {
                         focusManager.clearFocus()
@@ -557,30 +583,30 @@ fun GetPlayersPrefsDialog(
                     Text(
                         text = stringResource(id = R.string.play),
                         style = MaterialTheme.typography.bodyLarge,
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center,
                     )
                 }
             }
         }
     }
 
-    //Detect when keyboard is open
+    // Detect when keyboard is open
     DisposableEffect(view) {
-        val listener = ViewTreeObserver.OnGlobalLayoutListener { 
+        val listener = ViewTreeObserver.OnGlobalLayoutListener {
             isKeyboardOpen = ViewCompat.getRootWindowInsets(view)?.isVisible(
-                WindowInsetsCompat.Type.ime()
+                WindowInsetsCompat.Type.ime(),
             ) ?: false
         }
         view.viewTreeObserver.addOnGlobalLayoutListener(listener)
-        onDispose { 
+        onDispose {
             view.viewTreeObserver.removeOnGlobalLayoutListener(listener)
         }
     }
 
-    //Give focus to first player text field immediately after game screen load
+    // Give focus to first player text field immediately after game screen load
     DisposableEffect(Unit) {
         focusRequester.requestFocus()
 
-        onDispose{}
+        onDispose {}
     }
 }

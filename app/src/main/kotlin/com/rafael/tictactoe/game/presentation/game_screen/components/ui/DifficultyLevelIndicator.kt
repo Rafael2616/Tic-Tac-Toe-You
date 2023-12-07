@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.presentation.game_screen.components.ui
+package com.rafael.tictactoe.game.presentation.gameScreen.components.ui
 
 import android.content.res.Configuration
 import androidx.compose.foundation.BorderStroke
@@ -34,7 +34,7 @@ import com.rafael.tictactoe.settings.domain.model.SettingsState
 @Composable
 fun DifficultyLevelIndicator(
     state: GameState,
-    settingsState: SettingsState
+    settingsState: SettingsState,
 ) {
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
@@ -43,23 +43,23 @@ fun DifficultyLevelIndicator(
     Box(
         modifier = Modifier
             .fillMaxSize(),
-        contentAlignment = if (isInLandscape) Alignment.TopStart else Alignment.TopEnd
+        contentAlignment = if (isInLandscape) Alignment.TopStart else Alignment.TopEnd,
     ) {
         Box(
             modifier = Modifier
                 .padding(top = 30.dp, end = 40.dp)
                 .fillMaxWidth(if (isInLandscape) 0.46f else 1f),
-            contentAlignment = Alignment.TopEnd
+            contentAlignment = Alignment.TopEnd,
         ) {
             Card(
                 shape = MaterialTheme.shapes.medium,
                 border = BorderStroke(1.5.dp, Color.Gray),
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(3.dp)
+                    containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(3.dp),
                 ),
                 modifier = Modifier
                     .width(68.dp)
-                    .height(25.dp)
+                    .height(25.dp),
             ) {
                 Row(
                     modifier = Modifier
@@ -67,13 +67,13 @@ fun DifficultyLevelIndicator(
                         .height(25.dp)
                         .padding(start = 5.dp, end = 3.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
                         textAlign = TextAlign.Center,
                         text = stringResource(state.difficultyLevelName),
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        style = MaterialTheme.typography.bodyMedium.copy(fontSize = 12.sp)
+                        style = MaterialTheme.typography.bodyMedium.copy(fontSize = 12.sp),
                     )
                     Icon(
                         imageVector = state.difficultyLevelIcon,
@@ -83,7 +83,7 @@ fun DifficultyLevelIndicator(
                             CPUDifficultyLevel.Hard -> Color.Red
                         },
                         contentDescription = "Icon",
-       	    	     modifier = Modifier.size(23.dp)
+                        modifier = Modifier.size(23.dp),
                     )
                 }
             }

@@ -2,13 +2,13 @@ package com.rafael.tictactoe.game.domain.checkers
 
 import androidx.compose.runtime.Composable
 import com.rafael.tictactoe.game.domain.model.GameState
-import com.rafael.tictactoe.game.domain.victory_counter.VictoryCounterUpdater
+import com.rafael.tictactoe.game.domain.victoryCounter.victoryCounterUpdater
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
 @Composable
 fun WinnerChecker(
     vm: GameViewModel,
-    state: GameState
+    state: GameState,
 ) {
     val card = state.card
     val isCardClicked = state.isCardClicked
@@ -27,7 +27,7 @@ fun WinnerChecker(
 
         // Diagonals
         listOf(Pair(0, 0), Pair(1, 1), Pair(2, 2)),
-        listOf(Pair(0, 2), Pair(1, 1), Pair(2, 0))
+        listOf(Pair(0, 2), Pair(1, 1), Pair(2, 0)),
     )
 
     for ((index, positions) in winningPositions.withIndex()) {
@@ -60,7 +60,7 @@ fun WinnerChecker(
     if (state.hasWinner) {
         vm.updateIsGameFinished(true)
         vm.showVictoryCounterReseter(true)
-        VictoryCounterUpdater(vm, state)
+        victoryCounterUpdater(vm, state)
         vm.execWinnerSound()
         vm.updateHasLastWinningPlayer(true)
     }

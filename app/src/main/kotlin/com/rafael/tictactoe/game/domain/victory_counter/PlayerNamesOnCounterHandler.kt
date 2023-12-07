@@ -1,6 +1,5 @@
-package com.rafael.tictactoe.game.domain.victory_counter
+package com.rafael.tictactoe.game.domain.victoryCounter
 
-import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
@@ -27,7 +26,7 @@ class PlayerNamesOnCounterHandler() {
         val emptyPlayerName = context.getString(R.string.player)
         val cpuName = context.getString(R.string.cpu)
 
-        //Apply "CPU" name for first player name when needed in CPU Mode
+        // Apply "CPU" name for first player name when needed in CPU Mode
         if (isCPUMode) {
             if (isCPUPlayer1) {
                 vm.updatePlayer1NameOnCounter(cpuName)
@@ -36,7 +35,7 @@ class PlayerNamesOnCounterHandler() {
             }
         }
 
-        //Handle first player name when game is in setup fase/not started yet
+        // Handle first player name when game is in setup fase/not started yet
         if (!play) {
             if (localPlayer1) {
                 if (player1Name.isEmpty()) {
@@ -61,7 +60,7 @@ class PlayerNamesOnCounterHandler() {
             }
         }
 
-        //Handle first player name when game is ongoing or finished
+        // Handle first player name when game is ongoing or finished
         if (play) {
             if (player1Name.isEmpty() || player1Name == emptyPlayerName) {
                 if (isXFor1) {
@@ -91,7 +90,7 @@ class PlayerNamesOnCounterHandler() {
         val emptyPlayerName = context.getString(R.string.player)
         val cpuName = context.getString(R.string.cpu)
 
-        //Apply "CPU" name for second player name when needed in CPU Mode
+        // Apply "CPU" name for second player name when needed in CPU Mode
         if (isCPUMode) {
             if (!isCPUPlayer1) {
                 vm.updatePlayer2NameOnCounter(cpuName)
@@ -100,7 +99,7 @@ class PlayerNamesOnCounterHandler() {
             }
         }
 
-        //Handle second player name when game is in setup fase/not started yet
+        // Handle second player name when game is in setup fase/not started yet
         if (!play) {
             if (localPlayer1) {
                 if (player2Name.isEmpty()) {
@@ -125,7 +124,7 @@ class PlayerNamesOnCounterHandler() {
             }
         }
 
-        //Handle second player name when game is ongoing or finished
+        // Handle second player name when game is ongoing or finished
         if (play) {
             if (player2Name.isEmpty() || player2Name == emptyPlayerName) {
                 if (isXFor1) {

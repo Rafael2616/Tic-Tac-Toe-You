@@ -8,5 +8,5 @@ data class ScreenItem(
     val name: String,
     val icon: ImageVector,
     val tint: Color,
-    @StringRes val text: Int
+    @StringRes val text: Int,
 )

@@ -12,7 +12,7 @@ fun easyLevelCPUMove(state: GameState): Pair<Int, Int> {
     }
 
     if (isCardClicked.flatten().all { it }) {
-        return Pair (-1,-1)
+        return Pair(-1, -1)
     }
 
     while (isCardClicked[firstPosition][secondPosition]) {
@@ -24,6 +24,6 @@ fun easyLevelCPUMove(state: GameState): Pair<Int, Int> {
         }
     }
 
-    //Shoudn't reach here
+    // Shoudn't reach here
     return Pair(-1, -1)
 }

@@ -5,7 +5,7 @@ import com.rafael.tictactoe.settings.domain.enums.Colors
 import com.rafael.tictactoe.settings.domain.enums.Customization
 
 data class SettingsState(
-    val color : Colors = Colors.get(),
+    val color: Colors = Colors.get(),
     val isBackgroundMusicOn: Boolean = false,
     val isDarkThemeOn: Boolean = true,
     val isDynamicColorsOn: Boolean = true,
@@ -20,5 +20,5 @@ data class SettingsState(
     val circleColor: Color = color.light_green,
     val selectedCircleColor: Int = 5,
     val isBMPlaying: Boolean = false,
-    val customizationType: Customization = Customization.XCOLOR
+    val customizationType: Customization = Customization.XCOLOR,
 )

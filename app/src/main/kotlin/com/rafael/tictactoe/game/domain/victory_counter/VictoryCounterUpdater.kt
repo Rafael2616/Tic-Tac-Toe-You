@@ -1,11 +1,11 @@
-package com.rafael.tictactoe.game.domain.victory_counter
+package com.rafael.tictactoe.game.domain.victoryCounter
 
 import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
-fun VictoryCounterUpdater(
+fun victoryCounterUpdater(
     vm: GameViewModel,
-    state: GameState
+    state: GameState,
 ) {
     val isScoreUp = state.isScoreUp
     val is1Win = state.is1Win
@@ -15,9 +15,9 @@ fun VictoryCounterUpdater(
     if (!isScoreUp) {
         if (is1Win) {
             vm.updatePlayer1Wins(player1Wins + 1)
-		} else {
+        } else {
             vm.updatePlayer2Wins(player2Wins + 1)
-		}
+        }
         vm.updateIsScoreUp(true)
-	}
+    }
 }

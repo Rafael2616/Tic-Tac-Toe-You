@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.presentation.settings_screen.components
+package com.rafael.tictactoe.settings.presentation.settingsScreen.components
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.BorderStroke
@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -43,19 +42,19 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.presentation.utils.draws.drawCircleinColorDialog
-import com.rafael.tictactoe.game.presentation.utils.draws.drawXinColorDialog
 import com.rafael.tictactoe.game.presentation.utils.draws.drawWinnerLineinColorDialog
+import com.rafael.tictactoe.game.presentation.utils.draws.drawXinColorDialog
 import com.rafael.tictactoe.settings.domain.enums.Colors
 import com.rafael.tictactoe.settings.domain.enums.Customization
 import com.rafael.tictactoe.settings.domain.enums.IColor
 import com.rafael.tictactoe.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.domain.model.SettingsState
-import com.rafael.tictactoe.settings.domain.use_cases.colorSelectionUseCase
+import com.rafael.tictactoe.settings.domain.useCases.colorSelectionUseCase
 
 @Composable
 fun ColorSelectionDialog(
     onEvent: (SettingsEvent) -> Unit,
-    state: SettingsState
+    state: SettingsState,
 ) {
     val type = state.customizationType
     val selectedWinnerLineColor = state.selectedWinnerLineColor
@@ -69,59 +68,59 @@ fun ColorSelectionDialog(
     Surface(
         color = Color.Black.copy(alpha = 0.3f),
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxSize(),
     ) {
         Box(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxSize(),
         ) {
             Card(
                 shape = RoundedCornerShape(32.dp),
                 border = BorderStroke(1.25.dp, Color.Gray),
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(20.dp)
+                    containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(20.dp),
                 ),
                 modifier = Modifier
                     .width(275.dp)
                     .height(325.dp)
-                    .align(Alignment.Center)
+                    .align(Alignment.Center),
             ) {
                 Row(
                     modifier = Modifier
                         .height(40.dp)
                         .fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center
+                    horizontalArrangement = Arrangement.Center,
                 ) {
                     Text(
                         text = stringResource(R.string.choose_color),
                         style = MaterialTheme.typography.titleMedium.copy(
                             fontSize = 20.sp,
                             fontFamily = FontFamily.Serif,
-                            fontWeight = FontWeight.Light
+                            fontWeight = FontWeight.Light,
                         ),
                         color = MaterialTheme.colorScheme.onSurface,
                         modifier = Modifier
-                            .padding(start = 16.dp)
+                            .padding(start = 16.dp),
                     )
                     Spacer(
                         modifier = Modifier
-                            .width(15.dp)
+                            .width(15.dp),
                     )
                     Box(
                         modifier = Modifier
                             .size(40.dp),
-                        contentAlignment = Alignment.CenterStart
+                        contentAlignment = Alignment.CenterStart,
                     ) {
                         Box(
                             modifier = Modifier
                                 .padding(top = 2.dp)
                                 .size(20.dp),
-                            contentAlignment = Alignment.Center
+                            contentAlignment = Alignment.Center,
                         ) {
                             Canvas(
                                 modifier = Modifier
-                                    .fillMaxSize()
+                                    .fillMaxSize(),
                             ) {
                                 when (type) {
                                     Customization.XCOLOR -> {
@@ -142,7 +141,7 @@ fun ColorSelectionDialog(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(240.dp)
-                        .padding(6.dp)
+                        .padding(6.dp),
                 ) {
                     itemsIndexed(IColor.values()) { index, color ->
                         Box(
@@ -152,15 +151,15 @@ fun ColorSelectionDialog(
                                 .clickable {
                                     when (type) {
                                         Customization.WINNERLINECOLOR -> onEvent(SettingsEvent.SelectedWinnerLineColor(index))
-                                        Customization.CIRCLECOLOR ->  onEvent(SettingsEvent.SelectedCircleColor(index))
-                                        Customization.XCOLOR ->  onEvent(SettingsEvent.SelectedXColor(index))
+                                        Customization.CIRCLECOLOR -> onEvent(SettingsEvent.SelectedCircleColor(index))
+                                        Customization.XCOLOR -> onEvent(SettingsEvent.SelectedXColor(index))
                                     }
                                     colorSelectionUseCase(
                                         type,
                                         color,
-                                        onEvent
+                                        onEvent,
                                     )
-                                }
+                                },
                         ) {
                             Row(
                                 modifier = Modifier
@@ -172,21 +171,21 @@ fun ColorSelectionDialog(
                             ) {
                                 RadioButton(
                                     selected =
-                                        when (type) {
-                                            Customization.WINNERLINECOLOR -> index == selectedWinnerLineColor
-                                            Customization.CIRCLECOLOR -> index == selectedCircleColor
-                                            Customization.XCOLOR -> index == selectedXColor
-                                        },
+                                    when (type) {
+                                        Customization.WINNERLINECOLOR -> index == selectedWinnerLineColor
+                                        Customization.CIRCLECOLOR -> index == selectedCircleColor
+                                        Customization.XCOLOR -> index == selectedXColor
+                                    },
                                     onClick = {
                                         when (type) {
                                             Customization.WINNERLINECOLOR -> onEvent(SettingsEvent.SelectedWinnerLineColor(index))
-                                            Customization.CIRCLECOLOR ->  onEvent(SettingsEvent.SelectedCircleColor(index))
-                                            Customization.XCOLOR ->  onEvent(SettingsEvent.SelectedXColor(index))
+                                            Customization.CIRCLECOLOR -> onEvent(SettingsEvent.SelectedCircleColor(index))
+                                            Customization.XCOLOR -> onEvent(SettingsEvent.SelectedXColor(index))
                                         }
                                         colorSelectionUseCase(
                                             type,
                                             color,
-                                            onEvent
+                                            onEvent,
                                         )
                                     },
                                 )
@@ -196,7 +195,7 @@ fun ColorSelectionDialog(
                                         IColor.RED -> stringResource(R.string.color_red)
                                         IColor.YELLOW -> stringResource(R.string.color_yellow)
                                         IColor.BURNT_YELLOW -> stringResource(R.string.color_burnt_yellow)
-                                        IColor.DARK_GREEN -> stringResource(R.string.color_dark_green)                                       
+                                        IColor.DARK_GREEN -> stringResource(R.string.color_dark_green)
                                         IColor.LIGHT_GREEN -> stringResource(R.string.color_green)
                                         IColor.PURPLE -> stringResource(R.string.color_purple)
                                         IColor.MAGENTA -> stringResource(R.string.color_pink)
@@ -206,7 +205,7 @@ fun ColorSelectionDialog(
                                     overflow = TextOverflow.Ellipsis,
                                     textAlign = TextAlign.Center,
                                     modifier = Modifier
-                                        .width(135.dp)
+                                        .width(135.dp),
                                 )
                                 Box(
                                     modifier = Modifier
@@ -216,23 +215,23 @@ fun ColorSelectionDialog(
                                     content = {
                                         Box(
                                             modifier = Modifier
-                                            .fillMaxSize()
-                                            .background(
-                                                when (color) {
-                                                    IColor.BLUE -> colors.blue
-                                                    IColor.RED -> colors.red
-                                                    IColor.YELLOW -> colors.yellow
-                                                    IColor.BURNT_YELLOW -> colors.burnt_yellow
-                                                    IColor.DARK_GREEN -> colors.dark_green
-                                                    IColor.LIGHT_GREEN -> colors.light_green
-                                                    IColor.PURPLE -> colors.purple
-                                                    IColor.MAGENTA -> colors.magenta
-                                                    IColor.WHITE -> colors.white
-                                                    IColor.CYAN -> colors.cyan
-                                                }
-                                            )
+                                                .fillMaxSize()
+                                                .background(
+                                                    when (color) {
+                                                        IColor.BLUE -> colors.blue
+                                                        IColor.RED -> colors.red
+                                                        IColor.YELLOW -> colors.yellow
+                                                        IColor.BURNT_YELLOW -> colors.burnt_yellow
+                                                        IColor.DARK_GREEN -> colors.dark_green
+                                                        IColor.LIGHT_GREEN -> colors.light_green
+                                                        IColor.PURPLE -> colors.purple
+                                                        IColor.MAGENTA -> colors.magenta
+                                                        IColor.WHITE -> colors.white
+                                                        IColor.CYAN -> colors.cyan
+                                                    },
+                                                ),
                                         )
-                                    }
+                                    },
                                 )
                             }
                         }
@@ -245,13 +244,13 @@ fun ColorSelectionDialog(
                     modifier = Modifier
                         .width(90.dp)
                         .height(42.dp)
-                        .padding(end = 12.dp, bottom  = 6.dp)
+                        .padding(end = 12.dp, bottom = 6.dp)
                         .align(Alignment.End),
                 ) {
                     Text(
                         text = stringResource(android.R.string.ok),
                         style = MaterialTheme.typography.bodyLarge,
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center,
                     )
                 }
             }

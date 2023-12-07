@@ -16,9 +16,12 @@ class ComponentValidator {
     fun validateCard(groupType: SettingsGroup, index: Int, isFollowingSystemOn: Boolean): Boolean {
         val isDynamicColorsSupported = VERSION.SDK_INT >= VERSION_CODES.S
 
-        if (groupType == SettingsGroup.Theme && ((index == 1 && !isFollowingSystemOn) ||
-        (index == 2 && isDynamicColorsSupported) ||
-        (index != 1 && index != 2))) {
+        if (groupType == SettingsGroup.Theme && (
+                (index == 1 && !isFollowingSystemOn) ||
+                    (index == 2 && isDynamicColorsSupported) ||
+                    (index != 1 && index != 2)
+                )
+        ) {
             return true
         }
         if (groupType != SettingsGroup.Theme) {
@@ -37,8 +40,11 @@ class ComponentValidator {
     fun validateDivider(groupType: SettingsGroup, index: Int, isFollowingSystemOn: Boolean): Boolean {
         val isDynamicColorsSupported = VERSION.SDK_INT >= VERSION_CODES.S
 
-        if (groupType == SettingsGroup.Theme && ((index == 0 && isFollowingSystemOn && !isDynamicColorsSupported) ||
-        (index == 1 && !isDynamicColorsSupported))) {
+        if (groupType == SettingsGroup.Theme && (
+                (index == 0 && isFollowingSystemOn && !isDynamicColorsSupported) ||
+                    (index == 1 && !isDynamicColorsSupported)
+                )
+        ) {
             return false
         } else {
             return true

@@ -16,18 +16,17 @@ import javax.inject.Inject
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import retrofit2.HttpException
-import retrofit2.Response
 
 const val TAG = "GameRepository"
 
 class GameRepositoryImpl @Inject constructor(
-	private val gameDao: GameDao,
-    private val gameService: OnlineGameDao
+    private val gameDao: GameDao,
+    private val gameService: OnlineGameDao,
 ) : GameRepository {
 
-	init {
-		println("Game repository has been initialized")
-	}
+    init {
+        println("Game repository has been initialized")
+    }
 	
     // Local data from Room
     override fun getGameValues(): Flow<GameEntity> {
@@ -54,42 +53,46 @@ class GameRepositoryImpl @Inject constructor(
                     throw IOException("Request failed with code: " + response.code() + message)
                 }
             }
-        } catch(e: IOException) {
-             Log.e(TAG, "IO error: $e")
-             return Pair(null, RequestState.Failure(Error.IOError, e.toString()))
-        } catch(e: HttpException) {
-             Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
-             return Pair(null, RequestState.Failure(Error.HttpError, e.message(), e.code()))
+        } catch (e: IOException) {
+            Log.e(TAG, "IO error: $e")
+            return Pair(null, RequestState.Failure(Error.IOError, e.toString()))
+        } catch (e: HttpException) {
+            Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
+            return Pair(null, RequestState.Failure(Error.HttpError, e.message(), e.code()))
         }
         return Pair(null, RequestState.Loading)
     }
 
     override suspend fun postPlayer(state: GameState, settingsState: SettingsState): Pair<Player?, RequestState> {
-            try {
-                val response = gameService.postPlayer(
+        try {
+            val response = gameService.postPlayer(
                 Player(
                     id = state.matchID,
                     name = if (state.localPlayer1) {
                         state.player1Name
-                    } else state.player2Name,
+                    } else {
+                        state.player2Name
+                    },
                     color = if (state.isXFor1) {
                         settingsState.xColor
-                    } else settingsState.circleColor,
+                    } else {
+                        settingsState.circleColor
+                    },
                     isXImage = state.isXImage,
-                    isPlayer1 = state.isYouPlayer1
-                )
+                    isPlayer1 = state.isYouPlayer1,
+                ),
             )
             if (response.isSuccessful) {
                 return Pair(response.body()!!, RequestState.Success)
             } else {
                 throw IOException("Request failed with code: " + response.code())
             }
-        } catch(e: IOException) {
-             Log.e(TAG, "IO error: $e")
-             return Pair(null, RequestState.Failure(Error.IOError, e.toString()))
-        } catch(e: HttpException) {
-             Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
-             return Pair(null, RequestState.Failure(Error.HttpError, e.message(), e.code()))
+        } catch (e: IOException) {
+            Log.e(TAG, "IO error: $e")
+            return Pair(null, RequestState.Failure(Error.IOError, e.toString()))
+        } catch (e: HttpException) {
+            Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
+            return Pair(null, RequestState.Failure(Error.HttpError, e.message(), e.code()))
         }
     }
 
@@ -97,16 +100,16 @@ class GameRepositoryImpl @Inject constructor(
         try {
             val response = gameService.removePlayer(playerID)
             if (response.isSuccessful) {
-                 return RequestState.Success
+                return RequestState.Success
             } else {
                 throw IOException("Request failed with code: " + response.code())
             }
-        } catch(e: IOException) {
-             Log.e(TAG, "IO error: $e")
-             return RequestState.Failure(Error.IOError, e.toString())
-        } catch(e: HttpException) {
-             Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
-             return RequestState.Failure(Error.HttpError, e.message(), e.code())
+        } catch (e: IOException) {
+            Log.e(TAG, "IO error: $e")
+            return RequestState.Failure(Error.IOError, e.toString())
+        } catch (e: HttpException) {
+            Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
+            return RequestState.Failure(Error.HttpError, e.message(), e.code())
         }
     }
 
@@ -116,32 +119,32 @@ class GameRepositoryImpl @Inject constructor(
                 OnlineGameState(
                     matchID = matchID,
                     player1Wins = 0,
-                	player2Wins = 0,
-                	card = List(3){ List<Boolean>(3){false} },
-                	isCardClicked = List(3){ List<Boolean>(3){false} },
+                    player2Wins = 0,
+                    card = List(3) { List<Boolean>(3) { false } },
+                    isCardClicked = List(3) { List<Boolean>(3) { false } },
                     play = false,
-                	isXFor1 = true,
-                	isPlayer1 = true,
-                	hasWinner = false,
-                	gotOld = false,
-                	isGameFinished = false
-                )
+                    isXFor1 = true,
+                    isPlayer1 = true,
+                    hasWinner = false,
+                    gotOld = false,
+                    isGameFinished = false,
+                ),
             )
             if (response.isSuccessful) {
-                 return RequestState.Success
+                return RequestState.Success
             } else {
                 throw IOException("Request failed with code: " + response.code())
             }
-        } catch(e: IOException) {
-             Log.e(TAG, "IO error: $e")
-             return RequestState.Failure(Error.IOError, e.toString())
-        } catch(e: HttpException) {
-             Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
-             return RequestState.Failure(Error.HttpError, e.message(), e.code())
+        } catch (e: IOException) {
+            Log.e(TAG, "IO error: $e")
+            return RequestState.Failure(Error.IOError, e.toString())
+        } catch (e: HttpException) {
+            Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
+            return RequestState.Failure(Error.HttpError, e.message(), e.code())
         }
     }
 
-    override suspend fun getGameState() : Pair<Flow<OnlineGameState>?, RequestState> {
+    override suspend fun getGameState(): Pair<Flow<OnlineGameState>?, RequestState> {
         try {
             val response = gameService.getGameState()
             if (response.isSuccessful && response.body() != null) {
@@ -149,12 +152,12 @@ class GameRepositoryImpl @Inject constructor(
             } else {
                 throw IOException("Request failed with code: " + response.code())
             }
-        } catch(e: IOException) {
-             Log.e(TAG, "IO error: $e")
-             return Pair(null, RequestState.Failure(Error.IOError, e.toString()))
-        } catch(e: HttpException) {
-             Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
-             return Pair(null, RequestState.Failure(Error.HttpError, e.message(), e.code()))
+        } catch (e: IOException) {
+            Log.e(TAG, "IO error: $e")
+            return Pair(null, RequestState.Failure(Error.IOError, e.toString()))
+        } catch (e: HttpException) {
+            Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
+            return Pair(null, RequestState.Failure(Error.HttpError, e.message(), e.code()))
         }
     }
 
@@ -172,37 +175,37 @@ class GameRepositoryImpl @Inject constructor(
                     isPlayer1 = state.isPlayer1,
                     hasWinner = state.hasWinner,
                     gotOld = state.gotOld,
-                    isGameFinished = state.isGameFinished
-                )                   
+                    isGameFinished = state.isGameFinished,
+                ),
             )
             if (response.isSuccessful && response.body() != null) {
                 return Pair(response.body()!!, RequestState.Success)
             } else {
                 throw IOException("Request failed with code: " + response.code())
             }
-        } catch(e: IOException) {
-             Log.e(TAG, "IO error: $e")
-             return Pair(null, RequestState.Failure(Error.IOError, e.toString()))
-        } catch(e: HttpException) {
-             Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
-             return Pair(null, RequestState.Failure(Error.HttpError, e.message(), e.code()))
+        } catch (e: IOException) {
+            Log.e(TAG, "IO error: $e")
+            return Pair(null, RequestState.Failure(Error.IOError, e.toString()))
+        } catch (e: HttpException) {
+            Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
+            return Pair(null, RequestState.Failure(Error.HttpError, e.message(), e.code()))
         }
     }
 
     override suspend fun endMatch(matchID: Int): RequestState {
-       try {
+        try {
             val response = gameService.endMatch(matchID)
             if (response.isSuccessful) {
                 return RequestState.Success
             } else {
                 throw IOException("Request failed with code: " + response.code())
             }
-        } catch(e: IOException) {
-             Log.e(TAG, "IO error: $e")
-             return RequestState.Failure(Error.IOError, e.toString())
-        } catch(e: HttpException) {
-             Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
-             return RequestState.Failure(Error.HttpError, e.message(), e.code())
+        } catch (e: IOException) {
+            Log.e(TAG, "IO error: $e")
+            return RequestState.Failure(Error.IOError, e.toString())
+        } catch (e: HttpException) {
+            Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
+            return RequestState.Failure(Error.HttpError, e.message(), e.code())
         }
     }
 }

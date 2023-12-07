@@ -1,12 +1,11 @@
-package com.rafael.tictactoe.game.domain.game_toast
+package com.rafael.tictactoe.game.domain.toast
 
-import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
@@ -18,7 +17,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun ToastNameHandler(state: GameState) {
     val vm = hiltViewModel<GameViewModel>()
-	val hasWinner = state.hasWinner
+    val hasWinner = state.hasWinner
     val gotOld = state.gotOld
     val play = state.play
     val player1Name = state.player1Name
@@ -35,7 +34,7 @@ fun ToastNameHandler(state: GameState) {
     val cpuName = stringResource(R.string.cpu)
     var currentGamePhase: CurrentPlayerName = CurrentPlayerName.NameForSetupPhase
 
-    //Update game phase
+    // Update game phase
     if (!play && !isCPUMode) {
         currentGamePhase = CurrentPlayerName.NameForSetupPhase
     } else if (!play && isCPUMode) {
@@ -55,9 +54,9 @@ fun ToastNameHandler(state: GameState) {
             if (localPlayer1) {
                 if (player1Name.isEmpty()) {
                     vm.updateCurrentPlayerName(emptyPlayerName)
-               } else {
+                } else {
                     vm.updateCurrentPlayerName(player1Name)
-               }         
+                }
             } else {
                 if (player2Name.isEmpty()) {
                     vm.updateCurrentPlayerName(emptyPlayerName)
@@ -83,9 +82,9 @@ fun ToastNameHandler(state: GameState) {
             if (localPlayer1) {
                 if (player1Name.isEmpty()) {
                     vm.updateCurrentPlayerName(emptyPlayerName)
-               } else {
+                } else {
                     vm.updateCurrentPlayerName(player1Name)
-               }         
+                }
             } else {
                 if (player2Name.isEmpty()) {
                     vm.updateCurrentPlayerName(emptyPlayerName)
@@ -101,7 +100,7 @@ fun ToastNameHandler(state: GameState) {
                         vm.updateCurrentPlayerName(timer.toString())
                     }
                     delay(500L)
-                    timer --
+                    timer--
                     if (timer == 0) {
                         vm.updateIsTimerOn(false)
                     }
@@ -133,7 +132,7 @@ fun ToastNameHandler(state: GameState) {
             }
         }
         CurrentPlayerName.NameWhenGotOld -> {
-    		vm.updateCurrentPlayerName(stringResource(R.string.got_old))
+            vm.updateCurrentPlayerName(stringResource(R.string.got_old))
         }
     }
 }

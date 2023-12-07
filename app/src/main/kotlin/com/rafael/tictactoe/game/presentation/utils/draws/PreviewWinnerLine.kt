@@ -10,6 +10,6 @@ fun DrawScope.drawWinnerLineinColorDialog(color: Color) {
         start = Offset(x = 20.dp.toPx(), y = 0.dp.toPx()),
         end = Offset(x = 0.dp.toPx(), y = 20.dp.toPx()),
         strokeWidth = 4.dp.toPx(),
-        color = color
+        color = color,
     )
 }

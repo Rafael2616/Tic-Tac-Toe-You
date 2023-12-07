@@ -5,8 +5,8 @@ import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.common.services.MusicService
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.components.SingletonComponent
 import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -21,5 +21,4 @@ object CommonModule {
     fun provideMusicService(): MusicService {
         return MusicService()
     }
-
 }

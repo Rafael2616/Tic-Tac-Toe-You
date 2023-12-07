@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.presentation.game_screen
+package com.rafael.tictactoe.game.presentation.gameScreen
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
@@ -13,32 +13,32 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.rafael.tictactoe.game.presentation.game_screen.components.buttons.PlayAgainButton
-import com.rafael.tictactoe.game.presentation.game_screen.components.buttons.RestartButton
-import com.rafael.tictactoe.game.presentation.game_screen.components.buttons.SoundAndMusicButtons
-import com.rafael.tictactoe.game.presentation.game_screen.components.buttons.VictoryCounterReseterButton
-import com.rafael.tictactoe.game.presentation.game_screen.components.dialogs.ExitGameDialog
-import com.rafael.tictactoe.game.presentation.game_screen.components.dialogs.GetPlayersPrefsDialog
-import com.rafael.tictactoe.game.presentation.game_screen.components.ui.DifficultyLevelIndicator
-import com.rafael.tictactoe.game.presentation.game_screen.components.ui.GameBoard
-import com.rafael.tictactoe.game.presentation.game_screen.components.ui.GameStateToast
-import com.rafael.tictactoe.game.presentation.game_screen.components.ui.PlayersNamesOnCounter
-import com.rafael.tictactoe.game.presentation.game_screen.components.ui.VictoryCounter
-import com.rafael.tictactoe.game.presentation.game_screen.components.ui.WinnerLines
-import com.rafael.tictactoe.game.presentation.game_screen.components.ui.SearchingForPlayersSurface
-import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 import com.rafael.tictactoe.game.domain.checkers.GotOldChecker
 import com.rafael.tictactoe.game.domain.checkers.WinnerChecker
-import com.rafael.tictactoe.game.domain.game_toast.ToastNameHandler
 import com.rafael.tictactoe.game.domain.model.GameEvent
-import com.rafael.tictactoe.game.domain.restart_game.RestartButtonLogic
-import com.rafael.tictactoe.settings.presentation.settings_screen.components.ColorSelectionDialog
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.game.domain.restart.restartButtonLogic
+import com.rafael.tictactoe.game.domain.toast.ToastNameHandler
+import com.rafael.tictactoe.game.presentation.gameScreen.components.buttons.PlayAgainButton
+import com.rafael.tictactoe.game.presentation.gameScreen.components.buttons.RestartButton
+import com.rafael.tictactoe.game.presentation.gameScreen.components.buttons.SoundAndMusicButtons
+import com.rafael.tictactoe.game.presentation.gameScreen.components.buttons.VictoryCounterReseterButton
+import com.rafael.tictactoe.game.presentation.gameScreen.components.dialogs.ExitGameDialog
+import com.rafael.tictactoe.game.presentation.gameScreen.components.dialogs.GetPlayersPrefsDialog
+import com.rafael.tictactoe.game.presentation.gameScreen.components.ui.DifficultyLevelIndicator
+import com.rafael.tictactoe.game.presentation.gameScreen.components.ui.GameBoard
+import com.rafael.tictactoe.game.presentation.gameScreen.components.ui.GameStateToast
+import com.rafael.tictactoe.game.presentation.gameScreen.components.ui.PlayersNamesOnCounter
+import com.rafael.tictactoe.game.presentation.gameScreen.components.ui.SearchingForPlayersSurface
+import com.rafael.tictactoe.game.presentation.gameScreen.components.ui.VictoryCounter
+import com.rafael.tictactoe.game.presentation.gameScreen.components.ui.WinnerLines
+import com.rafael.tictactoe.game.presentation.gameScreen.viewmodels.GameViewModel
+import com.rafael.tictactoe.settings.presentation.settingsScreen.components.ColorSelectionDialog
+import com.rafael.tictactoe.settings.presentation.settingsScreen.viewmodels.SettingsViewModel
 
 @Composable
 fun GameScreen(
     navController: NavController,
-    isCPUMode: Boolean
+    isCPUMode: Boolean,
 ) {
     val viewModel = hiltViewModel<GameViewModel>()
     val settingsVM = hiltViewModel<SettingsViewModel>()
@@ -46,19 +46,19 @@ fun GameScreen(
     val state by viewModel.state.collectAsState()
     val settingsState by settingsVM.state.collectAsState()
 
-	//Handle when each UI component function will be called
+    // Handle when each UI component function will be called
 
-    //When GameScreen starts
+    // When GameScreen starts
     GameBoard(
         viewModel::onEvent,
         state,
-        settingsState
+        settingsState,
     )
 
     SoundAndMusicButtons(
         viewModel::onEvent,
         state,
-        settingsState
+        settingsState,
     )
 
     VictoryCounter(state, settingsState)
@@ -73,21 +73,21 @@ fun GameScreen(
     val showDialog = if (!state.play && state.showGetPrefsDialog) true else false
 
     AnimatedVisibility(showDialog) {
-		GetPlayersPrefsDialog(
+        GetPlayersPrefsDialog(
             viewModel::onEvent,
             settingsVM::onEvent,
             state,
-            settingsState
+            settingsState,
         )
     }
 
     AnimatedVisibility(state.showRestartButton) {
-		RestartButton(
+        RestartButton(
             viewModel::onEvent,
             state,
-            settingsState
+            settingsState,
         )
-	}
+    }
 
     AnimatedVisibility(state.isGameFinished) {
         PlayAgainButton(viewModel::onEvent, settingsState)
@@ -99,7 +99,7 @@ fun GameScreen(
     AnimatedVisibility(
         visible = state.hasWinner,
         enter = fadeIn() + scaleIn(),
-        exit = fadeOut()
+        exit = fadeOut(),
     ) {
         WinnerLines(state, settingsState)
     }
@@ -112,7 +112,7 @@ fun GameScreen(
         SearchingForPlayersSurface(
             state,
             settingsState,
-            viewModel::onEvent
+            viewModel::onEvent,
         )
     }
 
@@ -120,21 +120,21 @@ fun GameScreen(
         ExitGameDialog(navController, viewModel::onEvent)
     }
 
-    //Handle when some business logic will be called
+    // Handle when some business logic will be called
     if (state.play && !state.isGameFinished) {
         WinnerChecker(viewModel, state)
         GotOldChecker(viewModel, state)
     }
 
     if (state.play) {
-    	RestartButtonLogic(viewModel, state)
+        restartButtonLogic(viewModel, state)
     }
 
     DisposableEffect(key1 = "update") {
         if (update) {
             viewModel.updateIsCPUMode(isCPUMode)
         }
-        onDispose{}
+        onDispose {}
     }
 
     BackHandler {

@@ -1,19 +1,17 @@
 package com.rafael.tictactoe.game.domain.board.levels
 
-import com.rafael.tictactoe.game.domain.board.levels.easyLevelCPUMove
-import com.rafael.tictactoe.game.domain.board.levels.hardLevelCPUMove
 import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameState
 
 fun mediumLevelCPUMove(
     state: GameState,
-    onEvent: (GameEvent) -> Unit
+    onEvent: (GameEvent) -> Unit,
 ): Pair<Int, Int> {
     val easy = easyLevelCPUMove(state)
     val hard = hardLevelCPUMove(state)
     val isUsingEasyLevel = state.isUsingEasyLevel
 
-    //Select which mode will be used in next cpu move
+    // Select which mode will be used in next cpu move
     val useEasy = (0 until 2).random()
 
     if (useEasy == 0) {
@@ -22,7 +20,7 @@ fun mediumLevelCPUMove(
         onEvent(GameEvent.UseEasyLevel(false))
     }
 
-    //Perform an move based in which difficulty level is current sorted
+    // Perform an move based in which difficulty level is current sorted
     if (isUsingEasyLevel) {
         return Pair(easy.first, easy.second)
     } else {

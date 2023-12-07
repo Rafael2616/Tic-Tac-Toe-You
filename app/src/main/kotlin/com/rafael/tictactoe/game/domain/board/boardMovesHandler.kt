@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.domain.card_grid
+package com.rafael.tictactoe.game.domain.board
 
 import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameMode
@@ -8,11 +8,11 @@ import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewMod
 fun boardMovesHandler(
     state: GameState,
     onEvent: (GameEvent) -> Unit,
-	vm: GameViewModel,
-	rowIndex: Int,
-	cardIndex: Int
+    vm: GameViewModel,
+    rowIndex: Int,
+    cardIndex: Int,
 ) {
-	val play = state.play
+    val play = state.play
     val isCardClicked = state.isCardClicked
     val isXImage = state.isXImage
     val isPlayer1 = state.isPlayer1
@@ -38,18 +38,18 @@ fun boardMovesHandler(
         return
     }
 
-	when (gameMode) {
+    when (gameMode) {
         GameMode.PvP -> {
             vm.updateIsXImage(!isXImage)
-     	   vm.updateCard(rowIndex, cardIndex, isXImage)
-	    	vm.updateIsCardClicked(rowIndex, cardIndex, true)
-	    	vm.updateIsPlayer1(!isPlayer1)
+            vm.updateCard(rowIndex, cardIndex, isXImage)
+            vm.updateIsCardClicked(rowIndex, cardIndex, true)
+            vm.updateIsPlayer1(!isPlayer1)
         }
         GameMode.VsCPU -> {
-            // Exec human player move when needed 
+            // Exec human player move when needed
             vm.updateIsXImage(!isXImage)
-    	    vm.updateCard(rowIndex, cardIndex, isXImage)
-	    	vm.updateIsCardClicked(rowIndex, cardIndex, true)
+            vm.updateCard(rowIndex, cardIndex, isXImage)
+            vm.updateIsCardClicked(rowIndex, cardIndex, true)
             vm.updateIsPlayer1(!isPlayer1)
 
             // Calls CPU player's move when needed
@@ -65,9 +65,9 @@ fun boardMovesHandler(
                 return
             }
             vm.updateIsXImage(!isXImage)
-     	   vm.updateCard(rowIndex, cardIndex, isXImage)
-	    	vm.updateIsCardClicked(rowIndex, cardIndex, true)
-	    	vm.updateIsPlayer1(!isPlayer1)
+            vm.updateCard(rowIndex, cardIndex, isXImage)
+            vm.updateIsCardClicked(rowIndex, cardIndex, true)
+            vm.updateIsPlayer1(!isPlayer1)
             vm.updateIsOnlinePlayerTurn(true)
         }
     }

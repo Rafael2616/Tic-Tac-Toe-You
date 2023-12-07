@@ -1,12 +1,11 @@
-package com.rafael.tictactoe.game.presentation.game_screen.components.buttons
+package com.rafael.tictactoe.game.presentation.gameScreen.components.buttons
 
 import android.content.res.Configuration
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
@@ -39,7 +38,7 @@ import com.rafael.tictactoe.settings.domain.model.SettingsState
 fun RestartButton(
     onEvent: (GameEvent) -> Unit,
     state: GameState,
-    settingsState: SettingsState
+    settingsState: SettingsState,
 ) {
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
@@ -48,22 +47,22 @@ fun RestartButton(
     Box(
         modifier = Modifier
             .fillMaxSize(),
-        contentAlignment = if (isInLandscape) Alignment.TopStart else Alignment.TopEnd
+        contentAlignment = if (isInLandscape) Alignment.TopStart else Alignment.TopEnd,
     ) {
         Box(
             modifier = Modifier
                 .padding(top = if (isCPUMode) 70.dp else 55.dp, end = if (isCPUMode) 40.dp else 30.dp)
                 .fillMaxWidth(if (isInLandscape) 0.46f else 1f),
-            contentAlignment = Alignment.TopEnd
+            contentAlignment = Alignment.TopEnd,
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.wrapContentSize()
+                modifier = Modifier.wrapContentSize(),
             ) {
                 Card(
                     shape = MaterialTheme.shapes.medium,
                     colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp)
+                        containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp),
                     ),
                     modifier = Modifier
                         .size(45.dp)
@@ -71,20 +70,20 @@ fun RestartButton(
                         .clip(CircleShape)
                         .clickable {
                             onEvent(GameEvent.PlayAgain)
-                        }
+                        },
                 ) {
                     Box(
                         contentAlignment = Alignment.Center,
                         modifier = Modifier
-                        .fillMaxSize()
-                        .padding(bottom = 4.dp)
+                            .fillMaxSize()
+                            .padding(bottom = 4.dp),
                     ) {
                         Icon(
                             imageVector = Icons.Filled.Replay,
                             tint = if (settingsState.isDarkThemeOn) Color.Cyan else Colors.get().blue,
                             contentDescription = "Restart Button",
                             modifier = Modifier
-                                .size(38.dp)
+                                .size(38.dp),
                         )
                     }
                 }
@@ -94,7 +93,7 @@ fun RestartButton(
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Center,
                     modifier = Modifier
-                        .padding(top = 5.dp)
+                        .padding(top = 5.dp),
                 )
             }
         }

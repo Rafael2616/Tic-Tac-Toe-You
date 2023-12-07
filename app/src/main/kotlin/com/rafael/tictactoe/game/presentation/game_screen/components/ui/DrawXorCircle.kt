@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.presentation.game_screen.components.ui
+package com.rafael.tictactoe.game.presentation.gameScreen.components.ui
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
@@ -10,10 +10,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.drawscope.DrawScope
 import com.rafael.tictactoe.game.domain.model.GameState
-import com.rafael.tictactoe.game.presentation.utils.draws.drawX
 import com.rafael.tictactoe.game.presentation.utils.draws.drawAnCircle
+import com.rafael.tictactoe.game.presentation.utils.draws.drawX
 import com.rafael.tictactoe.settings.domain.model.SettingsState
 
 @Composable
@@ -21,23 +20,23 @@ fun DrawXorCircle(
     rowIndex: Int,
     cardIndex: Int,
     state: GameState,
-    settingsState: SettingsState
+    settingsState: SettingsState,
 ) {
     val card = state.card
-	val isCardClicked = state.isCardClicked
+    val isCardClicked = state.isCardClicked
     val xColor = settingsState.xColor
     val circleColor = settingsState.circleColor
 
     AnimatedVisibility(
         visible = isCardClicked[rowIndex][cardIndex],
         enter = fadeIn() + scaleIn(),
-        exit = fadeOut() + scaleOut()
+        exit = fadeOut() + scaleOut(),
     ) {
         Canvas(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxSize(),
         ) {
-        	if (card[rowIndex][cardIndex]) {
+            if (card[rowIndex][cardIndex]) {
                 drawX(xColor)
             } else {
                 drawAnCircle(circleColor)

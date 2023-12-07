@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.presentation.game_screen.components.ui
+package com.rafael.tictactoe.game.presentation.gameScreen.components.ui
 
 import android.content.res.Configuration
 import androidx.compose.animation.AnimatedContent
@@ -15,8 +15,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -33,20 +33,21 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.game.domain.game_toast.ToastImageHandler
 import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.settings.domain.model.SettingsState
 
 @Composable
 fun GameStateToast(
     state: GameState,
-    settingsState: SettingsState
+    settingsState: SettingsState,
 ) {
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
     val color = if (!state.gotOld) {
         MaterialTheme.colorScheme.onSurface
-    } else MaterialTheme.colorScheme.error
+    } else {
+        MaterialTheme.colorScheme.error
+    }
     val textColor by animateColorAsState(color)
     val winnerString = stringResource(R.string.winner)
     val winnerState = if (state.hasWinner) winnerString else ""
@@ -54,27 +55,27 @@ fun GameStateToast(
     Box(
         modifier = Modifier
             .fillMaxSize(),
-        contentAlignment = if (isInLandscape) Alignment.TopStart else Alignment.TopCenter
+        contentAlignment = if (isInLandscape) Alignment.TopStart else Alignment.TopCenter,
     ) {
-         Row(
+        Row(
             modifier = Modifier
                 .fillMaxWidth(if (isInLandscape) 0.48f else 1f)
                 .padding(top = 140.dp)
                 .height(35.dp),
             horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             AnimatedContent(
                 targetState = state.currentPlayerName,
                 transitionSpec = {
                     fadeIn() togetherWith fadeOut()
-                }
+                },
             ) { currentPlayerName ->
                 Text(
                     text = currentPlayerName,
                     style = MaterialTheme.typography.titleMedium,
                     textAlign = TextAlign.Center,
-                    color = textColor
+                    color = textColor,
                 )
             }
             if (!state.gotOld) {
@@ -83,10 +84,10 @@ fun GameStateToast(
             AnimatedVisibility(
                 visible = !state.gotOld,
                 enter = scaleIn(),
-                exit = scaleOut()
+                exit = scaleOut(),
             ) {
                 Box(
-                    modifier = Modifier.size(15.dp)
+                    modifier = Modifier.size(15.dp),
                 ) {
                     ToastImageHandler(state, settingsState)
                 }
@@ -98,13 +99,13 @@ fun GameStateToast(
                 targetState = winnerState,
                 transitionSpec = {
                     slideInHorizontally() togetherWith slideOutHorizontally()
-                }
+                },
             ) { winnerText ->
                 Text(
                     text = winnerText,
                     style = MaterialTheme.typography.titleMedium,
                     textAlign = TextAlign.Center,
-                    color = if (settingsState.isDarkThemeOn) Color.Green else Color(0xFF229A00)
+                    color = if (settingsState.isDarkThemeOn) Color.Green else Color(0xFF229A00),
                 )
             }
         }

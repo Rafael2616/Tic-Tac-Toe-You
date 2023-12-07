@@ -10,7 +10,7 @@ import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewMod
 @Composable
 fun GotOldChecker(
     vm: GameViewModel,
-    state: GameState
+    state: GameState,
 ) {
     val isCardClicked = state.isCardClicked
     val hasWinner = state.hasWinner
@@ -20,11 +20,11 @@ fun GotOldChecker(
         derivedStateOf { player1Wins + player2Wins }
     }
 
-	if ((isCardClicked.flatten().all { it }) && (!hasWinner)) {
-		vm.updateGotOld(true)
+    if ((isCardClicked.flatten().all { it }) && (!hasWinner)) {
+        vm.updateGotOld(true)
     } else {
-		vm.updateGotOld(false)
-	}
+        vm.updateGotOld(false)
+    }
 
     if (state.gotOld && !hasWinner) {
         vm.updateIsGameFinished(true)

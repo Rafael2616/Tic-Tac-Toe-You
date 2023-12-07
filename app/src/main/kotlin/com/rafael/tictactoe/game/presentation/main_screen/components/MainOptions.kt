@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.presentation.main_screen.components
+package com.rafael.tictactoe.game.presentation.mainScreen.components
 
 import android.content.res.Configuration
 import androidx.compose.foundation.clickable
@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -21,8 +20,8 @@ import androidx.compose.material.icons.outlined.PlayArrow
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
@@ -51,7 +50,7 @@ import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.Set
 fun MainOptions(
     navController: NavController,
     settingsVM: SettingsViewModel,
-    viewModel: GameViewModel
+    viewModel: GameViewModel,
 ) {
     val orientation = LocalConfiguration.current.orientation
     val state by settingsVM.state.collectAsState()
@@ -62,26 +61,26 @@ fun MainOptions(
             name = "PvP",
             icon = Icons.Outlined.PlayArrow,
             tint = if (state.isDarkThemeOn) Color.Green else Color(0xFF299961),
-            text = R.string.play
+            text = R.string.play,
         ),
         ScreenItem(
             name = "CPU",
             icon = Icons.Outlined.Memory,
             tint = Color.Red,
-            text = R.string.vs_cpu
+            text = R.string.vs_cpu,
         ),
         ScreenItem(
             name = "Online",
             icon = Icons.Outlined.Group,
             tint = MaterialTheme.colorScheme.onSurface,
-            text = R.string.online_match
+            text = R.string.online_match,
         ),
         ScreenItem(
             name = "Settings",
             icon = Icons.Outlined.Settings,
             tint = MaterialTheme.colorScheme.onSurface,
-            text = R.string.settings
-        )
+            text = R.string.settings,
+        ),
     )
 
     Column(
@@ -89,13 +88,13 @@ fun MainOptions(
             .fillMaxSize()
             .padding(top = if (orientation == Configuration.ORIENTATION_LANDSCAPE) 45.dp else 0.dp),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         items.forEachIndexed { index, screen ->
             Card(
                 shape = MaterialTheme.shapes.large,
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp)
+                    containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp),
                 ),
                 modifier = Modifier
                     .fillMaxWidth(if (orientation == Configuration.ORIENTATION_LANDSCAPE) 0.35f else 0.65f)
@@ -118,7 +117,7 @@ fun MainOptions(
                             }
                             "Settings" -> navController.navigate(Destinations.Settings.screen)
                         }
-                    }
+                    },
             ) {
                 Row(
                     modifier = Modifier
@@ -128,11 +127,12 @@ fun MainOptions(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Icon(
-                        imageVector = screen.icon,                        contentDescription = "Icon",
+                        imageVector = screen.icon,
+                        contentDescription = "Icon",
                         tint = screen.tint,
-       		    	 modifier = Modifier
+                        modifier = Modifier
                             .size(42.dp)
-                            .padding(end = 3.dp)
+                            .padding(end = 3.dp),
                     )
                     Text(
                         modifier = Modifier.wrapContentSize(),
@@ -141,7 +141,8 @@ fun MainOptions(
                         overflow = TextOverflow.Ellipsis,
                         textAlign = TextAlign.Center,
                         softWrap = true,
-                        text = stringResource(screen.text),                    )
+                        text = stringResource(screen.text),
+                    )
                 }
             }
             if (index <= items.size - 1) {

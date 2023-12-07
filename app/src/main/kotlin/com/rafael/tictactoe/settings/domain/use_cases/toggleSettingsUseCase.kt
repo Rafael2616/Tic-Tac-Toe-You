@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.domain.use_cases
+package com.rafael.tictactoe.settings.domain.useCases
 
 import android.content.Intent
 import android.net.Uri
@@ -12,9 +12,9 @@ import com.rafael.tictactoe.settings.domain.model.SettingsState
 fun toggleSettingsUseCase(
     launcher: ManagedActivityResultLauncher<Intent, ActivityResult>? = null,
     groupType: SettingsGroup,
-	index: Int,
-	state: SettingsState,
-    onEvent: (SettingsEvent) -> Unit
+    index: Int,
+    state: SettingsState,
+    onEvent: (SettingsEvent) -> Unit,
 ) {
     val githubRepoIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Rafael2616/Tic-Tac-Toe-You"))
 
@@ -45,8 +45,8 @@ fun toggleSettingsUseCase(
     fun toggleOtherSettings(index: Int) {
         when (index) {
             0 -> onEvent(SettingsEvent.ShowAboutAppCard(!state.isAboutShown))
-            1 ->  launcher!!.launch(githubRepoIntent)
-        }   
+            1 -> launcher!!.launch(githubRepoIntent)
+        }
     }
 
     when (groupType) {

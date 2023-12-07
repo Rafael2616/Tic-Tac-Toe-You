@@ -10,8 +10,8 @@ import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
 import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.components.SingletonComponent
 import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
@@ -24,7 +24,7 @@ object SettingsModule {
         return Room.databaseBuilder(
             context,
             SettingsDatabase::class.java,
-            SettingsDatabase.DATABASE_NAME
+            SettingsDatabase.DATABASE_NAME,
         ).build()
     }
 
@@ -40,13 +40,13 @@ object SettingsModule {
         repository: SettingsRepository,
         player: ExoPlayer,
         context: Application,
-        service: MusicService
+        service: MusicService,
     ): SettingsViewModel {
         return SettingsViewModel(
             repository,
             player,
             context,
-            service
+            service,
         )
     }
 }

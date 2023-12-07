@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.presentation.game_screen.components.buttons
+package com.rafael.tictactoe.game.presentation.gameScreen.components.buttons
 
 import android.content.res.Configuration
 import androidx.compose.foundation.clickable
@@ -16,8 +16,8 @@ import androidx.compose.material.icons.filled.Replay
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -36,51 +36,51 @@ import com.rafael.tictactoe.settings.domain.model.SettingsState
 @Composable
 fun PlayAgainButton(
     onEvent: (GameEvent) -> Unit,
-    settingsState: SettingsState
+    settingsState: SettingsState,
 ) {
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
 
     Box(
         modifier = Modifier
-           .fillMaxSize(),
-        contentAlignment = if (isInLandscape) Alignment.TopStart else Alignment.TopCenter
+            .fillMaxSize(),
+        contentAlignment = if (isInLandscape) Alignment.TopStart else Alignment.TopCenter,
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxWidth(if (isInLandscape) 0.48f else 1f)
-                .padding(top = 210.dp)
+                .padding(top = 210.dp),
         ) {
             Card(
                 shape = MaterialTheme.shapes.large,
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(20.dp)
+                    containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(20.dp),
                 ),
                 modifier = Modifier
                     .size(75.dp)
                     .clip(CircleShape)
                     .clickable {
                         onEvent(GameEvent.PlayAgain)
-                    }
+                    },
             ) {
                 Box(
                     contentAlignment = Alignment.Center,
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(bottom = 4.dp)
+                        .padding(bottom = 4.dp),
                 ) {
                     Icon(
                         imageVector = Icons.Filled.Replay,
                         tint = if (settingsState.isDarkThemeOn) Color.Cyan else Colors.get().blue,
                         contentDescription = "Play Button",
                         modifier = Modifier
-                            .size(68.dp)
+                            .size(68.dp),
                     )
                 }
             }
             Spacer(
-                modifier = Modifier.height(10.dp)
+                modifier = Modifier.height(10.dp),
             )
             Text(
                 text = stringResource(id = R.string.play_again),

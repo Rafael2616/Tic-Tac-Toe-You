@@ -3,13 +3,13 @@ package com.rafael.tictactoe.di
 import com.rafael.tictactoe.game.data.dao.OnlineGameDao
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.components.SingletonComponent
 import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.create
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -31,7 +31,7 @@ class RetrofitModule {
     @Singleton
     fun provideRetrofit(
         okHttpClient: OkHttpClient,
-        gsonConverterFactory: GsonConverterFactory
+        gsonConverterFactory: GsonConverterFactory,
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl("https://example.com/")

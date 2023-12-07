@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.domain.card_grid
+package com.rafael.tictactoe.game.domain.board
 
 import com.rafael.tictactoe.game.domain.board.levels.easyLevelCPUMove
 import com.rafael.tictactoe.game.domain.board.levels.hardLevelCPUMove
@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 fun cpuMoveLevelsHandler(
     vm: GameViewModel,
     state: GameState,
-    onEvent: (GameEvent) -> Unit
+    onEvent: (GameEvent) -> Unit,
 ) {
     val isCardClicked = state.isCardClicked
     val isCPU = state.isCPU

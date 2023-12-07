@@ -16,7 +16,7 @@ val Icons.Rounded.Github: ImageVector by lazy {
         defaultWidth = 24.0.dp,
         defaultHeight = 24.0.dp,
         viewportWidth = 24.0f,
-        viewportHeight = 24.0f
+        viewportHeight = 24.0f,
     ).apply {
         path(
             fill = SolidColor(Color(0xFF000000)),
@@ -25,15 +25,17 @@ val Icons.Rounded.Github: ImageVector by lazy {
             strokeLineCap = StrokeCap.Butt,
             strokeLineJoin = StrokeJoin.Miter,
             strokeLineMiter = 4.0f,
-            pathFillType = PathFillType.NonZero
+            pathFillType = PathFillType.NonZero,
         ) {
             moveTo(12.0f, 2.0f)
             arcTo(
-                10.0f, 10.0f, 0.0f,
+                10.0f,
+                10.0f,
+                0.0f,
                 isMoreThanHalf = false,
                 isPositiveArc = false,
                 x1 = 2.0f,
-                y1 = 12.0f
+                y1 = 12.0f,
             )
             curveTo(2.0f, 16.42f, 4.87f, 20.17f, 8.84f, 21.5f)
             curveTo(9.34f, 21.58f, 9.5f, 21.27f, 9.5f, 21.0f)
@@ -59,11 +61,13 @@ val Icons.Rounded.Github: ImageVector by lazy {
             curveTo(14.5f, 21.27f, 14.66f, 21.59f, 15.17f, 21.5f)
             curveTo(19.14f, 20.16f, 22.0f, 16.42f, 22.0f, 12.0f)
             arcTo(
-                10.0f, 10.0f, 0.0f,
+                10.0f,
+                10.0f,
+                0.0f,
                 isMoreThanHalf = false,
                 isPositiveArc = false,
                 x1 = 12.0f,
-                y1 = 2.0f
+                y1 = 2.0f,
             )
             close()
         }

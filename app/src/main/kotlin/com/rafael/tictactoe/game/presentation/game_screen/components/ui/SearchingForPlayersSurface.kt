@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.presentation.game_screen.components.ui
+package com.rafael.tictactoe.game.presentation.gameScreen.components.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -26,8 +26,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -49,16 +49,18 @@ import kotlinx.coroutines.delay
 fun SearchingForPlayersSurface(
     gameState: GameState,
     settingsState: SettingsState,
-    onEvent: (GameEvent) -> Unit
+    onEvent: (GameEvent) -> Unit,
 ) {
     val requestState = gameState.requestState
 
     Surface(
         color = if (settingsState.isDarkThemeOn) {
             Color.Black.copy(alpha = 0.5f)
-        } else MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp).copy(alpha = 0.5f),
+        } else {
+            MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp).copy(alpha = 0.5f)
+        },
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxSize(),
     ) {
         Column(
             modifier = Modifier
@@ -66,28 +68,28 @@ fun SearchingForPlayersSurface(
                 .statusBarsPadding()
                 .navigationBarsPadding(),
             verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Row(
                 modifier = Modifier
                     .weight(1f)
                     .fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.End
+                horizontalArrangement = Arrangement.End,
             ) {
                 IconButton(
                     modifier = Modifier
-                       .padding(end = 15.dp)
-                       .size(45.dp),
+                        .padding(end = 15.dp)
+                        .size(45.dp),
                     onClick = {
                         onEvent(GameEvent.UpdateRequestState(RequestState.Loading))
                         onEvent(GameEvent.GetRemotePlayers)
-                    }
+                    },
                 ) {
                     Icon(
                         imageVector = Icons.Outlined.Replay,
                         contentDescription = null,
-                        modifier = Modifier.size(35.dp)
+                        modifier = Modifier.size(35.dp),
                     )
                 }
                 IconButton(
@@ -96,44 +98,48 @@ fun SearchingForPlayersSurface(
                         .size(45.dp),
                     onClick = {
                         onEvent(GameEvent.ToggleExitDialog)
-                    }
+                    },
                 ) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Outlined.Logout,
                         contentDescription = null,
                         modifier = Modifier.size(35.dp),
-                        tint = MaterialTheme.colorScheme.error
+                        tint = MaterialTheme.colorScheme.error,
                     )
                 }
             }
             Text(
-                 modifier = Modifier
-                     .fillMaxWidth(0.8f)
-                     .weight(1.4f),
-                 text = stringResource(id = when (requestState) {
-                     RequestState.Loading -> R.string.searching_for_players
-                     RequestState.Success -> R.string.player_found
-                     is RequestState.Failure -> {
-                         when (requestState.type) {
-                             Error.IOError -> {
-                                 if (requestState.message.contains("404") && !requestState.message.contains("No players")) {
-                                      R.string.unable_connect_server
-                                  } else if (requestState.message.contains("UnknownHostException")) {
-                                      R.string.connection_error
-                                  } else if (requestState.message.contains("No players")) {
-                                      R.string.cannot_find_player
-                                 } else R.string.unknown_error
-                             }
-                             Error.HttpError -> R.string.problem_during_server_connection
-                         }
-                     }
-                 }),
-                 style = MaterialTheme.typography.titleMedium.copy(
-                     fontSize = 25.sp,
-                     fontWeight = FontWeight.Bold
-                 ),
-                 color = MaterialTheme.colorScheme.onSurface,
-                 textAlign = TextAlign.Center
+                modifier = Modifier
+                    .fillMaxWidth(0.8f)
+                    .weight(1.4f),
+                text = stringResource(
+                    id = when (requestState) {
+                        RequestState.Loading -> R.string.searching_for_players
+                        RequestState.Success -> R.string.player_found
+                        is RequestState.Failure -> {
+                            when (requestState.type) {
+                                Error.IOError -> {
+                                    if (requestState.message.contains("404") && !requestState.message.contains("No players")) {
+                                        R.string.unable_connect_server
+                                    } else if (requestState.message.contains("UnknownHostException")) {
+                                        R.string.connection_error
+                                    } else if (requestState.message.contains("No players")) {
+                                        R.string.cannot_find_player
+                                    } else {
+                                        R.string.unknown_error
+                                    }
+                                }
+                                Error.HttpError -> R.string.problem_during_server_connection
+                            }
+                        }
+                    },
+                ),
+                style = MaterialTheme.typography.titleMedium.copy(
+                    fontSize = 25.sp,
+                    fontWeight = FontWeight.Bold,
+                ),
+                color = MaterialTheme.colorScheme.onSurface,
+                textAlign = TextAlign.Center,
             )
             Text(
                 modifier = Modifier
@@ -142,25 +148,27 @@ fun SearchingForPlayersSurface(
                 text = stringResource(R.string.match_id) + " ${gameState.matchID}",
                 style = MaterialTheme.typography.bodyLarge,
                 textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
             Text(
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
                     .weight(0.4f),
                 text = if (requestState == RequestState.Success) {
-                     stringResource(R.string.player_n) + " ${gameState.secondPlayer!!.name}"
-                 } else "",
+                    stringResource(R.string.player_n) + " ${gameState.secondPlayer!!.name}"
+                } else {
+                    ""
+                },
                 style = MaterialTheme.typography.titleMedium,
                 textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
 
             var timer by rememberSaveable { mutableIntStateOf(4) }
             LaunchedEffect(Unit) {
                 if (requestState == RequestState.Success) {
-                    while(timer >= 0) {
-                        timer --
+                    while (timer >= 0) {
+                        timer--
                         delay(900L)
                         if (timer == 0) {
                             onEvent(GameEvent.StartOnlineMatch)
@@ -174,16 +182,18 @@ fun SearchingForPlayersSurface(
                     .weight(0.4f),
                 text = if (requestState == RequestState.Success) {
                     stringResource(id = R.string.game_will_start) + " " + timer.toString()
-                } else "",
+                } else {
+                    ""
+                },
                 style = MaterialTheme.typography.titleMedium,
                 textAlign = TextAlign.Center,
-                color = Color.Green
+                color = Color.Green,
             )
             Box(
                 modifier = Modifier
                     .weight(2.8f)
                     .fillMaxWidth(),
-                 contentAlignment = Alignment.Center
+                contentAlignment = Alignment.Center,
             ) {
                 when (requestState) {
                     RequestState.Loading -> {
@@ -191,7 +201,7 @@ fun SearchingForPlayersSurface(
                             modifier = Modifier
                                 .size(70.dp),
                             strokeCap = StrokeCap.Round,
-                            strokeWidth = 6.dp
+                            strokeWidth = 6.dp,
                         )
                     }
                     is RequestState.Failure -> {
@@ -200,7 +210,7 @@ fun SearchingForPlayersSurface(
                             contentDescription = null,
                             modifier = Modifier
                                 .size(70.dp),
-                            tint = Color.Red
+                            tint = Color.Red,
                         )
                     }
                     RequestState.Success -> {
@@ -209,7 +219,7 @@ fun SearchingForPlayersSurface(
                             contentDescription = null,
                             modifier = Modifier
                                 .size(70.dp),
-                            tint = Color.Green
+                            tint = Color.Green,
                         )
                     }
                 }
@@ -218,13 +228,15 @@ fun SearchingForPlayersSurface(
                 modifier = Modifier
                     .weight(1f)
                     .fillMaxWidth(0.95f),
-                text = ">>>  " + stringResource(id = if (gameState.isYouPlayer1) {
-                    R.string.you_will_start_game
-                } else {
-                    R.string.you_will_be_second_player
-                }) + "  <<<",
+                text = ">>>  " + stringResource(
+                    id = if (gameState.isYouPlayer1) {
+                        R.string.you_will_start_game
+                    } else {
+                        R.string.you_will_be_second_player
+                    },
+                ) + "  <<<",
                 style = MaterialTheme.typography.titleMedium,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
             )
             Text(
                 modifier = Modifier
@@ -241,7 +253,7 @@ fun SearchingForPlayersSurface(
                 },
                 style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
         }
     }

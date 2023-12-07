@@ -8,8 +8,8 @@ import com.rafael.tictactoe.settings.domain.model.SettingsEntity
 @Database(
     entities = [SettingsEntity::class],
     version = 1,
-    exportSchema = false
-) 
+    exportSchema = false,
+)
 abstract class SettingsDatabase : RoomDatabase() {
 
     abstract fun settingsDao(): SettingsDao

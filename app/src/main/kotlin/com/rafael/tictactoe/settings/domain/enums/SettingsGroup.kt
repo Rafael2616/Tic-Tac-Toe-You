@@ -4,5 +4,5 @@ enum class SettingsGroup {
     Theme,
     Sound,
     Customization,
-    Others
+    Others,
 }

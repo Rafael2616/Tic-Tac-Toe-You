@@ -3,9 +3,9 @@ package com.rafael.tictactoe.game.domain.model
 import androidx.compose.ui.graphics.Color
 
 data class Player(
-    val id : Int,
+    val id: Int,
     val name: String,
-    val color : Color,
+    val color: Color,
     val isXImage: Boolean,
-    val isPlayer1: Boolean
+    val isPlayer1: Boolean,
 )

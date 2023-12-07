@@ -8,13 +8,13 @@ import com.rafael.tictactoe.game.domain.model.GameEntity
 @Database(
     entities = [GameEntity::class],
     version = 1,
-    exportSchema = false
-) 
+    exportSchema = false,
+)
 abstract class GameDatabase : RoomDatabase() {
 
-	abstract fun gameDao(): GameDao
+    abstract fun gameDao(): GameDao
 
-	companion object {
-   	 const val DATABASE_NAME = "game"
-	}
+    companion object {
+        const val DATABASE_NAME = "game"
+    }
 }

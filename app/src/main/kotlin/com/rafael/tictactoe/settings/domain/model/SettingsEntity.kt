@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "settings")
 data class SettingsEntity(
     @PrimaryKey
-	var id: Int = 1,
+    var id: Int = 1,
     var isBackgroundMusicOn: Boolean,
     var isDarkThemeOn: Boolean,
     var isDynamicColorsOn: Boolean,
@@ -14,12 +14,12 @@ data class SettingsEntity(
     var isSoundEffectsOn: Boolean,
     var selectedWinnerLineColor: Int,
     var selectedXColor: Int,
-    var selectedCircleColor: Int
+    var selectedCircleColor: Int,
 ) {
     companion object {
         fun getDefaultSettings(): SettingsEntity {
             return SettingsEntity(
-				id = 1,
+                id = 1,
                 isBackgroundMusicOn = true,
                 isDarkThemeOn = true,
                 isDynamicColorsOn = true,
@@ -27,7 +27,7 @@ data class SettingsEntity(
                 isSoundEffectsOn = true,
                 selectedWinnerLineColor = 2,
                 selectedXColor = 1,
-                selectedCircleColor = 5
+                selectedCircleColor = 5,
             )
         }
     }

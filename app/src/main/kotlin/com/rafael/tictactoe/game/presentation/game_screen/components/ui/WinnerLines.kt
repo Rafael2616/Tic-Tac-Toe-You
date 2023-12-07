@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.presentation.game_screen.components.ui
+package com.rafael.tictactoe.game.presentation.gameScreen.components.ui
 
 import android.content.res.Configuration
 import androidx.compose.foundation.Canvas
@@ -23,7 +23,7 @@ import com.rafael.tictactoe.settings.domain.model.SettingsState
 @Composable
 fun WinnerLines(
     state: GameState,
-    settingsState: SettingsState
+    settingsState: SettingsState,
 ) {
     val winningPositionsIndices = state.winningPositionsIndices
     val winnerLineColor = settingsState.winnerLineColor
@@ -37,26 +37,26 @@ fun WinnerLines(
             .fillMaxSize()
             .padding(if (isInLandscape) lPadding else pPadding),
         verticalArrangement = Arrangement.Bottom,
-        horizontalAlignment = if (isInLandscape) Alignment.End else Alignment.CenterHorizontally
+        horizontalAlignment = if (isInLandscape) Alignment.End else Alignment.CenterHorizontally,
     ) {
-         Canvas(
-             modifier = Modifier
-             .fillMaxWidth(if (isInLandscape) 0.52f else 1f)
+        Canvas(
+            modifier = Modifier
+                .fillMaxWidth(if (isInLandscape) 0.52f else 1f),
         ) {
-            //Horizontal lines
+            // Horizontal lines
             if (winningPositionsIndices.contains(0)) {
                 drawWinnerLine(
                     start = Offset(x = 2.dp.toPx(), y = size.height - 330.dp.toPx()),
                     end = Offset(x = size.width - 2.dp.toPx(), y = size.height - 330.dp.toPx()),
-                    color = winnerLineColor
+                    color = winnerLineColor,
                 )
             }
 
             if (winningPositionsIndices.contains(1)) {
                 drawWinnerLine(
-                    start = Offset(x =  2.dp.toPx(), y = size.height - 198.dp.toPx()),
+                    start = Offset(x = 2.dp.toPx(), y = size.height - 198.dp.toPx()),
                     end = Offset(x = size.width - 2.dp.toPx(), y = size.height - 198.dp.toPx()),
-                    color = winnerLineColor
+                    color = winnerLineColor,
                 )
             }
 
@@ -64,16 +64,16 @@ fun WinnerLines(
                 drawWinnerLine(
                     start = Offset(x = 2.dp.toPx(), y = size.height - 67.dp.toPx()),
                     end = Offset(x = size.width - 2.dp.toPx(), y = size.height - 67.dp.toPx()),
-                    color = winnerLineColor
+                    color = winnerLineColor,
                 )
             }
 
-            //Vertical lines
+            // Vertical lines
             if (winningPositionsIndices.contains(3)) {
                 drawWinnerLine(
                     start = Offset(x = size.width / 6 + 1.dp.toPx(), y = size.height),
                     end = Offset(x = size.width / 6 + 1.dp.toPx(), y = size.height - 395.dp.toPx()),
-                    color = winnerLineColor
+                    color = winnerLineColor,
                 )
             }
 
@@ -81,7 +81,7 @@ fun WinnerLines(
                 drawWinnerLine(
                     start = Offset(x = (size.width / 2), y = size.height),
                     end = Offset(x = (size.width / 2), y = size.height - 395.dp.toPx()),
-                    color = winnerLineColor
+                    color = winnerLineColor,
                 )
             }
 
@@ -89,16 +89,16 @@ fun WinnerLines(
                 drawWinnerLine(
                     start = Offset(x = size.width - (size.width / 6) - 2.dp.toPx(), y = size.height),
                     end = Offset(x = size.width - (size.width / 6) - 2.dp.toPx(), y = size.height - 395.dp.toPx()),
-                    color = winnerLineColor
+                    color = winnerLineColor,
                 )
             }
 
-            //Transversal lines
+            // Transversal lines
             if (winningPositionsIndices.contains(6)) {
                 drawWinnerLine(
-                    start = Offset(x = 10.dp.toPx(),  y = size.height - 386.dp.toPx()),
+                    start = Offset(x = 10.dp.toPx(), y = size.height - 386.dp.toPx()),
                     end = Offset(x = size.width - 10.dp.toPx(), y = size.height - 10.dp.toPx()),
-                    color = winnerLineColor
+                    color = winnerLineColor,
                 )
             }
 
@@ -106,7 +106,7 @@ fun WinnerLines(
                 drawWinnerLine(
                     start = Offset(x = size.width - 10.dp.toPx(), y = size.height - 386.dp.toPx()),
                     end = Offset(x = 10.dp.toPx(), y = size.height - 10.dp.toPx()),
-                    color = winnerLineColor
+                    color = winnerLineColor,
                 )
             }
         }
@@ -116,7 +116,7 @@ fun WinnerLines(
 fun DrawScope.drawWinnerLine(
     start: Offset,
     end: Offset,
-    color: Color
+    color: Color,
 ) {
     drawLine(
         start = start,

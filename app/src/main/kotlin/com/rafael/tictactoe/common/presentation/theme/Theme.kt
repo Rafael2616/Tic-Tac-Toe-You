@@ -1,6 +1,5 @@
 package com.rafael.tictactoe.common.presentation.theme
 
-import android.content.Context
 import android.graphics.Color
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
@@ -8,11 +7,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.dynamicDarkColorScheme
+import androidx.compose.material3.dynamicLightColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
@@ -90,7 +89,7 @@ private val DarkColors = darkColorScheme(
 fun AppTheme(
     activity: ComponentActivity,
     isSystemInDarkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     val viewModel = hiltViewModel<SettingsViewModel>()
     val state by viewModel.state.collectAsState()
@@ -98,16 +97,16 @@ fun AppTheme(
     val isFollowingSystemOn = state.isFollowingSystemOn
     val isDynamicColorsOn = state.isDynamicColorsOn
     val context = LocalContext.current
-    val isAndroidS = VERSION.SDK_INT >= VERSION_CODES.S 
+    val isAndroidS = VERSION.SDK_INT >= VERSION_CODES.S
     val onEvent = viewModel::onEvent
 
-    //Handle with color will be applied according with some settings toggles
+    // Handle with color will be applied according with some settings toggles
     val colors = if (isFollowingSystemOn) {
         if (isAndroidS && isDynamicColorsOn) {
             if (isSystemInDarkTheme) {
-                 dynamicDarkColorScheme(context)
-            } else {           
-                 dynamicLightColorScheme(context)
+                dynamicDarkColorScheme(context)
+            } else {
+                dynamicLightColorScheme(context)
             }
         } else if (isSystemInDarkTheme) {
             DarkColors
@@ -117,9 +116,9 @@ fun AppTheme(
     } else {
         if (isAndroidS && isDynamicColorsOn) {
             if (isDarkThemeOn) {
-                 dynamicDarkColorScheme(context)
-            } else {           
-                 dynamicLightColorScheme(context)
+                dynamicDarkColorScheme(context)
+            } else {
+                dynamicLightColorScheme(context)
             }
         } else if (isDarkThemeOn) {
             DarkColors
@@ -128,23 +127,23 @@ fun AppTheme(
         }
     }
 
-	MaterialTheme(
-  	  colorScheme = colors,
-  	  shapes = Shapes,
-  	  typography = Typography,
-   	 content = content,
-	)
+    MaterialTheme(
+        colorScheme = colors,
+        shapes = Shapes,
+        typography = Typography,
+        content = content,
+    )
 
-    //Sync dark theme with value of system theme
+    // Sync dark theme with value of system theme
     if (isSystemInDarkTheme && isFollowingSystemOn) {
         onEvent(SettingsEvent.SetIsDarkThemeOn(true))
     } else if (!isSystemInDarkTheme && isFollowingSystemOn) {
         onEvent(SettingsEvent.SetIsDarkThemeOn(false))
     }
 
-    //Set System Bars Colors
-    DisposableEffect(isDarkThemeOn) { 
-        activity.enableEdgeToEdge( 
+    // Set System Bars Colors
+    DisposableEffect(isDarkThemeOn) {
+        activity.enableEdgeToEdge(
             statusBarStyle = SystemBarStyle.auto(
                 Color.TRANSPARENT,
                 Color.TRANSPARENT,
@@ -152,8 +151,8 @@ fun AppTheme(
             navigationBarStyle = SystemBarStyle.auto(
                 Color.TRANSPARENT,
                 Color.TRANSPARENT,
-            ) { isDarkThemeOn }, 
-        ) 
-        onDispose {} 
+            ) { isDarkThemeOn },
+        )
+        onDispose {}
     }
 }

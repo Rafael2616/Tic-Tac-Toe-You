@@ -1,11 +1,10 @@
-package com.rafael.tictactoe.settings.presentation.settings_screen.components
+package com.rafael.tictactoe.settings.presentation.settingsScreen.components
 
 import android.content.res.Configuration
 import androidx.annotation.StringRes
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -30,19 +29,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.rafael.tictactoe.R
 import com.rafael.tictactoe.settings.domain.enums.SettingsGroup
 import com.rafael.tictactoe.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.domain.model.SettingsItem
 import com.rafael.tictactoe.settings.domain.model.SettingsState
-import com.rafael.tictactoe.settings.domain.use_cases.toggleSettingsUseCase
+import com.rafael.tictactoe.settings.domain.useCases.toggleSettingsUseCase
 import com.rafael.tictactoe.settings.domain.util.ComponentValidator
 
 @Composable
@@ -51,7 +46,7 @@ fun SettingsBlockWithSwitch(
     onEvent: (SettingsEvent) -> Unit,
     groupType: SettingsGroup,
     @StringRes groupName: Int,
-    settings: List<SettingsItem>
+    settings: List<SettingsItem>,
 ) {
     val isFollowingSystemOn = state.isFollowingSystemOn
     val componentValidator = ComponentValidator()
@@ -64,7 +59,7 @@ fun SettingsBlockWithSwitch(
             .padding(bottom = 8.dp)
             .animateContentSize(),
         verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
             text = stringResource(groupName),
@@ -73,24 +68,25 @@ fun SettingsBlockWithSwitch(
             textAlign = TextAlign.Start,
             modifier = Modifier
                 .padding(bottom = 6.dp)
-                .fillMaxWidth(if (isInLandscape) 0.7f else 0.95f)
+                .fillMaxWidth(if (isInLandscape) 0.7f else 0.95f),
         )
         Card(
             shape = MaterialTheme.shapes.medium,
             colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp)
+                containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp),
             ),
             modifier = Modifier
                 .animateContentSize()
                 .fillMaxWidth(if (isInLandscape) 0.6f else 0.9f)
-                .clip(RoundedCornerShape(26.dp))
+                .clip(RoundedCornerShape(26.dp)),
         ) {
             settings.forEachIndexed { index, setting ->
                 if (componentValidator.validateCard(
-                    groupType,
-                    index,
-                    isFollowingSystemOn
-                )) {
+                        groupType,
+                        index,
+                        isFollowingSystemOn,
+                    )
+                ) {
                     Row(
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically,
@@ -103,23 +99,23 @@ fun SettingsBlockWithSwitch(
                                     groupType,
                                     index,
                                     state,
-                                    onEvent
+                                    onEvent,
                                 )
-                            }
+                            },
                     ) {
-                       Icon(
+                        Icon(
                             imageVector = setting.leadingIcon!!,
                             contentDescription = "Icon",
-       		        	 modifier = Modifier
+                            modifier = Modifier
                                 .size(42.dp)
-                                .padding(start = 10.dp)
+                                .padding(start = 10.dp),
                         )
                         Text(
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onSurface,
                             text = stringResource(setting.text),
                             modifier = Modifier.width(220.dp),
-                            textAlign = TextAlign.Center
+                            textAlign = TextAlign.Center,
                         )
                         Switch(
                             modifier = Modifier.padding(end = 10.dp),
@@ -130,28 +126,29 @@ fun SettingsBlockWithSwitch(
                                     groupType,
                                     index,
                                     state,
-                                    onEvent
+                                    onEvent,
                                 )
                             },
                             thumbContent = {
-                                 if (setting.isChecked) {
+                                if (setting.isChecked) {
                                     Icon(
-     					               imageVector = Icons.Filled.Check,
-    					                contentDescription = "Setting Switcher",
-       					             modifier = Modifier.size(SwitchDefaults.IconSize)
+                                        imageVector = Icons.Filled.Check,
+                                        contentDescription = "Setting Switcher",
+                                        modifier = Modifier.size(SwitchDefaults.IconSize),
                                     )
                                 }
-   					     }
+                            },
                         )
                     }
                     if ((index < (settings.size - 1)) && componentValidator.validateDivider(
-                        groupType,
-                        index,
-                        isFollowingSystemOn
-                    )) {
+                            groupType,
+                            index,
+                            isFollowingSystemOn,
+                        )
+                    ) {
                         HorizontalDivider(
                             thickness = 4.dp,
-                            color = MaterialTheme.colorScheme.surface
+                            color = MaterialTheme.colorScheme.surface,
                         )
                     }
                 }

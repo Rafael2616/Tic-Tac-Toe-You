@@ -1,14 +1,14 @@
-package com.rafael.tictactoe.game.domain.restart_game
+package com.rafael.tictactoe.game.domain.restart
 
 import com.rafael.tictactoe.game.domain.model.GameMode
 import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
 
-fun RestartGame(
+fun restartGame(
     vm: GameViewModel,
-    state: GameState
+    state: GameState,
 ) {
-    val allFalse = List(3){List<Boolean>(3) { false }}
+    val allFalse = List(3) { List<Boolean>(3) { false } }
     val is1Win = state.is1Win
     val isXFor1 = state.isXFor1
     val isCPUPlayer1 = state.isCPUPlayer1
@@ -39,7 +39,7 @@ fun RestartGame(
     }
 
     /*
-     * Defines which player will start the new match based on factors such as; 
+     * Defines which player will start the new match based on factors such as;
      * if there have been past winners and who was the last winner
      */
     if (hasWinner || hasLastWinningPlayer) {
@@ -57,7 +57,7 @@ fun RestartGame(
     when (gameMode) {
         GameMode.VsCPU -> {
             if (hasWinner) {
-                 if (is1Win && isCPUPlayer1) {
+                if (is1Win && isCPUPlayer1) {
                     vm.updateIsCPU(true)
                 } else if (!is1Win && !isCPUPlayer1) {
                     vm.updateIsCPU(true)
@@ -92,7 +92,7 @@ fun RestartGame(
         }
     }
 
-    //Others common actions, executed in all cases
+    // Others common actions, executed in all cases
     vm.updateHasWinner(false)
     vm.updateGotOld(false)
     vm.updateIsGameFinished(false)

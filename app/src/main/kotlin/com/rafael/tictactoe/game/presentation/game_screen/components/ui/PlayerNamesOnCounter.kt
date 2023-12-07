@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.presentation.game_screen.components.ui
+package com.rafael.tictactoe.game.presentation.gameScreen.components.ui
 
 import android.content.res.Configuration
 import androidx.compose.animation.AnimatedContent
@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -21,9 +20,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.model.GameState
-import com.rafael.tictactoe.game.domain.victory_counter.PlayerNamesOnCounterHandler
+import com.rafael.tictactoe.game.domain.victoryCounter.PlayerNamesOnCounterHandler
 
 @Composable
 fun PlayersNamesOnCounter(state: GameState) {
@@ -34,25 +32,25 @@ fun PlayersNamesOnCounter(state: GameState) {
     nameOnCounter.firstPlayerName(state)
     nameOnCounter.secondPlayerName(state)
 
-     Box(
+    Box(
         modifier = Modifier
             .fillMaxSize(),
-        contentAlignment = if (isInLandscape) Alignment.TopStart else Alignment.TopCenter
+        contentAlignment = if (isInLandscape) Alignment.TopStart else Alignment.TopCenter,
     ) {
         Row(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth(if (isInLandscape) 0.48f else 1f)
-                //.statusBarsPadding()
-                .padding(top = 20.dp)
+                // .statusBarsPadding()
+                .padding(top = 20.dp),
         ) {
             Players.values().forEachIndexed { _, player ->
                 Box(
                     modifier = Modifier
                         .padding(6.dp)
                         .width(75.dp),
-                    contentAlignment = Alignment.Center
+                    contentAlignment = Alignment.Center,
                 ) {
                     AnimatedContent(
                         targetState = when (player) {
@@ -61,14 +59,14 @@ fun PlayersNamesOnCounter(state: GameState) {
                         },
                         transitionSpec = {
                             fadeIn() togetherWith fadeOut()
-                        }
+                        },
                     ) { playerName ->
                         Text(
                             text = playerName,
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurface,
                             overflow = TextOverflow.Ellipsis,
-                            maxLines = 1
+                            maxLines = 1,
                         )
                     }
                 }
@@ -79,5 +77,5 @@ fun PlayersNamesOnCounter(state: GameState) {
 
 enum class Players {
     First,
-    Second
+    Second,
 }
