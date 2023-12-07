@@ -22,6 +22,8 @@ import androidx.compose.material.icons.outlined.MusicOff
 import androidx.compose.material.icons.outlined.Palette
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -41,7 +43,7 @@ fun SettingsOptionsImpl(
     state: SettingsState
 ) {
 
-    val themeSettings = listOf(
+    val themeSettings = mutableStateListOf(
         // Follow System
         SettingsItem(
             leadingIcon = Icons.Outlined.BrightnessMedium,
@@ -62,7 +64,7 @@ fun SettingsOptionsImpl(
         )
     )
 
-    val soundSettings = listOf(
+    val soundSettings = mutableStateListOf(
         // Sound Effects
         SettingsItem(
             leadingIcon = if (state.isSoundEffectsOn) Icons.Outlined.MusicNote else Icons.Outlined.MusicOff,
@@ -70,14 +72,14 @@ fun SettingsOptionsImpl(
             isChecked = state.isSoundEffectsOn
         ),
         // Background Music
-       SettingsItem(
+        SettingsItem(
             leadingIcon = if (state.isBackgroundMusicOn) Icons.AutoMirrored.Outlined.VolumeUp else Icons.AutoMirrored.Outlined.VolumeOff,
             text = R.string.background_music,
             isChecked = state.isBackgroundMusicOn
         )
     )
 
-    val customizationSettings = listOf(
+    val customizationSettings = mutableStateListOf(
         // Winner Line Color
         SettingsItem(
             text = R.string.winner_line_color,
@@ -95,7 +97,7 @@ fun SettingsOptionsImpl(
         )
     )
 
-    val otherSettings = listOf(
+    val otherSettings = mutableStateListOf(
         // About App
         SettingsItem(
             leadingIcon = Icons.Outlined.Info,
