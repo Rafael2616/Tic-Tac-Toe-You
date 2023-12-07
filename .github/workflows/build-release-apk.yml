@@ -25,17 +25,14 @@ jobs:
       with:
         java-version: '21'
         distribution: 'temurin'
-
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
-
     - name: Build Release APK
-    - uses: gradle/gradle-build-action@v2
+      uses: gradle/gradle-build-action@v2
       with:
         gradle-home-cache-cleanup: true
         arguments: --build-cache
       run: ./gradlew assembleRelease
-
     - name: Upload APK
       uses: actions/upload-artifact@v3
       with:
