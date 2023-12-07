@@ -106,12 +106,12 @@ android {
 configure<SpotlessExtension> {
     kotlin {
         ktlint()
-           .setEditorConfigPath(rootProject.file(".editorconfig"))
+            .setEditorConfigPath(rootProject.file(".editorconfig"))
         target("app/src/main/kotlin/**/*.kt")
     }
     kotlinGradle {
         ktlint()
-          .setEditorConfigPath(rootProject.file(".editorconfig"))
+            .setEditorConfigPath(rootProject.file(".editorconfig"))
         target("*.gradle.kts")
     }
 }
