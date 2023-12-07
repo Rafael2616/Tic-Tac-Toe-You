@@ -28,11 +28,13 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
 
-    - name: Gradle Build
-      uses: gradle/gradle-build-action@v2
+    - uses: gradle/gradle-build-action@v2
       with:
         gradle-home-cache-cleanup: true
         arguments: --build-cache
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
 
     - name: Build Release APK
       run: ./gradlew assembleRelease
@@ -59,7 +61,7 @@ jobs:
         distribution: 'temurin'
         java-version: 21
 
-    - name: Make Gradlew executable
+    - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
     - name: Check Kotlin Style
