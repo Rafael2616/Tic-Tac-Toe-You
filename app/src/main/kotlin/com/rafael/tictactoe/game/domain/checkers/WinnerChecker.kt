@@ -3,7 +3,7 @@ package com.rafael.tictactoe.game.domain.checkers
 import androidx.compose.runtime.Composable
 import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.domain.victoryCounter.victoryCounterUpdater
-import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
+import com.rafael.tictactoe.game.presentation.gameScreen.viewmodels.GameViewModel
 
 @Composable
 fun WinnerChecker(

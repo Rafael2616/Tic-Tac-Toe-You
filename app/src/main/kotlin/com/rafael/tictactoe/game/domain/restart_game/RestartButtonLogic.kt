@@ -3,7 +3,7 @@ package com.rafael.tictactoe.game.domain.restart
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import com.rafael.tictactoe.game.domain.model.GameState
-import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
+import com.rafael.tictactoe.game.presentation.gameScreen.viewmodels.GameViewModel
 
 @Composable
 fun restartButtonLogic(vm: GameViewModel, state: GameState) {

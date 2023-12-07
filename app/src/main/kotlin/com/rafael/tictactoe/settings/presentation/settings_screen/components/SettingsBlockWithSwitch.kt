@@ -34,8 +34,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.rafael.tictactoe.settings.domain.enums.SettingsGroup
+import com.rafael.tictactoe.settings.domain.model.SettingItem
 import com.rafael.tictactoe.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.domain.model.SettingsItem
 import com.rafael.tictactoe.settings.domain.model.SettingsState
 import com.rafael.tictactoe.settings.domain.useCases.toggleSettingsUseCase
 import com.rafael.tictactoe.settings.domain.util.ComponentValidator
@@ -46,7 +46,7 @@ fun SettingsBlockWithSwitch(
     onEvent: (SettingsEvent) -> Unit,
     groupType: SettingsGroup,
     @StringRes groupName: Int,
-    settings: List<SettingsItem>,
+    settings: List<SettingItem>,
 ) {
     val isFollowingSystemOn = state.isFollowingSystemOn
     val componentValidator = ComponentValidator()

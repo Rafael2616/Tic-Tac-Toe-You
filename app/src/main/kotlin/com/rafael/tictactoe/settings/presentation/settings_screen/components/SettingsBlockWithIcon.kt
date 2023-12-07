@@ -46,8 +46,8 @@ import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.getVersionCode
 import com.rafael.tictactoe.common.domain.util.getVersionName
 import com.rafael.tictactoe.settings.domain.enums.SettingsGroup
+import com.rafael.tictactoe.settings.domain.model.SettingItem
 import com.rafael.tictactoe.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.domain.model.SettingsItem
 import com.rafael.tictactoe.settings.domain.model.SettingsState
 import com.rafael.tictactoe.settings.domain.useCases.toggleSettingsUseCase
 import com.rafael.tictactoe.settings.domain.util.ComponentValidator
@@ -58,7 +58,7 @@ fun SettingsBlockWithIcon(
     onEvent: (SettingsEvent) -> Unit,
     groupType: SettingsGroup,
     @StringRes groupName: Int,
-    settings: List<SettingsItem>,
+    settings: List<SettingItem>,
 ) {
     val isAboutShown = state.isAboutShown
     val winnerLineColor by animateColorAsState(state.winnerLineColor)

@@ -12,7 +12,7 @@ import com.rafael.tictactoe.game.presentation.gameScreen.viewmodels.GameViewMode
 import com.rafael.tictactoe.game.presentation.mainScreen.components.MainOptions
 import com.rafael.tictactoe.game.presentation.mainScreen.components.MainTopBar
 import com.rafael.tictactoe.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.settings.presentation.settingsScreen.viewmodels.SettingsViewModel
 
 @Composable
 fun MainScreen(

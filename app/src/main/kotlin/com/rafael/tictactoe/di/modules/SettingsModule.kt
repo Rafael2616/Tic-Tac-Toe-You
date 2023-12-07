@@ -7,7 +7,7 @@ import com.rafael.tictactoe.common.services.MusicService
 import com.rafael.tictactoe.settings.data.database.SettingsDatabase
 import com.rafael.tictactoe.settings.data.repository.SettingsRepositoryImpl
 import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
-import com.rafael.tictactoe.settings.presentation.settings_screen.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.settings.presentation.settingsScreen.viewmodels.SettingsViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

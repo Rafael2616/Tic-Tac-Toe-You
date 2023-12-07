@@ -34,6 +34,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.model.GameState
+import com.rafael.tictactoe.game.domain.toast.ToastImageHandler
 import com.rafael.tictactoe.settings.domain.model.SettingsState
 
 @Composable

@@ -2,7 +2,7 @@ package com.rafael.tictactoe.game.domain.restart
 
 import com.rafael.tictactoe.game.domain.model.GameMode
 import com.rafael.tictactoe.game.domain.model.GameState
-import com.rafael.tictactoe.game.presentation.game_screen.viewmodels.GameViewModel
+import com.rafael.tictactoe.game.presentation.gameScreen.viewmodels.GameViewModel
 
 fun restartGame(
     vm: GameViewModel,
