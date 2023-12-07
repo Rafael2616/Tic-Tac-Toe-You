@@ -106,7 +106,7 @@ android {
 configure<SpotlessExtension> {
     kotlin {
         ktlint()
-        target("app/src/**/*.kt")
+        target("app/src/main/kotlin/**/*.kt")
     }
     kotlinGradle {
         ktlint()
