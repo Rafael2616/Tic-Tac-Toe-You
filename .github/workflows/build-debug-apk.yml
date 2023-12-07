@@ -31,9 +31,6 @@ jobs:
       run: chmod +x gradlew
 
     - name: Build Debug APK
-    - uses: gradle/gradle-build-action@v2
-      with:
-        gradle-home-cache-cleanup: true
       run: ./gradlew assembleDebug
 
     # - name: Upload APK
@@ -53,5 +50,4 @@ jobs:
         with:
           distribution: 'termurin'
           java-version: 21
-      - uses: gradle/gradle-build-action@v2
       - run: ./gradlew spotlessCheck
