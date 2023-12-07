@@ -31,9 +31,9 @@ jobs:
 
     - name: Build Release APK
     - uses: gradle/gradle-build-action@v2
-        with:
-          gradle-home-cache-cleanup: true
-          arguments: --build-cache
+      with:
+        gradle-home-cache-cleanup: true
+        arguments: --build-cache
       run: ./gradlew assembleRelease
 
     - name: Upload APK
