@@ -30,7 +30,9 @@ jobs:
     - uses: gradle/gradle-build-action@v2.10.0
       with:
         gradle-home-cache-cleanup: true
-        options: --build-cache
+        options: |
+            --build-cache
+            --configuration-cache
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
