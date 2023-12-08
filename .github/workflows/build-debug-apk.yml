@@ -30,9 +30,7 @@ jobs:
     - uses: gradle/gradle-build-action@v2.10.0
       with:
         gradle-home-cache-cleanup: true
-        options: |
-            --build-cache
-            --configuration-cache
+        arguments: --build-cache
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
@@ -40,12 +38,12 @@ jobs:
     - name: Build Debug APK
       run: ./gradlew assembleDebug
 
-    # Uncomment the following lines if you want to upload the APK
-    # - name: Upload APK
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: app-debug
-    #     path: app/build/outputs/apk/debug/app-debug.apk
+    # Comment the following lines if you dont want to upload the APK
+    - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-debug
+          path: app/build/outputs/apk/debug/app-debug.apk
 
   check-kotlin-style:
     runs-on: ubuntu-latest
@@ -66,9 +64,7 @@ jobs:
     - uses: gradle/gradle-build-action@v2.10.0
       with:
         gradle-home-cache-cleanup: true
-        options: |
-            --build-cache
-            --configuration-cache
+        arguments: --build-cache
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
