@@ -27,9 +27,10 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
 
-    - uses: gradle/gradle-build-action@v2
+    - uses: gradle/gradle-build-action@v2.4.2
       with:
         gradle-home-cache-cleanup: true
+        options: --build-cache
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
