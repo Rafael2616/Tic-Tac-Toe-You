@@ -21,7 +21,7 @@ A classic tic-tac-toe game made with material you and others new android technol
 - Reative Programming w/ [Kotlin Flows](https://developer.android.com/kotlin/flow)
 - [Androidx Core SplashScreen](https://developer.android.com/reference/kotlin/androidx/core/splashscreen/SplashScreen)
 - [Androidx Navigation Compose](https://developer.android.com/jetpack/compose/navigation?hl=en)
-- [Retrofit]((https://square.github.io/retrofit/)) and [OkHttp3](https://square.github.io/okhttp/) for Network op.
+- [Retrofit](https://square.github.io/retrofit/) and [OkHttp3](https://square.github.io/okhttp/) for Network op.
 - [Spotless](https://github.com/diffplug/spotless) for kotlin code linting
 
 # Game Screenshots:
