@@ -30,7 +30,7 @@ jobs:
     - uses: gradle/gradle-build-action@v2.10.0
       with:
         gradle-home-cache-cleanup: true
-        options: |
+        arguments: |
             --build-cache
             --configuration-cache
 
@@ -62,6 +62,13 @@ jobs:
       with:
         distribution: 'temurin'
         java-version: 21
+
+    - uses: gradle/gradle-build-action@v2.10.0
+      with:
+        gradle-home-cache-cleanup: true
+        arguments: |
+            --build-cache
+            --configuration-cache
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
