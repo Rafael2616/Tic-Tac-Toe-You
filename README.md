@@ -11,14 +11,18 @@ A classic tic-tac-toe game made with material you and others new android technol
 - Versus CPU Mode
 
 # Employed technologies:
-- Room database
-- Dependency Injection w/ Dagger Hilt
-- Clean Arquiteture
-- MVVM patterns
-- Jetpack Compose
-- Media3 Library
-- Kotlin 100%
-- Reative Programming w/ Kotlin Flows
+- [Room database](https://developer.android.com/jetpack/androidx/releases/room?hl=en)
+- Dependency Injection w/ [Dagger Hilt](https://dagger.dev/)
+- [Clean Arquiteture](https://medium.com/simform-engineering/clean-architecture-in-android-12d61c4f5318)
+- [MVVM](https://www.google.com/amp/s/www.geeksforgeeks.org/mvvm-model-view-viewmodel-architecture-pattern-in-android/amp/) patterns
+- [Jetpack Compose](https://developer.android.com/jetpack/compose?hl=en)
+- [Media3 Library](https://developer.android.com/jetpack/androidx/releases/media3?hl=en)
+- [Kotlin](https://kotlinlang.org/) 100%
+- Reative Programming w/ [Kotlin Flows](https://developer.android.com/kotlin/flow)
+- [Androidx Core SplashScreen](https://developer.android.com/reference/kotlin/androidx/core/splashscreen/SplashScreen)
+- [Androidx Navigation Compose](https://developer.android.com/jetpack/compose/navigation?hl=en)
+- [Retrofit]((https://square.github.io/retrofit/)) and [OkHttp3](https://square.github.io/okhttp/) for Network op.
+- [Spotless](https://github.com/diffplug/spotless) for kotlin code linting
 
 # Game Screenshots:
 
