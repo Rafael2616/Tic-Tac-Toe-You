@@ -30,7 +30,8 @@ jobs:
     - uses: gradle/gradle-build-action@v2.10.0
       with:
         gradle-home-cache-cleanup: true
-        arguments: --build-cache
+        arguments:
+          description: --build-cache
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
@@ -40,7 +41,7 @@ jobs:
 
     # Comment the following lines if you dont want to upload the APK
     - name: Upload APK
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: app-debug
         path: app/build/outputs/apk/debug/app-debug.apk
@@ -64,7 +65,8 @@ jobs:
     - uses: gradle/gradle-build-action@v2.10.0
       with:
         gradle-home-cache-cleanup: true
-        arguments: --build-cache
+        arguments:
+          description: --build-cache
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
