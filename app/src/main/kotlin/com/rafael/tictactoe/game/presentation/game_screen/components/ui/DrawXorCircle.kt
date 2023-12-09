@@ -21,6 +21,7 @@ fun DrawXorCircle(
     cardIndex: Int,
     state: GameState,
     settingsState: SettingsState,
+    modifier: Modifier = Modifier,
 ) {
     val card = state.card
     val isCardClicked = state.isCardClicked
@@ -33,7 +34,7 @@ fun DrawXorCircle(
         exit = fadeOut() + scaleOut(),
     ) {
         Canvas(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxSize(),
         ) {
             if (card[rowIndex][cardIndex]) {

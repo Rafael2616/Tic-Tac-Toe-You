@@ -37,12 +37,13 @@ import com.rafael.tictactoe.game.domain.model.GameEvent
 fun ExitGameDialog(
     navController: NavController,
     onEvent: (GameEvent) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     var isExitClicked by rememberSaveable { mutableStateOf(false) }
 
     Surface(
         color = Color.Black.copy(alpha = 0.3f),
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize(),
     ) {
         Box(

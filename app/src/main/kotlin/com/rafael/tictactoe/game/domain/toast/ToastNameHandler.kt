@@ -15,8 +15,10 @@ import com.rafael.tictactoe.game.presentation.gameScreen.viewmodels.GameViewMode
 import kotlinx.coroutines.delay
 
 @Composable
-fun ToastNameHandler(state: GameState) {
-    val vm = hiltViewModel<GameViewModel>()
+fun ToastNameHandler(
+    state: GameState,
+    vm: GameViewModel = hiltViewModel(),
+) {
     val hasWinner = state.hasWinner
     val gotOld = state.gotOld
     val play = state.play

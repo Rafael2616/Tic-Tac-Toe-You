@@ -55,6 +55,7 @@ import com.rafael.tictactoe.settings.domain.useCases.colorSelectionUseCase
 fun ColorSelectionDialog(
     onEvent: (SettingsEvent) -> Unit,
     state: SettingsState,
+    modifier: Modifier = Modifier,
 ) {
     val type = state.customizationType
     val selectedWinnerLineColor = state.selectedWinnerLineColor
@@ -67,7 +68,7 @@ fun ColorSelectionDialog(
 
     Surface(
         color = Color.Black.copy(alpha = 0.3f),
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize(),
     ) {
         Box(

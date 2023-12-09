@@ -39,13 +39,14 @@ fun RestartButton(
     onEvent: (GameEvent) -> Unit,
     state: GameState,
     settingsState: SettingsState,
+    modifier: Modifier = Modifier,
 ) {
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
     val isCPUMode = state.isCPUMode
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize(),
         contentAlignment = if (isInLandscape) Alignment.TopStart else Alignment.TopEnd,
     ) {

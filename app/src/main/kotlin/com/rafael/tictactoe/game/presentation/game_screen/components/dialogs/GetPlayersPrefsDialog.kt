@@ -88,6 +88,7 @@ fun GetPlayersPrefsDialog(
     onSettingsEvent: (SettingsEvent) -> Unit,
     state: GameState,
     settingsState: SettingsState,
+    modifier: Modifier = Modifier,
 ) {
     val view = LocalView.current
     val focusManager = LocalFocusManager.current
@@ -137,7 +138,7 @@ fun GetPlayersPrefsDialog(
 
     Surface(
         color = Color.Black.copy(alpha = 0.3f),
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .pointerInput(Unit) {
                 detectTapGestures(

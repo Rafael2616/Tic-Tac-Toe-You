@@ -16,7 +16,7 @@ import androidx.navigation.NavController
 import com.rafael.tictactoe.game.domain.checkers.GotOldChecker
 import com.rafael.tictactoe.game.domain.checkers.WinnerChecker
 import com.rafael.tictactoe.game.domain.model.GameEvent
-import com.rafael.tictactoe.game.domain.restart.restartButtonLogic
+import com.rafael.tictactoe.game.domain.restart.RestartButtonLogic
 import com.rafael.tictactoe.game.domain.toast.ToastNameHandler
 import com.rafael.tictactoe.game.presentation.gameScreen.components.buttons.PlayAgainButton
 import com.rafael.tictactoe.game.presentation.gameScreen.components.buttons.RestartButton
@@ -39,9 +39,9 @@ import com.rafael.tictactoe.settings.presentation.settingsScreen.viewmodels.Sett
 fun GameScreen(
     navController: NavController,
     isCPUMode: Boolean,
+    settingsVM: SettingsViewModel = hiltViewModel(),
+    viewModel: GameViewModel = hiltViewModel(),
 ) {
-    val viewModel = hiltViewModel<GameViewModel>()
-    val settingsVM = hiltViewModel<SettingsViewModel>()
     val update by rememberSaveable { mutableStateOf(true) }
     val state by viewModel.state.collectAsState()
     val settingsState by settingsVM.state.collectAsState()
@@ -127,7 +127,7 @@ fun GameScreen(
     }
 
     if (state.play) {
-        restartButtonLogic(viewModel, state)
+        RestartButtonLogic(viewModel, state)
     }
 
     DisposableEffect(key1 = "update") {

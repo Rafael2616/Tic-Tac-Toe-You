@@ -41,6 +41,7 @@ import com.rafael.tictactoe.settings.domain.model.SettingsState
 fun GameStateToast(
     state: GameState,
     settingsState: SettingsState,
+    modifier: Modifier = Modifier,
 ) {
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
@@ -54,7 +55,7 @@ fun GameStateToast(
     val winnerState = if (state.hasWinner) winnerString else ""
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize(),
         contentAlignment = if (isInLandscape) Alignment.TopStart else Alignment.TopCenter,
     ) {

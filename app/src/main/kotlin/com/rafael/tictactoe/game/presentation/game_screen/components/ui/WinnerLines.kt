@@ -24,6 +24,7 @@ import com.rafael.tictactoe.settings.domain.model.SettingsState
 fun WinnerLines(
     state: GameState,
     settingsState: SettingsState,
+    modifier: Modifier = Modifier,
 ) {
     val winningPositionsIndices = state.winningPositionsIndices
     val winnerLineColor = settingsState.winnerLineColor
@@ -33,7 +34,7 @@ fun WinnerLines(
     val lPadding = PaddingValues(start = 8.dp, end = 40.dp, bottom = 8.dp)
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(if (isInLandscape) lPadding else pPadding),
         verticalArrangement = Arrangement.Bottom,

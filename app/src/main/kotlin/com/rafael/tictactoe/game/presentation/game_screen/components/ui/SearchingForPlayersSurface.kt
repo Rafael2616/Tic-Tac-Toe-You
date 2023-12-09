@@ -50,6 +50,7 @@ fun SearchingForPlayersSurface(
     gameState: GameState,
     settingsState: SettingsState,
     onEvent: (GameEvent) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     val requestState = gameState.requestState
 
@@ -59,7 +60,7 @@ fun SearchingForPlayersSurface(
         } else {
             MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp).copy(alpha = 0.5f)
         },
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize(),
     ) {
         Column(

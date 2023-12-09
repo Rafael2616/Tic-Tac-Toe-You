@@ -6,7 +6,7 @@ import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.presentation.gameScreen.viewmodels.GameViewModel
 
 @Composable
-fun restartButtonLogic(vm: GameViewModel, state: GameState) {
+fun RestartButtonLogic(vm: GameViewModel, state: GameState) {
     val isCardClicked = state.isCardClicked
     val isGameFinished = state.isGameFinished
     val play = state.play

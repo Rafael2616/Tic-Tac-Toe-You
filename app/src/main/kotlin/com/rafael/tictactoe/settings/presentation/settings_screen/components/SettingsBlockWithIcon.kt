@@ -51,6 +51,7 @@ import com.rafael.tictactoe.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.domain.model.SettingsState
 import com.rafael.tictactoe.settings.domain.useCases.toggleSettingsUseCase
 import com.rafael.tictactoe.settings.domain.util.ComponentValidator
+import kotlinx.collections.immutable.ImmutableList
 
 @Composable
 fun SettingsBlockWithIcon(
@@ -58,7 +59,8 @@ fun SettingsBlockWithIcon(
     onEvent: (SettingsEvent) -> Unit,
     groupType: SettingsGroup,
     @StringRes groupName: Int,
-    settings: List<SettingItem>,
+    settings: ImmutableList<SettingItem>,
+    modifier: Modifier = Modifier,
 ) {
     val isAboutShown = state.isAboutShown
     val winnerLineColor by animateColorAsState(state.winnerLineColor)
@@ -70,7 +72,7 @@ fun SettingsBlockWithIcon(
     val launcher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { }
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(bottom = 8.dp)
             .animateContentSize(),

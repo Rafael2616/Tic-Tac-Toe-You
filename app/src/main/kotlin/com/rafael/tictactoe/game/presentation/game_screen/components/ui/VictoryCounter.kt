@@ -33,6 +33,7 @@ import com.rafael.tictactoe.settings.domain.model.SettingsState
 fun VictoryCounter(
     state: GameState,
     settingsState: SettingsState,
+    modifier: Modifier = Modifier,
 ) {
     val player1Wins = state.player1Wins
     val player2Wins = state.player2Wins
@@ -43,7 +44,7 @@ fun VictoryCounter(
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize(),
         contentAlignment = if (isInLandscape) Alignment.TopStart else Alignment.TopCenter,
     ) {

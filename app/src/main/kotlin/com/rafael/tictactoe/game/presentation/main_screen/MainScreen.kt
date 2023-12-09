@@ -18,9 +18,9 @@ import com.rafael.tictactoe.settings.presentation.settingsScreen.viewmodels.Sett
 fun MainScreen(
     navController: NavController,
     activity: ComponentActivity,
+    viewModel: GameViewModel = hiltViewModel(),
+    settingsVM: SettingsViewModel = hiltViewModel(),
 ) {
-    val settingsVM = hiltViewModel<SettingsViewModel>()
-    val viewModel = hiltViewModel<GameViewModel>()
     val context = LocalContext.current
     val serviceIntent = Intent(context, MusicService::class.java)
 

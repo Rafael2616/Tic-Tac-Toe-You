@@ -39,6 +39,7 @@ import com.rafael.tictactoe.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.domain.model.SettingsState
 import com.rafael.tictactoe.settings.domain.useCases.toggleSettingsUseCase
 import com.rafael.tictactoe.settings.domain.util.ComponentValidator
+import kotlinx.collections.immutable.ImmutableList
 
 @Composable
 fun SettingsBlockWithSwitch(
@@ -46,7 +47,8 @@ fun SettingsBlockWithSwitch(
     onEvent: (SettingsEvent) -> Unit,
     groupType: SettingsGroup,
     @StringRes groupName: Int,
-    settings: List<SettingItem>,
+    settings: ImmutableList<SettingItem>,
+    modifier: Modifier = Modifier,
 ) {
     val isFollowingSystemOn = state.isFollowingSystemOn
     val componentValidator = ComponentValidator()
@@ -54,7 +56,7 @@ fun SettingsBlockWithSwitch(
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(bottom = 8.dp)
             .animateContentSize(),

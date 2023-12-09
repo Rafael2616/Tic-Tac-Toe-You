@@ -32,12 +32,13 @@ import com.rafael.tictactoe.game.domain.model.GameEvent
 @Composable
 fun VictoryCounterReseterButton(
     onEvent: (GameEvent) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .padding(top = 55.dp, start = 65.dp)
             .fillMaxWidth(if (isInLandscape) 0.48f else 1f),
         contentAlignment = Alignment.TopStart,

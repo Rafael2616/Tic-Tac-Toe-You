@@ -51,6 +51,7 @@ fun MainOptions(
     navController: NavController,
     settingsVM: SettingsViewModel,
     viewModel: GameViewModel,
+    modifier: Modifier = Modifier,
 ) {
     val orientation = LocalConfiguration.current.orientation
     val state by settingsVM.state.collectAsState()
@@ -84,7 +85,7 @@ fun MainOptions(
     )
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(top = if (orientation == Configuration.ORIENTATION_LANDSCAPE) 45.dp else 0.dp),
         verticalArrangement = Arrangement.Center,

@@ -35,13 +35,14 @@ import com.rafael.tictactoe.settings.domain.model.SettingsState
 fun DifficultyLevelIndicator(
     state: GameState,
     settingsState: SettingsState,
+    modifier: Modifier = Modifier,
 ) {
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
     val level = state.cpuDifficultyLevel
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize(),
         contentAlignment = if (isInLandscape) Alignment.TopStart else Alignment.TopEnd,
     ) {

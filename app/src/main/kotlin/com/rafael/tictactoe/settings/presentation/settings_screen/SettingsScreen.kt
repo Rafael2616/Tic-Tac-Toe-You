@@ -16,8 +16,10 @@ import com.rafael.tictactoe.settings.presentation.settingsScreen.viewmodels.Sett
 
 @Composable
 @ExperimentalMaterial3Api
-fun SettingsScreen(navController: NavController) {
-    val settingsVM = hiltViewModel<SettingsViewModel>()
+fun SettingsScreen(
+    navController: NavController,
+    settingsVM: SettingsViewModel = hiltViewModel(),
+) {
     val state by settingsVM.state.collectAsState()
 
     SettingsTopBar(

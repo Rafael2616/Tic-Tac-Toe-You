@@ -24,16 +24,19 @@ import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.domain.victoryCounter.PlayerNamesOnCounterHandler
 
 @Composable
-fun PlayersNamesOnCounter(state: GameState) {
+fun PlayersNamesOnCounter(
+    state: GameState,
+    modifier: Modifier = Modifier,
+) {
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
     val nameOnCounter = PlayerNamesOnCounterHandler()
 
-    nameOnCounter.firstPlayerName(state)
-    nameOnCounter.secondPlayerName(state)
+    nameOnCounter.FirstPlayerName(state)
+    nameOnCounter.SecondPlayerName(state)
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize(),
         contentAlignment = if (isInLandscape) Alignment.TopStart else Alignment.TopCenter,
     ) {

@@ -43,9 +43,10 @@ fun SoundAndMusicButtons(
     onEvent: (GameEvent) -> Unit,
     state: GameState,
     settingsState: SettingsState,
+    modifier: Modifier = Modifier,
 ) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(start = 15.dp, top = 55.dp),
         contentAlignment = Alignment.TopStart,

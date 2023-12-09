@@ -89,9 +89,9 @@ private val DarkColors = darkColorScheme(
 fun AppTheme(
     activity: ComponentActivity,
     isSystemInDarkTheme: Boolean = isSystemInDarkTheme(),
+    viewModel: SettingsViewModel = hiltViewModel(),
     content: @Composable () -> Unit,
 ) {
-    val viewModel = hiltViewModel<SettingsViewModel>()
     val state by viewModel.state.collectAsState()
     val isDarkThemeOn = state.isDarkThemeOn
     val isFollowingSystemOn = state.isFollowingSystemOn

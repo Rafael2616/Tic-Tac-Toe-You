@@ -15,6 +15,7 @@ import com.rafael.tictactoe.settings.domain.model.SettingsState
 fun ToastImageHandler(
     state: GameState,
     settingsState: SettingsState,
+    modifier: Modifier = Modifier,
 ) {
     val xColor by animateColorAsState(settingsState.xColor)
     val circleColor by animateColorAsState(settingsState.circleColor)
@@ -25,7 +26,7 @@ fun ToastImageHandler(
     val isXImage = state.isXImage
 
     Canvas(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize(),
     ) {
         // Image showed when game not started yet (configuration fase)

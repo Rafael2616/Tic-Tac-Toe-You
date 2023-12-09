@@ -19,9 +19,9 @@ import androidx.compose.ui.unit.sp
 import com.rafael.tictactoe.R
 
 @Composable
-fun MainTopBar() {
+fun MainTopBar(modifier: Modifier = Modifier) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .statusBarsPadding()
             .padding(top = 10.dp),

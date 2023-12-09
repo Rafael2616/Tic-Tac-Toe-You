@@ -37,12 +37,13 @@ import com.rafael.tictactoe.settings.domain.model.SettingsState
 fun PlayAgainButton(
     onEvent: (GameEvent) -> Unit,
     settingsState: SettingsState,
+    modifier: Modifier = Modifier,
 ) {
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize(),
         contentAlignment = if (isInLandscape) Alignment.TopStart else Alignment.TopCenter,
     ) {

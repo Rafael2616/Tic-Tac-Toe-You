@@ -26,7 +26,10 @@ import com.rafael.tictactoe.settings.presentation.settingsScreen.SettingsScreen
 
 @Composable
 @ExperimentalMaterial3Api
-fun TicTacToe(context: ComponentActivity) {
+fun TicTacToe(
+    context: ComponentActivity,
+    modifier: Modifier = Modifier,
+) {
     val navController = rememberNavController()
     val enterTransition = fadeIn(
         animationSpec = tween(
@@ -44,7 +47,7 @@ fun TicTacToe(context: ComponentActivity) {
     AppTheme(context) {
         Surface(
             color = MaterialTheme.colorScheme.background,
-            modifier = Modifier.fillMaxSize(),
+            modifier = modifier.fillMaxSize(),
         ) {
             NavHost(
                 navController = navController,

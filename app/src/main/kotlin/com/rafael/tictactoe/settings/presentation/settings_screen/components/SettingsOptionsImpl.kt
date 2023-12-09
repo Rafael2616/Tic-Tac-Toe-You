@@ -31,12 +31,15 @@ import com.rafael.tictactoe.settings.domain.enums.SettingsGroup
 import com.rafael.tictactoe.settings.domain.model.SettingItem
 import com.rafael.tictactoe.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.domain.model.SettingsState
+import kotlinx.collections.immutable.toImmutableList
+import kotlinx.collections.immutable.toPersistentList
 
 @Composable
 fun SettingsOptionsImpl(
     livePadding: PaddingValues,
     onEvent: (SettingsEvent) -> Unit,
     state: SettingsState,
+    modifier: Modifier = Modifier,
 ) {
     val themeSettings = mutableStateListOf(
         // Follow System
@@ -108,7 +111,7 @@ fun SettingsOptionsImpl(
     )
 
     LazyColumn(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(livePadding)
             .animateContentSize(),
@@ -122,28 +125,28 @@ fun SettingsOptionsImpl(
                     onEvent = onEvent,
                     groupType = SettingsGroup.Theme,
                     groupName = R.string.group_theme,
-                    settings = themeSettings,
+                    settings = themeSettings.toPersistentList(),
                 )
                 SettingsGroup.Sound -> SettingsBlockWithSwitch(
                     state = state,
                     onEvent = onEvent,
                     groupType = SettingsGroup.Sound,
                     groupName = R.string.group_sound,
-                    settings = soundSettings,
+                    settings = soundSettings.toPersistentList(),
                 )
                 SettingsGroup.Customization -> SettingsBlockWithIcon(
                     state = state,
                     onEvent = onEvent,
                     groupType = SettingsGroup.Customization,
                     groupName = R.string.group_customization,
-                    settings = customizationSettings,
+                    settings = customizationSettings.toPersistentList(),
                 )
                 SettingsGroup.Others -> SettingsBlockWithIcon(
                     state = state,
                     onEvent = onEvent,
                     groupType = SettingsGroup.Others,
                     groupName = R.string.group_others,
-                    settings = otherSettings,
+                    settings = otherSettings.toPersistentList(),
                 )
             }
         }

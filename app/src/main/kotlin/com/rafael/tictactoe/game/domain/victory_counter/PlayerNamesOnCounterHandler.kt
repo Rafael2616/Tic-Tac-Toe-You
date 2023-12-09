@@ -11,8 +11,10 @@ import com.rafael.tictactoe.game.presentation.gameScreen.viewmodels.GameViewMode
 class PlayerNamesOnCounterHandler() {
 
     @Composable
-    fun firstPlayerName(state: GameState) {
-        val vm = hiltViewModel<GameViewModel>()
+    fun FirstPlayerName(
+        state: GameState,
+        vm: GameViewModel = hiltViewModel(),
+    ) {
         val context = LocalContext.current
         val isXFor1 = state.isXFor1
         val player1Name = state.player1Name
@@ -75,8 +77,7 @@ class PlayerNamesOnCounterHandler() {
     }
 
     @Composable
-    fun secondPlayerName(state: GameState) {
-        val vm = hiltViewModel<GameViewModel>()
+    fun SecondPlayerName(state: GameState, vm: GameViewModel = hiltViewModel()) {
         val context = LocalContext.current
         val isXFor1 = state.isXFor1
         val player1Name = state.player1Name
