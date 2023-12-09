@@ -77,7 +77,10 @@ class PlayerNamesOnCounterHandler() {
     }
 
     @Composable
-    fun SecondPlayerName(state: GameState, vm: GameViewModel = hiltViewModel()) {
+    fun SecondPlayerName(
+        state: GameState,
+        vm: GameViewModel = hiltViewModel(),
+    ) {
         val context = LocalContext.current
         val isXFor1 = state.isXFor1
         val player1Name = state.player1Name
