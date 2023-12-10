@@ -22,7 +22,6 @@ import androidx.compose.material.icons.outlined.MusicNote
 import androidx.compose.material.icons.outlined.MusicOff
 import androidx.compose.material.icons.outlined.Palette
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.rafael.tictactoe.R
@@ -31,7 +30,7 @@ import com.rafael.tictactoe.settings.domain.enums.SettingsGroup
 import com.rafael.tictactoe.settings.domain.model.SettingItem
 import com.rafael.tictactoe.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.domain.model.SettingsState
-import kotlinx.collections.immutable.toPersistentList
+import kotlinx.collections.immutable.persistentListOf
 
 @Composable
 fun SettingsOptionsImpl(
@@ -40,7 +39,7 @@ fun SettingsOptionsImpl(
     state: SettingsState,
     modifier: Modifier = Modifier,
 ) {
-    val themeSettings = mutableStateListOf(
+    val themeSettings = persistentListOf(
         // Follow System
         SettingItem(
             leadingIcon = Icons.Outlined.BrightnessMedium,
@@ -61,7 +60,7 @@ fun SettingsOptionsImpl(
         ),
     )
 
-    val soundSettings = mutableStateListOf(
+    val soundSettings = persistentListOf(
         // Sound Effects
         SettingItem(
             leadingIcon = if (state.isSoundEffectsOn) Icons.Outlined.MusicNote else Icons.Outlined.MusicOff,
@@ -76,7 +75,7 @@ fun SettingsOptionsImpl(
         ),
     )
 
-    val customizationSettings = mutableStateListOf(
+    val customizationSettings = persistentListOf(
         // Winner Line Color
         SettingItem(
             text = R.string.winner_line_color,
@@ -94,7 +93,7 @@ fun SettingsOptionsImpl(
         ),
     )
 
-    val otherSettings = mutableStateListOf(
+    val otherSettings = persistentListOf(
         // About App
         SettingItem(
             leadingIcon = Icons.Outlined.Info,
@@ -124,28 +123,28 @@ fun SettingsOptionsImpl(
                     onEvent = onEvent,
                     groupType = SettingsGroup.Theme,
                     groupName = R.string.group_theme,
-                    settings = themeSettings.toPersistentList(),
+                    settings = themeSettings,
                 )
                 SettingsGroup.Sound -> SettingsBlockWithSwitch(
                     state = state,
                     onEvent = onEvent,
                     groupType = SettingsGroup.Sound,
                     groupName = R.string.group_sound,
-                    settings = soundSettings.toPersistentList(),
+                    settings = soundSettings,
                 )
                 SettingsGroup.Customization -> SettingsBlockWithIcon(
                     state = state,
                     onEvent = onEvent,
                     groupType = SettingsGroup.Customization,
                     groupName = R.string.group_customization,
-                    settings = customizationSettings.toPersistentList(),
+                    settings = customizationSettings,
                 )
                 SettingsGroup.Others -> SettingsBlockWithIcon(
                     state = state,
                     onEvent = onEvent,
                     groupType = SettingsGroup.Others,
                     groupName = R.string.group_others,
-                    settings = otherSettings.toPersistentList(),
+                    settings = otherSettings,
                 )
             }
         }
