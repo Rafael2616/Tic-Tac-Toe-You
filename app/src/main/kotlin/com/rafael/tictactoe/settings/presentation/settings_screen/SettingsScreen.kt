@@ -52,7 +52,7 @@ fun SettingsScreen(
         if (state.showWhatsNewDialog) {
             settingsVM.onEvent(SettingsEvent.HideWhatsNewDialog)
         }
-        if (!state.showWhatsNewDialog || !state.showColorSelectionDialog) {
+        if (!state.showWhatsNewDialog && !state.showColorSelectionDialog) {
             navController.popBackStack()
         }
     }
