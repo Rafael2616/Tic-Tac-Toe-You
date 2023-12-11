@@ -9,6 +9,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.rafael.tictactoe.game.presentation.mainScreen.components.WhatsNewDialog
 import com.rafael.tictactoe.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.presentation.settingsScreen.components.ColorSelectionDialog
 import com.rafael.tictactoe.settings.presentation.settingsScreen.components.SettingsTopBar
@@ -32,6 +33,12 @@ fun SettingsScreen(
         ColorSelectionDialog(settingsVM::onEvent, state)
     }
 
+    AnimatedVisibility(state.showWhatsNewDialog) {
+        WhatsNewDialog(
+            settingsVM::onEvent,
+        )
+    }
+
     DisposableEffect(Unit) {
         onDispose {
             settingsVM.onEvent(SettingsEvent.OnSettingsScreenDestroyment)
@@ -41,7 +48,11 @@ fun SettingsScreen(
     BackHandler {
         if (state.showColorSelectionDialog) {
             settingsVM.onEvent(SettingsEvent.ShowColorSelectionDialog(false))
-        } else {
+        }
+        if (state.showWhatsNewDialog) {
+            settingsVM.onEvent(SettingsEvent.HideWhatsNewDialog)
+        }
+        if (!state.showWhatsNewDialog || !state.showColorSelectionDialog) {
             navController.popBackStack()
         }
     }

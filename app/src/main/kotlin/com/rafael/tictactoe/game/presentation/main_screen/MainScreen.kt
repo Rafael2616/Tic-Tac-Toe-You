@@ -3,7 +3,10 @@ package com.rafael.tictactoe.game.presentation.mainScreen
 import android.content.Intent
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -11,6 +14,7 @@ import com.rafael.tictactoe.common.services.MusicService
 import com.rafael.tictactoe.game.presentation.gameScreen.viewmodels.GameViewModel
 import com.rafael.tictactoe.game.presentation.mainScreen.components.MainOptions
 import com.rafael.tictactoe.game.presentation.mainScreen.components.MainTopBar
+import com.rafael.tictactoe.game.presentation.mainScreen.components.WhatsNewDialog
 import com.rafael.tictactoe.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.presentation.settingsScreen.viewmodels.SettingsViewModel
 
@@ -23,6 +27,7 @@ fun MainScreen(
 ) {
     val context = LocalContext.current
     val serviceIntent = Intent(context, MusicService::class.java)
+    val state by settingsVM.state.collectAsState()
 
     MainTopBar()
     MainOptions(
@@ -30,6 +35,11 @@ fun MainScreen(
         settingsVM,
         viewModel,
     )
+    AnimatedVisibility(state.showWhatsNewDialog) {
+        WhatsNewDialog(
+            settingsVM::onEvent,
+        )
+    }
 
     BackHandler {
         settingsVM.onEvent(SettingsEvent.IsBGMusicPlaying(false))

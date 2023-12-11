@@ -20,6 +20,7 @@ import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.LightMode
 import androidx.compose.material.icons.outlined.MusicNote
 import androidx.compose.material.icons.outlined.MusicOff
+import androidx.compose.material.icons.outlined.NewReleases
 import androidx.compose.material.icons.outlined.Palette
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -105,6 +106,12 @@ fun SettingsOptionsImpl(
             leadingIcon = Icons.Rounded.Github,
             text = R.string.view_on_github,
             trailingIcon = Icons.Filled.ArrowOutward,
+        ),
+        // What's New
+        SettingItem(
+            leadingIcon = Icons.Outlined.NewReleases,
+            text = R.string.whats_new,
+            trailingIcon = Icons.AutoMirrored.Filled.ArrowForward,
         ),
     )
 

@@ -5,6 +5,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.media3.exoplayer.ExoPlayer
+import com.rafael.tictactoe.common.domain.util.getVersionName
 import com.rafael.tictactoe.common.domain.util.uiClickSound
 import com.rafael.tictactoe.common.services.MusicService
 import com.rafael.tictactoe.game.domain.audio.backgroundMusic
@@ -52,6 +53,12 @@ class SettingsViewModel @Inject constructor(
                     winnerLineColor = Color(settings.selectedWinnerLineColor),
                     xColor = Color(settings.selectedXColor),
                     circleColor = Color(settings.selectedCircleColor),
+                    appVersion = settings.appVersion,
+                    showWhatsNewDialog = if (settings.appVersion == "O" || settings.appVersion != getVersionName()) {
+                        true
+                    } else {
+                        false
+                    },
                 )
             }
         }
@@ -196,6 +203,17 @@ class SettingsViewModel @Inject constructor(
             }
             is SettingsEvent.IsBGMusicPlaying -> {
                 _state.update { it.copy(isBMPlaying = event.value) }
+            }
+            SettingsEvent.HideWhatsNewDialog -> {
+                _state.update { it.copy(showWhatsNewDialog = false) }
+                viewModelScope.launch(Dispatchers.IO) {
+                    var settings = repository.getAllSettingsValues(1) ?: defaultSettings
+                    settings.appVersion = getVersionName()
+                    repository.setAllSettingsValues(settings)
+                }
+            }
+            SettingsEvent.ShowWhatsNewDialog -> {
+                _state.update { it.copy(showWhatsNewDialog = true) }
             }
         }
     }

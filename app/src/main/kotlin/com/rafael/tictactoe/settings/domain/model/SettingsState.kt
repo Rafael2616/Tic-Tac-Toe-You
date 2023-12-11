@@ -1,6 +1,7 @@
 package com.rafael.tictactoe.settings.domain.model
 
 import androidx.compose.ui.graphics.Color
+import com.rafael.tictactoe.common.domain.util.getVersionName
 import com.rafael.tictactoe.settings.domain.enums.Colors
 import com.rafael.tictactoe.settings.domain.enums.Customization
 
@@ -21,4 +22,6 @@ data class SettingsState(
     val selectedCircleColor: Int = 5,
     val isBMPlaying: Boolean = false,
     val customizationType: Customization = Customization.XCOLOR,
+    val appVersion: String = getVersionName(),
+    val showWhatsNewDialog: Boolean = false,
 )

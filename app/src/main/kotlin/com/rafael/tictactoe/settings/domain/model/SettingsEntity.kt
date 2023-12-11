@@ -15,6 +15,7 @@ data class SettingsEntity(
     var selectedWinnerLineColor: Int,
     var selectedXColor: Int,
     var selectedCircleColor: Int,
+    var appVersion: String,
 ) {
     companion object {
         fun getDefaultSettings(): SettingsEntity {
@@ -28,6 +29,7 @@ data class SettingsEntity(
                 selectedWinnerLineColor = 2,
                 selectedXColor = 1,
                 selectedCircleColor = 5,
+                appVersion = "0",
             )
         }
     }

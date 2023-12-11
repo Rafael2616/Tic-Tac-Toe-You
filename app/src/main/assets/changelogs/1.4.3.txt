@@ -1,0 +1,17 @@
+Added:
+- In app what's new changelog dialog
+- GitHub repo link in settings
+
+Improvements:
+- fix laggy settings scroll
+
+Code:
+- Added Spotless dep. to lint Kotlin
+code style
+- Added nlopez.compose.rules to lint Compose
+code
+- Improve CIs
+- Bumb all deps to their latest versions
+
+Full changelog at:
+https://github.com/Rafael2616/Tic-Tac-Toe-You/actions

@@ -46,6 +46,7 @@ fun toggleSettingsUseCase(
         when (index) {
             0 -> onEvent(SettingsEvent.ShowAboutAppCard(!state.isAboutShown))
             1 -> launcher!!.launch(githubRepoIntent)
+            2 -> onEvent(SettingsEvent.ShowWhatsNewDialog)
         }
     }
 
