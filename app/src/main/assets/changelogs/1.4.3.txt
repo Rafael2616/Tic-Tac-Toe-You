@@ -6,6 +6,9 @@ Added:
 Improvements:
 - fix laggy settings scroll
 
+Fixes:
+- The app no longer will crash when we have database schema changes
+
 Code:
 - Added Spotless dep. to lint Kotlin code style
 - Added nlopez.compose.rules to lint Compose code

@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.room.Room
 import com.rafael.tictactoe.common.services.MusicService
+import com.rafael.tictactoe.settings.data.database.Migrations
 import com.rafael.tictactoe.settings.data.database.SettingsDatabase
 import com.rafael.tictactoe.settings.data.repository.SettingsRepositoryImpl
 import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
@@ -25,7 +26,9 @@ object SettingsModule {
             context,
             SettingsDatabase::class.java,
             SettingsDatabase.DATABASE_NAME,
-        ).build()
+        ).addMigrations(Migrations().migration1To2)
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
     @Provides
