@@ -99,7 +99,7 @@ fun SettingsBlockWithIcon(
         ) {
             settings.forEachIndexed { index, setting ->
                 val rowHeight by animateDpAsState(
-                    if (groupType == SettingsGroup.Others && index == 0 && isAboutShown) 150.dp else 60.dp,
+                    if (groupType == SettingsGroup.Others && index == 0 && isAboutShown) 130.dp else 60.dp,
                 )
                 Row(
                     horizontalArrangement = Arrangement.SpaceBetween,
@@ -182,14 +182,18 @@ fun SettingsBlockWithIcon(
                             .wrapContentSize()
                             .animateContentSize(),
                         verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally,
+                        horizontalAlignment = Alignment.Start,
                     ) {
                         Text(
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onSurface,
                             text = stringResource(setting.text),
-                            modifier = Modifier.width(220.dp),
-                            textAlign = TextAlign.Center,
+                            modifier = Modifier.width(245.dp),
+                            textAlign = if (componentValidator.validateSubText(groupType, index, isAboutShown)) {
+                                TextAlign.Center
+                            } else {
+                                TextAlign.Start
+                            },
                         )
                         if (componentValidator.validateSubText(groupType, index, isAboutShown)) {
                             Text(
@@ -198,9 +202,8 @@ fun SettingsBlockWithIcon(
                                 text = stringResource(R.string.app_version) + " " + getVersionName() + "(" + getVersionCode() + ")",
                                 textAlign = TextAlign.Center,
                                 modifier = Modifier
-                                    .width(220.dp)
+                                    .width(245.dp)
                                     .padding(top = 8.dp),
-
                             )
                         }
                     }

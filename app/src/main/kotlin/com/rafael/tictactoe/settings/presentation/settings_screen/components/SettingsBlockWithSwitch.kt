@@ -117,7 +117,7 @@ fun SettingsBlockWithSwitch(
                             color = MaterialTheme.colorScheme.onSurface,
                             text = stringResource(setting.text),
                             modifier = Modifier.width(220.dp),
-                            textAlign = TextAlign.Center,
+                            textAlign = TextAlign.Start,
                         )
                         Switch(
                             modifier = Modifier.padding(end = 10.dp),
