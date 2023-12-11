@@ -61,6 +61,14 @@ class SettingsViewModel @Inject constructor(
                     },
                 )
             }
+            backgroundMusic(
+                context = context,
+                isBMPlaying = state.value.isBMPlaying,
+                isBackgroundMusicOn = settings.isBackgroundMusicOn,
+                onEvent = ::onEvent,
+                service = service,
+                isAppInOnStop = false,
+            )
         }
     }
 
