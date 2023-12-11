@@ -107,7 +107,8 @@ fun WhatsNewDialog(
                         color = MaterialTheme.colorScheme.inverseSurface,
                         textAlign = TextAlign.Start,
                         modifier = Modifier
-                            .fillMaxWidth(),
+                            .fillMaxWidth()
+                            .padding(5.dp),
                     )
                 }
                 Box(

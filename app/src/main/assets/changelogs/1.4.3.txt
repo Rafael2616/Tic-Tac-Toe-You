@@ -1,15 +1,14 @@
 Added:
 - In app what's new changelog dialog
 - GitHub repo link in settings
+- Whats New access via settings
 
 Improvements:
 - fix laggy settings scroll
 
 Code:
-- Added Spotless dep. to lint Kotlin
-code style
-- Added nlopez.compose.rules to lint Compose
-code
+- Added Spotless dep. to lint Kotlin code style
+- Added nlopez.compose.rules to lint Compose code
 - Improve CIs
 - Bumb all deps to their latest versions
 
