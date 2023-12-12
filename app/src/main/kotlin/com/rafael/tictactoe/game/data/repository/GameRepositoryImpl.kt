@@ -68,16 +68,8 @@ class GameRepositoryImpl @Inject constructor(
             val response = gameService.postPlayer(
                 Player(
                     id = state.matchID,
-                    name = if (state.localPlayer1) {
-                        state.player1Name
-                    } else {
-                        state.player2Name
-                    },
-                    color = if (state.isXFor1) {
-                        settingsState.xColor
-                    } else {
-                        settingsState.circleColor
-                    },
+                    name = if (state.localPlayer1) state.player1Name else state.player2Name,
+                    color = if (state.isXFor1) settingsState.xColor else settingsState.circleColor,
                     isXImage = state.isXImage,
                     isPlayer1 = state.isYouPlayer1,
                 ),

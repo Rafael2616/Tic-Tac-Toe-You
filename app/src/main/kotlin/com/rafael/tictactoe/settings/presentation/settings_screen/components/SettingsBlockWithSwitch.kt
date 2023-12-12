@@ -115,7 +115,7 @@ fun SettingsBlockWithSwitch(
                                 imageVector = setting.leadingIcon!!,
                                 contentDescription = "Icon",
                                 modifier = Modifier
-                                    .size(35.dp),
+                                    .size(32.dp),
                             )
                             Text(
                                 style = MaterialTheme.typography.titleMedium,

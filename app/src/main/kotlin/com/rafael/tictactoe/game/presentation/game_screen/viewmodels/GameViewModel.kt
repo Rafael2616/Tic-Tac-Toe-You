@@ -22,6 +22,7 @@ import com.rafael.tictactoe.settings.presentation.settingsScreen.viewmodels.Sett
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -101,7 +102,7 @@ class GameViewModel @Inject constructor(
                         )
                     }
                 } else {
-                    val randomicID = (1 until 99999).random()
+                    val randomicID = (1 until 999999).random()
                     _state.update {
                         it.copy(
                             showSearchForPlayersSurface = true,
@@ -228,6 +229,7 @@ class GameViewModel @Inject constructor(
                         _state.update { it.copy(secondPlayer = possiblePlayers[randomPlayer]) }
                     }
                     _state.update { it.copy(requestState = response.second) }
+                    this.cancel()
                 }
             }
             GameEvent.PostRemotePlayer -> {

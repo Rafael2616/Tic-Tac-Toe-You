@@ -127,7 +127,7 @@ fun SettingsBlockWithIcon(
                                 imageVector = setting.leadingIcon,
                                 contentDescription = "Icon",
                                 modifier = Modifier
-                                    .size(35.dp),
+                                    .size(32.dp),
                             )
                         }
                         if (componentValidator.validateCanvas(groupType)) {
@@ -135,7 +135,7 @@ fun SettingsBlockWithIcon(
                                 modifier = Modifier
                                     .clip(CircleShape)
                                     .background(Color.Black.copy(alpha = 0.12f))
-                                    .size(35.dp)
+                                    .size(32.dp)
                                     .align(Alignment.CenterVertically),
                                 contentAlignment = Alignment.Center,
                             ) {
@@ -181,7 +181,7 @@ fun SettingsBlockWithIcon(
                         }
                         Column(
                             modifier = Modifier
-                                .width(if (isInLandscape) 320.dp else 240.dp)
+                                .width(if (isInLandscape) 350.dp else 240.dp)
                                 .padding(start = 16.dp, end = 10.dp)
                                 .animateContentSize(),
                             verticalArrangement = Arrangement.Center,
@@ -215,7 +215,7 @@ fun SettingsBlockWithIcon(
                                 imageVector = setting.trailingIcon!!,
                                 contentDescription = "Icon",
                                 modifier = Modifier
-                                    .size(35.dp),
+                                    .size(32.dp),
                             )
                         }
                     }

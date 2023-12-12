@@ -1,11 +1,11 @@
 Added:
-- In app what's new changelog dialog
+- In app 'what's new' changelog dialog
 - GitHub repo link in settings
-- Whats New access via settings
+- 'Whats new' access via settings
 
 Improvements:
 - fix laggy settings scroll
-- Settings now have a alignment feom start
+- Settings now have a alignment from start
 
 Fixes:
 - The app no longer will crash when we have database schema changes
