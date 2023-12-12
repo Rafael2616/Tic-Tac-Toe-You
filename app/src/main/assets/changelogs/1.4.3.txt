@@ -5,6 +5,7 @@ Added:
 
 Improvements:
 - fix laggy settings scroll
+- Settings now have a alignment feom start
 
 Fixes:
 - The app no longer will crash when we have database schema changes

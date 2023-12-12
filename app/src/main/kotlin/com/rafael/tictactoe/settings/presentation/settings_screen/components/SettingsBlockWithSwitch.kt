@@ -5,6 +5,7 @@ import androidx.annotation.StringRes
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -89,12 +90,10 @@ fun SettingsBlockWithSwitch(
                         isFollowingSystemOn,
                     )
                 ) {
-                    Row(
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically,
+                    Box(
                         modifier = Modifier
                             .height(60.dp)
-                            .fillMaxSize()
+                            .fillMaxWidth()
                             .clickable {
                                 toggleSettingsUseCase(
                                     null,
@@ -105,42 +104,56 @@ fun SettingsBlockWithSwitch(
                                 )
                             },
                     ) {
-                        Icon(
-                            imageVector = setting.leadingIcon!!,
-                            contentDescription = "Icon",
+                        Row(
+                            horizontalArrangement = Arrangement.Start,
+                            verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier
-                                .size(42.dp)
-                                .padding(start = 10.dp),
-                        )
-                        Text(
-                            style = MaterialTheme.typography.titleMedium,
-                            color = MaterialTheme.colorScheme.onSurface,
-                            text = stringResource(setting.text),
-                            modifier = Modifier.width(220.dp),
-                            textAlign = TextAlign.Start,
-                        )
-                        Switch(
-                            modifier = Modifier.padding(end = 10.dp),
-                            checked = setting.isChecked!!,
-                            onCheckedChange = {
-                                toggleSettingsUseCase(
-                                    null,
-                                    groupType,
-                                    index,
-                                    state,
-                                    onEvent,
+                                .fillMaxSize()
+                                .padding(horizontal = 10.dp),
+                        ) {
+                            Icon(
+                                imageVector = setting.leadingIcon!!,
+                                contentDescription = "Icon",
+                                modifier = Modifier
+                                    .size(35.dp),
+                            )
+                            Text(
+                                style = MaterialTheme.typography.titleMedium,
+                                color = MaterialTheme.colorScheme.onSurface,
+                                text = stringResource(setting.text),
+                                modifier = Modifier
+                                    .width(220.dp)
+                                    .padding(start = 16.dp, end = 10.dp),
+                                textAlign = TextAlign.Start,
+                            )
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxSize(),
+                                contentAlignment = Alignment.CenterEnd,
+                            ) {
+                                Switch(
+                                    checked = setting.isChecked!!,
+                                    onCheckedChange = {
+                                        toggleSettingsUseCase(
+                                            null,
+                                            groupType,
+                                            index,
+                                            state,
+                                            onEvent,
+                                        )
+                                    },
+                                    thumbContent = {
+                                        if (setting.isChecked) {
+                                            Icon(
+                                                imageVector = Icons.Filled.Check,
+                                                contentDescription = "Setting Switcher",
+                                                modifier = Modifier.size(SwitchDefaults.IconSize),
+                                            )
+                                        }
+                                    },
                                 )
-                            },
-                            thumbContent = {
-                                if (setting.isChecked) {
-                                    Icon(
-                                        imageVector = Icons.Filled.Check,
-                                        contentDescription = "Setting Switcher",
-                                        modifier = Modifier.size(SwitchDefaults.IconSize),
-                                    )
-                                }
-                            },
-                        )
+                            }
+                        }
                     }
                     if ((index < (settings.size - 1)) && componentValidator.validateDivider(
                             groupType,

@@ -20,7 +20,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -101,13 +100,10 @@ fun SettingsBlockWithIcon(
                 val rowHeight by animateDpAsState(
                     if (groupType == SettingsGroup.Others && index == 0 && isAboutShown) 130.dp else 60.dp,
                 )
-                Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
+                Box(
                     modifier = Modifier
                         .height(rowHeight)
-                        .animateContentSize()
-                        .fillMaxSize()
+                        .fillMaxWidth()
                         .clickable {
                             toggleSettingsUseCase(
                                 launcher,
@@ -118,102 +114,111 @@ fun SettingsBlockWithIcon(
                             )
                         },
                 ) {
-                    if (setting.leadingIcon != null) {
-                        Icon(
-                            imageVector = setting.leadingIcon,
-                            contentDescription = "Icon",
-                            modifier = Modifier
-                                .size(42.dp)
-                                .padding(start = 10.dp),
-                        )
-                    }
-                    if (componentValidator.validateCanvas(groupType)) {
-                        Box(
-                            modifier = Modifier
-                                .padding(start = 6.dp)
-                                .clip(CircleShape)
-                                .background(Color.Black.copy(alpha = 0.12f))
-                                .size(40.dp)
-                                .align(Alignment.CenterVertically),
-                            contentAlignment = Alignment.Center,
-                        ) {
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier
+                            .animateContentSize()
+                            .fillMaxSize()
+                            .padding(horizontal = 10.dp),
+                    ) {
+                        if (setting.leadingIcon != null) {
+                            Icon(
+                                imageVector = setting.leadingIcon,
+                                contentDescription = "Icon",
+                                modifier = Modifier
+                                    .size(35.dp),
+                            )
+                        }
+                        if (componentValidator.validateCanvas(groupType)) {
                             Box(
-                                modifier = Modifier.size(24.dp),
+                                modifier = Modifier
+                                    .clip(CircleShape)
+                                    .background(Color.Black.copy(alpha = 0.12f))
+                                    .size(35.dp)
+                                    .align(Alignment.CenterVertically),
                                 contentAlignment = Alignment.Center,
                             ) {
-                                Canvas(
-                                    modifier = Modifier
-                                        .fillMaxSize(),
+                                Box(
+                                    modifier = Modifier.size(24.dp),
+                                    contentAlignment = Alignment.Center,
                                 ) {
-                                    when (index) {
-                                        0 -> drawLine(
-                                            strokeWidth = 5.dp.toPx(),
-                                            start = Offset(x = 24.dp.toPx(), y = 0.dp.toPx()),
-                                            end = Offset(x = 0.dp.toPx(), y = 24.dp.toPx()),
-                                            color = winnerLineColor,
-                                        )
-                                        1 -> drawCircle(
-                                            center = Offset(12.dp.toPx(), 12.dp.toPx()),
-                                            radius = 12.dp.toPx(),
-                                            style = Stroke(width = 5.dp.toPx()),
-                                            color = circleColor,
-                                        )
-                                        2 -> {
-                                            drawLine(
-                                                strokeWidth = 5.dp.toPx(),
-                                                start = Offset(x = 0.dp.toPx(), y = 0.dp.toPx()),
-                                                end = Offset(x = 24.dp.toPx(), y = 24.dp.toPx()),
-                                                color = xColor,
-                                            )
-                                            drawLine(
+                                    Canvas(
+                                        modifier = Modifier
+                                            .fillMaxSize(),
+                                    ) {
+                                        when (index) {
+                                            0 -> drawLine(
                                                 strokeWidth = 5.dp.toPx(),
                                                 start = Offset(x = 24.dp.toPx(), y = 0.dp.toPx()),
                                                 end = Offset(x = 0.dp.toPx(), y = 24.dp.toPx()),
-                                                color = xColor,
+                                                color = winnerLineColor,
                                             )
+                                            1 -> drawCircle(
+                                                center = Offset(12.dp.toPx(), 12.dp.toPx()),
+                                                radius = 12.dp.toPx(),
+                                                style = Stroke(width = 5.dp.toPx()),
+                                                color = circleColor,
+                                            )
+                                            2 -> {
+                                                drawLine(
+                                                    strokeWidth = 5.dp.toPx(),
+                                                    start = Offset(x = 0.dp.toPx(), y = 0.dp.toPx()),
+                                                    end = Offset(x = 24.dp.toPx(), y = 24.dp.toPx()),
+                                                    color = xColor,
+                                                )
+                                                drawLine(
+                                                    strokeWidth = 5.dp.toPx(),
+                                                    start = Offset(x = 24.dp.toPx(), y = 0.dp.toPx()),
+                                                    end = Offset(x = 0.dp.toPx(), y = 24.dp.toPx()),
+                                                    color = xColor,
+                                                )
+                                            }
                                         }
                                     }
                                 }
                             }
                         }
-                    }
-                    Column(
-                        modifier = Modifier
-                            .wrapContentSize()
-                            .animateContentSize(),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.Start,
-                    ) {
-                        Text(
-                            style = MaterialTheme.typography.titleMedium,
-                            color = MaterialTheme.colorScheme.onSurface,
-                            text = stringResource(setting.text),
-                            modifier = Modifier.width(245.dp),
-                            textAlign = if (componentValidator.validateSubText(groupType, index, isAboutShown)) {
-                                TextAlign.Center
-                            } else {
-                                TextAlign.Start
-                            },
-                        )
-                        if (componentValidator.validateSubText(groupType, index, isAboutShown)) {
+                        Column(
+                            modifier = Modifier
+                                .width(if (isInLandscape) 320.dp else 240.dp)
+                                .padding(start = 16.dp, end = 10.dp)
+                                .animateContentSize(),
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.Start,
+                        ) {
                             Text(
-                                style = MaterialTheme.typography.bodyMedium,
+                                style = MaterialTheme.typography.titleMedium,
                                 color = MaterialTheme.colorScheme.onSurface,
-                                text = stringResource(R.string.app_version) + " " + getVersionName() + "(" + getVersionCode() + ")",
-                                textAlign = TextAlign.Center,
+                                text = stringResource(setting.text),
+                                modifier = Modifier.fillMaxWidth(),
+                                textAlign = TextAlign.Start,
+                            )
+                            if (componentValidator.validateSubText(groupType, index, isAboutShown)) {
+                                Text(
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.onSurface,
+                                    text = stringResource(R.string.app_version) + " " + getVersionName() + "(" + getVersionCode() + ")",
+                                    textAlign = TextAlign.Start,
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(top = 8.dp),
+                                )
+                            }
+                        }
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize(),
+                            contentAlignment = Alignment.CenterEnd,
+                        ) {
+                            Icon(
+                                imageVector = setting.trailingIcon!!,
+                                contentDescription = "Icon",
                                 modifier = Modifier
-                                    .width(245.dp)
-                                    .padding(top = 8.dp),
+                                    .size(35.dp),
                             )
                         }
                     }
-                    Icon(
-                        imageVector = setting.trailingIcon!!,
-                        contentDescription = "Icon",
-                        modifier = Modifier
-                            .size(42.dp)
-                            .padding(end = 10.dp),
-                    )
                 }
                 if (index < (settings.size - 1)) {
                     HorizontalDivider(
