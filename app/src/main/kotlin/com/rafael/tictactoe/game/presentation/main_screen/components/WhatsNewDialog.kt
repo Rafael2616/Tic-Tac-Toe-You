@@ -44,7 +44,8 @@ fun WhatsNewDialog(
     onEvent: (SettingsEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val versionNumber = getVersionName().split("-")[0]
+    val version = getVersionName()
+    val versionNumber = if (version.contains("-")) version.split("-")[0] else version
     val context = LocalContext.current
     val changelog = getChangelogFile(context)
 
@@ -65,7 +66,7 @@ fun WhatsNewDialog(
                 ),
                 modifier = Modifier
                     .height(350.dp)
-                    .width(350.dp),
+                    .width(360.dp),
             ) {
                 Column(
                     modifier = Modifier

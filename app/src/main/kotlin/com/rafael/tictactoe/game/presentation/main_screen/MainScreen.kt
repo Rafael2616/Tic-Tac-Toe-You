@@ -35,6 +35,7 @@ fun MainScreen(
         settingsVM,
         viewModel,
     )
+
     AnimatedVisibility(state.showWhatsNewDialog) {
         WhatsNewDialog(
             settingsVM::onEvent,

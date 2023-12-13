@@ -8,9 +8,10 @@ import java.io.InputStream
 import java.io.InputStreamReader
 
 fun getChangelogFile(context: Context): String {
-    val versionNumber = getVersionName().split("-")[0]
-    val variant = getVersionName().split("-")[1]
-    val correctedVariant = if (variant == "debug") "" else "-" + variant
+    val version = getVersionName()
+    val versionNumber = if (version.contains("-")) version.split("-")[0] else version
+    val variant = if (version.contains("-")) version.split("-")[1] else ""
+    val correctedVariant = if (variant != "") "" else variant
     val changelogFile = try {
         val inputStream: InputStream = context.assets.open("changelogs/$versionNumber$correctedVariant.txt")
         val reader = BufferedReader(InputStreamReader(inputStream))

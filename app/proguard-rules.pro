@@ -31,13 +31,31 @@
 -keep class * extends androidx.room.util.CursorUtil
 -keep class * extends androidx.room.RoomSQLiteOpenHelper
 -keep class * extends androidx.room.util.TableInfo
+-keep class com.rafael.tictactoe.settings.data.database.SettingsDatabase
+-keep class com.rafael.tictactoe.settings.data.database.Migrations
+-keep class com.rafael.tictactoe.settings.data.database.Migrations.Migration1To2
 
+-keepclassmembers class com.rafael.tictactoe.settings.data.database.Migrations.Migration1To2 {
+    public void migrate(androidx.sqlite.db.SupportSQLiteDatabase);
+}
+-keepclassmembers class com.rafael.tictactoe.settings.data.database.Migrations.Migration1To2 {
+    public static final java.lang.String addAppVersion;
+    public static final java.lang.String addSelectedWinnerLineColor;
+    public static final java.lang.String addSelectedXColor;
+    public static final java.lang.String addSelectedCircleColor;
+}
 # Add rules to improve performance
 -keepclassmembers class * extends androidx.room.RoomDatabase {
     public static void destroyInstance(android.content.Context, java.lang.String);
 }
 -keepclasseswithmembers class * extends androidx.room.RoomDatabase {
     public static void clearAllTables(android.content.Context, java.lang.String);
+}
+-keepclassmembers class * extends androidx.room.RoomDatabase {
+    public static java.lang.String[] getDatabaseNames();
+}
+-keepclassmembers class * extends androidx.compose.runtime.Composable {
+    public static java.lang.Class[] getTopLevelComposables();
 }
 
 # Retrofit
