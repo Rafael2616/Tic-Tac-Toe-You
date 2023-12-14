@@ -99,8 +99,8 @@ fun MainOptions(
                     containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp),
                 ),
                 modifier = Modifier
-                    .fillMaxWidth(if (orientation == Configuration.ORIENTATION_LANDSCAPE) 0.3f else 0.55f)
-                    .height(55.dp)
+                    .fillMaxWidth(if (orientation == Configuration.ORIENTATION_LANDSCAPE) 0.3f else 0.6f)
+                    .height(58.dp)
                     .clip(RoundedCornerShape(36.dp))
                     .clickable {
                         settingsVM.execUIClickSound()
@@ -133,7 +133,7 @@ fun MainOptions(
                         contentDescription = "Icon",
                         tint = screen.tint,
                         modifier = Modifier
-                            .size(40.dp)
+                            .size(35.dp)
                             .padding(end = 3.dp),
                     )
                     Text(
