@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.media3.exoplayer.ExoPlayer
+import com.rafael.tictactoe.common.domain.util.AppExceptionHandler
 import com.rafael.tictactoe.common.presentation.navigation.TicTacToe
 import com.rafael.tictactoe.common.services.MusicService
 import com.rafael.tictactoe.settings.domain.model.SettingsEvent
@@ -28,7 +29,7 @@ class TicTacToeActivity : ComponentActivity() {
         installSplashScreen()
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
-
+        AppExceptionHandler.init()
         setContent {
             // Navigation graph
             TicTacToe(this)

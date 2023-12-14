@@ -110,7 +110,6 @@ class GameViewModel @Inject constructor(
                         )
                     }
                     this@GameViewModel.onEvent(GameEvent.UpdateIsYouPlayer1)
-                    this@GameViewModel.onEvent(GameEvent.GetRemotePlayers)
                 }
                 if (isCPUMode && isCPUPlayer1) {
                     _state.update { it.copy(isCPU = true) }
@@ -235,7 +234,7 @@ class GameViewModel @Inject constructor(
             GameEvent.PostRemotePlayer -> {
                 viewModelScope.launch(Dispatchers.IO) {
                     val response = repository.postPlayer(state.value, settingsVM.state.value)
-                    _state.update { it.copy(requestState = response.second) }
+                    _state.update { it.copy(requestState = response) }
                 }
             }
             GameEvent.RemoveRemotePlayer -> {
@@ -299,6 +298,7 @@ class GameViewModel @Inject constructor(
                         localPlayer1 = value,
                     )
                 }
+                this@GameViewModel.onEvent(GameEvent.GetRemotePlayers)
             }
             GameEvent.StartOnlineMatch -> {
                 _state.update {

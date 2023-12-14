@@ -37,6 +37,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.presentation.navigation.Destinations
@@ -98,8 +99,8 @@ fun MainOptions(
                     containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp),
                 ),
                 modifier = Modifier
-                    .fillMaxWidth(if (orientation == Configuration.ORIENTATION_LANDSCAPE) 0.35f else 0.65f)
-                    .height(65.dp)
+                    .fillMaxWidth(if (orientation == Configuration.ORIENTATION_LANDSCAPE) 0.3f else 0.55f)
+                    .height(55.dp)
                     .clip(RoundedCornerShape(36.dp))
                     .clickable {
                         settingsVM.execUIClickSound()
@@ -123,7 +124,7 @@ fun MainOptions(
                 Row(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(end = 10.dp, start = 10.dp),
+                        .padding(horizontal = 10.dp),
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
@@ -132,12 +133,14 @@ fun MainOptions(
                         contentDescription = "Icon",
                         tint = screen.tint,
                         modifier = Modifier
-                            .size(42.dp)
+                            .size(40.dp)
                             .padding(end = 3.dp),
                     )
                     Text(
                         modifier = Modifier.wrapContentSize(),
-                        style = MaterialTheme.typography.titleLarge,
+                        style = MaterialTheme.typography.titleMedium.copy(
+                            fontSize = 20.sp,
+                        ),
                         color = MaterialTheme.colorScheme.onSurface,
                         overflow = TextOverflow.Ellipsis,
                         textAlign = TextAlign.Center,
@@ -147,7 +150,7 @@ fun MainOptions(
                 }
             }
             if (index <= items.size - 1) {
-                Spacer(modifier = Modifier.height(15.dp))
+                Spacer(modifier = Modifier.height(10.dp))
             }
         }
     }

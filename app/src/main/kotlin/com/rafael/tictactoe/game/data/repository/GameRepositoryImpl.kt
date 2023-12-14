@@ -63,7 +63,7 @@ class GameRepositoryImpl @Inject constructor(
         return Pair(null, RequestState.Loading)
     }
 
-    override suspend fun postPlayer(state: GameState, settingsState: SettingsState): Pair<Player?, RequestState> {
+    override suspend fun postPlayer(state: GameState, settingsState: SettingsState): RequestState {
         try {
             val response = gameService.postPlayer(
                 Player(
@@ -75,16 +75,16 @@ class GameRepositoryImpl @Inject constructor(
                 ),
             )
             if (response.isSuccessful) {
-                return Pair(response.body()!!, RequestState.Success)
+                return RequestState.Success
             } else {
                 throw IOException("Request failed with code: " + response.code())
             }
         } catch (e: IOException) {
             Log.e(TAG, "IO error: $e")
-            return Pair(null, RequestState.Failure(Error.IOError, e.toString()))
+            return RequestState.Failure(Error.IOError, e.toString())
         } catch (e: HttpException) {
             Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
-            return Pair(null, RequestState.Failure(Error.HttpError, e.message(), e.code()))
+            return RequestState.Failure(Error.HttpError, e.message(), e.code())
         }
     }
 

@@ -16,7 +16,7 @@ interface GameRepository {
 
     // Internet data by Retrofit
     suspend fun getRemotePlayers(): Pair<Flow<List<Player>>?, RequestState>
-    suspend fun postPlayer(state: GameState, settingsState: SettingsState): Pair<Player?, RequestState>
+    suspend fun postPlayer(state: GameState, settingsState: SettingsState): RequestState
     suspend fun removePlayer(playerID: Int): RequestState
 
     suspend fun postInitialGameState(matchID: Int): RequestState

@@ -17,9 +17,9 @@ interface OnlineGameDao {
     suspend fun getPlayers(): Response<Flow<List<Player>>>
 
     @POST("/postPlayer")
-    suspend fun postPlayer(@Body player: Player): Response<Player>
+    suspend fun postPlayer(@Body player: Player): Response<Unit>
 
-    @DELETE("removePlayer/{id}")
+    @DELETE("/removePlayer/{id}")
     suspend fun removePlayer(@Path("id") playerId: Int): Response<Unit>
 
     @POST("/postInitialGameState")
@@ -31,6 +31,6 @@ interface OnlineGameDao {
     @PUT("/updateGameState")
     suspend fun updateGameState(@Body gameState: OnlineGameState): Response<Flow<OnlineGameState>>
 
-    @DELETE("endMatch/{id}")
+    @DELETE("/endMatch/{id}")
     suspend fun endMatch(@Path("id") matchID: Int): Response<Unit>
 }
