@@ -6,9 +6,11 @@ Added:
 Improvements:
 - fix laggy settings scroll
 - Settings now have a alignment from start
+- Reduce the size of buttons in main screen
 
 Fixes:
 - The app no longer will crash when we have database schema changes
+- Fix app crashing in Online mode in release version
 
 Code:
 - Added Spotless dep. to lint Kotlin code style
