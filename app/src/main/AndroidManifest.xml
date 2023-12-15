@@ -1,33 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".TicTacToeApp"
         android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="false"
+        android:supportsRtl="true"
         android:hardwareAccelerated="true"
         android:resizeableActivity="false"
+        android:enableOnBackInvokedCallback="true"
         android:isGame="true"
-        android:theme="@style/AppSplash">
+        android:theme="@style/Theme.AppSplash">
 
         <service
-        android:name=".common.services.MusicService"
-        android:foregroundServiceType="mediaPlayback"/>
+            android:name=".common.services.MusicService"
+            android:foregroundServiceType="mediaPlayback" />
 
         <activity
             android:name=".TicTacToeActivity"
             android:exported="true"
             android:configChanges="uiMode|screenSize|orientation">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
