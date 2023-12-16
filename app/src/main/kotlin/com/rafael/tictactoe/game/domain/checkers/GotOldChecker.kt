@@ -4,12 +4,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameState
-import com.rafael.tictactoe.game.presentation.gameScreen.viewmodels.GameViewModel
 
 @Composable
 fun GotOldChecker(
-    vm: GameViewModel,
+    onEvent: (GameEvent) -> Unit,
     state: GameState,
 ) {
     val isCardClicked = state.isCardClicked
@@ -21,16 +21,15 @@ fun GotOldChecker(
     }
 
     if ((isCardClicked.flatten().all { it }) && (!hasWinner)) {
-        vm.updateGotOld(true)
+        onEvent(GameEvent.UpdateGotOld(true))
     } else {
-        vm.updateGotOld(false)
+        onEvent(GameEvent.UpdateGotOld(false))
     }
 
     if (state.gotOld && !hasWinner) {
-        vm.updateIsGameFinished(true)
-        vm.execGotOldSound()
+        onEvent(GameEvent.GameIsFinished(true))
         if (isCounterReset > 0) {
-            vm.showVictoryCounterReseter(true)
+            onEvent(GameEvent.ShowVictoryCounterReseter(true))
         }
     }
 }

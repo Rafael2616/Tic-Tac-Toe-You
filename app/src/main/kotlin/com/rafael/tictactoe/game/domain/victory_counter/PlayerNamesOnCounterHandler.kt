@@ -5,6 +5,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
+import com.rafael.tictactoe.game.domain.model.GameMode
 import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.presentation.gameScreen.viewmodels.GameViewModel
 
@@ -21,7 +22,7 @@ class PlayerNamesOnCounterHandler() {
         val player2Name = state.player2Name
         val genericPlayerX = context.getString(R.string.player_x)
         val genericPlayerO = context.getString(R.string.player_o)
-        val isCPUMode = state.isCPUMode
+        val gameMode = state.gameMode
         val isCPUPlayer1 = state.isCPUPlayer1
         val localPlayer1 = state.localPlayer1
         val play = state.play
@@ -29,7 +30,7 @@ class PlayerNamesOnCounterHandler() {
         val cpuName = context.getString(R.string.cpu)
 
         // Apply "CPU" name for first player name when needed in CPU Mode
-        if (isCPUMode) {
+        if (gameMode == GameMode.VsCPU) {
             if (isCPUPlayer1) {
                 vm.updatePlayer1NameOnCounter(cpuName)
             } else {
@@ -86,7 +87,7 @@ class PlayerNamesOnCounterHandler() {
         val player1Name = state.player1Name
         val player2Name = state.player2Name
         val genericPlayerO = context.getString(R.string.player_o)
-        val isCPUMode = state.isCPUMode
+        val gameMode = state.gameMode
         val isCPUPlayer1 = state.isCPUPlayer1
         val genericPlayerX = context.getString(R.string.player_x)
         val localPlayer1 = state.localPlayer1
@@ -95,7 +96,7 @@ class PlayerNamesOnCounterHandler() {
         val cpuName = context.getString(R.string.cpu)
 
         // Apply "CPU" name for second player name when needed in CPU Mode
-        if (isCPUMode) {
+        if (gameMode == GameMode.VsCPU) {
             if (!isCPUPlayer1) {
                 vm.updatePlayer2NameOnCounter(cpuName)
             } else {

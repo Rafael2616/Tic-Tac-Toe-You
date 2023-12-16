@@ -1,13 +1,12 @@
 package com.rafael.tictactoe.game.domain.checkers
 
 import androidx.compose.runtime.Composable
+import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameState
-import com.rafael.tictactoe.game.domain.victoryCounter.victoryCounterUpdater
-import com.rafael.tictactoe.game.presentation.gameScreen.viewmodels.GameViewModel
 
 @Composable
 fun WinnerChecker(
-    vm: GameViewModel,
+    onEvent: (GameEvent) -> Unit,
     state: GameState,
 ) {
     val card = state.card
@@ -37,31 +36,29 @@ fun WinnerChecker(
 
         if (areAllClicked) {
             if (areAllClickedByPlayer1) {
-                vm.updateHasWinner(true)
+                onEvent(GameEvent.UpdateHasWinner(true))
                 if (isXFor1) {
-                    vm.updateIs1Win(true)
+                    onEvent(GameEvent.UpdateIs1Win(true))
                 } else {
-                    vm.updateIs1Win(false)
+                    onEvent(GameEvent.UpdateIs1Win(false))
                 }
-                vm.updateWinningPositionsIndices(index)
+                onEvent(GameEvent.UpdateWinningPositionsIndices(index))
             }
             if (areAllClickedByPlayer2) {
-                vm.updateHasWinner(true)
+                onEvent(GameEvent.UpdateHasWinner(true))
                 if (isXFor1) {
-                    vm.updateIs1Win(false)
+                    onEvent(GameEvent.UpdateIs1Win(false))
                 } else {
-                    vm.updateIs1Win(true)
+                    onEvent(GameEvent.UpdateIs1Win(true))
                 }
-                vm.updateWinningPositionsIndices(index)
+                onEvent(GameEvent.UpdateWinningPositionsIndices(index))
             }
         }
     }
 
     if (state.hasWinner) {
-        vm.updateIsGameFinished(true)
-        vm.showVictoryCounterReseter(true)
-        victoryCounterUpdater(vm, state)
-        vm.execWinnerSound()
-        vm.updateHasLastWinningPlayer(true)
+        onEvent(GameEvent.GameIsFinished(true))
+        onEvent(GameEvent.ShowVictoryCounterReseter(true))
+        onEvent(GameEvent.UpdateHasLastWinningPlayer(true))
     }
 }

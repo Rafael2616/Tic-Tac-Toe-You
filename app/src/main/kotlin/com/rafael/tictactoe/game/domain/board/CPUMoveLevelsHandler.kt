@@ -6,16 +6,15 @@ import com.rafael.tictactoe.game.domain.board.levels.mediumLevelCPUMove
 import com.rafael.tictactoe.game.domain.model.CPUDifficultyLevel
 import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameState
-import com.rafael.tictactoe.game.presentation.gameScreen.viewmodels.GameViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 fun cpuMoveLevelsHandler(
-    vm: GameViewModel,
     state: GameState,
     onEvent: (GameEvent) -> Unit,
+    execCardGridSound: () -> Unit,
 ) {
     val isCardClicked = state.isCardClicked
     val isCPU = state.isCPU
@@ -29,39 +28,34 @@ fun cpuMoveLevelsHandler(
     val medium = mediumLevelCPUMove(state, onEvent)
     val hard = hardLevelCPUMove(state)
 
-    if (isGameFinished) {
-        return
-    }
-
-    if (isCardClicked.flatten().all { it }) {
-        return
-    }
+    if (isGameFinished) return
+    if (isCardClicked.flatten().all { it }) return
 
     if (isCPU) {
         CoroutineScope(Dispatchers.IO).launch {
             delay(delayTime)
-            vm.updateIsXImage(!isXImage)
-            vm.updateIsCPU(false)
-            vm.updateIsPlayer1(!isCPUPlayer1)
+            onEvent(GameEvent.UpdateIsXImage(!isXImage))
+            onEvent(GameEvent.UpdateIsCPU(false))
+            onEvent(GameEvent.UpdateIsPlayer1(!isCPUPlayer1))
 
             when (level) {
                 CPUDifficultyLevel.Easy -> {
-                    vm.updateCard(easy.first, easy.second, isXImage)
-                    vm.updateIsCardClicked(easy.first, easy.second, true)
+                    onEvent(GameEvent.UpdateCard(easy.first, easy.second, isXImage))
+                    onEvent(GameEvent.UpdateIsCardClicked(easy.first, easy.second, true))
                 }
                 CPUDifficultyLevel.Medium -> {
-                    vm.updateCard(medium.first, medium.second, isXImage)
-                    vm.updateIsCardClicked(medium.first, medium.second, true)
+                    onEvent(GameEvent.UpdateCard(medium.first, medium.second, isXImage))
+                    onEvent(GameEvent.UpdateIsCardClicked(medium.first, medium.second, true))
                 }
                 CPUDifficultyLevel.Hard -> {
-                    vm.updateCard(hard.first, hard.second, isXImage)
-                    vm.updateIsCardClicked(hard.first, hard.second, true)
+                    onEvent(GameEvent.UpdateCard(hard.first, hard.second, isXImage))
+                    onEvent(GameEvent.UpdateIsCardClicked(hard.first, hard.second, true))
                 }
             }
         }
         CoroutineScope(Dispatchers.Main).launch {
             delay(delayTime)
-            vm.execCardGridSound()
+            execCardGridSound()
         }
     }
 }

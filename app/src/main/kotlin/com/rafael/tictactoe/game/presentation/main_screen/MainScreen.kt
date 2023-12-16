@@ -35,8 +35,8 @@ fun MainScreen(
     MainTopBar()
     MainOptions(
         navController,
-        settingsVM,
-        viewModel,
+        state,
+        viewModel::onEvent,
     )
 
     AnimatedVisibility(state.showWhatsNewDialog) {

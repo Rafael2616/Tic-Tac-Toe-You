@@ -10,6 +10,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.model.CurrentPlayerName
+import com.rafael.tictactoe.game.domain.model.GameMode
 import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.presentation.gameScreen.viewmodels.GameViewModel
 import kotlinx.coroutines.delay
@@ -29,7 +30,7 @@ fun ToastNameHandler(
     val is1Win = state.is1Win
     val isTimerOn = state.isTimerOn
     val isGameFinished = state.isGameFinished
-    val isCPUMode = state.isCPUMode
+    val isCPUMode = state.gameMode == GameMode.VsCPU
     val localPlayer1 = state.localPlayer1
     var timer by rememberSaveable { mutableIntStateOf(3) }
     val emptyPlayerName = stringResource(R.string.player)

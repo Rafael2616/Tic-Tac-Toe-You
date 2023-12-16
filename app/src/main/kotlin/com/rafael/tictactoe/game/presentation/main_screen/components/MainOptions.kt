@@ -25,7 +25,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -44,20 +43,16 @@ import com.rafael.tictactoe.common.presentation.navigation.Destinations
 import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameMode
 import com.rafael.tictactoe.game.domain.model.ScreenItem
-import com.rafael.tictactoe.game.presentation.gameScreen.viewmodels.GameViewModel
-import com.rafael.tictactoe.settings.presentation.settingsScreen.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.settings.domain.model.SettingsState
 
 @Composable
 fun MainOptions(
     navController: NavController,
-    settingsVM: SettingsViewModel,
-    viewModel: GameViewModel,
+    state: SettingsState,
+    onEvent: (GameEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val orientation = LocalConfiguration.current.orientation
-    val state by settingsVM.state.collectAsState()
-    val onEvent = viewModel::onEvent
-
     val items = listOf(
         ScreenItem(
             name = "PvP",
@@ -103,18 +98,18 @@ fun MainOptions(
                     .height(58.dp)
                     .clip(RoundedCornerShape(36.dp))
                     .clickable {
-                        settingsVM.execUIClickSound()
+                        // settingsVM.execUIClickSound()
                         when (screen.name) {
                             "PvP" -> {
-                                navController.navigate(Destinations.Game.screen + "/false")
+                                navController.navigate(Destinations.Game.screen)
                                 onEvent(GameEvent.SetGameMode(GameMode.PvP))
                             }
                             "CPU" -> {
-                                navController.navigate(Destinations.Game.screen + "/true")
+                                navController.navigate(Destinations.Game.screen)
                                 onEvent(GameEvent.SetGameMode(GameMode.VsCPU))
                             }
                             "Online" -> {
-                                navController.navigate(Destinations.Game.screen + "/false")
+                                navController.navigate(Destinations.Game.screen)
                                 onEvent(GameEvent.SetGameMode(GameMode.Online))
                             }
                             "Settings" -> navController.navigate(Destinations.Settings.screen)

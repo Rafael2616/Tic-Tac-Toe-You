@@ -3,12 +3,10 @@ package com.rafael.tictactoe.game.domain.board
 import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameMode
 import com.rafael.tictactoe.game.domain.model.GameState
-import com.rafael.tictactoe.game.presentation.gameScreen.viewmodels.GameViewModel
 
 fun boardMovesHandler(
     state: GameState,
     onEvent: (GameEvent) -> Unit,
-    vm: GameViewModel,
     rowIndex: Int,
     cardIndex: Int,
 ) {
@@ -22,53 +20,41 @@ fun boardMovesHandler(
     val gameMode = state.gameMode
     val isOnlinePlayerTurn = state.isOnlinePlayerTurn
 
-    if (isTimerOn) {
-        return
-    }
-
-    if (isGameFinished) {
-        return
-    }
-
-    if (isCardClicked[rowIndex][cardIndex]) {
-        return
-    }
-
-    if (!play) {
-        return
-    }
+    if (isTimerOn) return
+    if (isGameFinished) return
+    if (isCardClicked[rowIndex][cardIndex]) return
+    if (!play) return
 
     when (gameMode) {
         GameMode.PvP -> {
-            vm.updateIsXImage(!isXImage)
-            vm.updateCard(rowIndex, cardIndex, isXImage)
-            vm.updateIsCardClicked(rowIndex, cardIndex, true)
-            vm.updateIsPlayer1(!isPlayer1)
+            onEvent(GameEvent.UpdateIsXImage(!isXImage))
+            onEvent(GameEvent.UpdateCard(rowIndex, cardIndex, isXImage))
+            onEvent(GameEvent.UpdateIsCardClicked(rowIndex, cardIndex, true))
+            onEvent(GameEvent.UpdateIsPlayer1(!isPlayer1))
         }
         GameMode.VsCPU -> {
             // Exec human player move when needed
-            vm.updateIsXImage(!isXImage)
-            vm.updateCard(rowIndex, cardIndex, isXImage)
-            vm.updateIsCardClicked(rowIndex, cardIndex, true)
-            vm.updateIsPlayer1(!isPlayer1)
+            onEvent(GameEvent.UpdateIsXImage(!isXImage))
+            onEvent(GameEvent.UpdateCard(rowIndex, cardIndex, isXImage))
+            onEvent(GameEvent.UpdateIsCardClicked(rowIndex, cardIndex, true))
+            onEvent(GameEvent.UpdateIsPlayer1(!isPlayer1))
 
             // Calls CPU player's move when needed
             if ((isCPUPlayer1 && !isPlayer1) || (!isCPUPlayer1 && isPlayer1)) {
-                vm.updateIsCPU(true)
+                onEvent(GameEvent.UpdateIsCPU(true))
                 onEvent(GameEvent.ExecCPUMove)
             } else {
-                vm.updateIsCPU(false)
+                onEvent(GameEvent.UpdateIsCPU(false))
             }
         }
         GameMode.Online -> {
-            if (isOnlinePlayerTurn) {
-                return
-            }
-            vm.updateIsXImage(!isXImage)
-            vm.updateCard(rowIndex, cardIndex, isXImage)
-            vm.updateIsCardClicked(rowIndex, cardIndex, true)
-            vm.updateIsPlayer1(!isPlayer1)
-            vm.updateIsOnlinePlayerTurn(true)
+            if (isOnlinePlayerTurn) return
+
+            onEvent(GameEvent.UpdateIsXImage(!isXImage))
+            onEvent(GameEvent.UpdateCard(rowIndex, cardIndex, isXImage))
+            onEvent(GameEvent.UpdateIsCardClicked(rowIndex, cardIndex, true))
+            onEvent(GameEvent.UpdateIsPlayer1(!isPlayer1))
+            onEvent(GameEvent.IsOnlinePlayerTurn(true))
         }
     }
 }

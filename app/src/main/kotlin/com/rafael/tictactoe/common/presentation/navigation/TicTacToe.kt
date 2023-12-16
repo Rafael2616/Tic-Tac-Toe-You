@@ -13,12 +13,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import com.rafael.tictactoe.common.presentation.theme.AppTheme
 import com.rafael.tictactoe.game.presentation.gameScreen.GameScreen
 import com.rafael.tictactoe.game.presentation.mainScreen.MainScreen
@@ -61,20 +59,8 @@ fun TicTacToe(
                         activity = context,
                     )
                 }
-                composable(
-                    route = Destinations.Game.screen + "/{isCPUMode}",
-                    arguments = listOf(
-                        navArgument("isCPUMode") {
-                            type = NavType.BoolType
-                            defaultValue = false
-                            nullable = false
-                        },
-                    ),
-                ) { backStackEntry ->
-                    GameScreen(
-                        navController,
-                        backStackEntry.arguments?.getBoolean("isCPUMode") ?: false,
-                    )
+                composable(Destinations.Game.screen) {
+                    GameScreen(navController)
                 }
                 composable(Destinations.Settings.screen) {
                     SettingsScreen(navController)

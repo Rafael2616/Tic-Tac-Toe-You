@@ -1,11 +1,11 @@
 package com.rafael.tictactoe.game.domain.restart
 
+import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameMode
 import com.rafael.tictactoe.game.domain.model.GameState
-import com.rafael.tictactoe.game.presentation.gameScreen.viewmodels.GameViewModel
 
 fun restartGame(
-    vm: GameViewModel,
+    onEvent: (GameEvent) -> Unit,
     state: GameState,
 ) {
     val allFalse = List(3) { List<Boolean>(3) { false } }
@@ -22,19 +22,19 @@ fun restartGame(
      */
     if (hasWinner || hasLastWinningPlayer) {
         if (is1Win && isXFor1) {
-            vm.updateIsXImage(true)
+            onEvent(GameEvent.UpdateIsXImage(true))
         } else if (!is1Win && !isXFor1) {
-            vm.updateIsXImage(true)
+            onEvent(GameEvent.UpdateIsXImage(true))
         } else {
-            vm.updateIsXImage(false)
+            onEvent(GameEvent.UpdateIsXImage(false))
         }
     }
 
     if (!hasLastWinningPlayer) {
         if (isXFor1) {
-            vm.updateIsXImage(true)
+            onEvent(GameEvent.UpdateIsXImage(true))
         } else {
-            vm.updateIsXImage(false)
+            onEvent(GameEvent.UpdateIsXImage(false))
         }
     }
 
@@ -44,42 +44,42 @@ fun restartGame(
      */
     if (hasWinner || hasLastWinningPlayer) {
         if (is1Win) {
-            vm.updateIsPlayer1(true)
+            onEvent(GameEvent.UpdateIsPlayer1(true))
         } else {
-            vm.updateIsPlayer1(false)
+            onEvent(GameEvent.UpdateIsPlayer1(false))
         }
     }
 
     if (!hasWinner && !hasLastWinningPlayer) {
-        vm.updateIsPlayer1(true)
+        onEvent(GameEvent.UpdateIsPlayer1(true))
     }
 
     when (gameMode) {
         GameMode.VsCPU -> {
             if (hasWinner) {
                 if (is1Win && isCPUPlayer1) {
-                    vm.updateIsCPU(true)
+                    onEvent(GameEvent.UpdateIsCPU(true))
                 } else if (!is1Win && !isCPUPlayer1) {
-                    vm.updateIsCPU(true)
+                    onEvent(GameEvent.UpdateIsCPU(true))
                 } else {
-                    vm.updateIsCPU(false)
+                    onEvent(GameEvent.UpdateIsCPU(false))
                 }
             }
 
             if (!hasWinner) {
                 if (!hasLastWinningPlayer) {
                     if (isCPUPlayer1) {
-                        vm.updateIsCPU(true)
+                        onEvent(GameEvent.UpdateIsCPU(true))
                     } else {
-                        vm.updateIsCPU(false)
+                        onEvent(GameEvent.UpdateIsCPU(false))
                     }
                 } else {
                     if (isCPUPlayer1 && is1Win) {
-                        vm.updateIsCPU(true)
+                        onEvent(GameEvent.UpdateIsCPU(true))
                     } else if (!isCPUPlayer1 && !is1Win) {
-                        vm.updateIsCPU(true)
+                        onEvent(GameEvent.UpdateIsCPU(true))
                     } else {
-                        vm.updateIsCPU(false)
+                        onEvent(GameEvent.UpdateIsCPU(false))
                     }
                 }
             }
@@ -93,13 +93,13 @@ fun restartGame(
     }
 
     // Others common actions, executed in all cases
-    vm.updateHasWinner(false)
-    vm.updateGotOld(false)
-    vm.updateIsGameFinished(false)
-    vm.updateAllIsCardClicked(allFalse)
-    vm.updateIsScoreUp(false)
-    vm.updateIsWinSoundPlaying(false)
-    vm.updateIsGotOldSoundPlaying(false)
-    vm.resetWinningPositionsIndices(emptyList())
-    vm.showRestartButton(false)
+    onEvent(GameEvent.UpdateHasWinner(false))
+    onEvent(GameEvent.UpdateGotOld(false))
+    onEvent(GameEvent.GameIsFinished(false))
+    onEvent(GameEvent.UpdateAllIsCardClicked(allFalse))
+    onEvent(GameEvent.UpdateIsScoreUp(false))
+    onEvent(GameEvent.UpdateIsWinSoundPlaying(false))
+    onEvent(GameEvent.UpdateIsGotOldSoundPlaying(false))
+    onEvent(GameEvent.ResetWinningPositionsIndices)
+    onEvent(GameEvent.ShowRestartButton(false))
 }

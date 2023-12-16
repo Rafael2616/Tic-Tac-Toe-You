@@ -17,6 +17,7 @@ import com.rafael.tictactoe.game.domain.model.Player
 import com.rafael.tictactoe.game.domain.model.RequestState
 import com.rafael.tictactoe.game.domain.repository.GameRepository
 import com.rafael.tictactoe.game.domain.restart.restartGame
+import com.rafael.tictactoe.game.domain.victoryCounter.victoryCounterUpdater
 import com.rafael.tictactoe.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.presentation.settingsScreen.viewmodels.SettingsViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -48,7 +49,7 @@ class GameViewModel @Inject constructor(
 
     fun onEvent(event: GameEvent) {
         val localPlayer1 = state.value.localPlayer1
-        val isCPUMode = state.value.isCPUMode
+        val isCPUMode = state.value.gameMode == GameMode.VsCPU
         val isCPUPlayer1 = state.value.isCPUPlayer1
 
         when (event) {
@@ -109,14 +110,14 @@ class GameViewModel @Inject constructor(
                             matchID = randomicID,
                         )
                     }
-                    this@GameViewModel.onEvent(GameEvent.UpdateIsYouPlayer1)
+                    this.onEvent(GameEvent.UpdateIsYouPlayer1)
                 }
                 if (isCPUMode && isCPUPlayer1) {
                     _state.update { it.copy(isCPU = true) }
                     cpuMoveLevelsHandler(
-                        this,
                         state.value,
                         this::onEvent,
+                        this::execCardGridSound,
                     )
                 }
                 settingsVM.execUIClickSound()
@@ -126,7 +127,6 @@ class GameViewModel @Inject constructor(
                 boardMovesHandler(
                     state.value,
                     this::onEvent,
-                    this@GameViewModel,
                     event.rowIndex,
                     event.cardIndex,
                 )
@@ -134,9 +134,9 @@ class GameViewModel @Inject constructor(
             }
             GameEvent.ExecCPUMove -> {
                 cpuMoveLevelsHandler(
-                    this,
                     state.value,
                     this::onEvent,
+                    this::execCardGridSound,
                 )
             }
             GameEvent.ResetVictoryCounter -> {
@@ -152,14 +152,14 @@ class GameViewModel @Inject constructor(
             GameEvent.PlayAgain -> {
                 _state.update { it.copy(isExpandButtonShown = false) }
                 restartGame(
-                    this,
+                    this::onEvent,
                     state.value,
                 )
                 if (isCPUMode) {
                     cpuMoveLevelsHandler(
-                        this,
                         state.value,
                         this::onEvent,
+                        this::execCardGridSound,
                     )
                 }
                 settingsVM.execUIClickSound()
@@ -193,12 +193,6 @@ class GameViewModel @Inject constructor(
             GameEvent.ToggleIsXForPlayer1 -> {
                 _state.update { it.copy(isXFor1 = !it.isXFor1) }
                 settingsVM.execUIClickSound()
-            }
-            is GameEvent.UpdateIsGotOldSoundPlaying -> {
-                _state.update { it.copy(isGotOldSoundPlaying = event.value) }
-            }
-            is GameEvent.UpdateIsWinSoundPlaying -> {
-                _state.update { it.copy(isWinSoundPlaying = event.value) }
             }
             is GameEvent.SelectCPUDifficultyMode -> {
                 _state.update {
@@ -257,15 +251,15 @@ class GameViewModel @Inject constructor(
                         _state.update {
                             it.copy(
                                 requestState = RequestState.Success,
-                            /*player1Wins = onlineGameState.player1Wins.value,
-                            player2Wins = onlineGameState.player2Wins.value,
-                            card = onlineGameState.card.value,
-                            isCardClicked = onlineGameState.isCardClicked.value,
-                            play = onlineGameState.play.value,
-                            isPlayer1 = onlineGameState.isPlayer1.value,
-                            hasWinner = onlineGameState.hasWinner.value,
-                            gotOld = onlineGameState.gotOld.value,
-                            isGameFinished = onlineGameState.isGameFinished.value*/
+                             /* player1Wins = onlineGameState.player1Wins.value,
+                                player2Wins = onlineGameState.player2Wins.value,
+                                card = onlineGameState.card.value,
+                                isCardClicked = onlineGameState.isCardClicked.value,
+                                play = onlineGameState.play.value,
+                                isPlayer1 = onlineGameState.isPlayer1.value,
+                                hasWinner = onlineGameState.hasWinner.value,
+                                gotOld = onlineGameState.gotOld.value,
+                                isGameFinished = onlineGameState.isGameFinished.value */
                             )
                         }
                     }
@@ -310,39 +304,105 @@ class GameViewModel @Inject constructor(
                     )
                 }
             }
-        }
-    }
-
-    fun updateIsCardClicked(rowIndex: Int, cardIndex: Int, newValue: Boolean) {
-        val isCPU = state.value.isCPU
-        val isGameFinished = state.value.isGameFinished
-
-        if (!isCPU && !isGameFinished) {
-            _state.update {
-                it.copy(
-                    isCardClicked = it.isCardClicked.toMutableList().apply {
-                        this[rowIndex] = this[rowIndex].toMutableList().apply {
-                            this[cardIndex] = newValue
-                        }
-                    },
-                )
+            is GameEvent.ShowRestartButton -> {
+                _state.update { it.copy(showRestartButton = event.value) }
             }
-        }
-    }
+            is GameEvent.UpdateGotOld -> {
+                _state.update { it.copy(gotOld = event.gotOld) }
+                if (event.gotOld && !state.value.hasWinner) {
+                    execGotOldSound()
+                }
+            }
+            is GameEvent.GameIsFinished -> {
+                _state.update { it.copy(isGameFinished = event.value) }
+                if (state.value.hasWinner) {
+                    victoryCounterUpdater(state.value, this::onEvent)
+                }
+            }
+            is GameEvent.ShowVictoryCounterReseter -> {
+                _state.update { it.copy(showVictoryCounterReseter = event.value) }
+            }
+            is GameEvent.UpdateHasWinner -> {
+                _state.update { it.copy(hasWinner = event.hasWinner) }
+                if (event.hasWinner) {
+                    execWinnerSound()
+                }
+            }
+            is GameEvent.UpdateIs1Win -> {
+                _state.update { it.copy(is1Win = event.value) }
+            }
+            is GameEvent.UpdateHasLastWinningPlayer -> {
+                _state.update { it.copy(hasLastWinningPlayer = event.value) }
+            }
+            is GameEvent.UpdateWinningPositionsIndices -> {
+                val currentIndices = state.value.winningPositionsIndices.toMutableList()
+                currentIndices.add(event.index)
+                _state.update { it.copy(winningPositionsIndices = currentIndices) }
+            }
+            GameEvent.ResetWinningPositionsIndices -> {
+                _state.update { it.copy(winningPositionsIndices = emptyList()) }
+            }
+            is GameEvent.UpdateIsWinSoundPlaying -> {
+                _state.update { it.copy(isWinSoundPlaying = event.isPlaying) }
+            }
+            is GameEvent.UpdateIsGotOldSoundPlaying -> {
+                _state.update { it.copy(isGotOldSoundPlaying = event.isPlaying) }
+            }
+            is GameEvent.UpdateIsScoreUp -> {
+                _state.update { it.copy(isScoreUp = event.value) }
+            }
+            is GameEvent.UpdateAllIsCardClicked -> {
+                _state.update { it.copy(isCardClicked = event.newCardClickedValues) }
+            }
+            is GameEvent.UpdateIsCPU -> {
+                _state.update { it.copy(isCPU = event.value) }
+            }
+            is GameEvent.UpdateIsPlayer1 -> {
+                _state.update { it.copy(isPlayer1 = event.value) }
+            }
+            is GameEvent.UpdateIsXImage -> {
+                _state.update { it.copy(isXImage = event.value) }
+            }
+            is GameEvent.UpdateIsCardClicked -> {
+                val isCPU = state.value.isCPU
+                val isGameFinished = state.value.isGameFinished
 
-    fun updateCard(rowIndex: Int, cardIndex: Int, newValue: Boolean) {
-        val isCPU = state.value.isCPU
-        val isGameFinished = state.value.isGameFinished
+                if (!isCPU && !isGameFinished) {
+                    _state.update {
+                        it.copy(
+                            isCardClicked = it.isCardClicked.toMutableList().apply {
+                                this[event.rowIndex] = this[event.rowIndex].toMutableList().apply {
+                                    this[event.cardIndex] = event.newValue
+                                }
+                            },
+                        )
+                    }
+                }
+            }
+            is GameEvent.UpdateCard -> {
+                val isCPU = state.value.isCPU
+                val isGameFinished = state.value.isGameFinished
 
-        if (!isCPU && !isGameFinished) {
-            _state.update {
-                it.copy(
-                    card = it.card.toMutableList().apply {
-                        this[rowIndex] = this[rowIndex].toMutableList().apply {
-                            this[cardIndex] = newValue
-                        }
-                    },
-                )
+                if (!isCPU && !isGameFinished) {
+                    _state.update {
+                        it.copy(
+                            card = it.card.toMutableList().apply {
+                                this[event.rowIndex] = this[event.rowIndex].toMutableList().apply {
+                                    this[event.cardIndex] = event.newValue
+                                }
+                            },
+                        )
+                    }
+                }
+            }
+            is GameEvent.IsOnlinePlayerTurn -> {
+                _state.update { it.copy(isOnlinePlayerTurn = event.value) }
+            }
+            is GameEvent.UpdatePlayer1Wins -> {
+                _state.update { it.copy(player1Wins = event.value) }
+            }
+            is GameEvent.UpdatePlayer2Wins -> {
+                _state.update { it.copy(player2Wins = event.value) }
             }
         }
     }
@@ -359,56 +419,8 @@ class GameViewModel @Inject constructor(
         _state.update { it.copy(player2Name = newValue) }
     }
 
-    fun updatePlayer1Wins(newValue: Int) {
-        _state.update { it.copy(player1Wins = newValue) }
-    }
-
-    fun updatePlayer2Wins(newValue: Int) {
-        _state.update { it.copy(player2Wins = newValue) }
-    }
-
-    fun updateAllIsCardClicked(newCardClickedValue: List<List<Boolean>>) {
-        _state.update { it.copy(isCardClicked = newCardClickedValue) }
-    }
-
-    fun updateIsXImage(newValue: Boolean) {
-        _state.update { it.copy(isXImage = newValue) }
-    }
-
-    fun updateIs1Win(newValue: Boolean) {
-        _state.update { it.copy(is1Win = newValue) }
-    }
-
     fun updateIsXFor1(newValue: Boolean) {
         _state.update { it.copy(isXFor1 = newValue) }
-    }
-
-    fun updateIsPlayer1(newValue: Boolean) {
-        _state.update { it.copy(isPlayer1 = newValue) }
-    }
-
-    fun updateIsScoreUp(newValue: Boolean) {
-        _state.update { it.copy(isScoreUp = newValue) }
-    }
-
-    fun showRestartButton(newValue: Boolean) {
-        _state.update { it.copy(showRestartButton = newValue) }
-    }
-
-    fun updateIsWinSoundPlaying(newValue: Boolean) {
-        _state.update { it.copy(isWinSoundPlaying = newValue) }
-    }
-
-    fun updateIsGotOldSoundPlaying(newValue: Boolean) {
-        _state.update { it.copy(isGotOldSoundPlaying = newValue) }
-    }
-
-    fun updateHasWinner(newValue: Boolean) {
-        _state.update { it.copy(hasWinner = newValue) }
-    }
-
-    fun updateGotOld(newValue: Boolean) {
-        _state.update { it.copy(gotOld = newValue) }
     }
 	
     fun updatePlayer1NameOnCounter(newValue: String) {
@@ -419,42 +431,12 @@ class GameViewModel @Inject constructor(
         _state.update { it.copy(player2NameOnCounter = newValue) }
     }
 
-    fun updateIsGameFinished(newValue: Boolean) {
-        _state.update { it.copy(isGameFinished = newValue) }
-    }
-
     fun updateIsTimerOn(newValue: Boolean) {
         _state.update { it.copy(isTimerOn = newValue) }
     }
 
-    fun updateIsCPU(newValue: Boolean) {
-        _state.update { it.copy(isCPU = newValue) }
-    }
-
     fun updateIsCPUMode(newValue: Boolean) {
         _state.update { it.copy(isCPUMode = newValue) }
-    }
-
-    fun updateWinningPositionsIndices(index: Int) {
-        val currentIndices = state.value.winningPositionsIndices.toMutableList()
-        currentIndices.add(index)
-        _state.update { it.copy(winningPositionsIndices = currentIndices) }
-    }
-
-    fun resetWinningPositionsIndices(emptyList: List<Int>) {
-        _state.update { it.copy(winningPositionsIndices = emptyList) }
-    }
-
-    fun showVictoryCounterReseter(newValue: Boolean) {
-        _state.update { it.copy(showVictoryCounterReseter = newValue) }
-    }
-
-    fun updateHasLastWinningPlayer(player: Boolean) {
-        _state.update { it.copy(hasLastWinningPlayer = player) }
-    }
-
-    fun updateIsOnlinePlayerTurn(newValue: Boolean) {
-        _state.update { it.copy(isOnlinePlayerTurn = newValue) }
     }
 
     fun execCardGridSound() {
