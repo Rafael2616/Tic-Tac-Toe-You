@@ -132,7 +132,7 @@ dependencies {
 
     // Kotlin
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-    implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.6")
+    implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7")
     // Android Core
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.activity:activity-compose:1.8.2")
