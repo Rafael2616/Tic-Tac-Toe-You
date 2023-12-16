@@ -63,8 +63,10 @@ fun GameScreen(
         state,
         settingsState,
     )
-    PlayersNamesOnCounter(state)
-    ToastNameHandler(state)
+    PlayersNamesOnCounter(
+        state,
+        onEvent,
+    )
 
     if (state.gameMode == GameMode.VsCPU) {
         DifficultyLevelIndicator(state, settingsState)
@@ -142,6 +144,8 @@ fun GameScreen(
             state,
         )
     }
+
+    ToastNameHandler(state, onEvent)
 
     BackHandler {
         onEvent(GameEvent.ToggleExitDialog)

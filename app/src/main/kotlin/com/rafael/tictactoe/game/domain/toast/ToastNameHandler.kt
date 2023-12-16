@@ -7,18 +7,17 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.model.CurrentPlayerName
+import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameMode
 import com.rafael.tictactoe.game.domain.model.GameState
-import com.rafael.tictactoe.game.presentation.gameScreen.viewmodels.GameViewModel
 import kotlinx.coroutines.delay
 
 @Composable
 fun ToastNameHandler(
     state: GameState,
-    vm: GameViewModel = hiltViewModel(),
+    onEvent: (GameEvent) -> Unit,
 ) {
     val hasWinner = state.hasWinner
     val gotOld = state.gotOld
@@ -56,43 +55,43 @@ fun ToastNameHandler(
         CurrentPlayerName.NameForSetupPhase -> {
             if (localPlayer1) {
                 if (player1Name.isEmpty()) {
-                    vm.updateCurrentPlayerName(emptyPlayerName)
+                    onEvent(GameEvent.UpdateCurrentPlayerName(emptyPlayerName))
                 } else {
-                    vm.updateCurrentPlayerName(player1Name)
+                    onEvent(GameEvent.UpdateCurrentPlayerName(player1Name))
                 }
             } else {
                 if (player2Name.isEmpty()) {
-                    vm.updateCurrentPlayerName(emptyPlayerName)
+                    onEvent(GameEvent.UpdateCurrentPlayerName(emptyPlayerName))
                 } else {
-                    vm.updateCurrentPlayerName(player2Name)
+                    onEvent(GameEvent.UpdateCurrentPlayerName(player2Name))
                 }
             }
         }
         CurrentPlayerName.NameForSetupPhaseForCPUMode -> {
             if (isCPUMode) {
                 if (isCPUPlayer1) {
-                    vm.updatePlayer1Name(cpuName)
+                    onEvent(GameEvent.UpdatePlayer1Name(cpuName))
                     if (player2Name == cpuName) {
-                        vm.updatePlayer2Name(player1Name)
+                        onEvent(GameEvent.UpdatePlayer2Name(player1Name))
                     }
                 } else {
-                    vm.updatePlayer2Name(cpuName)
+                    onEvent(GameEvent.UpdatePlayer2Name(cpuName))
                     if (player1Name == cpuName) {
-                        vm.updatePlayer1Name(player2Name)
+                        onEvent(GameEvent.UpdatePlayer1Name(player2Name))
                     }
                 }
             }
             if (localPlayer1) {
                 if (player1Name.isEmpty()) {
-                    vm.updateCurrentPlayerName(emptyPlayerName)
+                    onEvent(GameEvent.UpdateCurrentPlayerName(emptyPlayerName))
                 } else {
-                    vm.updateCurrentPlayerName(player1Name)
+                    onEvent(GameEvent.UpdateCurrentPlayerName(player1Name))
                 }
             } else {
                 if (player2Name.isEmpty()) {
-                    vm.updateCurrentPlayerName(emptyPlayerName)
+                    onEvent(GameEvent.UpdateCurrentPlayerName(emptyPlayerName))
                 } else {
-                    vm.updateCurrentPlayerName(player2Name)
+                    onEvent(GameEvent.UpdateCurrentPlayerName(player2Name))
                 }
             }
         }
@@ -100,12 +99,12 @@ fun ToastNameHandler(
             LaunchedEffect(currentGamePhase) {
                 while (isTimerOn) {
                     if (timer > 0) {
-                        vm.updateCurrentPlayerName(timer.toString())
+                        onEvent(GameEvent.UpdateCurrentPlayerName(timer.toString()))
                     }
                     delay(500L)
                     timer--
                     if (timer == 0) {
-                        vm.updateIsTimerOn(false)
+                        onEvent(GameEvent.IsTimerOn(false))
                     }
                 }
             }
@@ -113,29 +112,29 @@ fun ToastNameHandler(
         CurrentPlayerName.NameForGameInProgress -> {
             if (isPlayer1) {
                 if (player1Name.isEmpty()) {
-                    vm.updateCurrentPlayerName(emptyPlayerName)
-                    vm.updatePlayer1Name(emptyPlayerName)
+                    onEvent(GameEvent.UpdateCurrentPlayerName(emptyPlayerName))
+                    onEvent(GameEvent.UpdatePlayer1Name(emptyPlayerName))
                 } else {
-                    vm.updateCurrentPlayerName(player1Name)
+                    onEvent(GameEvent.UpdateCurrentPlayerName(player1Name))
                 }
             } else {
                 if (player2Name.isEmpty()) {
-                    vm.updateCurrentPlayerName(emptyPlayerName)
-                    vm.updatePlayer2Name(emptyPlayerName)
+                    onEvent(GameEvent.UpdateCurrentPlayerName(emptyPlayerName))
+                    onEvent(GameEvent.UpdatePlayer2Name(emptyPlayerName))
                 } else {
-                    vm.updateCurrentPlayerName(player2Name)
+                    onEvent(GameEvent.UpdateCurrentPlayerName(player2Name))
                 }
             }
         }
         CurrentPlayerName.NameWhenThereWinner -> {
             if (is1Win) {
-                vm.updateCurrentPlayerName(player1Name)
+                onEvent(GameEvent.UpdateCurrentPlayerName(player1Name))
             } else {
-                vm.updateCurrentPlayerName(player2Name)
+                onEvent(GameEvent.UpdateCurrentPlayerName(player2Name))
             }
         }
         CurrentPlayerName.NameWhenGotOld -> {
-            vm.updateCurrentPlayerName(stringResource(R.string.got_old))
+            onEvent(GameEvent.UpdateCurrentPlayerName(stringResource(R.string.got_old)))
         }
     }
 }

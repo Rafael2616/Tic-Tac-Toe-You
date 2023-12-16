@@ -98,7 +98,7 @@ fun MainOptions(
                     .height(58.dp)
                     .clip(RoundedCornerShape(36.dp))
                     .clickable {
-                        // settingsVM.execUIClickSound()
+                        onEvent(GameEvent.ExecUIClickSound)
                         when (screen.name) {
                             "PvP" -> {
                                 navController.navigate(Destinations.Game.screen)

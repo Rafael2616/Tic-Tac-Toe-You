@@ -404,39 +404,28 @@ class GameViewModel @Inject constructor(
             is GameEvent.UpdatePlayer2Wins -> {
                 _state.update { it.copy(player2Wins = event.value) }
             }
+            is GameEvent.UpdatePlayer1NameOnCounter -> {
+                _state.update { it.copy(player1NameOnCounter = event.name) }
+            }
+            is GameEvent.UpdatePlayer2NameOnCounter -> {
+                _state.update { it.copy(player2NameOnCounter = event.name) }
+            }
+            is GameEvent.UpdatePlayer1Name -> {
+                _state.update { it.copy(player1Name = event.name) }
+            }
+            is GameEvent.UpdatePlayer2Name -> {
+                _state.update { it.copy(player2Name = event.name) }
+            }
+            is GameEvent.UpdateCurrentPlayerName -> {
+                _state.update { it.copy(currentPlayerName = event.name) }
+            }
+            is GameEvent.IsTimerOn -> {
+                _state.update { it.copy(isTimerOn = event.value) }
+            }
+            GameEvent.ExecUIClickSound -> {
+                settingsVM.execUIClickSound()
+            }
         }
-    }
-
-    fun updateCurrentPlayerName(newValue: String) {
-        _state.update { it.copy(currentPlayerName = newValue) }
-    }
-
-    fun updatePlayer1Name(newValue: String) {
-        _state.update { it.copy(player1Name = newValue) }
-    }
-
-    fun updatePlayer2Name(newValue: String) {
-        _state.update { it.copy(player2Name = newValue) }
-    }
-
-    fun updateIsXFor1(newValue: Boolean) {
-        _state.update { it.copy(isXFor1 = newValue) }
-    }
-	
-    fun updatePlayer1NameOnCounter(newValue: String) {
-        _state.update { it.copy(player1NameOnCounter = newValue) }
-    }
-
-    fun updatePlayer2NameOnCounter(newValue: String) {
-        _state.update { it.copy(player2NameOnCounter = newValue) }
-    }
-
-    fun updateIsTimerOn(newValue: Boolean) {
-        _state.update { it.copy(isTimerOn = newValue) }
-    }
-
-    fun updateIsCPUMode(newValue: Boolean) {
-        _state.update { it.copy(isCPUMode = newValue) }
     }
 
     fun execCardGridSound() {

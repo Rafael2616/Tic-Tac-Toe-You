@@ -52,4 +52,11 @@ sealed interface GameEvent {
     data class IsOnlinePlayerTurn(val value: Boolean) : GameEvent
     data class UpdatePlayer1Wins(val value: Int) : GameEvent
     data class UpdatePlayer2Wins(val value: Int) : GameEvent
+    data class UpdatePlayer1NameOnCounter(val name: String) : GameEvent
+    data class UpdatePlayer2NameOnCounter(val name: String) : GameEvent
+    data class UpdatePlayer1Name(val name: String) : GameEvent
+    data class UpdatePlayer2Name(val name: String) : GameEvent
+    data class UpdateCurrentPlayerName(val name: String) : GameEvent
+    data class IsTimerOn(val value: Boolean) : GameEvent
+    object ExecUIClickSound : GameEvent
 }
