@@ -211,7 +211,7 @@ class GameViewModel @Inject constructor(
             GameEvent.GetRemotePlayers -> {
                 viewModelScope.launch(Dispatchers.IO) {
                     val response = repository.getRemotePlayers()
-                    if (response.first != null) {
+                    response.first?.let {
                         availablePlayers = response.first!!
                         val possiblePlayers: List<Player> = availablePlayers.map {
                             it.filter { players ->
@@ -246,7 +246,7 @@ class GameViewModel @Inject constructor(
             GameEvent.GetOnlineGameState -> {
                 viewModelScope.launch(Dispatchers.IO) {
                     val response = repository.getGameState()
-                    if (response.first != null) {
+                    response.first?.let {
                         onlineGameState = response.first
                         _state.update {
                             it.copy(
@@ -292,7 +292,7 @@ class GameViewModel @Inject constructor(
                         localPlayer1 = value,
                     )
                 }
-                this@GameViewModel.onEvent(GameEvent.GetRemotePlayers)
+                this.onEvent(GameEvent.GetRemotePlayers)
             }
             GameEvent.StartOnlineMatch -> {
                 _state.update {
