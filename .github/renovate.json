@@ -12,6 +12,24 @@
       "matchPackagePatterns": [
         "org.jetbrains.kotlin.*"
       ]
+    },
+    {
+      "groupName": "Dagger Hilt",
+      "matchPackagePrefixes": [
+        "com.google.dagger.hilt.android"
+      ],
+      "matchPackagePatterns": [
+        "com.google.dagger:hilt-*"
+      ]
+    },
+    {
+      "groupName": "Room",
+      "matchPackagePrefixes": [
+        "androidx.room"
+      ],
+      "matchPackagePatterns": [
+        "androidx.room:room-*"
+      ]
     }
   ]
 }
