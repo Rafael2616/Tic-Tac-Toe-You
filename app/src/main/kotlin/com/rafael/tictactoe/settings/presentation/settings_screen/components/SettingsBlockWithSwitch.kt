@@ -92,7 +92,7 @@ fun SettingsBlockWithSwitch(
                 ) {
                     Box(
                         modifier = Modifier
-                            .height(60.dp)
+                            .height(58.dp)
                             .fillMaxWidth()
                             .clickable {
                                 toggleSettingsUseCase(

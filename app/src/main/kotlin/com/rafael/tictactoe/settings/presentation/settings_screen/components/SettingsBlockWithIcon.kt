@@ -98,7 +98,7 @@ fun SettingsBlockWithIcon(
         ) {
             settings.forEachIndexed { index, setting ->
                 val rowHeight by animateDpAsState(
-                    if (groupType == SettingsGroup.Others && index == 0 && isAboutShown) 130.dp else 60.dp,
+                    if (groupType == SettingsGroup.Others && index == 0 && isAboutShown) 130.dp else 58.dp,
                 )
                 Box(
                     modifier = Modifier
