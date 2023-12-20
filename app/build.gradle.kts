@@ -124,7 +124,7 @@ configure<SpotlessExtension> {
 dependencies {
     val lifecycleVersion = "2.6.2"
     val roomVersion = "2.6.1"
-    val hiltVersion = "2.49"
+    val hiltVersion = "2.50"
     val media3Version = "1.2.0"
 
     // Todo: remove this when compose bom 2023.12.00 is released
