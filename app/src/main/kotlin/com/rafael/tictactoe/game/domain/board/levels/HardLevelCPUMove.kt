@@ -14,7 +14,7 @@ fun hardLevelCPUMove(state: GameState): Pair<Int, Int> {
     // Represents the clicked state of the card
     val isClicked = state.isCardClicked
 
-    // Represent the player, if false is the player 1, if enabled the player 2
+    // Represent the player, if false is the player 1, if true the player 2
     val card = state.card
 
     val sides = listOf(Pair(0, 1), Pair(1, 0), Pair(1, 2), Pair(2, 1))

@@ -67,5 +67,7 @@
     <string name="match_id">ID de la partida:</string>
     <string name="view_on_github">Ver en Github</string>
     <string name="whats_new">Que hay de nuevo</string>
+    <string name="long_label">Este atajo inicia una partida de juego</string>
+    <string name="disabled_message">Actualmente no es posible jugar en este modo</string>
 
 </resources>

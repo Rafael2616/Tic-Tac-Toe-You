@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <shortcut
+        android:shortcutId="pvp_mode"
+        android:enabled="true"
+        android:icon="@drawable/play_arrow_24px"
+        android:shortcutShortLabel="@string/play"
+        android:shortcutLongLabel="@string/long_label"
+        android:shortcutDisabledMessage="@string/disabled_message">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.rafael.tictactoe.debug"
+            android:targetClass="com.rafael.tictactoe.TicTacToeActivity">
+            <extra android:name="pvp_mode" android:value="static" />
+        </intent>
+    </shortcut>
+
+    <shortcut
+        android:shortcutId="cpu_mode"
+        android:enabled="true"
+        android:icon="@drawable/memory_24px"
+        android:shortcutShortLabel="@string/vs_cpu"
+        android:shortcutLongLabel="@string/long_label"
+        android:shortcutDisabledMessage="@string/disabled_message">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.rafael.tictactoe.debug"
+            android:targetClass="com.rafael.tictactoe.TicTacToeActivity">
+            <extra android:name="cpu_mode" android:value="static" />
+        </intent>
+    </shortcut>
+
+    <shortcut
+        android:shortcutId="online_mode"
+        android:enabled="true"
+        android:icon="@drawable/group_24px"
+        android:shortcutShortLabel="@string/online_match"
+        android:shortcutLongLabel="@string/long_label"
+        android:shortcutDisabledMessage="@string/disabled_message">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.rafael.tictactoe.debug"
+            android:targetClass="com.rafael.tictactoe.TicTacToeActivity">
+            <extra android:name="online_mode" android:value="static" />
+        </intent>
+    </shortcut>
+
+</shortcuts>

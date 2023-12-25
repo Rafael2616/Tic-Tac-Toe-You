@@ -19,7 +19,7 @@
         android:enableOnBackInvokedCallback="true"
         android:isGame="true"
         android:theme="@style/Theme.AppSplash">
-
+    
         <service
             android:name=".common.services.MusicService"
             android:foregroundServiceType="mediaPlayback" />
@@ -33,6 +33,9 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <meta-data android:resource="@xml/shortcuts"
+                android:name="android.app.shortcuts" />
         </activity>
 
     </application>
