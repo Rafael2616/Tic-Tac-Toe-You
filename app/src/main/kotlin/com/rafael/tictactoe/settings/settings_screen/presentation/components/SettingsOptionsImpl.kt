@@ -16,6 +16,7 @@ import androidx.compose.material.icons.filled.ArrowOutward
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material.icons.outlined.BrightnessMedium
+import androidx.compose.material.icons.outlined.Code
 import androidx.compose.material.icons.outlined.DarkMode
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.LightMode
@@ -26,6 +27,7 @@ import androidx.compose.material.icons.outlined.Palette
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.presentation.icons.material.Github
 import com.rafael.tictactoe.settings.domain.enums.SettingsGroup
@@ -39,6 +41,7 @@ fun SettingsOptionsImpl(
     livePadding: PaddingValues,
     onEvent: (SettingsEvent) -> Unit,
     state: SettingsState,
+    navController: NavController,
     modifier: Modifier = Modifier,
 ) {
     val themeSettings = persistentListOf(
@@ -114,6 +117,12 @@ fun SettingsOptionsImpl(
             text = R.string.whats_new,
             trailingIcon = Icons.AutoMirrored.Filled.ArrowForward,
         ),
+        // Licences Activity
+        SettingItem(
+            leadingIcon = Icons.Outlined.Code,
+            text = R.string.open_source_licenses,
+            trailingIcon = Icons.AutoMirrored.Filled.ArrowForward,
+        ),
     )
 
     val lazyState = rememberLazyListState()
@@ -148,6 +157,7 @@ fun SettingsOptionsImpl(
                     groupType = SettingsGroup.Customization,
                     groupName = R.string.group_customization,
                     settings = customizationSettings,
+                    navController = navController,
                 )
                 SettingsGroup.Others -> SettingsBlockWithIcon(
                     state = state,
@@ -155,6 +165,7 @@ fun SettingsOptionsImpl(
                     groupType = SettingsGroup.Others,
                     groupName = R.string.group_others,
                     settings = otherSettings,
+                    navController = navController,
                 )
             }
         }

@@ -67,7 +67,8 @@
     <string name="match_id">ID da partida:</string>
     <string name="view_on_github">Veja no Github</string>
     <string name="whats_new">O que há de novo</string>
-    <string name="long_label">Este atalho inicia uma partida de jogo</string>
+    <string name="long_label">Começar partida</string>
     <string name="disabled_message">Atualmente não é possível jogar neste modo</string>
+    <string name="open_source_licenses">Licenças de código aberto</string>
 
 </resources>

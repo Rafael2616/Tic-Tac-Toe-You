@@ -41,6 +41,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.getVersionCode
 import com.rafael.tictactoe.common.domain.util.getVersionName
@@ -59,6 +60,7 @@ fun SettingsBlockWithIcon(
     groupType: SettingsGroup,
     @StringRes groupName: Int,
     settings: ImmutableList<SettingItem>,
+    navController: NavController,
     modifier: Modifier = Modifier,
 ) {
     val isAboutShown = state.isAboutShown
@@ -106,11 +108,12 @@ fun SettingsBlockWithIcon(
                         .fillMaxWidth()
                         .clickable {
                             toggleSettingsUseCase(
-                                launcher,
                                 groupType,
                                 index,
                                 state,
                                 onEvent,
+                                launcher,
+                                navController,
                             )
                         },
                 ) {

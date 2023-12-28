@@ -67,6 +67,7 @@ fun SettingsTopBar(
             paddingValues,
             onEvent,
             state,
+            navController,
         )
     }
 }

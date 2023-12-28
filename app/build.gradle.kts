@@ -1,4 +1,6 @@
+import app.cash.licensee.LicenseeTask
 import com.diffplug.gradle.spotless.SpotlessExtension
+import java.util.Locale
 import java.util.Properties
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -9,6 +11,8 @@ plugins {
     id("com.google.dagger.hilt.android")
     id("com.google.devtools.ksp")
     id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.plugin.serialization")
+    id("app.cash.licensee")
 }
 
 android {
@@ -101,6 +105,19 @@ android {
     room {
         schemaDirectory("$projectDir/schemas")
     }
+
+    androidComponents.onVariants { variant ->
+        val capName = variant.name.replaceFirstChar { it.titlecase(Locale.ROOT) }
+        val licenseeTask = tasks.named<LicenseeTask>("licenseeAndroid$capName")
+        val copyArtifactsTask = tasks.register<Copy>("copy${capName}Artifacts") {
+            dependsOn(licenseeTask)
+            from(licenseeTask.map { it.outputDir.file("artifacts.json") })
+            into(layout.buildDirectory.dir("generated/dependencyAssets/${variant.name}"))
+        }
+        variant.sources.assets?.addGeneratedSourceDirectory(licenseeTask) {
+            objects.directoryProperty().fileProvider(copyArtifactsTask.map { it.destinationDir })
+        }
+    }
 }
 
 configure<SpotlessExtension> {
@@ -121,6 +138,11 @@ configure<SpotlessExtension> {
     }
 }
 
+licensee {
+    allow("Apache-2.0")
+    allowUrl("https://www.gnu.org/licenses/gpl-3.0.en.html")
+}
+
 dependencies {
     val lifecycleVersion = "2.6.2"
     val roomVersion = "2.6.1"
@@ -133,6 +155,7 @@ dependencies {
     // Kotlin
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2")
     // Android Core
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.activity:activity-compose:1.8.2")
