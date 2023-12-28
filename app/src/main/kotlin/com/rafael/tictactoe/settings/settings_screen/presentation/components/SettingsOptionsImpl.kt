@@ -117,7 +117,7 @@ fun SettingsOptionsImpl(
             text = R.string.whats_new,
             trailingIcon = Icons.AutoMirrored.Filled.ArrowForward,
         ),
-        // Licences Activity
+        // Licences Screen
         SettingItem(
             leadingIcon = Icons.Outlined.Code,
             text = R.string.open_source_licenses,
