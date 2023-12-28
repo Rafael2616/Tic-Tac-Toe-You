@@ -1,0 +1,5 @@
+Added:
+- Library screen with libraries information
+
+Improvements:
+- Rewrite exit game dialog
