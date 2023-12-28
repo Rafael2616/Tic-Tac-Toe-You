@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.presentation.settingsScreen.components
+package com.rafael.tictactoe.settings.settingsScreen.presentation.components
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement
@@ -30,10 +30,10 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.presentation.icons.material.Github
-import com.rafael.tictactoe.settings.domain.enums.SettingsGroup
-import com.rafael.tictactoe.settings.domain.model.SettingItem
-import com.rafael.tictactoe.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.domain.model.SettingsState
+import com.rafael.tictactoe.settings.settingsScreen.domain.enums.SettingsGroup
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingItem
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 import kotlinx.collections.immutable.persistentListOf
 
 @Composable

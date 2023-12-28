@@ -1,9 +1,9 @@
-package com.rafael.tictactoe.settings.data.dao
+package com.rafael.tictactoe.settings.settingsScreen.data.dao
 
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
-import com.rafael.tictactoe.settings.domain.model.SettingsEntity
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEntity
 
 @Dao
 interface SettingsDao {

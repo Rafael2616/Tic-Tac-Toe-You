@@ -42,7 +42,7 @@ import com.rafael.tictactoe.game.domain.model.Error
 import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.domain.model.RequestState
-import com.rafael.tictactoe.settings.domain.model.SettingsState
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 import kotlinx.coroutines.delay
 
 @Composable

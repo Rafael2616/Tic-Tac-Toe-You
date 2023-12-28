@@ -30,8 +30,8 @@ import com.rafael.tictactoe.game.presentation.gameScreen.components.ui.Searching
 import com.rafael.tictactoe.game.presentation.gameScreen.components.ui.VictoryCounter
 import com.rafael.tictactoe.game.presentation.gameScreen.components.ui.WinnerLines
 import com.rafael.tictactoe.game.presentation.gameScreen.viewmodels.GameViewModel
-import com.rafael.tictactoe.settings.presentation.settingsScreen.components.ColorSelectionDialog
-import com.rafael.tictactoe.settings.presentation.settingsScreen.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.settings.settingsScreen.presentation.components.ColorSelectionDialog
+import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodels.SettingsViewModel
 
 @Composable
 fun GameScreen(

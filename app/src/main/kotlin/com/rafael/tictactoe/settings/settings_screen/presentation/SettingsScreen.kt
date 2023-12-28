@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.presentation.settingsScreen
+package com.rafael.tictactoe.settings.settingsScreen.presentation
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
@@ -10,10 +10,10 @@ import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.game.presentation.mainScreen.components.WhatsNewDialog
-import com.rafael.tictactoe.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.presentation.settingsScreen.components.ColorSelectionDialog
-import com.rafael.tictactoe.settings.presentation.settingsScreen.components.SettingsTopBar
-import com.rafael.tictactoe.settings.presentation.settingsScreen.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
+import com.rafael.tictactoe.settings.settingsScreen.presentation.components.ColorSelectionDialog
+import com.rafael.tictactoe.settings.settingsScreen.presentation.components.SettingsTopBar
+import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodels.SettingsViewModel
 
 @Composable
 @ExperimentalMaterial3Api

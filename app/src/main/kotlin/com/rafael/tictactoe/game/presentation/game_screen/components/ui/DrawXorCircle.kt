@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.presentation.utils.draws.drawAnCircle
 import com.rafael.tictactoe.game.presentation.utils.draws.drawX
-import com.rafael.tictactoe.settings.domain.model.SettingsState
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 
 @Composable
 fun DrawXorCircle(

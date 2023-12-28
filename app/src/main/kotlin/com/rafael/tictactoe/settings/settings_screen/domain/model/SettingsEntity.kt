@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.domain.model
+package com.rafael.tictactoe.settings.settingsScreen.domain.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

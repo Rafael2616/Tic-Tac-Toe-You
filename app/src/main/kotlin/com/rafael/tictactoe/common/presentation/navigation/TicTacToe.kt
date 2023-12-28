@@ -20,8 +20,8 @@ import androidx.navigation.compose.rememberNavController
 import com.rafael.tictactoe.common.presentation.theme.AppTheme
 import com.rafael.tictactoe.game.presentation.gameScreen.GameScreen
 import com.rafael.tictactoe.game.presentation.mainScreen.MainScreen
-import com.rafael.tictactoe.settings.presentation.libraryScreen.LibraryScreen
-import com.rafael.tictactoe.settings.presentation.settingsScreen.SettingsScreen
+import com.rafael.tictactoe.settings.libraryScreen.presentation.LibraryScreen
+import com.rafael.tictactoe.settings.settingsScreen.presentation.SettingsScreen
 
 @Composable
 @ExperimentalMaterial3Api

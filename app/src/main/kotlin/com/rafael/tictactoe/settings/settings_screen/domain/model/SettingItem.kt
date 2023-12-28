@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.domain.model
+package com.rafael.tictactoe.settings.settingsScreen.domain.model
 
 import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.vector.ImageVector

@@ -1,11 +1,11 @@
-package com.rafael.tictactoe.settings.data.database
+package com.rafael.tictactoe.settings.settingsScreen.data.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.rafael.tictactoe.settings.data.dao.SettingsDao
-import com.rafael.tictactoe.settings.domain.model.SettingsEntity
+import com.rafael.tictactoe.settings.settingsScreen.data.dao.SettingsDao
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEntity
 
 @Database(
     entities = [SettingsEntity::class],

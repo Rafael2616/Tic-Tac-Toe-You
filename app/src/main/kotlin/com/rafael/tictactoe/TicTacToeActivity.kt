@@ -10,8 +10,8 @@ import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.common.domain.util.AppExceptionHandler
 import com.rafael.tictactoe.common.presentation.navigation.TicTacToe
 import com.rafael.tictactoe.common.services.MusicService
-import com.rafael.tictactoe.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.presentation.settingsScreen.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
+import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodels.SettingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

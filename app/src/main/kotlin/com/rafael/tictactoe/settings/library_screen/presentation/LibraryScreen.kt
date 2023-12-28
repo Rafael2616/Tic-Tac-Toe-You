@@ -1,6 +1,5 @@
-package com.rafael.tictactoe.settings.presentation.libraryScreen
+package com.rafael.tictactoe.settings.libraryScreen.presentation
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -87,7 +86,6 @@ fun LibraryScreen(
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .background(MaterialTheme.colorScheme.surface)
                 .padding(horizontal = 24.dp)
                 .padding(paddingValues),
         ) {

@@ -1,7 +1,7 @@
-package com.rafael.tictactoe.settings.domain.model
+package com.rafael.tictactoe.settings.settingsScreen.domain.model
 
 import androidx.compose.ui.graphics.Color
-import com.rafael.tictactoe.settings.domain.enums.Customization
+import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Customization
 
 sealed interface SettingsEvent {
     object ToggleIsBackgroundMusicOn : SettingsEvent

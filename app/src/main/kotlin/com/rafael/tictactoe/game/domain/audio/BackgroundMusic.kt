@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import com.rafael.tictactoe.common.domain.util.runningServiceVerifier
 import com.rafael.tictactoe.common.services.MusicService
-import com.rafael.tictactoe.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 
 fun backgroundMusic(
     service: MusicService,

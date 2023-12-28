@@ -10,7 +10,7 @@ import com.rafael.tictactoe.game.domain.model.OnlineGameState
 import com.rafael.tictactoe.game.domain.model.Player
 import com.rafael.tictactoe.game.domain.model.RequestState
 import com.rafael.tictactoe.game.domain.repository.GameRepository
-import com.rafael.tictactoe.settings.domain.model.SettingsState
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 import java.io.IOException
 import javax.inject.Inject
 import kotlinx.coroutines.delay

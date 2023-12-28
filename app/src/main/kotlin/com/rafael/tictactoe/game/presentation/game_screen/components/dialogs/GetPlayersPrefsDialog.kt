@@ -77,10 +77,10 @@ import com.rafael.tictactoe.game.domain.model.GameMode
 import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.presentation.utils.draws.drawCircleinDialog
 import com.rafael.tictactoe.game.presentation.utils.draws.drawXinDialog
-import com.rafael.tictactoe.settings.domain.enums.Colors
-import com.rafael.tictactoe.settings.domain.enums.Customization
-import com.rafael.tictactoe.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.domain.model.SettingsState
+import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Colors
+import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Customization
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 
 @Composable
 fun GetPlayersPrefsDialog(

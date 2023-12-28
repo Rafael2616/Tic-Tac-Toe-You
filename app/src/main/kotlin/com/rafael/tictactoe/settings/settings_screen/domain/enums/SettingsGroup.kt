@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.domain.enums
+package com.rafael.tictactoe.settings.settingsScreen.domain.enums
 
 enum class SettingsGroup {
     Theme,

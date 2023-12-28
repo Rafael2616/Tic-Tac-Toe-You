@@ -28,8 +28,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rafael.tictactoe.game.domain.model.CPUDifficultyLevel
 import com.rafael.tictactoe.game.domain.model.GameState
-import com.rafael.tictactoe.settings.domain.enums.Colors
-import com.rafael.tictactoe.settings.domain.model.SettingsState
+import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Colors
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 
 @Composable
 fun DifficultyLevelIndicator(

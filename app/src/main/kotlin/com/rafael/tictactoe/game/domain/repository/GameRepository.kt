@@ -5,7 +5,7 @@ import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.domain.model.OnlineGameState
 import com.rafael.tictactoe.game.domain.model.Player
 import com.rafael.tictactoe.game.domain.model.RequestState
-import com.rafael.tictactoe.settings.domain.model.SettingsState
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 import kotlinx.coroutines.flow.Flow
 
 interface GameRepository {

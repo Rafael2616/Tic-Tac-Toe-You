@@ -8,7 +8,7 @@ import com.rafael.tictactoe.game.data.database.GameDatabase
 import com.rafael.tictactoe.game.data.repository.GameRepositoryImpl
 import com.rafael.tictactoe.game.domain.repository.GameRepository
 import com.rafael.tictactoe.game.presentation.gameScreen.viewmodels.GameViewModel
-import com.rafael.tictactoe.settings.presentation.settingsScreen.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodels.SettingsViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

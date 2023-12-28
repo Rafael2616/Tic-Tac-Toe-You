@@ -1,8 +1,8 @@
-package com.rafael.tictactoe.settings.domain.util
+package com.rafael.tictactoe.settings.settingsScreen.domain.util
 
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
-import com.rafael.tictactoe.settings.domain.enums.SettingsGroup
+import com.rafael.tictactoe.settings.settingsScreen.domain.enums.SettingsGroup
 
 class ComponentValidator {
 

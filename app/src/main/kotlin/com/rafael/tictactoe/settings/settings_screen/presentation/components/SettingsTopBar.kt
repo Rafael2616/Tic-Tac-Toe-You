@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.presentation.settingsScreen.components
+package com.rafael.tictactoe.settings.settingsScreen.presentation.components
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
@@ -20,8 +20,8 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.domain.model.SettingsState
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 
 @Composable
 @ExperimentalMaterial3Api

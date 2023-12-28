@@ -6,7 +6,7 @@ import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.model.GameState
-import com.rafael.tictactoe.settings.domain.model.SettingsState
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 
 fun cardGridSound(
     context: Context,

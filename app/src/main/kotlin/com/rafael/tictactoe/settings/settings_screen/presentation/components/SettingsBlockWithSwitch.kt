@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.presentation.settingsScreen.components
+package com.rafael.tictactoe.settings.settingsScreen.presentation.components
 
 import android.content.res.Configuration
 import androidx.annotation.StringRes
@@ -34,12 +34,12 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.rafael.tictactoe.settings.domain.enums.SettingsGroup
-import com.rafael.tictactoe.settings.domain.model.SettingItem
-import com.rafael.tictactoe.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.domain.model.SettingsState
-import com.rafael.tictactoe.settings.domain.useCases.toggleSettingsUseCase
-import com.rafael.tictactoe.settings.domain.util.ComponentValidator
+import com.rafael.tictactoe.settings.settingsScreen.domain.enums.SettingsGroup
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingItem
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
+import com.rafael.tictactoe.settings.settingsScreen.domain.useCases.toggleSettingsUseCase
+import com.rafael.tictactoe.settings.settingsScreen.domain.util.ComponentValidator
 import kotlinx.collections.immutable.ImmutableList
 
 @Composable
@@ -80,7 +80,7 @@ fun SettingsBlockWithSwitch(
             ),
             modifier = Modifier
                 .animateContentSize()
-                .fillMaxWidth(if (isInLandscape) 0.65f else 0.9f)
+                .fillMaxWidth(if (isInLandscape) 0.65f else 0.92f)
                 .clip(RoundedCornerShape(26.dp)),
         ) {
             settings.forEachIndexed { index, setting ->

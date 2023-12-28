@@ -36,7 +36,7 @@ import androidx.compose.ui.window.Dialog
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.getChangelogFile
 import com.rafael.tictactoe.common.domain.util.getVersionName
-import com.rafael.tictactoe.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 
 @Suppress("ktlint:compose:modifier-not-used-at-root")
 @Composable

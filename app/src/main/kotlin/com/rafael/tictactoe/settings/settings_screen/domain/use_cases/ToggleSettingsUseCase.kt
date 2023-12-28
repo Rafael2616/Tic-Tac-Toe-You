@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.domain.useCases
+package com.rafael.tictactoe.settings.settingsScreen.domain.useCases
 
 import android.content.Intent
 import android.net.Uri
@@ -6,10 +6,10 @@ import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.activity.result.ActivityResult
 import androidx.navigation.NavController
 import com.rafael.tictactoe.common.presentation.navigation.Destinations
-import com.rafael.tictactoe.settings.domain.enums.Customization
-import com.rafael.tictactoe.settings.domain.enums.SettingsGroup
-import com.rafael.tictactoe.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.domain.model.SettingsState
+import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Customization
+import com.rafael.tictactoe.settings.settingsScreen.domain.enums.SettingsGroup
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 
 fun toggleSettingsUseCase(
     groupType: SettingsGroup,

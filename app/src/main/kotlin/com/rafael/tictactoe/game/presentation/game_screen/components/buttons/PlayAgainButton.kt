@@ -30,8 +30,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.model.GameEvent
-import com.rafael.tictactoe.settings.domain.enums.Colors
-import com.rafael.tictactoe.settings.domain.model.SettingsState
+import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Colors
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 
 @Composable
 fun PlayAgainButton(

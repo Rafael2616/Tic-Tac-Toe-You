@@ -1,10 +1,10 @@
-package com.rafael.tictactoe.settings.domain.useCases
+package com.rafael.tictactoe.settings.settingsScreen.domain.useCases
 
 import androidx.compose.ui.graphics.Color
-import com.rafael.tictactoe.settings.domain.enums.Colors
-import com.rafael.tictactoe.settings.domain.enums.Customization
-import com.rafael.tictactoe.settings.domain.enums.IColor
-import com.rafael.tictactoe.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Colors
+import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Customization
+import com.rafael.tictactoe.settings.settingsScreen.domain.enums.IColor
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 
 fun colorSelectionUseCase(
     customization: Customization,

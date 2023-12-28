@@ -4,11 +4,11 @@ import android.app.Application
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.room.Room
 import com.rafael.tictactoe.common.services.MusicService
-import com.rafael.tictactoe.settings.data.database.Migrations
-import com.rafael.tictactoe.settings.data.database.SettingsDatabase
-import com.rafael.tictactoe.settings.data.repository.SettingsRepositoryImpl
-import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
-import com.rafael.tictactoe.settings.presentation.settingsScreen.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.settings.settingsScreen.data.database.Migrations
+import com.rafael.tictactoe.settings.settingsScreen.data.database.SettingsDatabase
+import com.rafael.tictactoe.settings.settingsScreen.data.repository.SettingsRepositoryImpl
+import com.rafael.tictactoe.settings.settingsScreen.domain.repository.SettingsRepository
+import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodels.SettingsViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

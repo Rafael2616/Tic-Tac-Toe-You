@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.presentation.settingsScreen.viewmodels
+package com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodels
 
 import android.app.Application
 import androidx.compose.ui.graphics.Color
@@ -9,11 +9,11 @@ import com.rafael.tictactoe.common.domain.util.getVersionName
 import com.rafael.tictactoe.common.domain.util.uiClickSound
 import com.rafael.tictactoe.common.services.MusicService
 import com.rafael.tictactoe.game.domain.audio.backgroundMusic
-import com.rafael.tictactoe.settings.domain.enums.Colors
-import com.rafael.tictactoe.settings.domain.model.SettingsEntity
-import com.rafael.tictactoe.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.domain.model.SettingsState
-import com.rafael.tictactoe.settings.domain.repository.SettingsRepository
+import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Colors
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEntity
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
+import com.rafael.tictactoe.settings.settingsScreen.domain.repository.SettingsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers

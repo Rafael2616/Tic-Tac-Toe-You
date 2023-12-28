@@ -31,14 +31,14 @@
 -keep class * extends androidx.room.util.CursorUtil
 -keep class * extends androidx.room.RoomSQLiteOpenHelper
 -keep class * extends androidx.room.util.TableInfo
--keep class com.rafael.tictactoe.settings.data.database.SettingsDatabase
--keep class com.rafael.tictactoe.settings.data.database.Migrations
--keep class com.rafael.tictactoe.settings.data.database.Migrations.Migration1To2
+-keep class com.rafael.tictactoe.settings.settingsScreen.data.database.SettingsDatabase
+-keep class com.rafael.tictactoe.settings.settingsScreen.data.database.Migrations
+-keep class com.rafael.tictactoe.settings.settingsScreen.data.database.Migrations.Migration1To2
 
--keepclassmembers class com.rafael.tictactoe.settings.data.database.Migrations.Migration1To2 {
+-keepclassmembers class com.rafael.tictactoe.settings.settingsScreen.data.database.Migrations.Migration1To2 {
     public void migrate(androidx.sqlite.db.SupportSQLiteDatabase);
 }
--keepclassmembers class com.rafael.tictactoe.settings.data.database.Migrations.Migration1To2 {
+-keepclassmembers class com.rafael.tictactoe.settings.settingsScreen.data.database.Migrations.Migration1To2 {
     public static final java.lang.String addAppVersion;
     public static final java.lang.String addSelectedWinnerLineColor;
     public static final java.lang.String addSelectedXColor;

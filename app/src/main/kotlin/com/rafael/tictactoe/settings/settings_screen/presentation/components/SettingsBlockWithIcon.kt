@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.presentation.settingsScreen.components
+package com.rafael.tictactoe.settings.settingsScreen.presentation.components
 
 import android.content.res.Configuration
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -45,12 +45,12 @@ import androidx.navigation.NavController
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.getVersionCode
 import com.rafael.tictactoe.common.domain.util.getVersionName
-import com.rafael.tictactoe.settings.domain.enums.SettingsGroup
-import com.rafael.tictactoe.settings.domain.model.SettingItem
-import com.rafael.tictactoe.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.domain.model.SettingsState
-import com.rafael.tictactoe.settings.domain.useCases.toggleSettingsUseCase
-import com.rafael.tictactoe.settings.domain.util.ComponentValidator
+import com.rafael.tictactoe.settings.settingsScreen.domain.enums.SettingsGroup
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingItem
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
+import com.rafael.tictactoe.settings.settingsScreen.domain.useCases.toggleSettingsUseCase
+import com.rafael.tictactoe.settings.settingsScreen.domain.util.ComponentValidator
 import kotlinx.collections.immutable.ImmutableList
 
 @Composable
@@ -95,7 +95,7 @@ fun SettingsBlockWithIcon(
                 containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp),
             ),
             modifier = Modifier
-                .fillMaxWidth(if (isInLandscape) 0.65f else 0.9f)
+                .fillMaxWidth(if (isInLandscape) 0.65f else 0.92f)
                 .clip(RoundedCornerShape(26.dp)),
         ) {
             settings.forEachIndexed { index, setting ->
