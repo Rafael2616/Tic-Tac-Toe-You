@@ -5,8 +5,8 @@
         android:shortcutId="pvp_mode"
         android:enabled="true"
         android:icon="@drawable/play_arrow_24px"
-        android:shortcutShortLabel="@string/play"
-        android:shortcutLongLabel="@string/long_label"
+        android:shortcutShortLabel="@string/short_label"
+        android:shortcutLongLabel="@string/play"
         android:shortcutDisabledMessage="@string/disabled_message">
         <intent
             android:action="android.intent.action.VIEW"
@@ -20,8 +20,8 @@
         android:shortcutId="cpu_mode"
         android:enabled="true"
         android:icon="@drawable/memory_24px"
-        android:shortcutShortLabel="@string/vs_cpu"
-        android:shortcutLongLabel="@string/long_label"
+        android:shortcutShortLabel="@string/short_label"
+        android:shortcutLongLabel="@string/vs_cpu"
         android:shortcutDisabledMessage="@string/disabled_message">
         <intent
             android:action="android.intent.action.VIEW"
@@ -35,8 +35,8 @@
         android:shortcutId="online_mode"
         android:enabled="true"
         android:icon="@drawable/group_24px"
-        android:shortcutShortLabel="@string/online_match"
-        android:shortcutLongLabel="@string/long_label"
+        android:shortcutShortLabel="@string/short_label"
+        android:shortcutLongLabel="@string/online_match"
         android:shortcutDisabledMessage="@string/disabled_message">
         <intent
             android:action="android.intent.action.VIEW"

@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -71,7 +72,7 @@ fun WhatsNewDialog(
                 Column(
                     modifier = Modifier
                         .padding(16.dp)
-                        .height(270.dp)
+                        .height(265.dp)
                         .fillMaxWidth()
                         .verticalScroll(rememberScrollState()),
                 ) {
@@ -115,18 +116,17 @@ fun WhatsNewDialog(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(45.dp),
+                        .height(50.dp),
                     contentAlignment = Alignment.BottomEnd,
                 ) {
                     Button(
-                        modifier = Modifier.padding(end = 16.dp, bottom = 6.dp),
+                        modifier = Modifier.padding(end = 16.dp, bottom = 10.dp),
+                        contentPadding = PaddingValues(horizontal = 12.dp),
                         onClick = {
                             onEvent(SettingsEvent.HideWhatsNewDialog)
                         },
                     ) {
-                        Text(
-                            text = stringResource(android.R.string.ok),
-                        )
+                        Text(stringResource(R.string.close))
                     }
                 }
             }
