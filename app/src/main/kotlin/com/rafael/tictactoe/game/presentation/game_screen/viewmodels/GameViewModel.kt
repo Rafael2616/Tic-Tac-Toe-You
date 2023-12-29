@@ -283,7 +283,7 @@ class GameViewModel @Inject constructor(
                 _state.update { it.copy(requestState = event.state) }
             }
             GameEvent.UpdateIsYouPlayer1 -> {
-                val isYouPlayer1 = (1..3).random()
+                val isYouPlayer1 = (1..2).random()
                 val value = if (isYouPlayer1 == 1) true else false
 
                 _state.update {
