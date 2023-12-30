@@ -41,12 +41,11 @@ class GameRepositoryImpl @Inject constructor(
     override suspend fun getRemotePlayers(): Pair<List<Player>?, RequestState> {
         try {
             val response = gameService.getPlayers()
-            Log.e(TAG, "Response code: ${response.code()}")
-            Log.e(TAG, "Response body: ${response.body()?.toString()}")
+            Log.d(TAG, "Response code: ${response.code()}")
+            Log.d(TAG, "Response body: ${response.body()?.toString()}")
             delay(2000L)
             if (response.isSuccessful && response.body() != null) {
-                val players = response.body()!!
-                return Pair(players, RequestState.Success)
+                return Pair(response.body()!!, RequestState.Success)
             } else {
                 if (!response.isSuccessful) {
                     throw IOException("Request failed with code: " + response.code() + response.message())
