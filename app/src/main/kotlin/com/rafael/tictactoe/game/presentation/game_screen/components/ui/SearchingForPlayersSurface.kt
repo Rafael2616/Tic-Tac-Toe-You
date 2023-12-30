@@ -156,7 +156,7 @@ fun SearchingForPlayersSurface(
                     .fillMaxWidth(0.9f)
                     .weight(0.4f),
                 text = if (requestState == RequestState.Success) {
-                    stringResource(R.string.player_n) + " ${gameState.secondPlayer!!.name}"
+                    stringResource(R.string.player_n) + " ${gameState.secondPlayer?.name ?: "null"}"
                 } else {
                     ""
                 },
@@ -166,11 +166,11 @@ fun SearchingForPlayersSurface(
             )
 
             var timer by rememberSaveable { mutableIntStateOf(4) }
-            LaunchedEffect(Unit) {
-                if (requestState == RequestState.Success) {
+            if (requestState == RequestState.Success) {
+                LaunchedEffect(timer >= 0) {
                     while (timer >= 0) {
                         timer--
-                        delay(900L)
+                        delay(950L)
                         if (timer == 0) {
                             onEvent(GameEvent.StartOnlineMatch)
                         }

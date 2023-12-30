@@ -13,8 +13,8 @@ import retrofit2.http.Path
 
 interface OnlineGameDao {
 
-    @GET("/players")
-    suspend fun getPlayers(): Response<Flow<List<Player>>>
+    @GET("/data")
+    suspend fun getPlayers(): Response<List<Player>>
 
     @POST("/postPlayer")
     suspend fun postPlayer(@Body player: Player): Response<Unit>

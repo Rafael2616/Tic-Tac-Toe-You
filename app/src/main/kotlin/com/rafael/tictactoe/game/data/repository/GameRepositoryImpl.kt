@@ -38,12 +38,15 @@ class GameRepositoryImpl @Inject constructor(
     }
 
     // Internet data by Retrofit
-    override suspend fun getRemotePlayers(): Pair<Flow<List<Player>>?, RequestState> {
+    override suspend fun getRemotePlayers(): Pair<List<Player>?, RequestState> {
         try {
             val response = gameService.getPlayers()
+            Log.e(TAG, "Response code: ${response.code()}")
+            Log.e(TAG, "Response body: ${response.body()?.toString()}")
             delay(2000L)
             if (response.isSuccessful && response.body() != null) {
-                return Pair(response.body()!!, RequestState.Success)
+                val players = response.body()!!
+                return Pair(players, RequestState.Success)
             } else {
                 if (!response.isSuccessful) {
                     throw IOException("Request failed with code: " + response.code() + response.message())
@@ -53,12 +56,19 @@ class GameRepositoryImpl @Inject constructor(
                     throw IOException("Request failed with code: " + response.code() + message)
                 }
             }
-        } catch (e: IOException) {
-            Log.e(TAG, "IO error: $e")
-            return Pair(null, RequestState.Failure(Error.IOError, e.toString()))
-        } catch (e: HttpException) {
-            Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
-            return Pair(null, RequestState.Failure(Error.HttpError, e.message(), e.code()))
+        } catch (e: Exception) {
+            if (e is IOException) {
+                Log.e(TAG, "IO error: $e")
+                return Pair(null, RequestState.Failure(Error.IOError, e.toString()))
+            }
+            if (e is HttpException) {
+                Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
+                return Pair(null, RequestState.Failure(Error.HttpError, e.message(), e.code()))
+            }
+            if (e is IllegalStateException) {
+                Log.e(TAG, "IllegalStateException error: $e")
+                return Pair(null, RequestState.Failure(Error.IOError, e.toString()))
+            }
         }
         return Pair(null, RequestState.Loading)
     }
@@ -69,8 +79,8 @@ class GameRepositoryImpl @Inject constructor(
                 Player(
                     id = state.matchID,
                     name = if (state.localPlayer1) state.player1Name else state.player2Name,
-                    color = if (state.isXFor1) settingsState.xColor else settingsState.circleColor,
-                    isXImage = state.isXImage,
+                    color = if (state.isXFor1) settingsState.selectedXColor else settingsState.selectedCircleColor,
+                    isXFor1 = state.isXFor1,
                     isPlayer1 = state.isYouPlayer1,
                 ),
             )

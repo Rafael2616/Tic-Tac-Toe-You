@@ -34,7 +34,7 @@ class RetrofitModule {
         gsonConverterFactory: GsonConverterFactory,
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://example.com/")
+            .baseUrl("https://retoolapi.dev/IdekO9/")
             .client(okHttpClient)
             .addConverterFactory(gsonConverterFactory)
             .build()

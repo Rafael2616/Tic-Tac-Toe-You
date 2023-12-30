@@ -44,7 +44,6 @@ class GameViewModel @Inject constructor(
 
     private val _state = MutableStateFlow(GameState())
     val state = _state.asStateFlow()
-    var availablePlayers: Flow<List<Player>> = flow { emit(emptyList()) }
     var onlineGameState: Flow<OnlineGameState>? = null
 
     fun onEvent(event: GameEvent) {
@@ -211,8 +210,8 @@ class GameViewModel @Inject constructor(
             GameEvent.GetRemotePlayers -> {
                 viewModelScope.launch(Dispatchers.IO) {
                     val response = repository.getRemotePlayers()
-                    response.first?.let {
-                        availablePlayers = response.first!!
+                    response.first?.let { players ->
+                        val availablePlayers: Flow<List<Player>> = flow { emit(players) }
                         val possiblePlayers: List<Player> = availablePlayers.map {
                             it.filter { players ->
                                 players.isPlayer1 == !state.value.isYouPlayer1
@@ -220,6 +219,30 @@ class GameViewModel @Inject constructor(
                         }.first()
                         val randomPlayer = (0..possiblePlayers.size - 1).random()
                         _state.update { it.copy(secondPlayer = possiblePlayers[randomPlayer]) }
+
+                        val onlinePlayerName = state.value.secondPlayer!!.name
+                        _state.update {
+                            it.copy(
+                                currentPlayerName = onlinePlayerName,
+                                isXFor1 = !state.value.secondPlayer!!.isXFor1,
+                            )
+                            if (state.value.secondPlayer!!.isPlayer1) {
+                                it.copy(
+                                    player1Name = onlinePlayerName,
+                                    player1NameOnCounter = onlinePlayerName,
+                                )
+                            } else {
+                                it.copy(
+                                    player2Name = onlinePlayerName,
+                                    player2NameOnCounter = onlinePlayerName,
+                                )
+                            }
+                        }
+                        if (state.value.secondPlayer!!.isXFor1) {
+                            settingsVM.onEvent(SettingsEvent.SetXColor(settingsVM.Color(state.value.secondPlayer!!.color)))
+                        } else {
+                            settingsVM.onEvent(SettingsEvent.SetCircleColor(settingsVM.Color(state.value.secondPlayer!!.color)))
+                        }
                     }
                     _state.update { it.copy(requestState = response.second) }
                     this.cancel()
