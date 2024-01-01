@@ -22,6 +22,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import com.rafael.tictactoe.game.domain.model.GameEvent
@@ -64,6 +65,7 @@ fun GameBoard(
                             .weight(1f)
                             .padding(6.dp)
                             .size(114.dp)
+                            .shadow(10.dp, RoundedCornerShape(26.dp))
                             .clip(RoundedCornerShape(26.dp))
                             .clickable {
                                 onEvent(GameEvent.ClickOnGameBoard(rowIndex, cardIndex))

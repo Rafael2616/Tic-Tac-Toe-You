@@ -30,6 +30,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
@@ -96,6 +97,7 @@ fun MainOptions(
                 modifier = Modifier
                     .fillMaxWidth(if (orientation == Configuration.ORIENTATION_LANDSCAPE) 0.3f else 0.6f)
                     .height(58.dp)
+                    .shadow(8.dp, RoundedCornerShape(36.dp))
                     .clip(RoundedCornerShape(36.dp))
                     .clickable {
                         onEvent(GameEvent.ExecUIClickSound)
