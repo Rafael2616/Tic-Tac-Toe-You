@@ -1,7 +1,7 @@
 import app.cash.licensee.LicenseeTask
 import com.diffplug.gradle.spotless.SpotlessExtension
-import java.util.Locale
 import java.util.Properties
+import org.gradle.configurationcache.extensions.capitalized
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -107,9 +107,9 @@ android {
     }
 
     androidComponents.onVariants { variant ->
-        val capName = variant.name.replaceFirstChar { it.titlecase(Locale.ROOT) }
-        val licenseeTask = tasks.named<LicenseeTask>("licenseeAndroid$capName")
-        val copyArtifactsTask = tasks.register<Copy>("copy${capName}Artifacts") {
+        val variantNameCapt = variant.name.capitalized()
+        val licenseeTask = tasks.named<LicenseeTask>("licenseeAndroid$variantNameCapt")
+        val copyArtifactsTask = tasks.register<Copy>("copy${variantNameCapt}Artifacts") {
             dependsOn(licenseeTask)
             from(licenseeTask.map { it.outputDir.file("artifacts.json") })
             into(layout.buildDirectory.dir("generated/dependencyAssets/${variant.name}"))
