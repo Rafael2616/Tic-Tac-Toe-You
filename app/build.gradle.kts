@@ -36,15 +36,15 @@ android {
     }
 
     val releaseSigningConfigsFile = rootProject.file(".env")
-    val props = Properties()
+    val keystoreProperties = Properties()
     val releaseSigningConfig =
         if (releaseSigningConfigsFile.exists()) {
-            props.load(releaseSigningConfigsFile.inputStream())
+            keystoreProperties.load(releaseSigningConfigsFile.inputStream())
             signingConfigs.create("release") {
-                storeFile = file(props.getProperty("KEYSTORE"))
-                storePassword = props.getProperty("KEYSTORE_PASSWORD")
-                keyAlias = props.getProperty("KEY_ALIAS")
-                keyPassword = props.getProperty("KEY_PASSWORD")
+                storeFile = file(keystoreProperties.getProperty("KEYSTORE"))
+                storePassword = keystoreProperties.getProperty("KEYSTORE_PASSWORD")
+                keyAlias = keystoreProperties.getProperty("KEY_ALIAS")
+                keyPassword = keystoreProperties.getProperty("KEY_PASSWORD")
                 enableV3Signing = true
             }
         } else {
