@@ -1,4 +1,5 @@
 import app.cash.licensee.LicenseeTask
+import com.android.build.gradle.internal.api.ApkVariantOutputImpl
 import com.diffplug.gradle.spotless.SpotlessExtension
 import java.util.Properties
 import org.gradle.configurationcache.extensions.capitalized
@@ -116,6 +117,13 @@ android {
         }
         variant.sources.assets?.addGeneratedSourceDirectory(licenseeTask) {
             objects.directoryProperty().fileProvider(copyArtifactsTask.map { it.destinationDir })
+        }
+    }
+
+    applicationVariants.all {
+        outputs.all {
+            (this as? ApkVariantOutputImpl)?.outputFileName =
+                "TicTacToe-You v$versionName.apk"
         }
     }
 }
