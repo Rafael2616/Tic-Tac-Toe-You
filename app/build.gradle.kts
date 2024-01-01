@@ -2,7 +2,6 @@ import app.cash.licensee.LicenseeTask
 import com.android.build.gradle.internal.api.ApkVariantOutputImpl
 import com.diffplug.gradle.spotless.SpotlessExtension
 import java.util.Properties
-import org.gradle.configurationcache.extensions.capitalized
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -108,7 +107,7 @@ android {
     }
 
     androidComponents.onVariants { variant ->
-        val variantNameCapt = variant.name.capitalized()
+        val variantNameCapt = variant.name.replaceFirstChar { it.uppercase() }
         val licenseeTask = tasks.named<LicenseeTask>("licenseeAndroid$variantNameCapt")
         val copyArtifactsTask = tasks.register<Copy>("copy${variantNameCapt}Artifacts") {
             dependsOn(licenseeTask)
