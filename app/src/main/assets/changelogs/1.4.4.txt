@@ -3,3 +3,7 @@ Added:
 
 Improvements:
 - Rewrite exit game dialog
+- UI tweaks
+
+Fixes:
+- Various fixes for online game mode
