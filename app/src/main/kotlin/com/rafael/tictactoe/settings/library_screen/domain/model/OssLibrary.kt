@@ -6,6 +6,7 @@ import kotlinx.serialization.Serializable
 data class OssLibrary(
     val groupId: String,
     val artifactId: String,
+    val version: String,
     val name: String = "unknown",
     val spdxLicenses: List<License>? = null,
     val unknownLicenses: List<License>? = null,
