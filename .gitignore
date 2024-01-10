@@ -86,4 +86,4 @@ lint/tmp/
 # Others files
 .git/
 .androidide/
-.env
+keystore.properties
