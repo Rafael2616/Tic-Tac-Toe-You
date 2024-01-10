@@ -177,7 +177,7 @@ dependencies {
     implementation("androidx.compose.animation:animation:$m3Version")
     implementation("androidx.compose.foundation:foundation:$m3Version")
     implementation("androidx.compose.material:material-icons-extended:$m3Version")
-    implementation("androidx.compose.material3:material3:1.2.0-beta01")
+    implementation("androidx.compose.material3:material3:1.2.0-beta02")
     implementation("androidx.compose.runtime:runtime:$m3Version")
     implementation("androidx.compose.ui:ui:$m3Version")
     // Navigation
