@@ -151,7 +151,7 @@ licensee {
 }
 
 dependencies {
-    val lifecycleVersion = "2.6.2"
+    val lifecycleVersion = "2.7.0"
     val roomVersion = "2.6.1"
     val hiltVersion = "2.50"
     val media3Version = "1.2.0"
