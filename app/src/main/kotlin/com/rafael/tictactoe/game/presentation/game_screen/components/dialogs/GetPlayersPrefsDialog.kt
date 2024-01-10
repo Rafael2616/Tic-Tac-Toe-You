@@ -168,7 +168,8 @@ fun GetPlayersPrefsDialog(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 8.dp, bottom = 6.dp, start = 14.dp, end = 14.dp)
+                        .padding(top = 8.dp, bottom = 6.dp),
+                        .padding(horizontal = 14.dp),
                         .then(
                             if (state.gameMode == GameMode.Online) {
                                 Modifier.padding(horizontal = 15.dp)

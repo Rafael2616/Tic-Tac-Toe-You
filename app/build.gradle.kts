@@ -35,27 +35,26 @@ android {
         }
     }
 
-    val releaseSigningConfigsFile = rootProject.file(".env")
+    val releaseSigningFile = rootProject.file("keystore.properties")
     val keystoreProperties = Properties()
-    val releaseSigningConfig =
-        if (releaseSigningConfigsFile.exists()) {
-            keystoreProperties.load(releaseSigningConfigsFile.inputStream())
-            signingConfigs.create("release") {
-                storeFile = file(keystoreProperties.getProperty("KEYSTORE"))
-                storePassword = keystoreProperties.getProperty("KEYSTORE_PASSWORD")
-                keyAlias = keystoreProperties.getProperty("KEY_ALIAS")
-                keyPassword = keystoreProperties.getProperty("KEY_PASSWORD")
-                enableV3Signing = true
-            }
-        } else {
-            signingConfigs.create("release") {
-                storeFile = file("tictactoekey.jks")
-                storePassword = System.getenv("KEYSTORE_PASSWORD")
-                keyAlias = System.getenv("KEY_ALIAS")
-                keyPassword = System.getenv("KEY_PASSWORD")
-                enableV3Signing = true
-            }
+    val releaseSigningConfig = if (releaseSigningFile.exists()) {
+        keystoreProperties.load(releaseSigningFile.inputStream())
+        signingConfigs.create("release") {
+            storeFile = file(keystoreProperties.getProperty("KEYSTORE"))
+            storePassword = keystoreProperties.getProperty("KEYSTORE_PASSWORD")
+            keyAlias = keystoreProperties.getProperty("KEY_ALIAS")
+            keyPassword = keystoreProperties.getProperty("KEY_PASSWORD")
+            enableV3Signing = true
         }
+    } else {
+        signingConfigs.create("release") {
+            storeFile = file("tictactoekey.jks")
+            storePassword = System.getenv("KEYSTORE_PASSWORD")
+            keyAlias = System.getenv("KEY_ALIAS")
+            keyPassword = System.getenv("KEY_PASSWORD")
+            enableV3Signing = true
+        }
+    }
 
     buildTypes {
         create("beta") {
