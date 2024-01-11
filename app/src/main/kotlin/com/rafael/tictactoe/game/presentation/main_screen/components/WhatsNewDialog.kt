@@ -98,6 +98,7 @@ fun WhatsNewDialog(
                         Icon(
                             imageVector = Icons.Outlined.NewReleases,
                             contentDescription = "New Releases",
+                            tint = MaterialTheme.colorScheme.onSurface,
                             modifier = Modifier
                                 .size(35.dp),
                         )

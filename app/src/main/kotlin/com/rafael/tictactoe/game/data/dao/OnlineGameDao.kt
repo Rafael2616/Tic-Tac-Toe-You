@@ -2,6 +2,7 @@ package com.rafael.tictactoe.game.data.dao
 
 import com.rafael.tictactoe.game.domain.model.OnlineGameState
 import com.rafael.tictactoe.game.domain.model.Player
+import kotlin.collections.ArrayList
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 import retrofit2.http.Body
@@ -14,7 +15,7 @@ import retrofit2.http.Path
 interface OnlineGameDao {
 
     @GET("/data")
-    suspend fun getPlayers(): Response<List<Player>>
+    suspend fun getPlayers(): Response<ArrayList<Player>>
 
     @POST("/postPlayer")
     suspend fun postPlayer(@Body player: Player): Response<Unit>
