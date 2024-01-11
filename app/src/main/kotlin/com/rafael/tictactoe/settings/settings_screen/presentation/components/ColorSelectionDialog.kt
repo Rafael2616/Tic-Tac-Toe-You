@@ -205,6 +205,7 @@ fun ColorSelectionDialog(
                                     },
                                     overflow = TextOverflow.Ellipsis,
                                     textAlign = TextAlign.Center,
+                                    color = MaterialTheme.colorScheme.onSurface,
                                     modifier = Modifier
                                         .width(135.dp),
                                 )
