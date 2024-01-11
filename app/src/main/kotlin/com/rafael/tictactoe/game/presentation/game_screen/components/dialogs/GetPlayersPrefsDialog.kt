@@ -296,6 +296,7 @@ fun GetPlayersPrefsDialog(
                         Icon(
                             imageVector = Icons.Outlined.Brush,
                             contentDescription = "Color image picker",
+                            tint = MaterialTheme.colorScheme.onSurface,
                             modifier = Modifier
                                 .size(25.dp),
                         )
@@ -382,6 +383,7 @@ fun GetPlayersPrefsDialog(
                             Icon(
                                 imageVector = Icons.Outlined.Brush,
                                 contentDescription = "Color image picker",
+                                tint = MaterialTheme.colorScheme.onSurface,
                                 modifier = Modifier
                                     .size(25.dp),
                             )

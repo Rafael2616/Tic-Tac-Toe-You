@@ -129,6 +129,7 @@ fun SettingsBlockWithIcon(
                             Icon(
                                 imageVector = setting.leadingIcon,
                                 contentDescription = "Icon",
+                                tint = MaterialTheme.colorScheme.onSurface,
                                 modifier = Modifier
                                     .size(32.dp),
                             )
@@ -217,6 +218,7 @@ fun SettingsBlockWithIcon(
                             Icon(
                                 imageVector = setting.trailingIcon!!,
                                 contentDescription = "Icon",
+                                tint = MaterialTheme.colorScheme.onSurface,
                                 modifier = Modifier
                                     .size(32.dp),
                             )

@@ -69,12 +69,13 @@ fun SoundAndMusicButtons(
                 Icon(
                     imageVector = if (state.isExpandButtonShown) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore,
                     contentDescription = "Expand Button",
-                    modifier = Modifier.size(42.dp),
+                    modifier = Modifier
+                        .size(42.dp),
                 )
             }
             if (state.isExpandButtonShown) {
                 Spacer(Modifier.height(3.dp))
-                Buttons.values().forEachIndexed { _, button ->
+                Buttons.values().forEach { button ->
                     Card(
                         shape = MaterialTheme.shapes.medium,
                         colors = CardDefaults.cardColors(
@@ -92,7 +93,8 @@ fun SoundAndMusicButtons(
                     ) {
                         Box(
                             contentAlignment = Alignment.Center,
-                            modifier = Modifier.fillMaxSize(),
+                            modifier = Modifier
+                                .fillMaxSize(),
                         ) {
                             Icon(
                                 imageVector = when (button) {
@@ -103,7 +105,9 @@ fun SoundAndMusicButtons(
                                     Buttons.SOUND_EFFECTS -> "Sound Effects Button"
                                     Buttons.BG_MUSIC -> "Background Music Button"
                                 },
-                                modifier = Modifier.size(38.dp),
+                                tint = MaterialTheme.colorScheme.onSurface,
+                                modifier = Modifier
+                                    .size(38.dp),
                             )
                         }
                     }

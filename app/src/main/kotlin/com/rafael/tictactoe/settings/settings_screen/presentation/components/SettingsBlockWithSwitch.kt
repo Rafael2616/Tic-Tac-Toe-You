@@ -113,6 +113,7 @@ fun SettingsBlockWithSwitch(
                             Icon(
                                 imageVector = setting.leadingIcon!!,
                                 contentDescription = "Icon",
+                                tint = MaterialTheme.colorScheme.onSurface,
                                 modifier = Modifier
                                     .size(32.dp),
                             )
