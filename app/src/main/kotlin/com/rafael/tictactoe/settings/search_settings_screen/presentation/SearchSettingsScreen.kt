@@ -85,7 +85,7 @@ fun SearchSettingsScreen(
                 .align(Alignment.TopCenter)
                 .semantics { traversalIndex = -1f },
             query = searchState.query,
-            onQueryChange = { searchSettingsVM.onEvent(SearchSettingsEvent.QuerySettingsFromRepository(it) },
+            onQueryChange = { searchSettingsVM.onEvent(SearchSettingsEvent.QuerySettingsFromRepository(it)) },
             onSearch = { active = false },
             active = active,
             onActiveChange = {
