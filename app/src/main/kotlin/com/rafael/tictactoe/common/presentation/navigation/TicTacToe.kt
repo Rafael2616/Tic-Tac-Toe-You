@@ -21,6 +21,7 @@ import com.rafael.tictactoe.common.presentation.theme.AppTheme
 import com.rafael.tictactoe.game.presentation.gameScreen.GameScreen
 import com.rafael.tictactoe.game.presentation.mainScreen.MainScreen
 import com.rafael.tictactoe.settings.libraryScreen.presentation.LibraryScreen
+import com.rafael.tictactoe.settings.searchSettingsScreen.presentation.SearchSettingsScreen
 import com.rafael.tictactoe.settings.settingsScreen.presentation.SettingsScreen
 
 @Composable
@@ -68,6 +69,9 @@ fun TicTacToe(
                 }
                 composable(Destinations.Library.screen) {
                     LibraryScreen(navController)
+                }
+                composable(Destinations.SearchSettings.screen) {
+                    SearchSettingsScreen(navController)
                 }
             }
         }

@@ -13,6 +13,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.serialization")
     id("app.cash.licensee")
+    kotlin("kapt")
 }
 
 android {
@@ -195,6 +196,10 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    // App Search
+    implementation("androidx.appsearch:appsearch:1.1.0-alpha03")
+    kapt("androidx.appsearch:appsearch-compiler:1.1.0-alpha03")
+    implementation("androidx.appsearch:appsearch-local-storage:1.1.0-alpha03")
     // Test Unit
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:$m3Version")

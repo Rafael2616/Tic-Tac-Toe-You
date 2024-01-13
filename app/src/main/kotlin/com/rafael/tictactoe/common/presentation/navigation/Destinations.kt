@@ -5,4 +5,5 @@ sealed class Destinations(val screen: String) {
     object Game : Destinations(screen = "game")
     object Settings : Destinations(screen = "settings")
     object Library : Destinations(screen = "library")
+    object SearchSettings : Destinations(screen = "searchSettings")
 }

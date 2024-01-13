@@ -3,6 +3,7 @@ package com.rafael.tictactoe.settings.settingsScreen.presentation.components
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -20,6 +21,8 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import com.rafael.tictactoe.R
+import com.rafael.tictactoe.common.presentation.navigation.Destinations
+import com.rafael.tictactoe.settings.searchSettingsScreen.domain.model.SearchSettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 
@@ -29,6 +32,7 @@ fun SettingsTopBar(
     navController: NavController,
     onEvent: (SettingsEvent) -> Unit,
     state: SettingsState,
+    onSeachEvent: (SearchSettingsEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
@@ -59,6 +63,18 @@ fun SettingsTopBar(
                         )
                     }
                 },
+                actions = {
+                    IconButton(
+                        onClick = {
+                            navController.navigate(Destinations.SearchSettings.screen)
+                        },
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Search,
+                            contentDescription = "Search",
+                        )
+                    }
+                },
                 scrollBehavior = scrollBehavior,
             )
         },
@@ -68,6 +84,7 @@ fun SettingsTopBar(
             onEvent,
             state,
             navController,
+            onSeachEvent,
         )
     }
 }

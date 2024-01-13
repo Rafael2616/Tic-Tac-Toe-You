@@ -10,6 +10,7 @@ import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.game.presentation.mainScreen.components.WhatsNewDialog
+import com.rafael.tictactoe.settings.searchSettingsScreen.presentation.viewmodels.SearchSettingsViewModel
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.presentation.components.ColorSelectionDialog
 import com.rafael.tictactoe.settings.settingsScreen.presentation.components.SettingsTopBar
@@ -20,6 +21,7 @@ import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodels.Sett
 fun SettingsScreen(
     navController: NavController,
     settingsVM: SettingsViewModel = hiltViewModel(),
+    searchSettingsVM: SearchSettingsViewModel = hiltViewModel(),
 ) {
     val state by settingsVM.state.collectAsState()
 
@@ -27,6 +29,7 @@ fun SettingsScreen(
         navController,
         settingsVM::onEvent,
         state,
+        searchSettingsVM::onEvent,
     )
 
     AnimatedVisibility(state.showColorSelectionDialog) {

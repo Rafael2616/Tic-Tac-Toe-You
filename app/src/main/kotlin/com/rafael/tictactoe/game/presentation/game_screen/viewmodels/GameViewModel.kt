@@ -23,6 +23,7 @@ import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodels.Sett
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -45,6 +46,7 @@ class GameViewModel @Inject constructor(
     private val _state = MutableStateFlow(GameState())
     val state = _state.asStateFlow()
     var onlineGameState: Flow<OnlineGameState>? = null
+    var searchPlayersJob: Job? = null
 
     fun onEvent(event: GameEvent) {
         val localPlayer1 = state.value.localPlayer1
@@ -177,7 +179,8 @@ class GameViewModel @Inject constructor(
                 settingsVM.onEvent(SettingsEvent.ShowColorSelectionDialog(false))
                 val cardState = state.value.card
                 _state.update { GameState() }
-
+                searchPlayersJob?.cancel()
+                searchPlayersJob = null
                 // Keep card variable state
                 _state.update { it.copy(card = cardState) }
                 settingsVM.execUIClickSound()
@@ -208,7 +211,8 @@ class GameViewModel @Inject constructor(
                 _state.update { it.copy(isUsingEasyLevel = event.value) }
             }
             GameEvent.GetRemotePlayers -> {
-                viewModelScope.launch(Dispatchers.IO) {
+                searchPlayersJob?.cancel()
+                searchPlayersJob = viewModelScope.launch(Dispatchers.IO) {
                     val response = repository.getRemotePlayers()
                     response.first?.let { players ->
                         val availablePlayers: Flow<List<Player>> = flow { emit(players) }

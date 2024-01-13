@@ -8,4 +8,6 @@ data class SettingItem(
     @StringRes val text: Int,
     val trailingIcon: ImageVector? = null,
     val isChecked: Boolean? = null,
+    val groupType: GroupType,
+    val searchText: SettingItemDoc,
 )
