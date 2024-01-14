@@ -120,7 +120,7 @@ fun SettingsBlockWithSwitch(
                             Text(
                                 style = MaterialTheme.typography.titleMedium,
                                 color = MaterialTheme.colorScheme.onSurface,
-                                text = stringResource(setting.text),
+                                text = setting.searchSpecs.text,
                                 modifier = Modifier
                                     .width(220.dp)
                                     .padding(start = 16.dp, end = 10.dp),

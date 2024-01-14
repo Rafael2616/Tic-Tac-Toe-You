@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.settingsScreen.domain.model
+package com.rafael.tictactoe.settings.searchSettingsScreen.domain.model
 
 import androidx.appsearch.annotation.Document
 import androidx.appsearch.annotation.Document.Id
@@ -7,7 +7,7 @@ import androidx.appsearch.annotation.Document.StringProperty
 import androidx.appsearch.app.AppSearchSchema
 
 @Document
-data class SettingItemDoc(
+data class SearchItemSpecs(
     @Namespace
     val namespace: String,
     @Id

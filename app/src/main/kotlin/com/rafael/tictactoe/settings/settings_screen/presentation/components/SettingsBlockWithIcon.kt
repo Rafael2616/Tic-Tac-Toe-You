@@ -194,7 +194,7 @@ fun SettingsBlockWithIcon(
                             Text(
                                 style = MaterialTheme.typography.titleMedium,
                                 color = MaterialTheme.colorScheme.onSurface,
-                                text = stringResource(setting.text),
+                                text = setting.searchSpecs.text,
                                 modifier = Modifier.fillMaxWidth(),
                                 textAlign = TextAlign.Start,
                             )

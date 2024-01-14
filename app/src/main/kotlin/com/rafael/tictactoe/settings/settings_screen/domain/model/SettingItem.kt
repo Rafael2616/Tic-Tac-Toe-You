@@ -1,13 +1,13 @@
 package com.rafael.tictactoe.settings.settingsScreen.domain.model
 
-import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.rafael.tictactoe.settings.searchSettingsScreen.domain.model.SearchItemSpecs
+import com.rafael.tictactoe.settings.settingsScreen.domain.enums.SettingsGroup
 
 data class SettingItem(
     val leadingIcon: ImageVector? = null,
-    @StringRes val text: Int,
     val trailingIcon: ImageVector? = null,
     val isChecked: Boolean? = null,
-    val groupType: GroupType,
-    val searchText: SettingItemDoc,
+    val groupType: SettingsGroup,
+    val searchSpecs: SearchItemSpecs,
 )
