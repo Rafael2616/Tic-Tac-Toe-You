@@ -22,7 +22,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.presentation.navigation.Destinations
-import com.rafael.tictactoe.settings.searchSettingsScreen.domain.model.SearchSettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 
@@ -32,7 +31,6 @@ fun SettingsTopBar(
     navController: NavController,
     onEvent: (SettingsEvent) -> Unit,
     state: SettingsState,
-    onSeachEvent: (SearchSettingsEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
@@ -84,7 +82,6 @@ fun SettingsTopBar(
             onEvent,
             state,
             navController,
-            onSeachEvent,
         )
     }
 }

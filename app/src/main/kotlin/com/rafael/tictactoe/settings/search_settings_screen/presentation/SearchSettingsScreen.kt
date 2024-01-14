@@ -21,12 +21,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -35,27 +37,25 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBar
+import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.isTraversalGroup
@@ -63,20 +63,20 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.traversalIndex
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.getVersionCode
 import com.rafael.tictactoe.common.domain.util.getVersionName
+import com.rafael.tictactoe.game.presentation.mainScreen.components.WhatsNewDialog
 import com.rafael.tictactoe.settings.searchSettingsScreen.domain.model.SearchSettingsEvent
 import com.rafael.tictactoe.settings.searchSettingsScreen.presentation.viewmodels.SearchSettingsViewModel
 import com.rafael.tictactoe.settings.settingsScreen.domain.enums.SettingsGroup
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.domain.useCases.toggleSettingsUseCase
 import com.rafael.tictactoe.settings.settingsScreen.domain.util.ComponentValidator
-import com.rafael.tictactoe.game.presentation.mainScreen.components.WhatsNewDialog
 import com.rafael.tictactoe.settings.settingsScreen.presentation.components.ColorSelectionDialog
+import com.rafael.tictactoe.settings.settingsScreen.presentation.utils.getSettingsItems
 import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodels.SettingsViewModel
 
 @Composable
@@ -100,6 +100,7 @@ fun SearchSettingsScreen(
     var active by rememberSaveable { mutableStateOf(true) }
     val matchingSettings = searchState.matchingSettings
     val focusManager = LocalFocusManager.current
+    val context = LocalContext.current
 
     Box(
         modifier = modifier
@@ -119,29 +120,35 @@ fun SearchSettingsScreen(
             },
             placeholder = { Text("Search settings") },
             leadingIcon = {
-                IconButton (
+                IconButton(
                     onClick = { navController.popBackStack() },
                 ) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = null
+                        contentDescription = null,
                     )
                 }
             },
             trailingIcon = {
-                Icon(
-                    imageVector = Icons.Outlined.Search,
-                    contentDescription = null
-                )
+                IconButton(
+                    onClick = { searchSettingsVM.onEvent(SearchSettingsEvent.ResetQuery) },
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Close,
+                        contentDescription = null,
+                    )
+                }
             },
             colors = SearchBarDefaults.colors(
                 containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f),
+                dividerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f),
             ),
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(top = 12.dp)
+                    .padding(top = 16.dp)
+                    .verticalScroll(rememberScrollState())
                     .animateContentSize(),
                 verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -158,8 +165,28 @@ fun SearchSettingsScreen(
                     if (matchingSettings.size > 0) {
                         matchingSettings.forEachIndexed { index, setting ->
                             val rowHeight by animateDpAsState(
-                                if (setting.groupType == SettingsGroup.Others && index == 2 && isAboutShown) 130.dp else 70.dp,
+                                if (setting.groupType == SettingsGroup.Others && setting.index == 0 && isAboutShown) 130.dp else 65.dp,
                             )
+                                /*   Box(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .height(14.dp),
+                                        contentAlignment = Alignment.CenterEnd,
+                                    ) {
+                                      Text(
+                                            text = stringResource(when (setting.groupType) {
+                                                SettingsGroup.Theme -> R.string.group_theme
+                                                SettingsGroup.Sound -> R.string.group_sound
+                                                SettingsGroup.Customization -> R.string.group_customization
+                                                SettingsGroup.Others -> R.string.group_others
+                                            }),
+                                            style = MaterialTheme.typography.titleMedium.copy(fontSize = 12.sp),
+                                            color = MaterialTheme.colorScheme.onSurface,
+                                            modifier = Modifier
+                                                .padding(end = 10.dp)
+                                                .align(Alignment.CenterEnd)
+                                        )
+                                    }*/
                             Box(
                                 modifier = Modifier
                                     .height(rowHeight)
@@ -167,28 +194,15 @@ fun SearchSettingsScreen(
                                     .clickable {
                                         toggleSettingsUseCase(
                                             setting.groupType,
-                                            setting.searchSpecs.id.toInt(),
+                                            setting.index,
                                             state,
                                             settingsVM::onEvent,
                                             launcher,
                                             navController,
                                         )
+                                        searchSettingsVM.onEvent(SearchSettingsEvent.PutSettingsToRepository(getSettingsItems(state, context).flatten()))
                                     },
                             ) {
-                                Column(
-                          modifier = Modifier
-                    .fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                     ) {
-
-                                Text(
-                                    text = setting.searchSpecs.text,
-                                    style = MaterialTheme.typography.titleMedium.copy(fontSize = 10.sp),
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .height(12.dp)
-                                        .align(Alignment.End)
-                                )
                                 Row(
                                     horizontalArrangement = Arrangement.SpaceBetween,
                                     verticalAlignment = Alignment.CenterVertically,
@@ -223,7 +237,7 @@ fun SearchSettingsScreen(
                                                     modifier = Modifier
                                                         .fillMaxSize(),
                                                 ) {
-                                                    when (setting.searchSpecs.id.toInt()) {
+                                                    when (setting.index) {
                                                         0 -> drawLine(
                                                             strokeWidth = 5.dp.toPx(),
                                                             start = Offset(x = 24.dp.toPx(), y = 0.dp.toPx()),
@@ -270,7 +284,7 @@ fun SearchSettingsScreen(
                                             modifier = Modifier.fillMaxWidth(),
                                             textAlign = TextAlign.Start,
                                         )
-                                        if (componentValidator.validateSubText(setting.groupType, setting.searchSpecs.id.toInt(), isAboutShown)) {
+                                        if (componentValidator.validateSubText(setting.groupType, setting.index, isAboutShown)) {
                                             Text(
                                                 style = MaterialTheme.typography.bodyMedium,
                                                 color = MaterialTheme.colorScheme.onSurface,
@@ -308,10 +322,11 @@ fun SearchSettingsScreen(
                                                 onCheckedChange = {
                                                     toggleSettingsUseCase(
                                                         setting.groupType,
-                                                        setting.searchSpecs.id.toInt(),
+                                                        setting.index,
                                                         state,
                                                         settingsVM::onEvent,
                                                     )
+                                                    searchSettingsVM.onEvent(SearchSettingsEvent.PutSettingsToRepository(getSettingsItems(state, context).flatten()))
                                                 },
                                                 thumbContent = {
                                                     if (setting.isChecked) {
@@ -327,7 +342,6 @@ fun SearchSettingsScreen(
                                     }
                                 }
                             }
-                        }
                             if (index < (matchingSettings.size - 1)) {
                                 HorizontalDivider(
                                     thickness = 4.dp,

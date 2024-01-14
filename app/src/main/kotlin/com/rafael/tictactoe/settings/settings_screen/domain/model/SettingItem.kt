@@ -8,6 +8,7 @@ data class SettingItem(
     val leadingIcon: ImageVector? = null,
     val trailingIcon: ImageVector? = null,
     val isChecked: Boolean? = null,
+    val index: Int,
     val groupType: SettingsGroup,
     val searchSpecs: SearchItemSpecs,
 )
