@@ -43,6 +43,7 @@ import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -291,7 +292,9 @@ fun SearchSettingsScreen(
                                                 Text(
                                                     style = MaterialTheme.typography.bodyMedium,
                                                     color = MaterialTheme.colorScheme.onSurface,
-                                                    text = stringResource(R.string.app_version) + " " + getVersionName() + "(" + getVersionCode() + ")",
+                                                    text = stringResource(R.string.creator_message) + "\n" +
+                                                        stringResource(R.string.app_version) + " " +
+                                                        getVersionName() + " (" + getVersionCode() + ")",
                                                     textAlign = TextAlign.Start,
                                                     modifier = Modifier
                                                         .fillMaxWidth()
@@ -369,6 +372,12 @@ fun SearchSettingsScreen(
         WhatsNewDialog(
             settingsVM::onEvent,
         )
+    }
+
+    DisposableEffect(Unit) {
+        onDispose {
+            settingsVM.onEvent(SettingsEvent.OnSettingsScreenDestroyment)
+        }
     }
 
     BackHandler {

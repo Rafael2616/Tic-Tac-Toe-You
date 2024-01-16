@@ -202,7 +202,9 @@ fun SettingsBlockWithIcon(
                                 Text(
                                     style = MaterialTheme.typography.bodyMedium,
                                     color = MaterialTheme.colorScheme.onSurface,
-                                    text = stringResource(R.string.app_version) + " " + getVersionName() + "(" + getVersionCode() + ")",
+                                    text = stringResource(R.string.creator_message) + "\n" +
+                                        stringResource(R.string.app_version) + " " +
+                                        getVersionName() + " (" + getVersionCode() + ")",
                                     textAlign = TextAlign.Start,
                                     modifier = Modifier
                                         .fillMaxWidth()

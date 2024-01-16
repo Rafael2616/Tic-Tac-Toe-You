@@ -141,7 +141,7 @@ fun getSettingsItems(
             index = 0,
             searchSpecs = searchItemSpec.copy(
                 id = UUID.randomUUID().toString(),
-                text = if (!state.isAboutShown) context.getString(R.string.about_app) else context.getString(R.string.creator_message),
+                text = context.getString(R.string.about_app),
             ),
         ),
         // Github repo
