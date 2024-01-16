@@ -102,6 +102,12 @@ fun SearchSettingsScreen(
     val focusManager = LocalFocusManager.current
     val context = LocalContext.current
 
+    fun updateSettings() {
+        //var setting = getSettingsItems(state, context).flatten()
+       // var settings = state.copy(it.matchingSettings.map { set -> set.isChecked = !set.isChecked ?: null} )
+        searchSettingsVM.onEvent(SearchSettingsEvent.PutSettingsToRepository(getSettingsItems(state, context).flatten()))
+    }
+
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -200,7 +206,7 @@ fun SearchSettingsScreen(
                                             launcher,
                                             navController,
                                         )
-                                        searchSettingsVM.onEvent(SearchSettingsEvent.PutSettingsToRepository(getSettingsItems(state, context).flatten()))
+                                        updateSettings()
                                     },
                             ) {
                                 Row(
@@ -318,7 +324,7 @@ fun SearchSettingsScreen(
                                             contentAlignment = Alignment.CenterEnd,
                                         ) {
                                             Switch(
-                                                checked = setting.isChecked,
+                                                checked = matchingSettings[index].isChecked!!,
                                                 onCheckedChange = {
                                                     toggleSettingsUseCase(
                                                         setting.groupType,
@@ -326,10 +332,10 @@ fun SearchSettingsScreen(
                                                         state,
                                                         settingsVM::onEvent,
                                                     )
-                                                    searchSettingsVM.onEvent(SearchSettingsEvent.PutSettingsToRepository(getSettingsItems(state, context).flatten()))
+                                                    updateSettings()
                                                 },
                                                 thumbContent = {
-                                                    if (setting.isChecked) {
+                                                    if (matchingSettings[index].isChecked!!) {
                                                         Icon(
                                                             imageVector = Icons.Filled.Check,
                                                             contentDescription = "Setting Switcher",

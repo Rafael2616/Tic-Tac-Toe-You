@@ -155,6 +155,7 @@ dependencies {
     val roomVersion = "2.6.1"
     val hiltVersion = "2.50"
     val media3Version = "1.2.0"
+    val appSearchVersion = "1.1.0-alpha03"
 
     // Todo: remove this when compose bom 2023.12.00 is released
     val m3Version = "1.6.0-rc01"
@@ -197,9 +198,9 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     // App Search
-    implementation("androidx.appsearch:appsearch:1.1.0-alpha03")
-    kapt("androidx.appsearch:appsearch-compiler:1.1.0-alpha03")
-    implementation("androidx.appsearch:appsearch-local-storage:1.1.0-alpha03")
+    implementation("androidx.appsearch:appsearch:$appSearchVersion")
+    kapt("androidx.appsearch:appsearch-compiler:$appSearchVersion")
+    implementation("androidx.appsearch:appsearch-local-storage:$appSearchVersion")
     // Test Unit
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:$m3Version")

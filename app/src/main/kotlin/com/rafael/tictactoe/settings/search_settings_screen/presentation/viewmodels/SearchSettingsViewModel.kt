@@ -30,12 +30,13 @@ class SearchSettingsViewModel @Inject constructor(
     private val _state = MutableStateFlow(SearchSettingsState())
     val state = _state.asStateFlow()
     var searchJob: Job? = null
-    var allSettings: List<SettingItem> = emptyList()
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
             searchManager.init()
         }
+        var allSettings: List<SettingItem> = emptyList()
+
         for (listSettings in getSettingsItems(settingsVM.state.value, context)) {
             for (setting in listSettings) {
                 allSettings += setting
@@ -57,22 +58,25 @@ class SearchSettingsViewModel @Inject constructor(
                     }
                     searchManager.putSettings(allSettingsItems)
                     _state.update { it.copy(allSettingsItems = event.settings) }
+                    onEvent(SearchSettingsEvent.QuerySettingsFromRepository(null))
                 }
             }
             is SearchSettingsEvent.QuerySettingsFromRepository -> {
-                _state.update { it.copy(query = event.query) }
+                val query = event.query ?: state.value.query
+
+                _state.update { it.copy(query = query) }
 
                 searchJob?.cancel()
-
-                if (event.query.isEmpty() || event.query.isBlank()) {
+                
+                if (query.isEmpty() || query.isBlank()) {
                     _state.update { it.copy(matchingSettings = emptyList()) }
                     return
                 }
 
                 searchJob = viewModelScope.launch {
-                    val results = searchManager.searchSettings(event.query)
+                    val results = searchManager.searchSettings(query)
                     delay(150L)
-                    val matchingSettings = allSettings.filter { setting ->
+                    val matchingSettings = state.value.allSettingsItems.filter { setting ->
                         results.any { result -> result.text.contains(setting.searchSpecs.text) }
                     }
                     _state.update { it.copy(matchingSettings = matchingSettings) }
