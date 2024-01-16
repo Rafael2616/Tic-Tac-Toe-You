@@ -48,11 +48,9 @@ fun SettingsScreen(
     BackHandler {
         if (state.showColorSelectionDialog) {
             settingsVM.onEvent(SettingsEvent.ShowColorSelectionDialog(false))
-        }
-        if (state.showWhatsNewDialog) {
+        } else if (state.showWhatsNewDialog) {
             settingsVM.onEvent(SettingsEvent.HideWhatsNewDialog)
-        }
-        if (!state.showWhatsNewDialog && !state.showColorSelectionDialog) {
+        } else {
             navController.popBackStack()
         }
     }
