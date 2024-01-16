@@ -154,7 +154,7 @@ dependencies {
     val lifecycleVersion = "2.7.0"
     val roomVersion = "2.6.1"
     val hiltVersion = "2.50"
-    val media3Version = "1.2.0"
+    val media3Version = "1.2.1"
     val appSearchVersion = "1.1.0-alpha03"
 
     // Todo: remove this when compose bom 2023.12.00 is released
