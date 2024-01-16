@@ -75,7 +75,6 @@ import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.domain.useCases.toggleSettingsUseCase
 import com.rafael.tictactoe.settings.settingsScreen.domain.util.ComponentValidator
 import com.rafael.tictactoe.settings.settingsScreen.presentation.components.ColorSelectionDialog
-import com.rafael.tictactoe.settings.settingsScreen.presentation.utils.getSettingsItems
 import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodels.SettingsViewModel
 
 @Composable
@@ -165,6 +164,12 @@ fun SearchSettingsScreen(
                             val rowHeight by animateDpAsState(
                                 if (setting.groupType == SettingsGroup.Others && setting.index == 0 && isAboutShown) 130.dp else 65.dp,
                             )
+                            if (componentValidator.validateCard(
+                                    setting.groupType,
+                                    setting.index,
+                                    state.isFollowingSystemOn,
+                                )
+                            ) {
                                 /*   Box(
                                         modifier = Modifier
                                             .fillMaxWidth()
@@ -185,166 +190,167 @@ fun SearchSettingsScreen(
                                                 .align(Alignment.CenterEnd)
                                         )
                                     }*/
-                            Box(
-                                modifier = Modifier
-                                    .height(rowHeight)
-                                    .fillMaxWidth()
-                                    .clickable {
-                                        toggleSettingsUseCase(
-                                            setting.groupType,
-                                            setting.index,
-                                            state,
-                                            settingsVM::onEvent,
-                                            launcher,
-                                            navController,
-                                        )
-                                        searchSettingsVM.onEvent(SearchSettingsEvent.UpdateMatchingSettings(index))
-                                    },
-                            ) {
-                                Row(
-                                    horizontalArrangement = Arrangement.SpaceBetween,
-                                    verticalAlignment = Alignment.CenterVertically,
+                                Box(
                                     modifier = Modifier
-                                        .animateContentSize()
-                                        .fillMaxSize()
-                                        .padding(horizontal = 10.dp),
-                                ) {
-                                    if (matchingSettings[index].leadingIcon != null) {
-                                        Icon(
-                                            imageVector = matchingSettings[index].leadingIcon!!,
-                                            contentDescription = "Icon",
-                                            tint = MaterialTheme.colorScheme.onSurface,
-                                            modifier = Modifier
-                                                .size(32.dp),
-                                        )
-                                    }
-                                    if (componentValidator.validateCanvas(setting.groupType)) {
-                                        Box(
-                                            modifier = Modifier
-                                                .clip(CircleShape)
-                                                .background(Color.Black.copy(alpha = 0.12f))
-                                                .size(32.dp)
-                                                .align(Alignment.CenterVertically),
-                                            contentAlignment = Alignment.Center,
-                                        ) {
-                                            Box(
-                                                modifier = Modifier.size(24.dp),
-                                                contentAlignment = Alignment.Center,
-                                            ) {
-                                                Canvas(
-                                                    modifier = Modifier
-                                                        .fillMaxSize(),
-                                                ) {
-                                                    when (setting.index) {
-                                                        0 -> drawLine(
-                                                            strokeWidth = 5.dp.toPx(),
-                                                            start = Offset(x = 24.dp.toPx(), y = 0.dp.toPx()),
-                                                            end = Offset(x = 0.dp.toPx(), y = 24.dp.toPx()),
-                                                            color = winnerLineColor,
-                                                        )
-                                                        1 -> drawCircle(
-                                                            center = Offset(12.dp.toPx(), 12.dp.toPx()),
-                                                            radius = 12.dp.toPx(),
-                                                            style = Stroke(width = 5.dp.toPx()),
-                                                            color = circleColor,
-                                                        )
-                                                        2 -> {
-                                                            drawLine(
-                                                                strokeWidth = 5.dp.toPx(),
-                                                                start = Offset(x = 0.dp.toPx(), y = 0.dp.toPx()),
-                                                                end = Offset(x = 24.dp.toPx(), y = 24.dp.toPx()),
-                                                                color = xColor,
-                                                            )
-                                                            drawLine(
-                                                                strokeWidth = 5.dp.toPx(),
-                                                                start = Offset(x = 24.dp.toPx(), y = 0.dp.toPx()),
-                                                                end = Offset(x = 0.dp.toPx(), y = 24.dp.toPx()),
-                                                                color = xColor,
-                                                            )
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                    Column(
-                                        modifier = Modifier
-                                            .width(if (isInLandscape) 350.dp else 240.dp)
-                                            .padding(start = 16.dp, end = 10.dp)
-                                            .animateContentSize(),
-                                        verticalArrangement = Arrangement.Center,
-                                        horizontalAlignment = Alignment.Start,
-                                    ) {
-                                        Text(
-                                            style = MaterialTheme.typography.titleMedium,
-                                            color = MaterialTheme.colorScheme.onSurface,
-                                            text = setting.searchSpecs.text,
-                                            modifier = Modifier.fillMaxWidth(),
-                                            textAlign = TextAlign.Start,
-                                        )
-                                        if (componentValidator.validateSubText(setting.groupType, setting.index, isAboutShown)) {
-                                            Text(
-                                                style = MaterialTheme.typography.bodyMedium,
-                                                color = MaterialTheme.colorScheme.onSurface,
-                                                text = stringResource(R.string.app_version) + " " + getVersionName() + "(" + getVersionCode() + ")",
-                                                textAlign = TextAlign.Start,
-                                                modifier = Modifier
-                                                    .fillMaxWidth()
-                                                    .padding(top = 8.dp),
+                                        .height(rowHeight)
+                                        .fillMaxWidth()
+                                        .clickable {
+                                            toggleSettingsUseCase(
+                                                setting.groupType,
+                                                setting.index,
+                                                state,
+                                                settingsVM::onEvent,
+                                                launcher,
+                                                navController,
                                             )
-                                        }
-                                    }
-                                    if (matchingSettings[index].trailingIcon != null) {
-                                        Box(
-                                            modifier = Modifier
-                                                .fillMaxSize(),
-                                            contentAlignment = Alignment.CenterEnd,
-                                        ) {
+                                            searchSettingsVM.onEvent(SearchSettingsEvent.UpdateMatchingSettings(index))
+                                        },
+                                ) {
+                                    Row(
+                                        horizontalArrangement = Arrangement.SpaceBetween,
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        modifier = Modifier
+                                            .animateContentSize()
+                                            .fillMaxSize()
+                                            .padding(horizontal = 10.dp),
+                                    ) {
+                                        if (matchingSettings[index].leadingIcon != null) {
                                             Icon(
-                                                imageVector = matchingSettings[index].trailingIcon!!,
+                                                imageVector = matchingSettings[index].leadingIcon!!,
                                                 contentDescription = "Icon",
                                                 tint = MaterialTheme.colorScheme.onSurface,
                                                 modifier = Modifier
                                                     .size(32.dp),
                                             )
                                         }
-                                    }
-                                    if (setting.isChecked != null) {
-                                        Box(
-                                            modifier = Modifier
-                                                .fillMaxSize(),
-                                            contentAlignment = Alignment.CenterEnd,
-                                        ) {
-                                            Switch(
-                                                checked = matchingSettings[index].isChecked!!,
-                                                onCheckedChange = {
-                                                    toggleSettingsUseCase(
-                                                        setting.groupType,
-                                                        setting.index,
-                                                        state,
-                                                        settingsVM::onEvent,
-                                                    )
-                                                    searchSettingsVM.onEvent(SearchSettingsEvent.UpdateMatchingSettings(index))
-                                                },
-                                                thumbContent = {
-                                                    if (matchingSettings[index].isChecked!!) {
-                                                        Icon(
-                                                            imageVector = Icons.Filled.Check,
-                                                            contentDescription = "Setting Switcher",
-                                                            modifier = Modifier.size(SwitchDefaults.IconSize),
-                                                        )
+                                        if (componentValidator.validateCanvas(setting.groupType)) {
+                                            Box(
+                                                modifier = Modifier
+                                                    .clip(CircleShape)
+                                                    .background(Color.Black.copy(alpha = 0.12f))
+                                                    .size(32.dp)
+                                                    .align(Alignment.CenterVertically),
+                                                contentAlignment = Alignment.Center,
+                                            ) {
+                                                Box(
+                                                    modifier = Modifier.size(24.dp),
+                                                    contentAlignment = Alignment.Center,
+                                                ) {
+                                                    Canvas(
+                                                        modifier = Modifier
+                                                            .fillMaxSize(),
+                                                    ) {
+                                                        when (setting.index) {
+                                                            0 -> drawLine(
+                                                                strokeWidth = 5.dp.toPx(),
+                                                                start = Offset(x = 24.dp.toPx(), y = 0.dp.toPx()),
+                                                                end = Offset(x = 0.dp.toPx(), y = 24.dp.toPx()),
+                                                                color = winnerLineColor,
+                                                            )
+                                                            1 -> drawCircle(
+                                                                center = Offset(12.dp.toPx(), 12.dp.toPx()),
+                                                                radius = 12.dp.toPx(),
+                                                                style = Stroke(width = 5.dp.toPx()),
+                                                                color = circleColor,
+                                                            )
+                                                            2 -> {
+                                                                drawLine(
+                                                                    strokeWidth = 5.dp.toPx(),
+                                                                    start = Offset(x = 0.dp.toPx(), y = 0.dp.toPx()),
+                                                                    end = Offset(x = 24.dp.toPx(), y = 24.dp.toPx()),
+                                                                    color = xColor,
+                                                                )
+                                                                drawLine(
+                                                                    strokeWidth = 5.dp.toPx(),
+                                                                    start = Offset(x = 24.dp.toPx(), y = 0.dp.toPx()),
+                                                                    end = Offset(x = 0.dp.toPx(), y = 24.dp.toPx()),
+                                                                    color = xColor,
+                                                                )
+                                                            }
+                                                        }
                                                     }
-                                                },
+                                                }
+                                            }
+                                        }
+                                        Column(
+                                            modifier = Modifier
+                                                .width(if (isInLandscape) 350.dp else 240.dp)
+                                                .padding(start = 16.dp, end = 10.dp)
+                                                .animateContentSize(),
+                                            verticalArrangement = Arrangement.Center,
+                                            horizontalAlignment = Alignment.Start,
+                                        ) {
+                                            Text(
+                                                style = MaterialTheme.typography.titleMedium,
+                                                color = MaterialTheme.colorScheme.onSurface,
+                                                text = setting.searchSpecs.text,
+                                                modifier = Modifier.fillMaxWidth(),
+                                                textAlign = TextAlign.Start,
                                             )
+                                            if (componentValidator.validateSubText(setting.groupType, setting.index, isAboutShown)) {
+                                                Text(
+                                                    style = MaterialTheme.typography.bodyMedium,
+                                                    color = MaterialTheme.colorScheme.onSurface,
+                                                    text = stringResource(R.string.app_version) + " " + getVersionName() + "(" + getVersionCode() + ")",
+                                                    textAlign = TextAlign.Start,
+                                                    modifier = Modifier
+                                                        .fillMaxWidth()
+                                                        .padding(top = 8.dp),
+                                                )
+                                            }
+                                        }
+                                        if (matchingSettings[index].trailingIcon != null) {
+                                            Box(
+                                                modifier = Modifier
+                                                    .fillMaxSize(),
+                                                contentAlignment = Alignment.CenterEnd,
+                                            ) {
+                                                Icon(
+                                                    imageVector = matchingSettings[index].trailingIcon!!,
+                                                    contentDescription = "Icon",
+                                                    tint = MaterialTheme.colorScheme.onSurface,
+                                                    modifier = Modifier
+                                                        .size(32.dp),
+                                                )
+                                            }
+                                        }
+                                        if (setting.isChecked != null) {
+                                            Box(
+                                                modifier = Modifier
+                                                    .fillMaxSize(),
+                                                contentAlignment = Alignment.CenterEnd,
+                                            ) {
+                                                Switch(
+                                                    checked = matchingSettings[index].isChecked!!,
+                                                    onCheckedChange = {
+                                                        toggleSettingsUseCase(
+                                                            setting.groupType,
+                                                            setting.index,
+                                                            state,
+                                                            settingsVM::onEvent,
+                                                        )
+                                                        searchSettingsVM.onEvent(SearchSettingsEvent.UpdateMatchingSettings(index))
+                                                    },
+                                                    thumbContent = {
+                                                        if (matchingSettings[index].isChecked!!) {
+                                                            Icon(
+                                                                imageVector = Icons.Filled.Check,
+                                                                contentDescription = "Setting Switcher",
+                                                                modifier = Modifier.size(SwitchDefaults.IconSize),
+                                                            )
+                                                        }
+                                                    },
+                                                )
+                                            }
                                         }
                                     }
                                 }
-                            }
-                            if (index < (matchingSettings.size - 1)) {
-                                HorizontalDivider(
-                                    thickness = 4.dp,
-                                    color = MaterialTheme.colorScheme.surface,
-                                )
+                                if (index < (matchingSettings.size - 1)) {
+                                    HorizontalDivider(
+                                        thickness = 4.dp,
+                                        color = MaterialTheme.colorScheme.surface,
+                                    )
+                                }
                             }
                         }
                     }

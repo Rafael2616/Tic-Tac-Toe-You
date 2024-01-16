@@ -68,7 +68,7 @@ class SearchSettingsViewModel @Inject constructor(
                 _state.update { it.copy(query = query) }
 
                 searchJob?.cancel()
-                
+
                 if (query.isEmpty() || query.isBlank()) {
                     _state.update { it.copy(matchingSettings = emptyList()) }
                     return
@@ -88,13 +88,15 @@ class SearchSettingsViewModel @Inject constructor(
             }
             is SearchSettingsEvent.UpdateMatchingSettings -> {
                 _state.update {
-                    it.copy(matchingSettings = state.value.matchingSettings.mapIndexed { index, setting ->
-                        if (index == event.index) {
-                            setting.copy(isChecked = setting.isChecked?.let { !it })
-                        } else {
-                            setting
-                        }
-                    })
+                    it.copy(
+                        matchingSettings = state.value.matchingSettings.mapIndexed { index, setting ->
+                            if (index == event.index) {
+                                setting.copy(isChecked = setting.isChecked?.let { !it })
+                            } else {
+                                setting
+                            }
+                        },
+                    )
                 }
                 var allSettingsUpdated: List<SettingItem> = emptyList()
 
