@@ -35,6 +35,7 @@ class SearchSettingsViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             searchManager.init()
         }
+
         var allSettings: List<SettingItem> = emptyList()
 
         for (listSettings in getSettingsItems(settingsVM.state.value, context)) {
@@ -84,6 +85,25 @@ class SearchSettingsViewModel @Inject constructor(
             }
             SearchSettingsEvent.ResetQuery -> {
                 _state.update { it.copy(query = "") }
+            }
+            is SearchSettingsEvent.UpdateMatchingSettings -> {
+                _state.update {
+                    it.copy(matchingSettings = state.value.matchingSettings.mapIndexed { index, setting ->
+                        if (index == event.index) {
+                            setting.copy(isChecked = setting.isChecked?.let { !it })
+                        } else {
+                            setting
+                        }
+                    })
+                }
+                var allSettingsUpdated: List<SettingItem> = emptyList()
+
+                for (listSettings in getSettingsItems(settingsVM.state.value, context)) {
+                    for (setting in listSettings) {
+                        allSettingsUpdated += setting
+                    }
+                }
+                onEvent(SearchSettingsEvent.PutSettingsToRepository(allSettingsUpdated))
             }
         }
     }

@@ -55,7 +55,6 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.isTraversalGroup
@@ -100,13 +99,6 @@ fun SearchSettingsScreen(
     var active by rememberSaveable { mutableStateOf(true) }
     val matchingSettings = searchState.matchingSettings
     val focusManager = LocalFocusManager.current
-    val context = LocalContext.current
-
-    fun updateSettings() {
-        //var setting = getSettingsItems(state, context).flatten()
-       // var settings = state.copy(it.matchingSettings.map { set -> set.isChecked = !set.isChecked ?: null} )
-        searchSettingsVM.onEvent(SearchSettingsEvent.PutSettingsToRepository(getSettingsItems(state, context).flatten()))
-    }
 
     Box(
         modifier = modifier
@@ -206,7 +198,7 @@ fun SearchSettingsScreen(
                                             launcher,
                                             navController,
                                         )
-                                        updateSettings()
+                                        searchSettingsVM.onEvent(SearchSettingsEvent.UpdateMatchingSettings(index))
                                     },
                             ) {
                                 Row(
@@ -332,7 +324,7 @@ fun SearchSettingsScreen(
                                                         state,
                                                         settingsVM::onEvent,
                                                     )
-                                                    updateSettings()
+                                                    searchSettingsVM.onEvent(SearchSettingsEvent.UpdateMatchingSettings(index))
                                                 },
                                                 thumbContent = {
                                                     if (matchingSettings[index].isChecked!!) {
@@ -376,11 +368,9 @@ fun SearchSettingsScreen(
     BackHandler {
         if (state.showColorSelectionDialog) {
             settingsVM.onEvent(SettingsEvent.ShowColorSelectionDialog(false))
-        }
-        if (state.showWhatsNewDialog) {
+        } else if (state.showWhatsNewDialog) {
             settingsVM.onEvent(SettingsEvent.HideWhatsNewDialog)
-        }
-        if (!state.showWhatsNewDialog && !state.showColorSelectionDialog) {
+        } else {
             navController.popBackStack()
         }
     }
