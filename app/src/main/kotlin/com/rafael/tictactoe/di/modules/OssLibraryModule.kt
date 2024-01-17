@@ -5,15 +5,15 @@ import com.rafael.tictactoe.settings.libraryScreen.presentation.viewmodels.Libra
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.scopes.ViewModelScoped
 
 @Module
-@InstallIn(SingletonComponent::class)
+@InstallIn(ViewModelComponent::class)
 object OssLibraryModule {
 
     @Provides
-    @Singleton
+    @ViewModelScoped
     fun provideLibraryViewModel(
         libraryRepository: OssLibraryRepository,
     ): LibraryViewModel {
