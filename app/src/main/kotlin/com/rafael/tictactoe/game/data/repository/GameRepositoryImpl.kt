@@ -207,7 +207,7 @@ class GameRepositoryImpl @Inject constructor(
             return RequestState.Failure(Error.HttpError, e.message(), e.code())
         }
     }
-    
+
     companion object {
         const val TAG = "GameRepository"
     }
