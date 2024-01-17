@@ -214,9 +214,9 @@ fun SearchSettingsScreen(
                                         .fillMaxSize()
                                         .padding(horizontal = 10.dp),
                                 ) {
-                                    if (matchingSettings[index].leadingIcon != null) {
+                                    if (setting.leadingIcon != null) {
                                         Icon(
-                                            imageVector = matchingSettings[index].leadingIcon!!,
+                                            imageVector = setting.leadingIcon,
                                             contentDescription = "Icon",
                                             tint = MaterialTheme.colorScheme.onSurface,
                                             modifier = Modifier
@@ -301,14 +301,14 @@ fun SearchSettingsScreen(
                                             )
                                         }
                                     }
-                                    if (matchingSettings[index].trailingIcon != null) {
+                                    if (setting.trailingIcon != null) {
                                         Box(
                                             modifier = Modifier
                                                 .fillMaxSize(),
                                             contentAlignment = Alignment.CenterEnd,
                                         ) {
                                             Icon(
-                                                imageVector = matchingSettings[index].trailingIcon!!,
+                                                imageVector = setting.trailingIcon,
                                                 contentDescription = "Icon",
                                                 tint = MaterialTheme.colorScheme.onSurface,
                                                 modifier = Modifier
@@ -323,7 +323,7 @@ fun SearchSettingsScreen(
                                             contentAlignment = Alignment.CenterEnd,
                                         ) {
                                             Switch(
-                                                checked = matchingSettings[index].isChecked!!,
+                                                checked = setting.isChecked,
                                                 onCheckedChange = {
                                                     toggleSettingsUseCase(
                                                         setting.groupType,
@@ -334,7 +334,7 @@ fun SearchSettingsScreen(
                                                     searchSettingsVM.onEvent(SearchSettingsEvent.UpdateMatchingSettings(index))
                                                 },
                                                 thumbContent = {
-                                                    if (matchingSettings[index].isChecked!!) {
+                                                    if (setting.isChecked) {
                                                         Icon(
                                                             imageVector = Icons.Filled.Check,
                                                             contentDescription = "Setting Switcher",

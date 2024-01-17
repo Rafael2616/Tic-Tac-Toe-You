@@ -213,8 +213,8 @@ class GameViewModel @Inject constructor(
             GameEvent.GetRemotePlayers -> {
                 searchPlayersJob?.cancel()
                 searchPlayersJob = viewModelScope.launch(Dispatchers.IO) {
-                    val response = repository.getRemotePlayers()
-                    response.first?.let { players ->
+                    val (response, requestState) = repository.getRemotePlayers()
+                    response?.let { players ->
                         val availablePlayers: Flow<List<Player>> = flow { emit(players) }
                         val possiblePlayers: List<Player> = availablePlayers.map {
                             it.filter { players ->
@@ -248,33 +248,33 @@ class GameViewModel @Inject constructor(
                             settingsVM.onEvent(SettingsEvent.SetCircleColor(settingsVM.Color(state.value.secondPlayer!!.color)))
                         }
                     }
-                    _state.update { it.copy(requestState = response.second) }
+                    _state.update { it.copy(requestState = requestState) }
                     this.cancel()
                 }
             }
             GameEvent.PostRemotePlayer -> {
                 viewModelScope.launch(Dispatchers.IO) {
-                    val response = repository.postPlayer(state.value, settingsVM.state.value)
-                    _state.update { it.copy(requestState = response) }
+                    val requestState = repository.postPlayer(state.value, settingsVM.state.value)
+                    _state.update { it.copy(requestState = requestState) }
                 }
             }
             GameEvent.RemoveRemotePlayer -> {
                 viewModelScope.launch(Dispatchers.IO) {
-                    val response = repository.removePlayer(state.value.matchID)
-                    _state.update { it.copy(requestState = response) }
+                    val requestState = repository.removePlayer(state.value.matchID)
+                    _state.update { it.copy(requestState = requestState) }
                 }
             }
             GameEvent.SendInitialOnlineGameState -> {
                 viewModelScope.launch(Dispatchers.IO) {
-                    val response = repository.postInitialGameState(state.value.matchID)
-                    _state.update { it.copy(requestState = response) }
+                    val requestState = repository.postInitialGameState(state.value.matchID)
+                    _state.update { it.copy(requestState = requestState) }
                 }
             }
             GameEvent.GetOnlineGameState -> {
                 viewModelScope.launch(Dispatchers.IO) {
-                    val response = repository.getGameState()
-                    response.first?.let {
-                        onlineGameState = response.first
+                    val (response, requestState) = repository.getGameState()
+                    response?.let {
+                        onlineGameState = response
                         _state.update {
                             it.copy(
                                 requestState = RequestState.Success,
@@ -290,20 +290,20 @@ class GameViewModel @Inject constructor(
                             )
                         }
                     }
-                    _state.update { it.copy(requestState = response.second) }
+                    _state.update { it.copy(requestState = requestState) }
                 }
             }
             GameEvent.UpdateOnlineGameState -> {
                 viewModelScope.launch(Dispatchers.IO) {
-                    val response = repository.updateGameState(state.value)
-                    _state.update { it.copy(requestState = response.second) }
-                    onlineGameState = response.first!!
+                    val (response, requestState) = repository.updateGameState(state.value)
+                    _state.update { it.copy(requestState = requestState) }
+                    onlineGameState = response!!
                 }
             }
             GameEvent.EndOnlineMatch -> {
                 viewModelScope.launch(Dispatchers.IO) {
-                    val response = repository.endMatch(state.value.matchID)
-                    _state.update { it.copy(requestState = response) }
+                    val requestState = repository.endMatch(state.value.matchID)
+                    _state.update { it.copy(requestState = requestState) }
                 }
             }
             is GameEvent.UpdateRequestState -> {
