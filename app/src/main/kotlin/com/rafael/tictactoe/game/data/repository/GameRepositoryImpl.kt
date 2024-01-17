@@ -17,8 +17,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import retrofit2.HttpException
 
-const val TAG = "GameRepository"
-
 class GameRepositoryImpl @Inject constructor(
     private val gameDao: GameDao,
     private val gameService: OnlineGameDao,
@@ -208,5 +206,9 @@ class GameRepositoryImpl @Inject constructor(
             Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
             return RequestState.Failure(Error.HttpError, e.message(), e.code())
         }
+    }
+    
+    companion object {
+        const val TAG = "GameRepository"
     }
 }
