@@ -85,6 +85,7 @@ class SearchSettingsViewModel @Inject constructor(
             }
             SearchSettingsEvent.ResetQuery -> {
                 _state.update { it.copy(query = "") }
+                onEvent(SearchSettingsEvent.QuerySettingsFromRepository(null))
             }
             is SearchSettingsEvent.UpdateMatchingSettings -> {
                 _state.update {
