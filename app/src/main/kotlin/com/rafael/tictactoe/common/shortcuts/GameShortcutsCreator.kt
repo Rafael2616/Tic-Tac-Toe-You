@@ -1,0 +1,60 @@
+package com.rafael.tictactoe.common.shortcuts
+
+import android.content.Context
+import android.content.Intent
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
+import androidx.core.content.pm.ShortcutInfoCompat
+import androidx.core.content.pm.ShortcutManagerCompat
+import androidx.core.graphics.drawable.IconCompat
+import com.rafael.tictactoe.R
+import com.rafael.tictactoe.TicTacToeActivity
+
+class GameShortcutsCreator {
+
+    data class Shortcut(
+        @StringRes val shortLabel: Int,
+        @StringRes val longLabel: Int,
+        @DrawableRes val icon: Int,
+    )
+
+    private val shortcuts = listOf(
+        Shortcut(
+            shortLabel = R.string.short_label,
+            longLabel = R.string.online_match,
+            icon = R.drawable.group_24px,
+        ),
+        Shortcut(
+            shortLabel = R.string.short_label,
+            longLabel = R.string.vs_cpu,
+            icon = R.drawable.memory_24px,
+        ),
+        Shortcut(
+            shortLabel = R.string.short_label,
+            longLabel = R.string.play,
+            icon = R.drawable.play_arrow_24px,
+        ),
+    )
+
+    fun create(context: Context) {
+        shortcuts.forEachIndexed { index, shortcut ->
+            val mShortcut = ShortcutInfoCompat.Builder(context, "dynamic_$index")
+                .setShortLabel(context.getString(shortcut.shortLabel))
+                .setLongLabel(context.getString(shortcut.longLabel))
+                .setIcon(
+                    IconCompat.createWithResource(
+                        context,
+                        shortcut.icon,
+                    ),
+                )
+                .setIntent(
+                    Intent(context, TicTacToeActivity::class.java).apply {
+                        action = Intent.ACTION_VIEW
+                        putExtra("${shortcut.longLabel}", "s$index")
+                    },
+                )
+                .build()
+            ShortcutManagerCompat.pushDynamicShortcut(context, mShortcut)
+        }
+    }
+}
