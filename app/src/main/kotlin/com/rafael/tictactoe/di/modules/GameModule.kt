@@ -2,9 +2,7 @@ package com.rafael.tictactoe.di
 
 import android.app.Application
 import androidx.media3.exoplayer.ExoPlayer
-import androidx.room.Room
 import com.rafael.tictactoe.game.data.dao.OnlineGameDao
-import com.rafael.tictactoe.game.data.database.GameDatabase
 import com.rafael.tictactoe.game.data.repository.GameRepositoryImpl
 import com.rafael.tictactoe.game.domain.repository.GameRepository
 import com.rafael.tictactoe.game.presentation.gameScreen.viewmodels.GameViewModel
@@ -14,46 +12,44 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
+import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.scopes.ViewModelScoped
 
-@Module
-@InstallIn(SingletonComponent::class)
-object GameModule {
+class GameModule {
 
-    @Provides
-    @Singleton
-    fun provideGameDatabase(app: Application): GameDatabase {
-        return Room.databaseBuilder(
-            app,
-            GameDatabase::class.java,
-            GameDatabase.DATABASE_NAME,
-        ).build()
+    @Module
+    @InstallIn(SingletonComponent::class)
+    object GameDataModule {
+
+        @Provides
+        @Singleton
+        fun provideGameRepository(
+            retrofitDao: OnlineGameDao,
+        ): GameRepository {
+            return GameRepositoryImpl(
+                retrofitDao,
+            )
+        }
     }
 
-    @Provides
-    @Singleton
-    fun provideGameRepository(
-        database: GameDatabase,
-        dao: OnlineGameDao,
-    ): GameRepository {
-        return GameRepositoryImpl(
-            database.gameDao(),
-            dao,
-        )
-    }
+    @Module
+    @InstallIn(ViewModelComponent::class)
+    object GameViewModelModule {
 
-    @Provides
-    @Singleton
-    fun provideGameViewModel(
-        player: ExoPlayer,
-        settingsVM: SettingsViewModel,
-        context: Application,
-        repository: GameRepository,
-    ): GameViewModel {
-        return GameViewModel(
-            player,
-            settingsVM,
-            context,
-            repository,
-        )
+        @Provides
+        @ViewModelScoped
+        fun provideGameViewModel(
+            player: ExoPlayer,
+            settingsVM: SettingsViewModel,
+            context: Application,
+            repository: GameRepository,
+        ): GameViewModel {
+            return GameViewModel(
+                player,
+                settingsVM,
+                context,
+                repository,
+            )
+        }
     }
 }

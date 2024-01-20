@@ -1,7 +1,6 @@
 package com.rafael.tictactoe.game.data.repository
 
 import android.util.Log
-import com.rafael.tictactoe.game.data.dao.GameDao
 import com.rafael.tictactoe.game.data.dao.OnlineGameDao
 import com.rafael.tictactoe.game.domain.model.Error
 import com.rafael.tictactoe.game.domain.model.GameEntity
@@ -18,21 +17,11 @@ import kotlinx.coroutines.flow.Flow
 import retrofit2.HttpException
 
 class GameRepositoryImpl @Inject constructor(
-    private val gameDao: GameDao,
     private val gameService: OnlineGameDao,
 ) : GameRepository {
 
     init {
         println("Game repository has been initialized")
-    }
-	
-    // Local data from Room
-    override fun getGameValues(): Flow<GameEntity> {
-        return gameDao.getGameValues()
-    }
-	
-    override suspend fun setGameValues(gameEntity: GameEntity) {
-        return gameDao.setGameValues(gameEntity)
     }
 
     // Internet data by Retrofit

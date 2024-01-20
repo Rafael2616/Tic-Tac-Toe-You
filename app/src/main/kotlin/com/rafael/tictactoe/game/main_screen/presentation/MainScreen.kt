@@ -19,6 +19,7 @@ import com.rafael.tictactoe.game.presentation.mainScreen.components.MainTopBar
 import com.rafael.tictactoe.game.presentation.mainScreen.components.WhatsNewDialog
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.game.mainScreen.presentation.viewmodel.MainViewModel
 
 @Composable
 fun MainScreen(
@@ -26,6 +27,7 @@ fun MainScreen(
     activity: ComponentActivity,
     viewModel: GameViewModel = hiltViewModel(),
     settingsVM: SettingsViewModel = hiltViewModel(),
+    mainVM: MainViewModel = hiltViewModel(),
 ) {
     val context = LocalContext.current
     val serviceIntent = Intent(context, MusicService::class.java)
@@ -36,6 +38,7 @@ fun MainScreen(
     MainOptions(
         navController,
         state,
+        mainVM::onEvent,
         viewModel::onEvent,
     )
 

@@ -32,18 +32,23 @@ import com.rafael.tictactoe.game.presentation.gameScreen.components.ui.WinnerLin
 import com.rafael.tictactoe.game.presentation.gameScreen.viewmodels.GameViewModel
 import com.rafael.tictactoe.settings.settingsScreen.presentation.components.ColorSelectionDialog
 import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.game.mainScreen.presentation.viewmodel.MainViewModel
 
 @Composable
 fun GameScreen(
     navController: NavController,
     settingsVM: SettingsViewModel = hiltViewModel(),
     viewModel: GameViewModel = hiltViewModel(),
+    mainVM: MainViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsState()
+    val mainState by mainVM.state.collectAsState()
     val settingsState by settingsVM.state.collectAsState()
     val onEvent = viewModel::onEvent
     val onSettingsEvent = settingsVM::onEvent
     val showDialog = if (!state.play && state.showGetPrefsDialog) true else false
+
+    onEvent(GameEvent.SetGameMode(mainState.gameMode))
 
     GameBoard(
         onEvent,

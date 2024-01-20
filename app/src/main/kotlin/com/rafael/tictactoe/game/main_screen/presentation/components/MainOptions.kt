@@ -41,16 +41,18 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.presentation.navigation.Destinations
-import com.rafael.tictactoe.game.domain.model.GameEvent
+import com.rafael.tictactoe.game.mainScreen.domain.model.MainEvent
 import com.rafael.tictactoe.game.domain.model.GameMode
-import com.rafael.tictactoe.game.domain.model.ScreenItem
+import com.rafael.tictactoe.game.domain.model.GameEvent
+import com.rafael.tictactoe.game.mainScreen.domain.model.ScreenItem
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 
 @Composable
 fun MainOptions(
     navController: NavController,
     state: SettingsState,
-    onEvent: (GameEvent) -> Unit,
+    onEvent: (MainEvent) -> Unit,
+    onClick: (GameEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val orientation = LocalConfiguration.current.orientation
@@ -100,19 +102,19 @@ fun MainOptions(
                     .shadow(8.dp, RoundedCornerShape(36.dp))
                     .clip(RoundedCornerShape(36.dp))
                     .clickable {
-                        onEvent(GameEvent.ExecUIClickSound)
+                        onClick(GameEvent.ExecUIClickSound)
                         when (screen.name) {
                             "PvP" -> {
                                 navController.navigate(Destinations.Game.screen)
-                                onEvent(GameEvent.SetGameMode(GameMode.PvP))
+                                onEvent(MainEvent.SetGameMode(GameMode.PvP))
                             }
                             "CPU" -> {
                                 navController.navigate(Destinations.Game.screen)
-                                onEvent(GameEvent.SetGameMode(GameMode.VsCPU))
+                                onEvent(MainEvent.SetGameMode(GameMode.VsCPU))
                             }
                             "Online" -> {
                                 navController.navigate(Destinations.Game.screen)
-                                onEvent(GameEvent.SetGameMode(GameMode.Online))
+                                onEvent(MainEvent.SetGameMode(GameMode.Online))
                             }
                             "Settings" -> navController.navigate(Destinations.Settings.screen)
                         }
