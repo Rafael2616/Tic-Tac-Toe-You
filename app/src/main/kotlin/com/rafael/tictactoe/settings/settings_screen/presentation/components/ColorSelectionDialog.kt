@@ -41,9 +41,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.game.presentation.utils.draws.drawCircleinColorDialog
-import com.rafael.tictactoe.game.presentation.utils.draws.drawWinnerLineinColorDialog
-import com.rafael.tictactoe.game.presentation.utils.draws.drawXinColorDialog
+import com.rafael.tictactoe.game.gameScreen.presentation.util.draws.drawCircleinColorDialog
+import com.rafael.tictactoe.game.gameScreen.presentation.util.draws.drawWinnerLineinColorDialog
+import com.rafael.tictactoe.game.gameScreen.presentation.util.draws.drawXinColorDialog
 import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Colors
 import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Customization
 import com.rafael.tictactoe.settings.settingsScreen.domain.enums.IColor

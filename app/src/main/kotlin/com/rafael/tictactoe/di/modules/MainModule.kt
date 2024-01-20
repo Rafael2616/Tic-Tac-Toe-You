@@ -1,6 +1,6 @@
 package com.rafael.tictactoe.di
 
-import android.app.Application
+import androidx.lifecycle.SavedStateHandle
 import com.rafael.tictactoe.game.mainScreen.presentation.viewmodel.MainViewModel
 import dagger.Module
 import dagger.Provides
@@ -14,7 +14,13 @@ object MainModule {
 
     @Provides
     @Singleton
-    fun provideMainViewModel(): MainViewModel {
-        return MainViewModel()
+    fun provideSavedStateHandle(): SavedStateHandle {
+        return SavedStateHandle()
+    }
+
+    @Provides
+    @Singleton
+    fun provideMainViewModel(savedState: SavedStateHandle): MainViewModel {
+        return MainViewModel(savedState)
     }
 }

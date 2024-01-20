@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.presentation.utils.draws
+package com.rafael.tictactoe.game.gameScreen.presentation.util.draws
 
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color

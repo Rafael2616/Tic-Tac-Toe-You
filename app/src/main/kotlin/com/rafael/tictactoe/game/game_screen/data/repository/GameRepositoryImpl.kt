@@ -3,7 +3,6 @@ package com.rafael.tictactoe.game.data.repository
 import android.util.Log
 import com.rafael.tictactoe.game.data.dao.OnlineGameDao
 import com.rafael.tictactoe.game.domain.model.Error
-import com.rafael.tictactoe.game.domain.model.GameEntity
 import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.domain.model.OnlineGameState
 import com.rafael.tictactoe.game.domain.model.Player

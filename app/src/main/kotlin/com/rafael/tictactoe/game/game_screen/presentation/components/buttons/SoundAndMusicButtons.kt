@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.presentation.gameScreen.components.buttons
+package com.rafael.tictactoe.game.gameScreen.presentation.components.buttons
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.clickable

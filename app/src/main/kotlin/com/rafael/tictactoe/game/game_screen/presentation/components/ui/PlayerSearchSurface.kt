@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.presentation.gameScreen.components.ui
+package com.rafael.tictactoe.game.gameScreen.presentation.components.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -47,7 +47,7 @@ import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 import kotlinx.coroutines.delay
 
 @Composable
-fun SearchingForPlayersSurface(
+fun PlayerSearchSurface(
     gameState: GameState,
     settingsState: SettingsState,
     onEvent: (GameEvent) -> Unit,

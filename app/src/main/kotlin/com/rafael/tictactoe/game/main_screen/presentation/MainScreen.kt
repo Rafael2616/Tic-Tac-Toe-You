@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.presentation.mainScreen
+package com.rafael.tictactoe.game.mainScreen.presentation
 
 import android.Manifest
 import android.content.Intent
@@ -13,13 +13,13 @@ import androidx.core.app.ActivityCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.common.services.MusicService
-import com.rafael.tictactoe.game.presentation.gameScreen.viewmodels.GameViewModel
-import com.rafael.tictactoe.game.presentation.mainScreen.components.MainOptions
-import com.rafael.tictactoe.game.presentation.mainScreen.components.MainTopBar
-import com.rafael.tictactoe.game.presentation.mainScreen.components.WhatsNewDialog
+import com.rafael.tictactoe.game.gameScreen.presentation.viewmodel.GameViewModel
+import com.rafael.tictactoe.game.mainScreen.presentation.components.MainOptions
+import com.rafael.tictactoe.game.mainScreen.presentation.components.MainTopBar
+import com.rafael.tictactoe.game.mainScreen.presentation.components.WhatsNewDialog
+import com.rafael.tictactoe.game.mainScreen.presentation.viewmodel.MainViewModel
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodels.SettingsViewModel
-import com.rafael.tictactoe.game.mainScreen.presentation.viewmodel.MainViewModel
 
 @Composable
 fun MainScreen(

@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.presentation.gameScreen.components.ui
+package com.rafael.tictactoe.game.gameScreen.presentation.components.ui
 
 import android.content.res.Configuration
 import androidx.compose.animation.AnimatedContent

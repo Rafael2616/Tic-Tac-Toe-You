@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.presentation.gameScreen.components.ui
+package com.rafael.tictactoe.game.gameScreen.presentation.components.ui
 
 import android.content.res.Configuration
 import androidx.compose.animation.animateColorAsState
@@ -25,8 +25,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import com.rafael.tictactoe.game.domain.model.GameState
-import com.rafael.tictactoe.game.presentation.utils.draws.drawCircleinCounter
-import com.rafael.tictactoe.game.presentation.utils.draws.drawXinCounter
+import com.rafael.tictactoe.game.gameScreen.presentation.util.draws.drawCircleinCounter
+import com.rafael.tictactoe.game.gameScreen.presentation.util.draws.drawXinCounter
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 
 @Composable

@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.presentation.gameScreen
+package com.rafael.tictactoe.game.gameScreen.presentation
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
@@ -16,23 +16,23 @@ import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameMode
 import com.rafael.tictactoe.game.domain.restart.RestartButtonLogic
 import com.rafael.tictactoe.game.domain.toast.ToastNameHandler
-import com.rafael.tictactoe.game.presentation.gameScreen.components.buttons.PlayAgainButton
-import com.rafael.tictactoe.game.presentation.gameScreen.components.buttons.RestartButton
-import com.rafael.tictactoe.game.presentation.gameScreen.components.buttons.SoundAndMusicButtons
-import com.rafael.tictactoe.game.presentation.gameScreen.components.buttons.VictoryCounterReseterButton
-import com.rafael.tictactoe.game.presentation.gameScreen.components.dialogs.ExitGameDialog
-import com.rafael.tictactoe.game.presentation.gameScreen.components.dialogs.GetPlayersPrefsDialog
-import com.rafael.tictactoe.game.presentation.gameScreen.components.ui.DifficultyLevelIndicator
-import com.rafael.tictactoe.game.presentation.gameScreen.components.ui.GameBoard
-import com.rafael.tictactoe.game.presentation.gameScreen.components.ui.GameStateToast
-import com.rafael.tictactoe.game.presentation.gameScreen.components.ui.PlayersNamesOnCounter
-import com.rafael.tictactoe.game.presentation.gameScreen.components.ui.SearchingForPlayersSurface
-import com.rafael.tictactoe.game.presentation.gameScreen.components.ui.VictoryCounter
-import com.rafael.tictactoe.game.presentation.gameScreen.components.ui.WinnerLines
-import com.rafael.tictactoe.game.presentation.gameScreen.viewmodels.GameViewModel
+import com.rafael.tictactoe.game.gameScreen.presentation.components.buttons.PlayAgainButton
+import com.rafael.tictactoe.game.gameScreen.presentation.components.buttons.RestartButton
+import com.rafael.tictactoe.game.gameScreen.presentation.components.buttons.SoundAndMusicButtons
+import com.rafael.tictactoe.game.gameScreen.presentation.components.buttons.VictoryCounterReseterButton
+import com.rafael.tictactoe.game.gameScreen.presentation.components.dialogs.ExitGameDialog
+import com.rafael.tictactoe.game.gameScreen.presentation.components.dialogs.GetPlayersPrefsDialog
+import com.rafael.tictactoe.game.gameScreen.presentation.components.ui.DifficultyLevelIndicator
+import com.rafael.tictactoe.game.gameScreen.presentation.components.ui.GameBoard
+import com.rafael.tictactoe.game.gameScreen.presentation.components.ui.GameStateToast
+import com.rafael.tictactoe.game.gameScreen.presentation.components.ui.PlayerSearchSurface
+import com.rafael.tictactoe.game.gameScreen.presentation.components.ui.PlayersNamesOnCounter
+import com.rafael.tictactoe.game.gameScreen.presentation.components.ui.VictoryCounter
+import com.rafael.tictactoe.game.gameScreen.presentation.components.ui.WinnerLines
+import com.rafael.tictactoe.game.gameScreen.presentation.viewmodel.GameViewModel
+import com.rafael.tictactoe.game.mainScreen.presentation.viewmodel.MainViewModel
 import com.rafael.tictactoe.settings.settingsScreen.presentation.components.ColorSelectionDialog
 import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodels.SettingsViewModel
-import com.rafael.tictactoe.game.mainScreen.presentation.viewmodel.MainViewModel
 
 @Composable
 fun GameScreen(
@@ -123,7 +123,7 @@ fun GameScreen(
     }
 
     AnimatedVisibility(state.showSearchForPlayersSurface) {
-        SearchingForPlayersSurface(
+        PlayerSearchSurface(
             state,
             settingsState,
             onEvent,

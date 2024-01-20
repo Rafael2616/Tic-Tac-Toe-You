@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.presentation.mainScreen.components
+package com.rafael.tictactoe.game.mainScreen.presentation.components
 
 import android.content.res.Configuration
 import androidx.compose.foundation.clickable
@@ -41,9 +41,9 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.presentation.navigation.Destinations
-import com.rafael.tictactoe.game.mainScreen.domain.model.MainEvent
-import com.rafael.tictactoe.game.domain.model.GameMode
 import com.rafael.tictactoe.game.domain.model.GameEvent
+import com.rafael.tictactoe.game.domain.model.GameMode
+import com.rafael.tictactoe.game.mainScreen.domain.model.MainEvent
 import com.rafael.tictactoe.game.mainScreen.domain.model.ScreenItem
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 

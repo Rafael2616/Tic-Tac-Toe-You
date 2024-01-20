@@ -9,7 +9,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.rafael.tictactoe.game.presentation.mainScreen.components.WhatsNewDialog
+import com.rafael.tictactoe.game.mainScreen.presentation.components.WhatsNewDialog
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.presentation.components.ColorSelectionDialog
 import com.rafael.tictactoe.settings.settingsScreen.presentation.components.SettingsTopBar

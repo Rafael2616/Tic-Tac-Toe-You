@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.presentation.gameScreen.viewmodels
+package com.rafael.tictactoe.game.gameScreen.presentation.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
