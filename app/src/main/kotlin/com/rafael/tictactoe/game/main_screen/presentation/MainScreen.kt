@@ -109,7 +109,7 @@ fun MainScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .statusBarsPadding()         
+            .statusBarsPadding()
             .padding(top = 10.dp, bottom = 10.dp),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
