@@ -1,7 +1,6 @@
 package com.rafael.tictactoe.settings.settingsScreen.presentation.components
 
 import androidx.compose.animation.animateColorAsState
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -24,7 +23,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.RadioButton
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
@@ -32,7 +30,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -40,6 +37,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.gameScreen.presentation.util.draws.drawCircleinColorDialog
 import com.rafael.tictactoe.game.gameScreen.presentation.util.draws.drawWinnerLineinColorDialog
@@ -52,6 +50,7 @@ import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 import com.rafael.tictactoe.settings.settingsScreen.domain.useCases.colorSelectionUseCase
 
 @Composable
+@Suppress("ktlint:compose:modifier-not-used-at-root")
 fun ColorSelectionDialog(
     onEvent: (SettingsEvent) -> Unit,
     state: SettingsState,
@@ -66,24 +65,24 @@ fun ColorSelectionDialog(
     val circleColor by animateColorAsState(state.circleColor)
     val winnerLineColor by animateColorAsState(state.winnerLineColor)
 
-    Surface(
-        color = Color.Black.copy(alpha = 0.3f),
-        modifier = modifier
-            .fillMaxSize(),
+    Dialog(
+        onDismissRequest = {
+            onEvent(SettingsEvent.ShowColorSelectionDialog(false))
+        },
     ) {
         Box(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxSize(),
         ) {
             Card(
                 shape = RoundedCornerShape(32.dp),
-                border = BorderStroke(1.25.dp, Color.Gray),
                 colors = CardDefaults.cardColors(
                     containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(20.dp),
                 ),
                 modifier = Modifier
                     .width(275.dp)
-                    .height(325.dp)
+                    .height(345.dp)
+                    .padding(vertical = 6.dp)
                     .align(Alignment.Center),
             ) {
                 Row(
@@ -102,7 +101,7 @@ fun ColorSelectionDialog(
                         ),
                         color = MaterialTheme.colorScheme.onSurface,
                         modifier = Modifier
-                            .padding(start = 16.dp),
+                            .padding(start = 16.dp, top = 6.dp),
                     )
                     Spacer(
                         modifier = Modifier
@@ -246,7 +245,7 @@ fun ColorSelectionDialog(
                     modifier = Modifier
                         .width(90.dp)
                         .height(42.dp)
-                        .padding(end = 12.dp, bottom = 6.dp)
+                        .padding(end = 12.dp)
                         .align(Alignment.End),
                 ) {
                     Text(
