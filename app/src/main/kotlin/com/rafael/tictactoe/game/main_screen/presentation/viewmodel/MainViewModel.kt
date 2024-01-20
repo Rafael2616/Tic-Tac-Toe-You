@@ -12,8 +12,7 @@ class MainViewModel @Inject constructor(
     private val savedState: SavedStateHandle,
 ) : ViewModel() {
 
-    // private val _state = MutableStateFlow(MainState())
-    val state = savedState.getStateFlow("state", MainState()) // _state.asStateFlow()
+    val state = savedState.getStateFlow("state", MainState())
 
     fun onEvent(event: MainEvent) {
         when (event) {
@@ -21,7 +20,6 @@ class MainViewModel @Inject constructor(
                 savedState["state"] = savedState.get<MainState>("state")?.copy(
                     gameMode = event.mode,
                 )
-                // _state.update { it.copy(gameMode = event.mode) }
             }
         }
     }
