@@ -1,0 +1,10 @@
+Added:
+- Search feature for settings
+
+Fixes:
+- Fix nfinite loading in online match mode
+- Fix subtitle cropping in landscape mode
+
+Code:
+- Rewrite code in various places
+- Bump deps to upstream
