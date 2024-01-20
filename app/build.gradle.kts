@@ -12,9 +12,9 @@ plugins {
     id("com.google.devtools.ksp")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.serialization")
-    id("org.jetbrains.kotlin.kapt")
     id("app.cash.licensee")
     id("kotlin-parcelize")
+    kotlin("kapt")
 }
 
 android {
