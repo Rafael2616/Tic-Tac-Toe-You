@@ -19,7 +19,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
 
 private val LightColors = lightColorScheme(
     primary = md_theme_light_primary,

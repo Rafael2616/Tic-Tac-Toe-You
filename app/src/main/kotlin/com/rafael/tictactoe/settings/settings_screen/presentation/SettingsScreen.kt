@@ -13,7 +13,7 @@ import com.rafael.tictactoe.game.mainScreen.presentation.components.WhatsNewDial
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.presentation.components.ColorSelectionDialog
 import com.rafael.tictactoe.settings.settingsScreen.presentation.components.SettingsTopBar
-import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
 
 @Composable
 @ExperimentalMaterial3Api

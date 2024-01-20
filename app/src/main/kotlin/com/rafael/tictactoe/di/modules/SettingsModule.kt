@@ -8,7 +8,7 @@ import com.rafael.tictactoe.settings.settingsScreen.data.database.Migrations
 import com.rafael.tictactoe.settings.settingsScreen.data.database.SettingsDatabase
 import com.rafael.tictactoe.settings.settingsScreen.data.repository.SettingsRepositoryImpl
 import com.rafael.tictactoe.settings.settingsScreen.domain.repository.SettingsRepository
-import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

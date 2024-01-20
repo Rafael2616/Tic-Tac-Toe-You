@@ -60,7 +60,7 @@ import com.rafael.tictactoe.game.mainScreen.domain.model.ScreenItem
 import com.rafael.tictactoe.game.mainScreen.presentation.components.WhatsNewDialog
 import com.rafael.tictactoe.game.mainScreen.presentation.viewmodel.MainViewModel
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
 
 @Composable
 fun MainScreen(

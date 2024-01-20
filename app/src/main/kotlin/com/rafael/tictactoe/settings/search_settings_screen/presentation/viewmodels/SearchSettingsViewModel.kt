@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.searchSettingsScreen.presentation.viewmodels
+package com.rafael.tictactoe.settings.searchSettingsScreen.presentation.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
@@ -9,7 +9,7 @@ import com.rafael.tictactoe.settings.searchSettingsScreen.domain.model.SearchSet
 import com.rafael.tictactoe.settings.searchSettingsScreen.domain.repository.SearchSettingsManager
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingItem
 import com.rafael.tictactoe.settings.settingsScreen.presentation.utils.getSettingsItems
-import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers

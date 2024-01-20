@@ -14,7 +14,7 @@ import com.rafael.tictactoe.common.services.MusicService
 import com.rafael.tictactoe.common.shortcuts.GameShortcutsCreator
 import com.rafael.tictactoe.common.shortcuts.ShortcutsReceiver
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

@@ -6,7 +6,7 @@ import com.rafael.tictactoe.game.data.dao.OnlineGameDao
 import com.rafael.tictactoe.game.data.repository.GameRepositoryImpl
 import com.rafael.tictactoe.game.domain.repository.GameRepository
 import com.rafael.tictactoe.game.gameScreen.presentation.viewmodel.GameViewModel
-import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

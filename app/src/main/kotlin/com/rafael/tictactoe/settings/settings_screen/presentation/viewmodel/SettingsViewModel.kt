@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodels
+package com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel
 
 import android.app.Application
 import androidx.compose.ui.graphics.Color

@@ -19,7 +19,7 @@ import com.rafael.tictactoe.game.domain.repository.GameRepository
 import com.rafael.tictactoe.game.domain.restart.restartGame
 import com.rafael.tictactoe.game.domain.victoryCounter.victoryCounterUpdater
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers

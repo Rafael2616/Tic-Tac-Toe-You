@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.libraryScreen.presentation.viewmodels
+package com.rafael.tictactoe.settings.libraryScreen.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.rafael.tictactoe.settings.libraryScreen.data.repository.OssLibraryRepository

@@ -70,13 +70,13 @@ import com.rafael.tictactoe.common.domain.util.getVersionCode
 import com.rafael.tictactoe.common.domain.util.getVersionName
 import com.rafael.tictactoe.game.mainScreen.presentation.components.WhatsNewDialog
 import com.rafael.tictactoe.settings.searchSettingsScreen.domain.model.SearchSettingsEvent
-import com.rafael.tictactoe.settings.searchSettingsScreen.presentation.viewmodels.SearchSettingsViewModel
+import com.rafael.tictactoe.settings.searchSettingsScreen.presentation.viewmodel.SearchSettingsViewModel
 import com.rafael.tictactoe.settings.settingsScreen.domain.enums.SettingsGroup
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.domain.useCases.toggleSettingsUseCase
 import com.rafael.tictactoe.settings.settingsScreen.domain.util.ComponentValidator
 import com.rafael.tictactoe.settings.settingsScreen.presentation.components.ColorSelectionDialog
-import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodels.SettingsViewModel
+import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
 
 @Composable
 @ExperimentalMaterial3Api
