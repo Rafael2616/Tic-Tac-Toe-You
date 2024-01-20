@@ -133,7 +133,7 @@ configure<SpotlessExtension> {
             .setEditorConfigPath(rootProject.file(".editorconfig"))
             .customRuleSets(
                 listOf(
-                    "io.nlopez.compose.rules:ktlint:0.3.9",
+                    "io.nlopez.compose.rules:ktlint:0.3.10",
                 ),
             )
         target("src/main/kotlin/**/*.kt")

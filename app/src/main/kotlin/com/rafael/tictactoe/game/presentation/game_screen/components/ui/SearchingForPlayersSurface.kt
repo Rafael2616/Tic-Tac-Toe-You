@@ -26,6 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -53,6 +54,7 @@ fun SearchingForPlayersSurface(
     modifier: Modifier = Modifier,
 ) {
     val requestState = gameState.requestState
+    val actualOnEvent by rememberUpdatedState(onEvent)
 
     Surface(
         color = if (settingsState.isDarkThemeOn) {
@@ -172,7 +174,7 @@ fun SearchingForPlayersSurface(
                         timer--
                         delay(950L)
                         if (timer == 0) {
-                            onEvent(GameEvent.StartOnlineMatch)
+                            actualOnEvent(GameEvent.StartOnlineMatch)
                         }
                     }
                 }

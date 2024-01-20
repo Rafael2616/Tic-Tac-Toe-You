@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
@@ -35,6 +36,7 @@ fun ToastNameHandler(
     val emptyPlayerName = stringResource(R.string.player)
     val cpuName = stringResource(R.string.cpu)
     var currentGamePhase: CurrentPlayerName = CurrentPlayerName.NameForSetupPhase
+    val actualOnEvent by rememberUpdatedState(onEvent)
 
     // Update game phase
     if (!play && !isCPUMode) {
@@ -99,12 +101,12 @@ fun ToastNameHandler(
             LaunchedEffect(currentGamePhase) {
                 while (isTimerOn) {
                     if (timer > 0) {
-                        onEvent(GameEvent.UpdateCurrentPlayerName(timer.toString()))
+                        actualOnEvent(GameEvent.UpdateCurrentPlayerName(timer.toString()))
                     }
                     delay(500L)
                     timer--
                     if (timer == 0) {
-                        onEvent(GameEvent.IsTimerOn(false))
+                        actualOnEvent(GameEvent.IsTimerOn(false))
                     }
                 }
             }
