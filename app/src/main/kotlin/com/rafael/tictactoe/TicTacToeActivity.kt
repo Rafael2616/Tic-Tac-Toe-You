@@ -9,7 +9,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.common.domain.util.AppExceptionHandler
-import com.rafael.tictactoe.common.presentation.navigation.TicTacToe
+import com.rafael.tictactoe.common.presentation.navigation.TicTacToeNavGraph
 import com.rafael.tictactoe.common.services.MusicService
 import com.rafael.tictactoe.common.shortcuts.GameShortcutsCreator
 import com.rafael.tictactoe.common.shortcuts.ShortcutsReceiver
@@ -45,7 +45,7 @@ class TicTacToeActivity : ComponentActivity() {
         registerReceiver(shortcutsReceiver, filter)
 
         setContent {
-            TicTacToe(this)
+            TicTacToeNavGraph(this)
         }
     }
 

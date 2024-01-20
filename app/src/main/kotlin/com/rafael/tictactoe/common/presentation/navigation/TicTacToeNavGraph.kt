@@ -26,7 +26,7 @@ import com.rafael.tictactoe.settings.settingsScreen.presentation.SettingsScreen
 
 @Composable
 @ExperimentalMaterial3Api
-fun TicTacToe(
+fun TicTacToeNavGraph(
     context: ComponentActivity,
     modifier: Modifier = Modifier,
 ) {
