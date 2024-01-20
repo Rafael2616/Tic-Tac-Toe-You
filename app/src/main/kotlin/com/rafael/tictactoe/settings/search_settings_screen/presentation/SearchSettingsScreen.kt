@@ -116,7 +116,7 @@ fun SearchSettingsScreen(
             onActiveChange = {
                 active = it
             },
-            placeholder = { Text("Search settings") },
+            placeholder = { Text(stringResource(R.string.search_settings)) },
             leadingIcon = {
                 IconButton(
                     onClick = { navController.popBackStack() },

@@ -109,8 +109,8 @@ fun MainScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .statusBarsPadding()
-            .padding(top = 10.dp),
+            .statusBarsPadding()           
+            .padding(top = 10.dp, bottom = 10.dp),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -142,7 +142,7 @@ fun MainScreen(
                         containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp),
                     ),
                     modifier = Modifier
-                        .fillMaxWidth(if (orientation == Configuration.ORIENTATION_LANDSCAPE) 0.3f else 0.6f)
+                        .fillMaxWidth(if (orientation == Configuration.ORIENTATION_LANDSCAPE) 0.33f else 0.6f)
                         .height(58.dp)
                         .shadow(8.dp, RoundedCornerShape(36.dp))
                         .clip(RoundedCornerShape(36.dp))

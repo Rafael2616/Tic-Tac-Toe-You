@@ -71,5 +71,6 @@
     <string name="disabled_message">Actualmente no es posible jugar en este modo</string>
     <string name="open_source_licenses">Licencias de codígo abierto</string>
     <string name="close">Cerrar</string>
+    <string name="search_settings">Buscar configuraciones</string>
 
 </resources>

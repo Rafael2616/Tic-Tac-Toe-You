@@ -243,14 +243,12 @@ fun ColorSelectionDialog(
                         onEvent(SettingsEvent.ShowColorSelectionDialog(false))
                     },
                     modifier = Modifier
-                        .width(90.dp)
-                        .height(42.dp)
                         .padding(end = 12.dp)
                         .align(Alignment.End),
                 ) {
                     Text(
                         text = stringResource(android.R.string.ok),
-                        style = MaterialTheme.typography.bodyLarge,
+                        style = MaterialTheme.typography.bodyMedium,
                         textAlign = TextAlign.Center,
                     )
                 }

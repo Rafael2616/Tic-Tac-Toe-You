@@ -71,6 +71,7 @@
     <string name="disabled_message">Play this mode is current not possible</string>
     <string name="open_source_licenses">Open source licenses</string>
     <string name="close">Close</string>
+    <string name="search_settings">Search settings</string>
 
     <string name="cpu" translatable="false">CPU</string>
 
