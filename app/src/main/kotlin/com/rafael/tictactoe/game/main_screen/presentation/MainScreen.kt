@@ -58,6 +58,7 @@ import com.rafael.tictactoe.game.gameScreen.presentation.viewmodel.GameViewModel
 import com.rafael.tictactoe.game.mainScreen.domain.model.MainEvent
 import com.rafael.tictactoe.game.mainScreen.domain.model.ScreenItem
 import com.rafael.tictactoe.game.mainScreen.presentation.components.WhatsNewDialog
+import com.rafael.tictactoe.game.mainScreen.presentation.util.ShortcutsIntentHandler
 import com.rafael.tictactoe.game.mainScreen.presentation.viewmodel.MainViewModel
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
@@ -67,6 +68,7 @@ fun MainScreen(
     navController: NavController,
     activity: ComponentActivity,
     modifier: Modifier = Modifier,
+    intent: Intent? = null,
     viewModel: GameViewModel = hiltViewModel(),
     settingsVM: SettingsViewModel = hiltViewModel(),
     mainVM: MainViewModel = hiltViewModel(),
@@ -74,7 +76,8 @@ fun MainScreen(
     val context = LocalContext.current
     val serviceIntent = Intent(context, MusicService::class.java)
     val state by settingsVM.state.collectAsState()
-    var showStoragePermissinRequest = false
+    val mainState by mainVM.state.collectAsState()
+    var showStoragePermissionRequest = false
     val onEvent = mainVM::onEvent
     val onClick = viewModel::onEvent
     val orientation = LocalConfiguration.current.orientation
@@ -206,10 +209,17 @@ fun MainScreen(
         )
     }
 
+    // Redirect user to property game mode screen when he presses
+    // the long click app shortcuts
+    if (mainState.canRedirectToAnGameModeScreen && intent != null) {
+        ShortcutsIntentHandler(activity, navController, mainVM::onEvent, intent)
+        mainVM.canRedirectToAnGameModeScreen(false)
+    }
+
     // This permission should not be shown to the end user, it is only for test
     // cases where there is a crash in the application in the release version in which
     // the developer needs the log file that is generated in the internal storage
-    if (showStoragePermissinRequest) {
+    if (showStoragePermissionRequest) {
         ActivityCompat.requestPermissions(
             activity,
             arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),

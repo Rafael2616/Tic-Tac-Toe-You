@@ -23,4 +23,10 @@ class MainViewModel @Inject constructor(
             }
         }
     }
+
+    fun canRedirectToAnGameModeScreen(can: Boolean) {
+        savedState["state"] = savedState.get<MainState>("state")?.copy(
+            canRedirectToAnGameModeScreen = can,
+        )
+    }
 }

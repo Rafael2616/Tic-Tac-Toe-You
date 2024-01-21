@@ -8,4 +8,5 @@ import kotlinx.parcelize.RawValue
 @Parcelize
 data class MainState(
     val gameMode: @RawValue GameMode = GameMode.PvP,
+    val canRedirectToAnGameModeScreen: Boolean = true,
 ) : Parcelable

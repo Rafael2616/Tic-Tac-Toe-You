@@ -1,6 +1,5 @@
 package com.rafael.tictactoe
 
-import android.content.IntentFilter
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -12,7 +11,6 @@ import com.rafael.tictactoe.common.domain.util.AppExceptionHandler
 import com.rafael.tictactoe.common.presentation.navigation.TicTacToeNavGraph
 import com.rafael.tictactoe.common.services.MusicService
 import com.rafael.tictactoe.common.shortcuts.GameShortcutsCreator
-import com.rafael.tictactoe.common.shortcuts.ShortcutsReceiver
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,8 +29,6 @@ class TicTacToeActivity : ComponentActivity() {
     @Inject
     lateinit var musicService: MusicService
 
-    private val shortcutsReceiver = ShortcutsReceiver()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         enableEdgeToEdge()
@@ -41,11 +37,8 @@ class TicTacToeActivity : ComponentActivity() {
         AppExceptionHandler.init()
         GameShortcutsCreator().create(this)
 
-        val filter = IntentFilter("SHORTCUT_CLICKED_ACTION")
-        registerReceiver(shortcutsReceiver, filter)
-
         setContent {
-            TicTacToeNavGraph(this)
+            TicTacToeNavGraph(this, intent = intent)
         }
     }
 
@@ -62,6 +55,5 @@ class TicTacToeActivity : ComponentActivity() {
     override fun onDestroy() {
         exoPlayer.release()
         super.onDestroy()
-        unregisterReceiver(shortcutsReceiver)
     }
 }

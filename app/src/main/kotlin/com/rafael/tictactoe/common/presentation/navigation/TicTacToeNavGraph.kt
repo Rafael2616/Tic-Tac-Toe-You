@@ -1,5 +1,6 @@
 package com.rafael.tictactoe.common.presentation.navigation
 
+import android.content.Intent
 import androidx.activity.ComponentActivity
 import androidx.compose.animation.core.EaseIn
 import androidx.compose.animation.core.EaseOut
@@ -29,6 +30,7 @@ import com.rafael.tictactoe.settings.settingsScreen.presentation.SettingsScreen
 fun TicTacToeNavGraph(
     context: ComponentActivity,
     modifier: Modifier = Modifier,
+    intent: Intent? = null,
 ) {
     val navController = rememberNavController()
     val enterTransition = fadeIn(
@@ -59,6 +61,7 @@ fun TicTacToeNavGraph(
                     MainScreen(
                         navController = navController,
                         activity = context,
+                        intent = intent,
                     )
                 }
                 composable(Destinations.Game.screen) {

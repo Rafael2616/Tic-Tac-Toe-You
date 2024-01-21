@@ -35,13 +35,5 @@
             </intent-filter>
         </activity>
 
-        <receiver
-            android:name=".common.shortcuts.ShortcutsReceiver"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="SHORTCUT_CLICKED_ACTION" />
-            </intent-filter>
-        </receiver>
-
     </application>
 </manifest>
