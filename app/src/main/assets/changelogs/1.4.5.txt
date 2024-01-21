@@ -1,5 +1,6 @@
 Added:
 - Search feature for settings
+- Long press shortcuts to game modes
 
 Fixes:
 - Fix infinite loading in online match mode

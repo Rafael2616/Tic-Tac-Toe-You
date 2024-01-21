@@ -62,6 +62,7 @@ import com.rafael.tictactoe.game.mainScreen.presentation.util.ShortcutsIntentHan
 import com.rafael.tictactoe.game.mainScreen.presentation.viewmodel.MainViewModel
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
+import kotlin.system.exitProcess
 
 @Composable
 fun MainScreen(
@@ -231,5 +232,6 @@ fun MainScreen(
         settingsVM.onEvent(SettingsEvent.IsBGMusicPlaying(false))
         activity.finish()
         context.stopService(serviceIntent)
+        exitProcess(0)
     }
 }
