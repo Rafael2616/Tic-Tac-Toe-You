@@ -2,7 +2,7 @@
 
 plugins {
     id("androidx.room").version("2.6.1").apply(false)
-    id("com.android.application").version("8.2.1").apply(false)
+    id("com.android.application").version("8.2.2").apply(false)
     id("com.diffplug.spotless").version("6.25.0").apply(false)
     id("com.google.dagger.hilt.android").version("2.50").apply(false)
     id("com.google.devtools.ksp").version("1.9.22-1.0.17").apply(false)
