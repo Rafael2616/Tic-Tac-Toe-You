@@ -1,11 +1,13 @@
 package com.rafael.tictactoe.settings.searchSettingsScreen.domain.model
 
+import androidx.annotation.Keep
 import androidx.appsearch.annotation.Document
 import androidx.appsearch.annotation.Document.Id
 import androidx.appsearch.annotation.Document.Namespace
 import androidx.appsearch.annotation.Document.StringProperty
 import androidx.appsearch.app.AppSearchSchema
 
+@Keep
 @Document
 data class SearchItemSpecs(
     @Namespace
