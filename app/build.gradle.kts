@@ -175,7 +175,7 @@ dependencies {
     ksp("com.google.dagger:hilt-android-compiler:$hiltVersion")
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
     // Jetpack Compose
-    implementation(platform("androidx.compose:compose-bom:2023.10.01"))
+    implementation(platform("androidx.compose:compose-bom:2024.01.00"))
     implementation("androidx.compose.animation:animation:$m3Version")
     implementation("androidx.compose.foundation:foundation:$m3Version")
     implementation("androidx.compose.material:material-icons-extended:$m3Version")
