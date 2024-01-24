@@ -21,6 +21,31 @@ fun hardLevelCPUMove(state: GameState): Pair<Int, Int> {
     val corners = listOf(Pair(0, 0), Pair(0, 2), Pair(2, 0), Pair(2, 2))
     val center = Pair(1, 1)
 
+    // Choose the center if there are 3 corners clicked
+    if (card[corners[0].first][corners[0].second] && card[corners[1].first][corners[1].second] && card[corners[2].first][corners[2].second]) {
+        if (!isClicked[1][1]) {
+            return Pair(1, 1)
+        }
+    }
+
+    if (card[corners[3].first][corners[3].second] && card[corners[1].first][corners[1].second] && card[corners[2].first][corners[2].second]) {
+        if (!isClicked[1][1]) {
+            return Pair(1, 1)
+        }
+    }
+
+    if (card[corners[3].first][corners[3].second] && card[corners[0].first][corners[0].second] && card[corners[2].first][corners[2].second]) {
+        if (!isClicked[1][1]) {
+            return Pair(1, 1)
+        }
+    }
+
+    if (card[corners[3].first][corners[3].second] && card[corners[0].first][corners[0].second] && card[corners[1].first][corners[1].second]) {
+        if (!isClicked[1][1]) {
+            return Pair(1, 1)
+        }
+    }
+
     // Choose best side if two corners are clicked
     if ((card[corners[0].first][corners[0].second] && isClicked[corners[0].first][corners[0].second]) &&
         (card[corners[1].first][corners[1].second] && isClicked[corners[1].first][corners[1].second])
@@ -221,104 +246,80 @@ fun hardLevelCPUMove(state: GameState): Pair<Int, Int> {
     }
 
     // Choose the best corner based in which side and corner is cliked and which player has been clicked
-    if ((
-            (card[corners[0].first][corners[0].second] && isClicked[corners[0].first][corners[0].second]) &&
-                (card[sides[0].first][sides[0].second] && isClicked[sides[0].first][sides[0].second])
-            ) ||
-        (
-            (card[corners[3].first][corners[3].second] && isClicked[corners[3].first][corners[3].second]) &&
-                (card[sides[2].first][sides[2].second] && isClicked[sides[2].first][sides[2].second])
-            )
+    if (
+        (card[corners[0].first][corners[0].second] && isClicked[corners[0].first][corners[0].second]) &&
+        (card[sides[0].first][sides[0].second] && isClicked[sides[0].first][sides[0].second]) ||
+        (card[corners[3].first][corners[3].second] && isClicked[corners[3].first][corners[3].second]) &&
+        (card[sides[2].first][sides[2].second] && isClicked[sides[2].first][sides[2].second])
     ) {
         if (!isClicked[0][2]) {
             return Pair(0, 2)
         }
-    } else if ((
-            (!card[corners[0].first][corners[0].second] && isClicked[corners[0].first][corners[0].second]) &&
-                (!card[sides[0].first][sides[0].second] && isClicked[sides[0].first][sides[0].second])
-            ) ||
-        (
-            (!card[corners[3].first][corners[3].second] && isClicked[corners[3].first][corners[3].second]) &&
-                (!card[sides[2].first][sides[2].second] && isClicked[sides[2].first][sides[2].second])
-            )
+    } else if (
+        (!card[corners[0].first][corners[0].second] && isClicked[corners[0].first][corners[0].second]) &&
+        (!card[sides[0].first][sides[0].second] && isClicked[sides[0].first][sides[0].second]) ||
+        (!card[corners[3].first][corners[3].second] && isClicked[corners[3].first][corners[3].second]) &&
+        (!card[sides[2].first][sides[2].second] && isClicked[sides[2].first][sides[2].second])
     ) {
         if (!isClicked[0][2]) {
             return Pair(0, 2)
         }
     }
 
-    if ((
-            (card[corners[1].first][corners[1].second] && isClicked[corners[1].first][corners[1].second]) &&
-                (card[sides[0].first][sides[0].second] && isClicked[sides[0].first][sides[0].second])
-            ) ||
-        (
-            (card[corners[2].first][corners[2].second] && isClicked[corners[2].first][corners[2].second]) &&
-                (card[sides[1].first][sides[1].second] && isClicked[sides[1].first][sides[1].second])
-            )
+    if (
+        (card[corners[1].first][corners[1].second] && isClicked[corners[1].first][corners[1].second]) &&
+        (card[sides[0].first][sides[0].second] && isClicked[sides[0].first][sides[0].second]) ||
+        (card[corners[2].first][corners[2].second] && isClicked[corners[2].first][corners[2].second]) &&
+        (card[sides[1].first][sides[1].second] && isClicked[sides[1].first][sides[1].second])
     ) {
         if (!isClicked[0][0]) {
             return Pair(0, 0)
         }
-    } else if ((
-            (!card[corners[1].first][corners[1].second] && isClicked[corners[1].first][corners[1].second]) &&
-                (!card[sides[0].first][sides[0].second] && isClicked[sides[0].first][sides[0].second])
-            ) ||
-        (
-            (!card[corners[2].first][corners[2].second] && isClicked[corners[2].first][corners[2].second]) &&
-                (!card[sides[1].first][sides[1].second] && isClicked[sides[1].first][sides[1].second])
-            )
+    } else if (
+        (!card[corners[1].first][corners[1].second] && isClicked[corners[1].first][corners[1].second]) &&
+        (!card[sides[0].first][sides[0].second] && isClicked[sides[0].first][sides[0].second]) ||
+        (!card[corners[2].first][corners[2].second] && isClicked[corners[2].first][corners[2].second]) &&
+        (!card[sides[1].first][sides[1].second] && isClicked[sides[1].first][sides[1].second])
     ) {
         if (!isClicked[0][0]) {
             return Pair(0, 0)
         }
     }
 
-    if ((
-            (card[corners[2].first][corners[2].second] && isClicked[corners[2].first][corners[2].second]) &&
-                (card[sides[3].first][sides[3].second] && isClicked[sides[3].first][sides[3].second])
-            ) ||
-        (
-            (card[corners[1].first][corners[1].second] && isClicked[corners[1].first][corners[1].second]) &&
-                (card[sides[2].first][sides[2].second] && isClicked[sides[2].first][sides[2].second])
-            )
+    if (
+        (card[corners[2].first][corners[2].second] && isClicked[corners[2].first][corners[2].second]) &&
+        (card[sides[3].first][sides[3].second] && isClicked[sides[3].first][sides[3].second]) ||
+        (card[corners[1].first][corners[1].second] && isClicked[corners[1].first][corners[1].second]) &&
+        (card[sides[2].first][sides[2].second] && isClicked[sides[2].first][sides[2].second])
     ) {
         if (!isClicked[2][2]) {
             return Pair(2, 2)
         }
-    } else if ((
-            (!card[corners[2].first][corners[2].second] && isClicked[corners[2].first][corners[2].second]) &&
-                (!card[sides[3].first][sides[3].second] && isClicked[sides[3].first][sides[3].second])
-            ) ||
-        (
-            (!card[corners[1].first][corners[1].second] && isClicked[corners[1].first][corners[1].second]) &&
-                (!card[sides[2].first][sides[2].second] && isClicked[sides[2].first][sides[2].second])
-            )
+    } else if (
+        (!card[corners[2].first][corners[2].second] && isClicked[corners[2].first][corners[2].second]) &&
+        (!card[sides[3].first][sides[3].second] && isClicked[sides[3].first][sides[3].second]) ||
+        (!card[corners[1].first][corners[1].second] && isClicked[corners[1].first][corners[1].second]) &&
+        (!card[sides[2].first][sides[2].second] && isClicked[sides[2].first][sides[2].second])
     ) {
         if (!isClicked[2][2]) {
             return Pair(2, 2)
         }
     }
 
-    if ((
-            (card[corners[0].first][corners[0].second] && isClicked[corners[0].first][corners[0].second]) &&
-                (card[sides[1].first][sides[1].second] && isClicked[sides[1].first][sides[1].second])
-            ) ||
-        (
-            (card[corners[3].first][corners[3].second] && isClicked[corners[3].first][corners[3].second]) &&
-                (card[sides[3].first][sides[3].second] && isClicked[sides[3].first][sides[3].second])
-            )
+    if (
+        (card[corners[0].first][corners[0].second] && isClicked[corners[0].first][corners[0].second]) &&
+        (card[sides[1].first][sides[1].second] && isClicked[sides[1].first][sides[1].second]) ||
+        (card[corners[3].first][corners[3].second] && isClicked[corners[3].first][corners[3].second]) &&
+        (card[sides[3].first][sides[3].second] && isClicked[sides[3].first][sides[3].second])
     ) {
         if (!isClicked[2][0]) {
             return Pair(2, 0)
         }
-    } else if ((
-            (!card[corners[0].first][corners[0].second] && isClicked[corners[0].first][corners[0].second]) &&
-                (!card[sides[1].first][sides[1].second] && isClicked[sides[1].first][sides[1].second])
-            ) ||
-        (
-            (!card[corners[3].first][corners[3].second] && isClicked[corners[3].first][corners[3].second]) &&
-                (!card[sides[3].first][sides[3].second] && isClicked[sides[3].first][sides[3].second])
-            )
+    } else if (
+        (!card[corners[0].first][corners[0].second] && isClicked[corners[0].first][corners[0].second]) &&
+        (!card[sides[1].first][sides[1].second] && isClicked[sides[1].first][sides[1].second]) ||
+        (!card[corners[3].first][corners[3].second] && isClicked[corners[3].first][corners[3].second]) &&
+        (!card[sides[3].first][sides[3].second] && isClicked[sides[3].first][sides[3].second])
     ) {
         if (!isClicked[2][0]) {
             return Pair(2, 0)
@@ -326,7 +327,8 @@ fun hardLevelCPUMove(state: GameState): Pair<Int, Int> {
     }
 
     // Choose an corner if center [1][1] and other corner is clicked too and which player has been clicked
-    for (corner in corners) {
+    val randomCorners = corners.shuffled()
+    for (corner in randomCorners) {
         if (card[corner.first][corner.second] && card[1][1]) {
             when (corner) {
                 Pair(0, 0) -> {
@@ -350,7 +352,7 @@ fun hardLevelCPUMove(state: GameState): Pair<Int, Int> {
 
     val strategy = (0 until 5).random()
 
-    for (corner in corners) {
+    for (corner in randomCorners) {
         if (isClicked[corner.first][corner.second]) {
             when (corner) {
                 Pair(0, 0) -> {
