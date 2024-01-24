@@ -159,7 +159,7 @@ dependencies {
     val appSearchVersion = "1.1.0-alpha03"
 
     // Todo: remove this when compose bom 2023.12.00 is released
-    val m3Version = "1.6.0-rc01"
+    val m3Version = "1.6.0"
 
     // Kotlin
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
