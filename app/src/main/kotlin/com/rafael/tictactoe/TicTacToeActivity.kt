@@ -38,7 +38,7 @@ class TicTacToeActivity : ComponentActivity() {
         GameShortcutsCreator().create(this)
 
         setContent {
-            TicTacToeNavGraph(this, intent = intent)
+            TicTacToeNavGraph(intent = intent)
         }
     }
 

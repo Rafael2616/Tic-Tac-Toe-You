@@ -67,14 +67,13 @@ import kotlin.system.exitProcess
 @Composable
 fun MainScreen(
     navController: NavController,
-    activity: ComponentActivity,
     modifier: Modifier = Modifier,
     intent: Intent? = null,
     viewModel: GameViewModel = hiltViewModel(),
     settingsVM: SettingsViewModel = hiltViewModel(),
     mainVM: MainViewModel = hiltViewModel(),
 ) {
-    val context = LocalContext.current
+    val activity = LocalContext.current as ComponentActivity
     val serviceIntent = Intent(context, MusicService::class.java)
     val state by settingsVM.state.collectAsState()
     val mainState by mainVM.state.collectAsState()
@@ -210,16 +209,20 @@ fun MainScreen(
         )
     }
 
-    // Redirect user to property game mode screen when he presses
-    // the long click app shortcuts
+    /**
+    * Redirect user to property game mode screen when he presses
+    * the long click app shortcuts
+    **/
     if (mainState.canRedirectToAnGameModeScreen && intent != null) {
         ShortcutsIntentHandler(activity, navController, mainVM::onEvent, intent)
         mainVM.canRedirectToAnGameModeScreen(false)
     }
 
-    // This permission should not be shown to the end user, it is only for test
-    // cases where there is a crash in the application in the release version in which
-    // the developer needs the log file that is generated in the internal storage
+    /**
+    * This permission should not be shown to the end user, it is only for test
+    * cases where there is a crash in the application in the release version in which
+    * the developer needs the log file that is generated in the internal storage
+    **/
     if (showStoragePermissionRequest) {
         ActivityCompat.requestPermissions(
             activity,
@@ -231,7 +234,7 @@ fun MainScreen(
     BackHandler {
         settingsVM.onEvent(SettingsEvent.IsBGMusicPlaying(false))
         activity.finish()
-        context.stopService(serviceIntent)
+        activity.stopService(serviceIntent)
         exitProcess(0)
     }
 }

@@ -141,7 +141,7 @@ configure<SpotlessExtension> {
         target("src/main/kotlin/**/*.kt")
     }
     kotlinGradle {
-        ktlint()    
+        ktlint()
             .setEditorConfigPath(rootProject.file(".editorconfig"))
         target("*.gradle.kts")
     }
