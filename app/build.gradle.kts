@@ -1,4 +1,5 @@
 import app.cash.licensee.LicenseeTask
+import app.cash.licensee.UnusedAction.IGNORE
 import com.android.build.gradle.internal.api.ApkVariantOutputImpl
 import com.diffplug.gradle.spotless.SpotlessExtension
 import java.util.Properties
@@ -140,7 +141,7 @@ configure<SpotlessExtension> {
         target("src/main/kotlin/**/*.kt")
     }
     kotlinGradle {
-        ktlint()
+        ktlint()    
             .setEditorConfigPath(rootProject.file(".editorconfig"))
         target("*.gradle.kts")
     }
@@ -149,6 +150,7 @@ configure<SpotlessExtension> {
 licensee {
     allow("Apache-2.0")
     allowUrl("https://www.gnu.org/licenses/gpl-3.0.en.html")
+    unusedAction(IGNORE)
 }
 
 dependencies {
