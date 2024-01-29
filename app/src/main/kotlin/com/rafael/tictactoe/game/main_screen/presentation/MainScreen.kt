@@ -210,19 +210,19 @@ fun MainScreen(
     }
 
     /**
-    * Redirect user to property game mode screen when he presses
-    * the long click app shortcuts
-    **/
+     * Redirect user to property game mode screen when he presses
+     * the long click app shortcuts
+     **/
     if (mainState.canRedirectToAnGameModeScreen && intent != null) {
         ShortcutsIntentHandler(activity, navController, mainVM::onEvent, intent)
         mainVM.canRedirectToAnGameModeScreen(false)
     }
 
     /**
-    * This permission should not be shown to the end user, it is only for test
-    * cases where there is a crash in the application in the release version in which
-    * the developer needs the log file that is generated in the internal storage
-    **/
+     * This permission should not be shown to the end user, it is only for test
+     * cases where there is a crash in the application in the release version in which
+     * the developer needs the log file that is generated in the internal storage
+     **/
     if (showStoragePermissionRequest) {
         ActivityCompat.requestPermissions(
             activity,

@@ -44,7 +44,7 @@ fun TicTacToeNavGraph(
         ),
     )
 
-    AppTheme() {
+    AppTheme {
         Surface(
             color = MaterialTheme.colorScheme.background,
             modifier = modifier.fillMaxSize(),
