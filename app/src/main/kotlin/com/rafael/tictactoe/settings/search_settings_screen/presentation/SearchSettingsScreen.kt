@@ -33,6 +33,7 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -56,8 +57,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.isTraversalGroup
@@ -67,6 +71,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import coil.compose.AsyncImagePainter
+import coil.compose.SubcomposeAsyncImage
+import coil.compose.SubcomposeAsyncImageContent
+import coil.request.ImageRequest
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.getVersionCode
 import com.rafael.tictactoe.common.domain.util.getVersionName
@@ -291,7 +299,7 @@ fun SearchSettingsScreen(
                                             modifier = Modifier.fillMaxWidth(),
                                             textAlign = TextAlign.Start,
                                         )
-                                        if (componentValidator.validateSubText(setting.groupType, setting.index, isAboutShown)) {
+                                        if (componentValidator.validateAboutAppSubComp(setting.groupType, setting.index, isAboutShown)) {
                                             Text(
                                                 style = MaterialTheme.typography.bodyMedium,
                                                 color = MaterialTheme.colorScheme.onSurface,
@@ -303,6 +311,30 @@ fun SearchSettingsScreen(
                                                     .fillMaxWidth()
                                                     .padding(top = 8.dp),
                                             )
+                                        }
+                                    }
+                                    if (componentValidator.validateAboutAppSubComp(setting.groupType, setting.index, isAboutShown)) {
+                                        SubcomposeAsyncImage(
+                                            model = ImageRequest.Builder(LocalContext.current)
+                                                .data("https://avatars.githubusercontent.com/u/93414086?s=96&v=4")
+                                                .crossfade(true)
+                                                .build(),
+                                            contentScale = ContentScale.Crop,
+                                            contentDescription = null,
+                                            modifier = Modifier
+                                                .size(45.dp)
+                                                .clip(CircleShape),
+                                        ) {
+                                            if (painter.state is AsyncImagePainter.State.Success) {
+                                                SubcomposeAsyncImageContent()
+                                            } else {
+                                                CircularProgressIndicator(
+                                                    modifier = Modifier
+                                                        .size(35.dp),
+                                                    strokeCap = StrokeCap.Round,
+                                                    strokeWidth = 5.dp,
+                                                )
+                                            }
                                         }
                                     }
                                     if (setting.trailingIcon != null) {

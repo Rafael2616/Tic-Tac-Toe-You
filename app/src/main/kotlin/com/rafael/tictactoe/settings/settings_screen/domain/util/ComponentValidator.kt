@@ -6,7 +6,7 @@ import com.rafael.tictactoe.settings.settingsScreen.domain.enums.SettingsGroup
 
 class ComponentValidator {
 
-    fun validateSubText(groupType: SettingsGroup, index: Int, isAboutShown: Boolean): Boolean {
+    fun validateAboutAppSubComp(groupType: SettingsGroup, index: Int, isAboutShown: Boolean): Boolean {
         if (groupType == SettingsGroup.Others && index == 0 && isAboutShown) {
             return true
         }
