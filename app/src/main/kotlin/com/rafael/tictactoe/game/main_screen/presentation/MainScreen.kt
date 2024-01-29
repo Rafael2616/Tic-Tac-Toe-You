@@ -74,7 +74,7 @@ fun MainScreen(
     mainVM: MainViewModel = hiltViewModel(),
 ) {
     val activity = LocalContext.current as ComponentActivity
-    val serviceIntent = Intent(context, MusicService::class.java)
+    val serviceIntent = Intent(activity, MusicService::class.java)
     val state by settingsVM.state.collectAsState()
     val mainState by mainVM.state.collectAsState()
     var showStoragePermissionRequest = false

@@ -87,7 +87,6 @@ private val DarkColors = darkColorScheme(
 
 @Composable
 fun AppTheme(
-    activity: ComponentActivity,
     isSystemInDarkTheme: Boolean = isSystemInDarkTheme(),
     viewModel: SettingsViewModel = hiltViewModel(),
     content: @Composable () -> Unit,
@@ -100,7 +99,7 @@ fun AppTheme(
     val isAndroidS = VERSION.SDK_INT >= VERSION_CODES.S
     val onEvent = viewModel::onEvent
 
-    // Handle with color will be applied according with some settings toggles
+    // Handle which color scheme will be applied
     val colors = if (isFollowingSystemOn) {
         if (isAndroidS && isDynamicColorsOn) {
             if (isSystemInDarkTheme) {
@@ -143,6 +142,7 @@ fun AppTheme(
 
     // Set System Bars Colors
     DisposableEffect(isDarkThemeOn) {
+        val activity = context as ComponentActivity
         activity.enableEdgeToEdge(
             statusBarStyle = SystemBarStyle.auto(
                 Color.TRANSPARENT,
