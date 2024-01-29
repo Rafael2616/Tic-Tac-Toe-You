@@ -330,7 +330,7 @@ fun SearchSettingsScreen(
                                             } else {
                                                 CircularProgressIndicator(
                                                     modifier = Modifier
-                                                        .size(35.dp),
+                                                        .size(30.dp),
                                                     strokeCap = StrokeCap.Round,
                                                     strokeWidth = 5.dp,
                                                 )

@@ -193,7 +193,7 @@ fun SettingsBlockWithIcon(
                         }
                         Column(
                             modifier = Modifier
-                                .width(if (isInLandscape) 350.dp else 235.dp)
+                                .width(if (isInLandscape) 350.dp else 240.dp)
                                 .padding(start = 16.dp, end = 10.dp)
                                 .animateContentSize(),
                             verticalArrangement = Arrangement.Center,
@@ -237,7 +237,7 @@ fun SettingsBlockWithIcon(
                                 } else {
                                     CircularProgressIndicator(
                                         modifier = Modifier
-                                            .size(35.dp),
+                                            .size(30.dp),
                                         strokeCap = StrokeCap.Round,
                                         strokeWidth = 5.dp,
                                     )
