@@ -175,12 +175,12 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
     // Jetpack Compose
     implementation(platform("androidx.compose:compose-bom:2024.01.00"))
-    implementation("androidx.compose.animation:animation")
-    implementation("androidx.compose.foundation:foundation")
-    implementation("androidx.compose.material:material-icons-extended")
+    implementation("androidx.compose.animation:animation:1.7.0-alpha01")
+    implementation("androidx.compose.foundation:foundation:1.7.0-alpha01")
+    implementation("androidx.compose.material:material-icons-extended:1.7.0-alpha01")
     implementation("androidx.compose.material3:material3:1.2.0-rc01")
-    implementation("androidx.compose.runtime:runtime")
-    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.runtime:runtime:1.7.0-alpha01")
+    implementation("androidx.compose.ui:ui:1.7.0-alpha01")
     // Navigation
     implementation("androidx.navigation:navigation-compose:2.7.6")
     // Coil
@@ -205,7 +205,7 @@ dependencies {
     implementation("androidx.appsearch:appsearch-local-storage:$appSearchVersion")
     // Test Unit
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.7.0-alpha01")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
 }
