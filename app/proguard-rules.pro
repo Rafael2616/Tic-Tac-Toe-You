@@ -111,4 +111,4 @@
 -keep,allowobfuscation,allowshrinking class retrofit2.Response
 
 # AppSearch
--keep class androidx.appsearch.** {*;}
+-keep class com.google.android.icing.IcingSearchEngineImpl
