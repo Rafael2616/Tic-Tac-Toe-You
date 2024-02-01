@@ -196,7 +196,7 @@ fun MainScreen(
                         )
                     }
                 }
-                if (index <= items.size - 1) {
+                if (index < (items.size - 1)) {
                     Spacer(modifier = Modifier.height(10.dp))
                 }
             }
