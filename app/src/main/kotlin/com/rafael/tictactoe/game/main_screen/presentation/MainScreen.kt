@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.Intent
 import android.content.res.Configuration
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -51,7 +50,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.presentation.navigation.Destinations
-import com.rafael.tictactoe.common.services.MusicService
 import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameMode
 import com.rafael.tictactoe.game.gameScreen.presentation.viewmodel.GameViewModel
@@ -60,9 +58,7 @@ import com.rafael.tictactoe.game.mainScreen.domain.model.ScreenItem
 import com.rafael.tictactoe.game.mainScreen.presentation.components.WhatsNewDialog
 import com.rafael.tictactoe.game.mainScreen.presentation.util.ShortcutsIntentHandler
 import com.rafael.tictactoe.game.mainScreen.presentation.viewmodel.MainViewModel
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
-import kotlin.system.exitProcess
 
 @Composable
 fun MainScreen(
@@ -74,7 +70,6 @@ fun MainScreen(
     mainVM: MainViewModel = hiltViewModel(),
 ) {
     val activity = LocalContext.current as ComponentActivity
-    val serviceIntent = Intent(activity, MusicService::class.java)
     val state by settingsVM.state.collectAsState()
     val mainState by mainVM.state.collectAsState()
     var showStoragePermissionRequest = false
@@ -229,12 +224,5 @@ fun MainScreen(
             arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
             0,
         )
-    }
-
-    BackHandler {
-        settingsVM.onEvent(SettingsEvent.IsBGMusicPlaying(false))
-        activity.finish()
-        activity.stopService(serviceIntent)
-        exitProcess(0)
     }
 }
