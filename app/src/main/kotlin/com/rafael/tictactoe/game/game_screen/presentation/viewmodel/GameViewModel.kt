@@ -177,13 +177,15 @@ class GameViewModel @Inject constructor(
             }
             GameEvent.ToggleBgMusicButton -> {
                 settingsVM.onEvent(SettingsEvent.ToggleIsBackgroundMusicOn)
+                settingsVM.execUIClickSound()
             }
             GameEvent.ToggleSoundEffectsButton -> {
                 settingsVM.onEvent(SettingsEvent.ToggleIsSoundEffectsOn)
+                settingsVM.execUIClickSound()
             }
             GameEvent.ToggleExpandButton -> {
-                settingsVM.execUIClickSound()
                 _state.update { it.copy(isExpandButtonShown = !it.isExpandButtonShown) }
+                settingsVM.execUIClickSound()
             }
             GameEvent.ExitGame -> {
                 settingsVM.onEvent(SettingsEvent.ShowColorSelectionDialog(false))

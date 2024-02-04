@@ -91,7 +91,6 @@ class SettingsViewModel @Inject constructor(
                     isBackgroundMusicOn = state.value.isBackgroundMusicOn,
                     service = service,
                 )
-                execUIClickSound()
             }
             SettingsEvent.ToggleIsDarkThemeOn -> {
                 _state.update { it.copy(isDarkThemeOn = !it.isDarkThemeOn) }
@@ -101,7 +100,6 @@ class SettingsViewModel @Inject constructor(
                     settings.isDarkThemeOn = state.value.isDarkThemeOn
                     repository.setAllSettingsValues(settings)
                 }
-                execUIClickSound()
             }
             SettingsEvent.ToggleIsDynamicColorsOn -> {
                 _state.update { it.copy(isDynamicColorsOn = !it.isDynamicColorsOn) }
@@ -111,7 +109,6 @@ class SettingsViewModel @Inject constructor(
                     settings.isDynamicColorsOn = state.value.isDynamicColorsOn
                     repository.setAllSettingsValues(settings)
                 }
-                execUIClickSound()
             }
             SettingsEvent.ToggleIsFollowingSystemOn -> {
                 _state.update { it.copy(isFollowingSystemOn = !it.isFollowingSystemOn) }
@@ -121,7 +118,6 @@ class SettingsViewModel @Inject constructor(
                     settings.isFollowingSystemOn = state.value.isFollowingSystemOn
                     repository.setAllSettingsValues(settings)
                 }
-                execUIClickSound()
             }
             SettingsEvent.ToggleIsSoundEffectsOn -> {
                 _state.update { it.copy(isSoundEffectsOn = !it.isSoundEffectsOn) }
@@ -131,7 +127,6 @@ class SettingsViewModel @Inject constructor(
                     settings.isSoundEffectsOn = state.value.isSoundEffectsOn
                     repository.setAllSettingsValues(settings)
                 }
-                execUIClickSound()
             }
             is SettingsEvent.SetIsDarkThemeOn -> {
                 _state.update { it.copy(isDarkThemeOn = event.value) }
@@ -162,7 +157,6 @@ class SettingsViewModel @Inject constructor(
             }
             is SettingsEvent.ShowAboutAppCard -> {
                 _state.update { it.copy(isAboutShown = event.value) }
-                execUIClickSound()
             }
             is SettingsEvent.SetCustomizationType -> {
                 _state.update { it.copy(customizationType = event.type) }
@@ -224,6 +218,9 @@ class SettingsViewModel @Inject constructor(
             }
             SettingsEvent.ShowWhatsNewDialog -> {
                 _state.update { it.copy(showWhatsNewDialog = true) }
+            }
+            SettingsEvent.ExecUIClickSound -> {
+                execUIClickSound()
             }
         }
     }
