@@ -215,6 +215,7 @@ class SettingsViewModel @Inject constructor(
                     settings.appVersion = getVersionName()
                     repository.setAllSettingsValues(settings)
                 }
+                execUIClickSound()
             }
             SettingsEvent.ShowWhatsNewDialog -> {
                 _state.update { it.copy(showWhatsNewDialog = true) }
