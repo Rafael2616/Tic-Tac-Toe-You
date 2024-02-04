@@ -41,7 +41,7 @@ fun VictoryCounter(
     val xColor by animateColorAsState(settingsState.xColor)
     val circleColor by animateColorAsState(settingsState.circleColor)
     val orientation = LocalConfiguration.current.orientation
-    val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
+    val isInLandscape = orientation == Configuration.ORIENTATION_LANDSCAPE
 
     Box(
         modifier = modifier

@@ -35,7 +35,7 @@ fun VictoryCounterReseterButton(
     modifier: Modifier = Modifier,
 ) {
     val orientation = LocalConfiguration.current.orientation
-    val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
+    val isInLandscape = orientation == Configuration.ORIENTATION_LANDSCAPE
 
     Box(
         modifier = modifier

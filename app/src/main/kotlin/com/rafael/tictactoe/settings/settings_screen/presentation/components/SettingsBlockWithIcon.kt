@@ -6,7 +6,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.StringRes
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -77,7 +79,7 @@ fun SettingsBlockWithIcon(
     val xColor by animateColorAsState(state.xColor)
     val componentValidator = ComponentValidator()
     val orientation = LocalConfiguration.current.orientation
-    val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
+    val isInLandscape = orientation == Configuration.ORIENTATION_LANDSCAPE
     val launcher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { }
 
     Column(
@@ -109,6 +111,10 @@ fun SettingsBlockWithIcon(
             settings.forEachIndexed { index, setting ->
                 val rowHeight by animateDpAsState(
                     if (groupType == SettingsGroup.Others && index == 0 && isAboutShown) 130.dp else 58.dp,
+                    animationSpec = spring(
+                        dampingRatio = Spring.DampingRatioMediumBouncy,
+                        stiffness = Spring.StiffnessLow,
+                    ),
                 )
                 Box(
                     modifier = Modifier

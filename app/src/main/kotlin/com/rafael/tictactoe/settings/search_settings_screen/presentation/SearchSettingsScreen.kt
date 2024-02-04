@@ -7,7 +7,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -104,7 +106,7 @@ fun SearchSettingsScreen(
     val xColor by animateColorAsState(state.xColor)
     val componentValidator = ComponentValidator()
     val orientation = LocalConfiguration.current.orientation
-    val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
+    val isInLandscape = orientation == Configuration.ORIENTATION_LANDSCAPE
     val launcher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { }
     var active by rememberSaveable { mutableStateOf(true) }
     val matchingSettings = searchState.matchingSettings
@@ -174,7 +176,11 @@ fun SearchSettingsScreen(
                 ) {
                     matchingSettings.forEachIndexed { index, setting ->
                         val rowHeight by animateDpAsState(
-                            if (setting.groupType == SettingsGroup.Others && setting.index == 0 && isAboutShown) 130.dp else 65.dp,
+                            if (setting.groupType == SettingsGroup.Others && setting.index == 0 && isAboutShown) 130.dp else 58.dp,
+                            animationSpec = spring(
+                                dampingRatio = Spring.DampingRatioMediumBouncy,
+                                stiffness = Spring.StiffnessLow,
+                            ),
                         )
                         if (componentValidator.validateCard(
                                 setting.groupType,

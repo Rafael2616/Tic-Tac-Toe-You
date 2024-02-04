@@ -1,11 +1,6 @@
 package com.rafael.tictactoe.common.presentation.navigation
 
 import android.content.Intent
-import androidx.compose.animation.core.EaseIn
-import androidx.compose.animation.core.EaseOut
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -13,6 +8,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
@@ -23,6 +20,9 @@ import com.rafael.tictactoe.game.mainScreen.presentation.MainScreen
 import com.rafael.tictactoe.settings.libraryScreen.presentation.LibraryScreen
 import com.rafael.tictactoe.settings.searchSettingsScreen.presentation.SearchSettingsScreen
 import com.rafael.tictactoe.settings.settingsScreen.presentation.SettingsScreen
+import soup.compose.material.motion.animation.materialSharedAxisXIn
+import soup.compose.material.motion.animation.materialSharedAxisXOut
+import soup.compose.material.motion.animation.rememberSlideDistance
 
 @Composable
 @ExperimentalMaterial3Api
@@ -31,18 +31,8 @@ fun TicTacToeNavGraph(
     intent: Intent? = null,
 ) {
     val navController = rememberNavController()
-    val enterTransition = fadeIn(
-        animationSpec = tween(
-            durationMillis = 280,
-            easing = EaseIn,
-        ),
-    )
-    val exitTransition = fadeOut(
-        animationSpec = tween(
-            durationMillis = 280,
-            easing = EaseOut,
-        ),
-    )
+    val isRtl = LocalLayoutDirection.current == LayoutDirection.Rtl
+    val slideDistance = rememberSlideDistance()
 
     AppTheme {
         Surface(
@@ -52,8 +42,11 @@ fun TicTacToeNavGraph(
             NavHost(
                 navController = navController,
                 startDestination = Destinations.Main.screen,
-                enterTransition = { enterTransition },
-                exitTransition = { exitTransition },
+                enterTransition = { materialSharedAxisXIn(!isRtl, slideDistance) },
+                exitTransition = { materialSharedAxisXOut(!isRtl, slideDistance) },
+                popEnterTransition = { materialSharedAxisXIn(isRtl, slideDistance) },
+                popExitTransition = { materialSharedAxisXOut(isRtl, slideDistance) },
+
             ) {
                 composable(Destinations.Main.screen) {
                     MainScreen(

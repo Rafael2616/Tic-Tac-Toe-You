@@ -30,7 +30,7 @@ fun WinnerLines(
     val winningPositionsIndices = state.winningPositionsIndices
     val winnerLineColor = settingsState.winnerLineColor
     val orientation = LocalConfiguration.current.orientation
-    val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
+    val isInLandscape = orientation == Configuration.ORIENTATION_LANDSCAPE
     val pPadding = PaddingValues(start = 8.dp, end = 8.dp, bottom = 50.dp)
     val lPadding = PaddingValues(start = 8.dp, end = 40.dp, bottom = 8.dp)
 
