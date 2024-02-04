@@ -30,7 +30,7 @@ fun SettingsOptionsImpl(
     val context = LocalContext.current
     val settings = getSettingsItems(state, context)
     val lazyState = rememberLazyListState()
-    
+
     LazyColumn(
         state = lazyState,
         modifier = modifier
