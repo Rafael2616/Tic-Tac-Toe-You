@@ -97,21 +97,18 @@ fun GetPlayersPrefsDialog(
     val densityHeight = (view.height / density).dp
     val focusRequester = remember { FocusRequester() }
     var isKeyboardOpen by rememberSaveable { mutableStateOf(false) }
-    val gameMode = state.gameMode
     val xColor by animateColorAsState(settingsState.xColor)
     val circleColor by animateColorAsState(settingsState.circleColor)
     val isDarkThemeOn = settingsState.isDarkThemeOn
-    val selectedDifficultyLevel = state.selectedDifficultyLevel
-    val isCPUPlayer1 = state.isCPUPlayer1
-    val textField1State = if (isCPUPlayer1) false else true
+    val textField1State = if (state.isCPUPlayer1) false else true
     val dialogHeight by animateDpAsState(
-        when (gameMode) {
+        when (state.gameMode) {
             GameMode.VsCPU -> 280.dp
             GameMode.PvP -> 215.dp
             GameMode.Online -> 240.dp
         },
     )
-    val dialogWidth by animateDpAsState(if (gameMode == GameMode.Online) 245.dp else 380.dp)
+    val dialogWidth by animateDpAsState(if (state.gameMode == GameMode.Online) 245.dp else 380.dp)
     val maxLetterLength by rememberSaveable { mutableIntStateOf(10) }
     val containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(18.dp)
     val bottomPadding by animateDpAsState(
@@ -128,9 +125,7 @@ fun GetPlayersPrefsDialog(
             .fillMaxSize()
             .pointerInput(Unit) {
                 detectTapGestures(
-                    onTap = {
-                        focusManager.clearFocus()
-                    },
+                    onTap = { focusManager.clearFocus() },
                 )
             },
     ) {
@@ -195,7 +190,7 @@ fun GetPlayersPrefsDialog(
                         placeholder = {
                             Text(stringResource(id = if (state.isXFor1) R.string.player_x else R.string.player_o))
                         },
-                        enabled = if (gameMode == GameMode.VsCPU) textField1State else true,
+                        enabled = if (state.gameMode == GameMode.VsCPU) textField1State else true,
                         keyboardOptions = keyboardOptions,
                         colors = textFieldColors,
                         modifier = Modifier
@@ -204,7 +199,7 @@ fun GetPlayersPrefsDialog(
                     )
 
                     // Show an second Textfield and toggle only in PvP and CPU Modes
-                    if (gameMode != GameMode.Online) {
+                    if (state.gameMode != GameMode.Online) {
                         Card(
                             shape = MaterialTheme.shapes.large,
                             colors = CardDefaults.cardColors(
@@ -245,7 +240,7 @@ fun GetPlayersPrefsDialog(
                             placeholder = {
                                 Text(stringResource(id = if (state.isXFor1) R.string.player_o else R.string.player_x))
                             },
-                            enabled = if (gameMode == GameMode.VsCPU) !textField1State else true,
+                            enabled = if (state.gameMode == GameMode.VsCPU) !textField1State else true,
                             keyboardOptions = keyboardOptions,
                             colors = textFieldColors,
                             modifier = Modifier.weight(1f),
@@ -312,7 +307,7 @@ fun GetPlayersPrefsDialog(
                     }
 
                     // Show an second Image and toggle only in PvP and CPU Modes
-                    if (gameMode != GameMode.Online) {
+                    if (state.gameMode != GameMode.Online) {
                         Spacer(modifier = Modifier.width(40.dp))
                         Card(
                             shape = MaterialTheme.shapes.large,
@@ -386,7 +381,7 @@ fun GetPlayersPrefsDialog(
                 }
 
                 // Show Image toggle bellow player image if in Online Mode
-                if (gameMode == GameMode.Online) {
+                if (state.gameMode == GameMode.Online) {
                     Box(
                         contentAlignment = Alignment.Center,
                         modifier = Modifier
@@ -413,7 +408,7 @@ fun GetPlayersPrefsDialog(
                 }
 
                 // Difficulty level selection
-                if (gameMode == GameMode.VsCPU) {
+                if (state.gameMode == GameMode.VsCPU) {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -488,7 +483,7 @@ fun GetPlayersPrefsDialog(
                                                     }
                                                 }
                                                 .background(
-                                                    if (index == selectedDifficultyLevel) {
+                                                    if (index == state.selectedDifficultyLevel) {
                                                         MaterialTheme.colorScheme.onSecondary
                                                     } else {
                                                         containerColor
@@ -498,7 +493,7 @@ fun GetPlayersPrefsDialog(
                                             verticalAlignment = Alignment.CenterVertically,
                                         ) {
                                             RadioButton(
-                                                selected = index == selectedDifficultyLevel,
+                                                selected = index == state.selectedDifficultyLevel,
                                                 onClick = {
                                                     when (level) {
                                                         CPUDifficultyLevel.Easy -> onEvent(
