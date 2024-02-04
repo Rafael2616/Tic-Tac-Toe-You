@@ -1,0 +1,7 @@
+Improvements:
+- Improve screen navigation transitions
+- Add some animations
+- Make winning lines have a rounded edge
+
+Code:
+- Bump deps to upstream
