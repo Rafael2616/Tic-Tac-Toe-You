@@ -151,7 +151,7 @@ fun GetPlayersPrefsDialog(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(bottom = bottomPadding),
+                .padding(bottom = bottomPadding.coerceAtLeast(0.dp)),
             contentAlignment = Alignment.BottomCenter,
         ) {
             Card(

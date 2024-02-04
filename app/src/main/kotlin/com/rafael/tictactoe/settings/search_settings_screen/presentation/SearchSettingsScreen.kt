@@ -8,6 +8,8 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -175,6 +177,10 @@ fun SearchSettingsScreen(
                     matchingSettings.forEachIndexed { index, setting ->
                         val rowHeight by animateDpAsState(
                             if (setting.groupType == SettingsGroup.Others && setting.index == 0 && isAboutShown) 130.dp else 65.dp,
+                            animationSpec = spring(
+                                dampingRatio = Spring.DampingRatioMediumBouncy,
+                                stiffness = Spring.StiffnessLow
+                            ),
                         )
                         if (componentValidator.validateCard(
                                 setting.groupType,
