@@ -185,6 +185,8 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.7.6")
     // Coil
     implementation("io.coil-kt:coil-compose:2.5.0")
+    // Material Motion
+    implementation("io.github.fornewid:material-motion-compose-core:1.2.0")
     // Lifecycle
     implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleVersion")

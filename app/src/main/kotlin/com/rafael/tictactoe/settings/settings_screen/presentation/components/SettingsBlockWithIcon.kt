@@ -113,7 +113,7 @@ fun SettingsBlockWithIcon(
                     if (groupType == SettingsGroup.Others && index == 0 && isAboutShown) 130.dp else 58.dp,
                     animationSpec = spring(
                         dampingRatio = Spring.DampingRatioMediumBouncy,
-                        stiffness = Spring.StiffnessLow,
+                        stiffness = Spring.StiffnessMedium,
                     ),
                 )
                 Box(
