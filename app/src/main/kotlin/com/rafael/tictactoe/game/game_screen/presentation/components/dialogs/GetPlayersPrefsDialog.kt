@@ -97,27 +97,13 @@ fun GetPlayersPrefsDialog(
     val densityHeight = (view.height / density).dp
     val focusRequester = remember { FocusRequester() }
     var isKeyboardOpen by rememberSaveable { mutableStateOf(false) }
-    val isXFor1 = state.isXFor1
     val gameMode = state.gameMode
     val xColor by animateColorAsState(settingsState.xColor)
     val circleColor by animateColorAsState(settingsState.circleColor)
     val isDarkThemeOn = settingsState.isDarkThemeOn
     val selectedDifficultyLevel = state.selectedDifficultyLevel
     val isCPUPlayer1 = state.isCPUPlayer1
-    val player1Value = if (state.localPlayer1) state.player1Name else state.player2Name
-    val player2Value = if (state.localPlayer1) state.player2Name else state.player1Name
-    val textField1State = if (gameMode == GameMode.VsCPU) {
-        if (isCPUPlayer1) false else true
-    } else {
-        true
-    }
-    val textField2State = if (gameMode == GameMode.VsCPU) {
-        if (isCPUPlayer1) true else false
-    } else {
-        true
-    }
-    val customTypeForP1 = if (isXFor1) Customization.XCOLOR else Customization.CIRCLECOLOR
-    val customTypeForP2 = if (isXFor1) Customization.CIRCLECOLOR else Customization.XCOLOR
+    val textField1State = if (isCPUPlayer1) false else true
     val dialogHeight by animateDpAsState(
         when (gameMode) {
             GameMode.VsCPU -> 280.dp
@@ -192,7 +178,7 @@ fun GetPlayersPrefsDialog(
                     )
 
                     TextField(
-                        value = player1Value,
+                        value = if (state.localPlayer1) state.player1Name else state.player2Name,
                         onValueChange = {
                             if (it.length <= maxLetterLength) {
                                 onEvent(GameEvent.GetFirstPlayerName(it))
@@ -207,9 +193,9 @@ fun GetPlayersPrefsDialog(
                             )
                         },
                         placeholder = {
-                            Text(stringResource(id = if (isXFor1) R.string.player_x else R.string.player_o))
+                            Text(stringResource(id = if (state.isXFor1) R.string.player_x else R.string.player_o))
                         },
-                        enabled = textField1State,
+                        enabled = if (gameMode == GameMode.VsCPU) textField1State else true,
                         keyboardOptions = keyboardOptions,
                         colors = textFieldColors,
                         modifier = Modifier
@@ -247,7 +233,7 @@ fun GetPlayersPrefsDialog(
                             }
                         }
                         TextField(
-                            value = player2Value,
+                            value = if (state.localPlayer1) state.player2Name else state.player1Name,
                             onValueChange = {
                                 if (it.length <= maxLetterLength) {
                                     onEvent(GameEvent.GetSecondPlayerName(it))
@@ -259,7 +245,7 @@ fun GetPlayersPrefsDialog(
                             placeholder = {
                                 Text(stringResource(id = if (state.isXFor1) R.string.player_o else R.string.player_x))
                             },
-                            enabled = textField2State,
+                            enabled = if (gameMode == GameMode.VsCPU) !textField1State else true,
                             keyboardOptions = keyboardOptions,
                             colors = textFieldColors,
                             modifier = Modifier.weight(1f),
@@ -290,7 +276,11 @@ fun GetPlayersPrefsDialog(
                             .clip(CircleShape)
                             .clickable {
                                 canvasOnClick()
-                                onSettingsEvent(SettingsEvent.SetCustomizationType(customTypeForP1))
+                                onSettingsEvent(
+                                    SettingsEvent.SetCustomizationType(
+                                        if (state.isXFor1) Customization.XCOLOR else Customization.CIRCLECOLOR,
+                                    ),
+                                )
                             },
                     ) {
                         Icon(
@@ -312,7 +302,7 @@ fun GetPlayersPrefsDialog(
                             Canvas(
                                 modifier = Modifier.fillMaxSize(),
                             ) {
-                                if (isXFor1) {
+                                if (state.isXFor1) {
                                     drawXinDialog(xColor)
                                 } else {
                                     drawCircleinDialog(circleColor)
@@ -362,7 +352,7 @@ fun GetPlayersPrefsDialog(
                                 Canvas(
                                     modifier = Modifier.fillMaxSize(),
                                 ) {
-                                    if (isXFor1) {
+                                    if (state.isXFor1) {
                                         drawCircleinDialog(circleColor)
                                     } else {
                                         drawXinDialog(xColor)
@@ -377,7 +367,11 @@ fun GetPlayersPrefsDialog(
                                 .clip(CircleShape)
                                 .clickable {
                                     canvasOnClick()
-                                    onSettingsEvent(SettingsEvent.SetCustomizationType(customTypeForP2))
+                                    onSettingsEvent(
+                                        SettingsEvent.SetCustomizationType(
+                                            if (state.isXFor1) Customization.CIRCLECOLOR else Customization.XCOLOR,
+                                        ),
+                                    )
                                 },
                         ) {
                             Icon(
@@ -576,7 +570,7 @@ fun GetPlayersPrefsDialog(
                     onClick = {
                         focusManager.clearFocus()
                         keyboardController?.hide()
-                        onEvent(GameEvent.StartGame(player1Value, player2Value))
+                        onEvent(GameEvent.StartGame)
                     },
                     modifier = Modifier
                         .width(102.dp)

@@ -87,13 +87,23 @@ class GameViewModel @Inject constructor(
                 }
                 settingsVM.execUIClickSound()
             }
-            is GameEvent.StartGame -> {
+            GameEvent.StartGame -> {
+                val player1Name = if (state.value.localPlayer1) {
+                    state.value.player1Name
+                } else {
+                    state.value.player2Name
+                }
+                val player2Name = if (state.value.localPlayer1) {
+                    state.value.player2Name
+                } else {
+                    state.value.player1Name
+                }
                 _state.update {
                     it.copy(
                         isXImage = it.isXFor1,
-                        player1Name = event.player1Value,
-                        player2Name = event.player2Value,
                         showGetPrefsDialog = false,
+                        player1Name = player1Name,
+                        player2Name = player2Name,
                     )
                 }
                 if (state.value.gameMode != GameMode.Online) {
