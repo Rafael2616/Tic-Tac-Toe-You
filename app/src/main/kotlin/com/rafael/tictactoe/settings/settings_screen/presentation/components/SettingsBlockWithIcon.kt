@@ -79,7 +79,7 @@ fun SettingsBlockWithIcon(
     val xColor by animateColorAsState(state.xColor)
     val componentValidator = ComponentValidator()
     val orientation = LocalConfiguration.current.orientation
-    val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
+    val isInLandscape = orientation == Configuration.ORIENTATION_LANDSCAPE
     val launcher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { }
 
     Column(
@@ -113,7 +113,7 @@ fun SettingsBlockWithIcon(
                     if (groupType == SettingsGroup.Others && index == 0 && isAboutShown) 130.dp else 58.dp,
                     animationSpec = spring(
                         dampingRatio = Spring.DampingRatioMediumBouncy,
-                        stiffness = Spring.StiffnessMedium,
+                        stiffness = Spring.StiffnessLow,
                     ),
                 )
                 Box(

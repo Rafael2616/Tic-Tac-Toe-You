@@ -106,7 +106,7 @@ fun SearchSettingsScreen(
     val xColor by animateColorAsState(state.xColor)
     val componentValidator = ComponentValidator()
     val orientation = LocalConfiguration.current.orientation
-    val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
+    val isInLandscape = orientation == Configuration.ORIENTATION_LANDSCAPE
     val launcher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { }
     var active by rememberSaveable { mutableStateOf(true) }
     val matchingSettings = searchState.matchingSettings

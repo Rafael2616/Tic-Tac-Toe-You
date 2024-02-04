@@ -54,7 +54,7 @@ fun SettingsBlockWithSwitch(
     val isFollowingSystemOn = state.isFollowingSystemOn
     val componentValidator = ComponentValidator()
     val orientation = LocalConfiguration.current.orientation
-    val isInLandscape = (if (orientation == Configuration.ORIENTATION_LANDSCAPE) true else false)
+    val isInLandscape = orientation == Configuration.ORIENTATION_LANDSCAPE
 
     Column(
         modifier = modifier
