@@ -176,7 +176,7 @@ fun SearchSettingsScreen(
                 ) {
                     matchingSettings.forEachIndexed { index, setting ->
                         val rowHeight by animateDpAsState(
-                            if (setting.groupType == SettingsGroup.Others && setting.index == 0 && isAboutShown) 130.dp else 65.dp,
+                            if (setting.groupType == SettingsGroup.Others && setting.index == 0 && isAboutShown) 130.dp else 58.dp,
                             animationSpec = spring(
                                 dampingRatio = Spring.DampingRatioMediumBouncy,
                                 stiffness = Spring.StiffnessLow,
