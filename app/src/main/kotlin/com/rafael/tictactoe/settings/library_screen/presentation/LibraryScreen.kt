@@ -45,6 +45,7 @@ import androidx.navigation.NavController
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.settings.libraryScreen.presentation.utils.annotatedLink
 import com.rafael.tictactoe.settings.libraryScreen.presentation.viewmodel.LibraryViewModel
+import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
 
 @Composable
 @ExperimentalMaterial3Api
@@ -52,6 +53,7 @@ fun LibraryScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
     viewModel: LibraryViewModel = hiltViewModel(),
+    settingsVM: SettingsViewModel = hiltViewModel(),
 ) {
     val uriHandler = LocalUriHandler.current
     val layoutResult = remember { mutableStateOf<TextLayoutResult?>(null) }
@@ -74,6 +76,7 @@ fun LibraryScreen(
                             if (!isGoBackClicked) {
                                 isGoBackClicked = true
                                 navController.popBackStack()
+                                settingsVM.execUIClickSound()
                             }
                         },
                     ) {

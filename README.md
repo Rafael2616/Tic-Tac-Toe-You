@@ -6,7 +6,7 @@ A classic tic-tac-toe game made with material you and others new android technol
 - The UI is constructed with material you components
 - Dynamic Colors support
 - Beautiful card to add name and select you icon "X" or "O"
-- Sound effects & background nusic
+- Sound effects & background music
 - Line when there is a winner
 - Versus CPU Mode
 

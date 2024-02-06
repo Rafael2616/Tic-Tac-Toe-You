@@ -127,13 +127,14 @@ fun SearchSettingsScreen(
             onQueryChange = { searchSettingsVM.onEvent(SearchSettingsEvent.QuerySettingsFromRepository(it)) },
             onSearch = { active = false },
             active = active,
-            onActiveChange = {
-                active = it
-            },
+            onActiveChange = { active = it },
             placeholder = { Text(stringResource(R.string.search_settings)) },
             leadingIcon = {
                 IconButton(
-                    onClick = { navController.popBackStack() },
+                    onClick = {
+                        navController.popBackStack()
+                        settingsVM.execUIClickSound()
+                    },
                 ) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
@@ -143,7 +144,10 @@ fun SearchSettingsScreen(
             },
             trailingIcon = {
                 IconButton(
-                    onClick = { searchSettingsVM.onEvent(SearchSettingsEvent.ResetQuery) },
+                    onClick = {
+                        searchSettingsVM.onEvent(SearchSettingsEvent.ResetQuery)
+                        settingsVM.execUIClickSound()
+                    },
                 ) {
                     Icon(
                         imageVector = Icons.Outlined.Close,

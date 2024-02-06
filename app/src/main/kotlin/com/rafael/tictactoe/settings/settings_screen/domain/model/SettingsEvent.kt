@@ -24,4 +24,5 @@ sealed interface SettingsEvent {
     data class StartBackgroundMusic(val value: Boolean) : SettingsEvent
     object ShowWhatsNewDialog : SettingsEvent
     object HideWhatsNewDialog : SettingsEvent
+    object ExecUIClickSound : SettingsEvent
 }
