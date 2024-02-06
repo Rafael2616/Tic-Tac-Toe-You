@@ -172,7 +172,7 @@ fun SearchSettingsScreen(
                     .animateContentSize()
                     .pointerInput(Unit) {
                         detectVerticalDragGestures(
-                            onVerticalDrag = { _, _, ->
+                            onVerticalDrag = { _, _ ->
                                 focusManager.clearFocus()
                             },
                         )
