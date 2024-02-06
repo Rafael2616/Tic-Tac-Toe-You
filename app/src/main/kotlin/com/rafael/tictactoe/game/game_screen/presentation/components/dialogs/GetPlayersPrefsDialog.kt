@@ -1,6 +1,5 @@
 package com.rafael.tictactoe.game.gameScreen.presentation.components.dialogs
 
-import android.view.ViewTreeObserver
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.BorderStroke
@@ -11,6 +10,7 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.ime
+import androidx.compose.foundation.layout.isImeVisible
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -68,8 +69,6 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.model.CPUDifficultyLevel
 import com.rafael.tictactoe.game.domain.model.GameEvent
@@ -83,6 +82,7 @@ import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 
 @Composable
+@ExperimentalLayoutApi
 fun GetPlayersPrefsDialog(
     onEvent: (GameEvent) -> Unit,
     onSettingsEvent: (SettingsEvent) -> Unit,
@@ -96,7 +96,6 @@ fun GetPlayersPrefsDialog(
     val density = LocalDensity.current.density
     val densityHeight = (view.height / density).dp
     val focusRequester = remember { FocusRequester() }
-    var isKeyboardOpen by rememberSaveable { mutableStateOf(false) }
     val xColor by animateColorAsState(settingsState.xColor)
     val circleColor by animateColorAsState(settingsState.circleColor)
     val isDarkThemeOn = settingsState.isDarkThemeOn
@@ -112,7 +111,7 @@ fun GetPlayersPrefsDialog(
     val maxLetterLength by rememberSaveable { mutableIntStateOf(10) }
     val containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(18.dp)
     val bottomPadding by animateDpAsState(
-        if (isKeyboardOpen) {
+        if (WindowInsets.isImeVisible) {
             WindowInsets.ime.asPaddingValues().calculateBottomPadding().plus(8.dp)
         } else {
             densityHeight / 2 - dialogHeight / 2
@@ -580,19 +579,6 @@ fun GetPlayersPrefsDialog(
                     )
                 }
             }
-        }
-    }
-
-    // Detect when keyboard is open
-    DisposableEffect(view) {
-        val listener = ViewTreeObserver.OnGlobalLayoutListener {
-            isKeyboardOpen = ViewCompat.getRootWindowInsets(view)?.isVisible(
-                WindowInsetsCompat.Type.ime(),
-            ) ?: false
-        }
-        view.viewTreeObserver.addOnGlobalLayoutListener(listener)
-        onDispose {
-            view.viewTreeObserver.removeOnGlobalLayoutListener(listener)
         }
     }
 
