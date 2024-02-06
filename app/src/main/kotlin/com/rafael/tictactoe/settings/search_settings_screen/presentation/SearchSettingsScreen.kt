@@ -143,16 +143,18 @@ fun SearchSettingsScreen(
                 }
             },
             trailingIcon = {
-                IconButton(
-                    onClick = {
-                        searchSettingsVM.onEvent(SearchSettingsEvent.ResetQuery)
-                        settingsVM.execUIClickSound()
-                    },
-                ) {
-                    Icon(
-                        imageVector = Icons.Outlined.Close,
-                        contentDescription = null,
-                    )
+                if (searchState.query.isNotEmpty()) {
+                    IconButton(
+                        onClick = {
+                            searchSettingsVM.onEvent(SearchSettingsEvent.ResetQuery)
+                            settingsVM.execUIClickSound()
+                        },
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Close,
+                            contentDescription = null,
+                        )
+                    }
                 }
             },
             colors = SearchBarDefaults.colors(
