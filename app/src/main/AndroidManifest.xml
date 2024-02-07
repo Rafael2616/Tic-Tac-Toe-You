@@ -27,6 +27,7 @@
         <activity
             android:name=".TicTacToeActivity"
             android:exported="true"
+            android:windowSoftInputMode="adjustResize"
             android:configChanges="uiMode|screenSize|orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
