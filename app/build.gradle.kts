@@ -177,7 +177,7 @@ dependencies {
     implementation(platform("androidx.compose:compose-bom:2024.01.00"))
     implementation("androidx.compose.animation:animation:1.7.0-alpha01")
     implementation("androidx.compose.foundation:foundation:1.7.0-alpha01")
-    implementation("androidx.compose.material:material-icons-extended:1.7.0-alpha01")
+    implementation("androidx.compose.material:material-icons-extended:1.7.0-alpha02")
     implementation("androidx.compose.material3:material3:1.2.0-rc01")
     implementation("androidx.compose.runtime:runtime:1.7.0-alpha01")
     implementation("androidx.compose.ui:ui:1.7.0-alpha01")
