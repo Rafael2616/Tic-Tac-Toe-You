@@ -6,7 +6,6 @@ import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
@@ -26,7 +25,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.SentimentDissatisfied
@@ -37,14 +35,16 @@ import androidx.compose.material.icons.outlined.SwapHoriz
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.RadioButton
+import androidx.compose.material3.SegmentedButton
+import androidx.compose.material3.SegmentedButtonDefaults
+import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
-import androidx.compose.material3.VerticalDivider
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -59,6 +59,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
@@ -82,7 +83,15 @@ import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Customization
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 
+data class Level(
+    val level: CPUDifficultyLevel,
+    val name: Int,
+    val icon: ImageVector,
+    val tint: Color,
+)
+
 @Composable
+@ExperimentalMaterial3Api
 @ExperimentalLayoutApi
 fun GetPlayersPrefsDialog(
     onEvent: (GameEvent) -> Unit,
@@ -433,130 +442,54 @@ fun GetPlayersPrefsDialog(
                             horizontalArrangement = Arrangement.SpaceEvenly,
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
-                            Card(
-                                shape = MaterialTheme.shapes.medium,
-                                border = BorderStroke(1.dp, Color.Gray),
-                                modifier = Modifier
-                                    .width(370.dp)
-                                    .height(40.dp)
-                                    .clip(RoundedCornerShape(26.dp)),
-                            ) {
-                                Row(
-                                    modifier = Modifier
-                                        .width(370.dp)
-                                        .height(40.dp),
-                                    horizontalArrangement = Arrangement.SpaceBetween,
-                                    verticalAlignment = Alignment.CenterVertically,
-                                ) {
-                                    val levels = listOf(
-                                        CPUDifficultyLevel.Easy,
-                                        CPUDifficultyLevel.Medium,
-                                        CPUDifficultyLevel.Hard,
-                                    )
-                                    levels.forEachIndexed { index, level ->
-                                        Row(
-                                            modifier = Modifier
-                                                .weight(1f)
-                                                .height(40.dp)
-                                                .clickable {
-                                                    when (level) {
-                                                        CPUDifficultyLevel.Easy -> onEvent(
-                                                            GameEvent.SelectCPUDifficultyMode(
-                                                                level = CPUDifficultyLevel.Easy,
-                                                                selectedLevel = 0,
-                                                                icon = Icons.Filled.SentimentSatisfied,
-                                                                name = R.string.level_easy,
-                                                            ),
-                                                        )
-                                                        CPUDifficultyLevel.Medium -> onEvent(
-                                                            GameEvent.SelectCPUDifficultyMode(
-                                                                level = CPUDifficultyLevel.Medium,
-                                                                selectedLevel = 1,
-                                                                icon = Icons.Filled.SentimentNeutral,
-                                                                name = R.string.level_medium,
-                                                            ),
-                                                        )
-                                                        CPUDifficultyLevel.Hard -> onEvent(
-                                                            GameEvent.SelectCPUDifficultyMode(
-                                                                level = CPUDifficultyLevel.Hard,
-                                                                selectedLevel = 2,
-                                                                icon = Icons.Filled.SentimentDissatisfied,
-                                                                name = R.string.level_hard,
-                                                            ),
-                                                        )
-                                                    }
-                                                }
-                                                .background(
-                                                    if (index == state.selectedDifficultyLevel) {
-                                                        MaterialTheme.colorScheme.onSecondary
-                                                    } else {
-                                                        containerColor
-                                                    },
+                            val levels = listOf(
+                                Level(
+                                    CPUDifficultyLevel.Easy,
+                                    R.string.level_easy,
+                                    Icons.Filled.SentimentSatisfied,
+                                    if (isDarkThemeOn) Color.Green else Color(0xFF299961),
+                                ),
+                                Level(
+                                    CPUDifficultyLevel.Medium,
+                                    R.string.level_medium,
+                                    Icons.Filled.SentimentNeutral,
+                                    if (isDarkThemeOn) Color.Yellow else Colors.get().burnt_yellow,
+                                ),
+                                Level(
+                                    CPUDifficultyLevel.Hard,
+                                    R.string.level_hard,
+                                    Icons.Filled.SentimentDissatisfied,
+                                    Color.Red,
+                                ),
+                            )
+
+                            SingleChoiceSegmentedButtonRow {
+                                levels.forEachIndexed { index, level ->
+                                    SegmentedButton(
+                                        shape = SegmentedButtonDefaults.itemShape(index = index, count = levels.size),
+                                        icon = {
+                                            SegmentedButtonDefaults.Icon(active = index == state.selectedDifficultyLevel) {
+                                                Icon(
+                                                    imageVector = level.icon,
+                                                    contentDescription = null,
+                                                    tint = level.tint,
+                                                    modifier = Modifier.size(SegmentedButtonDefaults.IconSize),
+                                                )
+                                            }
+                                        },
+                                        onClick = {
+                                            onEvent(
+                                                GameEvent.SelectCPUDifficultyMode(
+                                                    level = level.level,
+                                                    selectedLevel = index,
+                                                    icon = level.icon,
+                                                    name = level.name,
                                                 ),
-                                            horizontalArrangement = Arrangement.SpaceBetween,
-                                            verticalAlignment = Alignment.CenterVertically,
-                                        ) {
-                                            RadioButton(
-                                                selected = index == state.selectedDifficultyLevel,
-                                                onClick = {
-                                                    when (level) {
-                                                        CPUDifficultyLevel.Easy -> onEvent(
-                                                            GameEvent.SelectCPUDifficultyMode(
-                                                                level = CPUDifficultyLevel.Easy,
-                                                                selectedLevel = 0,
-                                                                icon = Icons.Filled.SentimentSatisfied,
-                                                                name = R.string.level_easy,
-                                                            ),
-                                                        )
-                                                        CPUDifficultyLevel.Medium -> onEvent(
-                                                            GameEvent.SelectCPUDifficultyMode(
-                                                                level = CPUDifficultyLevel.Medium,
-                                                                selectedLevel = 1,
-                                                                icon = Icons.Filled.SentimentDissatisfied,
-                                                                name = R.string.level_medium,
-                                                            ),
-                                                        )
-                                                        CPUDifficultyLevel.Hard -> onEvent(
-                                                            GameEvent.SelectCPUDifficultyMode(
-                                                                level = CPUDifficultyLevel.Hard,
-                                                                selectedLevel = 2,
-                                                                icon = Icons.Filled.SentimentDissatisfied,
-                                                                name = R.string.level_hard,
-                                                            ),
-                                                        )
-                                                    }
-                                                },
                                             )
-                                            Text(
-                                                textAlign = TextAlign.Start,
-                                                style = MaterialTheme.typography.bodyMedium,
-                                                text = when (level) {
-                                                    CPUDifficultyLevel.Easy -> stringResource(R.string.level_easy)
-                                                    CPUDifficultyLevel.Medium -> stringResource(R.string.level_medium)
-                                                    CPUDifficultyLevel.Hard -> stringResource(R.string.level_hard)
-                                                },
-                                            )
-                                            Icon(
-                                                imageVector = when (level) {
-                                                    CPUDifficultyLevel.Easy -> Icons.Filled.SentimentSatisfied
-                                                    CPUDifficultyLevel.Medium -> Icons.Filled.SentimentNeutral
-                                                    CPUDifficultyLevel.Hard -> Icons.Filled.SentimentDissatisfied
-                                                },
-                                                tint = when (level) {
-                                                    CPUDifficultyLevel.Easy -> if (isDarkThemeOn) Color.Green else Color(0xFF299961)
-                                                    CPUDifficultyLevel.Medium -> if (isDarkThemeOn) Color.Yellow else Colors.get().burnt_yellow
-                                                    CPUDifficultyLevel.Hard -> Color.Red
-                                                },
-                                                contentDescription = "Icon",
-                                                modifier = Modifier
-                                                    .size(32.dp)
-                                                    .padding(end = 3.dp),
-                                            )
-                                        }
-                                        VerticalDivider(
-                                            thickness = 1.5.dp,
-                                            color = Color.Gray,
-                                        )
+                                        },
+                                        selected = index == selectedIndex,
+                                    ) {
+                                        Text(stringResource(level.name))
                                     }
                                 }
                             }
