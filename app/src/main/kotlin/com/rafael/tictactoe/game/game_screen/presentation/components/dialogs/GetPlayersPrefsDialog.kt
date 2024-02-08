@@ -59,7 +59,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
@@ -76,19 +75,13 @@ import com.rafael.tictactoe.game.domain.model.CPUDifficultyLevel
 import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameMode
 import com.rafael.tictactoe.game.domain.model.GameState
+import com.rafael.tictactoe.game.domain.model.Level
 import com.rafael.tictactoe.game.gameScreen.presentation.util.draws.drawCircleinDialog
 import com.rafael.tictactoe.game.gameScreen.presentation.util.draws.drawXinDialog
 import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Colors
 import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Customization
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
-
-data class Level(
-    val level: CPUDifficultyLevel,
-    val name: Int,
-    val icon: ImageVector,
-    val tint: Color,
-)
 
 @Composable
 @ExperimentalMaterial3Api
@@ -487,7 +480,7 @@ fun GetPlayersPrefsDialog(
                                                 ),
                                             )
                                         },
-                                        selected = index == selectedIndex,
+                                        selected = index == state.selectedDifficultyLevel,
                                     ) {
                                         Text(stringResource(level.name))
                                     }

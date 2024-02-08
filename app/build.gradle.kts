@@ -15,7 +15,7 @@ plugins {
     id("org.jetbrains.kotlin.plugin.serialization")
     id("app.cash.licensee")
     id("kotlin-parcelize")
-    // kotlin("kapt")
+    kotlin("kapt")
 }
 
 android {
