@@ -481,6 +481,9 @@ fun GetPlayersPrefsDialog(
                                             )
                                         },
                                         selected = index == state.selectedDifficultyLevel,
+                                        colors = SegmentedButtonDefaults.colors(
+                                            inactiveContainerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(4.dp),
+                                        ),
                                     ) {
                                         Text(stringResource(level.name))
                                     }
