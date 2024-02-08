@@ -53,7 +53,7 @@ fun RestartButton(
     ) {
         Box(
             modifier = Modifier
-                .padding(top = if (isCPUMode) 70.dp else 55.dp, end = if (isCPUMode) 40.dp else 30.dp)
+                .padding(top = if (isCPUMode) 70.dp else 55.dp, end = if (isInLandscape) 35.dp else 25.dp)
                 .fillMaxWidth(if (isInLandscape) 0.46f else 1f),
             contentAlignment = Alignment.TopEnd,
         ) {
@@ -67,7 +67,7 @@ fun RestartButton(
                         containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp),
                     ),
                     modifier = Modifier
-                        .size(45.dp)
+                        .size(50.dp)
                         .align(Alignment.CenterHorizontally)
                         .clip(CircleShape)
                         .clickable {
@@ -85,7 +85,7 @@ fun RestartButton(
                             tint = if (settingsState.isDarkThemeOn) Color.Cyan else Colors.get().blue,
                             contentDescription = "Restart Button",
                             modifier = Modifier
-                                .size(38.dp),
+                                .size(42.dp),
                         )
                     }
                 }
