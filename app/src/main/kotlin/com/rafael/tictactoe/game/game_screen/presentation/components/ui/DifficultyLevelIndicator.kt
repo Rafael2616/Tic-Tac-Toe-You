@@ -40,11 +40,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.game.domain.model.CPUDifficultyLevel
 import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.domain.model.Level
-import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Colors
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -174,5 +172,5 @@ fun DifficultyLevelIndicator(
                 }
             }
         }
-    } 
+    }
 }

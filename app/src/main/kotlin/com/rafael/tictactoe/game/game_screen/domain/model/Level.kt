@@ -14,7 +14,7 @@ data class Level(
     val name: Int,
     val icon: ImageVector,
     val tint: Color,
-    val index: Int
+    val index: Int,
 ) {
     companion object {
         fun getLevels(isDarkThemeOn: Boolean): List<Level> {
