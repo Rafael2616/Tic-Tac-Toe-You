@@ -39,6 +39,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.model.CPUDifficultyLevel
 import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameState
@@ -62,6 +63,7 @@ fun DifficultyLevelIndicator(
     val scope = rememberCoroutineScope()
     val levels = Level.getLevels(settingsState.isDarkThemeOn)
     var showSelector by remember { mutableStateOf(false) }
+    val snackbarMessage = stringResource(R.string.unable_to_switch_levels_msg)
 
     Box(
         modifier = modifier
@@ -78,10 +80,7 @@ fun DifficultyLevelIndicator(
                 onClick = {
                     if (!state.isGameFinished && state.isCardClicked.flatten().any { it }) {
                         scope.launch {
-                            snackbarHostState.showSnackbar(
-                                "Termine a partida ou começe outra do zero \n" +
-                                    "para mudar a dificuldade",
-                            )
+                            snackbarHostState.showSnackbar(snackbarMessage)
                         }
                     } else {
                         showSelector = true
@@ -89,20 +88,16 @@ fun DifficultyLevelIndicator(
                 },
                 label = {
                     Text(
-                        text = stringResource(state.difficultyLevelName),
+                        text = stringResource(state.selectedDifficultyLevel.name),
                         style = MaterialTheme.typography.bodyMedium.copy(fontSize = 12.sp),
                     )
                 },
                 leadingIcon = {
                     Icon(
-                        imageVector = state.difficultyLevelIcon,
+                        imageVector = state.selectedDifficultyLevel.icon,
                         contentDescription = "Icon",
                         Modifier.size(AssistChipDefaults.IconSize),
-                        tint = when (state.cpuDifficultyLevel) {
-                            CPUDifficultyLevel.Easy -> if (settingsState.isDarkThemeOn) Color.Green else Color(0xFF299961)
-                            CPUDifficultyLevel.Medium -> if (settingsState.isDarkThemeOn) Color.Yellow else Colors.get().burnt_yellow
-                            CPUDifficultyLevel.Hard -> Color.Red
-                        },
+                        tint = state.selectedDifficultyLevel.tint,
                     )
                 },
             )
@@ -128,13 +123,13 @@ fun DifficultyLevelIndicator(
                         modifier = Modifier.padding(horizontal = 6.dp, vertical = 4.dp),
                         horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
-                        Text("Select the new Level")
+                        Text(stringResource(R.string.select_new_level))
                         SingleChoiceSegmentedButtonRow {
                             levels.forEachIndexed { index, level ->
                                 SegmentedButton(
                                     shape = SegmentedButtonDefaults.itemShape(index = index, count = levels.size),
                                     icon = {
-                                        SegmentedButtonDefaults.Icon(active = index == state.selectedDifficultyLevel) {
+                                        SegmentedButtonDefaults.Icon(active = index == state.selectedDifficultyLevel.index) {
                                             Icon(
                                                 imageVector = level.icon,
                                                 contentDescription = null,
@@ -144,20 +139,13 @@ fun DifficultyLevelIndicator(
                                         }
                                     },
                                     onClick = {
-                                        onEvent(
-                                            GameEvent.SelectCPUDifficultyMode(
-                                                level = level.level,
-                                                selectedLevel = index,
-                                                icon = level.icon,
-                                                name = level.name,
-                                            ),
-                                        )
+                                        onEvent(GameEvent.SelectCPUDifficultyMode(levels[index]))
                                         scope.launch {
                                             delay(500L)
                                             showSelector = false
                                         }
                                     },
-                                    selected = index == state.selectedDifficultyLevel,
+                                    selected = index == state.selectedDifficultyLevel.index,
                                     colors = SegmentedButtonDefaults.colors(
                                         inactiveContainerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(4.dp),
                                     ),

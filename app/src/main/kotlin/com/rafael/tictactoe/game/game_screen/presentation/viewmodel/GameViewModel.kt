@@ -211,10 +211,8 @@ class GameViewModel @Inject constructor(
             is GameEvent.SelectCPUDifficultyMode -> {
                 _state.update {
                     it.copy(
-                        cpuDifficultyLevel = event.level,
-                        selectedDifficultyLevel = event.selectedLevel,
-                        difficultyLevelName = event.name,
-                        difficultyLevelIcon = event.icon,
+                        selectedDifficultyLevel = event.level,
+                        cpuDifficultyLevel = event.level.level,
                     )
                 }
                 settingsVM.execUIClickSound()

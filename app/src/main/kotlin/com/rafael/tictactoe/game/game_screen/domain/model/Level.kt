@@ -14,27 +14,31 @@ data class Level(
     val name: Int,
     val icon: ImageVector,
     val tint: Color,
+    val index: Int
 ) {
     companion object {
         fun getLevels(isDarkThemeOn: Boolean): List<Level> {
             return listOf(
                 Level(
-                    CPUDifficultyLevel.Easy,
-                    R.string.level_easy,
-                    Icons.Filled.SentimentSatisfied,
-                    if (isDarkThemeOn) Color.Green else Color(0xFF299961),
+                    level = CPUDifficultyLevel.Easy,
+                    name = R.string.level_easy,
+                    icon = Icons.Filled.SentimentSatisfied,
+                    tint = if (isDarkThemeOn) Color.Green else Color(0xFF299961),
+                    index = 0,
                 ),
                 Level(
-                    CPUDifficultyLevel.Medium,
-                    R.string.level_medium,
-                    Icons.Filled.SentimentNeutral,
-                    if (isDarkThemeOn) Color.Yellow else Colors.get().burnt_yellow,
+                    level = CPUDifficultyLevel.Medium,
+                    name = R.string.level_medium,
+                    icon = Icons.Filled.SentimentNeutral,
+                    tint = if (isDarkThemeOn) Color.Yellow else Colors.get().burnt_yellow,
+                    index = 1,
                 ),
                 Level(
-                    CPUDifficultyLevel.Hard,
-                    R.string.level_hard,
-                    Icons.Filled.SentimentDissatisfied,
-                    Color.Red,
+                    level = CPUDifficultyLevel.Hard,
+                    name = R.string.level_hard,
+                    icon = Icons.Filled.SentimentDissatisfied,
+                    tint = Color.Red,
+                    index = 2,
                 ),
             )
         }

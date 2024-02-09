@@ -1,10 +1,5 @@
 package com.rafael.tictactoe.game.domain.model
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.SentimentNeutral
-import androidx.compose.ui.graphics.vector.ImageVector
-import com.rafael.tictactoe.R
-
 data class GameState(
     val currentPlayerName: String = "",
     val player1Name: String = "",
@@ -36,11 +31,9 @@ data class GameState(
     val cpuDifficultyLevel: CPUDifficultyLevel = CPUDifficultyLevel.Medium,
     val isCPUPlayer1: Boolean = false,
     val isUsingEasyLevel: Boolean = false,
-    val difficultyLevelName: Int = R.string.level_medium,
-    val difficultyLevelIcon: ImageVector = Icons.Filled.SentimentNeutral,
     val showExitGameDialog: Boolean = false,
     val winningPositionsIndices: List<Int> = emptyList(),
-    val selectedDifficultyLevel: Int = 1,
+    val selectedDifficultyLevel: Level = Level.getLevels(true)[1],
     val hasLastWinningPlayer: Boolean = false,
     val requestState: RequestState = RequestState.Loading,
     val matchID: Int = 0,

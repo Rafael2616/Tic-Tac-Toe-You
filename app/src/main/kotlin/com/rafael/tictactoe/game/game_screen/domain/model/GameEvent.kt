@@ -1,7 +1,5 @@
 package com.rafael.tictactoe.game.domain.model
 
-import androidx.compose.ui.graphics.vector.ImageVector
-
 sealed interface GameEvent {
     data class SetGameMode(val mode: GameMode = GameMode.PvP) : GameEvent
     data class GetFirstPlayerName(val name: String) : GameEvent
@@ -20,7 +18,7 @@ sealed interface GameEvent {
     object ExitGame : GameEvent
     object DimissExitDialog : GameEvent
     data class UseEasyLevel(val value: Boolean) : GameEvent
-    data class SelectCPUDifficultyMode(val level: CPUDifficultyLevel, val selectedLevel: Int, val icon: ImageVector, val name: Int) : GameEvent
+    data class SelectCPUDifficultyMode(val level: Level) : GameEvent
     data class UpdateRequestState(val state: RequestState) : GameEvent
     object GetRemotePlayers : GameEvent
     object PostRemotePlayer : GameEvent

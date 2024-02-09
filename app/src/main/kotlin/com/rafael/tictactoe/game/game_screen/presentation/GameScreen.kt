@@ -77,14 +77,6 @@ fun GameScreen(
         onEvent,
     )
 
-    if (state.gameMode == GameMode.VsCPU) {
-        DifficultyLevelIndicator(
-            state,
-            onEvent,
-            settingsState,
-        )
-    }
-
     AnimatedVisibility(showDialog) {
         GetPlayersPrefsDialog(
             onEvent,
@@ -119,6 +111,14 @@ fun GameScreen(
     ) {
         WinnerLines(
             state,
+            settingsState,
+        )
+    }
+
+    if (state.gameMode == GameMode.VsCPU) {
+        DifficultyLevelIndicator(
+            state,
+            onEvent,
             settingsState,
         )
     }

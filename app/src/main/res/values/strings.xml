@@ -72,6 +72,8 @@
     <string name="open_source_licenses">Open source licenses</string>
     <string name="close">Close</string>
     <string name="search_settings">Search settings</string>
+    <string name="select_new_level">Select the new level:</string>
+    <string name="unable_to_switch_levels_msg">Finish the game or start another one from scratch\nto change the difficulty</string>
 
     <string name="cpu" translatable="false">CPU</string>
 

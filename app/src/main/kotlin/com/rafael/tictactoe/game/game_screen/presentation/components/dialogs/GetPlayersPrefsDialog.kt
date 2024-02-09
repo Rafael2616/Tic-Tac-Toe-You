@@ -437,7 +437,7 @@ fun GetPlayersPrefsDialog(
                                     SegmentedButton(
                                         shape = SegmentedButtonDefaults.itemShape(index = index, count = levels.size),
                                         icon = {
-                                            SegmentedButtonDefaults.Icon(active = index == state.selectedDifficultyLevel) {
+                                            SegmentedButtonDefaults.Icon(active = index == state.selectedDifficultyLevel.index) {
                                                 Icon(
                                                     imageVector = level.icon,
                                                     contentDescription = null,
@@ -447,16 +447,9 @@ fun GetPlayersPrefsDialog(
                                             }
                                         },
                                         onClick = {
-                                            onEvent(
-                                                GameEvent.SelectCPUDifficultyMode(
-                                                    level = level.level,
-                                                    selectedLevel = index,
-                                                    icon = level.icon,
-                                                    name = level.name,
-                                                ),
-                                            )
+                                            onEvent(GameEvent.SelectCPUDifficultyMode(levels[index]))
                                         },
-                                        selected = index == state.selectedDifficultyLevel,
+                                        selected = index == state.selectedDifficultyLevel.index,
                                         colors = SegmentedButtonDefaults.colors(
                                             inactiveContainerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(4.dp),
                                         ),
