@@ -24,7 +24,7 @@ import com.rafael.tictactoe.game.gameScreen.presentation.components.buttons.Soun
 import com.rafael.tictactoe.game.gameScreen.presentation.components.buttons.VictoryCounterReseterButton
 import com.rafael.tictactoe.game.gameScreen.presentation.components.dialogs.ExitGameDialog
 import com.rafael.tictactoe.game.gameScreen.presentation.components.dialogs.GetPlayersPrefsDialog
-import com.rafael.tictactoe.game.gameScreen.presentation.components.ui.DifficultyLevelIndicator
+import com.rafael.tictactoe.game.gameScreen.presentation.components.ui.DifficultyLevelSwitcher
 import com.rafael.tictactoe.game.gameScreen.presentation.components.ui.GameBoard
 import com.rafael.tictactoe.game.gameScreen.presentation.components.ui.GameStateToast
 import com.rafael.tictactoe.game.gameScreen.presentation.components.ui.PlayerSearchSurface
@@ -116,7 +116,7 @@ fun GameScreen(
     }
 
     if (state.gameMode == GameMode.VsCPU) {
-        DifficultyLevelIndicator(
+        DifficultyLevelSwitcher(
             state,
             onEvent,
             settingsState,

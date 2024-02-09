@@ -49,7 +49,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 @ExperimentalMaterial3Api
-fun DifficultyLevelIndicator(
+fun DifficultyLevelSwitcher(
     state: GameState,
     onEvent: (GameEvent) -> Unit,
     settingsState: SettingsState,
