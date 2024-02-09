@@ -27,9 +27,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.SentimentDissatisfied
-import androidx.compose.material.icons.filled.SentimentNeutral
-import androidx.compose.material.icons.filled.SentimentSatisfied
 import androidx.compose.material.icons.outlined.Brush
 import androidx.compose.material.icons.outlined.SwapHoriz
 import androidx.compose.material3.Button
@@ -71,7 +68,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.game.domain.model.CPUDifficultyLevel
 import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameMode
 import com.rafael.tictactoe.game.domain.model.GameState
@@ -124,6 +120,7 @@ fun GetPlayersPrefsDialog(
             stiffness = Spring.StiffnessLow,
         ),
     )
+    val levels = Level.getLevels(isDarkThemeOn)
 
     Surface(
         color = Color.Black.copy(alpha = 0.3f),
@@ -435,27 +432,6 @@ fun GetPlayersPrefsDialog(
                             horizontalArrangement = Arrangement.SpaceEvenly,
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
-                            val levels = listOf(
-                                Level(
-                                    CPUDifficultyLevel.Easy,
-                                    R.string.level_easy,
-                                    Icons.Filled.SentimentSatisfied,
-                                    if (isDarkThemeOn) Color.Green else Color(0xFF299961),
-                                ),
-                                Level(
-                                    CPUDifficultyLevel.Medium,
-                                    R.string.level_medium,
-                                    Icons.Filled.SentimentNeutral,
-                                    if (isDarkThemeOn) Color.Yellow else Colors.get().burnt_yellow,
-                                ),
-                                Level(
-                                    CPUDifficultyLevel.Hard,
-                                    R.string.level_hard,
-                                    Icons.Filled.SentimentDissatisfied,
-                                    Color.Red,
-                                ),
-                            )
-
                             SingleChoiceSegmentedButtonRow {
                                 levels.forEachIndexed { index, level ->
                                     SegmentedButton(

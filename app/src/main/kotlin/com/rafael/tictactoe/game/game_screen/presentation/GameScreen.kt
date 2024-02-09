@@ -78,7 +78,11 @@ fun GameScreen(
     )
 
     if (state.gameMode == GameMode.VsCPU) {
-        DifficultyLevelIndicator(state, settingsState)
+        DifficultyLevelIndicator(
+            state,
+            onEvent,
+            settingsState,
+        )
     }
 
     AnimatedVisibility(showDialog) {
