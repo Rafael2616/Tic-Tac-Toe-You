@@ -165,7 +165,7 @@ fun DifficultyLevelIndicator(
                                     Text(stringResource(level.name))
                                 }
                             }
-                        } 
+                        }
                     }
                 }
             }
