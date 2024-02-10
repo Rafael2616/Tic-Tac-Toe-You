@@ -1,7 +1,6 @@
 package com.rafael.tictactoe.game.gameScreen.presentation.components.buttons
 
 import android.content.res.Configuration
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,19 +8,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Replay
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
@@ -61,33 +56,18 @@ fun RestartButton(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.wrapContentSize(),
             ) {
-                Card(
-                    shape = MaterialTheme.shapes.medium,
-                    colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp),
-                    ),
+                FilledTonalIconButton(
                     modifier = Modifier
-                        .size(50.dp)
-                        .align(Alignment.CenterHorizontally)
-                        .clip(CircleShape)
-                        .clickable {
-                            onEvent(GameEvent.PlayAgain)
-                        },
+                        .size(50.dp),
+                    onClick = { onEvent(GameEvent.PlayAgain) },
                 ) {
-                    Box(
-                        contentAlignment = Alignment.Center,
+                    Icon(
+                        imageVector = Icons.Filled.Replay,
+                        tint = if (settingsState.isDarkThemeOn) Color.Cyan else Colors.get().blue,
+                        contentDescription = "Restart Button",
                         modifier = Modifier
-                            .fillMaxSize()
-                            .padding(bottom = 4.dp),
-                    ) {
-                        Icon(
-                            imageVector = Icons.Filled.Replay,
-                            tint = if (settingsState.isDarkThemeOn) Color.Cyan else Colors.get().blue,
-                            contentDescription = "Restart Button",
-                            modifier = Modifier
-                                .size(42.dp),
-                        )
-                    }
+                            .size(42.dp),
+                    )
                 }
                 Text(
                     text = stringResource(R.string.restart),

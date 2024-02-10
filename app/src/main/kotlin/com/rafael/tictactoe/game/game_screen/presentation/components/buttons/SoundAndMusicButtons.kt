@@ -1,17 +1,14 @@
 package com.rafael.tictactoe.game.gameScreen.presentation.components.buttons
 
 import androidx.compose.animation.animateContentSize
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.VolumeOff
 import androidx.compose.material.icons.automirrored.outlined.VolumeUp
@@ -19,17 +16,15 @@ import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material.icons.outlined.MusicNote
 import androidx.compose.material.icons.outlined.MusicOff
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -57,14 +52,10 @@ fun SoundAndMusicButtons(
             verticalArrangement = Arrangement.Center,
         ) {
             // Expand Button, when clicked shows sound effects and background music buttons
-            Box(
-                contentAlignment = Alignment.Center,
+            IconButton(
                 modifier = Modifier
-                    .size(45.dp)
-                    .clip(CircleShape)
-                    .clickable {
-                        onEvent(GameEvent.ToggleExpandButton)
-                    },
+                    .size(45.dp),
+                onClick = { onEvent(GameEvent.ToggleExpandButton) },
             ) {
                 Icon(
                     imageVector = if (state.isExpandButtonShown) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore,
@@ -76,40 +67,29 @@ fun SoundAndMusicButtons(
             if (state.isExpandButtonShown) {
                 Spacer(Modifier.height(3.dp))
                 Buttons.values().forEach { button ->
-                    Card(
-                        shape = MaterialTheme.shapes.medium,
-                        colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp),
-                        ),
+                    FilledTonalIconButton(
                         modifier = Modifier
-                            .size(45.dp)
-                            .clip(CircleShape)
-                            .clickable {
-                                when (button) {
-                                    Buttons.SOUND_EFFECTS -> onEvent(GameEvent.ToggleSoundEffectsButton)
-                                    Buttons.BG_MUSIC -> onEvent(GameEvent.ToggleBgMusicButton)
-                                }
-                            },
+                            .size(45.dp),
+                        onClick = {
+                            when (button) {
+                                Buttons.SOUND_EFFECTS -> onEvent(GameEvent.ToggleSoundEffectsButton)
+                                Buttons.BG_MUSIC -> onEvent(GameEvent.ToggleBgMusicButton)
+                            }
+                        },
                     ) {
-                        Box(
-                            contentAlignment = Alignment.Center,
+                        Icon(
+                            imageVector = when (button) {
+                                Buttons.SOUND_EFFECTS -> if (settingsState.isSoundEffectsOn) Icons.Outlined.MusicNote else Icons.Outlined.MusicOff
+                                Buttons.BG_MUSIC -> if (settingsState.isBackgroundMusicOn) Icons.AutoMirrored.Outlined.VolumeUp else Icons.AutoMirrored.Outlined.VolumeOff
+                            },
+                            contentDescription = when (button) {
+                                Buttons.SOUND_EFFECTS -> "Sound Effects Button"
+                                Buttons.BG_MUSIC -> "Background Music Button"
+                            },
+                            tint = MaterialTheme.colorScheme.onSurface,
                             modifier = Modifier
-                                .fillMaxSize(),
-                        ) {
-                            Icon(
-                                imageVector = when (button) {
-                                    Buttons.SOUND_EFFECTS -> if (settingsState.isSoundEffectsOn) Icons.Outlined.MusicNote else Icons.Outlined.MusicOff
-                                    Buttons.BG_MUSIC -> if (settingsState.isBackgroundMusicOn) Icons.AutoMirrored.Outlined.VolumeUp else Icons.AutoMirrored.Outlined.VolumeOff
-                                },
-                                contentDescription = when (button) {
-                                    Buttons.SOUND_EFFECTS -> "Sound Effects Button"
-                                    Buttons.BG_MUSIC -> "Background Music Button"
-                                },
-                                tint = MaterialTheme.colorScheme.onSurface,
-                                modifier = Modifier
-                                    .size(38.dp),
-                            )
-                        }
+                                .size(38.dp),
+                        )
                     }
                     Text(
                         text = stringResource(
