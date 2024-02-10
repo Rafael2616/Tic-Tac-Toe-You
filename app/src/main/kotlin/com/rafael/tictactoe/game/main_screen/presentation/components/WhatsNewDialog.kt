@@ -125,6 +125,7 @@ fun WhatsNewDialog(
                         contentPadding = PaddingValues(horizontal = 12.dp),
                         onClick = {
                             onEvent(SettingsEvent.HideWhatsNewDialog)
+                            onEvent(SettingsEvent.ExecUIClickSound)
                         },
                     ) {
                         Text(stringResource(R.string.close))

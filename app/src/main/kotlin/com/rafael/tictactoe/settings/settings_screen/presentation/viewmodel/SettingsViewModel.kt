@@ -164,7 +164,6 @@ class SettingsViewModel @Inject constructor(
             }
             is SettingsEvent.ShowColorSelectionDialog -> {
                 _state.update { it.copy(showColorSelectionDialog = event.value) }
-                execUIClickSound()
             }
             is SettingsEvent.SetWinnerLineColor -> {
                 _state.update { it.copy(winnerLineColor = event.color) }
@@ -215,7 +214,6 @@ class SettingsViewModel @Inject constructor(
                     settings.appVersion = getVersionName()
                     repository.setAllSettingsValues(settings)
                 }
-                execUIClickSound()
             }
             SettingsEvent.ShowWhatsNewDialog -> {
                 _state.update { it.copy(showWhatsNewDialog = true) }

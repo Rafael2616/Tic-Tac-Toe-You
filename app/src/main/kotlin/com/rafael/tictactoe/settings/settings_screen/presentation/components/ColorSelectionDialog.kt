@@ -241,6 +241,7 @@ fun ColorSelectionDialog(
                 OutlinedButton(
                     onClick = {
                         onEvent(SettingsEvent.ShowColorSelectionDialog(false))
+                        onEvent(SettingsEvent.ExecUIClickSound)
                     },
                     modifier = Modifier
                         .padding(end = 12.dp)
