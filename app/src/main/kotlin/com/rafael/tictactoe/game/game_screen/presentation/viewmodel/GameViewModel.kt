@@ -130,6 +130,7 @@ class GameViewModel @Inject constructor(
                         this::onEvent,
                         this::execCardGridSound,
                     )
+                    execCardGridSound()
                 }
                 settingsVM.execUIClickSound()
             }
@@ -149,6 +150,7 @@ class GameViewModel @Inject constructor(
                     this::onEvent,
                     this::execCardGridSound,
                 )
+                execCardGridSound()
             }
             GameEvent.ResetVictoryCounter -> {
                 _state.update {
@@ -172,6 +174,7 @@ class GameViewModel @Inject constructor(
                         this::onEvent,
                         this::execCardGridSound,
                     )
+                    execCardGridSound()
                 }
                 settingsVM.execUIClickSound()
             }
