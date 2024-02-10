@@ -11,18 +11,22 @@ A classic tic-tac-toe game made with material you and others new android technol
 - Versus CPU Mode
 
 # Employed technologies:
-- [Room database](https://developer.android.com/jetpack/androidx/releases/room?hl=en)
-- Dependency Injection w/ [Dagger Hilt](https://dagger.dev/)
+- [Room database](https://developer.android.com/jetpack/androidx/releases/room?hl=en) for persistent data storage
+- [Dagger Hilt](https://dagger.dev/) for Dependency injection
 - [Clean Arquiteture](https://medium.com/simform-engineering/clean-architecture-in-android-12d61c4f5318)
 - [MVVM](https://www.google.com/amp/s/www.geeksforgeeks.org/mvvm-model-view-viewmodel-architecture-pattern-in-android/amp/) patterns
 - [Jetpack Compose](https://developer.android.com/jetpack/compose?hl=en)
-- [Media3 Library](https://developer.android.com/jetpack/androidx/releases/media3?hl=en)
+- [Media3](https://developer.android.com/jetpack/androidx/releases/media3?hl=en) for sound related features
 - [Kotlin](https://kotlinlang.org/) 100%
-- Reative Programming w/ [Kotlin Flows](https://developer.android.com/kotlin/flow)
+- [Kotlin Flows](https://developer.android.com/kotlin/flow) for Reative programming
 - [Androidx Core SplashScreen](https://developer.android.com/reference/kotlin/androidx/core/splashscreen/SplashScreen)
 - [Androidx Navigation Compose](https://developer.android.com/jetpack/compose/navigation?hl=en)
 - [Retrofit](https://square.github.io/retrofit/) and [OkHttp3](https://square.github.io/okhttp/) for Network op.
 - [Spotless](https://github.com/diffplug/spotless) for kotlin code linting
+- [Coil Compose](https://coil-kt.github.io/coil/compose/) for Async image loading
+- [Material Motion](https://fornewid.github.io/material-motion-compose/) for Screen transition animation
+- [App Search](https://developer.android.com/jetpack/androidx/releases/appsearch?hl=en) for in app search
+- [Androidx Libraries](https://developer.android.com/jetpack/androidx?hl=en) for core and base features for Android
 
 # Game Screenshots:
 
