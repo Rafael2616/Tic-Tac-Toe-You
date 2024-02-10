@@ -2,8 +2,8 @@ Added:
 - Ability to change CPU difficulty level during game match
 
 Improvements:
-- Improve some UI components like DifficultyLevelSelection
+- Improve some UI components like DifficultyLevelSelection and Buttons
 - Make SettingsScreen edge-to-edge
 
 Fixes:
-- Fix UI Click sound playing while leaving some dialogs when back button is pressed
+- Fix UI Click sound playing while leaving some dialogs when back button is pressed in SettingsScreen
