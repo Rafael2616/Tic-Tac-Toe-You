@@ -1,5 +1,6 @@
 package com.rafael.tictactoe.settings.settingsScreen.data.database
 
+import androidx.annotation.Keep
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
@@ -7,6 +8,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.rafael.tictactoe.settings.settingsScreen.data.dao.SettingsDao
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEntity
 
+@Keep
 @Database(
     entities = [SettingsEntity::class],
     version = 2,
@@ -21,6 +23,7 @@ abstract class SettingsDatabase : RoomDatabase() {
     }
 }
 
+@Keep
 class Migrations {
     val migration1To2 = object : Migration(1, 2) {
         override fun migrate(db: SupportSQLiteDatabase) {

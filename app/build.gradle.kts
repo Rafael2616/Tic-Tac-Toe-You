@@ -203,7 +203,7 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     // App Search
     implementation("androidx.appsearch:appsearch:$appSearchVersion")
-    ksp("androidx.appsearch:appsearch-compiler:$appSearchVersion")
+    kapt("androidx.appsearch:appsearch-compiler:$appSearchVersion")
     implementation("androidx.appsearch:appsearch-local-storage:$appSearchVersion")
     // Test Unit
     testImplementation("junit:junit:4.13.2")
