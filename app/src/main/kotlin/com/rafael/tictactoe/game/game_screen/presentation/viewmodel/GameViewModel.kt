@@ -130,7 +130,6 @@ class GameViewModel @Inject constructor(
                         this::onEvent,
                         this::execCardGridSound,
                     )
-                    execCardGridSound()
                 }
                 settingsVM.execUIClickSound()
             }
@@ -150,7 +149,6 @@ class GameViewModel @Inject constructor(
                     this::onEvent,
                     this::execCardGridSound,
                 )
-                execCardGridSound()
             }
             GameEvent.ResetVictoryCounter -> {
                 _state.update {
@@ -174,7 +172,6 @@ class GameViewModel @Inject constructor(
                         this::onEvent,
                         this::execCardGridSound,
                     )
-                    execCardGridSound()
                 }
                 settingsVM.execUIClickSound()
             }
@@ -349,14 +346,16 @@ class GameViewModel @Inject constructor(
             }
             is GameEvent.UpdateGotOld -> {
                 _state.update { it.copy(gotOld = event.gotOld) }
-                if (event.gotOld && !state.value.hasWinner) {
-                    execGotOldSound()
-                }
             }
             is GameEvent.GameIsFinished -> {
                 _state.update { it.copy(isGameFinished = event.value) }
                 if (state.value.hasWinner) {
                     victoryCounterUpdater(state.value, this::onEvent)
+                    execWinnerSound()
+                } else {
+                    if (state.value.gotOld) {
+                        execGotOldSound()
+                    }
                 }
             }
             is GameEvent.ShowVictoryCounterReseter -> {
@@ -364,9 +363,6 @@ class GameViewModel @Inject constructor(
             }
             is GameEvent.UpdateHasWinner -> {
                 _state.update { it.copy(hasWinner = event.hasWinner) }
-                if (event.hasWinner) {
-                    execWinnerSound()
-                }
             }
             is GameEvent.UpdateIs1Win -> {
                 _state.update { it.copy(is1Win = event.value) }
