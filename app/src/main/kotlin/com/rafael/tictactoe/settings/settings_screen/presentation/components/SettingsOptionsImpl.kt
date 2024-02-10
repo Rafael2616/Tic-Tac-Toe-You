@@ -3,8 +3,8 @@ package com.rafael.tictactoe.settings.settingsScreen.presentation.components
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -21,7 +21,7 @@ import com.rafael.tictactoe.settings.settingsScreen.presentation.utils.getSettin
 
 @Composable
 fun SettingsOptionsImpl(
-    livePadding: PaddingValues,
+    innerPadding: PaddingValues,
     onEvent: (SettingsEvent) -> Unit,
     state: SettingsState,
     navController: NavController,
@@ -35,8 +35,9 @@ fun SettingsOptionsImpl(
         state = lazyState,
         modifier = modifier
             .fillMaxSize()
-            .padding(livePadding)
+            .consumeWindowInsets(innerPadding)
             .animateContentSize(),
+        contentPadding = innerPadding,
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {

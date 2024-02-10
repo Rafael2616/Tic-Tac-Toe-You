@@ -77,15 +77,6 @@ fun GameScreen(
         onEvent,
     )
 
-    AnimatedVisibility(showDialog) {
-        GetPlayersPrefsDialog(
-            onEvent,
-            onSettingsEvent,
-            state,
-            settingsState,
-        )
-    }
-
     AnimatedVisibility(state.showRestartButton) {
         RestartButton(
             onEvent,
@@ -119,6 +110,15 @@ fun GameScreen(
         DifficultyLevelSwitcher(
             state,
             onEvent,
+            settingsState,
+        )
+    }
+
+    AnimatedVisibility(showDialog) {
+        GetPlayersPrefsDialog(
+            onEvent,
+            onSettingsEvent,
+            state,
             settingsState,
         )
     }

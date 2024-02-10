@@ -78,9 +78,9 @@ fun SettingsTopBar(
                 scrollBehavior = scrollBehavior,
             )
         },
-    ) { paddingValues ->
+    ) { innerPadding ->
         SettingsOptionsImpl(
-            paddingValues,
+            innerPadding,
             onEvent,
             state,
             navController,

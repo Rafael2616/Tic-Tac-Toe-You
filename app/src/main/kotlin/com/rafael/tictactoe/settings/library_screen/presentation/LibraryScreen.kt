@@ -89,12 +89,12 @@ fun LibraryScreen(
                 scrollBehavior = scrollBehavior,
             )
         },
-    ) { paddingValues ->
+    ) { innerPadding ->
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(horizontal = 24.dp)
-                .padding(paddingValues),
+                .padding(innerPadding),
         ) {
             itemsIndexed(libraries) { index, library ->
                 val licenseLink = (library.spdxLicenses ?: library.unknownLicenses)?.firstOrNull()?.url.orEmpty()
