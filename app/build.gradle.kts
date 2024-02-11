@@ -178,7 +178,7 @@ dependencies {
     implementation(platform("androidx.compose:compose-bom:2024.02.00"))
     implementation("androidx.compose.material3:material3:1.2.0")
     implementation("androidx.compose.animation:animation:m3Version")
-    implementation("androidx.compose.foundation:foundation:m3Version")
+    implementation("androidx.compose.foundation:foundation:1.6.1")
     implementation("androidx.compose.material:material-icons-extended:m3Version")
     implementation("androidx.compose.runtime:runtime:m3Version")
     implementation("androidx.compose.ui:ui:m3Version")
