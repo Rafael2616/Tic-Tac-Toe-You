@@ -159,6 +159,7 @@ dependencies {
     val hiltVersion = "2.50"
     val media3Version = "1.2.1"
     val appSearchVersion = "1.1.0-alpha03"
+    val m3Version = "1.7.0-alpha02"
 
     // Kotlin
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
@@ -175,12 +176,12 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
     // Jetpack Compose
     implementation(platform("androidx.compose:compose-bom:2024.02.00"))
-    implementation("androidx.compose.animation:animation")
-    implementation("androidx.compose.foundation:foundation")
-    implementation("androidx.compose.material:material-icons-extended")
     implementation("androidx.compose.material3:material3:1.2.0")
-    implementation("androidx.compose.runtime:runtime")
-    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.animation:animation:m3Version")
+    implementation("androidx.compose.foundation:foundation:m3Version")
+    implementation("androidx.compose.material:material-icons-extended:m3Version")
+    implementation("androidx.compose.runtime:runtime:m3Version")
+    implementation("androidx.compose.ui:ui:m3Version")
     // Navigation
     implementation("androidx.navigation:navigation-compose:2.7.7")
     // Coil
@@ -207,7 +208,7 @@ dependencies {
     implementation("androidx.appsearch:appsearch-local-storage:$appSearchVersion")
     // Test Unit
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:m3Version")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
 }
