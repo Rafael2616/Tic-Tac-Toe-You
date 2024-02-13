@@ -16,7 +16,6 @@ data class GameState(
     val isXFor1: Boolean = true,
     val isPlayer1: Boolean = true,
     val localPlayer1: Boolean = true,
-    val isScoreUp: Boolean = false,
     val isExpandButtonShown: Boolean = false,
     val showRestartButton: Boolean = false,
     val isWinSoundPlaying: Boolean = false,

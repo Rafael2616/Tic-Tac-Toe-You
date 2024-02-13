@@ -6,8 +6,7 @@ sealed interface GameEvent {
     data class GetSecondPlayerName(val name: String) : GameEvent
     object SwitchPlayerPositions : GameEvent
     object StartGame : GameEvent
-    data class ClickOnGameBoard(val rowIndex: Int, val cardIndex: Int) : GameEvent
-    object ExecCPUMove : GameEvent
+    data class OnCardClick(val rowIndex: Int, val cardIndex: Int) : GameEvent
     object ResetVictoryCounter : GameEvent
     object PlayAgain : GameEvent
     object ToggleBgMusicButton : GameEvent
@@ -17,7 +16,6 @@ sealed interface GameEvent {
     object ToggleIsXForPlayer1 : GameEvent
     object ExitGame : GameEvent
     object DimissExitDialog : GameEvent
-    data class UseEasyLevel(val value: Boolean) : GameEvent
     data class SelectCPUDifficultyMode(val level: Level) : GameEvent
     data class UpdateRequestState(val state: RequestState) : GameEvent
     object GetRemotePlayers : GameEvent
@@ -29,32 +27,5 @@ sealed interface GameEvent {
     object EndOnlineMatch : GameEvent
     object UpdateIsYouPlayer1 : GameEvent
     object StartOnlineMatch : GameEvent
-    data class ShowRestartButton(val value: Boolean) : GameEvent
-    data class UpdateGotOld(val gotOld: Boolean) : GameEvent
-    data class GameIsFinished(val value: Boolean) : GameEvent
-    data class ShowVictoryCounterReseter(val value: Boolean) : GameEvent
-    data class UpdateHasWinner(val hasWinner: Boolean) : GameEvent
-    data class UpdateIs1Win(val value: Boolean) : GameEvent
-    data class UpdateWinningPositionsIndices(val index: Int) : GameEvent
-    data class UpdateHasLastWinningPlayer(val value: Boolean) : GameEvent
-    object ResetWinningPositionsIndices : GameEvent
-    data class UpdateIsWinSoundPlaying(val isPlaying: Boolean) : GameEvent
-    data class UpdateIsGotOldSoundPlaying(val isPlaying: Boolean) : GameEvent
-    data class UpdateIsScoreUp(val value: Boolean) : GameEvent
-    data class UpdateAllIsCardClicked(val newCardClickedValues: List<List<Boolean>>) : GameEvent
-    data class UpdateIsCPU(val value: Boolean) : GameEvent
-    data class UpdateIsPlayer1(val value: Boolean) : GameEvent
-    data class UpdateIsXImage(val value: Boolean) : GameEvent
-    data class UpdateCard(val rowIndex: Int, val cardIndex: Int, val newValue: Boolean) : GameEvent
-    data class UpdateIsCardClicked(val rowIndex: Int, val cardIndex: Int, val newValue: Boolean) : GameEvent
-    data class IsOnlinePlayerTurn(val value: Boolean) : GameEvent
-    data class UpdatePlayer1Wins(val value: Int) : GameEvent
-    data class UpdatePlayer2Wins(val value: Int) : GameEvent
-    data class UpdatePlayer1NameOnCounter(val name: String) : GameEvent
-    data class UpdatePlayer2NameOnCounter(val name: String) : GameEvent
-    data class UpdatePlayer1Name(val name: String) : GameEvent
-    data class UpdatePlayer2Name(val name: String) : GameEvent
-    data class UpdateCurrentPlayerName(val name: String) : GameEvent
-    data class IsTimerOn(val value: Boolean) : GameEvent
     object ExecUIClickSound : GameEvent
 }

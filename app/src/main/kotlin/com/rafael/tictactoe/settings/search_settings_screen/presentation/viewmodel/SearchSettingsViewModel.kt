@@ -8,7 +8,6 @@ import com.rafael.tictactoe.settings.searchSettingsScreen.domain.model.SearchSet
 import com.rafael.tictactoe.settings.searchSettingsScreen.domain.model.SearchSettingsState
 import com.rafael.tictactoe.settings.searchSettingsScreen.domain.repository.SearchSettingsManager
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingItem
-import com.rafael.tictactoe.settings.settingsScreen.presentation.utils.getSettingsItems
 import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -38,7 +37,7 @@ class SearchSettingsViewModel @Inject constructor(
 
         var allSettings: List<SettingItem> = emptyList()
 
-        for (listSettings in getSettingsItems(settingsVM.state.value, context)) {
+        for (listSettings in SettingItem.getSettingsItems(settingsVM.state.value, context)) {
             for (setting in listSettings) {
                 allSettings += setting
             }
@@ -101,7 +100,7 @@ class SearchSettingsViewModel @Inject constructor(
                 }
                 var allSettingsUpdated: List<SettingItem> = emptyList()
 
-                for (listSettings in getSettingsItems(settingsVM.state.value, context)) {
+                for (listSettings in SettingItem.getSettingsItems(settingsVM.state.value, context)) {
                     for (setting in listSettings) {
                         allSettingsUpdated += setting
                     }

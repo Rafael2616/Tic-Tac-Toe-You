@@ -5,7 +5,6 @@ import android.net.Uri
 import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 
@@ -14,8 +13,7 @@ fun gotOldSound(
     state: GameState,
     settingsState: SettingsState,
     exoPlayer: ExoPlayer,
-    onEvent: (GameEvent) -> Unit,
-) {
+): Boolean {
     val gotOldSoundFile = R.raw.got_old_sound
     val gotOldSound = MediaItem.fromUri(Uri.parse("android.resource://$context/$gotOldSoundFile"))
     val isSoundEffectsOn = settingsState.isSoundEffectsOn
@@ -26,6 +24,7 @@ fun gotOldSound(
         exoPlayer.prepare()
         exoPlayer.setMediaItem(gotOldSound)
         exoPlayer.play()
-        onEvent(GameEvent.UpdateIsGotOldSoundPlaying(true))
+        return true
     }
+    return state.isGotOldSoundPlaying
 }

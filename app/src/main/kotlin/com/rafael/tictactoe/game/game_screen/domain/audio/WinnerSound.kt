@@ -5,7 +5,6 @@ import android.net.Uri
 import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 
@@ -14,8 +13,7 @@ fun winnerSound(
     state: GameState,
     settingsState: SettingsState,
     exoPlayer: ExoPlayer,
-    onEvent: (GameEvent) -> Unit,
-) {
+): Boolean {
     val winnerSoundFile = R.raw.winner_victory_sound
     val winnerSound = MediaItem.fromUri(Uri.parse("android.resource://$context/$winnerSoundFile"))
     val isSoundEffectsOn = settingsState.isSoundEffectsOn
@@ -26,6 +24,7 @@ fun winnerSound(
         exoPlayer.prepare()
         exoPlayer.setMediaItem(winnerSound)
         exoPlayer.play()
-        onEvent(GameEvent.UpdateIsWinSoundPlaying(true))
+        return true
     }
+    return state.isWinSoundPlaying
 }

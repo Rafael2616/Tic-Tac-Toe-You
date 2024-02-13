@@ -34,7 +34,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.model.GameState
-import com.rafael.tictactoe.game.domain.toast.ToastImageHandler
+import com.rafael.tictactoe.game.presentation.util.draws.ToastImage
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 
 @Composable
@@ -91,7 +91,7 @@ fun GameStateToast(
                 Box(
                     modifier = Modifier.size(15.dp),
                 ) {
-                    ToastImageHandler(state, settingsState)
+                    ToastImage(state, settingsState)
                 }
             }
             if (state.hasWinner) {

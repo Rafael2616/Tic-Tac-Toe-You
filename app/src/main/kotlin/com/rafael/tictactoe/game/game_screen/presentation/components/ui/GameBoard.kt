@@ -68,7 +68,7 @@ fun GameBoard(
                             .shadow(10.dp, RoundedCornerShape(26.dp))
                             .clip(RoundedCornerShape(26.dp))
                             .clickable {
-                                onEvent(GameEvent.ClickOnGameBoard(rowIndex, cardIndex))
+                                onEvent(GameEvent.OnCardClick(rowIndex, cardIndex))
                             },
                     ) {
                         Box(

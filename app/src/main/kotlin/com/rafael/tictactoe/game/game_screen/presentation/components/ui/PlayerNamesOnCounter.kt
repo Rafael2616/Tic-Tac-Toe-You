@@ -20,22 +20,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameState
-import com.rafael.tictactoe.game.domain.victoryCounter.PlayerNamesOnCounterHandler
 
 @Composable
 fun PlayersNamesOnCounter(
     state: GameState,
-    onEvent: (GameEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = orientation == Configuration.ORIENTATION_LANDSCAPE
-    val nameOnCounter = PlayerNamesOnCounterHandler()
-
-    nameOnCounter.FirstPlayerName(state, onEvent)
-    nameOnCounter.SecondPlayerName(state, onEvent)
 
     Box(
         modifier = modifier

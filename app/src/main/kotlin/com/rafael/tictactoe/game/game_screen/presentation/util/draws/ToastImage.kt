@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.domain.toast
+package com.rafael.tictactoe.game.presentation.util.draws
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.Canvas
@@ -12,7 +12,7 @@ import com.rafael.tictactoe.game.gameScreen.presentation.util.draws.drawXinToast
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 
 @Composable
-fun ToastImageHandler(
+fun ToastImage(
     state: GameState,
     settingsState: SettingsState,
     modifier: Modifier = Modifier,

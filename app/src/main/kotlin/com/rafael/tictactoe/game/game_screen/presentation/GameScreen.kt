@@ -8,16 +8,16 @@ import androidx.compose.animation.scaleIn
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.rafael.tictactoe.game.domain.checkers.GotOldChecker
-import com.rafael.tictactoe.game.domain.checkers.WinnerChecker
 import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameMode
-import com.rafael.tictactoe.game.domain.restart.RestartButtonLogic
-import com.rafael.tictactoe.game.domain.toast.ToastNameHandler
 import com.rafael.tictactoe.game.gameScreen.presentation.components.buttons.PlayAgainButton
 import com.rafael.tictactoe.game.gameScreen.presentation.components.buttons.RestartButton
 import com.rafael.tictactoe.game.gameScreen.presentation.components.buttons.SoundAndMusicButtons
@@ -51,8 +51,13 @@ fun GameScreen(
     val onEvent = viewModel::onEvent
     val onSettingsEvent = settingsVM::onEvent
     val showDialog = if (!state.play && state.showGetPrefsDialog) true else false
+    var canSetMode by rememberSaveable { mutableStateOf(true) }
 
-    onEvent(GameEvent.SetGameMode(mainState.gameMode))
+    DisposableEffect(canSetMode) {
+        onEvent(GameEvent.SetGameMode(mainState.gameMode))
+        canSetMode = false
+        onDispose {}
+    }
 
     GameBoard(
         onEvent,
@@ -72,10 +77,8 @@ fun GameScreen(
         state,
         settingsState,
     )
-    PlayersNamesOnCounter(
-        state,
-        onEvent,
-    )
+
+    PlayersNamesOnCounter(state)
 
     AnimatedVisibility(state.showRestartButton) {
         RestartButton(
@@ -144,21 +147,6 @@ fun GameScreen(
             onEvent,
         )
     }
-
-    // Handle when some business logic will be called
-    if (state.play && !state.isGameFinished) {
-        WinnerChecker(onEvent, state)
-        GotOldChecker(onEvent, state)
-    }
-
-    if (state.play) {
-        RestartButtonLogic(
-            onEvent,
-            state,
-        )
-    }
-
-    ToastNameHandler(state, onEvent)
 
     BackHandler {
         onEvent(GameEvent.ToggleExitDialog)

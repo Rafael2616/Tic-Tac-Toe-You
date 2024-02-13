@@ -1,15 +1,13 @@
 package com.rafael.tictactoe.game.domain.board
 
-import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameMode
 import com.rafael.tictactoe.game.domain.model.GameState
 
 fun boardMovesHandler(
     state: GameState,
-    onEvent: (GameEvent) -> Unit,
     rowIndex: Int,
     cardIndex: Int,
-) {
+): MutableMap<String, Any>? {
     val play = state.play
     val isCardClicked = state.isCardClicked
     val isXImage = state.isXImage
@@ -19,42 +17,43 @@ fun boardMovesHandler(
     val isGameFinished = state.isGameFinished
     val gameMode = state.gameMode
     val isOnlinePlayerTurn = state.isOnlinePlayerTurn
+    var moveParams: MutableMap<String, Any> = mutableMapOf()
 
-    if (isTimerOn) return
-    if (isGameFinished) return
-    if (isCardClicked[rowIndex][cardIndex]) return
-    if (!play) return
+    if (isTimerOn) return null
+    if (isGameFinished) return null
+    if (isCardClicked[rowIndex][cardIndex]) return null
+    if (!play) return null
 
     when (gameMode) {
         GameMode.PvP -> {
-            onEvent(GameEvent.UpdateIsXImage(!isXImage))
-            onEvent(GameEvent.UpdateCard(rowIndex, cardIndex, isXImage))
-            onEvent(GameEvent.UpdateIsCardClicked(rowIndex, cardIndex, true))
-            onEvent(GameEvent.UpdateIsPlayer1(!isPlayer1))
+            moveParams["isXImage"] = !isXImage
+            moveParams["card"] = listOf(rowIndex, cardIndex, isXImage)
+            moveParams["isCardClicked"] = listOf(rowIndex, cardIndex, true)
+            moveParams["isPlayer1"] = !isPlayer1
         }
         GameMode.VsCPU -> {
             // Exec human player move when needed
-            onEvent(GameEvent.UpdateIsXImage(!isXImage))
-            onEvent(GameEvent.UpdateCard(rowIndex, cardIndex, isXImage))
-            onEvent(GameEvent.UpdateIsCardClicked(rowIndex, cardIndex, true))
-            onEvent(GameEvent.UpdateIsPlayer1(!isPlayer1))
+            moveParams["isXImage"] = !isXImage
+            moveParams["card"] = listOf(rowIndex, cardIndex, isXImage)
+            moveParams["isCardClicked"] = listOf(rowIndex, cardIndex, true)
+            moveParams["isPlayer1"] = !isPlayer1
 
             // Calls CPU player's move when needed
             if ((isCPUPlayer1 && !isPlayer1) || (!isCPUPlayer1 && isPlayer1)) {
-                onEvent(GameEvent.UpdateIsCPU(true))
-                onEvent(GameEvent.ExecCPUMove)
+                moveParams["isCPU"] = true
             } else {
-                onEvent(GameEvent.UpdateIsCPU(false))
+                moveParams["isCPU"] = false
             }
         }
         GameMode.Online -> {
-            if (isOnlinePlayerTurn) return
+            if (isOnlinePlayerTurn) return null
 
-            onEvent(GameEvent.UpdateIsXImage(!isXImage))
-            onEvent(GameEvent.UpdateCard(rowIndex, cardIndex, isXImage))
-            onEvent(GameEvent.UpdateIsCardClicked(rowIndex, cardIndex, true))
-            onEvent(GameEvent.UpdateIsPlayer1(!isPlayer1))
-            onEvent(GameEvent.IsOnlinePlayerTurn(true))
+            moveParams["isXImage"] = !isXImage
+            moveParams["card"] = listOf(rowIndex, cardIndex, isXImage)
+            moveParams["isCardClicked"] = listOf(rowIndex, cardIndex, true)
+            moveParams["isPlayer1"] = !isPlayer1
+            moveParams["isOnlinePlayerTurn"] = true
         }
     }
+    return moveParams
 }

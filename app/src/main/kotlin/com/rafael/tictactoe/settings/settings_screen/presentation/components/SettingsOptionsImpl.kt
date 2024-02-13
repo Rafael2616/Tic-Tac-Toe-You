@@ -15,9 +15,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.settings.settingsScreen.domain.enums.SettingsGroup
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingItem
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
-import com.rafael.tictactoe.settings.settingsScreen.presentation.utils.getSettingsItems
 
 @Composable
 fun SettingsOptionsImpl(
@@ -28,7 +28,7 @@ fun SettingsOptionsImpl(
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
-    val settings = getSettingsItems(state, context)
+    val settings = SettingItem.getSettingsItems(state, context)
     val lazyState = rememberLazyListState()
 
     LazyColumn(
