@@ -20,7 +20,6 @@ sealed interface SettingsEvent {
     data class SelectedWinnerLineColor(val value: Int) : SettingsEvent
     data class SelectedXColor(val value: Int) : SettingsEvent
     data class SelectedCircleColor(val value: Int) : SettingsEvent
-    data class IsBGMusicPlaying(val value: Boolean) : SettingsEvent
     data class StartBackgroundMusic(val value: Boolean) : SettingsEvent
     object ShowWhatsNewDialog : SettingsEvent
     object HideWhatsNewDialog : SettingsEvent

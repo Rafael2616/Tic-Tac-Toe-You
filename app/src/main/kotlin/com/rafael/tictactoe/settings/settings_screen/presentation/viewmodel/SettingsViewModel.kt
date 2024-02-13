@@ -207,9 +207,6 @@ class SettingsViewModel @Inject constructor(
                 _state.update { it.copy(selectedCircleColor = event.value) }
                 execUIClickSound()
             }
-            is SettingsEvent.IsBGMusicPlaying -> {
-                _state.update { it.copy(isBMPlaying = event.value) }
-            }
             SettingsEvent.HideWhatsNewDialog -> {
                 _state.update { it.copy(showWhatsNewDialog = false) }
                 viewModelScope.launch(Dispatchers.IO) {

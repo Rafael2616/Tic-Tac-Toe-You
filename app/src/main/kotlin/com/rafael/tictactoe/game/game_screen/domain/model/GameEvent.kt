@@ -9,12 +9,12 @@ sealed interface GameEvent {
     data class OnCardClick(val rowIndex: Int, val cardIndex: Int) : GameEvent
     object ResetVictoryCounter : GameEvent
     object PlayAgain : GameEvent
+    object ExitGame : GameEvent
     object ToggleBgMusicButton : GameEvent
     object ToggleSoundEffectsButton : GameEvent
     object ToggleExpandButton : GameEvent
     object ToggleExitDialog : GameEvent
     object ToggleIsXForPlayer1 : GameEvent
-    object ExitGame : GameEvent
     object DimissExitDialog : GameEvent
     data class SelectCPUDifficultyMode(val level: Level) : GameEvent
     data class UpdateRequestState(val state: RequestState) : GameEvent

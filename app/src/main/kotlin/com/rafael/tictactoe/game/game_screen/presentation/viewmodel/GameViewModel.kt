@@ -56,14 +56,33 @@ class GameViewModel @Inject constructor(
 
     fun onEvent(event: GameEvent) {
         when (event) {
-            is GameEvent.SetGameMode -> setupGameMode(event.mode)
-            is GameEvent.GetFirstPlayerName -> getFirstPlayerName(event.name)
-            is GameEvent.GetSecondPlayerName -> getSecondPlayerName(event.name)
-            GameEvent.SwitchPlayerPositions -> switchPlayerPositions()
-            GameEvent.StartGame -> startGame()
-            is GameEvent.OnCardClick -> performBoardMove(event.rowIndex, event.cardIndex)
-            GameEvent.ResetVictoryCounter -> resetVicoryCounter()
-            GameEvent.PlayAgain -> playAgain()
+            is GameEvent.SetGameMode -> {
+                setupGameMode(event.mode)
+            }
+            is GameEvent.GetFirstPlayerName -> {
+                getFirstPlayerName(event.name)
+            }
+            is GameEvent.GetSecondPlayerName -> {
+                getSecondPlayerName(event.name)
+            }
+            GameEvent.SwitchPlayerPositions -> {
+                switchPlayerPositions()
+            }
+            GameEvent.StartGame -> {
+                startGame()
+            }
+            is GameEvent.OnCardClick -> {
+                performBoardMove(event.rowIndex, event.cardIndex)
+            }
+            GameEvent.ResetVictoryCounter -> {
+                resetVicoryCounter()
+            }
+            GameEvent.PlayAgain -> {
+                playAgain()
+            }
+            GameEvent.ExitGame -> {
+                exitGame()
+            }
             GameEvent.ToggleBgMusicButton -> {
                 settingsVM.onEvent(SettingsEvent.ToggleIsBackgroundMusicOn)
                 settingsVM.execUIClickSound()
@@ -74,16 +93,6 @@ class GameViewModel @Inject constructor(
             }
             GameEvent.ToggleExpandButton -> {
                 _state.update { it.copy(isExpandButtonShown = !it.isExpandButtonShown) }
-                settingsVM.execUIClickSound()
-            }
-            GameEvent.ExitGame -> {
-                settingsVM.onEvent(SettingsEvent.ShowColorSelectionDialog(false))
-                val cardState = state.value.card
-                _state.update { GameState() }
-                searchPlayersJob?.cancel()
-                searchPlayersJob = null
-                // Keep card variable state
-                _state.update { it.copy(card = cardState) }
                 settingsVM.execUIClickSound()
             }
             GameEvent.DimissExitDialog -> {
@@ -207,7 +216,7 @@ class GameViewModel @Inject constructor(
             }
             GameEvent.UpdateIsYouPlayer1 -> {
                 val isYouPlayer1 = (1..2).random()
-                val value = if (isYouPlayer1 == 1) true else false
+                val value = isYouPlayer1 == 1
 
                 _state.update {
                     it.copy(
@@ -556,6 +565,18 @@ class GameViewModel @Inject constructor(
         if (state.value.gotOld) {
             execGotOldSound()
         }
+    }
+
+    fun exitGame() {
+        settingsVM.onEvent(SettingsEvent.ShowColorSelectionDialog(false))
+        val cardState = state.value.card
+        _state.update { GameState() }
+        searchPlayersJob?.cancel()
+        searchPlayersJob = null
+    
+        // Keep card variable state
+        _state.update { it.copy(card = cardState) }
+        settingsVM.execUIClickSound()
     }
 
     fun execCardGridSound() {
