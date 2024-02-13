@@ -573,7 +573,7 @@ class GameViewModel @Inject constructor(
         _state.update { GameState() }
         searchPlayersJob?.cancel()
         searchPlayersJob = null
-    
+
         // Keep card variable state
         _state.update { it.copy(card = cardState) }
         settingsVM.execUIClickSound()
