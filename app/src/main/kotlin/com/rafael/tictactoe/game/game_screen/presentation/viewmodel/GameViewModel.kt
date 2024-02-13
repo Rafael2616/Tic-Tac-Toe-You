@@ -271,9 +271,9 @@ class GameViewModel @Inject constructor(
                 it.copy(localPlayer1 = !it.localPlayer1)
             }
         }
-        setPlayerNamesOnCounter()
-        updateCurrentToastName()
         switchPlayerNamesOrder()
+        updateCurrentToastName()
+        setPlayerNamesOnCounter()
         settingsVM.execUIClickSound()
     }
 
