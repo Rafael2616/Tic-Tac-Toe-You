@@ -11,6 +11,7 @@ import com.rafael.tictactoe.game.domain.board.boardMovesHandler
 import com.rafael.tictactoe.game.domain.board.cpuMovesHandler
 import com.rafael.tictactoe.game.domain.checkers.Checkers
 import com.rafael.tictactoe.game.domain.counter.VictoryCounter
+import com.rafael.tictactoe.game.domain.model.CurrentPlayerName
 import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameMode
 import com.rafael.tictactoe.game.domain.model.GameState
@@ -32,6 +33,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
@@ -300,7 +302,7 @@ class GameViewModel @Inject constructor(
         if (state.value.gameMode != GameMode.Online) {
             _state.update {
                 it.copy(
-                    // isTimerOn = true,
+                    isTimerOn = true,
                     play = true,
                 )
             }
@@ -320,6 +322,8 @@ class GameViewModel @Inject constructor(
         }
         switchPlayerNamesOrder()
         setPlayerNamesOnCounter()
+        updateCurrentToastName()
+
         settingsVM.execUIClickSound()
     }
 
@@ -357,7 +361,9 @@ class GameViewModel @Inject constructor(
         }
         if (isCPUMode) {
             _state.update { it.copy(isCPU = restartGame.resetIsPlayerCPU(state.value)) }
-            execCPUMove()
+            if (state.value.isCPU) {
+                execCPUMove()
+            }
         }
         updateCurrentToastName()
         settingsVM.execUIClickSound()
@@ -427,13 +433,15 @@ class GameViewModel @Inject constructor(
             rowIndex,
             cardIndex,
         )
-        execCardGridSound()
         moveParams?.let { param ->
+            execCardGridSound()
+
             @Suppress("UNCHECKED_CAST")
             val card = param["card"] as List<Any>
 
             @Suppress("UNCHECKED_CAST")
             val cardClicked = param["isCardClicked"] as List<Any>
+
             _state.update {
                 it.copy(
                     isOnlinePlayerTurn = param["isOnlinePlayerTurn"] as Boolean? ?: state.value.isOnlinePlayerTurn,
@@ -447,9 +455,6 @@ class GameViewModel @Inject constructor(
             if (state.value.gameMode == GameMode.VsCPU && param["isCPU"] as Boolean == true) {
                 execCPUMove()
             }
-        }
-
-        if (!state.value.isGameFinished) {
             updateGameState()
             updateCurrentToastName()
             switchPlayerNamesOrder()
@@ -461,14 +466,16 @@ class GameViewModel @Inject constructor(
         viewModelScope.launch {
             delay(delayTime)
             val moveParams = cpuMovesHandler(state.value)
-            execCardGridSound()
 
             moveParams?.let { param ->
+                execCardGridSound()
+
                 @Suppress("UNCHECKED_CAST")
                 val card = param["card"] as List<Any>
 
                 @Suppress("UNCHECKED_CAST")
                 val cardClicked = param["isCardClicked"] as List<Any>
+
                 _state.update {
                     it.copy(
                         isUsingEasyLevel = param["isUsingEasyLevel"] as Boolean? ?: state.value.isUsingEasyLevel,
@@ -479,9 +486,6 @@ class GameViewModel @Inject constructor(
                 }
                 updateCard(card[0] as Int, card[1] as Int, card[2] as Boolean)
                 updateIsCardClicked(cardClicked[0] as Int, cardClicked[1] as Int, cardClicked[2] as Boolean)
-            }
-
-            if (!state.value.isGameFinished) {
                 updateGameState()
                 updateCurrentToastName()
                 switchPlayerNamesOrder()
@@ -513,7 +517,22 @@ class GameViewModel @Inject constructor(
     fun updateCurrentToastName() {
         val toastController = ToastNameController()
         viewModelScope.launch {
-            _state.update { it.copy(isTimerOn = false, currentPlayerName = toastController.currentToastName(state.value, context)) }
+            toastController.currentToastName(state.value, context)?.let { name ->
+                _state.update { it.copy(currentPlayerName = name) }
+            }
+            if (toastController.getCurrentGamePhase(state.value) == CurrentPlayerName.CounterAfterGameStarts) {
+                toastController.counterAfterGameStarts(state.value).collect { (name, isTimerOn) ->
+                    _state.update {
+                        it.copy(
+                            currentPlayerName = name,
+                            isTimerOn = isTimerOn,
+                        )
+                    }
+                    if (!isTimerOn) {
+                        updateCurrentToastName()
+                    }
+                }
+            }
         }
     }
 

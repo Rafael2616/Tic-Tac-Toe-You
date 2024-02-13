@@ -5,23 +5,21 @@ import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.model.CurrentPlayerName
 import com.rafael.tictactoe.game.domain.model.GameMode
 import com.rafael.tictactoe.game.domain.model.GameState
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 class ToastNameController {
 
     suspend fun currentToastName(
         state: GameState,
         context: Context,
-    ): String {
+    ): String? {
         var currentGamePhase = getCurrentGamePhase(state)
-
         return when (currentGamePhase) {
             CurrentPlayerName.NameForSetupPhase -> currentNameForSetupPhase(state, context)
             CurrentPlayerName.NameForSetupPhaseForCPUMode -> currentNameForSetupPhaseForCPUMode(state, context)
-            CurrentPlayerName.CounterAfterGameStarts -> counterAfterGameStarts(state)
+            CurrentPlayerName.CounterAfterGameStarts -> null // counterAfterGameStarts(state)
             CurrentPlayerName.NameForGameInProgress -> currentNameForGameInProgress(state, context)
             CurrentPlayerName.NameWhenThereWinner -> currentNameWhenThereWinner(state)
             CurrentPlayerName.NameWhenGotOld -> currentNameWhenGotOld(context)
@@ -29,12 +27,14 @@ class ToastNameController {
     }
 
     suspend fun checkTimerIsOn(state: GameState): Boolean {
+        var isTimerOn: Boolean? = null
+
         if (getCurrentGamePhase(state) == CurrentPlayerName.CounterAfterGameStarts &&
-            counterAfterGameStarts(state) == 0.toString()
+            state.currentPlayerName == 1.toString()
         ) {
-            return false
+            isTimerOn = false
         }
-        return true
+        return isTimerOn ?: true
     }
 
     fun currentNameForSetupPhase(state: GameState, context: Context): String {
@@ -109,20 +109,19 @@ class ToastNameController {
         }
     }
 
-    suspend fun counterAfterGameStarts(state: GameState): String {
+    suspend fun counterAfterGameStarts(state: GameState): Flow<Pair<String, Boolean>> = flow {
         var timer = 3
-        var currentPlayerName: String = state.currentPlayerName
-
-        CoroutineScope(Dispatchers.IO).launch {
-            while (state.isTimerOn) {
-                if (timer > 0) {
-                    currentPlayerName = timer.toString()
-                }
-                delay(500L)
-                timer--
+        while (state.isTimerOn) {
+            if (timer > 0) {
+                emit(Pair(timer.toString(), true))
+            }
+            delay(500L)
+            timer--
+            if (timer == 0) {
+                emit(Pair(timer.toString(), false))
+                break
             }
         }
-        return currentPlayerName
     }
 
     fun getCurrentGamePhase(state: GameState): CurrentPlayerName {
