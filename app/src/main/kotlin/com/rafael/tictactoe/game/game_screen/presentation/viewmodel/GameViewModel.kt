@@ -471,7 +471,7 @@ class GameViewModel @Inject constructor(
                 val cardClicked = param["isCardClicked"] as List<Any>
                 _state.update {
                     it.copy(
-                        isUsingEasyLevel = param["isUsingEasyLevel"] as Boolean,
+                        isUsingEasyLevel = param["isUsingEasyLevel"] as Boolean? ?: state.value.isUsingEasyLevel,
                         isXImage = param["isXImage"] as Boolean,
                         isCPU = param["isCPU"] as Boolean,
                         isPlayer1 = param["isPlayer1"] as Boolean,
