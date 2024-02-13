@@ -26,17 +26,6 @@ class ToastNameController {
         }
     }
 
-    suspend fun checkTimerIsOn(state: GameState): Boolean {
-        var isTimerOn: Boolean? = null
-
-        if (getCurrentGamePhase(state) == CurrentPlayerName.CounterAfterGameStarts &&
-            state.currentPlayerName == 1.toString()
-        ) {
-            isTimerOn = false
-        }
-        return isTimerOn ?: true
-    }
-
     fun currentNameForSetupPhase(state: GameState, context: Context): String {
         var currentPlayerName: String
         val emptyPlayerName = context.getString(R.string.player)
