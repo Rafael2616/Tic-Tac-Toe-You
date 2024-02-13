@@ -4,31 +4,31 @@ import android.content.Context
 import android.content.Intent
 import com.rafael.tictactoe.common.domain.util.runningServiceVerifier
 import com.rafael.tictactoe.common.services.MusicService
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 
 fun backgroundMusic(
     service: MusicService,
     context: Context,
     isBMPlaying: Boolean,
     isBackgroundMusicOn: Boolean,
-    onEvent: (SettingsEvent) -> Unit,
     isAppInOnStop: Boolean = false,
-) {
+): Boolean? {
     val isServiceRunning = ::runningServiceVerifier
     val serviceIntent = Intent(context, service::class.java)
+    var isBGMusicPlaying: Boolean? = null
 
     if (!isAppInOnStop) {
         if (isBackgroundMusicOn && !isServiceRunning(context, MusicService::class.java)) {
             if (!isBMPlaying) {
                 context.startService(serviceIntent)
-                onEvent(SettingsEvent.IsBGMusicPlaying(true))
+                isBGMusicPlaying = true
             }
         } else {
             context.stopService(serviceIntent)
-            onEvent(SettingsEvent.IsBGMusicPlaying(false))
+            isBGMusicPlaying = false
         }
     } else {
         context.stopService(serviceIntent)
-        onEvent(SettingsEvent.IsBGMusicPlaying(false))
+        isBGMusicPlaying = false
     }
+    return isBGMusicPlaying
 }

@@ -66,10 +66,11 @@ class SettingsViewModel @Inject constructor(
                 context = context,
                 isBMPlaying = state.value.isBMPlaying,
                 isBackgroundMusicOn = settings.isBackgroundMusicOn,
-                onEvent = ::onEvent,
                 service = service,
                 isAppInOnStop = false,
-            )
+            )?.let { isPlaying ->
+                _state.update { it.copy(isBMPlaying = isPlaying) }
+            }
             this.cancel()
         }
     }
@@ -86,11 +87,12 @@ class SettingsViewModel @Inject constructor(
                 }
                 backgroundMusic(
                     context = context,
-                    onEvent = this::onEvent,
                     isBMPlaying = state.value.isBMPlaying,
                     isBackgroundMusicOn = state.value.isBackgroundMusicOn,
                     service = service,
-                )
+                )?.let { isPlaying ->
+                    _state.update { it.copy(isBMPlaying = isPlaying) }
+                }
             }
             SettingsEvent.ToggleIsDarkThemeOn -> {
                 _state.update { it.copy(isDarkThemeOn = !it.isDarkThemeOn) }
@@ -150,10 +152,11 @@ class SettingsViewModel @Inject constructor(
                     context = context,
                     isBMPlaying = state.value.isBMPlaying,
                     isBackgroundMusicOn = state.value.isBackgroundMusicOn,
-                    onEvent = ::onEvent,
                     service = service,
                     isAppInOnStop = event.value,
-                )
+                )?.let { isPlaying ->
+                    _state.update { it.copy(isBMPlaying = isPlaying) }
+                }
             }
             is SettingsEvent.ShowAboutAppCard -> {
                 _state.update { it.copy(isAboutShown = event.value) }
