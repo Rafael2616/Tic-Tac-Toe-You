@@ -34,7 +34,7 @@ class SearchSettingsViewModel @Inject constructor(
         .stateIn(
             viewModelScope,
             SharingStarted.WhileSubscribed(5000),
-            SearchSettingsState()
+            SearchSettingsState(),
         )
     var searchJob: Job? = null
 

@@ -57,7 +57,7 @@ class GameViewModel @Inject constructor(
         .stateIn(
             viewModelScope,
             SharingStarted.WhileSubscribed(5000),
-            GameState()
+            GameState(),
         )
     var onlineGameState: Flow<OnlineGameState>? = null
     var searchPlayersJob: Job? = null
