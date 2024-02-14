@@ -36,6 +36,7 @@ class SearchSettingsViewModel @Inject constructor(
             SharingStarted.WhileSubscribed(5000),
             SearchSettingsState()
         )
+    var searchJob: Job? = null
 
     init {
         viewModelScope.launch(Dispatchers.IO) { searchManager.init() }
@@ -67,7 +68,6 @@ class SearchSettingsViewModel @Inject constructor(
                 }
             }
             is SearchSettingsEvent.QuerySettingsFromRepository -> {
-                var searchJob: Job? = null
                 val query = event.query ?: state.value.query
 
                 _state.update { it.copy(query = query) }
