@@ -32,12 +32,14 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -50,7 +52,13 @@ class GameViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(GameState())
-    val state = _state.asStateFlow()
+    val state = _state
+        .asStateFlow()
+        .stateIn(
+            viewModelScope,
+            SharingStarted.WhileSubscribed(5000),
+            GameState()
+        )
     var onlineGameState: Flow<OnlineGameState>? = null
     var searchPlayersJob: Job? = null
 
@@ -126,7 +134,7 @@ class GameViewModel @Inject constructor(
                                 players.isPlayer1 == !state.value.isYouPlayer1
                             }
                         }.first()
-                        val randomPlayer = (0..possiblePlayers.size - 1).random()
+                        val randomPlayer = (0 until possiblePlayers.size).random()
                         _state.update { it.copy(secondPlayer = possiblePlayers[randomPlayer]) }
 
                         val onlinePlayerName = state.value.secondPlayer!!.name

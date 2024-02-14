@@ -15,7 +15,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -27,13 +29,16 @@ class SearchSettingsViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(SearchSettingsState())
-    val state = _state.asStateFlow()
-    var searchJob: Job? = null
+    val state = _state
+        .asStateFlow()
+        .stateIn(
+            viewModelScope,
+            SharingStarted.WhileSubscribed(5000),
+            SearchSettingsState()
+        )
 
     init {
-        viewModelScope.launch(Dispatchers.IO) {
-            searchManager.init()
-        }
+        viewModelScope.launch(Dispatchers.IO) { searchManager.init() }
 
         var allSettings: List<SettingItem> = emptyList()
 
@@ -49,7 +54,7 @@ class SearchSettingsViewModel @Inject constructor(
         when (event) {
             is SearchSettingsEvent.PutSettingsToRepository -> {
                 viewModelScope.launch(Dispatchers.IO) {
-                    val allSettingsItems = (0..event.settings.size - 1).map {
+                    val allSettingsItems = (0 until event.settings.size).map {
                         SearchItemSpecs(
                             namespace = event.settings[it].searchSpecs.namespace,
                             id = event.settings[it].searchSpecs.id,
@@ -62,6 +67,7 @@ class SearchSettingsViewModel @Inject constructor(
                 }
             }
             is SearchSettingsEvent.QuerySettingsFromRepository -> {
+                var searchJob: Job? = null
                 val query = event.query ?: state.value.query
 
                 _state.update { it.copy(query = query) }
