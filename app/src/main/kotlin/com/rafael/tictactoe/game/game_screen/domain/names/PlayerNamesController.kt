@@ -13,12 +13,14 @@ class PlayerNamesController {
         context: Context,
     ): Pair<String, String> {
         var currentGamePhase = ToastNameController().getCurrentGamePhase(state)
+
         return when (currentGamePhase) {
-            CurrentPlayerName.NameForSetupPhaseForCPUMode -> playerNamesForSetupPhaseForCPUMode(state, context)
+            CurrentPlayerName.NameForSetupPhase -> playerNamesForSetupPhaseForCPUMode(state, context)
             CurrentPlayerName.NameForGameInProgress -> playerNamesForGameInProgress(state, context)
             else -> return Pair(state.player1Name, state.player2Name)
         }
     }
+
     fun playerNamesForSetupPhaseForCPUMode(state: GameState, context: Context): Pair<String, String> {
         var player1Name = ""
         var player2Name = ""
@@ -37,25 +39,17 @@ class PlayerNamesController {
                     player1Name = state.player2Name
                 }
             }
+        } else {
+            player1Name = state.player1Name
+            player2Name = state.player2Name
         }
         return Pair(player1Name, player2Name)
     }
 
     fun playerNamesForGameInProgress(state: GameState, context: Context): Pair<String, String> {
-        var player1Name: String
-        var player2Name: String
         val emptyPlayerName = context.getString(R.string.player)
-
-        if (state.player1Name.isEmpty()) {
-            player1Name = emptyPlayerName
-        } else {
-            player1Name = state.player1Name
-        }
-        if (state.player2Name.isEmpty()) {
-            player2Name = emptyPlayerName
-        } else {
-            player2Name = state.player2Name
-        }
+        val player1Name = if (state.player1Name.isEmpty()) emptyPlayerName else state.player1Name
+        val player2Name = if (state.player2Name.isEmpty()) emptyPlayerName else state.player2Name
         return Pair(player1Name, player2Name)
     }
 }
