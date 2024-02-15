@@ -142,7 +142,7 @@ fun MainScreen(
                     modifier = Modifier
                         .fillMaxWidth(if (orientation == Configuration.ORIENTATION_LANDSCAPE) 0.33f else 0.6f)
                         .height(58.dp)
-                        .shadow(8.dp, RoundedCornerShape(36.dp))
+                        .shadow(6.dp, RoundedCornerShape(36.dp))
                         .clip(RoundedCornerShape(36.dp))
                         .clickable {
                             onClick(GameEvent.ExecUIClickSound)
