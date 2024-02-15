@@ -476,6 +476,7 @@ class GameViewModel @Inject constructor(
             updateCurrentToastName()
             switchPlayerNamesOrder()
         }
+        _state.update { it.copy(isExpandButtonShown = false) }
     }
 
     fun execCPUMove() {
