@@ -1,8 +1,8 @@
 package com.rafael.tictactoe.game.gameScreen.presentation.components.ui
 
 import android.content.res.Configuration
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.AssistChipDefaults
+import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -102,12 +103,9 @@ fun DifficultyLevelSwitcher(
             )
         }
 
-        if (showSelector) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color.Black.copy(alpha = 0.3f)),
-                contentAlignment = Alignment.Center,
+        AnimatedVisibility(showSelector) {
+            BasicAlertDialog(
+                onDismissRequest  = { showSelector = false },
             ) {
                 Card(
                     shape = MaterialTheme.shapes.medium,
@@ -116,13 +114,17 @@ fun DifficultyLevelSwitcher(
                         containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(18.dp),
                     ),
                     modifier = Modifier
-                        .wrapContentSize(),
+                        .wrapContentSize()
+                        .padding(6.dp),
                 ) {
                     Column(
                         modifier = Modifier.padding(horizontal = 6.dp, vertical = 4.dp),
                         horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
-                        Text(stringResource(R.string.select_new_level))
+                        Text(
+                            text = stringResource(R.string.select_new_level),
+                            modifier = Modifier.padding(4.dp),
+                        )
                         SingleChoiceSegmentedButtonRow {
                             levels.forEachIndexed { index, level ->
                                 SegmentedButton(
@@ -140,7 +142,7 @@ fun DifficultyLevelSwitcher(
                                     onClick = {
                                         onEvent(GameEvent.SelectCPUDifficultyMode(levels[index]))
                                         scope.launch {
-                                            delay(500L)
+                                            delay(300L)
                                             showSelector = false
                                         }
                                     },
