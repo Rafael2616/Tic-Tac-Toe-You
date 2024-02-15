@@ -105,7 +105,7 @@ fun DifficultyLevelSwitcher(
 
         AnimatedVisibility(showSelector) {
             BasicAlertDialog(
-                onDismissRequest  = { showSelector = false },
+                onDismissRequest = { showSelector = false },
             ) {
                 Card(
                     shape = MaterialTheme.shapes.medium,
@@ -142,7 +142,7 @@ fun DifficultyLevelSwitcher(
                                     onClick = {
                                         onEvent(GameEvent.SelectCPUDifficultyMode(levels[index]))
                                         scope.launch {
-                                            delay(300L)
+                                            delay(200L)
                                             showSelector = false
                                         }
                                     },

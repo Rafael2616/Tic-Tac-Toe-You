@@ -26,8 +26,8 @@ android {
         applicationId = "com.rafael.tictactoe"
         minSdk = 26
         targetSdk = 34
-        versionCode = 150
-        versionName = "1.5.0"
+        versionCode = 151
+        versionName = "1.5.1"
 
         tasks.withType<KotlinCompile>().configureEach {
             ksp {
