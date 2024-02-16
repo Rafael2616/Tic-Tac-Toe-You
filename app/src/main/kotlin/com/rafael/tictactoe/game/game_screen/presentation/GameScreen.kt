@@ -28,7 +28,6 @@ import com.rafael.tictactoe.game.gameScreen.presentation.components.ui.Difficult
 import com.rafael.tictactoe.game.gameScreen.presentation.components.ui.GameBoard
 import com.rafael.tictactoe.game.gameScreen.presentation.components.ui.GameStateToast
 import com.rafael.tictactoe.game.gameScreen.presentation.components.ui.PlayerSearchSurface
-import com.rafael.tictactoe.game.gameScreen.presentation.components.ui.PlayersNamesOnCounter
 import com.rafael.tictactoe.game.gameScreen.presentation.components.ui.VictoryCounter
 import com.rafael.tictactoe.game.gameScreen.presentation.components.ui.WinnerLines
 import com.rafael.tictactoe.game.gameScreen.presentation.viewmodel.GameViewModel
@@ -77,8 +76,6 @@ fun GameScreen(
         state,
         settingsState,
     )
-
-    PlayersNamesOnCounter(state)
 
     AnimatedVisibility(state.showRestartButton) {
         RestartButton(
