@@ -111,7 +111,7 @@ fun DifficultyLevelSwitcher(
                     shape = MaterialTheme.shapes.medium,
                     border = BorderStroke(1.25.dp, Color.Gray),
                     colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(18.dp),
+                        containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(8.dp),
                     ),
                     modifier = Modifier
                         .wrapContentSize()
