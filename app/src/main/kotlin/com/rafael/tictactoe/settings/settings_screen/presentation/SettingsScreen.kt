@@ -10,6 +10,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.game.mainScreen.presentation.components.WhatsNewDialog
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
+import com.rafael.tictactoe.settings.settingsScreen.presentation.components.SettingsOptionsImpl
 import com.rafael.tictactoe.settings.settingsScreen.presentation.components.SettingsTopBar
 import com.rafael.tictactoe.settings.settingsScreen.presentation.components.dialogs.ColorSelectionDialog
 import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
@@ -21,26 +22,31 @@ fun SettingsScreen(
     settingsVM: SettingsViewModel = hiltViewModel(),
 ) {
     val state by settingsVM.state.collectAsState()
+    val onEvent = settingsVM::onEvent
 
     SettingsTopBar(
         navController,
-        settingsVM::onEvent,
-        state,
-    )
+        onEvent,
+    ) {  innerPadding ->
+       SettingsOptionsImpl(
+            innerPadding,
+            onEvent,
+            state,
+            navController,
+        )    
+    }
 
     AnimatedVisibility(state.showColorSelectionDialog) {
-        ColorSelectionDialog(settingsVM::onEvent, state)
+        ColorSelectionDialog(onEvent, state)
     }
 
     AnimatedVisibility(state.showWhatsNewDialog) {
-        WhatsNewDialog(
-            settingsVM::onEvent,
-        )
+        WhatsNewDialog(onEvent)
     }
 
     DisposableEffect(Unit) {
         onDispose {
-            settingsVM.onEvent(SettingsEvent.OnSettingsScreenDestroyment)
+            onEvent(SettingsEvent.OnSettingsScreenDestroyment)
         }
     }
 }

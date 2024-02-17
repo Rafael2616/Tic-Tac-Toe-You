@@ -1,5 +1,6 @@
 package com.rafael.tictactoe.settings.settingsScreen.presentation.components
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -23,15 +24,14 @@ import androidx.navigation.NavController
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.presentation.navigation.Destinations
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 
 @Composable
 @ExperimentalMaterial3Api
 fun SettingsTopBar(
     navController: NavController,
     onEvent: (SettingsEvent) -> Unit,
-    state: SettingsState,
     modifier: Modifier = Modifier,
+    content: @Composable (PaddingValues) -> Unit
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     var isGoBackClicked by rememberSaveable { mutableStateOf(false) }
@@ -79,11 +79,6 @@ fun SettingsTopBar(
             )
         },
     ) { innerPadding ->
-        SettingsOptionsImpl(
-            innerPadding,
-            onEvent,
-            state,
-            navController,
-        )
+        content(innerPadding)
     }
 }
