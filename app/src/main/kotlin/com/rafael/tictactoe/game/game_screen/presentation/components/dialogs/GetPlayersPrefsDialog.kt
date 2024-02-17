@@ -99,9 +99,9 @@ fun GetPlayersPrefsDialog(
     val textField1State = if (state.isCPUPlayer1) false else true
     val dialogHeight by animateDpAsState(
         when (state.gameMode) {
-            GameMode.VsCPU -> 280.dp
-            GameMode.PvP -> 215.dp
-            GameMode.Online -> 240.dp
+            GameMode.VsCPU -> 275.dp
+            GameMode.PvP -> 210.dp
+            GameMode.Online -> 235.dp
         },
     )
     val dialogWidth by animateDpAsState(if (state.gameMode == GameMode.Online) 245.dp else 380.dp)
@@ -121,7 +121,7 @@ fun GetPlayersPrefsDialog(
     val levels = Level.getLevels(isDarkThemeOn)
 
     Surface(
-        color = Color.Black.copy(alpha = 0.3f),
+        color = Color.Black.copy(alpha = 0.33f),
         modifier = modifier
             .fillMaxSize()
             .pointerInput(Unit) {
