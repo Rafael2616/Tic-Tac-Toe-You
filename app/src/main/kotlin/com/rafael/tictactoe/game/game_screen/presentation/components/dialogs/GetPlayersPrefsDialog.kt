@@ -101,7 +101,7 @@ fun GetPlayersPrefsDialog(
         when (state.gameMode) {
             GameMode.VsCPU -> 275.dp
             GameMode.PvP -> 210.dp
-            GameMode.Online -> 235.dp
+            GameMode.Online -> 240.dp
         },
     )
     val dialogWidth by animateDpAsState(if (state.gameMode == GameMode.Online) 245.dp else 380.dp)
@@ -121,7 +121,7 @@ fun GetPlayersPrefsDialog(
     val levels = Level.getLevels(isDarkThemeOn)
 
     Surface(
-        color = Color.Black.copy(alpha = 0.33f),
+        color = Color.Black.copy(alpha = 0.35f),
         modifier = modifier
             .fillMaxSize()
             .pointerInput(Unit) {
@@ -150,8 +150,7 @@ fun GetPlayersPrefsDialog(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 8.dp, bottom = 6.dp)
-                        .padding(horizontal = 14.dp)
+                        .padding(horizontal = 14.dp, vertical = 6.dp)
                         .then(
                             if (state.gameMode == GameMode.Online) {
                                 Modifier.padding(horizontal = 15.dp)
@@ -204,7 +203,7 @@ fun GetPlayersPrefsDialog(
                     if (state.gameMode != GameMode.Online) {
                         IconButton(
                             modifier = Modifier
-                                .size(60.dp),
+                                .size(45.dp),
                             onClick = { onEvent(GameEvent.SwitchPlayerPositions) },
                         ) {
                             Icon(
@@ -239,7 +238,8 @@ fun GetPlayersPrefsDialog(
                 // Player images preview and button to toggle them
                 Row(
                     modifier = Modifier
-                        .fillMaxWidth(),
+                        .fillMaxWidth()
+                        .height(60.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterHorizontally),
                 ) {
@@ -288,7 +288,7 @@ fun GetPlayersPrefsDialog(
                         Spacer(modifier = Modifier.width(40.dp))
                         IconButton(
                             modifier = Modifier
-                                .size(60.dp),
+                                .size(45.dp),
                             onClick = { onEvent(GameEvent.ToggleIsXForPlayer1) },
                         ) {
                             Icon(
@@ -346,7 +346,7 @@ fun GetPlayersPrefsDialog(
                     ) {
                         IconButton(
                             modifier = Modifier
-                                .size(60.dp),
+                                .size(45.dp),
                             onClick = { onEvent(GameEvent.ToggleIsXForPlayer1) },
                         ) {
                             Icon(
