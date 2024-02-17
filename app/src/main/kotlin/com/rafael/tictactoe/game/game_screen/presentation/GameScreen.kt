@@ -49,14 +49,8 @@ fun GameScreen(
     val settingsState by settingsVM.state.collectAsState()
     val onEvent = viewModel::onEvent
     val onSettingsEvent = settingsVM::onEvent
-    val showDialog = if (!state.play && state.showGetPrefsDialog) true else false
+    val showPlayerPrefsDialog = !state.play && state.showGetPrefsDialog
     var canSetMode by rememberSaveable { mutableStateOf(true) }
-
-    DisposableEffect(canSetMode) {
-        onEvent(GameEvent.SetGameMode(mainState.gameMode))
-        canSetMode = false
-        onDispose {}
-    }
 
     GameBoard(
         onEvent,
@@ -85,6 +79,14 @@ fun GameScreen(
         )
     }
 
+    if (state.gameMode == GameMode.VsCPU) {
+        DifficultyLevelSwitcher(
+            state,
+            onEvent,
+            settingsState,
+        )
+    }
+
     AnimatedVisibility(state.isGameFinished) {
         PlayAgainButton(
             onEvent,
@@ -106,15 +108,7 @@ fun GameScreen(
         )
     }
 
-    if (state.gameMode == GameMode.VsCPU) {
-        DifficultyLevelSwitcher(
-            state,
-            onEvent,
-            settingsState,
-        )
-    }
-
-    AnimatedVisibility(showDialog) {
+    AnimatedVisibility(showPlayerPrefsDialog) {
         GetPlayersPrefsDialog(
             onEvent,
             onSettingsEvent,
@@ -143,6 +137,12 @@ fun GameScreen(
             navController,
             onEvent,
         )
+    }
+
+    DisposableEffect(canSetMode) {
+        onEvent(GameEvent.SetGameMode(mainState.gameMode))
+        canSetMode = false
+        onDispose {}
     }
 
     BackHandler {
