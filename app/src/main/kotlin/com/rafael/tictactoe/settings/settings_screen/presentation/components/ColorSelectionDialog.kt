@@ -7,7 +7,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -16,7 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -42,12 +41,12 @@ import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.gameScreen.presentation.util.draws.drawCircleinColorDialog
 import com.rafael.tictactoe.game.gameScreen.presentation.util.draws.drawWinnerLineinColorDialog
 import com.rafael.tictactoe.game.gameScreen.presentation.util.draws.drawXinColorDialog
-import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Colors
+import com.rafael.tictactoe.settings.settingsScreen.domain.enums.ColorItem
 import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Customization
-import com.rafael.tictactoe.settings.settingsScreen.domain.enums.IColor
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 import com.rafael.tictactoe.settings.settingsScreen.domain.useCases.colorSelectionUseCase
+import my.nanihadesuka.compose.LazyColumnScrollbar
 
 @Composable
 @Suppress("ktlint:compose:modifier-not-used-at-root")
@@ -60,112 +59,105 @@ fun ColorSelectionDialog(
     val selectedWinnerLineColor = state.selectedWinnerLineColor
     val selectedCircleColor = state.selectedCircleColor
     val selectedXColor = state.selectedXColor
-    val colors = Colors.get()
+    val colorItems = ColorItem.getColorItems()
     val xColor by animateColorAsState(state.xColor)
     val circleColor by animateColorAsState(state.circleColor)
     val winnerLineColor by animateColorAsState(state.winnerLineColor)
+    val listState = rememberLazyListState()
 
     Dialog(
         onDismissRequest = {
             onEvent(SettingsEvent.ShowColorSelectionDialog(false))
         },
     ) {
-        Box(
+        Card(
+            shape = RoundedCornerShape(32.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(20.dp),
+            ),
             modifier = modifier
-                .fillMaxSize(),
+                .width(280.dp)
+                .height(365.dp)
+                .padding(vertical = 6.dp),
         ) {
-            Card(
-                shape = RoundedCornerShape(32.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(20.dp),
-                ),
+            Row(
                 modifier = Modifier
-                    .width(275.dp)
-                    .height(345.dp)
-                    .padding(vertical = 6.dp)
-                    .align(Alignment.Center),
+                    .height(40.dp)
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(15.dp, Alignment.CenterHorizontally),
             ) {
-                Row(
+                Text(
+                    text = stringResource(R.string.choose_color),
+                    style = MaterialTheme.typography.titleMedium.copy(
+                        fontSize = 20.sp,
+                        fontFamily = FontFamily.Serif,
+                        fontWeight = FontWeight.Light,
+                    ),
+                    color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier
-                        .height(40.dp)
-                        .fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center,
+                        .padding(start = 16.dp, top = 6.dp),
+                )
+                Box(
+                    modifier = Modifier
+                        .size(40.dp),
+                    contentAlignment = Alignment.CenterStart,
                 ) {
-                    Text(
-                        text = stringResource(R.string.choose_color),
-                        style = MaterialTheme.typography.titleMedium.copy(
-                            fontSize = 20.sp,
-                            fontFamily = FontFamily.Serif,
-                            fontWeight = FontWeight.Light,
-                        ),
-                        color = MaterialTheme.colorScheme.onSurface,
-                        modifier = Modifier
-                            .padding(start = 16.dp, top = 6.dp),
-                    )
-                    Spacer(
-                        modifier = Modifier
-                            .width(15.dp),
-                    )
                     Box(
                         modifier = Modifier
-                            .size(40.dp),
-                        contentAlignment = Alignment.CenterStart,
+                            .padding(top = 2.dp)
+                            .size(20.dp),
+                        contentAlignment = Alignment.Center,
                     ) {
-                        Box(
+                        Canvas(
                             modifier = Modifier
-                                .padding(top = 2.dp)
-                                .size(20.dp),
-                            contentAlignment = Alignment.Center,
+                                .fillMaxSize(),
                         ) {
-                            Canvas(
-                                modifier = Modifier
-                                    .fillMaxSize(),
-                            ) {
-                                when (type) {
-                                    Customization.XCOLOR -> {
-                                        drawXinColorDialog(xColor)
-                                    }
-                                    Customization.CIRCLECOLOR -> {
-                                        drawCircleinColorDialog(circleColor)
-                                    }
-                                    Customization.WINNERLINECOLOR -> {
-                                        drawWinnerLineinColorDialog(winnerLineColor)
-                                    }
-                                }
+                            when (type) {
+                                Customization.XCOLOR -> drawXinColorDialog(xColor)
+                                Customization.CIRCLECOLOR -> drawCircleinColorDialog(circleColor)
+                                Customization.WINNERLINECOLOR -> drawWinnerLineinColorDialog(winnerLineColor)
                             }
                         }
                     }
                 }
-                LazyColumn(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(240.dp)
-                        .padding(6.dp),
+            }
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(265.dp)
+            ) {
+                LazyColumnScrollbar(
+                    listState = listState,
+                    thumbColor = MaterialTheme.colorScheme.primary,
+                    thumbSelectedColor = MaterialTheme.colorScheme.primary,
+                    hideDelayMillis = 1500,
+                    padding = 6.dp,
+                    thumbMinHeight = 0.05f,
+                    thickness = 6.dp,
                 ) {
-                    itemsIndexed(IColor.values()) { index, color ->
-                        Box(
-                            modifier = Modifier
-                                .height(60.dp)
-                                .fillMaxWidth()
-                                .clickable {
-                                    when (type) {
-                                        Customization.WINNERLINECOLOR -> onEvent(SettingsEvent.SelectedWinnerLineColor(index))
-                                        Customization.CIRCLECOLOR -> onEvent(SettingsEvent.SelectedCircleColor(index))
-                                        Customization.XCOLOR -> onEvent(SettingsEvent.SelectedXColor(index))
-                                    }
-                                    colorSelectionUseCase(
-                                        type,
-                                        color,
-                                        onEvent,
-                                    )
-                                },
-                        ) {
+                    LazyColumn(
+                        state = listState,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(265.dp)
+                            .padding(6.dp),
+                    ) {
+                        itemsIndexed(colorItems) { index, colorItem ->
                             Row(
                                 modifier = Modifier
-                                    .height(60.dp)
+                                    .height(50.dp)
                                     .fillMaxWidth()
-                                    .padding(8.dp),
+                                    .padding(horizontal = 2.dp)
+                                    .padding(end = 4.dp)
+                                    .clickable {
+                                        colorSelectionUseCase(
+                                            type,
+                                            colorItem.color,
+                                            index,
+                                            onEvent,
+                                        )
+                                    },
                                 horizontalArrangement = Arrangement.SpaceBetween,
                                 verticalAlignment = Alignment.CenterVertically,
                             ) {
@@ -177,31 +169,16 @@ fun ColorSelectionDialog(
                                         Customization.XCOLOR -> index == selectedXColor
                                     },
                                     onClick = {
-                                        when (type) {
-                                            Customization.WINNERLINECOLOR -> onEvent(SettingsEvent.SelectedWinnerLineColor(index))
-                                            Customization.CIRCLECOLOR -> onEvent(SettingsEvent.SelectedCircleColor(index))
-                                            Customization.XCOLOR -> onEvent(SettingsEvent.SelectedXColor(index))
-                                        }
                                         colorSelectionUseCase(
                                             type,
-                                            color,
+                                            colorItem.color,
+                                            index,
                                             onEvent,
                                         )
                                     },
                                 )
                                 Text(
-                                    text = when (color) {
-                                        IColor.BLUE -> stringResource(R.string.color_blue)
-                                        IColor.RED -> stringResource(R.string.color_red)
-                                        IColor.YELLOW -> stringResource(R.string.color_yellow)
-                                        IColor.BURNT_YELLOW -> stringResource(R.string.color_burnt_yellow)
-                                        IColor.DARK_GREEN -> stringResource(R.string.color_dark_green)
-                                        IColor.LIGHT_GREEN -> stringResource(R.string.color_green)
-                                        IColor.PURPLE -> stringResource(R.string.color_purple)
-                                        IColor.MAGENTA -> stringResource(R.string.color_pink)
-                                        IColor.WHITE -> stringResource(R.string.color_white)
-                                        IColor.CYAN -> stringResource(R.string.color_cyan)
-                                    },
+                                    text = stringResource(colorItem.name),
                                     overflow = TextOverflow.Ellipsis,
                                     textAlign = TextAlign.Center,
                                     color = MaterialTheme.colorScheme.onSurface,
@@ -210,49 +187,31 @@ fun ColorSelectionDialog(
                                 )
                                 Box(
                                     modifier = Modifier
-                                        .size(55.dp)
+                                        .height(45.dp)
+                                        .width(55.dp)
                                         .padding(5.dp)
-                                        .clip(CircleShape),
-                                    content = {
-                                        Box(
-                                            modifier = Modifier
-                                                .fillMaxSize()
-                                                .background(
-                                                    when (color) {
-                                                        IColor.BLUE -> colors.blue
-                                                        IColor.RED -> colors.red
-                                                        IColor.YELLOW -> colors.yellow
-                                                        IColor.BURNT_YELLOW -> colors.burnt_yellow
-                                                        IColor.DARK_GREEN -> colors.dark_green
-                                                        IColor.LIGHT_GREEN -> colors.light_green
-                                                        IColor.PURPLE -> colors.purple
-                                                        IColor.MAGENTA -> colors.magenta
-                                                        IColor.WHITE -> colors.white
-                                                        IColor.CYAN -> colors.cyan
-                                                    },
-                                                ),
-                                        )
-                                    },
+                                        .clip(RoundedCornerShape(20.dp))
+                                        .background(colorItem.color),
                                 )
                             }
                         }
                     }
                 }
-                OutlinedButton(
-                    onClick = {
-                        onEvent(SettingsEvent.ShowColorSelectionDialog(false))
-                        onEvent(SettingsEvent.ExecUIClickSound)
-                    },
-                    modifier = Modifier
-                        .padding(end = 12.dp)
-                        .align(Alignment.End),
-                ) {
-                    Text(
-                        text = stringResource(android.R.string.ok),
-                        style = MaterialTheme.typography.bodyMedium,
-                        textAlign = TextAlign.Center,
-                    )
-                }
+            }
+            OutlinedButton(
+                onClick = {
+                    onEvent(SettingsEvent.ShowColorSelectionDialog(false))
+                    onEvent(SettingsEvent.ExecUIClickSound)
+                },
+                modifier = Modifier
+                    .padding(end = 12.dp)
+                    .align(Alignment.End),
+            ) {
+                Text(
+                    text = stringResource(android.R.string.ok),
+                    style = MaterialTheme.typography.bodyMedium,
+                    textAlign = TextAlign.Center,
+                )
             }
         }
     }

@@ -149,6 +149,7 @@ configure<SpotlessExtension> {
 
 licensee {
     allow("Apache-2.0")
+    allow("MIT")
     allowUrl("https://www.gnu.org/licenses/gpl-3.0.en.html")
     unusedAction(IGNORE)
 }
@@ -188,6 +189,8 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.5.0")
     // Material Motion
     implementation("io.github.fornewid:material-motion-compose-core:1.2.0")
+    // LazyColumnScrollbar
+    implementation("com.github.nanihadesuka:LazyColumnScrollbar:1.9.0")
     // Lifecycle
     implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleVersion")
