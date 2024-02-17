@@ -123,7 +123,7 @@ fun ColorSelectionDialog(
                     listState = listState,
                     thumbColor = MaterialTheme.colorScheme.primary,
                     thumbSelectedColor = MaterialTheme.colorScheme.primary,
-                    padding = 6.dp,
+                    padding = 4.dp,
                     thumbMinHeight = 0.05f,
                     thickness = 6.dp,
                 ) {
@@ -140,7 +140,6 @@ fun ColorSelectionDialog(
                                     .height(50.dp)
                                     .fillMaxWidth()
                                     .padding(horizontal = 2.dp)
-                                    .padding(end = 4.dp)
                                     .clickable {
                                         colorSelectionUseCase(
                                             type,
