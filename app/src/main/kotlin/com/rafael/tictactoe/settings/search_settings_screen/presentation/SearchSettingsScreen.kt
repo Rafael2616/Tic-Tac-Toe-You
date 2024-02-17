@@ -1,7 +1,6 @@
 package com.rafael.tictactoe.settings.searchSettingsScreen.presentation
 
 import android.content.res.Configuration
-import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
@@ -432,16 +431,6 @@ fun SearchSettingsScreen(
     DisposableEffect(Unit) {
         onDispose {
             settingsVM.onEvent(SettingsEvent.OnSettingsScreenDestroyment)
-        }
-    }
-
-    BackHandler {
-        if (state.showColorSelectionDialog) {
-            settingsVM.onEvent(SettingsEvent.ShowColorSelectionDialog(false))
-        } else if (state.showWhatsNewDialog) {
-            settingsVM.onEvent(SettingsEvent.HideWhatsNewDialog)
-        } else {
-            navController.popBackStack()
         }
     }
 }

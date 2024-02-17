@@ -1,6 +1,5 @@
 package com.rafael.tictactoe.settings.settingsScreen.presentation
 
-import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
@@ -42,16 +41,6 @@ fun SettingsScreen(
     DisposableEffect(Unit) {
         onDispose {
             settingsVM.onEvent(SettingsEvent.OnSettingsScreenDestroyment)
-        }
-    }
-
-    BackHandler {
-        if (state.showColorSelectionDialog) {
-            settingsVM.onEvent(SettingsEvent.ShowColorSelectionDialog(false))
-        } else if (state.showWhatsNewDialog) {
-            settingsVM.onEvent(SettingsEvent.HideWhatsNewDialog)
-        } else {
-            navController.popBackStack()
         }
     }
 }
