@@ -160,6 +160,7 @@ fun GetPlayersPrefsDialog(
                             },
                         ),
                     horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     val textFieldColors = TextFieldDefaults.colors(
                         focusedContainerColor = containerColor,
@@ -203,8 +204,7 @@ fun GetPlayersPrefsDialog(
                     if (state.gameMode != GameMode.Online) {
                         IconButton(
                             modifier = Modifier
-                                .width(60.dp)
-                                .height(85.dp),
+                                .size(60.dp),
                             onClick = { onEvent(GameEvent.SwitchPlayerPositions) },
                         ) {
                             Icon(
@@ -241,17 +241,13 @@ fun GetPlayersPrefsDialog(
                     modifier = Modifier
                         .fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center,
+                    horizontalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterHorizontally),
                 ) {
                     val canvasOnClick = {
                         focusManager.clearFocus()
                         keyboardController?.hide()
                         onSettingsEvent(SettingsEvent.ShowColorSelectionDialog(true))
                     }
-                    val canvasModifier = Modifier
-                        .size(50.dp)
-                        .align(Alignment.CenterVertically)
-
                     IconButton(
                         modifier = Modifier
                             .size(40.dp),
@@ -273,21 +269,16 @@ fun GetPlayersPrefsDialog(
                         )
                     }
                     Box(
-                        modifier = canvasModifier,
+                        modifier = Modifier.size(35.dp),
                         contentAlignment = Alignment.Center,
                     ) {
-                        Box(
-                            modifier = Modifier.size(35.dp),
-                            contentAlignment = Alignment.Center,
+                        Canvas(
+                            modifier = Modifier.fillMaxSize(),
                         ) {
-                            Canvas(
-                                modifier = Modifier.fillMaxSize(),
-                            ) {
-                                if (state.isXFor1) {
-                                    drawXinDialog(xColor)
-                                } else {
-                                    drawCircleinDialog(circleColor)
-                                }
+                            if (state.isXFor1) {
+                                drawXinDialog(xColor)
+                            } else {
+                                drawCircleinDialog(circleColor)
                             }
                         }
                     }
@@ -310,21 +301,16 @@ fun GetPlayersPrefsDialog(
                         }
                         Spacer(modifier = Modifier.width(40.dp))
                         Box(
-                            modifier = canvasModifier,
+                            modifier = Modifier.size(35.dp),
                             contentAlignment = Alignment.Center,
                         ) {
-                            Box(
-                                modifier = Modifier.size(35.dp),
-                                contentAlignment = Alignment.Center,
+                            Canvas(
+                                modifier = Modifier.fillMaxSize(),
                             ) {
-                                Canvas(
-                                    modifier = Modifier.fillMaxSize(),
-                                ) {
-                                    if (state.isXFor1) {
-                                        drawCircleinDialog(circleColor)
-                                    } else {
-                                        drawXinDialog(xColor)
-                                    }
+                                if (state.isXFor1) {
+                                    drawCircleinDialog(circleColor)
+                                } else {
+                                    drawXinDialog(xColor)
                                 }
                             }
                         }
