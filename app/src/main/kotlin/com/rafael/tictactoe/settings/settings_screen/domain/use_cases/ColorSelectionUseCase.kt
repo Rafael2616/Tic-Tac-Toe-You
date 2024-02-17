@@ -17,11 +17,11 @@ fun colorSelectionUseCase(
         }
         Customization.XCOLOR -> {
             onEvent(SettingsEvent.SetXColor(option))
-            onEvent(SettingsEvent.SelectedCircleColor(index))
+            onEvent(SettingsEvent.SelectedXColor(index))
         }
         Customization.CIRCLECOLOR -> {
             onEvent(SettingsEvent.SetCircleColor(option))
-            onEvent(SettingsEvent.SelectedXColor(index))
+            onEvent(SettingsEvent.SelectedCircleColor(index))
         }
     }
 }
