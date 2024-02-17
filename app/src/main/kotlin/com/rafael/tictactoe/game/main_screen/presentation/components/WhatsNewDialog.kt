@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -55,81 +54,75 @@ fun WhatsNewDialog(
             onEvent(SettingsEvent.HideWhatsNewDialog)
         },
     ) {
-        Box(
-            modifier = modifier
-                .fillMaxSize(),
-            contentAlignment = Alignment.Center,
+        Card(
+            shape = MaterialTheme.shapes.large,
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(15.dp),
+            ),
+            modifier = Modifier
+                .height(350.dp)
+                .width(360.dp),
         ) {
-            Card(
-                shape = MaterialTheme.shapes.large,
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(15.dp),
-                ),
+            Column(
                 modifier = Modifier
-                    .height(350.dp)
-                    .width(360.dp),
+                    .padding(16.dp)
+                    .height(265.dp)
+                    .fillMaxWidth()
+                    .verticalScroll(rememberScrollState()),
             ) {
-                Column(
+                Row(
                     modifier = Modifier
-                        .padding(16.dp)
-                        .height(265.dp)
-                        .fillMaxWidth()
-                        .verticalScroll(rememberScrollState()),
+                        .height(40.dp)
+                        .fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
-                    Row(
-                        modifier = Modifier
-                            .height(40.dp)
-                            .fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                    ) {
-                        Text(
-                            text = stringResource(R.string.whats_new) + " v$versionNumber:",
-                            style = MaterialTheme.typography.titleMedium.copy(
-                                fontSize = 20.sp,
-                                fontFamily = FontFamily.SansSerif,
-                                fontWeight = FontWeight.Normal,
-                            ),
-                            color = MaterialTheme.colorScheme.inverseSurface,
-                            textAlign = TextAlign.Start,
-                            modifier = Modifier
-                                .width(250.dp),
-                        )
-                        Icon(
-                            imageVector = Icons.Outlined.NewReleases,
-                            contentDescription = "New Releases",
-                            tint = MaterialTheme.colorScheme.onSurface,
-                            modifier = Modifier
-                                .size(35.dp),
-                        )
-                    }
-                    Spacer(Modifier.height(5.dp))
                     Text(
-                        text = "$changelog",
-                        style = MaterialTheme.typography.bodyLarge,
+                        text = stringResource(R.string.whats_new) + " v$versionNumber:",
+                        style = MaterialTheme.typography.titleMedium.copy(
+                            fontSize = 20.sp,
+                            fontFamily = FontFamily.SansSerif,
+                            fontWeight = FontWeight.Normal,
+                        ),
                         color = MaterialTheme.colorScheme.inverseSurface,
                         textAlign = TextAlign.Start,
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(5.dp),
+                            .width(250.dp),
+                    )
+                    Icon(
+                        imageVector = Icons.Outlined.NewReleases,
+                        contentDescription = "New Releases",
+                        tint = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier
+                            .size(35.dp),
                     )
                 }
-                Box(
+                Spacer(Modifier.height(5.dp))
+                Text(
+                    text = "$changelog",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.inverseSurface,
+                    textAlign = TextAlign.Start,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(50.dp),
-                    contentAlignment = Alignment.BottomEnd,
+                        .padding(5.dp),
+                )
+            }
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp),
+                contentAlignment = Alignment.BottomEnd,
+            ) {
+                Button(
+                    modifier = Modifier.padding(end = 16.dp, bottom = 10.dp),
+                    contentPadding = PaddingValues(horizontal = 12.dp),
+                    onClick = {
+                        onEvent(SettingsEvent.HideWhatsNewDialog)
+                        onEvent(SettingsEvent.ExecUIClickSound)
+                    },
                 ) {
-                    Button(
-                        modifier = Modifier.padding(end = 16.dp, bottom = 10.dp),
-                        contentPadding = PaddingValues(horizontal = 12.dp),
-                        onClick = {
-                            onEvent(SettingsEvent.HideWhatsNewDialog)
-                            onEvent(SettingsEvent.ExecUIClickSound)
-                        },
-                    ) {
-                        Text(stringResource(R.string.close))
-                    }
+                    Text(stringResource(R.string.close))
                 }
             }
         }
