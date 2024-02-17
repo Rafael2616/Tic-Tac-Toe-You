@@ -78,7 +78,7 @@ fun ColorSelectionDialog(
             ),
             modifier = modifier
                 .width(280.dp)
-                .height(370.dp)
+                .height(375.dp)
                 .padding(vertical = 6.dp),
         ) {
             Row(
