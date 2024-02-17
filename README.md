@@ -1,4 +1,11 @@
-# Tic-Tac-Toe-You
+<div align="center">
+</br>
+<img src="screenshots/AppLogo.png" width="200" />
+</div>
+
+<h1 align="center">Tic Tac Toe You</h1>
+</br>
+
 A classic tic-tac-toe game made with material you and others new android technologies
 
 # Features:
