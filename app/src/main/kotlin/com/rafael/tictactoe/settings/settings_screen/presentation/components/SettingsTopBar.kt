@@ -31,7 +31,7 @@ fun SettingsTopBar(
     navController: NavController,
     onEvent: (SettingsEvent) -> Unit,
     modifier: Modifier = Modifier,
-    content: @Composable (PaddingValues) -> Unit
+    content: @Composable (PaddingValues) -> Unit,
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     var isGoBackClicked by rememberSaveable { mutableStateOf(false) }

@@ -28,12 +28,12 @@ fun SettingsScreen(
         navController,
         onEvent,
     ) {  innerPadding ->
-       SettingsOptionsImpl(
+        SettingsOptionsImpl(
             innerPadding,
             onEvent,
             state,
             navController,
-        )    
+        )
     }
 
     AnimatedVisibility(state.showColorSelectionDialog) {
