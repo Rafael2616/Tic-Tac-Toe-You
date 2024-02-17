@@ -6,7 +6,7 @@
 <h1 align="center">Tic Tac Toe You</h1>
 </br>
 
-A classic tic-tac-toe game made with material you and others new android technologies
+<h3 align="center">A classic tic-tac-toe game made with material you and others new android technologies</h1>
 
 # Features:
 *The game have all basic features that you expect in a tic tac toe game and the following below:*
@@ -19,7 +19,7 @@ A classic tic-tac-toe game made with material you and others new android technol
 
 # Game Screenshots:
 
-<div style="width:100%; display:flex; justify-content:space-between;">
+<div align="center"; style="width:100%; display:flex; justify-content:space-between;">
 <img src="screenshots/Screenshot_1d.png" width=31% alt="home">
 <img src="screenshots/Screenshot_2d.png" width=31% alt="settings">
 <img src="screenshots/Screenshot_3d.png" width=31% alt ="PvP dialog">
@@ -28,7 +28,7 @@ A classic tic-tac-toe game made with material you and others new android technol
 <img src="screenshots/Screenshot_6d.png" width=31% alt ="online match loading">
 </div>
 
-<div style="width:100%; display:flex; justify-content:space-between;">
+<div align="center"; style="width:100%; display:flex; justify-content:space-between;">
 <img src="screenshots/Screenshot_1.png" width=31% alt="home">
 <img src="screenshots/Screenshot_2.png" width=31% alt="settings">
 <img src="screenshots/Screenshot_3.png" width=31% alt="PvP dialog">
