@@ -105,7 +105,7 @@ fun SettingsBlockWithIcon(
                 containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp),
             ),
             modifier = Modifier
-                .fillMaxWidth(if (isInLandscape) 0.65f else 0.92f)
+                .fillMaxWidth(if (isInLandscape) 0.65f else 0.93f)
                 .clip(RoundedCornerShape(26.dp)),
         ) {
             settings.forEachIndexed { index, setting ->
