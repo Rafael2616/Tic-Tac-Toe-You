@@ -123,7 +123,6 @@ fun ColorSelectionDialog(
                     listState = listState,
                     thumbColor = MaterialTheme.colorScheme.primary,
                     thumbSelectedColor = MaterialTheme.colorScheme.primary,
-                    hideDelayMillis = 600,
                     padding = 6.dp,
                     thumbMinHeight = 0.05f,
                     thickness = 6.dp,
