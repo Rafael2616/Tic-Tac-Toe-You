@@ -27,7 +27,7 @@ fun SettingsScreen(
     SettingsTopBar(
         navController,
         onEvent,
-    ) {  innerPadding ->
+    ) { innerPadding ->
         SettingsOptionsImpl(
             innerPadding,
             onEvent,
