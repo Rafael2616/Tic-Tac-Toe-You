@@ -7,6 +7,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -77,12 +78,12 @@ fun ColorSelectionDialog(
             ),
             modifier = modifier
                 .width(280.dp)
-                .height(365.dp)
+                .height(370.dp)
                 .padding(vertical = 6.dp),
         ) {
             Row(
                 modifier = Modifier
-                    .height(40.dp)
+                    .height(46.dp)
                     .fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(15.dp, Alignment.CenterHorizontally),
@@ -95,29 +96,20 @@ fun ColorSelectionDialog(
                         fontWeight = FontWeight.Light,
                     ),
                     color = MaterialTheme.colorScheme.onSurface,
-                    modifier = Modifier
-                        .padding(start = 16.dp, top = 6.dp),
                 )
                 Box(
                     modifier = Modifier
-                        .size(40.dp),
-                    contentAlignment = Alignment.CenterStart,
+                        .size(20.dp),
+                    contentAlignment = Alignment.Center,
                 ) {
-                    Box(
+                    Canvas(
                         modifier = Modifier
-                            .padding(top = 2.dp)
-                            .size(20.dp),
-                        contentAlignment = Alignment.Center,
+                            .fillMaxSize(),
                     ) {
-                        Canvas(
-                            modifier = Modifier
-                                .fillMaxSize(),
-                        ) {
-                            when (type) {
-                                Customization.XCOLOR -> drawXinColorDialog(xColor)
-                                Customization.CIRCLECOLOR -> drawCircleinColorDialog(circleColor)
-                                Customization.WINNERLINECOLOR -> drawWinnerLineinColorDialog(winnerLineColor)
-                            }
+                        when (type) {
+                            Customization.XCOLOR -> drawXinColorDialog(xColor)
+                            Customization.CIRCLECOLOR -> drawCircleinColorDialog(circleColor)
+                            Customization.WINNERLINECOLOR -> drawWinnerLineinColorDialog(winnerLineColor)
                         }
                     }
                 }
@@ -125,13 +117,13 @@ fun ColorSelectionDialog(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(265.dp)
+                    .height(265.dp),
             ) {
                 LazyColumnScrollbar(
                     listState = listState,
                     thumbColor = MaterialTheme.colorScheme.primary,
                     thumbSelectedColor = MaterialTheme.colorScheme.primary,
-                    hideDelayMillis = 1500,
+                    hideDelayMillis = 1000,
                     padding = 6.dp,
                     thumbMinHeight = 0.05f,
                     thickness = 6.dp,
@@ -140,8 +132,8 @@ fun ColorSelectionDialog(
                         state = listState,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(265.dp)
-                            .padding(6.dp),
+                            .height(265.dp),
+                        contentPadding = PaddingValues(8.dp),
                     ) {
                         itemsIndexed(colorItems) { index, colorItem ->
                             Row(
