@@ -39,12 +39,12 @@ A classic tic-tac-toe game made with material you and others new android technol
 </div>
 
 <div style="width:100%; display:flex; justify-content:space-between;">
-<img src="screenshots/screenshot_1.png" width=31% alt="home">
-<img src="screenshots/screenshot_2.png" width=31% alt="settings">
-<img src="screenshots/screenshot_3.png" width=31% alt="PvP dialog">
-<img src="screenshots/screenshot_4.png" width=31% alt="PvP screen">
-<img src="screenshots/screenshot_5.png" width=31% alt="vs CPU dialog">
-<img src="screenshots/screenshot_6.png" width=31% alt ="online match dialog">
+<img src="screenshots/Screenshot_1.png" width=31% alt="home">
+<img src="screenshots/Screenshot_2.png" width=31% alt="settings">
+<img src="screenshots/Screenshot_3.png" width=31% alt="PvP dialog">
+<img src="screenshots/Screenshot_4.png" width=31% alt="PvP screen">
+<img src="screenshots/Screenshot_5.png" width=31% alt="vs CPU dialog">
+<img src="screenshots/Screenshot_6.png" width=31% alt ="online match dialog">
 </div>
 
 # Follow me on Instagram
