@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.settingsScreen.domain.enums
+package com.rafael.tictactoe.settings.settingsScreen.domain.model
 
 import androidx.compose.ui.graphics.Color
 

@@ -9,7 +9,7 @@ import com.rafael.tictactoe.common.domain.util.getVersionName
 import com.rafael.tictactoe.common.domain.util.uiClickSound
 import com.rafael.tictactoe.common.services.MusicService
 import com.rafael.tictactoe.game.domain.audio.backgroundMusic
-import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Colors
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.Colors
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEntity
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState

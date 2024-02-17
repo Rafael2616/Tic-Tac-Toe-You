@@ -72,8 +72,8 @@ import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.domain.model.Level
 import com.rafael.tictactoe.game.gameScreen.presentation.util.draws.drawCircleinDialog
 import com.rafael.tictactoe.game.gameScreen.presentation.util.draws.drawXinDialog
-import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Colors
 import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Customization
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.Colors
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 

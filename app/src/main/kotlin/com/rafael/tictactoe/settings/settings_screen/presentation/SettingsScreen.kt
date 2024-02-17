@@ -11,8 +11,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.game.mainScreen.presentation.components.WhatsNewDialog
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.settingsScreen.presentation.components.ColorSelectionDialog
 import com.rafael.tictactoe.settings.settingsScreen.presentation.components.SettingsTopBar
+import com.rafael.tictactoe.settings.settingsScreen.presentation.components.dialogs.ColorSelectionDialog
 import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
 
 @Composable

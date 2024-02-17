@@ -32,7 +32,7 @@ import com.rafael.tictactoe.game.gameScreen.presentation.components.ui.VictoryCo
 import com.rafael.tictactoe.game.gameScreen.presentation.components.ui.WinnerLines
 import com.rafael.tictactoe.game.gameScreen.presentation.viewmodel.GameViewModel
 import com.rafael.tictactoe.game.mainScreen.presentation.viewmodel.MainViewModel
-import com.rafael.tictactoe.settings.settingsScreen.presentation.components.ColorSelectionDialog
+import com.rafael.tictactoe.settings.settingsScreen.presentation.components.dialogs.ColorSelectionDialog
 import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
 
 @Composable

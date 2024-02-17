@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.settingsScreen.presentation.components
+package com.rafael.tictactoe.settings.settingsScreen.presentation.components.dialogs
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.Canvas
@@ -42,8 +42,8 @@ import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.gameScreen.presentation.util.draws.drawCircleinColorDialog
 import com.rafael.tictactoe.game.gameScreen.presentation.util.draws.drawWinnerLineinColorDialog
 import com.rafael.tictactoe.game.gameScreen.presentation.util.draws.drawXinColorDialog
-import com.rafael.tictactoe.settings.settingsScreen.domain.enums.ColorItem
 import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Customization
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.ColorItem
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 import com.rafael.tictactoe.settings.settingsScreen.domain.useCases.colorSelectionUseCase

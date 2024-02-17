@@ -2,7 +2,6 @@ package com.rafael.tictactoe.settings.settingsScreen.domain.model
 
 import androidx.compose.ui.graphics.Color
 import com.rafael.tictactoe.common.domain.util.getVersionName
-import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Colors
 import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Customization
 
 data class SettingsState(

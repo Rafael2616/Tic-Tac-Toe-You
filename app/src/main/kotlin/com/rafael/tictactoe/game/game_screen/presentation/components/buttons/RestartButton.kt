@@ -27,7 +27,7 @@ import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameMode
 import com.rafael.tictactoe.game.domain.model.GameState
-import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Colors
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.Colors
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 
 @Composable
