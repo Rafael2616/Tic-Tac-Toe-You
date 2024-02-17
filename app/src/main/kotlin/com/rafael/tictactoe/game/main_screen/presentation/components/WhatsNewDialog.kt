@@ -59,7 +59,7 @@ fun WhatsNewDialog(
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(15.dp),
             ),
-            modifier = Modifier
+            modifier = modifier
                 .height(350.dp)
                 .width(360.dp),
         ) {
