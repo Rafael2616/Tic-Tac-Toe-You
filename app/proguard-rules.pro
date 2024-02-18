@@ -25,7 +25,6 @@
 
 -keep class * extends androidx.room.** { *; }
 -keep class * extends androidx.room.migration.** { *; }
--keep class * extends androidx.room.util.** { *; }
 
 # Rules for OkHttp3
 -keep class com.google.gson.** { *; }
