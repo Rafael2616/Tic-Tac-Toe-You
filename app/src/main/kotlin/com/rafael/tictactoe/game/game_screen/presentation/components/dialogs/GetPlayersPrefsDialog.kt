@@ -99,9 +99,9 @@ fun GetPlayersPrefsDialog(
     val textField1State = if (state.isCPUPlayer1) false else true
     val dialogHeight by animateDpAsState(
         when (state.gameMode) {
-            GameMode.VsCPU -> 275.dp
-            GameMode.PvP -> 210.dp
-            GameMode.Online -> 240.dp
+            GameMode.VsCPU -> 270.dp
+            GameMode.PvP -> 205.dp
+            GameMode.Online -> 235.dp
         },
     )
     val dialogWidth by animateDpAsState(if (state.gameMode == GameMode.Online) 245.dp else 380.dp)
