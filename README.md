@@ -6,7 +6,9 @@
 <h1 align="center">Tic Tac Toe You</h1>
 </br>
 
-[![Build debug APK](https://github.com/Rafael2616/Tic-Tac-Toe-You/actions/workflows/build-debug-apk.yml/badge.svg)](https://github.com/Rafael2616/Tic-Tac-Toe-You/actions/workflows/build-debug-apk.yml)
+<p align="center">
+<img src="https://github.com/Rafael2616/Tic-Tac-Toe-You/actions/workflows/build-debug-apk.yml/badge.svg;label=CI" alt="Workflow">
+<img src="https://img.shields.io/github/v/release/Rafael2616/Tic-Tac-Toe-You?include_prereleases&amp;label=Latest%20release" alt="Latest release"></p>
 
 <h3 align="center">A classic tic-tac-toe game made with material you and others new android technologies</h1>
 
