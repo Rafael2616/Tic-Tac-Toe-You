@@ -160,7 +160,7 @@ dependencies {
     val hiltVersion = "2.50"
     val media3Version = "1.2.1"
     val appSearchVersion = "1.1.0-alpha03"
-    val m3Version = "1.7.0-alpha02"
+    val m3Version = "1.7.0-alpha03"
 
     // Kotlin
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
