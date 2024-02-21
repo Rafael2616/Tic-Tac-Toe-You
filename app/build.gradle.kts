@@ -177,7 +177,7 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
     // Jetpack Compose
     implementation(platform("androidx.compose:compose-bom:2024.02.01"))
-    implementation("androidx.compose.material3:material3:1.2.0")
+    implementation("androidx.compose.material3:material3:1.3.0-alpha01")
     implementation("androidx.compose.animation:animation:$m3Version")
     implementation("androidx.compose.foundation:foundation:$m3Version")
     implementation("androidx.compose.material:material-icons-extended:$m3Version")
