@@ -74,5 +74,8 @@
     <string name="search_settings">Procurar configurações</string>
     <string name="select_new_level">Selecione o novo nivel:</string>
     <string name="unable_to_switch_levels_msg">Termine a partida ou começe outra do zero \npara mudar a dificuldade</string>
+    <string name="add_photo">Adicionar Imagem</string>
+    <string name="remove_photo">Remover</string>
+    <string name="change_photo">Alterar</string>
 
 </resources>

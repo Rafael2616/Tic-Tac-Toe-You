@@ -24,4 +24,6 @@ sealed interface SettingsEvent {
     object ShowWhatsNewDialog : SettingsEvent
     object HideWhatsNewDialog : SettingsEvent
     object ExecUIClickSound : SettingsEvent
+    object ToggleShowProfilePictureMenu : SettingsEvent
+    object HideProfilePictureMenu : SettingsEvent
 }

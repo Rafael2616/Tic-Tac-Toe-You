@@ -1,5 +1,7 @@
 package com.rafael.tictactoe.settings.settingsScreen.domain.model
 
+import android.graphics.Bitmap
+import android.net.Uri
 import androidx.compose.ui.graphics.Color
 import com.rafael.tictactoe.common.domain.util.getVersionName
 import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Customization
@@ -23,4 +25,7 @@ data class SettingsState(
     val customizationType: Customization = Customization.XCOLOR,
     val appVersion: String = getVersionName(),
     val showWhatsNewDialog: Boolean = false,
+    val showProfilePictureMenu: Boolean = false,
+    val profilePictureBitmap: Bitmap? = null,
+    val profilePictureUri: Uri = Uri.EMPTY,
 )

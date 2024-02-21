@@ -1,9 +1,13 @@
 package com.rafael.tictactoe.settings.settingsScreen.presentation.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -18,23 +22,30 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.presentation.navigation.Destinations
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 
 @Composable
 @ExperimentalMaterial3Api
 fun SettingsTopBar(
     navController: NavController,
+    state: SettingsState,
     onEvent: (SettingsEvent) -> Unit,
     modifier: Modifier = Modifier,
     content: @Composable (PaddingValues) -> Unit,
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     var isGoBackClicked by rememberSaveable { mutableStateOf(false) }
+    val profilePicture = state.profilePictureBitmap
 
     Scaffold(
         modifier = modifier
@@ -73,6 +84,28 @@ fun SettingsTopBar(
                             imageVector = Icons.Outlined.Search,
                             contentDescription = "Search",
                         )
+                    }
+                    IconButton(
+                        onClick = {
+                            onEvent(SettingsEvent.ToggleShowProfilePictureMenu)
+                        },
+                    ) {
+                        profilePicture?.let { image ->
+                            Image(
+                                bitmap = image.asImageBitmap(),
+                                contentDescription = "Profile picture",
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier
+                                    .size(35.dp)
+                                    .clip(CircleShape),
+                            )
+                        }
+                        if (profilePicture == null) {
+                            Icon(
+                                imageVector = Icons.Filled.Person,
+                                contentDescription = "No profile picture",
+                            )
+                        }
                     }
                 },
                 scrollBehavior = scrollBehavior,

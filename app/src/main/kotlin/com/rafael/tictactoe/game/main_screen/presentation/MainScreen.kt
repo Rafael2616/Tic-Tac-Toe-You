@@ -1,6 +1,5 @@
 package com.rafael.tictactoe.game.mainScreen.presentation
 
-import android.Manifest
 import android.content.Intent
 import android.content.res.Configuration
 import androidx.activity.ComponentActivity
@@ -45,7 +44,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.app.ActivityCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.R
@@ -72,7 +70,6 @@ fun MainScreen(
     val activity = LocalContext.current as ComponentActivity
     val state by settingsVM.state.collectAsState()
     val mainState by mainVM.state.collectAsState()
-    var showStoragePermissionRequest = false
     val onEvent = mainVM::onEvent
     val onClick = viewModel::onEvent
     val orientation = LocalConfiguration.current.orientation
@@ -211,18 +208,5 @@ fun MainScreen(
     if (mainState.canRedirectToAnGameModeScreen && intent != null) {
         ShortcutsIntentHandler(activity, navController, mainVM::onEvent, intent)
         mainVM.canRedirectToAnGameModeScreen(false)
-    }
-
-    /**
-     * This permission should not be shown to the end user, it is only for test
-     * cases where there is a crash in the application in the release version in which
-     * the developer needs the log file that is generated in the internal storage
-     **/
-    if (showStoragePermissionRequest) {
-        ActivityCompat.requestPermissions(
-            activity,
-            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-            0,
-        )
     }
 }

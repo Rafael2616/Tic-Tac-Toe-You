@@ -1,10 +1,14 @@
 package com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel
 
 import android.app.Application
+import android.content.Context
+import android.graphics.BitmapFactory
+import android.net.Uri
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.media3.exoplayer.ExoPlayer
+import com.rafael.tictactoe.common.domain.util.ProfilePictureUtils
 import com.rafael.tictactoe.common.domain.util.getVersionName
 import com.rafael.tictactoe.common.domain.util.uiClickSound
 import com.rafael.tictactoe.common.services.MusicService
@@ -15,6 +19,7 @@ import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 import com.rafael.tictactoe.settings.settingsScreen.domain.repository.SettingsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.io.FileInputStream
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
@@ -71,6 +76,8 @@ class SettingsViewModel @Inject constructor(
             )?.let { isPlaying ->
                 _state.update { it.copy(isBMPlaying = isPlaying) }
             }
+            _state.update { it.copy(profilePictureUri = ProfilePictureUtils().getPictureUriIfExists()) }
+            onSaveImage(Uri.EMPTY)
             this.cancel()
         }
     }
@@ -221,6 +228,12 @@ class SettingsViewModel @Inject constructor(
             SettingsEvent.ExecUIClickSound -> {
                 execUIClickSound()
             }
+            SettingsEvent.ToggleShowProfilePictureMenu -> {
+                _state.update { it.copy(showProfilePictureMenu = !it.showProfilePictureMenu) }
+            }
+            SettingsEvent.HideProfilePictureMenu -> {
+                _state.update { it.copy(showProfilePictureMenu = false) }
+            }
         }
     }
 
@@ -243,6 +256,38 @@ class SettingsViewModel @Inject constructor(
     fun execUIClickSound() {
         if (state.value.isSoundEffectsOn) {
             uiClickSound(context, player)
+        }
+    }
+
+    fun onDeleteImage() {
+        _state.update {
+            it.copy(
+                profilePictureUri = Uri.EMPTY,
+                profilePictureBitmap = null,
+                showProfilePictureMenu = false,
+            )
+        }
+        ProfilePictureUtils().deletePicture()
+    }
+
+    fun onSaveImage(imageUri: Uri) {
+        if (imageUri != Uri.EMPTY) {
+            _state.update {
+                it.copy(
+                    profilePictureUri = ProfilePictureUtils().savePictureFromUri(context as Context, imageUri),
+                    showProfilePictureMenu = false,
+                )
+            }
+        }
+        if (state.value.profilePictureUri != Uri.EMPTY) {
+            _state.update {
+                it.copy(
+                    profilePictureBitmap = BitmapFactory.decodeStream(
+                        FileInputStream(it.profilePictureUri.path!!),
+                    ),
+                    showProfilePictureMenu = false,
+                )
+            }
         }
     }
 }
