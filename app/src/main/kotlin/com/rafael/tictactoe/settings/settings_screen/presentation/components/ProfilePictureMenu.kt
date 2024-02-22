@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AddPhotoAlternate
 import androidx.compose.material.icons.outlined.Delete
@@ -55,6 +56,7 @@ fun ProfilePictureMenu(
         DropdownMenu(
             expanded = state.showProfilePictureMenu,
             onDismissRequest = { onEvent(SettingsEvent.HideProfilePictureMenu) },
+            shape = RoundedCornerShape(20.dp),
         ) {
             DropdownMenuItem(
                 text = { Text(text = stringResource(if (profilePicture == null) R.string.add_photo else R.string.change_photo)) },
