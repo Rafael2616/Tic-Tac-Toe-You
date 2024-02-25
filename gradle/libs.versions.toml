@@ -104,5 +104,4 @@ dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger-hil
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 licensee = { id = "app.cash.licensee", version.ref = "licensee" }
