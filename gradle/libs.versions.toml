@@ -40,7 +40,7 @@ appsearch = "1.1.0-alpha03"
 retrofit2 = "2.9.0"
 http3 = "4.12.0"
 
-junit = "4.13.0"
+junit = "4.13.2"
 expresso = "3.5.1"
 androidx-test-junit = "1.1.5"
 
