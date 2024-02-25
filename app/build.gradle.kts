@@ -6,28 +6,27 @@ import java.util.Properties
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("androidx.room")
-    id("com.android.application")
-    id("com.diffplug.spotless")
-    id("com.google.dagger.hilt.android")
-    id("com.google.devtools.ksp")
-    id("org.jetbrains.kotlin.android")
-    id("org.jetbrains.kotlin.plugin.serialization")
-    id("app.cash.licensee")
-    id("kotlin-parcelize")
+    alias(libs.plugins.androidx.room)
+    alias(libs.plugins.com.android.application)
+    alias(libs.plugins.spotless)
+    alias(libs.plugins.dagger.hilt)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.kotlin)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.licensee)
     kotlin("kapt")
 }
 
 android {
-    compileSdk = 34
+    compileSdk = libs.versions.compileSdk.get().toInt()
     namespace = "com.rafael.tictactoe"
 
     defaultConfig {
         applicationId = "com.rafael.tictactoe"
-        minSdk = 26
-        targetSdk = 34
-        versionCode = 151
-        versionName = "1.5.1"
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
+        versionCode = libs.versions.versionCode.get().toInt()
+        versionName = libs.versions.versionName.get()
 
         tasks.withType<KotlinCompile>().configureEach {
             ksp {
@@ -135,7 +134,7 @@ configure<SpotlessExtension> {
             .setEditorConfigPath(rootProject.file(".editorconfig"))
             .customRuleSets(
                 listOf(
-                    "io.nlopez.compose.rules:ktlint:0.3.11",
+                    "io.nlopez.compose.rules:ktlint:${libs.versions.compose.rules.get()}",
                 ),
             )
         target("src/main/kotlin/**/*.kt")
@@ -155,63 +154,56 @@ licensee {
 }
 
 dependencies {
-    val lifecycleVersion = "2.7.0"
-    val roomVersion = "2.6.1"
-    val hiltVersion = "2.50"
-    val media3Version = "1.2.1"
-    val appSearchVersion = "1.1.0-alpha03"
-    val m3Version = "1.7.0-alpha03"
-
     // Kotlin
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+    implementation(libs.kotlinx.coroutines)
+    implementation(libs.kotlinx.collections.immutable)
+    implementation(libs.kotlinx.serialization.json)
     // Android Core
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.activity:activity-compose:1.8.2")
-    implementation("androidx.annotation:annotation:1.7.1")
-    implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation(libs.androidx.core)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.annotation)
+    implementation(libs.androidx.core.splashscreen)
     // Dagger Hilt
-    implementation("com.google.dagger:hilt-android:$hiltVersion")
-    ksp("com.google.dagger:hilt-android-compiler:$hiltVersion")
-    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+    implementation(libs.dagger.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
+    ksp(libs.dagger.hilt.android.compiler)
     // Jetpack Compose
-    implementation(platform("androidx.compose:compose-bom:2024.02.01"))
-    implementation("androidx.compose.material3:material3:1.3.0-alpha01")
-    implementation("androidx.compose.animation:animation:$m3Version")
-    implementation("androidx.compose.foundation:foundation:$m3Version")
-    implementation("androidx.compose.material:material-icons-extended:$m3Version")
-    implementation("androidx.compose.runtime:runtime:$m3Version")
-    implementation("androidx.compose.ui:ui:$m3Version")
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.animation)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.material.icons.extended)
+    implementation(libs.androidx.compose.runtime)
+    implementation(libs.androidx.compose.ui)
     // Navigation
-    implementation("androidx.navigation:navigation-compose:2.7.7")
+    implementation(libs.androidx.navigation.compose)
     // Coil
-    implementation("io.coil-kt:coil-compose:2.6.0")
+    implementation(libs.coil.compose)
     // Material Motion
-    implementation("io.github.fornewid:material-motion-compose-core:1.2.0")
+    implementation(libs.material.motion.compose)
     // LazyColumnScrollbar
-    implementation("com.github.nanihadesuka:LazyColumnScrollbar:1.9.0")
+    implementation(libs.nanihadesuka.lazyColumnScrollbar)
     // Lifecycle
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycleVersion")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleVersion")
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
     // Media3
-    implementation("androidx.media3:media3-common:$media3Version")
-    implementation("androidx.media3:media3-exoplayer:$media3Version")
+    implementation(libs.androidx.media3.common)
+    implementation(libs.androidx.media3.exoplayer)
     // Room
-    implementation("androidx.room:room-runtime:$roomVersion")
-    implementation("androidx.room:room-ktx:$roomVersion")
-    ksp("androidx.room:room-compiler:$roomVersion")
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
     // Retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation(libs.retrofit2)
+    implementation(libs.retrofit2.converter.gson)
+    implementation(libs.okhttp3)
     // App Search
-    implementation("androidx.appsearch:appsearch:$appSearchVersion")
-    kapt("androidx.appsearch:appsearch-compiler:$appSearchVersion")
-    implementation("androidx.appsearch:appsearch-local-storage:$appSearchVersion")
+    implementation(libs.androidx.appsearch)
+    implementation(libs.androidx.appsearch.localStorage)
+    kapt(libs.androidx.appsearch.compiler)
     // Test Unit
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:$m3Version")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+    androidTestImplementation(libs.androidx.test.espresso.core)
+    androidTestImplementation(libs.androidx.test.ext.junit)
 }
