@@ -14,8 +14,8 @@ plugins {
     alias(libs.plugins.kotlin)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.licensee)
-    id("kotlin-parcelize")
     kotlin("kapt")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -85,7 +85,7 @@ android {
 
     kotlin {
         jvmToolchain {
-            languageVersion = JavaLanguageVersion.of(17)
+            languageVersion = JavaLanguageVersion.of(libs.versions.javaVersion.get().toInt())
         }
     }
 
@@ -95,7 +95,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.10"
+        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
 
     packaging {
@@ -165,9 +165,12 @@ dependencies {
     implementation(libs.androidx.annotation)
     implementation(libs.androidx.core.splashscreen)
     // Dagger Hilt
-    implementation(libs.dagger.hilt.android)
-    implementation(libs.androidx.hilt.navigation.compose)
-    ksp(libs.dagger.hilt.android.compiler)
+    // implementation(libs.dagger.hilt.android)
+    // implementation(libs.androidx.hilt.navigation.compose)
+    // ksp(libs.dagger.hilt.android.compiler)
+    implementation("com.google.dagger:hilt-android:2.50")
+    implementation("androidx.hilt:hilt-navigation.compose:1.2.0")
+    ksp("com.google.dagger:hilt-android-compiler:2.50")
     // Jetpack Compose
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.material3)
