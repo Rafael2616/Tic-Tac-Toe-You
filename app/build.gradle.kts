@@ -165,10 +165,9 @@ dependencies {
     implementation(libs.androidx.annotation)
     implementation(libs.androidx.core.splashscreen)
     // Dagger Hilt
-    // implementation(libs.dagger.hilt.android)
+    implementation(libs.dagger.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
     ksp(libs.dagger.hilt.android.compiler)
-    implementation("com.google.dagger:hilt-android:2.50")
     // Jetpack Compose
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.material3)
