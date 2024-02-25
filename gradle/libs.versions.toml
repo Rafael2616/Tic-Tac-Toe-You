@@ -55,7 +55,7 @@ androidx-annotation = { module = "androidx.annotation:annotation", version.ref =
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "core-splashscreen" }
 
 dagger-hilt-android = { module = "com.google.dagger:hilt-android", version = "dagger-hilt" }
-dagger-hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version = "dagger-hilt" }
+dagger-hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "dagger-hilt" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-navigation-compose"}
 
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
