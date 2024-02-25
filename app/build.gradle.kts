@@ -6,16 +6,16 @@ import java.util.Properties
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    alias(libs.plugins.androidx.room)
-    alias(libs.plugins.com.android.application)
-    alias(libs.plugins.spotless)
-    alias(libs.plugins.dagger.hilt)
-    alias(libs.plugins.ksp)
-    alias(libs.plugins.kotlin)
-    alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.licensee)
-    kotlin("kapt")
+    id("androidx.room")
+    id("com.android.application")
+    id("com.diffplug.spotless")
+    id("com.google.dagger.hilt.android")
+    id("com.google.devtools.ksp")
+    id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.plugin.serialization")
+    id("app.cash.licensee")
     id("kotlin-parcelize")
+    id("kotlin-kapt")
 }
 
 android {
