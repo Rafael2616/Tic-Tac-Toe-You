@@ -67,6 +67,7 @@ androidx-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compos
 androidx-compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
 androidx-compose-runtime = { module = "androidx.compose.runtime:runtime", version.ref = "compose" }
 androidx-compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose" }
+ktlint-compose-rules = { module = "io.nlopez.compose.rules:ktlint", version.ref = "compose-rules" }
 
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
