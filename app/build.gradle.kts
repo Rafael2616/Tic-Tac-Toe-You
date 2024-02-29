@@ -29,6 +29,8 @@ android {
         versionCode = libs.versions.versionCode.get().toInt()
         versionName = libs.versions.versionName.get()
 
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
         tasks.withType<KotlinCompile>().configureEach {
             ksp {
                 arg("room.schemaLocation", "$projectDir/schemas")
@@ -100,7 +102,12 @@ android {
 
     packaging {
         resources {
-            excludes += listOf("/META-INF/AL2.0", "/META-INF/LGPL2.1")
+            excludes += listOf(
+                "/META-INF/AL2.0",
+                "/META-INF/LGPL2.1",
+                "/META-INF/LICENSE.md",
+                "/META-INF/LICENSE-notice.md",
+            )
         }
     }
 
@@ -138,7 +145,7 @@ configure<SpotlessExtension> {
                     libs.ktlint.compose.rules.get().toString(),
                 ),
             )
-        target("src/main/kotlin/**/*.kt")
+        target("src/main/kotlin/**/*.kt", "src/androidTest/java/**/*.kt")
     }
     kotlinGradle {
         ktlint()
@@ -202,9 +209,11 @@ dependencies {
     implementation(libs.androidx.appsearch)
     implementation(libs.androidx.appsearch.localStorage)
     kapt(libs.androidx.appsearch.compiler)
-    // Test Unit
+    // Tests
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     androidTestImplementation(libs.androidx.test.espresso.core)
     androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.mockk)
 }
