@@ -35,7 +35,7 @@ lazyColumnScrollbar = "1.9.0"
 compose-rules = "0.3.12"
 
 lifecycle = "2.7.0"
-media3 = "1.2.1"
+media3 = "1.3.0"
 room = "2.6.1"
 appsearch = "1.1.0-alpha03"
 
