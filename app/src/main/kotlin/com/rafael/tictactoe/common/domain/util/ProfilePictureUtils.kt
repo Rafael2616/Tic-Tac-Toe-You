@@ -1,8 +1,12 @@
 package com.rafael.tictactoe.common.domain.util
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Bitmap.CompressFormat
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.webkit.MimeTypeMap
+import com.rafael.tictactoe.BuildConfig
 import java.io.File
 import java.io.FileOutputStream
 
@@ -28,12 +32,11 @@ class ProfilePictureUtils() {
         val imageExtension = MimeTypeMap.getSingleton().getExtensionFromMimeType(imageMimeType)
         val targetFile = File(PICTURE_PATH + "profilePicture.$imageExtension")
         val outputStream = FileOutputStream(targetFile)
+        val options = BitmapFactory.Options()
+        options.inSampleSize = 3
 
-        val buffer = ByteArray(1024)
-        var bytesRead: Int
-        while (inputStream.read(buffer).also { bytesRead = it } != -1) {
-            outputStream.write(buffer, 0, bytesRead)
-        }
+        val bitmap = BitmapFactory.decodeStream(inputStream, null, options)
+        bitmap?.compress(compressionFormat(imageExtension), 80, outputStream)
 
         outputStream.flush()
         outputStream.close()
@@ -69,7 +72,15 @@ class ProfilePictureUtils() {
         }
     }
 
+    private fun compressionFormat(extension: String?): CompressFormat {
+        return when (extension) {
+            "jpg", "jpeg" -> Bitmap.CompressFormat.JPEG
+            "png" -> Bitmap.CompressFormat.PNG
+            else -> Bitmap.CompressFormat.JPEG
+        }
+    }
+
     companion object {
-        const val PICTURE_PATH = "/storage/emulated/0/Android/data/com.rafael.tictactoe/files/userProfile/"
+        const val PICTURE_PATH = "/storage/emulated/0/Android/data/${BuildConfig.APPLICATION_ID}/files/userProfile/"
     }
 }
