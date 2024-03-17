@@ -31,7 +31,7 @@ compose = "1.7.0-alpha04"
 navigation-compose = "2.7.7"
 coil = "2.6.0"
 material-motion-compose = "1.2.0"
-lazyColumnScrollbar = "1.9.0"
+lazyColumnScrollbar = "1.10.0"
 compose-rules = "0.3.12"
 
 lifecycle = "2.7.0"
