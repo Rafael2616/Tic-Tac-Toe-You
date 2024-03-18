@@ -6,7 +6,7 @@ versionCode = "152"
 versionName = "1.5.2"
 javaVersion = "17"
 
-agp = "8.3.0"
+agp = "8.3.1"
 spotless = "6.25.0"
 ksp = "1.9.22-1.0.18"
 kotlin = "1.9.22"
