@@ -341,12 +341,13 @@ fun BoardCustomizationDialog(
                                 imageVector = Icons.Outlined.SettingsBackupRestore,
                                 contentDescription = "slider",
                                 modifier = Modifier
-                                    .size(32.dp),
+                                    .size(32.dp)
+                                    .padding(start = 6.dp),
                             )
                             Text(
                                 text = stringResource(R.string.reset_colors),
                                 modifier = Modifier
-                                    .padding(horizontal = 6.dp),
+                                    .padding(end = 6.dp),
                             )
                         }
                     }
