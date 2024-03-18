@@ -13,6 +13,7 @@ import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.presentation.components.ProfilePictureMenu
 import com.rafael.tictactoe.settings.settingsScreen.presentation.components.SettingsOptionsImpl
 import com.rafael.tictactoe.settings.settingsScreen.presentation.components.SettingsTopBar
+import com.rafael.tictactoe.settings.settingsScreen.presentation.components.dialogs.BoardCustomizationDialog
 import com.rafael.tictactoe.settings.settingsScreen.presentation.components.dialogs.ColorSelectionDialog
 import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
 
@@ -49,6 +50,10 @@ fun SettingsScreen(
 
     AnimatedVisibility(state.showColorSelectionDialog) {
         ColorSelectionDialog(onEvent, state)
+    }
+
+    AnimatedVisibility(state.showBoardCustomizationDialog) {
+        BoardCustomizationDialog(onEvent, state)
     }
 
     AnimatedVisibility(state.showWhatsNewDialog) {

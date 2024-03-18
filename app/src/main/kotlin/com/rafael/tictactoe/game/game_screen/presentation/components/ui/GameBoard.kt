@@ -1,6 +1,7 @@
 package com.rafael.tictactoe.game.gameScreen.presentation.components.ui
 
 import android.content.res.Configuration
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -58,15 +59,21 @@ fun GameBoard(
             ) {
                 cardItems.forEachIndexed { cardIndex, _ ->
                     Card(
+                        shape = RoundedCornerShape(settingsState.boardCardsCornerRadius.dp),
+                        border = if (settingsState.boardCardsThickness != 0f) {
+                            BorderStroke(settingsState.boardCardsThickness.dp, settingsState.boardCardsBorderColor)
+                        } else {
+                            null
+                        },
                         colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(15.dp),
+                            containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(settingsState.boardCardsElevation.dp),
                         ),
                         modifier = Modifier
                             .weight(1f)
                             .padding(6.dp)
                             .size(114.dp)
-                            .shadow(10.dp, RoundedCornerShape(26.dp))
-                            .clip(RoundedCornerShape(26.dp))
+                            .shadow(settingsState.boardCardsShadow.dp, RoundedCornerShape(settingsState.boardCardsCornerRadius.dp))
+                            .clip(RoundedCornerShape(settingsState.boardCardsCornerRadius.dp))
                             .clickable {
                                 onEvent(GameEvent.OnCardClick(rowIndex, cardIndex))
                             },

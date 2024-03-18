@@ -77,5 +77,17 @@
     <string name="add_photo">Adicionar Imagem</string>
     <string name="remove_photo">Remover</string>
     <string name="change_photo">Alterar</string>
+    <string name="apply">Aplicar</string>
+    <string name="border_color">Cor da borda</string>
+    <string name="board_customization">Customização do tabuleiro</string>
+    <string name="square">Quadrado</string>
+    <string name="rounded">Arredondado</string>
+    <string name="circle">Círculo</string>
+    <string name="custom">Customizado</string>
+    <string name="corner_radius">Raio do canto</string>
+    <string name="border_thickness">Grossura da borda</string>
+    <string name="elevation">Elevação</string>
+    <string name="shadow">Sombra</string>
+    <string name="reset_colors">Redefinir</string>
 
 </resources>

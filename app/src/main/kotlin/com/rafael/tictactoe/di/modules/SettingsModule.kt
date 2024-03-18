@@ -26,7 +26,7 @@ object SettingsModule {
             context,
             SettingsDatabase::class.java,
             SettingsDatabase.DATABASE_NAME,
-        ).addMigrations(Migrations().migration1To2)
+        ).addMigrations(Migrations().migration1To2, Migrations().migration2To3)
             .fallbackToDestructiveMigration()
             .build()
     }

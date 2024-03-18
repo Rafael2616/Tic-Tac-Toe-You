@@ -77,6 +77,18 @@
     <string name="add_photo">Add Photo</string>
     <string name="remove_photo">Remove</string>
     <string name="change_photo">Change</string>
+    <string name="apply">Apply</string>
+    <string name="border_color">Border color</string>
+    <string name="board_customization">Board customization</string>
+    <string name="square">Square</string>
+    <string name="rounded">Rounded</string>
+    <string name="circle">Circle</string>
+    <string name="custom">Custom</string>
+    <string name="corner_radius">Corner radius</string>
+    <string name="border_thickness">Border thickness</string>
+    <string name="elevation">Elevation</string>
+    <string name="shadow">Shadow</string>
+    <string name="reset_colors">Reset</string>
 
     <string name="cpu" translatable="false">CPU</string>
 

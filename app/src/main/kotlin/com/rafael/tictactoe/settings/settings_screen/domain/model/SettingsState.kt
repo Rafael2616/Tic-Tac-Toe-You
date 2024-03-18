@@ -28,4 +28,11 @@ data class SettingsState(
     val showProfilePictureMenu: Boolean = false,
     val profilePictureBitmap: Bitmap? = null,
     val profilePictureUri: Uri = Uri.EMPTY,
+    val showBoardCustomizationDialog: Boolean = false,
+    val shapeSelected: Int = 1,
+    val boardCardsCornerRadius: Float = 10f,
+    val boardCardsThickness: Float = 0f,
+    val boardCardsElevation: Float = 20f,
+    val boardCardsShadow: Float = 0f,
+    val boardCardsBorderColor: Color = Color.White,
 )

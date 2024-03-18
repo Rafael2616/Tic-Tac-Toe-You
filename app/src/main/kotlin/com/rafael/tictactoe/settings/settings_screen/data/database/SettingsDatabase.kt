@@ -11,7 +11,7 @@ import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEntity
 @Keep
 @Database(
     entities = [SettingsEntity::class],
-    version = 2,
+    version = 3,
     exportSchema = false,
 )
 abstract class SettingsDatabase : RoomDatabase() {
@@ -36,6 +36,24 @@ class Migrations {
             db.execSQL(addSelectedWinnerLineColor)
             db.execSQL(addSelectedXColor)
             db.execSQL(addSelectedCircleColor)
+        }
+    }
+
+    val migration2To3 = object : Migration(2, 3) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            val addShapeSelected = "ALTER TABLE 'settings' ADD COLUMN 'shapeSelected' INTEGER NOT NULL DEFAULT 1"
+            val addBoardCardsCornerRadius = "ALTER TABLE 'settings' ADD COLUMN 'boardCardsCornerRadius' FLOAT NOT NULL DEFAULT 12.0"
+            val addBoardCardsThickness = "ALTER TABLE 'settings' ADD COLUMN 'boardCardsThickness' FLOAT NOT NULL DEFAULT 2.0"
+            val addBoardCardsElevation = "ALTER TABLE 'settings' ADD COLUMN 'boardCardsElevation' FLOAT NOT NULL DEFAULT 20.0"
+            val addBoardCardsShadow = "ALTER TABLE 'settings' ADD COLUMN 'boardCardsShadow' FLOAT NOT NULL DEFAULT 0.0"
+            val addBoardCardsBorderColor = "ALTER TABLE 'settings' ADD COLUMN 'boardCardsBorderColor' TEXT NOT NULL DEFAULT '0xFFFFFFFFF'"
+
+            db.execSQL(addShapeSelected)
+            db.execSQL(addBoardCardsCornerRadius)
+            db.execSQL(addBoardCardsThickness)
+            db.execSQL(addBoardCardsElevation)
+            db.execSQL(addBoardCardsShadow)
+            db.execSQL(addBoardCardsBorderColor)
         }
     }
 }

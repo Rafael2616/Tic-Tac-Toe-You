@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.media3.exoplayer.ExoPlayer
@@ -65,6 +66,12 @@ class SettingsViewModel @Inject constructor(
                     } else {
                         false
                     },
+                    shapeSelected = settings.shapeSelected,
+                    boardCardsCornerRadius = settings.boardCardsCornerRadius,
+                    boardCardsThickness = settings.boardCardsThickness,
+                    boardCardsElevation = settings.boardCardsElevation,
+                    boardCardsShadow = settings.boardCardsShadow,
+                    boardCardsBorderColor = Color(settings.boardCardsBorderColor.toInt()),
                 )
             }
             backgroundMusic(
@@ -233,6 +240,53 @@ class SettingsViewModel @Inject constructor(
             }
             SettingsEvent.HideProfilePictureMenu -> {
                 _state.update { it.copy(showProfilePictureMenu = false) }
+            }
+            is SettingsEvent.ShowBoardCustomizationDialog -> {
+                _state.update { it.copy(showBoardCustomizationDialog = event.value) }
+            }
+            is SettingsEvent.SetBoardShape -> {
+                _state.update {
+                    it.copy(
+                        shapeSelected = event.index,
+                        boardCardsCornerRadius = event.shape.cornerRadius,
+                        boardCardsThickness = event.shape.thickness,
+                        boardCardsElevation = event.shape.elevation,
+                        boardCardsShadow = event.shape.shadow,
+                        boardCardsBorderColor = event.shape.borderColor,
+                    )
+                }
+                viewModelScope.launch(Dispatchers.IO) {
+                    var settings = repository.getAllSettingsValues(1) ?: defaultSettings
+                    settings.shapeSelected = event.index
+                    settings.boardCardsCornerRadius = event.shape.cornerRadius
+                    settings.boardCardsThickness = event.shape.thickness
+                    settings.boardCardsElevation = event.shape.elevation
+                    settings.boardCardsShadow = event.shape.shadow
+                    settings.boardCardsBorderColor = event.shape.borderColor.toArgb().toString()
+
+                    repository.setAllSettingsValues(settings)
+                }
+            }
+            SettingsEvent.ResetBoardParams -> {
+                _state.update {
+                    it.copy(
+                        boardCardsCornerRadius = 12f,
+                        boardCardsThickness = 2f,
+                        boardCardsElevation = 20f,
+                        boardCardsShadow = 0f,
+                        boardCardsBorderColor = Color.White,
+                    )
+                }
+                viewModelScope.launch(Dispatchers.IO) {
+                    var settings = repository.getAllSettingsValues(1) ?: defaultSettings
+                    settings.boardCardsCornerRadius = 12f
+                    settings.boardCardsThickness = 2f
+                    settings.boardCardsElevation = 20f
+                    settings.boardCardsShadow = 0f
+                    settings.boardCardsBorderColor = Color.White.toArgb().toString()
+
+                    repository.setAllSettingsValues(settings)
+                }
             }
         }
     }

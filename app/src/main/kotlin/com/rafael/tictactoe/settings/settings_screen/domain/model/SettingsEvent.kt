@@ -26,4 +26,7 @@ sealed interface SettingsEvent {
     object ExecUIClickSound : SettingsEvent
     object ToggleShowProfilePictureMenu : SettingsEvent
     object HideProfilePictureMenu : SettingsEvent
+    data class ShowBoardCustomizationDialog(val value: Boolean) : SettingsEvent
+    data class SetBoardShape(val shape: BoardShape, val index: Int) : SettingsEvent
+    object ResetBoardParams : SettingsEvent
 }

@@ -16,6 +16,12 @@ data class SettingsEntity(
     var selectedXColor: Int,
     var selectedCircleColor: Int,
     var appVersion: String,
+    var shapeSelected: Int,
+    var boardCardsCornerRadius: Float,
+    var boardCardsThickness: Float,
+    var boardCardsElevation: Float,
+    var boardCardsShadow: Float,
+    var boardCardsBorderColor: String,
 ) {
     companion object {
         fun getDefaultSettings(): SettingsEntity {
@@ -30,6 +36,12 @@ data class SettingsEntity(
                 selectedXColor = 1,
                 selectedCircleColor = 5,
                 appVersion = "0",
+                shapeSelected = 1,
+                boardCardsCornerRadius = 10f,
+                boardCardsThickness = 0f,
+                boardCardsElevation = 20f,
+                boardCardsShadow = 0f,
+                boardCardsBorderColor = "0xFFFFFFFFF",
             )
         }
     }

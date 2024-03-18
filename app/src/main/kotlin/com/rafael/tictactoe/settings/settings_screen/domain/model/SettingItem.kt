@@ -138,6 +138,16 @@ data class SettingItem(
                         text = context.getString(R.string.color_x),
                     ),
                 ),
+                // Board Cards
+                SettingItem(
+                    trailingIcon = Icons.AutoMirrored.Filled.ArrowForward,
+                    groupType = SettingsGroup.Customization,
+                    index = 3,
+                    searchSpecs = searchItemSpec.copy(
+                        id = UUID.randomUUID().toString(),
+                        text = context.getString(R.string.board_customization),
+                    ),
+                ),
             )
 
             val otherSettings = persistentListOf(

@@ -191,6 +191,8 @@ dependencies {
     implementation(libs.material.motion.compose)
     // LazyColumnScrollbar
     implementation(libs.nanihadesuka.lazyColumnScrollbar)
+    // ColorPicker Compose
+    implementation(libs.skydoves.colorpicker.compose)
     // Lifecycle
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)

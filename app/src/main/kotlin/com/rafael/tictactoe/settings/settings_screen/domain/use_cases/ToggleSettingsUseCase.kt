@@ -37,11 +37,20 @@ fun toggleSettingsUseCase(
     }
 
     fun toggleCustomizationSettings(index: Int) {
-        onEvent(SettingsEvent.ShowColorSelectionDialog(true))
         when (index) {
-            0 -> onEvent(SettingsEvent.SetCustomizationType(Customization.WINNERLINECOLOR))
-            1 -> onEvent(SettingsEvent.SetCustomizationType(Customization.CIRCLECOLOR))
-            2 -> onEvent(SettingsEvent.SetCustomizationType(Customization.XCOLOR))
+            0 -> {
+                onEvent(SettingsEvent.SetCustomizationType(Customization.WINNERLINECOLOR))
+                onEvent(SettingsEvent.ShowColorSelectionDialog(true))
+            }
+            1 -> {
+                onEvent(SettingsEvent.SetCustomizationType(Customization.CIRCLECOLOR))
+                onEvent(SettingsEvent.ShowColorSelectionDialog(true))
+            }
+            2 -> {
+                onEvent(SettingsEvent.SetCustomizationType(Customization.XCOLOR))
+                onEvent(SettingsEvent.ShowColorSelectionDialog(true))
+            }
+            3 -> onEvent(SettingsEvent.ShowBoardCustomizationDialog(true))
         }
     }
 
