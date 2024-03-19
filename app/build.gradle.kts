@@ -104,6 +104,7 @@ android {
         resources {
             excludes += listOf(
                 "/META-INF/AL2.0",
+                "/META-INF/INDEX.LIST",
                 "/META-INF/LGPL2.1",
                 "/META-INF/LICENSE.md",
                 "/META-INF/LICENSE-notice.md",
@@ -156,6 +157,8 @@ configure<SpotlessExtension> {
 
 licensee {
     allow("Apache-2.0")
+    allow("EPL-1.0")
+    allow("LGPL-2.1-only")
     allow("MIT")
     allowUrl("https://www.gnu.org/licenses/gpl-3.0.en.html")
     unusedAction(IGNORE)
@@ -205,7 +208,7 @@ dependencies {
     ksp(libs.androidx.room.compiler)
     // Retrofit
     implementation(libs.retrofit2)
-    implementation(libs.retrofit2.converter.gson)
+    implementation(libs.retrofit2.converter.kotlinx.serialization)
     implementation(libs.okhttp3)
     // App Search
     implementation(libs.androidx.appsearch)

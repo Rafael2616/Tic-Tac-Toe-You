@@ -29,4 +29,5 @@ sealed interface SettingsEvent {
     data class ShowBoardCustomizationDialog(val value: Boolean) : SettingsEvent
     data class SetBoardShape(val shape: BoardShape, val index: Int) : SettingsEvent
     object ResetBoardParams : SettingsEvent
+    data class UpdateBoardCardsBorderColor(val color: Color) : SettingsEvent
 }

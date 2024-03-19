@@ -1,5 +1,6 @@
 package com.rafael.tictactoe.settings.settingsScreen.presentation.components.dialogs
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -77,16 +78,21 @@ fun BoardCustomizationDialog(
 ) {
     val listState = rememberLazyListState()
     val scope = rememberCoroutineScope()
+    val colorPickerController = rememberColorPickerController()
+    val scrollState = rememberScrollState()
     val shapeSelected = state.shapeSelected
     var sliderCornerRadius by remember { mutableStateOf(if (shapeSelected == 3) state.boardCardsCornerRadius else 12f) }
     var sliderThickness by remember { mutableStateOf(if (shapeSelected == 3) state.boardCardsThickness else 2f) }
     var sliderElevation by remember { mutableStateOf(if (shapeSelected == 3) state.boardCardsElevation else 20f) }
     var sliderShadow by remember { mutableStateOf(if (shapeSelected == 3) state.boardCardsShadow else 0f) }
-    var localBoardCardsBorderColor by remember { mutableStateOf(state.boardCardsBorderColor) }
+    var localBoardCardsBorderColor by remember { mutableStateOf(Color.White) }
     var localShapeSelected by remember { mutableIntStateOf(1) }
+    var needUpdateLocalBorderColorVar by remember { mutableStateOf(true) }
 
-    val colorPickerController = rememberColorPickerController()
-    val scrollState = rememberScrollState()
+    if (needUpdateLocalBorderColorVar) {
+        localBoardCardsBorderColor = state.boardCardsBorderColor
+        needUpdateLocalBorderColorVar = false
+    }
 
     val shapes = listOf(
         BoardShape(
