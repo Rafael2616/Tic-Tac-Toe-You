@@ -5,7 +5,6 @@ import android.content.Context
 import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.media3.exoplayer.ExoPlayer
@@ -268,7 +267,7 @@ class SettingsViewModel @Inject constructor(
                 }
             }
             is SettingsEvent.UpdateBoardCardsBorderColor -> {
-               _state.update { it.copy(boardCardsBorderColor = event.color) }         
+                _state.update { it.copy(boardCardsBorderColor = event.color) }         
             }
         }
     }
