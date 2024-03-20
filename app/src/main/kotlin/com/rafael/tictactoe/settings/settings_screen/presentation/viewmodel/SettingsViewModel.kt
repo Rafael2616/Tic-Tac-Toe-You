@@ -30,6 +30,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 @HiltViewModel
+//@ExperimentalStdlibApi
 class SettingsViewModel @Inject constructor(
     private val repository: SettingsRepository,
     private val player: ExoPlayer,
@@ -71,7 +72,7 @@ class SettingsViewModel @Inject constructor(
                     boardCardsThickness = settings.boardCardsThickness,
                     boardCardsElevation = settings.boardCardsElevation,
                     boardCardsShadow = settings.boardCardsShadow,
-                    boardCardsBorderColor = Color(settings.boardCardsBorderColor.toInt()),
+                    boardCardsBorderColor = Color("${settings.boardCardsBorderColor}".toLong(16)),
                 )
             }
             backgroundMusic(
@@ -262,33 +263,12 @@ class SettingsViewModel @Inject constructor(
                     settings.boardCardsThickness = event.shape.thickness
                     settings.boardCardsElevation = event.shape.elevation
                     settings.boardCardsShadow = event.shape.shadow
-                    settings.boardCardsBorderColor = event.shape.borderColor.toArgb().toString()
+                    settings.boardCardsBorderColor = event.shape.borderHexColor
 
                     repository.setAllSettingsValues(settings)
                 }
             }
-            SettingsEvent.ResetBoardParams -> {
-                _state.update {
-                    it.copy(
-                        boardCardsCornerRadius = 12f,
-                        boardCardsThickness = 2f,
-                        boardCardsElevation = 20f,
-                        boardCardsShadow = 0f,
-                        boardCardsBorderColor = Color.White,
-                    )
-                }
-                viewModelScope.launch(Dispatchers.IO) {
-                    var settings = repository.getAllSettingsValues(1) ?: defaultSettings
-                    settings.boardCardsCornerRadius = 12f
-                    settings.boardCardsThickness = 2f
-                    settings.boardCardsElevation = 20f
-                    settings.boardCardsShadow = 0f
-                    settings.boardCardsBorderColor = Color.White.toArgb().toString()
-
-                    repository.setAllSettingsValues(settings)
-                }
-            }
-            is SettingsEvent.UpdateBoardCardsBorderColor -> {
+             is SettingsEvent.UpdateBoardCardsBorderColor -> {
                _state.update { it.copy(boardCardsBorderColor = event.color) }         
             }
         }

@@ -10,4 +10,5 @@ data class BoardShape(
     val shadow: Float = 0f,
     val thickness: Float = 0f,
     val borderColor: Color = Color.White,
+    val borderHexColor: String = "FFFFFFFF",
 )

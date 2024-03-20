@@ -89,6 +89,7 @@
     <string name="elevation">Elevation</string>
     <string name="shadow">Shadow</string>
     <string name="reset_colors">Reset</string>
+    <string name="cancel">Cancel</string>
 
     <string name="cpu" translatable="false">CPU</string>
 

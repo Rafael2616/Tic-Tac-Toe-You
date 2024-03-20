@@ -41,7 +41,7 @@ data class SettingsEntity(
                 boardCardsThickness = 0f,
                 boardCardsElevation = 20f,
                 boardCardsShadow = 0f,
-                boardCardsBorderColor = "0xFFFFFFFFF",
+                boardCardsBorderColor = "FFFFFFFF",
             )
         }
     }

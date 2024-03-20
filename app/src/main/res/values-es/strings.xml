@@ -89,5 +89,6 @@
     <string name="elevation">Elevación</string>
     <string name="shadow">Sombra</string>
     <string name="reset_colors">Restabelecer</string>
+    <string name="cancel">Cancelar</string>
 
 </resources>

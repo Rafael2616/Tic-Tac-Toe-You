@@ -33,6 +33,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
@@ -85,14 +86,10 @@ fun BoardCustomizationDialog(
     var sliderThickness by remember { mutableStateOf(if (shapeSelected == 3) state.boardCardsThickness else 2f) }
     var sliderElevation by remember { mutableStateOf(if (shapeSelected == 3) state.boardCardsElevation else 20f) }
     var sliderShadow by remember { mutableStateOf(if (shapeSelected == 3) state.boardCardsShadow else 0f) }
-    var localBoardCardsBorderColor by remember { mutableStateOf(Color.White) }
-    var localShapeSelected by remember { mutableIntStateOf(1) }
-    var needUpdateLocalBorderColorVar by remember { mutableStateOf(true) }
-
-    if (needUpdateLocalBorderColorVar) {
-        localBoardCardsBorderColor = state.boardCardsBorderColor
-        needUpdateLocalBorderColorVar = false
-    }
+    val boardCardsBorderColor by animateColorAsState(state.boardCardsBorderColor)
+    var localBoardCardsBorderColor by remember { mutableStateOf(boardCardsBorderColor) }
+    var localShapeSelected by remember { mutableIntStateOf(shapeSelected) }
+    var localCardsBorderHexColor by remember { mutableStateOf("FFFFFFFF") }
 
     val shapes = listOf(
         BoardShape(
@@ -114,6 +111,7 @@ fun BoardCustomizationDialog(
             thickness = sliderThickness,
             shadow = sliderShadow,
             borderColor = localBoardCardsBorderColor,
+            borderHexColor = localCardsBorderHexColor,
         ),
     )
 
@@ -122,28 +120,28 @@ fun BoardCustomizationDialog(
             name = R.string.corner_radius,
             valueRange = 0f..65f,
             value = sliderCornerRadius,
-            onValueChange = { if (shapeSelected == 3) sliderCornerRadius = it },
+            onValueChange = { if (localShapeSelected == 3) sliderCornerRadius = it },
             steps = 64,
         ),
         BoardCustomization(
             name = R.string.border_thickness,
             valueRange = 0f..5f,
             value = sliderThickness,
-            onValueChange = { if (shapeSelected == 3) sliderThickness = it },
+            onValueChange = { if (localShapeSelected == 3) sliderThickness = it },
             steps = 19,
         ),
         BoardCustomization(
             name = R.string.elevation,
             valueRange = 0f..80f,
             value = sliderElevation,
-            onValueChange = { if (shapeSelected == 3) sliderElevation = it },
+            onValueChange = { if (localShapeSelected == 3) sliderElevation = it },
             steps = 15,
         ),
         BoardCustomization(
             name = R.string.shadow,
             valueRange = 0f..20f,
             value = sliderShadow,
-            onValueChange = { if (shapeSelected == 3) sliderShadow = it },
+            onValueChange = { if (localShapeSelected == 3) sliderShadow = it },
             steps = 18,
         ),
     )
@@ -199,15 +197,14 @@ fun BoardCustomizationDialog(
                                 colors = CardDefaults.cardColors(
                                     containerColor = MaterialTheme.colorScheme.surface,
                                 ),
-                                border = if (shapeSelected == index) BorderStroke(1.25.dp, MaterialTheme.colorScheme.primary) else null,
+                                border = if (localShapeSelected == index) BorderStroke(1.25.dp, MaterialTheme.colorScheme.primary) else null,
                                 modifier = Modifier
                                     .size(100.dp)
                                     .clip(RoundedCornerShape(24.dp))
                                     .clickable {
-                                        onEvent(SettingsEvent.SetBoardShape(shapes[index], index))
+                                        localShapeSelected = index
                                         scope.launch { listState.animateScrollToItem(index, 1) }
                                     },
-
                             ) {
                                 Box(
                                     modifier = Modifier.fillMaxSize(),
@@ -245,7 +242,7 @@ fun BoardCustomizationDialog(
                     modifier = Modifier
                         .fillMaxWidth()
                         .then(
-                            if (shapeSelected == 3) {
+                            if (localShapeSelected == 3) {
                                 Modifier.height(310.dp)
                             } else {
                                 Modifier.wrapContentHeight()
@@ -254,7 +251,7 @@ fun BoardCustomizationDialog(
                         .verticalScroll(scrollState),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
-                    if (shapeSelected == 3) {
+                    if (localShapeSelected == 3) {
                         Spacer(Modifier.height(6.dp))
                         customizations.forEachIndexed { index, customization ->
                             Text(
@@ -275,8 +272,7 @@ fun BoardCustomizationDialog(
                                 steps = customization.steps,
                                 onValueChange = {
                                     customization.onValueChange(it)
-                                    localShapeSelected = index
-                                    scope.launch { listState.animateScrollToItem(shapeSelected, 1) }
+                                    scope.launch { listState.animateScrollToItem(localShapeSelected, 1) }
                                 },
                             )
                         }
@@ -285,7 +281,7 @@ fun BoardCustomizationDialog(
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.SpaceBetween,
                         ) {
-                            Text(text = stringResource(R.string.border_color) + ":")
+                            Text(text = stringResource(R.string.border_color) + ": #" + localCardsBorderHexColor)
                             Box(
                                 modifier = Modifier
                                     .clip(CircleShape)
@@ -302,9 +298,10 @@ fun BoardCustomizationDialog(
                                     .padding(vertical = 12.dp)
                                     .size(250.dp),
                                 controller = colorPickerController,
-                                initialColor = localBoardCardsBorderColor,
+                                initialColor = boardCardsBorderColor,
                                 onColorChanged = { colorEnvelope ->
                                     localBoardCardsBorderColor = colorEnvelope.color
+                                    localCardsBorderHexColor = colorEnvelope.hexCode
                                 },
                             )
                         }
@@ -318,20 +315,19 @@ fun BoardCustomizationDialog(
                     .fillMaxWidth()
                     .padding(horizontal = 12.dp)
                     .padding(bottom = 12.dp),
-
             ) {
-                if (localShapeSelected == 3 && sliderCornerRadius != 12f || sliderThickness != 2f || sliderElevation != 20f || sliderShadow != 0f || localBoardCardsBorderColor != Color.White) {
+                if (localShapeSelected == 3 && (sliderCornerRadius != 12f || sliderThickness != 2f || sliderElevation != 20f || sliderShadow != 0f || localBoardCardsBorderColor != Color.White)) {
                     Card(
                         modifier = Modifier
                             .wrapContentSize()
                             .clip(RoundedCornerShape(24.dp))
                             .clickable {
-                                onEvent(SettingsEvent.ResetBoardParams)
                                 sliderCornerRadius = 12f
                                 sliderThickness = 2f
                                 sliderElevation = 20f
                                 sliderShadow = 0f
                                 localBoardCardsBorderColor = Color.White
+                                colorPickerController.selectByColor(Color.White, true)
                             },
                         colors = CardDefaults.cardColors(
                             containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(70.dp),
@@ -352,25 +348,37 @@ fun BoardCustomizationDialog(
                             )
                             Text(
                                 text = stringResource(R.string.reset_colors),
+                                style = MaterialTheme.typography.bodyMedium,
                                 modifier = Modifier
                                     .padding(end = 6.dp),
                             )
                         }
                     }
                 }
-                Box(
-                    modifier = Modifier.fillMaxWidth(),
-                    contentAlignment = Alignment.CenterEnd,
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(6.dp, Alignment.End),
+                    modifier = Modifier
+                        .fillMaxWidth(),
                 ) {
+                    OutlinedButton(
+                        onClick = {
+                            onEvent(SettingsEvent.ShowBoardCustomizationDialog(false))
+                        },
+                        contentPadding = PaddingValues(vertical = 6.dp, horizontal = 8.dp),
+                    ) {
+                        Text(text = stringResource(R.string.cancel))
+                    }
                     Button(
                         onClick = {
-                            onEvent(SettingsEvent.SetBoardShape(shapes[shapeSelected], shapeSelected))
+                            onEvent(SettingsEvent.SetBoardShape(shapes[localShapeSelected], localShapeSelected))
                             scope.launch {
                                 // Ensure settings is saved on database
                                 delay(300L)
                                 onEvent(SettingsEvent.ShowBoardCustomizationDialog(false))
                             }
                         },
+                        contentPadding = PaddingValues(vertical = 6.dp, horizontal = 8.dp),
                     ) {
                         Text(text = stringResource(R.string.apply))
                     }
@@ -380,6 +388,7 @@ fun BoardCustomizationDialog(
     }
 
     DisposableEffect(Unit) {
+        localShapeSelected = state.shapeSelected
         scope.launch {
             listState.animateScrollToItem(shapeSelected, 1)
         }

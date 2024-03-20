@@ -46,7 +46,7 @@ class Migrations {
             val addBoardCardsThickness = "ALTER TABLE 'settings' ADD COLUMN 'boardCardsThickness' FLOAT NOT NULL DEFAULT 2.0"
             val addBoardCardsElevation = "ALTER TABLE 'settings' ADD COLUMN 'boardCardsElevation' FLOAT NOT NULL DEFAULT 20.0"
             val addBoardCardsShadow = "ALTER TABLE 'settings' ADD COLUMN 'boardCardsShadow' FLOAT NOT NULL DEFAULT 0.0"
-            val addBoardCardsBorderColor = "ALTER TABLE 'settings' ADD COLUMN 'boardCardsBorderColor' TEXT NOT NULL DEFAULT '0xFFFFFFFFF'"
+            val addBoardCardsBorderColor = "ALTER TABLE 'settings' ADD COLUMN 'boardCardsBorderColor' TEXT NOT NULL DEFAULT 'FFFFFFFF'"
 
             db.execSQL(addShapeSelected)
             db.execSQL(addBoardCardsCornerRadius)
