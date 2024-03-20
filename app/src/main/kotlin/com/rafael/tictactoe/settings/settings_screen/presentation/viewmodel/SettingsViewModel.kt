@@ -267,7 +267,7 @@ class SettingsViewModel @Inject constructor(
                 }
             }
             is SettingsEvent.UpdateBoardCardsBorderColor -> {
-                _state.update { it.copy(boardCardsBorderColor = event.color) }         
+                _state.update { it.copy(boardCardsBorderColor = event.color) }
             }
         }
     }
