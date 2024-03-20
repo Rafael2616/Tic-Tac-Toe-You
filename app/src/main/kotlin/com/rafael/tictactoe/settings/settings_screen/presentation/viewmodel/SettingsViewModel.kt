@@ -30,7 +30,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 @HiltViewModel
-//@ExperimentalStdlibApi
 class SettingsViewModel @Inject constructor(
     private val repository: SettingsRepository,
     private val player: ExoPlayer,
