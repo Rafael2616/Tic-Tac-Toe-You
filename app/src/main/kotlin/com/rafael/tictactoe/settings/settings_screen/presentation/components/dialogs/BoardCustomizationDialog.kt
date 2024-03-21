@@ -157,7 +157,7 @@ fun BoardCustomizationDialog(
                 containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(20.dp),
             ),
             modifier = modifier
-                .width(430.dp),
+                .width(440.dp),
         ) {
             Column(
                 modifier = Modifier
@@ -366,6 +366,7 @@ fun BoardCustomizationDialog(
                             onEvent(SettingsEvent.ShowBoardCustomizationDialog(false))
                         },
                         contentPadding = PaddingValues(vertical = 6.dp, horizontal = 8.dp),
+                        modifier = Modifier.width(80.dp),
                     ) {
                         Text(text = stringResource(R.string.cancel))
                     }
@@ -379,6 +380,7 @@ fun BoardCustomizationDialog(
                             }
                         },
                         contentPadding = PaddingValues(vertical = 6.dp, horizontal = 8.dp),
+                        modifier = Modifier.width(80.dp),
                     ) {
                         Text(text = stringResource(R.string.apply))
                     }
