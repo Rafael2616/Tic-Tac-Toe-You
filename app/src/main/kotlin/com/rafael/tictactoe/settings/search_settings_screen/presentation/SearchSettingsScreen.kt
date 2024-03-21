@@ -280,7 +280,7 @@ fun SearchSettingsScreen(
                                                         0 -> drawLine(
                                                             strokeWidth = 5.dp.toPx(),
                                                             start = Offset(x = 26.dp.toPx(), y = 2.dp.toPx()),
-                                                            end = Offset(x = 2.dp.toPx(), y = 6.dp.toPx()),
+                                                            end = Offset(x = 2.dp.toPx(), y = 26.dp.toPx()),
                                                             color = winnerLineColor,
                                                         )
                                                         1 -> drawCircle(
@@ -308,7 +308,7 @@ fun SearchSettingsScreen(
                                                 if (setting.index == 3) {
                                                     Card(
                                                         shape = RoundedCornerShape((state.boardCardsCornerRadius / 4).dp),
-                                                        border = if (index == 3 && state.boardCardsThickness != 0f) {
+                                                        border = if (setting.index == 3 && state.boardCardsThickness != 0f) {
                                                             BorderStroke((state.boardCardsThickness / 2).dp, state.boardCardsBorderColor)
                                                         } else {
                                                             null
@@ -320,7 +320,7 @@ fun SearchSettingsScreen(
                                                             .fillMaxSize()
                                                             .padding(2.dp)
                                                             .then(
-                                                                if (state.boardCardsShadow != 0f && index == 3) {
+                                                                if (state.boardCardsShadow != 0f && setting.index == 3) {
                                                                     Modifier.shadow(state.boardCardsShadow.roundToInt().dp, RoundedCornerShape((state.boardCardsCornerRadius / 4).dp))
                                                                 } else {
                                                                     Modifier

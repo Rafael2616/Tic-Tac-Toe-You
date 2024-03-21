@@ -276,34 +276,36 @@ fun BoardCustomizationDialog(
                                 },
                             )
                         }
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                        ) {
-                            Text(text = stringResource(R.string.border_color) + ": #" + localCardsBorderHexColor)
+                        if (sliderThickness > 0f) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                            ) {
+                                Text(text = stringResource(R.string.border_color) + ": #" + localCardsBorderHexColor)
+                                Box(
+                                    modifier = Modifier
+                                        .clip(CircleShape)
+                                        .background(localBoardCardsBorderColor)
+                                        .size(15.dp),
+                                )
+                            }
                             Box(
-                                modifier = Modifier
-                                    .clip(CircleShape)
-                                    .background(localBoardCardsBorderColor)
-                                    .size(15.dp),
-                            )
-                        }
-                        Box(
-                            modifier = Modifier.size(258.dp),
-                            contentAlignment = Alignment.Center,
-                        ) {
-                            HsvColorPicker(
-                                modifier = Modifier
-                                    .padding(vertical = 12.dp)
-                                    .size(250.dp),
-                                controller = colorPickerController,
-                                initialColor = boardCardsBorderColor,
-                                onColorChanged = { colorEnvelope ->
-                                    localBoardCardsBorderColor = colorEnvelope.color
-                                    localCardsBorderHexColor = colorEnvelope.hexCode
-                                },
-                            )
+                                modifier = Modifier.size(258.dp),
+                                contentAlignment = Alignment.Center,
+                            ) {
+                                HsvColorPicker(
+                                    modifier = Modifier
+                                        .padding(vertical = 12.dp)
+                                        .size(250.dp),
+                                    controller = colorPickerController,
+                                    initialColor = boardCardsBorderColor,
+                                    onColorChanged = { colorEnvelope ->
+                                        localBoardCardsBorderColor = colorEnvelope.color
+                                        localCardsBorderHexColor = colorEnvelope.hexCode
+                                    },
+                                )
+                            }
                         }
                     }
                 }
