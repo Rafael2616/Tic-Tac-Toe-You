@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.media3.exoplayer.ExoPlayer
+import com.rafael.tictactoe.common.domain.util.toColor
 import com.rafael.tictactoe.game.domain.audio.cardGridSound
 import com.rafael.tictactoe.game.domain.audio.gotOldSound
 import com.rafael.tictactoe.game.domain.audio.winnerSound
@@ -156,9 +157,9 @@ class GameViewModel @Inject constructor(
                             }
                         }
                         if (state.value.secondPlayer!!.isXFor1) {
-                            settingsVM.onEvent(SettingsEvent.SetXColor(settingsVM.Color(state.value.secondPlayer!!.color)))
+                            settingsVM.onEvent(SettingsEvent.SetXColor(state.value.secondPlayer!!.color.toColor()))
                         } else {
-                            settingsVM.onEvent(SettingsEvent.SetCircleColor(settingsVM.Color(state.value.secondPlayer!!.color)))
+                            settingsVM.onEvent(SettingsEvent.SetCircleColor(state.value.secondPlayer!!.color.toColor()))
                         }
                     }
                     _state.update { it.copy(requestState = requestState) }

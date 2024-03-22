@@ -10,10 +10,10 @@ import androidx.lifecycle.viewModelScope
 import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.common.domain.util.ProfilePictureUtils
 import com.rafael.tictactoe.common.domain.util.getVersionName
+import com.rafael.tictactoe.common.domain.util.toColor
 import com.rafael.tictactoe.common.domain.util.uiClickSound
 import com.rafael.tictactoe.common.services.MusicService
 import com.rafael.tictactoe.game.domain.audio.backgroundMusic
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.Colors
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEntity
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
@@ -56,9 +56,9 @@ class SettingsViewModel @Inject constructor(
                     selectedWinnerLineColor = settings.selectedWinnerLineColor,
                     selectedXColor = settings.selectedXColor,
                     selectedCircleColor = settings.selectedCircleColor,
-                    winnerLineColor = Color(settings.selectedWinnerLineColor),
-                    xColor = Color(settings.selectedXColor),
-                    circleColor = Color(settings.selectedCircleColor),
+                    winnerLineColor = settings.selectedWinnerLineColor.toColor(),
+                    xColor = settings.selectedXColor.toColor(),
+                    circleColor = settings.selectedCircleColor.toColor(),
                     appVersion = settings.appVersion,
                     showWhatsNewDialog = if (settings.appVersion == "O" || settings.appVersion != getVersionName()) {
                         true
@@ -269,22 +269,6 @@ class SettingsViewModel @Inject constructor(
             is SettingsEvent.UpdateBoardCardsBorderColor -> {
                 _state.update { it.copy(boardCardsBorderColor = event.color) }
             }
-        }
-    }
-
-    fun Color(option: Int): Color {
-        val color = Colors.get()
-        return when (option) {
-            0 -> color.blue
-            1 -> color.red
-            2 -> color.yellow
-            3 -> color.burnt_yellow
-            4 -> color.dark_green
-            5 -> color.light_green
-            6 -> color.purple
-            7 -> color.magenta
-            8 -> color.white
-            else -> color.cyan
         }
     }
 
