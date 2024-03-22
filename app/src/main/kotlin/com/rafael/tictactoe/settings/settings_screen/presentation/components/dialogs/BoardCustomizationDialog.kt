@@ -313,7 +313,8 @@ fun BoardCustomizationDialog(
                     Text(
                         text = stringResource(R.string.brightness) + ":",
                         modifier = Modifier
-                            .fillMaxWidth(),
+                            .fillMaxWidth()
+                            .padding(vertical = 4.dp),
                     )
                     BrightnessSlider(
                         controller = colorPickerController,
@@ -327,7 +328,8 @@ fun BoardCustomizationDialog(
                     Text(
                         text = stringResource(R.string.alpha) + ":",
                         modifier = Modifier
-                            .fillMaxWidth(),
+                            .fillMaxWidth()
+                            .padding(vertical = 4.dp),
                     )
                     AlphaSlider(
                         controller = colorPickerController,
