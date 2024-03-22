@@ -89,6 +89,8 @@
     <string name="elevation">Elevação</string>
     <string name="shadow">Sombra</string>
     <string name="reset_colors">Redefinir</string>
-   <string name="cancel">Cancelar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="brightness">Brilho</string>
+    <string name="alpha">Alpha</string>
 
 </resources>

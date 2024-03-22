@@ -90,6 +90,8 @@
     <string name="shadow">Shadow</string>
     <string name="reset_colors">Reset</string>
     <string name="cancel">Cancel</string>
+    <string name="brightness">Brightness</string>
+    <string name="alpha">Alpha</string>
 
     <string name="cpu" translatable="false">CPU</string>
 

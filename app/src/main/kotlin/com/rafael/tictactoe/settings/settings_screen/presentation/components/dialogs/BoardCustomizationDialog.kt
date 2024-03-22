@@ -59,6 +59,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import com.github.skydoves.colorpicker.compose.AlphaSlider
+import com.github.skydoves.colorpicker.compose.BrightnessSlider
 import com.github.skydoves.colorpicker.compose.HsvColorPicker
 import com.github.skydoves.colorpicker.compose.rememberColorPickerController
 import com.rafael.tictactoe.R
@@ -308,6 +310,34 @@ fun BoardCustomizationDialog(
                             }
                         }
                     }
+                    Text(
+                        text = stringResource(R.string.brightness) + ":",
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                    )
+                    BrightnessSlider(
+                        controller = colorPickerController,
+                        wheelRadius = 12.dp,
+                        wheelColor = Color.Gray,
+                        borderRadius = 8.dp,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(25.dp),
+                    )
+                    Text(
+                        text = stringResource(R.string.alpha) + ":",
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                    )
+                    AlphaSlider(
+                        controller = colorPickerController,
+                        wheelRadius = 12.dp,
+                        wheelColor = Color.Gray,
+                        borderRadius = 8.dp,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(25.dp),
+                    )
                 }
             }
             Row(

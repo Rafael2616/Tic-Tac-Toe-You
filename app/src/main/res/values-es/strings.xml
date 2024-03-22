@@ -90,5 +90,7 @@
     <string name="shadow">Sombra</string>
     <string name="reset_colors">Restabelecer</string>
     <string name="cancel">Cancelar</string>
+    <string name="brightness">Brillo</string>
+    <string name="alpha">Alpha</string>
 
 </resources>
