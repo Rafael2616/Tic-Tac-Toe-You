@@ -89,7 +89,7 @@ import com.rafael.tictactoe.settings.searchSettingsScreen.presentation.viewmodel
 import com.rafael.tictactoe.settings.settingsScreen.domain.enums.SettingsGroup
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.domain.useCases.toggleSettingsUseCase
-import com.rafael.tictactoe.settings.settingsScreen.domain.util.ComponentValidator
+import com.rafael.tictactoe.settings.settingsScreen.domain.util.rememberComponentValidator
 import com.rafael.tictactoe.settings.settingsScreen.presentation.components.dialogs.BoardCustomizationDialog
 import com.rafael.tictactoe.settings.settingsScreen.presentation.components.dialogs.ColorSelectionDialog
 import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
@@ -109,7 +109,7 @@ fun SearchSettingsScreen(
     val winnerLineColor by animateColorAsState(state.winnerLineColor)
     val circleColor by animateColorAsState(state.circleColor)
     val xColor by animateColorAsState(state.xColor)
-    val componentValidator = ComponentValidator()
+    val componentValidator = rememberComponentValidator()
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = orientation == Configuration.ORIENTATION_LANDSCAPE
     val launcher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { }

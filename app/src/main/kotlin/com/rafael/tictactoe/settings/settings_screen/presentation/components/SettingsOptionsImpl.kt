@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -28,7 +29,7 @@ fun SettingsOptionsImpl(
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
-    val settings = SettingItem.getSettingsItems(state, context)
+    val settings = remember(state) { SettingItem.getSettingsItems(state, context) }
     val lazyState = rememberLazyListState()
 
     LazyColumn(

@@ -17,6 +17,7 @@ import androidx.compose.material.icons.outlined.MusicNote
 import androidx.compose.material.icons.outlined.MusicOff
 import androidx.compose.material.icons.outlined.NewReleases
 import androidx.compose.material.icons.outlined.Palette
+import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.presentation.icons.material.Github
@@ -26,6 +27,7 @@ import java.util.UUID
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
 
+@Stable
 data class SettingItem(
     val leadingIcon: ImageVector? = null,
     val trailingIcon: ImageVector? = null,
@@ -35,6 +37,7 @@ data class SettingItem(
     val searchSpecs: SearchItemSpecs,
 ) {
     companion object {
+        @Stable
         fun getSettingsItems(
             state: SettingsState,
             context: Context,

@@ -62,7 +62,7 @@ import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingItem
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 import com.rafael.tictactoe.settings.settingsScreen.domain.useCases.toggleSettingsUseCase
-import com.rafael.tictactoe.settings.settingsScreen.domain.util.ComponentValidator
+import com.rafael.tictactoe.settings.settingsScreen.domain.util.rememberComponentValidator
 import kotlin.math.roundToInt
 import kotlinx.collections.immutable.ImmutableList
 
@@ -80,7 +80,7 @@ fun SettingsBlockWithIcon(
     val winnerLineColor by animateColorAsState(state.winnerLineColor)
     val circleColor by animateColorAsState(state.circleColor)
     val xColor by animateColorAsState(state.xColor)
-    val componentValidator = ComponentValidator()
+    val componentValidator = rememberComponentValidator()
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = orientation == Configuration.ORIENTATION_LANDSCAPE
     val launcher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { }
