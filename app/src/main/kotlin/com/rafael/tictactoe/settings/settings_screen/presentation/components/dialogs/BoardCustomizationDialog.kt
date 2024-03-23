@@ -308,38 +308,38 @@ fun BoardCustomizationDialog(
                                     },
                                 )
                             }
+                            Text(
+                                text = stringResource(R.string.brightness) + ":",
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(vertical = 4.dp),
+                            )
+                            BrightnessSlider(
+                                controller = colorPickerController,
+                                wheelRadius = 12.dp,
+                                wheelColor = Color.Gray,
+                                borderRadius = 8.dp,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(25.dp),
+                            )
+                            Text(
+                                text = stringResource(R.string.alpha) + ":",
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(vertical = 4.dp),
+                            )
+                            AlphaSlider(
+                                controller = colorPickerController,
+                                wheelRadius = 12.dp,
+                                wheelColor = Color.Gray,
+                                borderRadius = 8.dp,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(25.dp),
+                            )
                         }
                     }
-                    Text(
-                        text = stringResource(R.string.brightness) + ":",
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 4.dp),
-                    )
-                    BrightnessSlider(
-                        controller = colorPickerController,
-                        wheelRadius = 12.dp,
-                        wheelColor = Color.Gray,
-                        borderRadius = 8.dp,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(25.dp),
-                    )
-                    Text(
-                        text = stringResource(R.string.alpha) + ":",
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 4.dp),
-                    )
-                    AlphaSlider(
-                        controller = colorPickerController,
-                        wheelRadius = 12.dp,
-                        wheelColor = Color.Gray,
-                        borderRadius = 8.dp,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(25.dp),
-                    )
                 }
             }
             Row(
