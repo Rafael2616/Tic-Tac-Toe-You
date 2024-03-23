@@ -55,6 +55,6 @@ class ComponentValidator {
 }
 
 @Composable
-fun rememberComponentValidator() : ComponentValidator {
+fun rememberComponentValidator(): ComponentValidator {
     return remember { ComponentValidator() }
 }
