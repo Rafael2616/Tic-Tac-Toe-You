@@ -1,5 +1,8 @@
 package com.rafael.tictactoe.settings.settingsScreen.presentation.components.dialogs
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -50,6 +53,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -63,6 +67,7 @@ import com.github.skydoves.colorpicker.compose.AlphaSlider
 import com.github.skydoves.colorpicker.compose.BrightnessSlider
 import com.github.skydoves.colorpicker.compose.HsvColorPicker
 import com.github.skydoves.colorpicker.compose.rememberColorPickerController
+import com.smarttoolfactory.extendedcolors.parser.rememberColorParser
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.BoardCustomization
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.BoardShape
@@ -82,6 +87,7 @@ fun BoardCustomizationDialog(
     val listState = rememberLazyListState()
     val scope = rememberCoroutineScope()
     val colorPickerController = rememberColorPickerController()
+    val colorParser = rememberColorParser()
     val scrollState = rememberScrollState()
     val shapeSelected = state.shapeSelected
     var sliderCornerRadius by remember { mutableStateOf(if (shapeSelected == 3) state.boardCardsCornerRadius else 12f) }
@@ -92,6 +98,9 @@ fun BoardCustomizationDialog(
     var localBoardCardsBorderColor by remember { mutableStateOf(boardCardsBorderColor) }
     var localShapeSelected by remember { mutableIntStateOf(shapeSelected) }
     var localCardsBorderHexColor by remember { mutableStateOf("FFFFFFFF") }
+    val context = LocalContext.current
+    val clipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    val clipData = ClipData.newPlainText(context.getString(R.string.border_color), localCardsBorderHexColor)
 
     val shapes = listOf(
         BoardShape(
@@ -244,8 +253,8 @@ fun BoardCustomizationDialog(
                     modifier = Modifier
                         .fillMaxWidth()
                         .then(
-                            if (localShapeSelected == 3) {
-                                Modifier.height(310.dp)
+                            if (localShapeSelected == 3 && sliderThickness > 0f) {
+                                Modifier.height(340.dp)
                             } else {
                                 Modifier.wrapContentHeight()
                             },
@@ -284,22 +293,23 @@ fun BoardCustomizationDialog(
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.SpaceBetween,
                             ) {
-                                Text(text = stringResource(R.string.border_color) + ": #" + localCardsBorderHexColor)
+                                Text(text = stringResource(R.string.border_color) + ": " + colorParser.parseColorName(localBoardCardsBorderColor))
                                 Box(
                                     modifier = Modifier
                                         .clip(CircleShape)
                                         .background(localBoardCardsBorderColor)
-                                        .size(15.dp),
+                                        .size(15.dp)
+                                        .clickable { clipboardManager.setPrimaryClip(clipData) },
                                 )
                             }
                             Box(
-                                modifier = Modifier.size(258.dp),
+                                modifier = Modifier.size(250.dp),
                                 contentAlignment = Alignment.Center,
                             ) {
                                 HsvColorPicker(
                                     modifier = Modifier
                                         .padding(vertical = 12.dp)
-                                        .size(250.dp),
+                                        .size(240.dp),
                                     controller = colorPickerController,
                                     initialColor = boardCardsBorderColor,
                                     onColorChanged = { colorEnvelope ->

@@ -161,6 +161,9 @@ licensee {
     allow("LGPL-2.1-only")
     allow("MIT")
     allowUrl("https://www.gnu.org/licenses/gpl-3.0.en.html")
+    allowDependency("com.github.SmartToolFactory", "Compose-Extended-Colors", libs.versions.smarttoolfactory.extended.colors.get()) {
+        because("No license provided for this dependency")
+    }
     unusedAction(IGNORE)
 }
 
@@ -196,6 +199,8 @@ dependencies {
     implementation(libs.nanihadesuka.lazyColumnScrollbar)
     // ColorPicker Compose
     implementation(libs.skydoves.colorpicker.compose)
+    // Compose extended colors
+    implementation(libs.smarttoolfactory.extended.colors)
     // Lifecycle
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
