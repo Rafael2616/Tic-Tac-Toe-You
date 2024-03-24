@@ -67,12 +67,12 @@ import com.github.skydoves.colorpicker.compose.AlphaSlider
 import com.github.skydoves.colorpicker.compose.BrightnessSlider
 import com.github.skydoves.colorpicker.compose.HsvColorPicker
 import com.github.skydoves.colorpicker.compose.rememberColorPickerController
-import com.smarttoolfactory.extendedcolors.parser.rememberColorParser
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.BoardCustomization
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.BoardShape
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
+import com.smarttoolfactory.extendedcolors.parser.rememberColorParser
 import kotlin.math.roundToInt
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

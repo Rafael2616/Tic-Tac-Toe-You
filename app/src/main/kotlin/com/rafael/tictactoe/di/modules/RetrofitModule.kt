@@ -23,7 +23,7 @@ object RetrofitModule {
         return Retrofit.Builder()
             .baseUrl("https://retoolapi.dev/IdekO9/")
             .client(OkHttpClient.Builder().build())
-            .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
+            .addConverterFactory(Json{ ignoreUnknownKeys = true }.asConverterFactory("application/json".toMediaType()))
             .build()
     }
 
