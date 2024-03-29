@@ -22,7 +22,7 @@ activity-compose = "1.8.2"
 androidx-annotation = "1.7.1"
 core-splashscreen = "1.0.1"
 
-dagger-hilt = "2.51"
+dagger-hilt = "2.51.1"
 hilt-navigation-compose = "1.2.0"
 
 compose-bom = "2024.03.00"
