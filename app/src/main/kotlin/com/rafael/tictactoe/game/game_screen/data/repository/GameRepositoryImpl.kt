@@ -44,16 +44,22 @@ class GameRepositoryImpl @Inject constructor(
             }
         } catch (e: Exception) {
             return when (e) {
-                is IOException -> Pair(null, RequestState.Failure(Error.IOError, e.toString())) // .run {
-                //    Log.e(TAG, "IO error: $e")
-                // }
-                is HttpException -> Pair(null, RequestState.Failure(Error.HttpError, e.message(), e.code())) // .run {
-                //  Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
-                //  }
-                is IllegalStateException -> Pair(null, RequestState.Failure(Error.IOError, e.toString())) // .run {
-                //    Log.e(TAG, "IllegalStateException error: $e")
-                // }
-                else -> Pair(null, RequestState.Loading)
+                is IOException ->  run {
+                    Log.e(TAG, "IO error: $e")
+                    Pair(null, RequestState.Failure(Error.IOError, e.toString()))
+                }
+                is HttpException -> run {
+                    Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
+                    Pair(null, RequestState.Failure(Error.HttpError, e.message(), e.code()))
+                }
+                is IllegalStateException -> run {
+                    Log.e(TAG, "IllegalStateException error: $e")
+                    Pair(null, RequestState.Failure(Error.IOError, e.toString()))
+                }
+                else -> run {
+                    Log.e(TAG, "UnknownException: $e")
+                    Pair(null, RequestState.Failure(Error.IOError, e.toString()))
+                }
             }
         }
         return Pair(null, RequestState.Loading)
