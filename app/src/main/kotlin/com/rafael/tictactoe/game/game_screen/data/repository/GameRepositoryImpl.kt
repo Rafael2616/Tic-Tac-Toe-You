@@ -44,7 +44,7 @@ class GameRepositoryImpl @Inject constructor(
             }
         } catch (e: Exception) {
             return when (e) {
-                is IOException ->  run {
+                is IOException -> run {
                     Log.e(TAG, "IO error: $e")
                     Pair(null, RequestState.Failure(Error.IOError, e.toString()))
                 }
