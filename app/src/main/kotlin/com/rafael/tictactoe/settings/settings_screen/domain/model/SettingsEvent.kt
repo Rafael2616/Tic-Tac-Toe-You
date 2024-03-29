@@ -27,6 +27,6 @@ sealed interface SettingsEvent {
     object ToggleShowProfilePictureMenu : SettingsEvent
     object HideProfilePictureMenu : SettingsEvent
     data class ShowBoardCustomizationDialog(val value: Boolean) : SettingsEvent
-    data class SetBoardShape(val shape: BoardShape, val index: Int) : SettingsEvent
+    data class SetBoardShape(val shape: BoardShape, val index: Int, val isRGBEffectOn: Boolean, val isGradientOn: Boolean) : SettingsEvent
     data class UpdateBoardCardsBorderColor(val color: Color) : SettingsEvent
 }

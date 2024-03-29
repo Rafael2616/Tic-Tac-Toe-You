@@ -60,6 +60,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
@@ -116,6 +117,9 @@ fun SearchSettingsScreen(
     var active by rememberSaveable { mutableStateOf(true) }
     val matchingSettings = searchState.matchingSettings
     val focusManager = LocalFocusManager.current
+    val rgbGradientBrush = Brush.linearGradient(
+        colors = listOf(Color.Red, Color.Yellow),
+    )
 
     Box(
         modifier = modifier
@@ -308,8 +312,12 @@ fun SearchSettingsScreen(
                                                 if (setting.index == 3) {
                                                     Card(
                                                         shape = RoundedCornerShape((state.boardCardsCornerRadius / 4).dp),
-                                                        border = if (setting.index == 3 && state.boardCardsThickness != 0f) {
-                                                            BorderStroke((state.boardCardsThickness / 2).dp, state.boardCardsBorderColor)
+                                                        border = if (index == 3 && state.boardCardsThickness != 0f) {
+                                                            if (state.isRGBEffectOn) {
+                                                                BorderStroke((state.boardCardsThickness / 2).dp, rgbGradientBrush)
+                                                            } else {
+                                                                BorderStroke((state.boardCardsThickness / 2).dp, state.boardCardsBorderColor)
+                                                            }
                                                         } else {
                                                             null
                                                         },

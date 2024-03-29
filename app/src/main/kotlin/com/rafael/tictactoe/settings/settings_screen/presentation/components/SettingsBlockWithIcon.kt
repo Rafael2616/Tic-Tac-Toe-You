@@ -40,6 +40,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
@@ -84,6 +85,9 @@ fun SettingsBlockWithIcon(
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = orientation == Configuration.ORIENTATION_LANDSCAPE
     val launcher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { }
+    val rgbGradientBrush = Brush.linearGradient(
+        colors = listOf(Color.Red, Color.Yellow),
+    )
 
     Column(
         modifier = modifier
@@ -201,7 +205,11 @@ fun SettingsBlockWithIcon(
                                         Card(
                                             shape = RoundedCornerShape((state.boardCardsCornerRadius / 4).dp),
                                             border = if (index == 3 && state.boardCardsThickness != 0f) {
-                                                BorderStroke((state.boardCardsThickness / 2).dp, state.boardCardsBorderColor)
+                                                if (state.isRGBEffectOn) {
+                                                    BorderStroke((state.boardCardsThickness / 2).dp, rgbGradientBrush)
+                                                } else {
+                                                    BorderStroke((state.boardCardsThickness / 2).dp, state.boardCardsBorderColor)
+                                                }
                                             } else {
                                                 null
                                             },

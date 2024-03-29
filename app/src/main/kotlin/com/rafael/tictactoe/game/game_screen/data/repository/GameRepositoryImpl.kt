@@ -35,24 +35,25 @@ class GameRepositoryImpl @Inject constructor(
             } else {
                 if (!response.isSuccessful) {
                     throw IOException("Request failed with code: " + response.code() + response.message())
-                } else if (response.body() == null) {
+                }
+                if (response.body() == null) {
                     val message = " message: No players avaliable in server"
                     Log.e(TAG, message)
                     throw IOException("Request failed with code: " + response.code() + message)
                 }
             }
         } catch (e: Exception) {
-            if (e is IOException) {
-                Log.e(TAG, "IO error: $e")
-                return Pair(null, RequestState.Failure(Error.IOError, e.toString()))
-            }
-            if (e is HttpException) {
-                Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
-                return Pair(null, RequestState.Failure(Error.HttpError, e.message(), e.code()))
-            }
-            if (e is IllegalStateException) {
-                Log.e(TAG, "IllegalStateException error: $e")
-                return Pair(null, RequestState.Failure(Error.IOError, e.toString()))
+            return when (e) {
+                is IOException -> Pair(null, RequestState.Failure(Error.IOError, e.toString())) // .run {
+                //    Log.e(TAG, "IO error: $e")
+                // }
+                is HttpException -> Pair(null, RequestState.Failure(Error.HttpError, e.message(), e.code())) // .run {
+                //  Log.e(TAG, "HTTP error: ${e.code()}, ${e.message()}")
+                //  }
+                is IllegalStateException -> Pair(null, RequestState.Failure(Error.IOError, e.toString())) // .run {
+                //    Log.e(TAG, "IllegalStateException error: $e")
+                // }
+                else -> Pair(null, RequestState.Loading)
             }
         }
         return Pair(null, RequestState.Loading)

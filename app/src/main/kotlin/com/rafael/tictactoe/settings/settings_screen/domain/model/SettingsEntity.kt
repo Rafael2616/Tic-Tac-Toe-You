@@ -22,6 +22,8 @@ data class SettingsEntity(
     var boardCardsElevation: Float,
     var boardCardsShadow: Float,
     var boardCardsBorderColor: String,
+    var isRGBEffectOn: Boolean,
+    var isGradientOn: Boolean,
 ) {
     companion object {
         fun getDefaultSettings(): SettingsEntity {
@@ -37,11 +39,13 @@ data class SettingsEntity(
                 selectedCircleColor = 5,
                 appVersion = "0",
                 shapeSelected = 1,
-                boardCardsCornerRadius = 10f,
-                boardCardsThickness = 0f,
+                boardCardsCornerRadius = 12f,
+                boardCardsThickness = 2f,
                 boardCardsElevation = 20f,
                 boardCardsShadow = 0f,
                 boardCardsBorderColor = "FFFFFFFF",
+                isRGBEffectOn = false,
+                isGradientOn = true,
             )
         }
     }

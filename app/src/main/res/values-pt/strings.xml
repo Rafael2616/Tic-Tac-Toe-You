@@ -85,12 +85,15 @@
     <string name="circle">Círculo</string>
     <string name="custom">Customizado</string>
     <string name="corner_radius">Raio do canto</string>
-    <string name="border_thickness">Grossura da borda</string>
+    <string name="border_thickness">Espessura da borda</string>
     <string name="elevation">Elevação</string>
     <string name="shadow">Sombra</string>
     <string name="reset_colors">Redefinir</string>
     <string name="cancel">Cancelar</string>
     <string name="brightness">Brilho</string>
     <string name="alpha">Alpha</string>
+    <string name="rgb_effect">Efeito RGB</string>
+    <string name="color_gradient">Gradiente de cor</string>
+    <string name="overheat_warning">Aviso: esse recurso pode causar superaquecimento e perda de desempenho</string>
 
 </resources>

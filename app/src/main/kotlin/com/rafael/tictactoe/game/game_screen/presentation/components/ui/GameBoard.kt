@@ -1,6 +1,7 @@
 package com.rafael.tictactoe.game.gameScreen.presentation.components.ui
 
 import android.content.res.Configuration
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -18,17 +19,24 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameState
+import com.rafael.tictactoe.settings.settingsScreen.domain.animations.rememberRGBAnimation
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
+import kotlinx.coroutines.delay
 
 @Composable
 fun GameBoard(
@@ -43,6 +51,23 @@ fun GameBoard(
     val isInLandscape = orientation == Configuration.ORIENTATION_LANDSCAPE
     val pPadding = PaddingValues(start = 8.dp, end = 8.dp, bottom = 50.dp)
     val lPadding = PaddingValues(start = 8.dp, end = 40.dp, bottom = 8.dp)
+    val rgbAnimController = rememberRGBAnimation()
+    var rgbColorCurrent by remember { mutableStateOf(Color.Red) }
+    var rgbColorOld by remember { mutableStateOf(Color.Yellow) }
+    val rgbColorCurrentAnimated by animateColorAsState(rgbColorCurrent)
+    val rgbColorOldAnimated by animateColorAsState(rgbColorOld)
+    val rgbGradientBrush = Brush.linearGradient(
+        colors = listOf(rgbColorCurrentAnimated, rgbColorOldAnimated),
+    )
+
+    LaunchedEffect(settingsState.isRGBEffectOn) {
+        rgbAnimController.animate().collect { currentColor ->
+            rgbColorCurrent = currentColor
+            delay(125L)
+            rgbColorOld = currentColor
+            delay(125L)
+        }
+    }
 
     Column(
         modifier = modifier
@@ -60,8 +85,14 @@ fun GameBoard(
                 cardItems.forEachIndexed { cardIndex, _ ->
                     Card(
                         shape = RoundedCornerShape(settingsState.boardCardsCornerRadius.dp),
-                        border = if (settingsState.boardCardsThickness != 0f) {
-                            BorderStroke(settingsState.boardCardsThickness.dp, settingsState.boardCardsBorderColor)
+                        border = if (settingsState.boardCardsThickness > 0f) {
+                            if (settingsState.isRGBEffectOn && settingsState.isGradientOn) {
+                                BorderStroke(settingsState.boardCardsThickness.dp, rgbGradientBrush)
+                            } else if (settingsState.isRGBEffectOn && !settingsState.isGradientOn) {
+                                BorderStroke(settingsState.boardCardsThickness.dp, rgbColorCurrentAnimated)
+                            } else {
+                                BorderStroke(settingsState.boardCardsThickness.dp, settingsState.boardCardsBorderColor)
+                            }
                         } else {
                             null
                         },

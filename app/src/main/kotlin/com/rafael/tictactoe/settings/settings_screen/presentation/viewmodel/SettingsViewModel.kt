@@ -71,6 +71,8 @@ class SettingsViewModel @Inject constructor(
                     boardCardsElevation = settings.boardCardsElevation,
                     boardCardsShadow = settings.boardCardsShadow,
                     boardCardsBorderColor = Color("${settings.boardCardsBorderColor}".toLong(16)),
+                    isRGBEffectOn = settings.isRGBEffectOn,
+                    isGradientOn = settings.isGradientOn,
                 )
             }
             backgroundMusic(
@@ -252,6 +254,8 @@ class SettingsViewModel @Inject constructor(
                         boardCardsElevation = event.shape.elevation,
                         boardCardsShadow = event.shape.shadow,
                         boardCardsBorderColor = event.shape.borderColor,
+                        isGradientOn = event.isGradientOn,
+                        isRGBEffectOn = event.isRGBEffectOn,
                     )
                 }
                 viewModelScope.launch(Dispatchers.IO) {
@@ -262,6 +266,8 @@ class SettingsViewModel @Inject constructor(
                     settings.boardCardsElevation = event.shape.elevation
                     settings.boardCardsShadow = event.shape.shadow
                     settings.boardCardsBorderColor = event.shape.borderHexColor
+                    settings.isRGBEffectOn = event.isRGBEffectOn
+                    settings.isGradientOn = event.isGradientOn
 
                     repository.setAllSettingsValues(settings)
                 }

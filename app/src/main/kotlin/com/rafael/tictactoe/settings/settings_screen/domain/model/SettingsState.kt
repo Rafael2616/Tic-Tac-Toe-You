@@ -35,4 +35,6 @@ data class SettingsState(
     val boardCardsElevation: Float = 20f,
     val boardCardsShadow: Float = 0f,
     val boardCardsBorderColor: Color = Color.White,
+    val isRGBEffectOn: Boolean = false,
+    val isGradientOn: Boolean = true,
 )

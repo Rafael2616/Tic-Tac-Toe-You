@@ -47,6 +47,8 @@ class Migrations {
             val addBoardCardsElevation = "ALTER TABLE 'settings' ADD COLUMN 'boardCardsElevation' FLOAT NOT NULL DEFAULT 20.0"
             val addBoardCardsShadow = "ALTER TABLE 'settings' ADD COLUMN 'boardCardsShadow' FLOAT NOT NULL DEFAULT 0.0"
             val addBoardCardsBorderColor = "ALTER TABLE 'settings' ADD COLUMN 'boardCardsBorderColor' TEXT NOT NULL DEFAULT 'FFFFFFFF'"
+            val addIsRGBEffectOn = "ALTER TABLE 'settings' ADD COLUMN 'isRGBEffectOn' BOOLEAN NOT NULL DEFAULT false"
+            val addIsGradientOn = "ALTER TABLE 'settings' ADD COLUMN 'isGradientOn' BOOLEAN NOT NULL DEFAULT true"
 
             db.execSQL(addShapeSelected)
             db.execSQL(addBoardCardsCornerRadius)
@@ -54,6 +56,8 @@ class Migrations {
             db.execSQL(addBoardCardsElevation)
             db.execSQL(addBoardCardsShadow)
             db.execSQL(addBoardCardsBorderColor)
+            db.execSQL(addIsRGBEffectOn)
+            db.execSQL(addIsGradientOn)
         }
     }
 }

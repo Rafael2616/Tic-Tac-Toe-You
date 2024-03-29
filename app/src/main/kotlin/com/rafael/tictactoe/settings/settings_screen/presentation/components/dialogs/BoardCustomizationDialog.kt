@@ -4,6 +4,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -31,17 +32,22 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.SettingsBackupRestore
+import androidx.compose.material.icons.outlined.Warning
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Slider
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -52,6 +58,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -68,6 +75,7 @@ import com.github.skydoves.colorpicker.compose.BrightnessSlider
 import com.github.skydoves.colorpicker.compose.HsvColorPicker
 import com.github.skydoves.colorpicker.compose.rememberColorPickerController
 import com.rafael.tictactoe.R
+import com.rafael.tictactoe.settings.settingsScreen.domain.animations.rememberRGBAnimation
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.BoardCustomization
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.BoardShape
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
@@ -89,18 +97,39 @@ fun BoardCustomizationDialog(
     val colorPickerController = rememberColorPickerController()
     val colorParser = rememberColorParser()
     val scrollState = rememberScrollState()
-    val shapeSelected = state.shapeSelected
-    var sliderCornerRadius by remember { mutableStateOf(if (shapeSelected == 3) state.boardCardsCornerRadius else 12f) }
-    var sliderThickness by remember { mutableStateOf(if (shapeSelected == 3) state.boardCardsThickness else 2f) }
-    var sliderElevation by remember { mutableStateOf(if (shapeSelected == 3) state.boardCardsElevation else 20f) }
-    var sliderShadow by remember { mutableStateOf(if (shapeSelected == 3) state.boardCardsShadow else 0f) }
+    var sliderCornerRadius by remember { mutableStateOf(state.boardCardsCornerRadius) }
+    var sliderThickness by remember { mutableStateOf(state.boardCardsThickness) }
+    var sliderElevation by remember { mutableStateOf(state.boardCardsElevation) }
+    var sliderShadow by remember { mutableStateOf(state.boardCardsShadow) }
     val boardCardsBorderColor by animateColorAsState(state.boardCardsBorderColor)
-    var localBoardCardsBorderColor by remember { mutableStateOf(boardCardsBorderColor) }
-    var localShapeSelected by remember { mutableIntStateOf(shapeSelected) }
+    var localShapeSelected by remember { mutableIntStateOf(state.shapeSelected) }
     var localCardsBorderHexColor by remember { mutableStateOf("FFFFFFFF") }
     val context = LocalContext.current
     val clipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     val clipData = ClipData.newPlainText(context.getString(R.string.border_color), localCardsBorderHexColor)
+    var isRGBEffectOn by remember { mutableStateOf(state.isRGBEffectOn) }
+    var isGradientOn by remember { mutableStateOf(state.isGradientOn) }
+    val rgbAnimController = rememberRGBAnimation()
+    var rgbColorCurrent by remember { mutableStateOf(Color.Red) }
+    var rgbColorOld by remember { mutableStateOf(Color.Yellow) }
+    val rgbColorCurrentAnimated by animateColorAsState(rgbColorCurrent)
+    val rgbColorOldAnimated by animateColorAsState(rgbColorOld)
+    val shouldUseRGBEffect = remember { derivedStateOf { isRGBEffectOn && localShapeSelected == 3 } }
+    var localBoardCardsBorderColor by remember(if (shouldUseRGBEffect.value) rgbColorCurrentAnimated else Unit) {
+        mutableStateOf(if (shouldUseRGBEffect.value) rgbColorCurrentAnimated else boardCardsBorderColor)
+    }
+    val rgbGradientBrush = Brush.linearGradient(
+        colors = listOf(rgbColorCurrentAnimated, rgbColorOldAnimated),
+    )
+
+    LaunchedEffect(isRGBEffectOn) {
+        rgbAnimController.animate().collect { currentColor ->
+            rgbColorCurrent = currentColor
+            delay(125L)
+            rgbColorOld = currentColor
+            delay(125L)
+        }
+    }
 
     val shapes = listOf(
         BoardShape(
@@ -168,11 +197,19 @@ fun BoardCustomizationDialog(
                 containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(20.dp),
             ),
             modifier = modifier
-                .width(440.dp),
+                .fillMaxWidth(),
         ) {
             Column(
                 modifier = Modifier
-                    .wrapContentHeight()
+                    .fillMaxWidth()
+                    .then(
+                        if (localShapeSelected == 3 && sliderThickness > 0f) {
+                            Modifier.height(575.dp)
+                        } else {
+                            Modifier.wrapContentSize()
+                        },
+                    )
+                    .animateContentSize()
                     .padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
             ) {
@@ -223,8 +260,12 @@ fun BoardCustomizationDialog(
                                 ) {
                                     Card(
                                         shape = RoundedCornerShape(shape.cornerRadius),
-                                        border = if (index == 3 && shape.thickness != 0f) {
-                                            BorderStroke(shape.thickness.dp, shape.borderColor)
+                                        border = if (index == 3 && shape.thickness > 0f) {
+                                            if (shouldUseRGBEffect.value && isGradientOn) {
+                                                BorderStroke(shape.thickness.dp, rgbGradientBrush)
+                                            } else {
+                                                BorderStroke(shape.thickness.dp, shape.borderColor)
+                                            }
                                         } else {
                                             null
                                         },
@@ -234,7 +275,7 @@ fun BoardCustomizationDialog(
                                         modifier = Modifier
                                             .size(70.dp)
                                             .then(
-                                                if (shape.shadow != 0f && index == 3) {
+                                                if (shape.shadow > 0f && index == 3) {
                                                     Modifier.shadow(shape.shadow.roundToInt().dp, RoundedCornerShape(shape.cornerRadius))
                                                 } else {
                                                     Modifier
@@ -249,20 +290,14 @@ fun BoardCustomizationDialog(
                         }
                     }
                 }
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .then(
-                            if (localShapeSelected == 3 && sliderThickness > 0f) {
-                                Modifier.height(340.dp)
-                            } else {
-                                Modifier.wrapContentHeight()
-                            },
-                        )
-                        .verticalScroll(scrollState),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    if (localShapeSelected == 3) {
+                if (localShapeSelected == 3) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .animateContentSize()
+                            .verticalScroll(scrollState),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                    ) {
                         Spacer(Modifier.height(6.dp))
                         customizations.forEachIndexed { index, customization ->
                             Text(
@@ -288,66 +323,123 @@ fun BoardCustomizationDialog(
                             )
                         }
                         if (sliderThickness > 0f) {
+                            Spacer(Modifier.height(6.dp))
+                            HorizontalDivider()
                             Row(
-                                modifier = Modifier.fillMaxWidth(),
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clickable { isRGBEffectOn = !isRGBEffectOn },
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.SpaceBetween,
                             ) {
-                                Text(text = stringResource(R.string.border_color) + ": " + colorParser.parseColorName(localBoardCardsBorderColor))
+                                Text(text = stringResource(R.string.rgb_effect))
+                                Switch(
+                                    checked = isRGBEffectOn,
+                                    onCheckedChange = { isRGBEffectOn = it },
+                                )
+                            }
+                            if (isRGBEffectOn) {
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.Start),
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Outlined.Warning,
+                                        tint = MaterialTheme.colorScheme.error,
+                                        contentDescription = null,
+                                    )
+                                    Text(
+                                        text = stringResource(R.string.overheat_warning),
+                                        color = MaterialTheme.colorScheme.onErrorContainer,
+                                    )
+                                }
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .clickable { isGradientOn = !isGradientOn },
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.SpaceBetween,
+                                ) {
+                                    Text(text = stringResource(R.string.color_gradient))
+                                    Switch(
+                                        checked = isGradientOn,
+                                        onCheckedChange = { isGradientOn = it },
+                                    )
+                                }
+                            }
+                            HorizontalDivider()
+                            Spacer(Modifier.height(6.dp))
+                        }
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .wrapContentHeight()
+                                .animateContentSize(),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                        ) {
+                            if (sliderThickness > 0f && !isRGBEffectOn) {
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.SpaceBetween,
+                                ) {
+                                    Text(text = stringResource(R.string.border_color) + ": " + colorParser.parseColorName(localBoardCardsBorderColor))
+                                    Box(
+                                        modifier = Modifier
+                                            .clip(CircleShape)
+                                            .background(localBoardCardsBorderColor)
+                                            .size(15.dp)
+                                            .clickable { clipboardManager.setPrimaryClip(clipData) },
+                                    )
+                                }
                                 Box(
+                                    modifier = Modifier.size(250.dp),
+                                    contentAlignment = Alignment.Center,
+                                ) {
+                                    HsvColorPicker(
+                                        modifier = Modifier
+                                            .padding(vertical = 12.dp)
+                                            .size(240.dp),
+                                        controller = colorPickerController,
+                                        initialColor = boardCardsBorderColor,
+                                        onColorChanged = { colorEnvelope ->
+                                            localBoardCardsBorderColor = colorEnvelope.color
+                                            localCardsBorderHexColor = colorEnvelope.hexCode
+                                        },
+                                    )
+                                }
+                                Text(
+                                    text = stringResource(R.string.brightness) + ":",
                                     modifier = Modifier
-                                        .clip(CircleShape)
-                                        .background(localBoardCardsBorderColor)
-                                        .size(15.dp)
-                                        .clickable { clipboardManager.setPrimaryClip(clipData) },
+                                        .fillMaxWidth()
+                                        .padding(vertical = 4.dp),
                                 )
-                            }
-                            Box(
-                                modifier = Modifier.size(250.dp),
-                                contentAlignment = Alignment.Center,
-                            ) {
-                                HsvColorPicker(
-                                    modifier = Modifier
-                                        .padding(vertical = 12.dp)
-                                        .size(240.dp),
+                                BrightnessSlider(
                                     controller = colorPickerController,
-                                    initialColor = boardCardsBorderColor,
-                                    onColorChanged = { colorEnvelope ->
-                                        localBoardCardsBorderColor = colorEnvelope.color
-                                        localCardsBorderHexColor = colorEnvelope.hexCode
-                                    },
+                                    wheelRadius = 12.dp,
+                                    wheelColor = Color.Gray,
+                                    borderRadius = 8.dp,
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(25.dp),
+                                )
+                                Text(
+                                    text = stringResource(R.string.alpha) + ":",
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(vertical = 4.dp),
+                                )
+                                AlphaSlider(
+                                    controller = colorPickerController,
+                                    wheelRadius = 12.dp,
+                                    wheelColor = Color.Gray,
+                                    borderRadius = 8.dp,
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(25.dp),
                                 )
                             }
-                            Text(
-                                text = stringResource(R.string.brightness) + ":",
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(vertical = 4.dp),
-                            )
-                            BrightnessSlider(
-                                controller = colorPickerController,
-                                wheelRadius = 12.dp,
-                                wheelColor = Color.Gray,
-                                borderRadius = 8.dp,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(25.dp),
-                            )
-                            Text(
-                                text = stringResource(R.string.alpha) + ":",
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(vertical = 4.dp),
-                            )
-                            AlphaSlider(
-                                controller = colorPickerController,
-                                wheelRadius = 12.dp,
-                                wheelColor = Color.Gray,
-                                borderRadius = 8.dp,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(25.dp),
-                            )
                         }
                     }
                 }
@@ -366,11 +458,13 @@ fun BoardCustomizationDialog(
                             .wrapContentSize()
                             .clip(RoundedCornerShape(24.dp))
                             .clickable {
+                                localBoardCardsBorderColor = Color.White
+                                isGradientOn = true
+                                isRGBEffectOn = false
                                 sliderCornerRadius = 12f
                                 sliderThickness = 2f
                                 sliderElevation = 20f
                                 sliderShadow = 0f
-                                localBoardCardsBorderColor = Color.White
                                 colorPickerController.selectByColor(Color.White, true)
                             },
                         colors = CardDefaults.cardColors(
@@ -416,7 +510,14 @@ fun BoardCustomizationDialog(
                     }
                     Button(
                         onClick = {
-                            onEvent(SettingsEvent.SetBoardShape(shapes[localShapeSelected], localShapeSelected))
+                            onEvent(
+                                SettingsEvent.SetBoardShape(
+                                    shapes[localShapeSelected],
+                                    localShapeSelected,
+                                    isRGBEffectOn,
+                                    isGradientOn,
+                                ),
+                            )
                             scope.launch {
                                 // Ensure settings is saved on database
                                 delay(300L)
@@ -434,9 +535,8 @@ fun BoardCustomizationDialog(
     }
 
     DisposableEffect(Unit) {
-        localShapeSelected = state.shapeSelected
         scope.launch {
-            listState.animateScrollToItem(shapeSelected, 1)
+            listState.animateScrollToItem(state.shapeSelected, 1)
         }
         onDispose {}
     }
