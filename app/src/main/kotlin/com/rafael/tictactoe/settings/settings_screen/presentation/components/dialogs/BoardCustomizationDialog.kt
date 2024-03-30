@@ -47,7 +47,6 @@ import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -114,7 +113,7 @@ fun BoardCustomizationDialog(
     var rgbColorOld by remember { mutableStateOf(Color.Yellow) }
     val rgbColorCurrentAnimated by animateColorAsState(rgbColorCurrent)
     val rgbColorOldAnimated by animateColorAsState(rgbColorOld)
-    var localBoardCardsBorderColor by remember { mutableStateOf(Color.White) }
+    var localBoardCardsBorderColor by remember { mutableStateOf(state.boardCardsBorderColor) }
     var localBoardCardsBorderColorRGB by remember(rgbColorCurrentAnimated) {
         mutableStateOf(rgbColorCurrentAnimated)
     }
@@ -123,11 +122,13 @@ fun BoardCustomizationDialog(
     )
 
     LaunchedEffect(isRGBEffectOn) {
-        rgbAnimController.animate().collect { currentColor ->
-            rgbColorCurrent = currentColor
-            delay(125L)
-            rgbColorOld = currentColor
-            delay(125L)
+        if (localShapeSelected == 3) {
+            rgbAnimController.animate().collect { currentColor ->
+                rgbColorCurrent = currentColor
+                delay(125L)
+                rgbColorOld = currentColor
+                delay(125L)
+            }
             if (!isInitialized) isInitialized = true
         }
     }
@@ -252,6 +253,7 @@ fun BoardCustomizationDialog(
                                     .clip(RoundedCornerShape(24.dp))
                                     .clickable {
                                         localShapeSelected = index
+                                        isInitialized = false
                                         scope.launch { listState.animateScrollToItem(index, 1) }
                                     },
                             ) {
@@ -263,11 +265,11 @@ fun BoardCustomizationDialog(
                                         shape = RoundedCornerShape(shape.cornerRadius),
                                         border = if (shape.thickness > 0f && index == 3) {
                                             when {
-                                            localShapeSelected == 3 && isRGBEffectOn && isGradientOn -> BorderStroke(shape.thickness.dp, rgbGradientBrush)
-                                            localShapeSelected == 3 && isRGBEffectOn && !isGradientOn -> BorderStroke(shape.thickness.dp, localBoardCardsBorderColorRGB)
-                                            localShapeSelected != 3 && isRGBEffectOn -> BorderStroke(shape.thickness.dp, Brush.linearGradient(colors = listOf(Color.Red, Color.Yellow)))
-                                            else -> BorderStroke(shape.thickness.dp, shape.borderColor)          
-                                        }
+                                                localShapeSelected == 3 && isRGBEffectOn && isGradientOn -> BorderStroke(shape.thickness.dp, rgbGradientBrush)
+                                                localShapeSelected == 3 && isRGBEffectOn && !isGradientOn -> BorderStroke(shape.thickness.dp, localBoardCardsBorderColorRGB)
+                                                localShapeSelected != 3 && isRGBEffectOn -> BorderStroke(shape.thickness.dp, Brush.linearGradient(colors = listOf(Color.Red, Color.Yellow)))
+                                                else -> BorderStroke(shape.thickness.dp, shape.borderColor)
+                                            }
                                         } else {
                                             null
                                         },
@@ -404,7 +406,7 @@ fun BoardCustomizationDialog(
                                             .padding(vertical = 12.dp)
                                             .size(240.dp),
                                         controller = colorPickerController,
-                                        initialColor = remember { if (isInitialized) Color.White else state.boardCardsBorderColor },
+                                        initialColor = remember { if (isInitialized) Color.White else localBoardCardsBorderColor },
                                         onColorChanged = { colorEnvelope ->
                                             localBoardCardsBorderColor = colorEnvelope.color
                                             localCardsBorderHexColor = colorEnvelope.hexCode
@@ -422,6 +424,7 @@ fun BoardCustomizationDialog(
                                     wheelRadius = 12.dp,
                                     wheelColor = Color.Gray,
                                     borderRadius = 8.dp,
+                                    initialColor = remember { if (isInitialized) Color.White else localBoardCardsBorderColor },
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .height(25.dp),
@@ -437,6 +440,7 @@ fun BoardCustomizationDialog(
                                     wheelRadius = 12.dp,
                                     wheelColor = Color.Gray,
                                     borderRadius = 8.dp,
+                                    initialColor = remember { if (isInitialized) Color.White else localBoardCardsBorderColor },
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .height(25.dp),
@@ -537,7 +541,7 @@ fun BoardCustomizationDialog(
     }
 
     DisposableEffect(Unit) {
-       scope.launch {
+        scope.launch {
             listState.animateScrollToItem(state.shapeSelected, 1)
         }
         onDispose {}
