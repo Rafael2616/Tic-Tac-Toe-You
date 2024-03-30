@@ -101,10 +101,10 @@ fun BoardCustomizationDialog(
     var sliderThickness by remember { mutableStateOf(state.boardCardsThickness) }
     var sliderElevation by remember { mutableStateOf(state.boardCardsElevation) }
     var sliderShadow by remember { mutableStateOf(state.boardCardsShadow) }
-    val boardCardsBorderColor by animateColorAsState(state.boardCardsBorderColor)
     var localShapeSelected by remember { mutableIntStateOf(state.shapeSelected) }
     var localCardsBorderHexColor by remember { mutableStateOf("FFFFFFFF") }
     val context = LocalContext.current
+    var isInitialized by remember { mutableStateOf(false) }
     val clipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     val clipData = ClipData.newPlainText(context.getString(R.string.border_color), localCardsBorderHexColor)
     var isRGBEffectOn by remember { mutableStateOf(state.isRGBEffectOn) }
@@ -114,9 +114,9 @@ fun BoardCustomizationDialog(
     var rgbColorOld by remember { mutableStateOf(Color.Yellow) }
     val rgbColorCurrentAnimated by animateColorAsState(rgbColorCurrent)
     val rgbColorOldAnimated by animateColorAsState(rgbColorOld)
-    val shouldUseRGBEffect = remember { derivedStateOf { isRGBEffectOn && localShapeSelected == 3 } }
-    var localBoardCardsBorderColor by remember(if (shouldUseRGBEffect.value) rgbColorCurrentAnimated else Unit) {
-        mutableStateOf(if (shouldUseRGBEffect.value) rgbColorCurrentAnimated else boardCardsBorderColor)
+    var localBoardCardsBorderColor by remember { mutableStateOf(Color.White) }
+    var localBoardCardsBorderColorRGB by remember(rgbColorCurrentAnimated) {
+        mutableStateOf(rgbColorCurrentAnimated)
     }
     val rgbGradientBrush = Brush.linearGradient(
         colors = listOf(rgbColorCurrentAnimated, rgbColorOldAnimated),
@@ -128,6 +128,7 @@ fun BoardCustomizationDialog(
             delay(125L)
             rgbColorOld = currentColor
             delay(125L)
+            if (!isInitialized) isInitialized = true
         }
     }
 
@@ -260,12 +261,13 @@ fun BoardCustomizationDialog(
                                 ) {
                                     Card(
                                         shape = RoundedCornerShape(shape.cornerRadius),
-                                        border = if (index == 3 && shape.thickness > 0f) {
-                                            if (shouldUseRGBEffect.value && isGradientOn) {
-                                                BorderStroke(shape.thickness.dp, rgbGradientBrush)
-                                            } else {
-                                                BorderStroke(shape.thickness.dp, shape.borderColor)
-                                            }
+                                        border = if (shape.thickness > 0f && index == 3) {
+                                            when {
+                                            localShapeSelected == 3 && isRGBEffectOn && isGradientOn -> BorderStroke(shape.thickness.dp, rgbGradientBrush)
+                                            localShapeSelected == 3 && isRGBEffectOn && !isGradientOn -> BorderStroke(shape.thickness.dp, localBoardCardsBorderColorRGB)
+                                            localShapeSelected != 3 && isRGBEffectOn -> BorderStroke(shape.thickness.dp, Brush.linearGradient(colors = listOf(Color.Red, Color.Yellow)))
+                                            else -> BorderStroke(shape.thickness.dp, shape.borderColor)          
+                                        }
                                         } else {
                                             null
                                         },
@@ -378,7 +380,7 @@ fun BoardCustomizationDialog(
                                 .animateContentSize(),
                             horizontalAlignment = Alignment.CenterHorizontally,
                         ) {
-                            if (sliderThickness > 0f && !isRGBEffectOn) {
+                            if (!isRGBEffectOn) {
                                 Row(
                                     modifier = Modifier.fillMaxWidth(),
                                     verticalAlignment = Alignment.CenterVertically,
@@ -402,7 +404,7 @@ fun BoardCustomizationDialog(
                                             .padding(vertical = 12.dp)
                                             .size(240.dp),
                                         controller = colorPickerController,
-                                        initialColor = boardCardsBorderColor,
+                                        initialColor = remember { if (isInitialized) Color.White else state.boardCardsBorderColor },
                                         onColorChanged = { colorEnvelope ->
                                             localBoardCardsBorderColor = colorEnvelope.color
                                             localCardsBorderHexColor = colorEnvelope.hexCode
@@ -452,15 +454,15 @@ fun BoardCustomizationDialog(
                     .padding(horizontal = 12.dp)
                     .padding(bottom = 12.dp),
             ) {
-                if (localShapeSelected == 3 && (sliderCornerRadius != 12f || sliderThickness != 2f || sliderElevation != 20f || sliderShadow != 0f || localBoardCardsBorderColor != Color.White)) {
+                if (localShapeSelected == 3 && (sliderCornerRadius != 12f || sliderThickness != 2f || sliderElevation != 20f || sliderShadow != 0f || !isGradientOn || isRGBEffectOn || localBoardCardsBorderColor != Color.White)) {
                     Card(
                         modifier = Modifier
                             .wrapContentSize()
                             .clip(RoundedCornerShape(24.dp))
                             .clickable {
-                                localBoardCardsBorderColor = Color.White
                                 isGradientOn = true
                                 isRGBEffectOn = false
+                                localBoardCardsBorderColor = Color.White
                                 sliderCornerRadius = 12f
                                 sliderThickness = 2f
                                 sliderElevation = 20f
@@ -535,7 +537,7 @@ fun BoardCustomizationDialog(
     }
 
     DisposableEffect(Unit) {
-        scope.launch {
+       scope.launch {
             listState.animateScrollToItem(state.shapeSelected, 1)
         }
         onDispose {}
