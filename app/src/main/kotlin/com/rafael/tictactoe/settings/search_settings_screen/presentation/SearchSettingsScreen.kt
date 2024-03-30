@@ -312,7 +312,7 @@ fun SearchSettingsScreen(
                                                 if (setting.index == 3) {
                                                     Card(
                                                         shape = RoundedCornerShape((state.boardCardsCornerRadius / 4).dp),
-                                                        border = if (index == 3 && state.boardCardsThickness != 0f) {
+                                                        border = if (index == 3 && state.boardCardsThickness != 0f && state.shapeSelected == 3) {
                                                             if (state.isRGBEffectOn) {
                                                                 BorderStroke((state.boardCardsThickness / 2).dp, rgbGradientBrush)
                                                             } else {

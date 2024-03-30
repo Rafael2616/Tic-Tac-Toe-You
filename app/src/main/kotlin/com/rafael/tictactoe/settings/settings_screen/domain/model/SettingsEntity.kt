@@ -39,7 +39,7 @@ data class SettingsEntity(
                 selectedCircleColor = 5,
                 appVersion = "0",
                 shapeSelected = 1,
-                boardCardsCornerRadius = 12f,
+                boardCardsCornerRadius = 24f,
                 boardCardsThickness = 2f,
                 boardCardsElevation = 20f,
                 boardCardsShadow = 0f,

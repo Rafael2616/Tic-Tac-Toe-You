@@ -42,7 +42,7 @@ class Migrations {
     val migration2To3 = object : Migration(2, 3) {
         override fun migrate(db: SupportSQLiteDatabase) {
             val addShapeSelected = "ALTER TABLE 'settings' ADD COLUMN 'shapeSelected' INTEGER NOT NULL DEFAULT 1"
-            val addBoardCardsCornerRadius = "ALTER TABLE 'settings' ADD COLUMN 'boardCardsCornerRadius' FLOAT NOT NULL DEFAULT 12.0"
+            val addBoardCardsCornerRadius = "ALTER TABLE 'settings' ADD COLUMN 'boardCardsCornerRadius' FLOAT NOT NULL DEFAULT 24.0"
             val addBoardCardsThickness = "ALTER TABLE 'settings' ADD COLUMN 'boardCardsThickness' FLOAT NOT NULL DEFAULT 2.0"
             val addBoardCardsElevation = "ALTER TABLE 'settings' ADD COLUMN 'boardCardsElevation' FLOAT NOT NULL DEFAULT 20.0"
             val addBoardCardsShadow = "ALTER TABLE 'settings' ADD COLUMN 'boardCardsShadow' FLOAT NOT NULL DEFAULT 0.0"

@@ -96,10 +96,10 @@ fun BoardCustomizationDialog(
     val colorPickerController = rememberColorPickerController()
     val colorParser = rememberColorParser()
     val scrollState = rememberScrollState()
-    var sliderCornerRadius by remember { mutableStateOf(state.boardCardsCornerRadius) }
-    var sliderThickness by remember { mutableStateOf(state.boardCardsThickness) }
-    var sliderElevation by remember { mutableStateOf(state.boardCardsElevation) }
-    var sliderShadow by remember { mutableStateOf(state.boardCardsShadow) }
+    var sliderCornerRadius by remember { mutableStateOf(if (state.shapeSelected == 3) state.boardCardsCornerRadius else 24f) }
+    var sliderThickness by remember { mutableStateOf(if (state.shapeSelected == 3) state.boardCardsThickness else 2f) }
+    var sliderElevation by remember { mutableStateOf(if (state.shapeSelected == 3) state.boardCardsElevation else 20f) }
+    var sliderShadow by remember { mutableStateOf(if (state.shapeSelected == 3) state.boardCardsShadow else 0f) }
     var localShapeSelected by remember { mutableIntStateOf(state.shapeSelected) }
     var localCardsBorderHexColor by remember { mutableStateOf("FFFFFFFF") }
     val context = LocalContext.current
@@ -113,7 +113,7 @@ fun BoardCustomizationDialog(
     var rgbColorOld by remember { mutableStateOf(Color.Yellow) }
     val rgbColorCurrentAnimated by animateColorAsState(rgbColorCurrent)
     val rgbColorOldAnimated by animateColorAsState(rgbColorOld)
-    var localBoardCardsBorderColor by remember { mutableStateOf(state.boardCardsBorderColor) }
+    var localBoardCardsBorderColor by remember { mutableStateOf(if (state.shapeSelected == 3) state.boardCardsBorderColor else Color.White) }
     var localBoardCardsBorderColorRGB by remember(rgbColorCurrentAnimated) {
         mutableStateOf(rgbColorCurrentAnimated)
     }
@@ -382,7 +382,7 @@ fun BoardCustomizationDialog(
                                 .animateContentSize(),
                             horizontalAlignment = Alignment.CenterHorizontally,
                         ) {
-                            if (!isRGBEffectOn) {
+                            if (!isRGBEffectOn && sliderThickness > 0f) {
                                 Row(
                                     modifier = Modifier.fillMaxWidth(),
                                     verticalAlignment = Alignment.CenterVertically,
