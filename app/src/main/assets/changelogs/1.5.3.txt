@@ -1,0 +1,7 @@
+Added:
+- Board Customization :)
+ -> Edit the corner radius, board elevation and thickness, shadow, border color and much more!!!
+- RGB Effect for cards border
+
+Improvements:
+- Updated dependencies
