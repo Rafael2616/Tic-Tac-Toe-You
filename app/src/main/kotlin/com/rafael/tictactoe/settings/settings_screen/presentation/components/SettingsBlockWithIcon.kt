@@ -64,6 +64,7 @@ import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 import com.rafael.tictactoe.settings.settingsScreen.domain.useCases.toggleSettingsUseCase
 import com.rafael.tictactoe.settings.settingsScreen.domain.util.rememberComponentValidator
+import com.rafael.tictactoe.settings.util.BoardConstants.SHAPE_CUSTOM
 import kotlin.math.roundToInt
 import kotlinx.collections.immutable.ImmutableList
 
@@ -204,7 +205,7 @@ fun SettingsBlockWithIcon(
                                     if (index == 3) {
                                         Card(
                                             shape = RoundedCornerShape((state.boardCardsCornerRadius / 4).dp),
-                                            border = if (index == 3 && state.boardCardsThickness != 0f && state.shapeSelected == 3) {
+                                            border = if (index == 3 && state.boardCardsThickness != 0f && state.shapeSelected == SHAPE_CUSTOM) {
                                                 if (state.isRGBEffectOn) {
                                                     BorderStroke((state.boardCardsThickness / 2).dp, rgbGradientBrush)
                                                 } else {

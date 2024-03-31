@@ -79,6 +79,12 @@ import com.rafael.tictactoe.settings.settingsScreen.domain.model.BoardCustomizat
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.BoardShape
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
+import com.rafael.tictactoe.settings.util.BoardConstants.DEF_CARDS_BORDER_THICKNESS
+import com.rafael.tictactoe.settings.util.BoardConstants.DEF_CARDS_COLOR
+import com.rafael.tictactoe.settings.util.BoardConstants.DEF_CARDS_CORNER_RADIUS
+import com.rafael.tictactoe.settings.util.BoardConstants.DEF_CARDS_ELEVATION
+import com.rafael.tictactoe.settings.util.BoardConstants.DEF_CARDS_SHADOW
+import com.rafael.tictactoe.settings.util.BoardConstants.SHAPE_CUSTOM
 import com.smarttoolfactory.extendedcolors.parser.rememberColorParser
 import kotlin.math.roundToInt
 import kotlinx.coroutines.delay
@@ -96,10 +102,10 @@ fun BoardCustomizationDialog(
     val colorPickerController = rememberColorPickerController()
     val colorParser = rememberColorParser()
     val scrollState = rememberScrollState()
-    var sliderCornerRadius by remember { mutableStateOf(if (state.shapeSelected == 3) state.boardCardsCornerRadius else 24f) }
-    var sliderThickness by remember { mutableStateOf(if (state.shapeSelected == 3) state.boardCardsThickness else 2f) }
-    var sliderElevation by remember { mutableStateOf(if (state.shapeSelected == 3) state.boardCardsElevation else 20f) }
-    var sliderShadow by remember { mutableStateOf(if (state.shapeSelected == 3) state.boardCardsShadow else 0f) }
+    var sliderCornerRadius by remember { mutableStateOf(if (state.shapeSelected == SHAPE_CUSTOM) state.boardCardsCornerRadius else DEF_CARDS_CORNER_RADIUS) }
+    var sliderThickness by remember { mutableStateOf(if (state.shapeSelected == SHAPE_CUSTOM) state.boardCardsThickness else DEF_CARDS_BORDER_THICKNESS) }
+    var sliderElevation by remember { mutableStateOf(if (state.shapeSelected == SHAPE_CUSTOM) state.boardCardsElevation else DEF_CARDS_ELEVATION) }
+    var sliderShadow by remember { mutableStateOf(if (state.shapeSelected == SHAPE_CUSTOM) state.boardCardsShadow else DEF_CARDS_SHADOW) }
     var localShapeSelected by remember { mutableIntStateOf(state.shapeSelected) }
     var localCardsBorderHexColor by remember { mutableStateOf("FFFFFFFF") }
     val context = LocalContext.current
@@ -113,7 +119,7 @@ fun BoardCustomizationDialog(
     var rgbColorOld by remember { mutableStateOf(Color.Yellow) }
     val rgbColorCurrentAnimated by animateColorAsState(rgbColorCurrent)
     val rgbColorOldAnimated by animateColorAsState(rgbColorOld)
-    var localBoardCardsBorderColor by remember { mutableStateOf(if (state.shapeSelected == 3) state.boardCardsBorderColor else Color.White) }
+    var localBoardCardsBorderColor by remember { mutableStateOf(if (state.shapeSelected == SHAPE_CUSTOM) state.boardCardsBorderColor else DEF_CARDS_COLOR) }
     var localBoardCardsBorderColorRGB by remember(rgbColorCurrentAnimated) {
         mutableStateOf(rgbColorCurrentAnimated)
     }
@@ -122,7 +128,7 @@ fun BoardCustomizationDialog(
     )
 
     LaunchedEffect(isRGBEffectOn) {
-        if (localShapeSelected == 3) {
+        if (localShapeSelected == SHAPE_CUSTOM) {
             rgbAnimController.animate().collect { currentColor ->
                 rgbColorCurrent = currentColor
                 delay(125L)
@@ -162,28 +168,28 @@ fun BoardCustomizationDialog(
             name = R.string.corner_radius,
             valueRange = 0f..65f,
             value = sliderCornerRadius,
-            onValueChange = { if (localShapeSelected == 3) sliderCornerRadius = it },
+            onValueChange = { if (localShapeSelected == SHAPE_CUSTOM) sliderCornerRadius = it },
             steps = 64,
         ),
         BoardCustomization(
             name = R.string.border_thickness,
             valueRange = 0f..5f,
             value = sliderThickness,
-            onValueChange = { if (localShapeSelected == 3) sliderThickness = it },
+            onValueChange = { if (localShapeSelected == SHAPE_CUSTOM) sliderThickness = it },
             steps = 19,
         ),
         BoardCustomization(
             name = R.string.elevation,
             valueRange = 0f..80f,
             value = sliderElevation,
-            onValueChange = { if (localShapeSelected == 3) sliderElevation = it },
+            onValueChange = { if (localShapeSelected == SHAPE_CUSTOM) sliderElevation = it },
             steps = 15,
         ),
         BoardCustomization(
             name = R.string.shadow,
             valueRange = 0f..20f,
             value = sliderShadow,
-            onValueChange = { if (localShapeSelected == 3) sliderShadow = it },
+            onValueChange = { if (localShapeSelected == SHAPE_CUSTOM) sliderShadow = it },
             steps = 18,
         ),
     )
@@ -205,8 +211,8 @@ fun BoardCustomizationDialog(
                 modifier = Modifier
                     .fillMaxWidth()
                     .then(
-                        if (localShapeSelected == 3 && sliderThickness > 0f) {
-                            Modifier.height(575.dp)
+                        if (localShapeSelected == SHAPE_CUSTOM && sliderThickness > 0f) {
+                            Modifier.height(580.dp)
                         } else {
                             Modifier.wrapContentSize()
                         },
@@ -263,11 +269,11 @@ fun BoardCustomizationDialog(
                                 ) {
                                     Card(
                                         shape = RoundedCornerShape(shape.cornerRadius),
-                                        border = if (shape.thickness > 0f && index == 3) {
+                                        border = if (shape.thickness > 0f && index == SHAPE_CUSTOM) {
                                             when {
-                                                localShapeSelected == 3 && isRGBEffectOn && isGradientOn -> BorderStroke(shape.thickness.dp, rgbGradientBrush)
-                                                localShapeSelected == 3 && isRGBEffectOn && !isGradientOn -> BorderStroke(shape.thickness.dp, localBoardCardsBorderColorRGB)
-                                                localShapeSelected != 3 && isRGBEffectOn -> BorderStroke(shape.thickness.dp, Brush.linearGradient(colors = listOf(Color.Red, Color.Yellow)))
+                                                localShapeSelected == SHAPE_CUSTOM && isRGBEffectOn && isGradientOn -> BorderStroke(shape.thickness.dp, rgbGradientBrush)
+                                                localShapeSelected == SHAPE_CUSTOM && isRGBEffectOn && !isGradientOn -> BorderStroke(shape.thickness.dp, localBoardCardsBorderColorRGB)
+                                                localShapeSelected != SHAPE_CUSTOM && isRGBEffectOn -> BorderStroke(shape.thickness.dp, Brush.linearGradient(colors = listOf(Color.Red, Color.Yellow)))
                                                 else -> BorderStroke(shape.thickness.dp, shape.borderColor)
                                             }
                                         } else {
@@ -294,7 +300,7 @@ fun BoardCustomizationDialog(
                         }
                     }
                 }
-                if (localShapeSelected == 3) {
+                if (localShapeSelected == SHAPE_CUSTOM) {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -406,7 +412,7 @@ fun BoardCustomizationDialog(
                                             .padding(vertical = 12.dp)
                                             .size(240.dp),
                                         controller = colorPickerController,
-                                        initialColor = remember { if (isInitialized) Color.White else localBoardCardsBorderColor },
+                                        initialColor = remember { if (isInitialized) DEF_CARDS_COLOR else localBoardCardsBorderColor },
                                         onColorChanged = { colorEnvelope ->
                                             localBoardCardsBorderColor = colorEnvelope.color
                                             localCardsBorderHexColor = colorEnvelope.hexCode
@@ -424,7 +430,7 @@ fun BoardCustomizationDialog(
                                     wheelRadius = 12.dp,
                                     wheelColor = Color.Gray,
                                     borderRadius = 8.dp,
-                                    initialColor = remember { if (isInitialized) Color.White else localBoardCardsBorderColor },
+                                    initialColor = remember { if (isInitialized) DEF_CARDS_COLOR else localBoardCardsBorderColor },
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .height(25.dp),
@@ -440,7 +446,7 @@ fun BoardCustomizationDialog(
                                     wheelRadius = 12.dp,
                                     wheelColor = Color.Gray,
                                     borderRadius = 8.dp,
-                                    initialColor = remember { if (isInitialized) Color.White else localBoardCardsBorderColor },
+                                    initialColor = remember { if (isInitialized) DEF_CARDS_COLOR else localBoardCardsBorderColor },
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .height(25.dp),
@@ -458,7 +464,7 @@ fun BoardCustomizationDialog(
                     .padding(horizontal = 12.dp)
                     .padding(bottom = 12.dp),
             ) {
-                if (localShapeSelected == 3 && (sliderCornerRadius != 12f || sliderThickness != 2f || sliderElevation != 20f || sliderShadow != 0f || !isGradientOn || isRGBEffectOn || localBoardCardsBorderColor != Color.White)) {
+                if (localShapeSelected == SHAPE_CUSTOM && (sliderCornerRadius != DEF_CARDS_CORNER_RADIUS || sliderThickness != DEF_CARDS_BORDER_THICKNESS || sliderElevation != DEF_CARDS_ELEVATION || sliderShadow != DEF_CARDS_SHADOW || !isGradientOn || isRGBEffectOn || localBoardCardsBorderColor != DEF_CARDS_COLOR)) {
                     Card(
                         modifier = Modifier
                             .wrapContentSize()
@@ -466,12 +472,12 @@ fun BoardCustomizationDialog(
                             .clickable {
                                 isGradientOn = true
                                 isRGBEffectOn = false
-                                localBoardCardsBorderColor = Color.White
-                                sliderCornerRadius = 12f
-                                sliderThickness = 2f
-                                sliderElevation = 20f
-                                sliderShadow = 0f
-                                colorPickerController.selectByColor(Color.White, true)
+                                localBoardCardsBorderColor = DEF_CARDS_COLOR
+                                sliderCornerRadius = DEF_CARDS_CORNER_RADIUS
+                                sliderThickness = DEF_CARDS_BORDER_THICKNESS
+                                sliderElevation = DEF_CARDS_ELEVATION
+                                sliderShadow = DEF_CARDS_SHADOW
+                                colorPickerController.selectByColor(DEF_CARDS_COLOR, true)
                             },
                         colors = CardDefaults.cardColors(
                             containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(70.dp),

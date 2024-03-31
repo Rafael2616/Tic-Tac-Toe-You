@@ -94,6 +94,7 @@ import com.rafael.tictactoe.settings.settingsScreen.domain.util.rememberComponen
 import com.rafael.tictactoe.settings.settingsScreen.presentation.components.dialogs.BoardCustomizationDialog
 import com.rafael.tictactoe.settings.settingsScreen.presentation.components.dialogs.ColorSelectionDialog
 import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
+import com.rafael.tictactoe.settings.util.BoardConstants.SHAPE_CUSTOM
 import kotlin.math.roundToInt
 
 @Composable
@@ -312,7 +313,7 @@ fun SearchSettingsScreen(
                                                 if (setting.index == 3) {
                                                     Card(
                                                         shape = RoundedCornerShape((state.boardCardsCornerRadius / 4).dp),
-                                                        border = if (index == 3 && state.boardCardsThickness != 0f && state.shapeSelected == 3) {
+                                                        border = if (index == 3 && state.boardCardsThickness != 0f && state.shapeSelected == SHAPE_CUSTOM) {
                                                             if (state.isRGBEffectOn) {
                                                                 BorderStroke((state.boardCardsThickness / 2).dp, rgbGradientBrush)
                                                             } else {

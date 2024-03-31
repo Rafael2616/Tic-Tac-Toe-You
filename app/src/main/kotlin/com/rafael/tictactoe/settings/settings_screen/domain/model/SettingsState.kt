@@ -5,6 +5,11 @@ import android.net.Uri
 import androidx.compose.ui.graphics.Color
 import com.rafael.tictactoe.common.domain.util.getVersionName
 import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Customization
+import com.rafael.tictactoe.settings.util.BoardConstants.DEF_CARDS_BORDER_THICKNESS
+import com.rafael.tictactoe.settings.util.BoardConstants.DEF_CARDS_COLOR
+import com.rafael.tictactoe.settings.util.BoardConstants.DEF_CARDS_CORNER_RADIUS
+import com.rafael.tictactoe.settings.util.BoardConstants.DEF_CARDS_ELEVATION
+import com.rafael.tictactoe.settings.util.BoardConstants.DEF_CARDS_SHADOW
 
 data class SettingsState(
     val color: Colors = Colors.get(),
@@ -30,11 +35,11 @@ data class SettingsState(
     val profilePictureUri: Uri = Uri.EMPTY,
     val showBoardCustomizationDialog: Boolean = false,
     val shapeSelected: Int = 1,
-    val boardCardsCornerRadius: Float = 24f,
-    val boardCardsThickness: Float = 2f,
-    val boardCardsElevation: Float = 20f,
-    val boardCardsShadow: Float = 0f,
-    val boardCardsBorderColor: Color = Color.White,
+    val boardCardsCornerRadius: Float = DEF_CARDS_CORNER_RADIUS,
+    val boardCardsThickness: Float = DEF_CARDS_BORDER_THICKNESS,
+    val boardCardsElevation: Float = DEF_CARDS_ELEVATION,
+    val boardCardsShadow: Float = DEF_CARDS_SHADOW,
+    val boardCardsBorderColor: Color = DEF_CARDS_COLOR,
     val isRGBEffectOn: Boolean = false,
     val isGradientOn: Boolean = true,
 )
