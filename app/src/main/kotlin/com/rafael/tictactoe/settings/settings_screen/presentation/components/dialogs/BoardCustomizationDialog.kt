@@ -128,7 +128,7 @@ fun BoardCustomizationDialog(
     )
 
     LaunchedEffect(isRGBEffectOn) {
-        if (localShapeSelected == SHAPE_CUSTOM) {
+        if (localShapeSelected == SHAPE_CUSTOM && isRGBEffectOn) {
             rgbAnimController.animate().collect { currentColor ->
                 rgbColorCurrent = currentColor
                 delay(125L)
