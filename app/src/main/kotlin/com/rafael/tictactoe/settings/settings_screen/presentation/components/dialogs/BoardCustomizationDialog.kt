@@ -381,14 +381,14 @@ fun BoardCustomizationDialog(
                             HorizontalDivider()
                             Spacer(Modifier.height(6.dp))
                         }
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .wrapContentHeight()
-                                .animateContentSize(),
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                        ) {
-                            if (!isRGBEffectOn && sliderThickness > 0f) {
+                        if (!isRGBEffectOn && sliderThickness > 0f) {
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .wrapContentHeight()
+                                    .animateContentSize(),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                            ) {
                                 Row(
                                     modifier = Modifier.fillMaxWidth(),
                                     verticalAlignment = Alignment.CenterVertically,
@@ -478,6 +478,7 @@ fun BoardCustomizationDialog(
                                 sliderElevation = DEF_CARDS_ELEVATION
                                 sliderShadow = DEF_CARDS_SHADOW
                                 colorPickerController.selectByColor(DEF_CARDS_COLOR, true)
+                                colorPickerController.setEnabled(false)
                             },
                         colors = CardDefaults.cardColors(
                             containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(70.dp),
