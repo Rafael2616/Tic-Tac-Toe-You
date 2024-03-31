@@ -478,7 +478,6 @@ fun BoardCustomizationDialog(
                                 sliderElevation = DEF_CARDS_ELEVATION
                                 sliderShadow = DEF_CARDS_SHADOW
                                 colorPickerController.selectByColor(DEF_CARDS_COLOR, true)
-                                colorPickerController.setEnabled(false)
                             },
                         colors = CardDefaults.cardColors(
                             containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(70.dp),
