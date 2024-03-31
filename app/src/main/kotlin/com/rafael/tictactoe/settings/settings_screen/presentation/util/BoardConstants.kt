@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.util
+package com.rafael.tictactoe.settings.settingsScreen.presentation.util
 
 import androidx.compose.ui.graphics.Color
 

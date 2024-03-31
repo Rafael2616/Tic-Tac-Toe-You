@@ -64,7 +64,7 @@ import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 import com.rafael.tictactoe.settings.settingsScreen.domain.useCases.toggleSettingsUseCase
 import com.rafael.tictactoe.settings.settingsScreen.domain.util.rememberComponentValidator
-import com.rafael.tictactoe.settings.util.BoardConstants.SHAPE_CUSTOM
+import com.rafael.tictactoe.settings.settingsScreen.presentation.util.BoardConstants.SHAPE_CUSTOM
 import kotlin.math.roundToInt
 import kotlinx.collections.immutable.ImmutableList
 

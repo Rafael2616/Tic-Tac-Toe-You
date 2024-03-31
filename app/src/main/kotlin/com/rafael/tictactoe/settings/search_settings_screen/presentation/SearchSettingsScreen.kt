@@ -93,8 +93,8 @@ import com.rafael.tictactoe.settings.settingsScreen.domain.useCases.toggleSettin
 import com.rafael.tictactoe.settings.settingsScreen.domain.util.rememberComponentValidator
 import com.rafael.tictactoe.settings.settingsScreen.presentation.components.dialogs.BoardCustomizationDialog
 import com.rafael.tictactoe.settings.settingsScreen.presentation.components.dialogs.ColorSelectionDialog
+import com.rafael.tictactoe.settings.settingsScreen.presentation.util.BoardConstants.SHAPE_CUSTOM
 import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
-import com.rafael.tictactoe.settings.util.BoardConstants.SHAPE_CUSTOM
 import kotlin.math.roundToInt
 
 @Composable
