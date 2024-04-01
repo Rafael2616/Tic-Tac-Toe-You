@@ -21,7 +21,10 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,6 +35,7 @@ import androidx.core.app.ActivityCompat
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
+import kotlinx.coroutines.delay
 
 @Composable
 fun ProfilePictureMenu(
@@ -46,6 +50,19 @@ fun ProfilePictureMenu(
         uri?.let { onSaveImage(uri) }
     }
     val activity = LocalContext.current as ComponentActivity
+    var isStoragePermissionGranted by remember { mutableStateOf(false) }
+    var isClicked by remember { mutableStateOf(false) }
+
+    // An "callback" that observes when storage permission is granted
+    // to show PickVisualMedia
+    LaunchedEffect(isClicked) {
+        while (isClicked) {
+            if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                if (!isStoragePermissionGranted) isStoragePermissionGranted = true
+            }
+            delay(200L)
+        }
+    }
 
     Box(
         modifier = modifier
@@ -61,9 +78,8 @@ fun ProfilePictureMenu(
             DropdownMenuItem(
                 text = { Text(text = stringResource(if (profilePicture == null) R.string.add_photo else R.string.change_photo)) },
                 onClick = {
-                    if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                        launcher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-                    } else {
+                    isClicked = true
+                    if (!isStoragePermissionGranted) {
                         ActivityCompat.requestPermissions(
                             activity,
                             arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
@@ -91,5 +107,10 @@ fun ProfilePictureMenu(
                 )
             }
         }
+    }
+
+    if (isStoragePermissionGranted && isClicked) {
+        launcher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        isClicked = false
     }
 }
