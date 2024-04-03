@@ -34,8 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.rafael.tictactoe.R
-import com.rafael.tictactoe.common.domain.util.getChangelogFile
-import com.rafael.tictactoe.common.domain.util.getVersionName
+import com.rafael.tictactoe.common.domain.util.getCurrentChangelogFile
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 
 @Suppress("ktlint:compose:modifier-not-used-at-root")
@@ -44,10 +43,8 @@ fun WhatsNewDialog(
     onEvent: (SettingsEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val version = getVersionName()
-    val versionNumber = if (version.contains("-")) version.split("-")[0] else version
     val context = LocalContext.current
-    val changelog = getChangelogFile(context)
+    val (versionNumber, changelog) = context.getCurrentChangelogFile()
 
     Dialog(
         onDismissRequest = {
