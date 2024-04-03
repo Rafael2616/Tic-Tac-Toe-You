@@ -167,7 +167,7 @@ fun GetPlayersPrefsDialog(
                         disabledContainerColor = containerColor,
                     )
                     val keyboardOptions = KeyboardOptions(
-                        autoCorrect = true,
+                        autoCorrectEnabled = true,
                         keyboardType = KeyboardType.Text,
                         imeAction = ImeAction.Done,
                         capitalization = KeyboardCapitalization.Words,
