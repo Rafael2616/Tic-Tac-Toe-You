@@ -95,5 +95,7 @@
     <string name="rgb_effect">Efeito RGB</string>
     <string name="color_gradient">Gradiente de cor</string>
     <string name="overheat_warning">Aviso: esse recurso pode causar superaquecimento e perda de desempenho</string>
+    <string name="current">Atual</string>
+    <string name="update_history">Histórico de atualizações</string>
 
 </resources>

@@ -6,4 +6,5 @@ sealed class Destinations(val screen: String) {
     data object Settings : Destinations(screen = "settings")
     data object Library : Destinations(screen = "library")
     data object SearchSettings : Destinations(screen = "searchSettings")
+    data object Changelogs : Destinations(screen = "changelogs")
 }

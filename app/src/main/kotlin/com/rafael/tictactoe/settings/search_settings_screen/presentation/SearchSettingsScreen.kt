@@ -84,7 +84,7 @@ import coil.request.ImageRequest
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.getVersionCode
 import com.rafael.tictactoe.common.domain.util.getVersionName
-import com.rafael.tictactoe.game.mainScreen.presentation.components.WhatsNewDialog
+import com.rafael.tictactoe.settings.changelogsScreen.presentation.components.WhatsNewDialog
 import com.rafael.tictactoe.settings.searchSettingsScreen.domain.model.SearchSettingsEvent
 import com.rafael.tictactoe.settings.searchSettingsScreen.presentation.viewmodel.SearchSettingsViewModel
 import com.rafael.tictactoe.settings.settingsScreen.domain.enums.SettingsGroup

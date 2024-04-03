@@ -234,7 +234,7 @@ fun SettingsBlockWithIcon(
                         }
                         Column(
                             modifier = Modifier
-                                .width(if (isInLandscape) 350.dp else 240.dp)
+                                .width(if (isInLandscape) 350.dp else 270.dp)
                                 .padding(start = 16.dp, end = 10.dp)
                                 .animateContentSize(),
                             verticalArrangement = Arrangement.Center,

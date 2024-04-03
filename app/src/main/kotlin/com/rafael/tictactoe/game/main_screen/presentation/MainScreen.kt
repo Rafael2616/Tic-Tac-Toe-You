@@ -52,9 +52,9 @@ import com.rafael.tictactoe.game.domain.model.GameMode
 import com.rafael.tictactoe.game.gameScreen.presentation.viewmodel.GameViewModel
 import com.rafael.tictactoe.game.mainScreen.domain.model.MainEvent
 import com.rafael.tictactoe.game.mainScreen.domain.model.ScreenItem
-import com.rafael.tictactoe.game.mainScreen.presentation.components.WhatsNewDialog
 import com.rafael.tictactoe.game.mainScreen.presentation.util.ShortcutsIntentHandler
 import com.rafael.tictactoe.game.mainScreen.presentation.viewmodel.MainViewModel
+import com.rafael.tictactoe.settings.changelogsScreen.presentation.components.WhatsNewDialog
 import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
 
 @Composable

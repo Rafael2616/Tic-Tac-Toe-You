@@ -27,3 +27,22 @@ fun getChangelogFile(context: Context): String {
 
     return changelogContent?.joinToString("\n") ?: "No changelogs provided for this version"
 }
+
+fun Context.getChangelogFiles(): List<Pair<String, String>> {
+    var changelogFiles = mutableListOf<Pair<String, String>>()
+
+    try {
+        assets.list("changelogs/")
+            ?.filter { it.endsWith(".txt") }
+            ?.forEach { changelogFile ->
+                assets.open("changelogs/" + changelogFile).use { inputStream ->
+                    val changelog = inputStream.bufferedReader().readText()
+                    changelogFiles.add(Pair(changelogFile.removeSuffix(".txt"), changelog))
+                }
+            }
+    } catch (e: IOException) {
+        e.printStackTrace()
+    }
+
+    return if (changelogFiles.isNotEmpty()) changelogFiles.reversed() else listOf(Pair("unknown version", "no changelogs founded :("))
+}

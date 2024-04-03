@@ -18,6 +18,7 @@ import androidx.navigation.compose.rememberNavController
 import com.rafael.tictactoe.common.presentation.theme.AppTheme
 import com.rafael.tictactoe.game.gameScreen.presentation.GameScreen
 import com.rafael.tictactoe.game.mainScreen.presentation.MainScreen
+import com.rafael.tictactoe.settings.changelogsScreen.presentation.ChangelogsScreen
 import com.rafael.tictactoe.settings.libraryScreen.presentation.LibraryScreen
 import com.rafael.tictactoe.settings.searchSettingsScreen.presentation.SearchSettingsScreen
 import com.rafael.tictactoe.settings.settingsScreen.presentation.SettingsScreen
@@ -67,6 +68,9 @@ fun TicTacToeNavGraph(
                 }
                 composable(Destinations.SearchSettings.screen) {
                     SearchSettingsScreen(navController)
+                }
+                composable(Destinations.Changelogs.screen) {
+                    ChangelogsScreen(navController)
                 }
             }
         }

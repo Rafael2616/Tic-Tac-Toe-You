@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.mainScreen.presentation.components
+package com.rafael.tictactoe.settings.changelogsScreen.presentation.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box

@@ -11,11 +11,11 @@ import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material.icons.outlined.BrightnessMedium
 import androidx.compose.material.icons.outlined.Code
 import androidx.compose.material.icons.outlined.DarkMode
+import androidx.compose.material.icons.outlined.History
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.LightMode
 import androidx.compose.material.icons.outlined.MusicNote
 import androidx.compose.material.icons.outlined.MusicOff
-import androidx.compose.material.icons.outlined.NewReleases
 import androidx.compose.material.icons.outlined.Palette
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -178,13 +178,13 @@ data class SettingItem(
                 ),
                 // What's New
                 SettingItem(
-                    leadingIcon = Icons.Outlined.NewReleases,
+                    leadingIcon = Icons.Outlined.History,
                     trailingIcon = Icons.AutoMirrored.Filled.ArrowForward,
                     groupType = SettingsGroup.Others,
                     index = 2,
                     searchSpecs = searchItemSpec.copy(
                         id = UUID.randomUUID().toString(),
-                        text = context.getString(R.string.whats_new),
+                        text = context.getString(R.string.update_history),
                     ),
                 ),
                 // Licences Screen
