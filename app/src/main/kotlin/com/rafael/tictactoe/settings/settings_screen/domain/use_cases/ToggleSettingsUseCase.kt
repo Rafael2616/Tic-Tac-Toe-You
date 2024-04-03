@@ -58,7 +58,7 @@ fun toggleSettingsUseCase(
         when (index) {
             0 -> onEvent(SettingsEvent.ShowAboutAppCard(!state.isAboutShown))
             1 -> launcher!!.launch(githubRepoIntent)
-            2 -> navController!!.navigate(Destinations.Changelogs.screen) // onEvent(SettingsEvent.ShowWhatsNewDialog)
+            2 -> navController!!.navigate(Destinations.Changelogs.screen)
             3 -> navController!!.navigate(Destinations.Library.screen)
         }
     }
