@@ -1,7 +1,5 @@
 package com.rafael.tictactoe.settings.settingsScreen.presentation.components.dialogs
 
-import android.content.ClipData
-import android.content.ClipboardManager
 import android.content.Context
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
@@ -59,10 +57,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -108,10 +107,8 @@ fun BoardCustomizationDialog(
     var sliderShadow by remember { mutableStateOf(if (state.shapeSelected == SHAPE_CUSTOM) state.boardCardsShadow else DEF_CARDS_SHADOW) }
     var localShapeSelected by remember { mutableIntStateOf(state.shapeSelected) }
     var localCardsBorderHexColor by remember { mutableStateOf("FFFFFFFF") }
-    val context = LocalContext.current
     var isInitialized by remember { mutableStateOf(false) }
-    val clipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-    val clipData = ClipData.newPlainText(context.getString(R.string.border_color), localCardsBorderHexColor)
+    val clipboardManager = LocalClipboardManager.current
     var isRGBEffectOn by remember { mutableStateOf(state.isRGBEffectOn) }
     var isGradientOn by remember { mutableStateOf(state.isGradientOn) }
     val rgbAnimController = rememberRGBAnimation()
@@ -400,7 +397,7 @@ fun BoardCustomizationDialog(
                                             .clip(CircleShape)
                                             .background(localBoardCardsBorderColor)
                                             .size(15.dp)
-                                            .clickable { clipboardManager.setPrimaryClip(clipData) },
+                                            .clickable { clipboardManager.setText(AnnotatedString(localCardsBorderHexColor)) },
                                     )
                                 }
                                 Box(
