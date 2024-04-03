@@ -1,6 +1,5 @@
 package com.rafael.tictactoe.settings.settingsScreen.presentation.components.dialogs
 
-import android.content.Context
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.BorderStroke
