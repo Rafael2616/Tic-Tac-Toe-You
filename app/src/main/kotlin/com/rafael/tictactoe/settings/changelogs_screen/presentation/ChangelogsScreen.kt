@@ -113,7 +113,7 @@ fun ChangelogsScreen(
                         .fillMaxWidth()
                         .wrapContentHeight(),
                     colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(20.dp),
+                        containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp),
                     ),
                 ) {
                     Column(
