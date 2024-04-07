@@ -3,6 +3,7 @@ Added:
  -> Edit the corner radius, board elevation and thickness, shadow, border color and much more!!!
 - RGB Effect for cards border
 - Update history screen
+- Redesign Icons color selection dialog to add more color capabilities
 
 Improvements:
 - Updated dependencies
