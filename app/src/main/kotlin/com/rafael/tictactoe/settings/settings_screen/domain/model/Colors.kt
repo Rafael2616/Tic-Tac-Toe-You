@@ -26,7 +26,7 @@ data class Colors(
                 purple = Color(0xFF820AD1),
                 magenta = Color.Magenta,
                 white = Color.White,
-                cyan = Color.Cyan,
+                cyan = Color(0xFF00E8FF),
                 burnt_yellow = Color(0xFFFBBC04),
                 transparent = Color.Transparent,
             )
