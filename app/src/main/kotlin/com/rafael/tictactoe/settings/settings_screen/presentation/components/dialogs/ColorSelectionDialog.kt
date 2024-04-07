@@ -192,7 +192,8 @@ fun ColorSelectionDialog(
                     )
                     Box(
                         modifier = Modifier
-                            .size(20.dp)
+                            .size(30.dp)
+                            .clip(CircleShape)
                             .clickable {
                                 clipboardManager.setText(AnnotatedString(localHexColor))
                             },
@@ -206,7 +207,7 @@ fun ColorSelectionDialog(
                         }
                     }
                 }
-                Text(text = "Presets:")
+                Text(text = stringResource(R.string.presets))
                 LazyVerticalStaggeredGrid(
                     columns = StaggeredGridCells.Fixed(5),
                     modifier = Modifier

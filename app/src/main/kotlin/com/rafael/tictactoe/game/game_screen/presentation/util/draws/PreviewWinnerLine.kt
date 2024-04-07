@@ -7,8 +7,8 @@ import androidx.compose.ui.unit.dp
 
 fun DrawScope.drawWinnerLineinColorDialog(color: Color) {
     drawLine(
-        start = Offset(x = 20.dp.toPx(), y = 0.dp.toPx()),
-        end = Offset(x = 0.dp.toPx(), y = 20.dp.toPx()),
+        start = Offset(x = 28.dp.toPx(), y = 2.dp.toPx()),
+        end = Offset(x = 2.dp.toPx(), y = 28.dp.toPx()),
         strokeWidth = 4.dp.toPx(),
         color = color,
     )

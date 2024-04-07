@@ -47,8 +47,8 @@ fun DrawScope.drawCircleinDialog(color: Color) = drawCircle(
 
 // Circle Image adjusted for ColorSelectionDialog
 fun DrawScope.drawCircleinColorDialog(color: Color) = drawCircle(
-    center = Offset(10.dp.toPx(), 10.dp.toPx()),
-    radius = 10.dp,
+    center = Offset(15.dp.toPx(), 15.dp.toPx()),
+    radius = 14.dp,
     style = Stroke(width = 4.dp.toPx()),
     color = color,
 )

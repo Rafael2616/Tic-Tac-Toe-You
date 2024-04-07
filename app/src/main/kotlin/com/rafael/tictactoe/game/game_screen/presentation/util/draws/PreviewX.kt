@@ -61,9 +61,9 @@ fun DrawScope.drawXinDialog(colorX: Color) = drawXPreview(
 // X Image adjusted for ColorSelectionDialog
 fun DrawScope.drawXinColorDialog(colorX: Color) = drawXPreview(
     strokeWidth = 4.dp,
-    start1 = Offset(x = 0.dp.toPx(), y = 0.dp.toPx()),
-    end1 = Offset(x = 20.dp.toPx(), y = 20.dp.toPx()),
-    start2 = Offset(x = 20.dp.toPx(), y = 0f),
-    end2 = Offset(x = 0.dp.toPx(), y = 20.dp.toPx()),
+    start1 = Offset(x = 2.dp.toPx(), y = 2.dp.toPx()),
+    end1 = Offset(x = 28.dp.toPx(), y = 28.dp.toPx()),
+    start2 = Offset(x = 28.dp.toPx(), y = 2.dp.toPx()),
+    end2 = Offset(x = 2.dp.toPx(), y = 28.dp.toPx()),
     colorX = colorX,
 )

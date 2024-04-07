@@ -97,5 +97,6 @@
     <string name="overheat_warning">Aviso: esse recurso pode causar superaquecimento e perda de desempenho</string>
     <string name="current">Atual</string>
     <string name="update_history">Histórico de atualizações</string>
+    <string name="presets">Predefinidos</string>
 
 </resources>

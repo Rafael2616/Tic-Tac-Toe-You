@@ -97,6 +97,7 @@
     <string name="overheat_warning">Warning: this option may cause overheating and loss of perfomance</string>
     <string name="current">Current</string>
     <string name="update_history">Update history</string>
+    <string name="presets">Presets</string>
 
     <string name="cpu" translatable="false">CPU</string>
 
