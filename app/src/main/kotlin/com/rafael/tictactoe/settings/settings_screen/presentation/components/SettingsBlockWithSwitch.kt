@@ -27,6 +27,7 @@ import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -141,13 +142,17 @@ fun SettingsBlockWithSwitch(
                                             onEvent,
                                         )
                                     },
-                                    thumbContent = {
+                                    thumbContent = remember(setting.isChecked) {
                                         if (setting.isChecked) {
-                                            Icon(
-                                                imageVector = Icons.Filled.Check,
-                                                contentDescription = "Setting Switcher",
-                                                modifier = Modifier.size(SwitchDefaults.IconSize),
-                                            )
+                                            {
+                                                Icon(
+                                                    imageVector = Icons.Filled.Check,
+                                                    contentDescription = "Setting Switcher",
+                                                    modifier = Modifier.size(SwitchDefaults.IconSize),
+                                                )
+                                            }
+                                        } else {
+                                            null
                                         }
                                     },
                                 )
