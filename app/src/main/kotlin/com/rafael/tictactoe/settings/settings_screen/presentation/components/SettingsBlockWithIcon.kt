@@ -205,7 +205,7 @@ fun SettingsBlockWithIcon(
                                     if (index == 3) {
                                         Card(
                                             shape = RoundedCornerShape((state.boardCardsCornerRadius / 4).dp),
-                                            border = if (index == 3 && state.boardCardsThickness != 0f && state.shapeSelected == SHAPE_CUSTOM) {
+                                            border = if (state.boardCardsThickness != 0f && state.shapeSelected == SHAPE_CUSTOM) {
                                                 if (state.isRGBEffectOn) {
                                                     BorderStroke((state.boardCardsThickness / 2).dp, rgbGradientBrush)
                                                 } else {

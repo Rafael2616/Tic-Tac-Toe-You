@@ -36,6 +36,7 @@ import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.settings.settingsScreen.domain.animations.rememberRGBAnimation
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
+import com.rafael.tictactoe.settings.settingsScreen.presentation.util.BoardConstants.SHAPE_CUSTOM
 import kotlinx.coroutines.delay
 
 @Composable
@@ -85,7 +86,7 @@ fun GameBoard(
                 cardItems.forEachIndexed { cardIndex, _ ->
                     Card(
                         shape = RoundedCornerShape(settingsState.boardCardsCornerRadius.dp),
-                        border = if (settingsState.boardCardsThickness > 0f) {
+                        border = if (settingsState.boardCardsThickness > 0f && settingsState.shapeSelected == SHAPE_CUSTOM) {
                             if (settingsState.isRGBEffectOn && settingsState.isGradientOn) {
                                 BorderStroke(settingsState.boardCardsThickness.dp, rgbGradientBrush)
                             } else if (settingsState.isRGBEffectOn && !settingsState.isGradientOn) {
