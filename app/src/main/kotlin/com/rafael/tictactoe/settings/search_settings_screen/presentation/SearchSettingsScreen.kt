@@ -53,6 +53,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -425,13 +426,17 @@ fun SearchSettingsScreen(
                                                     )
                                                     searchSettingsVM.onEvent(SearchSettingsEvent.UpdateMatchingSettings(index))
                                                 },
-                                                thumbContent = {
+                                                thumbContent = remember(setting.isChecked) {
                                                     if (setting.isChecked) {
-                                                        Icon(
-                                                            imageVector = Icons.Filled.Check,
-                                                            contentDescription = "Setting Switcher",
-                                                            modifier = Modifier.size(SwitchDefaults.IconSize),
-                                                        )
+                                                        {
+                                                            Icon(
+                                                                imageVector = Icons.Filled.Check,
+                                                                contentDescription = "Setting Switcher",
+                                                                modifier = Modifier.size(SwitchDefaults.IconSize),
+                                                            )
+                                                        }
+                                                    } else {
+                                                        null
                                                     }
                                                 },
                                             )
