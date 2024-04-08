@@ -207,7 +207,7 @@ fun ColorSelectionDialog(
                         }
                     }
                 }
-                Text(text = stringResource(R.string.presets))
+                Text(text = stringResource(R.string.presets) + ":")
                 LazyVerticalStaggeredGrid(
                     columns = StaggeredGridCells.Fixed(5),
                     modifier = Modifier
@@ -316,7 +316,7 @@ fun ColorSelectionDialog(
                         .padding(top = 6.dp)
                         .fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.End),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End),
                 ) {
                     OutlinedButton(
                         onClick = {
