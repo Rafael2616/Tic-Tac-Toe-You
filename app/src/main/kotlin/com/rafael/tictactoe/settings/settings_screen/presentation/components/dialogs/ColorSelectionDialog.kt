@@ -61,6 +61,7 @@ import com.rafael.tictactoe.game.gameScreen.presentation.util.draws.drawWinnerLi
 import com.rafael.tictactoe.game.gameScreen.presentation.util.draws.drawXinColorDialog
 import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Customization
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.ColorItem
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.COLORLIST
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.IconCustomization
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
@@ -92,7 +93,6 @@ fun ColorSelectionDialog(
     val colorParser = rememberColorParser()
     var localColor by remember { mutableStateOf(Color.Blue) }
     var localHexColor by remember { mutableStateOf("FFFFFFFF") }
-    var isCustomColor by remember { mutableStateOf(false) }
     val customizations = listOf(
         IconCustomization(
             label = Customization.XCOLOR,
@@ -153,6 +153,7 @@ fun ColorSelectionDialog(
         ),
     )
     val currentIcon = customizations[selectedIcon]
+    val isCustomColor = customizations[selectedIcon].color !in COLORLIST
 
     Dialog(
         onDismissRequest = {
@@ -237,7 +238,6 @@ fun ColorSelectionDialog(
                                     .background(item.color)
                                     .clickable {
                                         currentIcon.onSelectIndex(index)
-                                        isCustomColor = false
                                         colorPickerController.selectByColor(item.color, false)
                                     },
                                 contentAlignment = Alignment.Center,
@@ -286,7 +286,6 @@ fun ColorSelectionDialog(
                                     onColorChanged = { colorEnvelope ->
                                         localColor = colorEnvelope.color
                                         localHexColor = colorEnvelope.hexCode
-                                        if (colorEnvelope.fromUser) isCustomColor = true
                                         currentIcon.onSelect(colorEnvelope.color)
                                     },
                                 )

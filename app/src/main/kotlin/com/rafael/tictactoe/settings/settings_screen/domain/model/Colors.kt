@@ -33,3 +33,18 @@ data class Colors(
         }
     }
 }
+
+private val colors = Colors.get()
+val COLORLIST = listOf(
+    colors.blue,
+    colors.red,
+    colors.yellow,
+    colors.dark_green,
+    colors.light_green,
+    colors.purple,
+    colors.magenta,
+    colors.white,
+    colors.cyan,
+    colors.burnt_yellow,
+    colors.transparent
+)
