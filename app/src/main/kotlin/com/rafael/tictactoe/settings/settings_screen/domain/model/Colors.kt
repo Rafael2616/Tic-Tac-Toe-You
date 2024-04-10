@@ -46,5 +46,5 @@ val COLORLIST = listOf(
     colors.white,
     colors.cyan,
     colors.burnt_yellow,
-    colors.transparent
+    colors.transparent,
 )
