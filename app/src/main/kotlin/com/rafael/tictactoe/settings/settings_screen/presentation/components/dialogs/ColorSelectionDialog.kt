@@ -60,8 +60,8 @@ import com.rafael.tictactoe.game.gameScreen.presentation.util.draws.drawCirclein
 import com.rafael.tictactoe.game.gameScreen.presentation.util.draws.drawWinnerLineinColorDialog
 import com.rafael.tictactoe.game.gameScreen.presentation.util.draws.drawXinColorDialog
 import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Customization
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.ColorItem
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.COLORLIST
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.ColorItem
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.IconCustomization
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
