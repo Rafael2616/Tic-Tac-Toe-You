@@ -9,8 +9,8 @@ import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
+import com.rafael.tictactoe.settings.settingsScreen.presentation.components.Preferences
 import com.rafael.tictactoe.settings.settingsScreen.presentation.components.ProfilePictureMenu
-import com.rafael.tictactoe.settings.settingsScreen.presentation.components.SettingsOptionsImpl
 import com.rafael.tictactoe.settings.settingsScreen.presentation.components.SettingsTopBar
 import com.rafael.tictactoe.settings.settingsScreen.presentation.components.dialogs.BoardCustomizationDialog
 import com.rafael.tictactoe.settings.settingsScreen.presentation.components.dialogs.ColorSelectionDialog
@@ -30,10 +30,10 @@ fun SettingsScreen(
         state,
         onEvent,
     ) { innerPadding ->
-        SettingsOptionsImpl(
+        Preferences(
             innerPadding,
-            onEvent,
             state,
+            onEvent,
             navController,
         )
     }

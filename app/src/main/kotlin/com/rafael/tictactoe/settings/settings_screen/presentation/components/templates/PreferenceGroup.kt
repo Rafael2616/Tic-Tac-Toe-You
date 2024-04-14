@@ -1,0 +1,63 @@
+package com.rafael.tictactoe.settings.settingsscreen.presentation.components.templates
+
+import android.content.res.Configuration
+import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyItemScope
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.surfaceColorAtElevation
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+
+@Composable
+fun LazyItemScope.PreferenceGroup(
+    heading: Int,
+    modifier: Modifier = Modifier,
+    preferences: @Composable () -> Unit,
+) {
+    val orientation = LocalConfiguration.current.orientation
+    val isInLandscape = orientation == Configuration.ORIENTATION_LANDSCAPE
+
+    Text(
+        text = stringResource(heading),
+        style = MaterialTheme.typography.titleMedium,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+        textAlign = TextAlign.Start,
+        modifier = modifier
+            .padding(bottom = 6.dp)
+            .fillMaxWidth(if (isInLandscape) 0.7f else 0.95f),
+    )
+    Card(
+        shape = MaterialTheme.shapes.medium,
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp),
+        ),
+        modifier = Modifier
+            .animateContentSize()
+            .fillMaxWidth(if (isInLandscape) 0.65f else 0.93f)
+            .clip(RoundedCornerShape(26.dp)),
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .animateContentSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.Start,
+        ) {
+            preferences()
+        }
+    }
+}

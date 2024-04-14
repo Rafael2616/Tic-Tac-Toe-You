@@ -1,0 +1,28 @@
+package com.rafael.tictactoe.settings.settingsscreen.presentation.components.groups
+
+import androidx.compose.foundation.lazy.LazyItemScope
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.navigation.NavController
+import com.rafael.tictactoe.R
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
+import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
+import com.rafael.tictactoe.settings.settingsscreen.presentation.components.preferences.AboutAppPreference
+import com.rafael.tictactoe.settings.settingsscreen.presentation.components.preferences.OpenSourceLicensesPreference
+import com.rafael.tictactoe.settings.settingsscreen.presentation.components.preferences.UpdateHistoryPreference
+import com.rafael.tictactoe.settings.settingsscreen.presentation.components.preferences.ViewOnGithubPreference
+import com.rafael.tictactoe.settings.settingsscreen.presentation.components.templates.PreferenceGroup
+
+@Composable
+fun LazyItemScope.OthersPreferenceGroup(
+    onEvent: (SettingsEvent) -> Unit,
+    state: SettingsState,
+    navController: NavController,
+) {
+    PreferenceGroup(heading = R.string.group_others) {
+        AboutAppPreference(onEvent, state)
+        ViewOnGithubPreference()
+        UpdateHistoryPreference(navController)
+        OpenSourceLicensesPreference(navController)
+    }
+}
