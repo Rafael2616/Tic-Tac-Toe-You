@@ -23,7 +23,6 @@ sealed interface SettingsEvent {
     data class StartBackgroundMusic(val value: Boolean) : SettingsEvent
     object ShowWhatsNewDialog : SettingsEvent
     object HideWhatsNewDialog : SettingsEvent
-    object ExecUIClickSound : SettingsEvent
     object ToggleShowProfilePictureMenu : SettingsEvent
     object HideProfilePictureMenu : SettingsEvent
     data class ShowBoardCustomizationDialog(val value: Boolean) : SettingsEvent

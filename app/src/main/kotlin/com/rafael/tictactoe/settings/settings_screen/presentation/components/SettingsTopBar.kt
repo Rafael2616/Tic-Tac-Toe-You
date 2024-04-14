@@ -62,7 +62,6 @@ fun SettingsTopBar(
                             if (!isGoBackClicked) {
                                 isGoBackClicked = true
                                 onEvent(SettingsEvent.ShowAboutAppCard(false))
-                                onEvent(SettingsEvent.ExecUIClickSound)
                                 navController.popBackStack()
                             }
                         },
@@ -77,7 +76,6 @@ fun SettingsTopBar(
                     IconButton(
                         onClick = {
                             navController.navigate(Destinations.SearchSettings.screen)
-                            onEvent(SettingsEvent.ExecUIClickSound)
                         },
                     ) {
                         Icon(

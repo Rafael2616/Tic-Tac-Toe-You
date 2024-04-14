@@ -320,7 +320,6 @@ fun ColorSelectionDialog(
                     OutlinedButton(
                         onClick = {
                             onEvent(SettingsEvent.ShowColorSelectionDialog(false))
-                            onEvent(SettingsEvent.ExecUIClickSound)
                         },
                         contentPadding = PaddingValues(horizontal = 12.dp),
                     ) {
@@ -333,7 +332,6 @@ fun ColorSelectionDialog(
                     Button(
                         onClick = {
                             onEvent(SettingsEvent.ShowColorSelectionDialog(false))
-                            onEvent(SettingsEvent.ExecUIClickSound)
                             currentIcon.onApply()
                         },
                         contentPadding = PaddingValues(horizontal = 12.dp),

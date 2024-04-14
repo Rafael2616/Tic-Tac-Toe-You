@@ -11,7 +11,6 @@ import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.common.domain.util.ProfilePictureUtils
 import com.rafael.tictactoe.common.domain.util.getVersionName
 import com.rafael.tictactoe.common.domain.util.toColor
-import com.rafael.tictactoe.common.domain.util.uiClickSound
 import com.rafael.tictactoe.common.services.MusicService
 import com.rafael.tictactoe.game.domain.audio.backgroundMusic
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEntity
@@ -178,22 +177,18 @@ class SettingsViewModel @Inject constructor(
             }
             is SettingsEvent.SetCustomizationType -> {
                 _state.update { it.copy(customizationType = event.type) }
-                execUIClickSound()
             }
             is SettingsEvent.ShowColorSelectionDialog -> {
                 _state.update { it.copy(showColorSelectionDialog = event.value) }
             }
             is SettingsEvent.SetWinnerLineColor -> {
                 _state.update { it.copy(winnerLineColor = event.color) }
-                execUIClickSound()
             }
             is SettingsEvent.SetXColor -> {
                 _state.update { it.copy(xColor = event.color) }
-                execUIClickSound()
             }
             is SettingsEvent.SetCircleColor -> {
                 _state.update { it.copy(circleColor = event.color) }
-                execUIClickSound()
             }
             is SettingsEvent.SelectedWinnerLineColor -> {
                 viewModelScope.launch(Dispatchers.IO) {
@@ -202,7 +197,6 @@ class SettingsViewModel @Inject constructor(
                     repository.setAllSettingsValues(settings)
                 }
                 _state.update { it.copy(selectedWinnerLineColor = event.value) }
-                execUIClickSound()
             }
             is SettingsEvent.SelectedXColor -> {
                 viewModelScope.launch(Dispatchers.IO) {
@@ -211,7 +205,6 @@ class SettingsViewModel @Inject constructor(
                     repository.setAllSettingsValues(settings)
                 }
                 _state.update { it.copy(selectedXColor = event.value) }
-                execUIClickSound()
             }
             is SettingsEvent.SelectedCircleColor -> {
                 viewModelScope.launch(Dispatchers.IO) {
@@ -220,7 +213,6 @@ class SettingsViewModel @Inject constructor(
                     repository.setAllSettingsValues(settings)
                 }
                 _state.update { it.copy(selectedCircleColor = event.value) }
-                execUIClickSound()
             }
             SettingsEvent.HideWhatsNewDialog -> {
                 _state.update { it.copy(showWhatsNewDialog = false) }
@@ -232,9 +224,6 @@ class SettingsViewModel @Inject constructor(
             }
             SettingsEvent.ShowWhatsNewDialog -> {
                 _state.update { it.copy(showWhatsNewDialog = true) }
-            }
-            SettingsEvent.ExecUIClickSound -> {
-                execUIClickSound()
             }
             SettingsEvent.ToggleShowProfilePictureMenu -> {
                 _state.update { it.copy(showProfilePictureMenu = !it.showProfilePictureMenu) }
@@ -275,12 +264,6 @@ class SettingsViewModel @Inject constructor(
             is SettingsEvent.UpdateBoardCardsBorderColor -> {
                 _state.update { it.copy(boardCardsBorderColor = event.color) }
             }
-        }
-    }
-
-    fun execUIClickSound() {
-        if (state.value.isSoundEffectsOn) {
-            uiClickSound(context, player)
         }
     }
 

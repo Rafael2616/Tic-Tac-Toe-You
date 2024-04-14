@@ -84,7 +84,6 @@ fun DifficultyLevelSwitcher(
                     } else {
                         showSelector = true
                     }
-                    onEvent(GameEvent.ExecUIClickSound)
                 },
                 label = {
                     Text(

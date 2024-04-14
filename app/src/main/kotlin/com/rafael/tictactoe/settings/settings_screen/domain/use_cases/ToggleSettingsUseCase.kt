@@ -69,5 +69,4 @@ fun toggleSettingsUseCase(
         SettingsGroup.Customization -> toggleCustomizationSettings(index)
         SettingsGroup.Others -> toggleOtherSettings(index)
     }
-    onEvent(SettingsEvent.ExecUIClickSound)
 }

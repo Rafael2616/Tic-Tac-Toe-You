@@ -94,26 +94,21 @@ class GameViewModel @Inject constructor(
             }
             GameEvent.ToggleBgMusicButton -> {
                 settingsVM.onEvent(SettingsEvent.ToggleIsBackgroundMusicOn)
-                settingsVM.execUIClickSound()
             }
             GameEvent.ToggleSoundEffectsButton -> {
                 settingsVM.onEvent(SettingsEvent.ToggleIsSoundEffectsOn)
-                settingsVM.execUIClickSound()
             }
             GameEvent.ToggleExpandButton -> {
                 _state.update { it.copy(isExpandButtonShown = !it.isExpandButtonShown) }
-                settingsVM.execUIClickSound()
             }
             GameEvent.DimissExitDialog -> {
                 _state.update { it.copy(showExitGameDialog = false) }
-                settingsVM.execUIClickSound()
             }
             GameEvent.ToggleExitDialog -> {
                 _state.update { it.copy(showExitGameDialog = !it.showExitGameDialog) }
             }
             GameEvent.ToggleIsXForPlayer1 -> {
                 _state.update { it.copy(isXFor1 = !it.isXFor1) }
-                settingsVM.execUIClickSound()
             }
             is GameEvent.SelectCPUDifficultyMode -> {
                 _state.update {
@@ -122,7 +117,6 @@ class GameViewModel @Inject constructor(
                         cpuDifficultyLevel = event.level.level,
                     )
                 }
-                settingsVM.execUIClickSound()
             }
             GameEvent.GetRemotePlayers -> {
                 searchPlayersJob?.cancel()
@@ -245,9 +239,6 @@ class GameViewModel @Inject constructor(
                     )
                 }
             }
-            GameEvent.ExecUIClickSound -> {
-                settingsVM.execUIClickSound()
-            }
         }
     }
 
@@ -294,7 +285,6 @@ class GameViewModel @Inject constructor(
         switchPlayerNamesOrder()
         updateCurrentToastName()
         setPlayerNamesOnCounter()
-        settingsVM.execUIClickSound()
     }
 
     fun startGame() {
@@ -341,8 +331,6 @@ class GameViewModel @Inject constructor(
         switchPlayerNamesOrder()
         setPlayerNamesOnCounter()
         updateCurrentToastName()
-
-        settingsVM.execUIClickSound()
     }
 
     fun resetVicoryCounter() {
@@ -353,7 +341,6 @@ class GameViewModel @Inject constructor(
                 player2Wins = 0,
             )
         }
-        settingsVM.execUIClickSound()
     }
 
     fun playAgain() {
@@ -384,7 +371,6 @@ class GameViewModel @Inject constructor(
             }
         }
         updateCurrentToastName()
-        settingsVM.execUIClickSound()
     }
 
     fun updateCard(rowIndex: Int, cardIndex: Int, newValue: Boolean) {
@@ -586,7 +572,6 @@ class GameViewModel @Inject constructor(
 
         // Keep card variable state
         _state.update { it.copy(card = cardState) }
-        settingsVM.execUIClickSound()
     }
 
     fun execCardGridSound() {

@@ -47,9 +47,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.presentation.navigation.Destinations
-import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameMode
-import com.rafael.tictactoe.game.gameScreen.presentation.viewmodel.GameViewModel
 import com.rafael.tictactoe.game.mainScreen.domain.model.MainEvent
 import com.rafael.tictactoe.game.mainScreen.domain.model.ScreenItem
 import com.rafael.tictactoe.game.mainScreen.presentation.util.ShortcutsIntentHandler
@@ -62,7 +60,6 @@ fun MainScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
     intent: Intent? = null,
-    viewModel: GameViewModel = hiltViewModel(),
     settingsVM: SettingsViewModel = hiltViewModel(),
     mainVM: MainViewModel = hiltViewModel(),
 ) {
@@ -70,7 +67,6 @@ fun MainScreen(
     val state by settingsVM.state.collectAsState()
     val mainState by mainVM.state.collectAsState()
     val onEvent = mainVM::onEvent
-    val onClick = viewModel::onEvent
     val orientation = LocalConfiguration.current.orientation
 
     val items = listOf(
@@ -141,7 +137,6 @@ fun MainScreen(
                         .shadow(6.dp, RoundedCornerShape(36.dp))
                         .clip(RoundedCornerShape(36.dp)),
                     onClick = {
-                        onClick(GameEvent.ExecUIClickSound)
                         when (screen.name) {
                             "PvP" -> {
                                 navController.navigate(Destinations.Game.screen)

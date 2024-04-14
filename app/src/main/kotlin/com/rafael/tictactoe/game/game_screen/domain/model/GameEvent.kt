@@ -27,5 +27,4 @@ sealed interface GameEvent {
     object EndOnlineMatch : GameEvent
     object UpdateIsYouPlayer1 : GameEvent
     object StartOnlineMatch : GameEvent
-    object ExecUIClickSound : GameEvent
 }

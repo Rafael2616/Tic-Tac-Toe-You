@@ -142,10 +142,7 @@ fun SearchSettingsScreen(
             placeholder = { Text(stringResource(R.string.search_settings)) },
             leadingIcon = {
                 IconButton(
-                    onClick = {
-                        navController.popBackStack()
-                        settingsVM.execUIClickSound()
-                    },
+                    onClick = { navController.popBackStack() },
                 ) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
@@ -158,7 +155,6 @@ fun SearchSettingsScreen(
                     IconButton(
                         onClick = {
                             searchSettingsVM.onEvent(SearchSettingsEvent.ResetQuery)
-                            settingsVM.execUIClickSound()
                         },
                     ) {
                         Icon(
