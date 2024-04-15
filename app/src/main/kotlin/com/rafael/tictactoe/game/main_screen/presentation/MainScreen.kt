@@ -71,28 +71,37 @@ fun MainScreen(
 
     val items = listOf(
         ScreenItem(
-            name = "PvP",
             icon = Icons.Outlined.PlayArrow,
             tint = if (state.isDarkThemeOn) Color.Green else Color(0xFF299961),
             text = R.string.play,
+            onClick = {
+                navController.navigate(Destinations.Game.screen)
+                onEvent(MainEvent.SetGameMode(GameMode.PvP))
+            },
         ),
         ScreenItem(
-            name = "CPU",
             icon = Icons.Outlined.Memory,
             tint = Color.Red,
             text = R.string.vs_cpu,
+            onClick = {
+                navController.navigate(Destinations.Game.screen)
+                onEvent(MainEvent.SetGameMode(GameMode.VsCPU))
+            },
         ),
         ScreenItem(
-            name = "Online",
             icon = Icons.Outlined.Group,
             tint = MaterialTheme.colorScheme.onSurface,
             text = R.string.online_match,
+            onClick = {
+                navController.navigate(Destinations.Game.screen)
+                onEvent(MainEvent.SetGameMode(GameMode.Online))
+            },
         ),
         ScreenItem(
-            name = "Settings",
             icon = Icons.Outlined.Settings,
             tint = MaterialTheme.colorScheme.onSurface,
             text = R.string.settings,
+            onClick = { navController.navigate(Destinations.Settings.screen) },
         ),
     )
 
@@ -136,23 +145,7 @@ fun MainScreen(
                         .height(58.dp)
                         .shadow(6.dp, RoundedCornerShape(36.dp))
                         .clip(RoundedCornerShape(36.dp)),
-                    onClick = {
-                        when (screen.name) {
-                            "PvP" -> {
-                                navController.navigate(Destinations.Game.screen)
-                                onEvent(MainEvent.SetGameMode(GameMode.PvP))
-                            }
-                            "CPU" -> {
-                                navController.navigate(Destinations.Game.screen)
-                                onEvent(MainEvent.SetGameMode(GameMode.VsCPU))
-                            }
-                            "Online" -> {
-                                navController.navigate(Destinations.Game.screen)
-                                onEvent(MainEvent.SetGameMode(GameMode.Online))
-                            }
-                            "Settings" -> navController.navigate(Destinations.Settings.screen)
-                        }
-                    },
+                    onClick = { screen.onClick() },
                 ) {
                     Row(
                         modifier = Modifier
