@@ -17,10 +17,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -46,7 +46,6 @@ fun IconPreference(
     leadingWidget: (@Composable BoxScope.() -> Unit)? = null,
     extraContent: (@Composable () -> Unit)? = null,
     leadingIcon: ImageVector? = null,
-    isLastPref: Boolean = false,
 ) {
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = orientation == Configuration.ORIENTATION_LANDSCAPE
@@ -58,6 +57,7 @@ fun IconPreference(
             .fillMaxWidth()
             .height(rowHeight)
             .clickable { onClick() }
+            .background(MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp))
             .padding(horizontal = 10.dp),
     ) {
         leadingIcon?.let { leadingIcon ->
@@ -130,7 +130,8 @@ fun IconPreference(
                 )
             }
         }
-        // An optional exta content next to preference title
+
+        // An optional extra content next to preference title
         extraContent?.let { it.invoke() }
 
         Box(
@@ -146,11 +147,5 @@ fun IconPreference(
                     .size(32.dp),
             )
         }
-    }
-    if (!isLastPref) {
-        HorizontalDivider(
-            thickness = 4.dp,
-            color = MaterialTheme.colorScheme.surface,
-        )
     }
 }

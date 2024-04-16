@@ -21,7 +21,6 @@ fun DynamicColorsPreference(
             leadingIcon = Icons.Outlined.Palette,
             isChecked = state.isDynamicColorsOn,
             onCheckedChange = { onEvent(SettingsEvent.ToggleIsDynamicColorsOn) },
-            isLastPref = true,
         )
     }
 }

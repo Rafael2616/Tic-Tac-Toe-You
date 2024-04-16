@@ -78,6 +78,5 @@ fun BoardCustomizationPreference(
         onClick = {
             onEvent(SettingsEvent.ShowBoardCustomizationDialog(true))
         },
-        isLastPref = true,
     )
 }

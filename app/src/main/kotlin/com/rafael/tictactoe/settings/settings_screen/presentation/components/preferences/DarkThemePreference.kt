@@ -1,7 +1,5 @@
 package com.rafael.tictactoe.settings.settingsscreen.presentation.components.preferences
 
-import android.os.Build.VERSION
-import android.os.Build.VERSION_CODES
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.DarkMode
 import androidx.compose.material.icons.outlined.LightMode
@@ -16,15 +14,12 @@ fun DarkThemePreference(
     onEvent: (SettingsEvent) -> Unit,
     state: SettingsState,
 ) {
-    val isBellowA12 = VERSION.SDK_INT < VERSION_CODES.S
-
     if (!state.isFollowingSystemOn) {
         SwitchPreference(
             title = R.string.dark_theme,
             leadingIcon = if (state.isDarkThemeOn) Icons.Outlined.DarkMode else Icons.Outlined.LightMode,
             isChecked = state.isDarkThemeOn,
             onCheckedChange = { onEvent(SettingsEvent.ToggleIsDarkThemeOn) },
-            isLastPref = isBellowA12,
         )
     }
 }

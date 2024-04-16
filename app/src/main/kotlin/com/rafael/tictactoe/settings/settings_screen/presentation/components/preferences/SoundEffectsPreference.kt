@@ -19,6 +19,5 @@ fun SoundEffectsPreference(
         leadingIcon = if (state.isSoundEffectsOn) Icons.Outlined.MusicNote else Icons.Outlined.MusicOff,
         isChecked = state.isSoundEffectsOn,
         onCheckedChange = { onEvent(SettingsEvent.ToggleIsSoundEffectsOn) },
-        isLastPref = true,
     )
 }

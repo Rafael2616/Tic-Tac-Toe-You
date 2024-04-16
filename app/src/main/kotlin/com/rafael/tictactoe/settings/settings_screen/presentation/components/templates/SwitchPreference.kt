@@ -1,5 +1,6 @@
 package com.rafael.tictactoe.settings.settingsscreen.presentation.components.templates
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -12,12 +13,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -34,7 +35,6 @@ fun SwitchPreference(
     isChecked: Boolean,
     onCheckedChange: () -> Unit,
     modifier: Modifier = Modifier,
-    isLastPref: Boolean = false,
 ) {
     Row(
         horizontalArrangement = Arrangement.Start,
@@ -43,6 +43,7 @@ fun SwitchPreference(
             .fillMaxWidth()
             .height(58.dp)
             .clickable { onCheckedChange() }
+            .background(MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp))
             .padding(horizontal = 10.dp),
     ) {
         Icon(
@@ -86,11 +87,5 @@ fun SwitchPreference(
                 },
             )
         }
-    }
-    if (!isLastPref) {
-        HorizontalDivider(
-            thickness = 4.dp,
-            color = MaterialTheme.colorScheme.surface,
-        )
     }
 }

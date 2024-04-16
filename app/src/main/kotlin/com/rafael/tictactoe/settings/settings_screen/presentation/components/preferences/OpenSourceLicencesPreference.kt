@@ -18,6 +18,5 @@ fun OpenSourceLicensesPreference(
         leadingIcon = Icons.Outlined.Code,
         trailingIcon = Icons.AutoMirrored.Filled.ArrowForward,
         onClick = { navController.navigate(Destinations.Library.screen) },
-        isLastPref = true,
     )
 }

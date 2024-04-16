@@ -12,7 +12,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,7 +42,7 @@ fun LazyItemScope.PreferenceGroup(
     Card(
         shape = MaterialTheme.shapes.medium,
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp),
+            containerColor = MaterialTheme.colorScheme.surface,
         ),
         modifier = Modifier
             .animateContentSize()
@@ -54,7 +53,7 @@ fun LazyItemScope.PreferenceGroup(
             modifier = Modifier
                 .fillMaxWidth()
                 .animateContentSize(),
-            verticalArrangement = Arrangement.Center,
+            verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterVertically),
             horizontalAlignment = Alignment.Start,
         ) {
             preferences()

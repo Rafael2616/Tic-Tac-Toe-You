@@ -43,10 +43,8 @@ class SearchSettingsViewModel @Inject constructor(
 
         var allSettings: List<SettingItem> = emptyList()
 
-        for (listSettings in SettingItem.getSettingsItems(settingsVM.state.value, context)) {
-            for (setting in listSettings) {
-                allSettings += setting
-            }
+        for (setting in SettingItem.getSettingsItems(context)) {
+            allSettings += setting
         }
         onEvent(SearchSettingsEvent.PutSettingsToRepository(allSettings))
     }
@@ -91,27 +89,6 @@ class SearchSettingsViewModel @Inject constructor(
             SearchSettingsEvent.ResetQuery -> {
                 _state.update { it.copy(query = "") }
                 onEvent(SearchSettingsEvent.QuerySettingsFromRepository(null))
-            }
-            is SearchSettingsEvent.UpdateMatchingSettings -> {
-                _state.update {
-                    it.copy(
-                        matchingSettings = state.value.matchingSettings.mapIndexed { index, setting ->
-                            if (index == event.index) {
-                                setting.copy(isChecked = setting.isChecked?.let { !it })
-                            } else {
-                                setting
-                            }
-                        },
-                    )
-                }
-                var allSettingsUpdated: List<SettingItem> = emptyList()
-
-                for (listSettings in SettingItem.getSettingsItems(settingsVM.state.value, context)) {
-                    for (setting in listSettings) {
-                        allSettingsUpdated += setting
-                    }
-                }
-                onEvent(SearchSettingsEvent.PutSettingsToRepository(allSettingsUpdated))
             }
         }
     }
