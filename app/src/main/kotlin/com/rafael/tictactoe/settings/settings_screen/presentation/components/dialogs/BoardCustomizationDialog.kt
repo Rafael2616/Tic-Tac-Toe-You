@@ -123,7 +123,7 @@ fun BoardCustomizationDialog(
         colors = listOf(rgbColorCurrentAnimated, rgbColorOldAnimated),
     )
 
-    LaunchedEffect(isRGBEffectOn) {
+    LaunchedEffect(localShapeSelected == SHAPE_CUSTOM && isRGBEffectOn) {
         if (localShapeSelected == SHAPE_CUSTOM && isRGBEffectOn) {
             rgbAnimController.animate().collect { currentColor ->
                 rgbColorCurrent = currentColor
