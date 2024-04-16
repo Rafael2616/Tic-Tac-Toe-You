@@ -79,7 +79,7 @@ class SearchSettingsViewModel @Inject constructor(
 
                 searchJob = viewModelScope.launch {
                     val results = searchManager.searchSettings(query)
-                    delay(150L)
+                    delay(125L)
                     val matchingSettings = state.value.allSettingsItems.filter { setting ->
                         results.any { result -> result.text.contains(setting.searchSpecs.text) }
                     }

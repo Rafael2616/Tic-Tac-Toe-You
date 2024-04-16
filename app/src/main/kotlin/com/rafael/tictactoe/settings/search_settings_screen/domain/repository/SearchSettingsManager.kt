@@ -47,7 +47,7 @@ class SearchSettingsManager @Inject constructor(
     suspend fun searchSettings(query: String): List<SearchItemSpecs> {
         return withContext(Dispatchers.IO) {
             val searchSpec = SearchSpec.Builder()
-                .setSnippetCount(10)
+                .setSnippetCount(50)
                 .addFilterNamespaces("settings")
                 .setRankingStrategy(SearchSpec.RANKING_STRATEGY_USAGE_COUNT)
                 .build()

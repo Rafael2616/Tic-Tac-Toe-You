@@ -98,5 +98,6 @@
     <string name="current">Atual</string>
     <string name="update_history">Histórico de atualizações</string>
     <string name="presets">Predefinidos</string>
+    <string name="no_matching_settings_msg">Nenhuma configuração correspondente para consulta</string>
 
 </resources>
