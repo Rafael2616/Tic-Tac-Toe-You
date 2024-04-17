@@ -2,7 +2,6 @@ package com.rafael.tictactoe.settings.searchSettingsScreen.presentation
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -11,18 +10,21 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.gestures.detectVerticalDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.outlined.Close
+import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.TipsAndUpdates
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -152,27 +154,36 @@ fun SearchSettingsScreen(
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .height(250.dp),
+                                .height(220.dp),
                             contentAlignment = Alignment.Center,
                         ) {
                             AnimatedContent(
                                 targetState = if (searchState.query.isNotEmpty()) {
                                     stringResource(R.string.no_matching_settings_msg) + ": ${searchState.query}"
                                 } else {
-                                    "Tente pesquisar por algo como: ${SettingItem.getSettingsItems(context).random().searchSpecs.text}"
+                                    stringResource(R.string.search_tip) + ": ${SettingItem.getSettingsItems(context).random().searchSpecs.text}"
                                 },
                                 transitionSpec = {
                                     fadeIn() togetherWith fadeOut()
                                 },
                             ) { textHint ->
-                                Text(
-                                    text = textHint,
-                                    maxLines = 2,
-                                    textAlign = TextAlign.Center,
-                                    modifier = Modifier
-                                        .wrapContentSize()
-                                        .align(Alignment.Center),
-                                )
+                                Column(
+                                    modifier = Modifier.fillMaxSize(),
+                                    verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterVertically),
+                                    horizontalAlignment = Alignment.CenterHorizontally,
+                                ) {
+                                    Icon(
+                                        imageVector = if (searchState.query.isNotEmpty()) Icons.Outlined.Info else Icons.Outlined.TipsAndUpdates,
+                                        contentDescription = null,
+                                        modifier = Modifier.size(35.dp),
+                                    )
+                                    Text(
+                                        text = textHint,
+                                        maxLines = 2,
+                                        textAlign = TextAlign.Center,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    )
+                                }
                             }
                         }
                     }

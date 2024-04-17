@@ -99,5 +99,6 @@
     <string name="update_history">Histórico de atualizações</string>
     <string name="presets">Predefinidos</string>
     <string name="no_matching_settings_msg">Nenhuma configuração correspondente para consulta</string>
+    <string name="search_tip">Tente pesquisar por algo como</string>
 
 </resources>

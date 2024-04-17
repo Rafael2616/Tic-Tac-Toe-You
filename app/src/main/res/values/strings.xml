@@ -99,6 +99,7 @@
     <string name="update_history">Update history</string>
     <string name="presets">Presets</string>
     <string name="no_matching_settings_msg">No matching setting for query</string>
+    <string name="search_tip">Try searching for something like</string>
 
     <string name="cpu" translatable="false">CPU</string>
 
