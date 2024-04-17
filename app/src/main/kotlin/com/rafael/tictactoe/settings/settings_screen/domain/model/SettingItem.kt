@@ -1,8 +1,8 @@
 package com.rafael.tictactoe.settings.settingsScreen.domain.model
 
+import android.content.Context
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
-import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.navigation.NavController
