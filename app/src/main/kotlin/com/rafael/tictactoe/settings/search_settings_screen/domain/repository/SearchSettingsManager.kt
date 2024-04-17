@@ -7,6 +7,7 @@ import androidx.appsearch.app.SearchSpec
 import androidx.appsearch.app.SetSchemaRequest
 import androidx.appsearch.localstorage.LocalStorage
 import com.rafael.tictactoe.settings.searchSettingsScreen.domain.model.SearchItemSpecs
+import java.util.concurrent.ExecutionException
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -56,15 +57,20 @@ class SearchSettingsManager @Inject constructor(
                 searchSpec,
             ) ?: return@withContext emptyList()
 
-            val page = result.nextPageAsync.get()
+            val page = try {
+                result.nextPageAsync.get()
+            } catch (e: ExecutionException) {
+                e.printStackTrace()
+                null
+            }
 
-            page.mapNotNull {
+            page?.mapNotNull {
                 if (it.genericDocument.schemaType == SearchItemSpecs::class.java.simpleName) {
                     it.getDocument(SearchItemSpecs::class.java)
                 } else {
                     null
                 }
-            }
+            } ?: emptyList()
         }
     }
 
