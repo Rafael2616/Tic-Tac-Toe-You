@@ -1,5 +1,7 @@
 package com.rafael.tictactoe.settings.settingsScreen.domain.model
 
+import android.os.Build.VERSION
+import android.os.Build.VERSION_CODES
 import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
@@ -27,11 +29,13 @@ import kotlinx.collections.immutable.persistentListOf
 data class SettingItem(
     val content: (@Composable ((SettingsEvent) -> Unit, SettingsState, NavController) -> Unit)? = null,
     val searchSpecs: SearchItemSpecs,
+    val isAvailable: Boolean = true,
 ) {
     companion object {
         @Stable
         fun getSettingsItems(
             context: Context,
+            settingsState: SettingsState,
         ): PersistentList<SettingItem> {
             val searchItemSpec = SearchItemSpecs(
                 namespace = "settings",
@@ -55,6 +59,7 @@ data class SettingItem(
                         id = UUID.randomUUID().toString(),
                         text = context.getString(R.string.dark_theme),
                     ),
+                    isAvailable = !settingsState.isFollowingSystemOn,
 
                 ),
                 // Dynamic Colors
@@ -64,6 +69,7 @@ data class SettingItem(
                         id = UUID.randomUUID().toString(),
                         text = context.getString(R.string.material_you),
                     ),
+                    isAvailable = VERSION.SDK_INT >= VERSION_CODES.S,
                 ),
                 // Sound Effects
                 SettingItem(

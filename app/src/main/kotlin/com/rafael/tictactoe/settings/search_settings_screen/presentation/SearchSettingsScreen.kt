@@ -161,7 +161,7 @@ fun SearchSettingsScreen(
                                 targetState = if (searchState.query.isNotEmpty()) {
                                     stringResource(R.string.no_matching_settings_msg) + ": ${searchState.query}"
                                 } else {
-                                    stringResource(R.string.search_tip) + ": ${SettingItem.getSettingsItems(context).random().searchSpecs.text}"
+                                    stringResource(R.string.search_tip) + ": ${SettingItem.getSettingsItems(context, state).random().searchSpecs.text}"
                                 },
                                 transitionSpec = {
                                     fadeIn() togetherWith fadeOut()

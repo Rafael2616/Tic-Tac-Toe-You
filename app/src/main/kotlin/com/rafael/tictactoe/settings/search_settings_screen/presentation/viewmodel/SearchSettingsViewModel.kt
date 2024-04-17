@@ -43,7 +43,7 @@ class SearchSettingsViewModel @Inject constructor(
 
         var allSettings: List<SettingItem> = emptyList()
 
-        for (setting in SettingItem.getSettingsItems(context)) {
+        for (setting in SettingItem.getSettingsItems(context, settingsVM.state.value)) {
             allSettings += setting
         }
         onEvent(SearchSettingsEvent.PutSettingsToRepository(allSettings))
@@ -61,7 +61,6 @@ class SearchSettingsViewModel @Inject constructor(
                         )
                     }
                     searchManager.putSettings(allSettingsItems)
-                    _state.update { it.copy(allSettingsItems = event.settings) }
                     onEvent(SearchSettingsEvent.QuerySettingsFromRepository(null))
                 }
             }
@@ -80,10 +79,11 @@ class SearchSettingsViewModel @Inject constructor(
                 searchJob = viewModelScope.launch {
                     val results = searchManager.searchSettings(query)
                     delay(125L)
-                    val matchingSettings = state.value.allSettingsItems.filter { setting ->
+                    val matchingSettings = SettingItem.getSettingsItems(context, settingsVM.state.value).filter { setting ->
                         results.any { result -> result.text.contains(setting.searchSpecs.text) }
                     }
-                    _state.update { it.copy(matchingSettings = matchingSettings) }
+                    val availableMatchingSettings = matchingSettings.filter { it.isAvailable }
+                    _state.update { it.copy(matchingSettings = availableMatchingSettings) }
                 }
             }
             SearchSettingsEvent.ResetQuery -> {
