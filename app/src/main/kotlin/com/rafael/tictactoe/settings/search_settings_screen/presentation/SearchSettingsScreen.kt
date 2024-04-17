@@ -73,7 +73,7 @@ fun SearchSettingsScreen(
 ) {
     val state by settingsVM.state.collectAsState()
     val searchState by searchSettingsVM.state.collectAsState()
-    var active by rememberSaveable { mutableStateOf(true) }
+    var expanded by rememberSaveable { mutableStateOf(true) }
     val matchingSettings = searchState.matchingSettings
     val focusManager = LocalFocusManager.current
     val context = LocalContext.current
@@ -89,36 +89,42 @@ fun SearchSettingsScreen(
                 .navigationBarsPadding()
                 .statusBarsPadding()
                 .semantics { traversalIndex = -1f },
-            query = searchState.query,
-            onQueryChange = { searchSettingsVM.onEvent(SearchSettingsEvent.QuerySettingsFromRepository(it)) },
-            onSearch = { active = false },
-            active = active,
-            onActiveChange = { active = it },
-            placeholder = { Text(stringResource(R.string.search_settings)) },
-            leadingIcon = {
-                IconButton(
-                    onClick = { navController.popBackStack() },
-                ) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = null,
-                    )
-                }
+            inputField = {
+                SearchBarDefaults.InputField(
+                    query = searchState.query,
+                    onQueryChange = { searchSettingsVM.onEvent(SearchSettingsEvent.QuerySettingsFromRepository(it)) },
+                    onSearch = { expanded = false },
+                    expanded = expanded,
+                    onExpandedChange = { expanded = it },
+                    placeholder = { Text(stringResource(R.string.search_settings)) },
+                    leadingIcon = {
+                        IconButton(
+                            onClick = { navController.popBackStack() },
+                        ) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = null,
+                            )
+                        }
+                    },
+                    trailingIcon = {
+                        if (searchState.query.isNotEmpty()) {
+                            IconButton(
+                                onClick = {
+                                    searchSettingsVM.onEvent(SearchSettingsEvent.ResetQuery)
+                                },
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Outlined.Close,
+                                    contentDescription = null,
+                                )
+                            }
+                        }
+                    },
+                )
             },
-            trailingIcon = {
-                if (searchState.query.isNotEmpty()) {
-                    IconButton(
-                        onClick = {
-                            searchSettingsVM.onEvent(SearchSettingsEvent.ResetQuery)
-                        },
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.Close,
-                            contentDescription = null,
-                        )
-                    }
-                }
-            },
+            expanded = expanded,
+            onExpandedChange = { expanded = it },
             colors = SearchBarDefaults.colors(
                 containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f),
                 dividerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f),
