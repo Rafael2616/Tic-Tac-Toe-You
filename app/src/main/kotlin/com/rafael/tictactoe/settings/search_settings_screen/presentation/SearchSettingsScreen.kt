@@ -161,7 +161,10 @@ fun SearchSettingsScreen(
                                 targetState = if (searchState.query.isNotEmpty()) {
                                     stringResource(R.string.no_matching_settings_msg) + ": ${searchState.query}"
                                 } else {
-                                    stringResource(R.string.search_tip) + ": ${SettingItem.getSettingsItems(context, state).random().searchSpecs.text}"
+                                    val randomSetting = SettingItem.getSettingsItems(context, state)
+                                        .filter { it.isAvailable }
+                                        .random()
+                                    stringResource(R.string.search_tip) + ": ${randomSetting.searchSpecs.text}"
                                 },
                                 transitionSpec = {
                                     fadeIn() togetherWith fadeOut()
