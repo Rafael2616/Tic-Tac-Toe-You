@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.res.Configuration
 import androidx.activity.ComponentActivity
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,8 +22,8 @@ import androidx.compose.material.icons.outlined.Group
 import androidx.compose.material.icons.outlined.Memory
 import androidx.compose.material.icons.outlined.PlayArrow
 import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -135,17 +136,17 @@ fun MainScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             items.forEachIndexed { index, screen ->
-                ElevatedButton(
+                Card(
                     shape = MaterialTheme.shapes.large,
-                    colors = ButtonDefaults.buttonColors(
+                    colors = CardDefaults.cardColors(
                         containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp),
                     ),
                     modifier = Modifier
                         .fillMaxWidth(if (orientation == Configuration.ORIENTATION_LANDSCAPE) 0.33f else 0.6f)
                         .height(58.dp)
                         .shadow(6.dp, RoundedCornerShape(36.dp))
-                        .clip(RoundedCornerShape(36.dp)),
-                    onClick = { screen.onClick() },
+                        .clip(RoundedCornerShape(36.dp))
+                        .clickable { screen.onClick() },
                 ) {
                     Row(
                         modifier = Modifier
