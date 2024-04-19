@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun SwitchPreference(
@@ -54,7 +55,7 @@ fun SwitchPreference(
                 .size(32.dp),
         )
         Text(
-            style = MaterialTheme.typography.titleMedium,
+            style = MaterialTheme.typography.titleLarge.copy(fontSize = 18.sp),
             color = MaterialTheme.colorScheme.onSurface,
             text = stringResource(title),
             modifier = Modifier

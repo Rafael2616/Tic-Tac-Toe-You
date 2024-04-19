@@ -122,7 +122,7 @@ fun ChangelogsScreen(
                     ) {
                         Text(
                             text = "v" + if (currentVersion == version) version + " - " + stringResource(R.string.current) else version,
-                            style = MaterialTheme.typography.titleMedium.copy(
+                            style = MaterialTheme.typography.titleLarge.copy(
                                 fontWeight = FontWeight.Bold,
                             ),
                         )

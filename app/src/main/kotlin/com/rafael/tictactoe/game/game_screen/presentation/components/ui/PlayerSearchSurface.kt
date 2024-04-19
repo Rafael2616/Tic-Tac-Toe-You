@@ -188,7 +188,7 @@ fun PlayerSearchSurface(
                 } else {
                     ""
                 },
-                style = MaterialTheme.typography.titleMedium,
+                style = MaterialTheme.typography.bodyLarge,
                 textAlign = TextAlign.Center,
                 color = Color.Green,
             )

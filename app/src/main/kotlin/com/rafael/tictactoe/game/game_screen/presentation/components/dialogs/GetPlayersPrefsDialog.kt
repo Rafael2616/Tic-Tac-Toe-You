@@ -98,7 +98,7 @@ fun GetPlayersPrefsDialog(
     val dialogHeight by animateDpAsState(
         when (state.gameMode) {
             GameMode.VsCPU -> 270.dp
-            GameMode.PvP -> 205.dp
+            GameMode.PvP -> 215.dp
             GameMode.Online -> 235.dp
         },
     )

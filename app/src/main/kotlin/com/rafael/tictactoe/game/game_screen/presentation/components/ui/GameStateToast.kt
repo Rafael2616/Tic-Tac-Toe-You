@@ -32,6 +32,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.presentation.util.draws.ToastImage
@@ -75,7 +76,7 @@ fun GameStateToast(
             ) { currentPlayerName ->
                 Text(
                     text = currentPlayerName,
-                    style = MaterialTheme.typography.titleMedium,
+                    style = MaterialTheme.typography.titleLarge.copy(fontSize = 18.sp),
                     textAlign = TextAlign.Center,
                     color = textColor,
                 )
@@ -105,7 +106,7 @@ fun GameStateToast(
             ) { winnerText ->
                 Text(
                     text = winnerText,
-                    style = MaterialTheme.typography.titleMedium,
+                    style = MaterialTheme.typography.titleLarge.copy(fontSize = 18.sp),
                     textAlign = TextAlign.Center,
                     color = if (settingsState.isDarkThemeOn) Color.Green else Color(0xFF229A00),
                 )

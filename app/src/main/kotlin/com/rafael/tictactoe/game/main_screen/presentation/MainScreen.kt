@@ -116,7 +116,7 @@ fun MainScreen(
     ) {
         Text(
             text = stringResource(id = R.string.inapp_title),
-            style = MaterialTheme.typography.titleLarge.copy(fontSize = 26.sp),
+            style = MaterialTheme.typography.headlineMedium,
             color = MaterialTheme.colorScheme.onSurface,
         )
         Spacer(
@@ -124,7 +124,7 @@ fun MainScreen(
         )
         Text(
             text = "Material You",
-            style = MaterialTheme.typography.titleMedium,
+            style = MaterialTheme.typography.titleLarge.copy(fontSize = 20.sp),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
 
@@ -165,9 +165,7 @@ fun MainScreen(
                         )
                         Text(
                             modifier = Modifier.wrapContentSize(),
-                            style = MaterialTheme.typography.titleMedium.copy(
-                                fontSize = 20.sp,
-                            ),
+                            style = MaterialTheme.typography.titleLarge,
                             color = MaterialTheme.colorScheme.onSurface,
                             overflow = TextOverflow.Ellipsis,
                             textAlign = TextAlign.Center,

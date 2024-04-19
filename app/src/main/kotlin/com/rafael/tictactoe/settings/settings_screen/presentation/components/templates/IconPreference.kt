@@ -33,6 +33,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun IconPreference(
@@ -116,7 +117,7 @@ fun IconPreference(
             horizontalAlignment = Alignment.Start,
         ) {
             Text(
-                style = MaterialTheme.typography.titleMedium,
+                style = MaterialTheme.typography.titleLarge.copy(fontSize = 18.sp),
                 color = MaterialTheme.colorScheme.onSurface,
                 text = stringResource(title),
                 textAlign = TextAlign.Start,

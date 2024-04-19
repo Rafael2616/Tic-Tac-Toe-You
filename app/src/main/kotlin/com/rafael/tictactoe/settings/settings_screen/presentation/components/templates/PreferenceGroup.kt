@@ -20,6 +20,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun LazyItemScope.PreferenceGroup(
@@ -32,7 +33,7 @@ fun LazyItemScope.PreferenceGroup(
 
     Text(
         text = stringResource(heading),
-        style = MaterialTheme.typography.titleMedium,
+        style = MaterialTheme.typography.titleLarge.copy(fontSize = 18.sp),
         color = MaterialTheme.colorScheme.onSurfaceVariant,
         textAlign = TextAlign.Start,
         modifier = modifier
