@@ -124,7 +124,7 @@ fun MainScreen(
         )
         Text(
             text = "Material You",
-            style = MaterialTheme.typography.titleLarge.copy(fontSize = 20.sp),
+            style = MaterialTheme.typography.titleLarge.copy(fontSize = 18.sp),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
 
