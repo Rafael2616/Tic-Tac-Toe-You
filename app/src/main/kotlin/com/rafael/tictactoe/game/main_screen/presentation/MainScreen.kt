@@ -22,8 +22,8 @@ import androidx.compose.material.icons.outlined.Group
 import androidx.compose.material.icons.outlined.Memory
 import androidx.compose.material.icons.outlined.PlayArrow
 import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -186,6 +186,7 @@ fun MainScreen(
     AnimatedVisibility(state.showWhatsNewDialog) {
         WhatsNewDialog(
             settingsVM::onEvent,
+            navController,
         )
     }
 

@@ -136,6 +136,9 @@ fun ChangelogsScreen(
     }
 
     AnimatedVisibility(state.showWhatsNewDialog) {
-        WhatsNewDialog(settingsVM::onEvent)
+        WhatsNewDialog(
+            settingsVM::onEvent,
+            navController,
+        )
     }
 }

@@ -100,5 +100,6 @@
     <string name="presets">Preajustes</string>
     <string name="no_matching_settings_msg">No hay ninguna configuración coincidente para la consulta</string>
     <string name="search_tip">Intenta buscar algo como</string>
+    <string name="see_history">Ver historia</string>
 
 </resources>
