@@ -52,7 +52,10 @@ fun WhatsNewDialog(
             )
         },
         title = {
-            Text(text = stringResource(R.string.whats_new) + " v$versionNumber")
+            Text(
+                text = stringResource(R.string.whats_new) + " v$versionNumber",
+                style = MaterialTheme.typography.titleLarge,
+            )
         },
         text = {
             Column(
