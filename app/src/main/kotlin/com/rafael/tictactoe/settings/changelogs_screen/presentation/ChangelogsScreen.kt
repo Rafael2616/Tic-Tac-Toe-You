@@ -1,6 +1,7 @@
 package com.rafael.tictactoe.settings.changelogsScreen.presentation
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,13 +28,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.ExperimentalTextApi
+import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -42,11 +48,13 @@ import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.getChangelogFiles
 import com.rafael.tictactoe.common.domain.util.getVersionName
 import com.rafael.tictactoe.settings.changelogsScreen.presentation.components.WhatsNewDialog
+import com.rafael.tictactoe.settings.changelogsScreen.presentation.util.styledChangelog
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
 
 @Composable
 @ExperimentalMaterial3Api
+@ExperimentalTextApi
 fun ChangelogsScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
@@ -59,6 +67,8 @@ fun ChangelogsScreen(
     val version = getVersionName()
     val currentVersion = if (version.contains("-")) version.split("-")[0] else version
     val state by settingsVM.state.collectAsState()
+    val uriHandler = LocalUriHandler.current
+    val layoutResult = remember { mutableStateOf<TextLayoutResult?>(null) }
 
     Scaffold(
         modifier = modifier
@@ -108,6 +118,7 @@ fun ChangelogsScreen(
             verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterVertically),
         ) {
             changelogs.forEach { (version, changelog) ->
+                val styledChangelog = styledChangelog(changelog)
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -127,7 +138,22 @@ fun ChangelogsScreen(
                             ),
                         )
                         Text(
-                            text = changelog,
+                            text = styledChangelog,
+                            modifier = Modifier
+                                .pointerInput(Unit) {
+                                    detectTapGestures { pos ->
+                                        layoutResult.value?.let { layoutResult ->
+                                            val position = layoutResult.getOffsetForPosition(pos)
+                                            val link = styledChangelog.getStringAnnotations(position, position).firstOrNull()
+                                            if (link?.tag == "URL") {
+                                                uriHandler.openUri(link.item)
+                                            }
+                                        }
+                                    }
+                                },
+                            onTextLayout = {
+                                layoutResult.value = it
+                            },
                         )
                     }
                 }

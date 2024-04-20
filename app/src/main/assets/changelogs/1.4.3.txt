@@ -19,4 +19,4 @@ Code:
 - Bumb all deps to their latest versions
 
 Full changelog at:
-https://github.com/Rafael2616/Tic-Tac-Toe-You/actions
+https://github.com/Rafael2616/Tic-Tac-Toe-You/releases/tag/v1.4.3

@@ -281,7 +281,7 @@ fun BoardCustomizationDialog(
                                         modifier = Modifier
                                             .size(70.dp)
                                             .then(
-                                                if (shape.shadow > 0f && index == 3) {
+                                                if (shape.shadow > 0f && index == SHAPE_CUSTOM) {
                                                     Modifier.shadow(shape.shadow.roundToInt().dp, RoundedCornerShape(shape.cornerRadius))
                                                 } else {
                                                     Modifier
@@ -292,6 +292,7 @@ fun BoardCustomizationDialog(
                             }
                             Text(
                                 text = stringResource(shape.name),
+                                fontSize = 14.sp,
                             )
                         }
                     }

@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -29,6 +30,7 @@ import soup.compose.material.motion.animation.rememberSlideDistance
 @Composable
 @ExperimentalLayoutApi
 @ExperimentalMaterial3Api
+@ExperimentalTextApi
 fun TicTacToeNavGraph(
     modifier: Modifier = Modifier,
     intent: Intent? = null,

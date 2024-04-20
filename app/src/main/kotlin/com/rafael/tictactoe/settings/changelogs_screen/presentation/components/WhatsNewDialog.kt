@@ -21,15 +21,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.rafael.tictactoe.R
 import com.rafael.tictactoe.common.domain.util.getCurrentChangelogFile
 import com.rafael.tictactoe.common.presentation.navigation.Destinations
+import com.rafael.tictactoe.settings.changelogsScreen.presentation.util.styledChangelog
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 
 @Composable
+@ExperimentalTextApi
 fun WhatsNewDialog(
     onEvent: (SettingsEvent) -> Unit,
     navController: NavController,
@@ -64,7 +67,7 @@ fun WhatsNewDialog(
                     .verticalScroll(rememberScrollState()),
             ) {
                 Text(
-                    text = changelog,
+                    text = styledChangelog(changelog),
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.inverseSurface,
                     textAlign = TextAlign.Start,
@@ -95,7 +98,7 @@ fun WhatsNewDialog(
             }
         },
         modifier = modifier
-            .height(430.dp)
+            .height(440.dp)
             .width(360.dp),
     )
 }
