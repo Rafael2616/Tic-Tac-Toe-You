@@ -48,6 +48,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.isTraversalGroup
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.traversalIndex
+import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -65,6 +66,7 @@ import com.rafael.tictactoe.settings.settingsscreen.presentation.components.temp
 
 @Composable
 @ExperimentalMaterial3Api
+@ExperimentalTextApi
 fun SearchSettingsScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
