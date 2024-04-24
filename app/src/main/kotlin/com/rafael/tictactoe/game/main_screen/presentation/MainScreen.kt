@@ -167,7 +167,7 @@ fun MainScreen(
                         )
                         Text(
                             modifier = Modifier.wrapContentSize(),
-                            style = MaterialTheme.typography.titleLarge,
+                            style = MaterialTheme.typography.titleLarge.copy(fontSize = 20.sp),
                             color = MaterialTheme.colorScheme.onSurface,
                             overflow = TextOverflow.Ellipsis,
                             textAlign = TextAlign.Center,
