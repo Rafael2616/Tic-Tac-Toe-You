@@ -67,6 +67,7 @@ import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 import com.smarttoolfactory.extendedcolors.parser.rememberColorParser
 import my.nanihadesuka.compose.ColumnScrollbar
+import my.nanihadesuka.compose.ScrollbarSettings
 
 @Composable
 @Suppress("ktlint:compose:modifier-not-used-at-root")
@@ -259,12 +260,14 @@ fun ColorSelectionDialog(
                 ) {
                     ColumnScrollbar(
                         state = scrollState,
-                        thumbColor = MaterialTheme.colorScheme.primary,
-                        thumbSelectedColor = MaterialTheme.colorScheme.primary,
-                        padding = 2.dp,
-                        thumbMinHeight = 0.05f,
-                        thickness = 6.dp,
-                        alwaysShowScrollBar = true,
+                        settings = ScrollbarSettings(
+                            scrollbarPadding = 2.dp,
+                            thumbUnselectedColor = MaterialTheme.colorScheme.primary,
+                            thumbSelectedColor = MaterialTheme.colorScheme.primary,
+                            thumbMinLength = 0.05f,
+                            thumbThickness = 6.dp,
+                            alwaysShowScrollbar = true,
+                        ),
                     ) {
                         Column(
                             modifier = Modifier
