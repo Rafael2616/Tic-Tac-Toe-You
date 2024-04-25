@@ -10,7 +10,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withAnnotation
 import androidx.compose.ui.text.withStyle
-import java.util.regex.Pattern
 
 @Composable
 @ExperimentalTextApi
@@ -25,7 +24,7 @@ fun styledChangelog(changelog: String): AnnotatedString {
                     append(part)
                 }
             } else {
-                val urlPattern = Pattern.compile("https?://\\S+")
+                val urlPattern = "https?://\\S+".toPattern()
                 val matcher = urlPattern.matcher(part)
                 if (matcher.find()) {
                     val start = matcher.start()
