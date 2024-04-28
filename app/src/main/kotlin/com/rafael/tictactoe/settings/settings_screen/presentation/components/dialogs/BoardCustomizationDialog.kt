@@ -87,6 +87,8 @@ import com.smarttoolfactory.extendedcolors.parser.rememberColorParser
 import kotlin.math.roundToInt
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import my.nanihadesuka.compose.LazyRowScrollbar
+import my.nanihadesuka.compose.ScrollbarSettings
 
 @Composable
 @Suppress("ktlint:compose:modifier-not-used-at-root")
@@ -227,73 +229,86 @@ fun BoardCustomizationDialog(
                     color = MaterialTheme.colorScheme.inverseSurface,
                     textAlign = TextAlign.Start,
                 )
-                LazyRow(
+                LazyRowScrollbar(
                     state = listState,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .wrapContentHeight()
-                        .clip(RoundedCornerShape(20.dp))
-                        .background(MaterialTheme.colorScheme.surface),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterHorizontally),
-                    contentPadding = PaddingValues(4.dp),
+                    modifier = Modifier.height(155.dp),
+                    settings = ScrollbarSettings(
+                        scrollbarPadding = 2.dp,
+                        thumbUnselectedColor = MaterialTheme.colorScheme.primary,
+                        thumbSelectedColor = MaterialTheme.colorScheme.primary,
+                        thumbMinLength = 0.05f,
+                        thumbThickness = 6.dp,
+                        alwaysShowScrollbar = false,
+                    ),
                 ) {
-                    itemsIndexed(shapes) { index, shape ->
-                        Column(
-                            modifier = Modifier.wrapContentHeight(),
-                            verticalArrangement = Arrangement.spacedBy(6.dp, Alignment.CenterVertically),
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                        ) {
-                            Card(
-                                shape = RoundedCornerShape(24.dp),
-                                colors = CardDefaults.cardColors(
-                                    containerColor = MaterialTheme.colorScheme.surface,
-                                ),
-                                border = if (localShapeSelected == index) BorderStroke(1.25.dp, MaterialTheme.colorScheme.primary) else null,
-                                modifier = Modifier
-                                    .size(100.dp)
-                                    .clip(RoundedCornerShape(24.dp))
-                                    .clickable {
-                                        localShapeSelected = index
-                                        isInitialized = false
-                                        scope.launch { listState.animateScrollToItem(index, 1) }
-                                    },
+                    LazyRow(
+                        state = listState,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .wrapContentHeight()
+                            .clip(RoundedCornerShape(20.dp))
+                            .background(MaterialTheme.colorScheme.surface),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterHorizontally),
+                        contentPadding = PaddingValues(4.dp),
+                    ) {
+                        itemsIndexed(shapes) { index, shape ->
+                            Column(
+                                modifier = Modifier.wrapContentHeight(),
+                                verticalArrangement = Arrangement.spacedBy(6.dp, Alignment.CenterVertically),
+                                horizontalAlignment = Alignment.CenterHorizontally,
                             ) {
-                                Box(
-                                    modifier = Modifier.fillMaxSize(),
-                                    contentAlignment = Alignment.Center,
-                                ) {
-                                    Card(
-                                        shape = RoundedCornerShape(shape.cornerRadius),
-                                        border = if (shape.thickness > 0f && index == SHAPE_CUSTOM) {
-                                            when {
-                                                localShapeSelected == SHAPE_CUSTOM && isRGBEffectOn && isGradientOn -> BorderStroke(shape.thickness.dp, rgbGradientBrush)
-                                                localShapeSelected == SHAPE_CUSTOM && isRGBEffectOn && !isGradientOn -> BorderStroke(shape.thickness.dp, localBoardCardsBorderColorRGB)
-                                                localShapeSelected != SHAPE_CUSTOM && isRGBEffectOn -> BorderStroke(shape.thickness.dp, Brush.linearGradient(colors = listOf(Color.Red, Color.Yellow)))
-                                                else -> BorderStroke(shape.thickness.dp, shape.borderColor)
-                                            }
-                                        } else {
-                                            null
+                                Card(
+                                    shape = RoundedCornerShape(24.dp),
+                                    colors = CardDefaults.cardColors(
+                                        containerColor = MaterialTheme.colorScheme.surface,
+                                    ),
+                                    border = if (localShapeSelected == index) BorderStroke(1.25.dp, MaterialTheme.colorScheme.primary) else null,
+                                    modifier = Modifier
+                                        .size(100.dp)
+                                        .clip(RoundedCornerShape(24.dp))
+                                        .clickable {
+                                            localShapeSelected = index
+                                            isInitialized = false
+                                            scope.launch { listState.animateScrollToItem(index, 1) }
                                         },
-                                        colors = CardDefaults.cardColors(
-                                            containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(shape.elevation.dp),
-                                        ),
-                                        modifier = Modifier
-                                            .size(70.dp)
-                                            .then(
-                                                if (shape.shadow > 0f && index == SHAPE_CUSTOM) {
-                                                    Modifier.shadow(shape.shadow.roundToInt().dp, RoundedCornerShape(shape.cornerRadius))
-                                                } else {
-                                                    Modifier
-                                                },
+                                ) {
+                                    Box(
+                                        modifier = Modifier.fillMaxSize(),
+                                        contentAlignment = Alignment.Center,
+                                    ) {
+                                        Card(
+                                            shape = RoundedCornerShape(shape.cornerRadius),
+                                            border = if (shape.thickness > 0f && index == SHAPE_CUSTOM) {
+                                                when {
+                                                    localShapeSelected == SHAPE_CUSTOM && isRGBEffectOn && isGradientOn -> BorderStroke(shape.thickness.dp, rgbGradientBrush)
+                                                    localShapeSelected == SHAPE_CUSTOM && isRGBEffectOn && !isGradientOn -> BorderStroke(shape.thickness.dp, localBoardCardsBorderColorRGB)
+                                                    localShapeSelected != SHAPE_CUSTOM && isRGBEffectOn -> BorderStroke(shape.thickness.dp, Brush.linearGradient(colors = listOf(Color.Red, Color.Yellow)))
+                                                    else -> BorderStroke(shape.thickness.dp, shape.borderColor)
+                                                }
+                                            } else {
+                                                null
+                                            },
+                                            colors = CardDefaults.cardColors(
+                                                containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(shape.elevation.dp),
                                             ),
-                                    ) { /* No content here */ }
+                                            modifier = Modifier
+                                                .size(70.dp)
+                                                .then(
+                                                    if (shape.shadow > 0f && index == SHAPE_CUSTOM) {
+                                                        Modifier.shadow(shape.shadow.roundToInt().dp, RoundedCornerShape(shape.cornerRadius))
+                                                    } else {
+                                                        Modifier
+                                                    },
+                                                ),
+                                        ) { /* No content here */ }
+                                    }
                                 }
+                                Text(
+                                    text = stringResource(shape.name),
+                                    fontSize = 14.sp,
+                                )
                             }
-                            Text(
-                                text = stringResource(shape.name),
-                                fontSize = 14.sp,
-                            )
                         }
                     }
                 }

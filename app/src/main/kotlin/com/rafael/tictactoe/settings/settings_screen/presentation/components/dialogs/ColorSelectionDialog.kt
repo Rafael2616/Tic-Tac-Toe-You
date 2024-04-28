@@ -253,64 +253,59 @@ fun ColorSelectionDialog(
                         }
                     }
                 }
-                Box(
-                    modifier = Modifier
-                        .height(275.dp)
-                        .fillMaxWidth(),
+                ColumnScrollbar(
+                    state = scrollState,
+                    modifier = Modifier.height(275.dp),
+                    settings = ScrollbarSettings(
+                        scrollbarPadding = 2.dp,
+                        thumbUnselectedColor = MaterialTheme.colorScheme.primary,
+                        thumbSelectedColor = MaterialTheme.colorScheme.primary,
+                        thumbMinLength = 0.05f,
+                        thumbThickness = 6.dp,
+                        alwaysShowScrollbar = true,
+                    ),
                 ) {
-                    ColumnScrollbar(
-                        state = scrollState,
-                        settings = ScrollbarSettings(
-                            scrollbarPadding = 2.dp,
-                            thumbUnselectedColor = MaterialTheme.colorScheme.primary,
-                            thumbSelectedColor = MaterialTheme.colorScheme.primary,
-                            thumbMinLength = 0.05f,
-                            thumbThickness = 6.dp,
-                            alwaysShowScrollbar = true,
-                        ),
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(275.dp)
+                            .verticalScroll(scrollState),
+                        horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(275.dp)
-                                .verticalScroll(scrollState),
-                            horizontalAlignment = Alignment.CenterHorizontally,
+                        Text(text = colorParser.parseColorName(localColor))
+                        Box(
+                            modifier = Modifier.size(250.dp),
+                            contentAlignment = Alignment.Center,
                         ) {
-                            Text(text = colorParser.parseColorName(localColor))
-                            Box(
-                                modifier = Modifier.size(250.dp),
-                                contentAlignment = Alignment.Center,
-                            ) {
-                                HsvColorPicker(
-                                    modifier = Modifier
-                                        .size(240.dp),
-                                    controller = colorPickerController,
-                                    initialColor = remember { customizations[selectedIcon].color },
-                                    onColorChanged = { colorEnvelope ->
-                                        localColor = colorEnvelope.color
-                                        localHexColor = colorEnvelope.hexCode
-                                        currentIcon.onSelect(colorEnvelope.color)
-                                    },
-                                )
-                            }
-                            Text(
-                                text = stringResource(R.string.brightness) + ":",
+                            HsvColorPicker(
                                 modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(vertical = 4.dp),
-                            )
-                            BrightnessSlider(
+                                    .size(240.dp),
                                 controller = colorPickerController,
-                                wheelRadius = 12.dp,
-                                wheelColor = Color.Gray,
-                                borderRadius = 8.dp,
-                                initialColor = remember { currentIcon.color },
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(end = 16.dp)
-                                    .height(25.dp),
+                                initialColor = remember { customizations[selectedIcon].color },
+                                onColorChanged = { colorEnvelope ->
+                                    localColor = colorEnvelope.color
+                                    localHexColor = colorEnvelope.hexCode
+                                    currentIcon.onSelect(colorEnvelope.color)
+                                },
                             )
                         }
+                        Text(
+                            text = stringResource(R.string.brightness) + ":",
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 4.dp),
+                        )
+                        BrightnessSlider(
+                            controller = colorPickerController,
+                            wheelRadius = 12.dp,
+                            wheelColor = Color.Gray,
+                            borderRadius = 8.dp,
+                            initialColor = remember { currentIcon.color },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(end = 16.dp)
+                                .height(25.dp),
+                        )
                     }
                 }
                 Row(
