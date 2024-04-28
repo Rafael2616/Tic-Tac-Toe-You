@@ -340,7 +340,9 @@ fun BoardCustomizationDialog(
                                 steps = customization.steps,
                                 onValueChange = {
                                     customization.onValueChange(it)
-                                    scope.launch { listState.animateScrollToItem(localShapeSelected, 1) }
+                                    if (listState.firstVisibleItemIndex != 1) {
+                                        scope.launch { listState.animateScrollToItem(localShapeSelected, 1) }
+                                    }
                                 },
                             )
                         }
