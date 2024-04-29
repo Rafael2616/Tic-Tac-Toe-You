@@ -16,6 +16,7 @@ plugins {
     id("app.cash.licensee")
     id("kotlin-parcelize")
     id("kotlin-kapt")
+    alias(libs.plugins.jetbrains.compose)
 }
 
 android {
@@ -94,10 +95,6 @@ android {
     buildFeatures {
         compose = true
         buildConfig = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
 
     packaging {
