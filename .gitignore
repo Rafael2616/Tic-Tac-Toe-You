@@ -85,3 +85,4 @@ lint/tmp/
 .git/
 .androidide/
 keystore.properties
+.kotlin

@@ -8,14 +8,15 @@ import android.net.Uri
 import android.webkit.MimeTypeMap
 import com.rafael.tictactoe.BuildConfig
 import java.io.File
+import java.io.FileInputStream
 import java.io.FileOutputStream
 
 class ProfilePictureUtils() {
 
-    fun savePictureFromUri(context: Context, imageUri: Uri): Uri {
+    fun savePictureFromUri(context: Context, imageUri: Uri) {
         val contentResolver = context.contentResolver
 
-        val inputStream = contentResolver.openInputStream(imageUri) ?: return Uri.EMPTY
+        val inputStream = contentResolver.openInputStream(imageUri) ?: return
         val directory = File(PICTURE_PATH)
         if (!directory.exists()) {
             directory.mkdirs()
@@ -41,8 +42,6 @@ class ProfilePictureUtils() {
         outputStream.flush()
         outputStream.close()
         inputStream.close()
-
-        return Uri.parse(targetFile.absolutePath)
     }
 
     fun getPictureUriIfExists(): Uri {
@@ -60,6 +59,12 @@ class ProfilePictureUtils() {
             }
         }
         return uriDirWithFileNameExt
+    }
+
+    fun getPictureBitmap(): Bitmap {
+        return BitmapFactory.decodeStream(
+            FileInputStream(getPictureUriIfExists().path!!),
+        )
     }
 
     fun deletePicture() {

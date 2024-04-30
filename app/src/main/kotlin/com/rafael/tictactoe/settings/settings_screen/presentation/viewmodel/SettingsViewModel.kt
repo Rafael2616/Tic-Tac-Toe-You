@@ -2,7 +2,6 @@ package com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel
 
 import android.app.Application
 import android.content.Context
-import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
@@ -18,7 +17,6 @@ import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 import com.rafael.tictactoe.settings.settingsScreen.domain.repository.SettingsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.io.FileInputStream
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
@@ -84,7 +82,7 @@ class SettingsViewModel @Inject constructor(
                 _state.update { it.copy(isBMPlaying = isPlaying) }
             }
             _state.update { it.copy(profilePictureUri = ProfilePictureUtils().getPictureUriIfExists()) }
-            onSaveImage(Uri.EMPTY)
+            onSaveImage()
             this.cancel()
         }
     }
@@ -278,24 +276,19 @@ class SettingsViewModel @Inject constructor(
         ProfilePictureUtils().deletePicture()
     }
 
-    fun onSaveImage(imageUri: Uri) {
-        if (imageUri != Uri.EMPTY) {
-            _state.update {
-                it.copy(
-                    profilePictureUri = ProfilePictureUtils().savePictureFromUri(context as Context, imageUri),
-                    showProfilePictureMenu = false,
-                )
-            }
+    fun onSaveImage(imageUri: Uri? = null) {
+        val profileManager = ProfilePictureUtils()
+        imageUri?.let {
+            profileManager.savePictureFromUri(context as Context, imageUri)
+        }
+        _state.update {
+            it.copy(
+                profilePictureUri = profileManager.getPictureUriIfExists(),
+                showProfilePictureMenu = false,
+            )
         }
         if (state.value.profilePictureUri != Uri.EMPTY) {
-            _state.update {
-                it.copy(
-                    profilePictureBitmap = BitmapFactory.decodeStream(
-                        FileInputStream(it.profilePictureUri.path!!),
-                    ),
-                    showProfilePictureMenu = false,
-                )
-            }
+            _state.update { it.copy(profilePictureBitmap = profileManager.getPictureBitmap()) }
         }
     }
 }

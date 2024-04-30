@@ -47,7 +47,7 @@ fun ProfilePictureMenu(
 ) {
     val profilePicture = state.profilePictureBitmap
     val launcher = rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-        uri?.let { onSaveImage(uri) }
+        uri?.takeIf { uri != Uri.EMPTY }?.let { onSaveImage(uri) }
     }
     val activity = LocalContext.current as ComponentActivity
     var isStoragePermissionGranted by remember { mutableStateOf(false) }
