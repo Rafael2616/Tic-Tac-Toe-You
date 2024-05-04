@@ -134,6 +134,11 @@ android {
     }
 }
 
+composeCompiler {
+    //https://medium.com/androiddevelopers/jetpack-compose-strong-skipping-mode-explained-cbdb2aa4b900
+    enableStrongSkippingMode = true
+}    
+
 configure<SpotlessExtension> {
     kotlin {
         ktlint()
