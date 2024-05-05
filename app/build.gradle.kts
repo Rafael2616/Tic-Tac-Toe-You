@@ -202,6 +202,9 @@ dependencies {
     implementation(libs.skydoves.colorpicker.compose)
     // Compose extended colors
     implementation(libs.smarttoolfactory.extended.colors)
+    // Lifecycle
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
     // Media3
     implementation(libs.androidx.media3.common)
     implementation(libs.androidx.media3.exoplayer)
