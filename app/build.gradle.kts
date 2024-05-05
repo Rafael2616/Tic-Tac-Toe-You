@@ -14,7 +14,6 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.parcelize)
-    alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.licensee)
 }
@@ -135,9 +134,9 @@ android {
 }
 
 composeCompiler {
-    //https://medium.com/androiddevelopers/jetpack-compose-strong-skipping-mode-explained-cbdb2aa4b900
+    // https://medium.com/androiddevelopers/jetpack-compose-strong-skipping-mode-explained-cbdb2aa4b900
     enableStrongSkippingMode = true
-}    
+}
 
 configure<SpotlessExtension> {
     kotlin {
@@ -203,9 +202,6 @@ dependencies {
     implementation(libs.skydoves.colorpicker.compose)
     // Compose extended colors
     implementation(libs.smarttoolfactory.extended.colors)
-    // Lifecycle
-    implementation(libs.androidx.lifecycle.runtime.compose)
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
     // Media3
     implementation(libs.androidx.media3.common)
     implementation(libs.androidx.media3.exoplayer)
@@ -217,10 +213,6 @@ dependencies {
     implementation(libs.retrofit2)
     implementation(libs.retrofit2.converter.kotlinx.serialization)
     implementation(libs.okhttp3)
-    // App Search
-    implementation(libs.androidx.appsearch)
-    implementation(libs.androidx.appsearch.localStorage)
-    kapt(libs.androidx.appsearch.compiler)
     // Tests
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     testImplementation(libs.junit)
@@ -228,4 +220,7 @@ dependencies {
     androidTestImplementation(libs.androidx.test.espresso.core)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.mockk)
+
+    // Projects
+    implementation(project(":feature:settings-search"))
 }

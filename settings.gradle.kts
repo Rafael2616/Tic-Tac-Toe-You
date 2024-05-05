@@ -25,3 +25,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "TicTacToe You"
 include(":app")
+include(":feature:settings-search")
