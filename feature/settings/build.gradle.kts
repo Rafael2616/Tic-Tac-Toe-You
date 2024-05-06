@@ -23,6 +23,10 @@ android {
     room {
         schemaDirectory("$projectDir/schemas")
     }
+
+    buildFeatures {
+        compose = true
+    }
 }
 
 dependencies {
@@ -65,9 +69,10 @@ dependencies {
     implementation(libs.skydoves.colorpicker.compose)
     // Coil
     implementation(libs.coil.compose)
+    // App Search
+    implementation(libs.androidx.appsearch)
 
     // Projects
     implementation(project(":core:services"))
     implementation(project(":core:domain"))
-    //implementation(project(":feature:settings-search"))
 }

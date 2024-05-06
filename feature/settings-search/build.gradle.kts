@@ -19,6 +19,10 @@ android {
             languageVersion = JavaLanguageVersion.of(libs.versions.javaVersion.get().toInt())
         }
     }
+
+    buildFeatures {
+        compose = true
+    }
 }
 
 dependencies {
