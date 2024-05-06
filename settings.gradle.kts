@@ -26,3 +26,7 @@ dependencyResolutionManagement {
 rootProject.name = "TicTacToe You"
 include(":app")
 include(":feature:settings-search")
+include(":feature:settings")
+include(":core:services")
+include(":core:domain")
+

@@ -3,6 +3,7 @@
 plugins {
     alias(libs.plugins.androidx.room).apply(false)
     alias(libs.plugins.com.android.application).apply(false)
+    alias(libs.plugins.com.android.library).apply(false)
     alias(libs.plugins.spotless).apply(false)
     alias(libs.plugins.dagger.hilt).apply(false)
     alias(libs.plugins.ksp).apply(false)

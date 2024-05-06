@@ -6,87 +6,107 @@
 6        android:minSdkVersion="26"
 7        android:targetSdkVersion="34" />
 8
-9    <permission
-9-->[androidx.core:core:1.13.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/b2c039607970e06b20bc9a7c498d3da0/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
-10        android:name="com.rafael.tictactoe.feature.settings_search.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-10-->[androidx.core:core:1.13.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/b2c039607970e06b20bc9a7c498d3da0/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
-11        android:protectionLevel="signature" />
-11-->[androidx.core:core:1.13.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/b2c039607970e06b20bc9a7c498d3da0/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
-12
-13    <uses-permission android:name="com.rafael.tictactoe.feature.settings_search.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-13-->[androidx.core:core:1.13.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/b2c039607970e06b20bc9a7c498d3da0/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
-13-->[androidx.core:core:1.13.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/b2c039607970e06b20bc9a7c498d3da0/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+9    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+9-->[androidx.media3:media3-common:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/43966d05b9db037a09ae93f598cc5092/transformed/media3-common-1.3.1/AndroidManifest.xml:22:5-79
+9-->[androidx.media3:media3-common:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/43966d05b9db037a09ae93f598cc5092/transformed/media3-common-1.3.1/AndroidManifest.xml:22:22-76
+10
+11    <permission
+11-->[androidx.core:core:1.13.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/b2c039607970e06b20bc9a7c498d3da0/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
+12        android:name="com.rafael.tictactoe.feature.settings_search.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+12-->[androidx.core:core:1.13.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/b2c039607970e06b20bc9a7c498d3da0/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
+13        android:protectionLevel="signature" />
+13-->[androidx.core:core:1.13.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/b2c039607970e06b20bc9a7c498d3da0/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
 14
-15    <application
-16        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-16-->[androidx.core:core:1.13.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/b2c039607970e06b20bc9a7c498d3da0/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
-17        android:debuggable="true"
-18        android:extractNativeLibs="false" >
-19        <provider
-19-->[androidx.emoji2:emoji2:1.3.0] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/176e21d4e1b0616c589ae4205019e46f/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
-20            android:name="androidx.startup.InitializationProvider"
-20-->[androidx.emoji2:emoji2:1.3.0] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/176e21d4e1b0616c589ae4205019e46f/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
-21            android:authorities="com.rafael.tictactoe.feature.settings_search.androidx-startup"
-21-->[androidx.emoji2:emoji2:1.3.0] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/176e21d4e1b0616c589ae4205019e46f/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
-22            android:exported="false" >
-22-->[androidx.emoji2:emoji2:1.3.0] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/176e21d4e1b0616c589ae4205019e46f/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
-23            <meta-data
-23-->[androidx.emoji2:emoji2:1.3.0] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/176e21d4e1b0616c589ae4205019e46f/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
-24                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-24-->[androidx.emoji2:emoji2:1.3.0] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/176e21d4e1b0616c589ae4205019e46f/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
-25                android:value="androidx.startup" />
-25-->[androidx.emoji2:emoji2:1.3.0] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/176e21d4e1b0616c589ae4205019e46f/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
-26            <meta-data
-26-->[androidx.lifecycle:lifecycle-process:2.8.0-rc01] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/2110baec0e64ec3cb23a6d33b6172213/transformed/lifecycle-process-2.8.0-rc01/AndroidManifest.xml:29:13-31:52
-27                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-27-->[androidx.lifecycle:lifecycle-process:2.8.0-rc01] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/2110baec0e64ec3cb23a6d33b6172213/transformed/lifecycle-process-2.8.0-rc01/AndroidManifest.xml:30:17-78
-28                android:value="androidx.startup" />
-28-->[androidx.lifecycle:lifecycle-process:2.8.0-rc01] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/2110baec0e64ec3cb23a6d33b6172213/transformed/lifecycle-process-2.8.0-rc01/AndroidManifest.xml:31:17-49
+15    <uses-permission android:name="com.rafael.tictactoe.feature.settings_search.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+15-->[androidx.core:core:1.13.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/b2c039607970e06b20bc9a7c498d3da0/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
+15-->[androidx.core:core:1.13.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/b2c039607970e06b20bc9a7c498d3da0/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+16
+17    <application
+18        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+18-->[androidx.core:core:1.13.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/b2c039607970e06b20bc9a7c498d3da0/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
+19        android:debuggable="true"
+20        android:extractNativeLibs="false" >
+21        <activity
+21-->[androidx.compose.ui:ui-tooling-android:1.7.0-alpha08] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/41653443fd46e301e8d18b84f7bdae6f/transformed/ui-tooling-release/AndroidManifest.xml:23:9-25:39
+22            android:name="androidx.compose.ui.tooling.PreviewActivity"
+22-->[androidx.compose.ui:ui-tooling-android:1.7.0-alpha08] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/41653443fd46e301e8d18b84f7bdae6f/transformed/ui-tooling-release/AndroidManifest.xml:24:13-71
+23            android:exported="true" />
+23-->[androidx.compose.ui:ui-tooling-android:1.7.0-alpha08] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/41653443fd46e301e8d18b84f7bdae6f/transformed/ui-tooling-release/AndroidManifest.xml:25:13-36
+24
+25        <provider
+25-->[androidx.emoji2:emoji2:1.3.0] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/176e21d4e1b0616c589ae4205019e46f/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
+26            android:name="androidx.startup.InitializationProvider"
+26-->[androidx.emoji2:emoji2:1.3.0] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/176e21d4e1b0616c589ae4205019e46f/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
+27            android:authorities="com.rafael.tictactoe.feature.settings_search.androidx-startup"
+27-->[androidx.emoji2:emoji2:1.3.0] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/176e21d4e1b0616c589ae4205019e46f/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
+28            android:exported="false" >
+28-->[androidx.emoji2:emoji2:1.3.0] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/176e21d4e1b0616c589ae4205019e46f/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
 29            <meta-data
-29-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
-30                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-30-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
+29-->[androidx.emoji2:emoji2:1.3.0] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/176e21d4e1b0616c589ae4205019e46f/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
+30                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+30-->[androidx.emoji2:emoji2:1.3.0] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/176e21d4e1b0616c589ae4205019e46f/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
 31                android:value="androidx.startup" />
-31-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
-32        </provider>
-33
-34        <receiver
-34-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
-35            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-35-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
-36            android:directBootAware="false"
-36-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
-37            android:enabled="true"
-37-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
-38            android:exported="true"
-38-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
-39            android:permission="android.permission.DUMP" >
-39-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
-40            <intent-filter>
-40-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
-41                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-41-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
-41-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
-42            </intent-filter>
-43            <intent-filter>
-43-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
-44                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-44-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
-44-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
-45            </intent-filter>
-46            <intent-filter>
-46-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
-47                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-47-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
-47-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
-48            </intent-filter>
-49            <intent-filter>
-49-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
-50                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-50-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
-50-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
-51            </intent-filter>
-52        </receiver>
-53    </application>
-54
-55</manifest>
+31-->[androidx.emoji2:emoji2:1.3.0] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/176e21d4e1b0616c589ae4205019e46f/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
+32            <meta-data
+32-->[androidx.lifecycle:lifecycle-process:2.8.0-rc01] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/2110baec0e64ec3cb23a6d33b6172213/transformed/lifecycle-process-2.8.0-rc01/AndroidManifest.xml:29:13-31:52
+33                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+33-->[androidx.lifecycle:lifecycle-process:2.8.0-rc01] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/2110baec0e64ec3cb23a6d33b6172213/transformed/lifecycle-process-2.8.0-rc01/AndroidManifest.xml:30:17-78
+34                android:value="androidx.startup" />
+34-->[androidx.lifecycle:lifecycle-process:2.8.0-rc01] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/2110baec0e64ec3cb23a6d33b6172213/transformed/lifecycle-process-2.8.0-rc01/AndroidManifest.xml:31:17-49
+35            <meta-data
+35-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
+36                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+36-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
+37                android:value="androidx.startup" />
+37-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
+38        </provider>
+39
+40        <service
+40-->[androidx.room:room-runtime:2.6.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/37112874b9dcb8c184a338ca8daef385/transformed/room-runtime-2.6.1/AndroidManifest.xml:24:9-28:63
+41            android:name="androidx.room.MultiInstanceInvalidationService"
+41-->[androidx.room:room-runtime:2.6.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/37112874b9dcb8c184a338ca8daef385/transformed/room-runtime-2.6.1/AndroidManifest.xml:25:13-74
+42            android:directBootAware="true"
+42-->[androidx.room:room-runtime:2.6.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/37112874b9dcb8c184a338ca8daef385/transformed/room-runtime-2.6.1/AndroidManifest.xml:26:13-43
+43            android:exported="false" />
+43-->[androidx.room:room-runtime:2.6.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/37112874b9dcb8c184a338ca8daef385/transformed/room-runtime-2.6.1/AndroidManifest.xml:27:13-37
+44
+45        <receiver
+45-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
+46            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+46-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
+47            android:directBootAware="false"
+47-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
+48            android:enabled="true"
+48-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
+49            android:exported="true"
+49-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
+50            android:permission="android.permission.DUMP" >
+50-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
+51            <intent-filter>
+51-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
+52                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+52-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
+52-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
+53            </intent-filter>
+54            <intent-filter>
+54-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
+55                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+55-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
+55-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
+56            </intent-filter>
+57            <intent-filter>
+57-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
+58                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+58-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
+58-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
+59            </intent-filter>
+60            <intent-filter>
+60-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
+61                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+61-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
+61-->[androidx.profileinstaller:profileinstaller:1.3.1] /data/data/com.itsaky.androidide/files/home/.gradle/caches/transforms-4/187c9fcac61b9f1eee7ce7038c3f45ce/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
+62            </intent-filter>
+63        </receiver>
+64    </application>
+65
+66</manifest>

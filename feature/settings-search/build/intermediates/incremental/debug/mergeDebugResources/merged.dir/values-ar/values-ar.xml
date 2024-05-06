@@ -12,6 +12,15 @@
     <string msgid="8038256446254964252" name="default_error_message">"إدخال غير صالح"</string>
     <string msgid="6312721426453364202" name="default_popup_window_title">"نافذة منبثقة"</string>
     <string msgid="1890207353314751437" name="dropdown_menu">"قائمة منسدلة"</string>
+    <string name="exo_download_completed">اكتمل التنزيل</string>
+    <string name="exo_download_description">تنزيل</string>
+    <string name="exo_download_downloading">جارٍ التنزيل.</string>
+    <string name="exo_download_failed">تعذّر التنزيل</string>
+    <string name="exo_download_notification_channel_name">عمليات التنزيل</string>
+    <string name="exo_download_paused">تمّ إيقاف عمليات التنزيل مؤقتًا.</string>
+    <string name="exo_download_paused_for_network">عمليات التنزيل في انتظار الاتصال بالشبكة</string>
+    <string name="exo_download_paused_for_wifi">عمليات التنزيل في انتظار اتصال Wi-Fi.</string>
+    <string name="exo_download_removing">تجري إزالة المحتوى الذي تم تنزيله</string>
     <string msgid="6827826412747255547" name="in_progress">"قيد التقدم"</string>
     <string msgid="7933458017204019916" name="indeterminate">"تم وضع علامة في المربّع بشكل جزئي"</string>
     <string msgid="2988463736136100848" name="m3c_bottom_sheet_collapse_description">"تصغير البطاقة السفلية"</string>

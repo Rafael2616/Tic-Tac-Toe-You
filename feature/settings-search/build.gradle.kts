@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.com.android.application)
+    alias(libs.plugins.com.android.library)
     alias(libs.plugins.spotless)
     alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.ksp)
@@ -13,11 +13,6 @@ plugins {
 android {
     namespace = "com.rafael.tictactoe.feature.settings_search"
     compileSdk = libs.versions.compileSdk.get().toInt()
-    
-    defaultConfig {
-        minSdk = libs.versions.minSdk.get().toInt()
-        targetSdk = libs.versions.targetSdk.get().toInt()
-    }
 
     kotlin {
         jvmToolchain {
@@ -31,6 +26,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines)
     // AndroidX
     implementation(libs.androidx.annotation)
+    implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.hilt.navigation.compose)
     // Jetpack Compose
     implementation(platform(libs.androidx.compose.bom))
@@ -56,5 +52,5 @@ dependencies {
     
     // Projects
     // this is only for while i do not make the all migration
-    evaluationDependsOn(":app")
+    implementation(project(":feature:settings"))
 }

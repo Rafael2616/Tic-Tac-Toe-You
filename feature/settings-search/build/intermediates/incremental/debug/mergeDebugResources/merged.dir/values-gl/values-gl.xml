@@ -12,6 +12,15 @@
     <string msgid="8038256446254964252" name="default_error_message">"O texto escrito non é válido"</string>
     <string msgid="6312721426453364202" name="default_popup_window_title">"Ventá emerxente"</string>
     <string msgid="1890207353314751437" name="dropdown_menu">"Menú despregable"</string>
+    <string name="exo_download_completed">Completouse a descarga</string>
+    <string name="exo_download_description">Descargar</string>
+    <string name="exo_download_downloading">Descargando</string>
+    <string name="exo_download_failed">Produciuse un erro na descarga</string>
+    <string name="exo_download_notification_channel_name">Descargas</string>
+    <string name="exo_download_paused">As descargas están en pausa</string>
+    <string name="exo_download_paused_for_network">As descargas están agardando pola rede</string>
+    <string name="exo_download_paused_for_wifi">As descargas están agardando pola wifi</string>
+    <string name="exo_download_removing">Quitando descargas</string>
     <string msgid="6827826412747255547" name="in_progress">"En curso"</string>
     <string msgid="7933458017204019916" name="indeterminate">"Marcada parcialmente"</string>
     <string msgid="2988463736136100848" name="m3c_bottom_sheet_collapse_description">"Contrae o panel inferior"</string>

@@ -107,6 +107,7 @@ mockk = { module = "io.mockk:mockk-android", version.ref = "mockk" }
 [plugins]
 androidx-room = { id = "androidx.room", version.ref = "room" }
 com-android-application = { id = "com.android.application", version.ref = "agp" }
+com-android-library = { id = "com.android.library", version.ref = "agp" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger-hilt" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

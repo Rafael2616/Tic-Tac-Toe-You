@@ -12,6 +12,15 @@
     <string msgid="8038256446254964252" name="default_error_message">"Invalid input"</string>
     <string msgid="6312721426453364202" name="default_popup_window_title">"Pop-up window"</string>
     <string msgid="1890207353314751437" name="dropdown_menu">"Drop-down menu"</string>
+    <string name="exo_download_completed">Download completed</string>
+    <string name="exo_download_description">Download</string>
+    <string name="exo_download_downloading">Downloading</string>
+    <string name="exo_download_failed">Download failed</string>
+    <string name="exo_download_notification_channel_name">Downloads</string>
+    <string name="exo_download_paused">Downloads paused</string>
+    <string name="exo_download_paused_for_network">Downloads waiting for network</string>
+    <string name="exo_download_paused_for_wifi">Downloads waiting for Wi-Fi</string>
+    <string name="exo_download_removing">Removing downloads</string>
     <string msgid="6827826412747255547" name="in_progress">"In progress"</string>
     <string msgid="7933458017204019916" name="indeterminate">"Partially ticked"</string>
     <string msgid="2988463736136100848" name="m3c_bottom_sheet_collapse_description">"Collapse bottom sheet"</string>
