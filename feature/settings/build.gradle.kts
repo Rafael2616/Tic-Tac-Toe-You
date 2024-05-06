@@ -69,5 +69,5 @@ dependencies {
     // Projects
     implementation(project(":core:services"))
     implementation(project(":core:domain"))
-    implementation(project(":feature:settings-search"))
+    //implementation(project(":feature:settings-search"))
 }
