@@ -71,7 +71,7 @@ import com.github.skydoves.colorpicker.compose.AlphaSlider
 import com.github.skydoves.colorpicker.compose.BrightnessSlider
 import com.github.skydoves.colorpicker.compose.HsvColorPicker
 import com.github.skydoves.colorpicker.compose.rememberColorPickerController
-import com.rafael.tictactoe.feature.settings.R
+import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.settings.settingsScreen.domain.animations.rememberRGBAnimation
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.BoardCustomization
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.BoardShape

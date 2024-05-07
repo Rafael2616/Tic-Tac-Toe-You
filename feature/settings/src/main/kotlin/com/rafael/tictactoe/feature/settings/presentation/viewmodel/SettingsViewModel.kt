@@ -11,7 +11,7 @@ import com.rafael.tictactoe.common.domain.util.ProfilePictureUtils
 import com.rafael.tictactoe.common.domain.util.getVersionName
 import com.rafael.tictactoe.common.domain.util.toColor
 import com.rafael.tictactoe.common.services.MusicService
-import com.rafael.tictactoe.game.domain.audio.backgroundMusic
+import com.rafael.tictactoe.core.domain.audio.backgroundMusic
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEntity
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState

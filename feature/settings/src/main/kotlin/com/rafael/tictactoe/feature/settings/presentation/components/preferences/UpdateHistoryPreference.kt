@@ -5,7 +5,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.outlined.History
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
-import com.rafael.tictactoe.R
+import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.common.presentation.navigation.Destinations
 import com.rafael.tictactoe.settings.settingsscreen.presentation.components.templates.IconPreference
 

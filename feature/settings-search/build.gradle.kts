@@ -57,4 +57,5 @@ dependencies {
     // Projects
     // this is only for while i do not make the all migration
     implementation(project(":feature:settings"))
+    implementation(project(":core:ui"))
 }

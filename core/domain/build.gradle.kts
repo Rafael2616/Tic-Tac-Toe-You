@@ -19,5 +19,5 @@ android {
 dependencies {
     implementation(libs.androidx.compose.ui)
     // Projects
-    implementation(project(":app"))
+    implementation(project(":core:services"))
 }

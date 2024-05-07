@@ -7,8 +7,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowOutward
 import androidx.compose.runtime.Composable
-import com.rafael.tictactoe.R
-import com.rafael.tictactoe.common.presentation.icons.material.Github
+import com.rafael.tictactoe.core.resources.R
+import com.rafael.tictactoe.core.resources.icons.material.Github
 import com.rafael.tictactoe.settings.settingsscreen.presentation.components.templates.IconPreference
 
 @Composable

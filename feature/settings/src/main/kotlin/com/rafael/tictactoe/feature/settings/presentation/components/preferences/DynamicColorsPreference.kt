@@ -5,7 +5,7 @@ import android.os.Build.VERSION_CODES
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Palette
 import androidx.compose.runtime.Composable
-import com.rafael.tictactoe.R
+import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 import com.rafael.tictactoe.settings.settingsscreen.presentation.components.templates.SwitchPreference

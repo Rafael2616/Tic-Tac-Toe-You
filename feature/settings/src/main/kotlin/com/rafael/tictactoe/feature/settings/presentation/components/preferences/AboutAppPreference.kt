@@ -23,7 +23,7 @@ import coil.compose.AsyncImagePainter
 import coil.compose.SubcomposeAsyncImage
 import coil.compose.SubcomposeAsyncImageContent
 import coil.request.ImageRequest
-import com.rafael.tictactoe.R
+import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.common.domain.util.getVersionCode
 import com.rafael.tictactoe.common.domain.util.getVersionName
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent

@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.feature.settingssearch.domain.model
+package com.rafael.tictactoe.feature.settings.domain.model
 
 import androidx.annotation.Keep
 import androidx.appsearch.annotation.Document
