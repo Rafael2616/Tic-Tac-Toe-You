@@ -76,5 +76,5 @@ dependencies {
     implementation(project(":core:services"))
     implementation(project(":core:domain"))
     implementation(project(":core:resources"))
-   // implementation(project(":core:navigation-wrapper"))
+    implementation(project(":core:navigation-wrapper"))
 }
