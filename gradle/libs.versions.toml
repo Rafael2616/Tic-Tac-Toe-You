@@ -48,6 +48,7 @@ junit = "4.13.2"
 expresso = "3.5.1"
 androidx-test-junit = "1.1.5"
 mockk = "1.13.10"
+guava = "33.2.0-android"
 
 [libraries]
 kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
@@ -103,6 +104,8 @@ androidx-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-mani
 androidx-test-ext-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-test-junit" }
 androidx-test-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "expresso" }
 mockk = { module = "io.mockk:mockk-android", version.ref = "mockk" }
+
+google-guava = { module = "com.google.guava:guava", version.ref = "guava" }
 
 [plugins]
 androidx-room = { id = "androidx.room", version.ref = "room" }

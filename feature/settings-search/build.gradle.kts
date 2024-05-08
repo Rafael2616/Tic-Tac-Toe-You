@@ -42,7 +42,6 @@ dependencies {
     // AndroidX
     implementation(libs.androidx.annotation)
     implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.core)
     implementation(libs.androidx.hilt.navigation.compose)
     // Jetpack Compose
     implementation(platform(libs.androidx.compose.bom))
@@ -65,7 +64,9 @@ dependencies {
     implementation(libs.androidx.appsearch)
     implementation(libs.androidx.appsearch.localStorage)
     kapt(libs.androidx.appsearch.compiler)
-    
+
+    implementation(libs.google.guava)
+
     // Projects
     // this is only for while i do not make the all migration
     implementation(project(":feature:settings"))
