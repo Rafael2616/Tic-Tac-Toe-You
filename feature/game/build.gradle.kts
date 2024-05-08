@@ -32,7 +32,7 @@ android {
 dependencies {
     // Kotlin
     implementation(libs.kotlinx.coroutines)
-    implementation(libs.kotlinx.serialization)
+    implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlinx.collections.immutable)
     // AndroidX
     implementation(libs.androidx.annotation)
