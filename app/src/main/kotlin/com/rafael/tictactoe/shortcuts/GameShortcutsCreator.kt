@@ -7,8 +7,8 @@ import androidx.annotation.StringRes
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
-import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.TicTacToeActivity
+import com.rafael.tictactoe.core.resources.R
 
 class GameShortcutsCreator {
 
