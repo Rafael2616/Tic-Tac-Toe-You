@@ -226,5 +226,6 @@ dependencies {
 
     // Projects
     implementation(project(":core:navigation"))
+    implementation(project(":core:services"))
     implementation(project(":feature:settings"))
 }
