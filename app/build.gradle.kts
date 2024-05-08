@@ -162,10 +162,6 @@ licensee {
 }
 
 dependencies {
-    // Kotlin
-    implementation(libs.kotlinx.coroutines)
-    implementation(libs.kotlinx.collections.immutable)
-    implementation(libs.kotlinx.serialization.json)
     // Android Core
     implementation(libs.androidx.core)
     implementation(libs.androidx.activity.compose)
@@ -183,32 +179,8 @@ dependencies {
     implementation(libs.androidx.compose.material.icons.extended)
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.compose.ui)
-    // Navigation
-    implementation(libs.androidx.navigation.compose)
-    // Coil
-    implementation(libs.coil.compose)
-    // Material Motion
-    implementation(libs.material.motion.compose)
-    // LazyColumnScrollbar
-    implementation(libs.nanihadesuka.lazyColumnScrollbar)
-    // ColorPicker Compose
-    implementation(libs.skydoves.colorpicker.compose)
-    // Compose extended colors
-    implementation(libs.smarttoolfactory.extended.colors)
-    // Lifecycle
-    implementation(libs.androidx.lifecycle.runtime.compose)
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
     // Media3
-    implementation(libs.androidx.media3.common)
     implementation(libs.androidx.media3.exoplayer)
-    // Room
-    implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.room.ktx)
-    ksp(libs.androidx.room.compiler)
-    // Retrofit
-    implementation(libs.retrofit2)
-    implementation(libs.retrofit2.converter.kotlinx.serialization)
-    implementation(libs.okhttp3)
     // Tests
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     testImplementation(libs.junit)
@@ -221,4 +193,5 @@ dependencies {
     implementation(project(":core:navigation"))
     implementation(project(":core:services"))
     implementation(project(":feature:settings"))
+    implementation(project(":core:resources"))
 }
