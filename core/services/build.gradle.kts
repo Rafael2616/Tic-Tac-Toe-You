@@ -20,11 +20,8 @@ android {
 dependencies {
     // Dagger Hilt
     implementation(libs.dagger.hilt.android)
-    implementation(libs.androidx.hilt.navigation.compose)
     ksp(libs.dagger.hilt.android.compiler)
     // Media3
     implementation(libs.androidx.media3.common)
     implementation(libs.androidx.media3.exoplayer)
- 
-    // Projects
 }

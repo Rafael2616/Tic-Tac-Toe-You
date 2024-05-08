@@ -1,5 +1,4 @@
 plugins {
-    alias(libs.plugins.androidx.room)
     alias(libs.plugins.com.android.library)
     alias(libs.plugins.spotless)
     alias(libs.plugins.dagger.hilt)
@@ -18,10 +17,6 @@ android {
         jvmToolchain {
             languageVersion = JavaLanguageVersion.of(libs.versions.javaVersion.get().toInt())
         }
-    }
-
-    room {
-        schemaDirectory("$projectDir/schemas")
     }
 
     buildFeatures {

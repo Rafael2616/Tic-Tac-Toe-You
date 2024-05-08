@@ -6,14 +6,11 @@ import java.util.Properties
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    alias(libs.plugins.androidx.room)
     alias(libs.plugins.com.android.application)
     alias(libs.plugins.spotless)
     alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.licensee)
 }
@@ -106,10 +103,6 @@ android {
                 "/META-INF/LICENSE-notice.md",
             )
         }
-    }
-
-    room {
-        schemaDirectory("$projectDir/schemas")
     }
 
     androidComponents.onVariants { variant ->

@@ -10,9 +10,9 @@ import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.common.domain.util.AppExceptionHandler
-import com.rafael.tictactoe.core.navigation.TicTacToeNavGraph
 import com.rafael.tictactoe.common.services.MusicService
 import com.rafael.tictactoe.common.shortcuts.GameShortcutsCreator
+import com.rafael.tictactoe.core.navigation.TicTacToeNavGraph
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
 import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
 import dagger.hilt.android.AndroidEntryPoint

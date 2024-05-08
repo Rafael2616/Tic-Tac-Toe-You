@@ -21,11 +21,7 @@ android {
 }
 
 dependencies {
-    // Kotlin
-    implementation(libs.kotlinx.coroutines)
     // AndroidX
-    implementation(libs.androidx.annotation)
-    implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.hilt.navigation.compose)
     // Jetpack Compose
     implementation(platform(libs.androidx.compose.bom))
@@ -35,14 +31,11 @@ dependencies {
     implementation(libs.androidx.compose.material.icons.extended)
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.compose.ui)
-    // Lifecycle
-    implementation(libs.androidx.lifecycle.runtime.compose)
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
     // Navigation
     implementation(libs.androidx.navigation.compose)
     // Projects
     implementation(project(":core:ui"))
     implementation(project(":core:resources"))
-    //implementation(project(":core:navigation"))
+    // implementation(project(":core:navigation"))
     implementation(project(":feature:settings"))
 }
