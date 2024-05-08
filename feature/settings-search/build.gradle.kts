@@ -42,6 +42,7 @@ dependencies {
     // AndroidX
     implementation(libs.androidx.annotation)
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.core)
     implementation(libs.androidx.hilt.navigation.compose)
     // Jetpack Compose
     implementation(platform(libs.androidx.compose.bom))
