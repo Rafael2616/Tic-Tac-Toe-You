@@ -3,7 +3,7 @@ package com.rafael.tictactoe.feature.settingssearch.presentation.viewmodel
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rafael.tictactoe.feature.settingssearch.domain.model.SearchItemSpecs
+import com.rafael.tictactoe.feature.settings.domain.model.SearchItemSpecs
 import com.rafael.tictactoe.feature.settingssearch.domain.model.SearchSettingsEvent
 import com.rafael.tictactoe.feature.settingssearch.domain.model.SearchSettingsState
 import com.rafael.tictactoe.feature.settingssearch.data.repository.AndroidSearchSettingsManager
