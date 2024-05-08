@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.common.shortcuts
+package com.rafael.tictactoe.shortcuts
 
 import android.content.Context
 import android.content.Intent
