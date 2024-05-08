@@ -42,7 +42,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.rafael.tictactoe.R
+import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.settings.libraryScreen.presentation.utils.annotatedLink
 import com.rafael.tictactoe.settings.libraryScreen.presentation.viewmodel.LibraryViewModel
 

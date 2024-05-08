@@ -32,6 +32,7 @@ android {
 dependencies {
     // Kotlin
     implementation(libs.kotlinx.coroutines)
+    implementation(libs.kotlinx.serialization.json)
     // Jetpack Compose
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.material3)
@@ -49,4 +50,5 @@ dependencies {
     ksp(libs.dagger.hilt.android.compiler)
     // Projects
     implementation(project(":core:ui"))
+    implementation(project(":core:resources"))
 }

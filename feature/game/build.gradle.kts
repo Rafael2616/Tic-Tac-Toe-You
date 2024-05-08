@@ -61,16 +61,8 @@ dependencies {
     // Media3
     implementation(libs.androidx.media3.common)
     implementation(libs.androidx.media3.exoplayer)
-     // Compose extended colors
-    implementation(libs.smarttoolfactory.extended.colors)
-   // LazyColumnScrollbar
-    implementation(libs.nanihadesuka.lazyColumnScrollbar)
-    // ColorPicker Compose
-    implementation(libs.skydoves.colorpicker.compose)
-    // Coil
-    implementation(libs.coil.compose)
-    // App Search
-    implementation(libs.androidx.appsearch)
+     //Retrofit
+    implementation(libs.retrofit2)
 
     // Projects
     implementation(project(":core:services"))
@@ -78,4 +70,5 @@ dependencies {
     implementation(project(":core:ui"))
     implementation(project(":core:di"))
     implementation(project(":core:resources"))
+    implementation(project(":feature:settings"))
 }

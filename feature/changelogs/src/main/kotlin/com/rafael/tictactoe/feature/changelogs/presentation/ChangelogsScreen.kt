@@ -44,9 +44,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.rafael.tictactoe.R
+import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.common.domain.util.getChangelogFiles
-import com.rafael.tictactoe.common.domain.util.getVersionName
+//import com.rafael.tictactoe.common.domain.util.getVersionName
 import com.rafael.tictactoe.settings.changelogsScreen.presentation.components.WhatsNewDialog
 import com.rafael.tictactoe.settings.changelogsScreen.presentation.util.styledChangelog
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
@@ -64,7 +64,7 @@ fun ChangelogsScreen(
     val changelogs = context.getChangelogFiles()
     var isGoBackClicked by rememberSaveable { mutableStateOf(false) }
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
-    val version = getVersionName()
+    val version = "1.5.3"//getVersionName()
     val currentVersion = if (version.contains("-")) version.split("-")[0] else version
     val state by settingsVM.state.collectAsState()
     val uriHandler = LocalUriHandler.current
