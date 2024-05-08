@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.changelogsScreen.presentation.components
+package com.rafael.tictactoe.feature.changelogs.presentation.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -26,10 +26,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.rafael.tictactoe.core.resources.R
-import com.rafael.tictactoe.common.domain.util.getCurrentChangelogFile
+import com.rafael.tictactoe.feature.changelogs.data.getCurrentChangelogFile
 //import com.rafael.tictactoe.common.presentation.navigation.Destinations
-import com.rafael.tictactoe.settings.changelogsScreen.presentation.util.styledChangelog
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
+import com.rafael.tictactoe.feature.changelogs.presentation.util.styledChangelog
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
 
 @Composable
 @ExperimentalTextApi

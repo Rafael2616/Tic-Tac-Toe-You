@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.settingsScreen.presentation.components
+package com.rafael.tictactoe.feature.settings.presentation.components
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement
@@ -12,12 +12,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
-import com.rafael.tictactoe.settings.settingsscreen.presentation.components.groups.CustomizationPreferenceGroup
-import com.rafael.tictactoe.settings.settingsscreen.presentation.components.groups.OthersPreferenceGroup
-import com.rafael.tictactoe.settings.settingsscreen.presentation.components.groups.SoundPreferenceGroup
-import com.rafael.tictactoe.settings.settingsscreen.presentation.components.groups.ThemePreferenceGroup
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
+import com.rafael.tictactoe.feature.settings.presentation.components.groups.CustomizationPreferenceGroup
+import com.rafael.tictactoe.feature.settings.presentation.components.groups.OthersPreferenceGroup
+import com.rafael.tictactoe.feature.settings.presentation.components.groups.SoundPreferenceGroup
+import com.rafael.tictactoe.feature.settings.presentation.components.groups.ThemePreferenceGroup
 
 @Composable
 fun Preferences(

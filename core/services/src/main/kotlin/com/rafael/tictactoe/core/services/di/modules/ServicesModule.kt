@@ -1,8 +1,8 @@
-package com.rafael.tictactoe.di
+package com.rafael.tictactoe.core.services.di.modules
 
 import android.app.Application
 import androidx.media3.exoplayer.ExoPlayer
-import com.rafael.tictactoe.common.services.MusicService
+import com.rafael.tictactoe.core.services.MusicService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

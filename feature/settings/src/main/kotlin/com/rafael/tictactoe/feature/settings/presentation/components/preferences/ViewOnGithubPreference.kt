@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.settingsscreen.presentation.components.preferences
+package com.rafael.tictactoe.feature.settings.presentation.components.preferences
 
 import android.content.Intent
 import android.net.Uri
@@ -9,7 +9,7 @@ import androidx.compose.material.icons.filled.ArrowOutward
 import androidx.compose.runtime.Composable
 import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.core.resources.icons.material.Github
-import com.rafael.tictactoe.settings.settingsscreen.presentation.components.templates.IconPreference
+import com.rafael.tictactoe.feature.settings.presentation.components.templates.IconPreference
 
 @Composable
 fun ViewOnGithubPreference() {

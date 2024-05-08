@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.mainScreen.domain.model
+package com.rafael.tictactoe.feature.main.domain.model
 
 import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.Color

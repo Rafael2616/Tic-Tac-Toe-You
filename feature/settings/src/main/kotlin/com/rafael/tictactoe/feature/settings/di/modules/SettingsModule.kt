@@ -1,14 +1,14 @@
-package com.rafael.tictactoe.di
+package com.rafael.tictactoe.feature.settings.di.modules
 
 import android.app.Application
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.room.Room
-import com.rafael.tictactoe.common.services.MusicService
-import com.rafael.tictactoe.settings.settingsScreen.data.database.Migrations
-import com.rafael.tictactoe.settings.settingsScreen.data.database.SettingsDatabase
-import com.rafael.tictactoe.settings.settingsScreen.data.repository.SettingsRepositoryImpl
-import com.rafael.tictactoe.settings.settingsScreen.domain.repository.SettingsRepository
-import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
+import com.rafael.tictactoe.core.services.MusicService
+import com.rafael.tictactoe.feature.settings.data.database.Migrations
+import com.rafael.tictactoe.feature.settings.data.database.SettingsDatabase
+import com.rafael.tictactoe.feature.settings.data.repository.SettingsRepositoryImpl
+import com.rafael.tictactoe.feature.settings.domain.repository.SettingsRepository
+import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

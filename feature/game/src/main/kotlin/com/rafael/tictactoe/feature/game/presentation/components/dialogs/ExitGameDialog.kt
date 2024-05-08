@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.gameScreen.presentation.components.dialogs
+package com.rafael.tictactoe.feature.game.presentation.components.dialogs
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.width
@@ -21,7 +21,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.rafael.tictactoe.core.resources.R
-import com.rafael.tictactoe.game.domain.model.GameEvent
+import com.rafael.tictactoe.feature.game.domain.model.GameEvent
 
 @Composable
 fun ExitGameDialog(

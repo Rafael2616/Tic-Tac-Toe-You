@@ -1,7 +1,7 @@
-package com.rafael.tictactoe.settings.libraryScreen.data.repository
+package com.rafael.tictactoe.feature.libraryinfo.data.repository
 
 import android.app.Application
-import com.rafael.tictactoe.settings.domain.model.OssLibrary
+import com.rafael.tictactoe.feature.libraryinfo.domain.model.OssLibrary
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope

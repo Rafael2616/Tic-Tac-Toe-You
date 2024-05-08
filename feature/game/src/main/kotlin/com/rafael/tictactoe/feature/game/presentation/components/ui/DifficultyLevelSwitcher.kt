@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.gameScreen.presentation.components.ui
+package com.rafael.tictactoe.feature.game.presentation.components.ui
 
 import android.content.res.Configuration
 import androidx.compose.animation.AnimatedVisibility
@@ -41,10 +41,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rafael.tictactoe.core.resources.R
-import com.rafael.tictactoe.game.domain.model.GameEvent
-import com.rafael.tictactoe.game.domain.model.GameState
-import com.rafael.tictactoe.game.domain.model.Level
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
+import com.rafael.tictactoe.feature game.domain.model.GameEvent
+import com.rafael.tictactoe.feature.game.domain.model.GameState
+import com.rafael.tictactoe.feature.game.domain.model.Level
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

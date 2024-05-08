@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.searchSettingsScreen.domain.repository
+package com.rafael.tictactoe.feature.settingssearch.domain.repository
 
 import com.rafael.tictactoe.feature.settings.domain.model.SearchItemSpecs
 

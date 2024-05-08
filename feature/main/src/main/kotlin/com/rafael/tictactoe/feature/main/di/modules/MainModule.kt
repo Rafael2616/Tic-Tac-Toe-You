@@ -1,7 +1,7 @@
-package com.rafael.tictactoe.di
+package com.rafael.tictactoe.feature.main.di.modules
 
 import androidx.lifecycle.SavedStateHandle
-import com.rafael.tictactoe.game.mainScreen.presentation.viewmodel.MainViewModel
+import com.rafael.tictactoe.feature.main.presentation.viewmodel.MainViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

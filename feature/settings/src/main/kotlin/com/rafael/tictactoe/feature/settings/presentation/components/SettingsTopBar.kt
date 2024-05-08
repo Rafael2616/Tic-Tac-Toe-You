@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.settingsScreen.presentation.components
+package com.rafael.tictactoe.feature.settings.presentation.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.PaddingValues
@@ -30,9 +30,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.rafael.tictactoe.core.resources.R
-//import com.rafael.tictactoe.common.presentation.navigation.Destinations
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
+//import com.rafael.tictactoe.core.navigation.Destinations
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 
 @Composable
 @ExperimentalMaterial3Api

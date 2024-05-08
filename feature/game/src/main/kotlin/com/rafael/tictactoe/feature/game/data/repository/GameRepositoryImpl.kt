@@ -1,14 +1,14 @@
-package com.rafael.tictactoe.game.data.repository
+package com.rafael.tictactoe.feature.game.data.repository
 
 import android.util.Log
-import com.rafael.tictactoe.game.data.dao.OnlineGameDao
-import com.rafael.tictactoe.game.domain.model.Error
-import com.rafael.tictactoe.game.domain.model.GameState
-import com.rafael.tictactoe.game.domain.model.OnlineGameState
-import com.rafael.tictactoe.game.domain.model.Player
-import com.rafael.tictactoe.game.domain.model.RequestState
-import com.rafael.tictactoe.game.domain.repository.GameRepository
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
+import com.rafael.tictactoe.feature.game.data.dao.OnlineGameDao
+import com.rafael.tictactoe.feature.game.domain.model.Error
+import com.rafael.tictactoe.feature.game.domain.model.GameState
+import com.rafael.tictactoe.feature.game.domain.model.OnlineGameState
+import com.rafael.tictactoe.feature.game.domain.model.Player
+import com.rafael.tictactoe.feature.game.domain.model.RequestState
+import com.rafael.tictactoe.feature.game.domain.repository.GameRepository
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 import java.io.IOException
 import javax.inject.Inject
 import kotlinx.coroutines.delay

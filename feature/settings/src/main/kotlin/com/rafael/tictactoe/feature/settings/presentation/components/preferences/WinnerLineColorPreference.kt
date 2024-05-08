@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.settingsscreen.presentation.components.preferences
+package com.rafael.tictactoe.feature.settings.presentation.components.preferences
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.material.icons.Icons
@@ -8,10 +8,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.unit.dp
 import com.rafael.tictactoe.core.resources.R
-import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Customization
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
-import com.rafael.tictactoe.settings.settingsscreen.presentation.components.templates.IconPreference
+import com.rafael.tictactoe.feature.settings.domain.enums.Customization
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
+import com.rafael.tictactoe.feature.settings.presentation.components.templates.IconPreference
 
 @Composable
 fun WinnerLineColorPreference(

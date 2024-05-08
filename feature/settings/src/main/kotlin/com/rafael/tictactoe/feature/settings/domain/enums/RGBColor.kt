@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.settingsScreen.domain.enums
+package com.rafael.tictactoe.feature.settings.domain.enums
 
 enum class RGBColor {
     Red,

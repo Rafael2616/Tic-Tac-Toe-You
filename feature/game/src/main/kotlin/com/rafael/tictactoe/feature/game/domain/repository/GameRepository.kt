@@ -1,10 +1,10 @@
-package com.rafael.tictactoe.game.domain.repository
+package com.rafael.tictactoe.feature.game.domain.repository
 
-import com.rafael.tictactoe.game.domain.model.GameState
-import com.rafael.tictactoe.game.domain.model.OnlineGameState
-import com.rafael.tictactoe.game.domain.model.Player
-import com.rafael.tictactoe.game.domain.model.RequestState
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
+import com.rafael.tictactoe.feature.game.domain.model.GameState
+import com.rafael.tictactoe.feature.game.domain.model.OnlineGameState
+import com.rafael.tictactoe.feature.game.domain.model.Player
+import com.rafael.tictactoe.feature.game.domain.model.RequestState
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 import kotlinx.coroutines.flow.Flow
 
 interface GameRepository {

@@ -1,17 +1,17 @@
-package com.rafael.tictactoe.settings.settingsscreen.presentation.components.groups
+package com.rafael.tictactoe.feature.settings.presentation.components.groups
 
 import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavController
 import com.rafael.tictactoe.core.resources.R
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
-import com.rafael.tictactoe.settings.settingsscreen.presentation.components.preferences.AboutAppPreference
-import com.rafael.tictactoe.settings.settingsscreen.presentation.components.preferences.OpenSourceLicensesPreference
-import com.rafael.tictactoe.settings.settingsscreen.presentation.components.preferences.UpdateHistoryPreference
-import com.rafael.tictactoe.settings.settingsscreen.presentation.components.preferences.ViewOnGithubPreference
-import com.rafael.tictactoe.settings.settingsscreen.presentation.components.templates.PreferenceGroup
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
+import com.rafael.tictactoe.feature.settings.presentation.components.preferences.AboutAppPreference
+import com.rafael.tictactoe.feature.settings.presentation.components.preferences.OpenSourceLicensesPreference
+import com.rafael.tictactoe.feature.settings.presentation.components.preferences.UpdateHistoryPreference
+import com.rafael.tictactoe.feature.settings.presentation.components.preferences.ViewOnGithubPreference
+import com.rafael.tictactoe.feature.settings.presentation.components.templates.PreferenceGroup
 
 @Composable
 fun LazyItemScope.OthersPreferenceGroup(

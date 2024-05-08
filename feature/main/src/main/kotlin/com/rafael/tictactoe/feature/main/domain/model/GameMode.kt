@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.domain.model
+package com.rafael.tictactoe.feature.main.domain.model
 
 sealed interface GameMode {
     object PvP : GameMode

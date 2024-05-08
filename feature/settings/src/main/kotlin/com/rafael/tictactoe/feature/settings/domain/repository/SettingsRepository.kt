@@ -1,6 +1,6 @@
-package com.rafael.tictactoe.settings.settingsScreen.domain.repository
+package com.rafael.tictactoe.feature.settings.domain.repository
 
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEntity
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsEntity
 
 interface SettingsRepository {
 

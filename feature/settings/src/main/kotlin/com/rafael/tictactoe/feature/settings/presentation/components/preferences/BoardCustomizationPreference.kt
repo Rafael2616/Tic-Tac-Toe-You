@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.settingsscreen.presentation.components.preferences
+package com.rafael.tictactoe.feature.settings.presentation.components.preferences
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -22,10 +22,10 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.rafael.tictactoe.core.resources.R
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
-import com.rafael.tictactoe.settings.settingsScreen.presentation.util.BoardConstants.SHAPE_CUSTOM
-import com.rafael.tictactoe.settings.settingsscreen.presentation.components.templates.IconPreference
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
+import com.rafael.tictactoe.feature.settings.presentation.util.BoardConstants.SHAPE_CUSTOM
+import com.rafael.tictactoe.feature.settings.presentation.components.templates.IconPreference
 import kotlin.math.roundToInt
 
 @Composable

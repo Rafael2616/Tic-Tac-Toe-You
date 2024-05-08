@@ -1,6 +1,6 @@
-package com.rafael.tictactoe.game.domain.checkers
+package com.rafael.tictactoe.feature.game.domain.checkers
 
-import com.rafael.tictactoe.game.domain.model.GameState
+import com.rafael.tictactoe.feature.game.domain.model.GameState
 
 class Checkers {
     private val winningPositions = listOf(

@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.gameScreen.presentation.components.ui
+package com.rafael.tictactoe.feature.game.presentation.components.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -39,11 +39,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rafael.tictactoe.core.resources.R
-import com.rafael.tictactoe.game.domain.model.Error
-import com.rafael.tictactoe.game.domain.model.GameEvent
-import com.rafael.tictactoe.game.domain.model.GameState
-import com.rafael.tictactoe.game.domain.model.RequestState
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
+import com.rafael.tictactoe.feature.game.domain.model.Error
+import com.rafael.tictactoe.feature.game.domain.model.GameEvent
+import com.rafael.tictactoe.feature.game.domain.model.GameState
+import com.rafael.tictactoe.feature.game.domain.model.RequestState
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 import kotlinx.coroutines.delay
 
 @Composable

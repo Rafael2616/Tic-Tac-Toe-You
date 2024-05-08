@@ -1,8 +1,8 @@
-package com.rafael.tictactoe.settings.settingsScreen.data.repository
+package com.rafael.tictactoe.feature.settings.data.repository
 
-import com.rafael.tictactoe.settings.settingsScreen.data.dao.SettingsDao
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEntity
-import com.rafael.tictactoe.settings.settingsScreen.domain.repository.SettingsRepository
+import com.rafael.tictactoe.feature.settings.data.dao.SettingsDao
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsEntity
+import com.rafael.tictactoe.feature.settings.domain.repository.SettingsRepository
 import javax.inject.Inject
 
 class SettingsRepositoryImpl @Inject constructor(

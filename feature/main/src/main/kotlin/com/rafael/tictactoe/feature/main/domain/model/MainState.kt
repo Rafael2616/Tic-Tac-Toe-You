@@ -1,7 +1,7 @@
-package com.rafael.tictactoe.game.mainScreen.domain.model
+package com.rafael.tictactoe.feature.main.domain.model
 
 import android.os.Parcelable
-import com.rafael.tictactoe.game.domain.model.GameMode
+import com.rafael.tictactoe.feature.main.domain.model.GameMode
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
 

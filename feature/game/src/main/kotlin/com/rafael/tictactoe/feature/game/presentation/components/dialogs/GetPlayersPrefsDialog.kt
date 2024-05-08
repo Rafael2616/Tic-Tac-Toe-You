@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.gameScreen.presentation.components.dialogs
+package com.rafael.tictactoe.feature.game.presentation.components.dialogs
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Spring
@@ -65,16 +65,16 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.rafael.tictactoe.core.resources.R
-import com.rafael.tictactoe.game.domain.model.GameEvent
-import com.rafael.tictactoe.game.domain.model.GameMode
-import com.rafael.tictactoe.game.domain.model.GameState
-import com.rafael.tictactoe.game.domain.model.Level
+import com.rafael.tictactoe.feature.game.domain.model.GameEvent
+import com.rafael.tictactoe.feature.game.domain.model.GameMode
+import com.rafael.tictactoe.feature.game.domain.model.GameState
+import com.rafael.tictactoe.feature.game.domain.model.Level
 import com.rafael.tictactoe.core.resources.draws.drawCircleinDialog
 import com.rafael.tictactoe.core.resources.draws.drawXinDialog
-import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Customization
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.Colors
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
+import com.rafael.tictactoe.feature.settings.domain.enums.Customization
+import com.rafael.tictactoe.core.domain.model.Colors
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 
 @Composable
 @ExperimentalLayoutApi

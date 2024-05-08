@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.gameScreen.presentation
+package com.rafael.tictactoe.feature.game.presentation
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
@@ -16,24 +16,24 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.rafael.tictactoe.game.domain.model.GameEvent
-import com.rafael.tictactoe.game.domain.model.GameMode
-import com.rafael.tictactoe.game.gameScreen.presentation.components.buttons.PlayAgainButton
-import com.rafael.tictactoe.game.gameScreen.presentation.components.buttons.RestartButton
-import com.rafael.tictactoe.game.gameScreen.presentation.components.buttons.SoundAndMusicButtons
-import com.rafael.tictactoe.game.gameScreen.presentation.components.buttons.VictoryCounterReseterButton
-import com.rafael.tictactoe.game.gameScreen.presentation.components.dialogs.ExitGameDialog
-import com.rafael.tictactoe.game.gameScreen.presentation.components.dialogs.GetPlayersPrefsDialog
-import com.rafael.tictactoe.game.gameScreen.presentation.components.ui.DifficultyLevelSwitcher
-import com.rafael.tictactoe.game.gameScreen.presentation.components.ui.GameBoard
-import com.rafael.tictactoe.game.gameScreen.presentation.components.ui.GameStateToast
-import com.rafael.tictactoe.game.gameScreen.presentation.components.ui.PlayerSearchSurface
-import com.rafael.tictactoe.game.gameScreen.presentation.components.ui.VictoryCounter
-import com.rafael.tictactoe.game.gameScreen.presentation.components.ui.WinnerLines
-import com.rafael.tictactoe.game.gameScreen.presentation.viewmodel.GameViewModel
-import com.rafael.tictactoe.game.mainScreen.presentation.viewmodel.MainViewModel
-import com.rafael.tictactoe.settings.settingsScreen.presentation.components.dialogs.ColorSelectionDialog
-import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
+import com.rafael.tictactoe.feature.game.domain.model.GameEvent
+import com.rafael.tictactoe.feature.game.domain.model.GameMode
+import com.rafael.tictactoe.feature.game.presentation.components.buttons.PlayAgainButton
+import com.rafael.tictactoe.feature.game.presentation.components.buttons.RestartButton
+import com.rafael.tictactoe.feature.game.presentation.components.buttons.SoundAndMusicButtons
+import com.rafael.tictactoe.feature.game.presentation.components.buttons.VictoryCounterReseterButton
+import com.rafael.tictactoe.feature.game.presentation.components.dialogs.ExitGameDialog
+import com.rafael.tictactoe.feature.game.presentation.components.dialogs.GetPlayersPrefsDialog
+import com.rafael.tictactoe.feature.game.presentation.components.ui.DifficultyLevelSwitcher
+import com.rafael.tictactoe.feature.game.presentation.components.ui.GameBoard
+import com.rafael.tictactoe.feature.game.presentation.components.ui.GameStateToast
+import com.rafael.tictactoe.feature.game.presentation.components.ui.PlayerSearchSurface
+import com.rafael.tictactoe.feature.game.presentation.components.ui.VictoryCounter
+import com.rafael.tictactoe.feature.game.presentation.components.ui.WinnerLines
+import com.rafael.tictactoe.feature.game.presentation.viewmodel.GameViewModel
+import com.rafael.tictactoe.feature.main.presentation.viewmodel.MainViewModel
+import com.rafael.tictactoe.feature.settings.presentation.components.dialogs.ColorSelectionDialog
+import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsViewModel
 
 @Composable
 @ExperimentalMaterial3Api

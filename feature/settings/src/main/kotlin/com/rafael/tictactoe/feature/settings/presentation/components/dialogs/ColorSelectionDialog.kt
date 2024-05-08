@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.settingsScreen.presentation.components.dialogs
+package com.rafael.tictactoe.feature.settings.presentation.components.dialogs
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -55,16 +55,16 @@ import com.github.skydoves.colorpicker.compose.BrightnessSlider
 import com.github.skydoves.colorpicker.compose.HsvColorPicker
 import com.github.skydoves.colorpicker.compose.rememberColorPickerController
 import com.rafael.tictactoe.core.resources.R
-import com.rafael.tictactoe.common.domain.util.toColor
+import com.rafael.tictactoe.core.domain.util.toColor
 import com.rafael.tictactoe.core.resources.draws.drawCircleinColorDialog
 import com.rafael.tictactoe.core.resources.draws.drawWinnerLineinColorDialog
 import com.rafael.tictactoe.core.resources.draws.drawXinColorDialog
-import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Customization
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.COLORLIST
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.ColorItem
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.IconCustomization
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
+import com.rafael.tictactoe.feature.settings.domain.enums.Customization
+import com.rafael.tictactoe.core.domain.model.COLORLIST
+import com.rafael.tictactoe.feature.settings.domain.model.ColorItem
+import com.rafael.tictactoe.feature.settings.domain.model.IconCustomization
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 import com.smarttoolfactory.extendedcolors.parser.rememberColorParser
 import my.nanihadesuka.compose.ColumnScrollbar
 import my.nanihadesuka.compose.ScrollbarSettings

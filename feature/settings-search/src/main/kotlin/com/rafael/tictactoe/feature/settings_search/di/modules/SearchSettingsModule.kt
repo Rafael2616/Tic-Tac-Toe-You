@@ -3,7 +3,7 @@ package com.rafael.tictactoe.feature.settingssearch.di.modules
 import android.app.Application
 import com.rafael.tictactoe.feature.settingssearch.data.repository.AndroidSearchSettingsManager
 import com.rafael.tictactoe.feature.settingssearch.presentation.viewmodel.SearchSettingsViewModel
-import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
+import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

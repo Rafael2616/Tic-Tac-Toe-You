@@ -17,12 +17,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.rafael.tictactoe.common.presentation.theme.AppTheme
-import com.rafael.tictactoe.game.gameScreen.presentation.GameScreen
-import com.rafael.tictactoe.game.mainScreen.presentation.MainScreen
-import com.rafael.tictactoe.settings.changelogsScreen.presentation.ChangelogsScreen
-import com.rafael.tictactoe.settings.libraryScreen.presentation.LibraryScreen
+import com.rafael.tictactoe.feature.game.presentation.GameScreen
+import com.rafael.tictactoe.feature.main.presentation.MainScreen
+import com.rafael.tictactoe.feature.changelogs.presentation.ChangelogsScreen
+import com.rafael.tictactoe.feature.libraryinfo.presentation.LibraryScreen
 import com.rafael.tictactoe.feature.settingssearch.presentation.SearchSettingsScreen
-import com.rafael.tictactoe.settings.settingsScreen.presentation.SettingsScreen
+import com.rafael.tictactoe.feature.settings.presentation.SettingsScreen
 import soup.compose.material.motion.animation.materialSharedAxisXIn
 import soup.compose.material.motion.animation.materialSharedAxisXOut
 import soup.compose.material.motion.animation.rememberSlideDistance

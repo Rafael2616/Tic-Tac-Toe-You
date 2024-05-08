@@ -1,9 +1,9 @@
-package com.rafael.tictactoe.settings.settingsScreen.domain.model
+package com.rafael.tictactoe.feature.settings.domain.model
 
 import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
-import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Customization
+import com.rafael.tictactoe.feature.settings.domain.enums.Customization
 
 data class IconCustomization(
     val label: Customization,

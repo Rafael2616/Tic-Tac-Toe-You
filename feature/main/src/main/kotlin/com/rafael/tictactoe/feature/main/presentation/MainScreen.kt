@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.mainScreen.presentation
+package com.rafael.tictactoe.feature.main.presentation
 
 import android.content.Intent
 import android.content.res.Configuration
@@ -48,14 +48,14 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.core.resources.R
-//import com.rafael.tictactoe.common.presentation.navigation.Destinations
-import com.rafael.tictactoe.game.domain.model.GameMode
-import com.rafael.tictactoe.game.mainScreen.domain.model.MainEvent
-import com.rafael.tictactoe.game.mainScreen.domain.model.ScreenItem
-import com.rafael.tictactoe.game.mainScreen.presentation.util.ShortcutsIntentHandler
-import com.rafael.tictactoe.game.mainScreen.presentation.viewmodel.MainViewModel
-import com.rafael.tictactoe.settings.changelogsScreen.presentation.components.WhatsNewDialog
-import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
+//import com.rafael.tictactoe.core.navigation.Destinations
+import com.rafael.tictactoe.feature.main.domain.model.GameMode
+import com.rafael.tictactoe.feature.main.domain.model.MainEvent
+import com.rafael.tictactoe.feature.main.domain.model.ScreenItem
+import com.rafael.tictactoe.feature.main.presentation.util.ShortcutsIntentHandler
+import com.rafael.tictactoe.feature.main.presentation.viewmodel.MainViewModel
+import com.rafael.tictactoe.feature.changelogs.presentation.components.WhatsNewDialog
+import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsViewModel
 
 @Composable
 @ExperimentalTextApi

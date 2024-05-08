@@ -1,6 +1,6 @@
-package com.rafael.tictactoe.game.domain.board.levels
+package com.rafael.tictactoe.feature.game.domain.board.levels
 
-import com.rafael.tictactoe.game.domain.model.GameState
+import com.rafael.tictactoe.feature.game.domain.model.GameState
 
 fun mediumLevelCPUMove(state: GameState): Triple<Int, Int, Boolean> {
     val easy = easyLevelCPUMove(state)

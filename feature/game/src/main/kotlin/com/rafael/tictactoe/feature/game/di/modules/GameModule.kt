@@ -1,12 +1,12 @@
-package com.rafael.tictactoe.di
+package com.rafael.tictactoe.feature.game.di.modules
 
 import android.app.Application
 import androidx.media3.exoplayer.ExoPlayer
-import com.rafael.tictactoe.game.data.dao.OnlineGameDao
-import com.rafael.tictactoe.game.data.repository.GameRepositoryImpl
-import com.rafael.tictactoe.game.domain.repository.GameRepository
-import com.rafael.tictactoe.game.gameScreen.presentation.viewmodel.GameViewModel
-import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
+import com.rafael.tictactoe.feature.game.data.dao.OnlineGameDao
+import com.rafael.tictactoe.feature.game.data.repository.GameRepositoryImpl
+import com.rafael.tictactoe.feature.game.domain.repository.GameRepository
+import com.rafael.tictactoe.feature.game.presentation.viewmodel.GameViewModel
+import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

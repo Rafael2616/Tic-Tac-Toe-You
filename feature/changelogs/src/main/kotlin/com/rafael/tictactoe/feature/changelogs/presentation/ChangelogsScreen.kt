@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.changelogsScreen.presentation
+package com.rafael.tictactoe.feature.changelogs.presentation
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -45,12 +45,12 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.core.resources.R
-import com.rafael.tictactoe.common.domain.util.getChangelogFiles
-//import com.rafael.tictactoe.common.domain.util.getVersionName
-import com.rafael.tictactoe.settings.changelogsScreen.presentation.components.WhatsNewDialog
-import com.rafael.tictactoe.settings.changelogsScreen.presentation.util.styledChangelog
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
+import com.rafael.tictactoe.feature.changelogs.data.getChangelogFiles
+//import com.rafael.tictactoe.core.domain.util.getVersionName
+import com.rafael.tictactoe.feature.changelogs.presentation.components.WhatsNewDialog
+import com.rafael.tictactoe.feature.changelogs.presentation.util.styledChangelog
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsViewModel
 
 @Composable
 @ExperimentalMaterial3Api

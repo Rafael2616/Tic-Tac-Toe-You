@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel
+package com.rafael.tictactoe.feature.settings.presentation.viewmodel
 
 import android.app.Application
 import android.content.Context
@@ -7,15 +7,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.media3.exoplayer.ExoPlayer
-import com.rafael.tictactoe.common.domain.util.ProfilePictureUtils
-import com.rafael.tictactoe.common.domain.util.getVersionName
-import com.rafael.tictactoe.common.domain.util.toColor
-import com.rafael.tictactoe.common.services.MusicService
-import com.rafael.tictactoe.core.domain.audio.backgroundMusic
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEntity
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
-import com.rafael.tictactoe.settings.settingsScreen.domain.repository.SettingsRepository
+import com.rafael.tictactoe.core.domain.util.ProfilePictureUtils
+import com.rafael.tictactoe.core.domain.util.getVersionName
+import com.rafael.tictactoe.core.domain.util.toColor
+import com.rafael.tictactoe.core.services.MusicService
+import com.rafael.tictactoe.core.services.music.backgroundMusic
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsEntity
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
+import com.rafael.tictactoe.feature.settings.domain.repository.SettingsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers

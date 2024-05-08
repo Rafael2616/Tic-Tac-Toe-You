@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.common.presentation.theme
+package com.rafael.tictactoe.core.ui.theme
 
 import android.graphics.Color
 import android.os.Build.VERSION
@@ -18,8 +18,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsViewModel
 
 private val LightColors = lightColorScheme(
     primary = md_theme_light_primary,

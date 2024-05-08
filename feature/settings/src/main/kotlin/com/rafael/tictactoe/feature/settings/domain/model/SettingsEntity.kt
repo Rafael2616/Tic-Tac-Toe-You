@@ -1,11 +1,11 @@
-package com.rafael.tictactoe.settings.settingsScreen.domain.model
+package com.rafael.tictactoe.feature.settings.domain.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.rafael.tictactoe.settings.settingsScreen.presentation.util.BoardConstants.DEF_CARDS_BORDER_THICKNESS
-import com.rafael.tictactoe.settings.settingsScreen.presentation.util.BoardConstants.DEF_CARDS_CORNER_RADIUS
-import com.rafael.tictactoe.settings.settingsScreen.presentation.util.BoardConstants.DEF_CARDS_ELEVATION
-import com.rafael.tictactoe.settings.settingsScreen.presentation.util.BoardConstants.DEF_CARDS_SHADOW
+import com.rafael.tictactoe.feature.settings.presentation.util.BoardConstants.DEF_CARDS_BORDER_THICKNESS
+import com.rafael.tictactoe.feature.settings.presentation.util.BoardConstants.DEF_CARDS_CORNER_RADIUS
+import com.rafael.tictactoe.feature.settings.presentation.util.BoardConstants.DEF_CARDS_ELEVATION
+import com.rafael.tictactoe.feature.settings.presentation.util.BoardConstants.DEF_CARDS_SHADOW
 
 @Entity(tableName = "settings")
 data class SettingsEntity(

@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.common.services
+package com.rafael.tictactoe.core.services
 
 import android.app.Service
 import android.content.Intent

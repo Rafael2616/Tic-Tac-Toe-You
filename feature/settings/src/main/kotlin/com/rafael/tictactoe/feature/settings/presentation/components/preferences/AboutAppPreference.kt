@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.settingsscreen.presentation.components.preferences
+package com.rafael.tictactoe.feature.settings.presentation.components.preferences
 
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
@@ -24,11 +24,11 @@ import coil.compose.SubcomposeAsyncImage
 import coil.compose.SubcomposeAsyncImageContent
 import coil.request.ImageRequest
 import com.rafael.tictactoe.core.resources.R
-import com.rafael.tictactoe.common.domain.util.getVersionCode
-import com.rafael.tictactoe.common.domain.util.getVersionName
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
-import com.rafael.tictactoe.settings.settingsscreen.presentation.components.templates.IconPreference
+import com.rafael.tictactoe.core.domain.util.getVersionCode
+import com.rafael.tictactoe.core.domain.util.getVersionName
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
+import com.rafael.tictactoe.feature.settings.presentation.components.templates.IconPreference
 
 @Composable
 fun AboutAppPreference(

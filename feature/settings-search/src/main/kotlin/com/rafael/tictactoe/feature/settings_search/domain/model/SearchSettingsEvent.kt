@@ -1,6 +1,6 @@
 package com.rafael.tictactoe.feature.settingssearch.domain.model
 
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingItem
+import com.rafael.tictactoe.feature.settings.settings.domain.model.SettingItem
 
 sealed interface SearchSettingsEvent {
     data class PutSettingsToRepository(val settings: List<SettingItem>) : SearchSettingsEvent

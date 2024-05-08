@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.common.domain.util
+package com.rafael.tictactoe.feature.changelogs.data
 
 import android.content.Context
 import java.io.IOException

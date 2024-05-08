@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.settingsscreen.presentation.components.templates
+package com.rafael.tictactoe.feature.settings.presentation.components.templates
 
 import android.content.res.Configuration
 import androidx.compose.animation.animateContentSize

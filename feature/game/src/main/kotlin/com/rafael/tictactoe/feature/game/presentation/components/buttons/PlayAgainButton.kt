@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.gameScreen.presentation.components.buttons
+package com.rafael.tictactoe.feature.game.presentation.components.buttons
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Box
@@ -24,9 +24,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.rafael.tictactoe.core.resources.R
-import com.rafael.tictactoe.game.domain.model.GameEvent
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.Colors
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
+import com.rafael.tictactoe.feature.game.domain.model.GameEvent
+import com.rafael.tictactoe.core.domain.model.Colors
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 
 @Composable
 fun PlayAgainButton(

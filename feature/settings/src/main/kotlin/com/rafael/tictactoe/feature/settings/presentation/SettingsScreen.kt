@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.settingsScreen.presentation
+package com.rafael.tictactoe.feature.settings.presentation
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -8,13 +8,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.settingsScreen.presentation.components.Preferences
-import com.rafael.tictactoe.settings.settingsScreen.presentation.components.ProfilePictureMenu
-import com.rafael.tictactoe.settings.settingsScreen.presentation.components.SettingsTopBar
-import com.rafael.tictactoe.settings.settingsScreen.presentation.components.dialogs.BoardCustomizationDialog
-import com.rafael.tictactoe.settings.settingsScreen.presentation.components.dialogs.ColorSelectionDialog
-import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.feature.settings.presentation.components.Preferences
+import com.rafael.tictactoe.feature.settings.presentation.components.ProfilePictureMenu
+import com.rafael.tictactoe.feature.settings.presentation.components.SettingsTopBar
+import com.rafael.tictactoe.feature.settings.presentation.components.dialogs.BoardCustomizationDialog
+import com.rafael.tictactoe.feature.settings.presentation.components.dialogs.ColorSelectionDialog
+import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsViewModel
 
 @Composable
 @ExperimentalMaterial3Api

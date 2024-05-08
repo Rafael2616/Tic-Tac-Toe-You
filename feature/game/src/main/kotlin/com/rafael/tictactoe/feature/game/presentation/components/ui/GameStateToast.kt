@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.gameScreen.presentation.components.ui
+package com.rafael.tictactoe.feature.game.presentation.components.ui
 
 import android.content.res.Configuration
 import androidx.compose.animation.AnimatedContent
@@ -34,9 +34,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rafael.tictactoe.core.resources.R
-import com.rafael.tictactoe.game.domain.model.GameState
+import com.rafael.tictactoe.feature.game.domain.model.GameState
 import com.rafael.tictactoe.core.resources.draws.ToastImage
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 
 @Composable
 fun GameStateToast(

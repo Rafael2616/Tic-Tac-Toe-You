@@ -1,15 +1,16 @@
-package com.rafael.tictactoe.settings.settingsScreen.domain.model
+package com.rafael.tictactoe.feature.settings.domain.model
 
 import android.graphics.Bitmap
 import android.net.Uri
 import androidx.compose.ui.graphics.Color
-import com.rafael.tictactoe.common.domain.util.getVersionName
-import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Customization
-import com.rafael.tictactoe.settings.settingsScreen.presentation.util.BoardConstants.DEF_CARDS_BORDER_THICKNESS
-import com.rafael.tictactoe.settings.settingsScreen.presentation.util.BoardConstants.DEF_CARDS_COLOR
-import com.rafael.tictactoe.settings.settingsScreen.presentation.util.BoardConstants.DEF_CARDS_CORNER_RADIUS
-import com.rafael.tictactoe.settings.settingsScreen.presentation.util.BoardConstants.DEF_CARDS_ELEVATION
-import com.rafael.tictactoe.settings.settingsScreen.presentation.util.BoardConstants.DEF_CARDS_SHADOW
+import com.rafael.tictactoe.core.domain.util.getVersionName
+import com.rafael.tictactoe.core.domain.model.Colors
+import com.rafael.tictactoe.feature.settings.domain.enums.Customization
+import com.rafael.tictactoe.feature.settings.presentation.util.BoardConstants.DEF_CARDS_BORDER_THICKNESS
+import com.rafael.tictactoe.feature.settings.presentation.util.BoardConstants.DEF_CARDS_COLOR
+import com.rafael.tictactoe.feature.settings.presentation.util.BoardConstants.DEF_CARDS_CORNER_RADIUS
+import com.rafael.tictactoe.feature.settings.presentation.util.BoardConstants.DEF_CARDS_ELEVATION
+import com.rafael.tictactoe.feature.settings.presentation.util.BoardConstants.DEF_CARDS_SHADOW
 
 data class SettingsState(
     val color: Colors = Colors.get(),

@@ -54,15 +54,15 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.core.resources.R
-import com.rafael.tictactoe.settings.changelogsScreen.presentation.components.WhatsNewDialog
+import com.rafael.tictactoe.feature.changelogs.presentation.components.WhatsNewDialog
 import com.rafael.tictactoe.feature.settingssearch.domain.model.SearchSettingsEvent
 import com.rafael.tictactoe.feature.settingssearch.presentation.viewmodel.SearchSettingsViewModel
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingItem
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.settingsScreen.presentation.components.dialogs.BoardCustomizationDialog
-import com.rafael.tictactoe.settings.settingsScreen.presentation.components.dialogs.ColorSelectionDialog
-import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
-import com.rafael.tictactoe.settings.settingsscreen.presentation.components.templates.PreferenceGroup
+import com.rafael.tictactoe.feature.settingsScreen.domain.model.SettingItem
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.feature.settings.presentation.components.dialogs.BoardCustomizationDialog
+import com.rafael.tictactoe.feature.settings.presentation.components.dialogs.ColorSelectionDialog
+import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsViewModel
+import com.rafael.tictactoe.feature.settings.presentation.components.templates.PreferenceGroup
 
 @Composable
 @ExperimentalMaterial3Api

@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.settingsscreen.presentation.components.templates
+package com.rafael.tictactoe.feature.settings.presentation.components.templates
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

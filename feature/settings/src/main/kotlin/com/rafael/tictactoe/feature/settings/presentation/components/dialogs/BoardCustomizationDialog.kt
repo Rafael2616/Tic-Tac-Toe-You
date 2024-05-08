@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.settingsScreen.presentation.components.dialogs
+package com.rafael.tictactoe.feature.settings.presentation.components.dialogs
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
@@ -72,17 +72,17 @@ import com.github.skydoves.colorpicker.compose.BrightnessSlider
 import com.github.skydoves.colorpicker.compose.HsvColorPicker
 import com.github.skydoves.colorpicker.compose.rememberColorPickerController
 import com.rafael.tictactoe.core.resources.R
-import com.rafael.tictactoe.settings.settingsScreen.domain.animations.rememberRGBAnimation
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.BoardCustomization
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.BoardShape
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
-import com.rafael.tictactoe.settings.settingsScreen.presentation.util.BoardConstants.DEF_CARDS_BORDER_THICKNESS
-import com.rafael.tictactoe.settings.settingsScreen.presentation.util.BoardConstants.DEF_CARDS_COLOR
-import com.rafael.tictactoe.settings.settingsScreen.presentation.util.BoardConstants.DEF_CARDS_CORNER_RADIUS
-import com.rafael.tictactoe.settings.settingsScreen.presentation.util.BoardConstants.DEF_CARDS_ELEVATION
-import com.rafael.tictactoe.settings.settingsScreen.presentation.util.BoardConstants.DEF_CARDS_SHADOW
-import com.rafael.tictactoe.settings.settingsScreen.presentation.util.BoardConstants.SHAPE_CUSTOM
+import com.rafael.tictactoe.feature.settings.domain.animations.rememberRGBAnimation
+import com.rafael.tictactoe.feature.settings.domain.model.BoardCustomization
+import com.rafael.tictactoe.feature.settings.domain.model.BoardShape
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
+import com.rafael.tictactoe.feature.settings.presentation.util.BoardConstants.DEF_CARDS_BORDER_THICKNESS
+import com.rafael.tictactoe.feature.settings.presentation.util.BoardConstants.DEF_CARDS_COLOR
+import com.rafael.tictactoe.feature.settings.presentation.util.BoardConstants.DEF_CARDS_CORNER_RADIUS
+import com.rafael.tictactoe.feature.settings.presentation.util.BoardConstants.DEF_CARDS_ELEVATION
+import com.rafael.tictactoe.feature.settings.presentation.util.BoardConstants.DEF_CARDS_SHADOW
+import com.rafael.tictactoe.feature.settings.presentation.util.BoardConstants.SHAPE_CUSTOM
 import com.smarttoolfactory.extendedcolors.parser.rememberColorParser
 import kotlin.math.roundToInt
 import kotlinx.coroutines.delay

@@ -1,6 +1,6 @@
-package com.rafael.tictactoe.game.domain.restart
+package com.rafael.tictactoe.feature.game.domain.restart
 
-import com.rafael.tictactoe.game.domain.model.GameState
+import com.rafael.tictactoe.feature.game.domain.model.GameState
 
 class RestartGame {
     /*

@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.common.domain.util
+package com.rafael.tictactoe.core.services.util
 
 import android.app.ActivityManager
 import android.content.Context

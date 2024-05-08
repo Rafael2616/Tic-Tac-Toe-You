@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.libraryScreen.presentation.utils
+package com.rafael.tictactoe.feature.libraryinfo.presentation.utils
 
 import android.text.SpannableString
 import android.text.style.URLSpan

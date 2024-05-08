@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.domain.model
+package com.rafael.tictactoe.feature.game.domain.model
 
 data class Counter(
     val playerName: String,

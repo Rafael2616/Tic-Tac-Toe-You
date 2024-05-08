@@ -1,9 +1,9 @@
-package com.rafael.tictactoe.core.domain.audio
+package com.rafael.tictactoe.core.services.music
 
 import android.content.Context
 import android.content.Intent
-import com.rafael.tictactoe.common.domain.util.runningServiceVerifier
-import com.rafael.tictactoe.common.services.MusicService
+import com.rafael.tictactoe.core.services.util.runningServiceVerifier
+import com.rafael.tictactoe.core.services.MusicService
 
 fun backgroundMusic(
     service: MusicService,

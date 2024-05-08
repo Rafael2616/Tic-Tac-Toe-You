@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.core.resources.draws
+package com.rafael.tictactoe.feature.game.presentation.components.ui
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.Canvas
@@ -6,10 +6,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import com.rafael.tictactoe.game.domain.model.GameState
+import com.rafael.tictactoe.feature.game.domain.model.GameState
 import com.rafael.tictactoe.core.resources.draws.drawCircleinToast
 import com.rafael.tictactoe.core.resources.draws.drawXinToast
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 
 @Composable
 fun ToastImage(

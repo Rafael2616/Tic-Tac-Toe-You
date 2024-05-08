@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.common.domain.util
+package com.rafael.tictactoe.core.domain.util
 
 //import com.rafael.tictactoe.BuildConfig
 

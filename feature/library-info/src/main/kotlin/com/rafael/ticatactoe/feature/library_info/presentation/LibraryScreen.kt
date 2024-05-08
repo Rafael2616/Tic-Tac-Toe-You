@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.libraryScreen.presentation
+package com.rafael.tictactoe.feature.libraryinfo.presentation
 
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
@@ -43,8 +43,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.core.resources.R
-import com.rafael.tictactoe.settings.libraryScreen.presentation.utils.annotatedLink
-import com.rafael.tictactoe.settings.libraryScreen.presentation.viewmodel.LibraryViewModel
+import com.rafael.tictactoe.feature.libraryinfo.presentation.utils.annotatedLink
+import com.rafael.tictactoe.feature.libraryinfo.presentation.viewmodel.LibraryViewModel
 
 @Composable
 @ExperimentalMaterial3Api

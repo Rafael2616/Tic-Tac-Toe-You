@@ -1,7 +1,7 @@
-package com.rafael.tictactoe.game.data.dao
+package com.rafael.tictactoe.feature.game.data.dao
 
-import com.rafael.tictactoe.game.domain.model.OnlineGameState
-import com.rafael.tictactoe.game.domain.model.Player
+import com.rafael.tictactoe.feature.game.domain.model.OnlineGameState
+import com.rafael.tictactoe.feature.game.domain.model.Player
 import kotlin.collections.ArrayList
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response

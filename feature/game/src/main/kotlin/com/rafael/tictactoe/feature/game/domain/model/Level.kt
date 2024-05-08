@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.domain.model
+package com.rafael.tictactoe.feature.game.domain.model
 
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
@@ -8,7 +8,7 @@ import androidx.compose.material.icons.filled.SentimentSatisfied
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.rafael.tictactoe.core.resources.R
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.Colors
+import com.rafael.tictactoe.core.domain.model.Colors
 
 data class Level(
     val level: CPUDifficultyLevel,

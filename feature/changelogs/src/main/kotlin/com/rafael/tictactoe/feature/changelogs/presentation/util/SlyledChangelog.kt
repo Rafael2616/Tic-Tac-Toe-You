@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.settings.changelogsScreen.presentation.util
+package com.rafael.tictactoe.feature.changelogs.presentation.util
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable

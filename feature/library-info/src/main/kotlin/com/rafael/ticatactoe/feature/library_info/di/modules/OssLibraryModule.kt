@@ -1,7 +1,7 @@
-package com.rafael.tictactoe.di
+package com.rafael.tictactoe.feature.libraryinfo.di.modules
 
-import com.rafael.tictactoe.settings.libraryScreen.data.repository.OssLibraryRepository
-import com.rafael.tictactoe.settings.libraryScreen.presentation.viewmodel.LibraryViewModel
+import com.rafael.tictactoe.feature.libraryinfo.data.repository.OssLibraryRepository
+import com.rafael.tictactoe.feature.libraryinfo.presentation.viewmodel.LibraryViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

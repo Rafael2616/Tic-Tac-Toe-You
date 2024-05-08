@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.common.domain.util
+package com.rafael.tictactoe.exception
 
 import android.os.Environment
 import android.util.Log

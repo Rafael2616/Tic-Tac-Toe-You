@@ -7,8 +7,8 @@ import com.rafael.tictactoe.feature.settings.domain.model.SearchItemSpecs
 import com.rafael.tictactoe.feature.settingssearch.domain.model.SearchSettingsEvent
 import com.rafael.tictactoe.feature.settingssearch.domain.model.SearchSettingsState
 import com.rafael.tictactoe.feature.settingssearch.data.repository.AndroidSearchSettingsManager
-import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingItem
-import com.rafael.tictactoe.settings.settingsScreen.presentation.viewmodel.SettingsViewModel
+import com.rafael.tictactoe.feature.settings.domain.model.SettingItem
+import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
