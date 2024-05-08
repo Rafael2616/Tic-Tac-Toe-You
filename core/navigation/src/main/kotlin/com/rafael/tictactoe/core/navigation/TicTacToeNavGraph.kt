@@ -21,7 +21,7 @@ import com.rafael.tictactoe.game.gameScreen.presentation.GameScreen
 import com.rafael.tictactoe.game.mainScreen.presentation.MainScreen
 import com.rafael.tictactoe.settings.changelogsScreen.presentation.ChangelogsScreen
 import com.rafael.tictactoe.settings.libraryScreen.presentation.LibraryScreen
-import com.rafael.tictactoe.settings.searchSettingsScreen.presentation.SearchSettingsScreen
+import com.rafael.tictactoe.feature.settingssearch.presentation.SearchSettingsScreen
 import com.rafael.tictactoe.settings.settingsScreen.presentation.SettingsScreen
 import soup.compose.material.motion.animation.materialSharedAxisXIn
 import soup.compose.material.motion.animation.materialSharedAxisXOut
