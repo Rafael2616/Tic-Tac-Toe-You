@@ -7,6 +7,7 @@ import androidx.appsearch.app.SearchSpec
 import androidx.appsearch.app.SetSchemaRequest
 import androidx.appsearch.localstorage.LocalStorage
 import com.rafael.tictactoe.feature.settings.domain.model.SearchItemSpecs
+import com.rafael.tictactoe.settings.searchSettingsScreen.domain.repository.SearchSettingsManager
 import java.util.concurrent.ExecutionException
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
