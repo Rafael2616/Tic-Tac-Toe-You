@@ -2,6 +2,7 @@ package com.rafael.tictactoe.core.domain.util
 
 import androidx.compose.ui.graphics.Color
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.Colors
+import com.rafael.tictactoe.core.domain.model.Colors
 
 fun Int.toColor(): Color {
     val color = Colors.get()
