@@ -9,7 +9,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.media3.exoplayer.ExoPlayer
-import com.rafael.tictactoe.core.navigation.TicTacToeNavGraph
+import com.rafael.tictactoe.core.navigation.impl.TicTacToeNavGraph
 import com.rafael.tictactoe.core.services.MusicService
 import com.rafael.tictactoe.exception.AppExceptionHandler
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent

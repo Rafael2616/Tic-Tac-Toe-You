@@ -190,7 +190,7 @@ dependencies {
     androidTestImplementation(libs.mockk)
 
     // Projects
-    implementation(project(":core:navigation"))
+    implementation(project(":core:navigation-impl"))
     implementation(project(":core:services"))
     implementation(project(":feature:settings"))
     implementation(project(":core:resources"))
