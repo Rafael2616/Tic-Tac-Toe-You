@@ -44,6 +44,5 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
     ksp(libs.dagger.hilt.android.compiler)
     // Projects
-    implementation(project(":core:ui"))
     implementation(project(":core:resources"))
 }

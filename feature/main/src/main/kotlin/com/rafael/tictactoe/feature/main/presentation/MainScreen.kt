@@ -48,7 +48,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.core.resources.R
-//import com.rafael.tictactoe.core.navigation.Destinations
+import com.rafael.tictactoe.core.navigation.Destinations
 import com.rafael.tictactoe.feature.main.domain.model.GameMode
 import com.rafael.tictactoe.feature.main.domain.model.MainEvent
 import com.rafael.tictactoe.feature.main.domain.model.ScreenItem
@@ -78,7 +78,7 @@ fun MainScreen(
             tint = if (state.isDarkThemeOn) Color.Green else Color(0xFF299961),
             text = R.string.play,
             onClick = {
-               // navController.navigate(Destinations.Game.screen)
+                navController.navigate(Destinations.Game.screen)
                 onEvent(MainEvent.SetGameMode(GameMode.PvP))
             },
         ),
@@ -87,7 +87,7 @@ fun MainScreen(
             tint = Color.Red,
             text = R.string.vs_cpu,
             onClick = {
-               // navController.navigate(Destinations.Game.screen)
+                navController.navigate(Destinations.Game.screen)
                 onEvent(MainEvent.SetGameMode(GameMode.VsCPU))
             },
         ),
@@ -96,7 +96,7 @@ fun MainScreen(
             tint = MaterialTheme.colorScheme.onSurface,
             text = R.string.online_match,
             onClick = {
-               // navController.navigate(Destinations.Game.screen)
+                navController.navigate(Destinations.Game.screen)
                 onEvent(MainEvent.SetGameMode(GameMode.Online))
             },
         ),
@@ -104,7 +104,7 @@ fun MainScreen(
             icon = Icons.Outlined.Settings,
             tint = MaterialTheme.colorScheme.onSurface,
             text = R.string.settings,
-            onClick = { /*navController.navigate(Destinations.Settings.screen) */},
+            onClick = { navController.navigate(Destinations.Settings.screen) },
         ),
     )
 

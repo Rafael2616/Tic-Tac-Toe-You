@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.core.navigation
+package com.rafael.tictactoe.core.navigation.impl
 
 import android.content.Intent
 import androidx.compose.foundation.layout.ExperimentalLayoutApi

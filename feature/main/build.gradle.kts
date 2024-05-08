@@ -48,7 +48,6 @@ dependencies {
     ksp(libs.dagger.hilt.android.compiler)
 
     // Projects
-    implementation(project(":core:ui"))
     implementation(project(":core:resources"))
     //implementation(project(":core:navigation"))
     implementation(project(":feature:settings"))

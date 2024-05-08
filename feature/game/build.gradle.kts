@@ -70,7 +70,6 @@ dependencies {
     // Projects
     implementation(project(":core:services"))
     implementation(project(":core:domain"))
-    implementation(project(":core:ui"))
     implementation(project(":core:resources"))
     // todo: remove later
     implementation(project(":feature:main"))

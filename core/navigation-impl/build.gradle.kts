@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.rafael.tictactoe.core.navigation_wrapper"
+    namespace = "com.rafael.tictactoe.core.navigation"
     compileSdk = libs.versions.compileSdk.get().toInt()
     
     kotlin {
@@ -31,5 +31,12 @@ dependencies {
     implementation(libs.material.motion.compose)
 
     // Projects
+    implementation(project(":feature:settings"))
+    implementation(project(":feature:settings-search"))
+    implementation(project(":feature:changelogs"))
+    implementation(project(":feature:library-info"))
+    implementation(project(":feature:main"))
+    implementation(project(":feature:game"))
+    implementation(project(":core:ui"))
     implementation(project(":core:navigation"))
 }

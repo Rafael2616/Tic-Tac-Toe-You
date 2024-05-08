@@ -71,6 +71,5 @@ dependencies {
     // this is only for while i do not make the all migration
     implementation(project(":feature:settings"))
     implementation(project(":feature:changelogs"))
-    implementation(project(":core:ui"))
     implementation(project(":core:resources"))
 }
