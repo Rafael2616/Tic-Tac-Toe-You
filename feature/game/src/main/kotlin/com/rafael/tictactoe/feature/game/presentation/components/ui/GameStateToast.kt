@@ -35,7 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.feature.game.domain.model.GameState
-import com.rafael.tictactoe.core.resources.draws.ToastImage
+import com.rafael.tictactoe.feature.game.presentation.components.ui.ToastImage
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 
 @Composable

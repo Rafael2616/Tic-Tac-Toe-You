@@ -1,10 +1,10 @@
-package com.rafael.tictactoe.game.domain.board
+package com.rafael.tictactoe.feature.game.domain.board
 
-import com.rafael.tictactoe.game.domain.board.levels.easyLevelCPUMove
-import com.rafael.tictactoe.game.domain.board.levels.hardLevelCPUMove
-import com.rafael.tictactoe.game.domain.board.levels.mediumLevelCPUMove
-import com.rafael.tictactoe.game.domain.model.CPUDifficultyLevel
-import com.rafael.tictactoe.game.domain.model.GameState
+import com.rafael.tictactoe.feature.game.domain.board.levels.easyLevelCPUMove
+import com.rafael.tictactoe.feature.game.domain.board.levels.hardLevelCPUMove
+import com.rafael.tictactoe.feature.game.domain.board.levels.mediumLevelCPUMove
+import com.rafael.tictactoe.feature.game.domain.model.CPUDifficultyLevel
+import com.rafael.tictactoe.feature.game.domain.model.GameState
 
 fun cpuMovesHandler(state: GameState): MutableMap<String, Any>? {
     val isCardClicked = state.isCardClicked

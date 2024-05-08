@@ -14,7 +14,7 @@ import com.rafael.tictactoe.feature.game.domain.checkers.Checkers
 import com.rafael.tictactoe.feature.game.domain.counter.VictoryCounter
 import com.rafael.tictactoe.feature.game.domain.model.CurrentPlayerName
 import com.rafael.tictactoe.feature.game.domain.model.GameEvent
-import com.rafael.tictactoe.feature.game.domain.model.GameMode
+import com.rafael.tictactoe.feature.main.domain.model.GameMode
 import com.rafael.tictactoe.feature.game.domain.model.GameState
 import com.rafael.tictactoe.feature.game.domain.model.OnlineGameState
 import com.rafael.tictactoe.feature.game.domain.model.Player

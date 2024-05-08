@@ -17,7 +17,7 @@ import androidx.compose.runtime.setValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.feature.game.domain.model.GameEvent
-import com.rafael.tictactoe.feature.game.domain.model.GameMode
+import com.rafael.tictactoe.feature.main.domain.model.GameMode
 import com.rafael.tictactoe.feature.game.presentation.components.buttons.PlayAgainButton
 import com.rafael.tictactoe.feature.game.presentation.components.buttons.RestartButton
 import com.rafael.tictactoe.feature.game.presentation.components.buttons.SoundAndMusicButtons
