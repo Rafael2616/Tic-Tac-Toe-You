@@ -53,10 +53,10 @@ class GameModule {
                 repository,
             )
         }
-    }
 
-    @Provides
-    fun provideGameService(retrofit: Retrofit): OnlineGameDao {
-        return retrofit.create(OnlineGameDao::class.java)
+        @Provides
+        fun provideGameService(retrofit: Retrofit): OnlineGameDao {
+            return retrofit.create(OnlineGameDao::class.java)
+        }
     }
 }

@@ -1,8 +1,6 @@
 plugins {
     alias(libs.plugins.com.android.library)
     alias(libs.plugins.spotless)
-    alias(libs.plugins.dagger.hilt)
-    alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.jetbrains.compose)
 }
@@ -25,9 +23,7 @@ android {
 
 dependencies {
     // Dagger Hilt
-    implementation(libs.dagger.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
-    ksp(libs.dagger.hilt.android.compiler)
     // Jetpack Compose
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.material3)
@@ -36,10 +32,6 @@ dependencies {
     implementation(libs.androidx.compose.material.icons.extended)
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.compose.ui)
-    // Navigation
-    implementation(libs.androidx.navigation.compose)
-    // Material Motion
-    implementation(libs.material.motion.compose)
 
     // Projects
     implementation(project(":feature:settings"))
