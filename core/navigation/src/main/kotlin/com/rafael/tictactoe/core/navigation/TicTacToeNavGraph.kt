@@ -16,7 +16,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
-import com.rafael.tictactoe.common.presentation.theme.AppTheme
+import com.rafael.tictactoe.core.ui.theme.AppTheme
 import com.rafael.tictactoe.feature.game.presentation.GameScreen
 import com.rafael.tictactoe.feature.main.presentation.MainScreen
 import com.rafael.tictactoe.feature.changelogs.presentation.ChangelogsScreen
