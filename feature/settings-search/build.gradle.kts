@@ -38,6 +38,7 @@ android {
 dependencies {
     // Kotlin
     implementation(libs.kotlinx.coroutines)
+    implementation(libs.kotlinx.collections.immutable)
     // AndroidX
     implementation(libs.androidx.annotation)
     implementation(libs.androidx.activity.compose)
