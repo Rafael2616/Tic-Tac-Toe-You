@@ -32,6 +32,7 @@ android {
 dependencies {
     // Kotlin
     implementation(libs.kotlinx.coroutines)
+    implementation(libs.kotlinx.serialization)
     implementation(libs.kotlinx.collections.immutable)
     // AndroidX
     implementation(libs.androidx.annotation)
@@ -70,5 +71,7 @@ dependencies {
     implementation(project(":core:ui"))
     implementation(project(":core:di"))
     implementation(project(":core:resources"))
+    // todo: remove later
+    implementation(project(":feature:main"))
     implementation(project(":feature:settings"))
 }

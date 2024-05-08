@@ -14,7 +14,6 @@ import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
-import com.rafael.tictactoe.game.data.dao.OnlineGameDao
 import retrofit2.Retrofit
 
 class GameModule {

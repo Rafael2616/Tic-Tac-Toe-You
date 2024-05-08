@@ -11,8 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import com.rafael.tictactoe.game.domain.model.GameState
-import com.rafael.tictactoe.game.gameScreen.presentation.util.draws.drawAnCircle
-import com.rafael.tictactoe.game.gameScreen.presentation.util.draws.drawX
+import com.rafael.tictactoe.core.resources.draws.drawAnCircle
+import com.rafael.tictactoe.core.resources.draws.drawX
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsState
 
 @Composable

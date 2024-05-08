@@ -1,7 +1,7 @@
 package com.rafael.tictactoe.game.domain.counter
 
 import android.content.Context
-import com.rafael.tictactoe.R
+import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.game.domain.checkers.Checkers
 import com.rafael.tictactoe.game.domain.model.GameMode
 import com.rafael.tictactoe.game.domain.model.GameState

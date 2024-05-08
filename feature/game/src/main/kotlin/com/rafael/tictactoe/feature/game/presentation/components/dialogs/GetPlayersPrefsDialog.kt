@@ -64,13 +64,13 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.rafael.tictactoe.R
+import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.game.domain.model.GameEvent
 import com.rafael.tictactoe.game.domain.model.GameMode
 import com.rafael.tictactoe.game.domain.model.GameState
 import com.rafael.tictactoe.game.domain.model.Level
-import com.rafael.tictactoe.game.gameScreen.presentation.util.draws.drawCircleinDialog
-import com.rafael.tictactoe.game.gameScreen.presentation.util.draws.drawXinDialog
+import com.rafael.tictactoe.core.resources.draws.drawCircleinDialog
+import com.rafael.tictactoe.core.resources.draws.drawXinDialog
 import com.rafael.tictactoe.settings.settingsScreen.domain.enums.Customization
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.Colors
 import com.rafael.tictactoe.settings.settingsScreen.domain.model.SettingsEvent
