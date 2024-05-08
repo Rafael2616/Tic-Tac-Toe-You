@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
-import com.rafael.tictactoe.R
+import com.rafael.tictactoe.core.resources.R
 //import com.rafael.tictactoe.common.presentation.navigation.Destinations
 import com.rafael.tictactoe.game.domain.model.GameMode
 import com.rafael.tictactoe.game.mainScreen.domain.model.MainEvent
