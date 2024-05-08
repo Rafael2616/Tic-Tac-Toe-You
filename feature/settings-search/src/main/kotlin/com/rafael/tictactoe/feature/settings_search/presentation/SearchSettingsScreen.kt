@@ -53,7 +53,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.rafael.tictactoe.R
+import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.settings.changelogsScreen.presentation.components.WhatsNewDialog
 import com.rafael.tictactoe.feature.settingssearch.domain.model.SearchSettingsEvent
 import com.rafael.tictactoe.feature.settingssearch.presentation.viewmodel.SearchSettingsViewModel

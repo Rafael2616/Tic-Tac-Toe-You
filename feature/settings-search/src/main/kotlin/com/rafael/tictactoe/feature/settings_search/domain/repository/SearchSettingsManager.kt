@@ -1,6 +1,6 @@
 package com.rafael.tictactoe.settings.searchSettingsScreen.domain.repository
 
-import com.rafael.tictactoe.settings.searchSettingsScreen.domain.model.SearchItemSpecs
+import com.rafael.tictactoe.feature.settings.domain.model.SearchItemSpecs
 
 interface SearchSettingsManager {
 
