@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     alias(libs.plugins.com.android.library)
     alias(libs.plugins.spotless)
@@ -22,6 +24,14 @@ android {
 
     buildFeatures {
         compose = true
+    }
+
+    tasks.withType<KotlinCompile>().configureEach {
+        ksp {
+            arg("room.schemaLocation", "$projectDir/schemas")
+            arg("room.incremental", "true")
+            arg("room.generateKotlin", "true")
+        }
     }
 }
 
