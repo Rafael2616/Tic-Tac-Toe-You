@@ -64,6 +64,8 @@ dependencies {
     implementation(libs.androidx.media3.exoplayer)
      //Retrofit
     implementation(libs.retrofit2)
+    implementation(libs.retrofit2.converter.kotlinx.serialization)
+    implementation(libs.okhttp3)
 
     // Projects
     implementation(project(":core:services"))
