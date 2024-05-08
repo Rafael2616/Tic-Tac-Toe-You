@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.game.mainScreen.presentation.viewmodel
+package com.rafael.tictactoe.feature.main.presentation.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
