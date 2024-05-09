@@ -7,5 +7,5 @@ fun getVersionCode(): Int {
 }
 
 fun getVersionName(): String {
-    return BuildConfig.VERSION_NAME + if (BuildConfig.BuildType == "release") "" else "-${BuildConfig.BuildType}"
+    return BuildConfig.VERSION_NAME + if (BuildConfig.BUILD_TYPE == "release") "" else "-${BuildConfig.BUILD_TYPE}"
 }
