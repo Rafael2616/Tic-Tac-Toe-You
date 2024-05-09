@@ -33,7 +33,7 @@ coil = "2.6.0"
 material-motion-compose = "1.2.0"
 lazycolumn-scrollbar = "2.0.7"
 compose-rules = "0.3.19"
-colorpicker-compose = "1.0.7"
+colorpicker-compose = "1.0.8"
 smarttoolfactory-extended-colors = "1.0.0-alpha07"
 
 lifecycle = "2.7.0"
