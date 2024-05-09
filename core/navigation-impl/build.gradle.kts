@@ -31,12 +31,12 @@ dependencies {
     implementation(libs.material.motion.compose)
 
     // Projects
-    implementation(project(":feature:settings"))
-    implementation(project(":feature:settings-search"))
-    implementation(project(":feature:changelogs"))
-    implementation(project(":feature:library-info"))
-    implementation(project(":feature:main"))
-    implementation(project(":feature:game"))
-    implementation(project(":core:ui"))
-    implementation(project(":core:navigation"))
+    implementation(projects.core.ui)
+    implementation(projects.core.navigation)
+    implementation(projects.feature.changelogs)
+    implementation(projects.feature.game)
+    implementation(projects.feature.libraryInfo)
+    implementation(projects.feature.main)
+    implementation(projects.feature.settings)
+    implementation(projects.feature.settingsSearch)
 }

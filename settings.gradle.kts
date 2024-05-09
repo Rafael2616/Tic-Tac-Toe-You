@@ -23,17 +23,20 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "TicTacToe You"
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
+rootProject.name = "TicTacToe-You"
+
 include(":app")
-include(":feature:settings-search")
-include(":feature:settings")
-include(":feature:main")
-include(":feature:game")
-include(":feature:library-info")
-include(":feature:changelogs")
-include(":core:services")
 include(":core:domain")
-include(":core:ui")
 include(":core:navigation")
 include(":core:navigation-impl")
 include(":core:resources")
+include(":core:services")
+include(":core:ui")
+include(":feature:changelogs")
+include(":feature:game")
+include(":feature:library-info")
+include(":feature:main")
+include(":feature:settings")
+include(":feature:settings-search")

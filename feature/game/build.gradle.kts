@@ -68,10 +68,10 @@ dependencies {
     implementation(libs.okhttp3)
 
     // Projects
-    implementation(project(":core:services"))
-    implementation(project(":core:domain"))
-    implementation(project(":core:resources"))
-    // todo: remove later
-    implementation(project(":feature:main"))
-    implementation(project(":feature:settings"))
+    implementation(projects.core.domain)
+    implementation(projects.core.services)
+    implementation(projects.core.resources)
+    // TODO: remove this later
+    implementation(projects.feature.main)
+    implementation(projects.feature.settings)
 }

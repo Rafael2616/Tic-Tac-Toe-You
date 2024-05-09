@@ -33,8 +33,9 @@ dependencies {
     implementation(libs.androidx.compose.ui)
     // Navigation
     implementation(libs.androidx.navigation.compose)
+
     // Projects
-    implementation(project(":core:resources"))
-    implementation(project(":core:navigation"))
-    implementation(project(":feature:settings"))
+    implementation(projects.core.resources)
+    implementation(projects.core.navigation)
+    implementation(projects.feature.settings)
 }

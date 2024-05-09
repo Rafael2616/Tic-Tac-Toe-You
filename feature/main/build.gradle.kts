@@ -48,8 +48,8 @@ dependencies {
     ksp(libs.dagger.hilt.android.compiler)
 
     // Projects
-    implementation(project(":core:resources"))
-    implementation(project(":core:navigation"))
-    implementation(project(":feature:settings"))
-    implementation(project(":feature:changelogs"))
+    implementation(projects.core.resources)
+    implementation(projects.core.navigation)
+    implementation(projects.feature.settings)
+    implementation(projects.feature.changelogs)
 }

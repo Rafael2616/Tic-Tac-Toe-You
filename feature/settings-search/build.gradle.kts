@@ -68,8 +68,7 @@ dependencies {
     implementation(libs.google.guava)
 
     // Projects
-    // this is only for while i do not make the all migration
-    implementation(project(":feature:settings"))
-    implementation(project(":feature:changelogs"))
-    implementation(project(":core:resources"))
+    implementation(projects.core.resources)
+    implementation(projects.feature.changelogs)
+    implementation(projects.feature.settings)
 }
