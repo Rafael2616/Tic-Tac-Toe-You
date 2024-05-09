@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.androidx.room)
     alias(libs.plugins.com.android.library)
-    alias(libs.plugins.spotless)
     alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.android)

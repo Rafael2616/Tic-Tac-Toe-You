@@ -1,12 +1,10 @@
-import org.gradle.caching.configuration.BuildCacheConfiguration
-
 pluginManagement {
-	repositories {
-   	 gradlePluginPortal()
-  	  google()
-  	  mavenCentral()
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
         maven { setUrl("https://jitpack.io") }
-	}
+    }
 }
 
 dependencyResolutionManagement {
@@ -16,8 +14,8 @@ dependencyResolutionManagement {
         mavenCentral()
         maven { setUrl("https://jitpack.io") }
     }	
-	buildCache {
-		local {
+    buildCache {
+        local {
             isEnabled = true
         }
     }

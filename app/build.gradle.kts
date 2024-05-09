@@ -1,13 +1,11 @@
 import app.cash.licensee.LicenseeTask
 import app.cash.licensee.UnusedAction.IGNORE
 import com.android.build.gradle.internal.api.ApkVariantOutputImpl
-import com.diffplug.gradle.spotless.SpotlessExtension
 import java.util.Properties
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     alias(libs.plugins.com.android.application)
-    alias(libs.plugins.spotless)
     alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.android)
@@ -129,24 +127,6 @@ android {
 composeCompiler {
     // https://medium.com/androiddevelopers/jetpack-compose-strong-skipping-mode-explained-cbdb2aa4b900
     enableStrongSkippingMode = true
-}
-
-configure<SpotlessExtension> {
-    kotlin {
-        ktlint()
-            .setEditorConfigPath(rootProject.file(".editorconfig"))
-            .customRuleSets(
-                listOf(
-                    libs.ktlint.compose.rules.get().toString(),
-                ),
-            )
-        target("src/main/kotlin/**/*.kt", "src/androidTest/java/**/*.kt")
-    }
-    kotlinGradle {
-        ktlint()
-            .setEditorConfigPath(rootProject.file(".editorconfig"))
-        target("*.gradle.kts")
-    }
 }
 
 licensee {
