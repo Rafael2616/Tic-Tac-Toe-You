@@ -1,11 +1,11 @@
 package com.rafael.tictactoe.core.domain.util
 
-//import com.rafael.tictactoe.BuildConfig
+import com.rafael.tictactoe.core.domain.BuildConfig
 
 fun getVersionCode(): Int {
-    return 153//BuildConfig.VERSION_CODE
+    return BuildConfig.VERSION_CODE
 }
 
 fun getVersionName(): String {
-    return "1.5.3"//BuildConfig.VERSION_NAME
+    return BuildConfig.VERSION_NAME
 }

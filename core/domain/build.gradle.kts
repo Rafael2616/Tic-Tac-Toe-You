@@ -10,8 +10,8 @@ android {
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        versionCode = libs.versions.versionCode.get().toInt()
-        versionName = libs.versions.versionName.get()
+        buildConfigField("Int", "VERSION_CODE", "${libs.versions.versionCode.get().toInt()}")
+        buildConfigField("String", "VERSION_NAME", "${libs.versions.versionName.get()}")
     }
 
     kotlin {
