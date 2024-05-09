@@ -6,7 +6,7 @@ import android.graphics.Bitmap.CompressFormat
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.webkit.MimeTypeMap
-//import com.rafael.tictactoe.BuildConfig
+import com.rafael.tictactoe.BuildConfig
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
@@ -86,7 +86,7 @@ class ProfilePictureUtils() {
     }
 
     companion object {
-        const val PICTURE_PATH = "/storage/emulated/0/Android/data/com.rafael.tictactoe.debug/files/userProfile/"
-       // const val PICTURE_PATH = "/storage/emulated/0/Android/data/${BuildConfig.APPLICATION_ID}/files/userProfile/"
+        // const val PICTURE_PATH = "/storage/emulated/0/Android/data/com.rafael.tictactoe.debug/files/userProfile/"
+        const val PICTURE_PATH = "/storage/emulated/0/Android/data/${BuildConfig.APPLICATION_ID}/files/userProfile/"
     }
 }

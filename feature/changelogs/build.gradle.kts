@@ -35,6 +35,6 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     // Projects
     implementation(project(":core:resources"))
-    // implementation(project(":core:navigation"))
+    implementation(project(":core:navigation"))
     implementation(project(":feature:settings"))
 }

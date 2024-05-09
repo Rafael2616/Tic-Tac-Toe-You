@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.feature.changelogs.data.getCurrentChangelogFile
-//import com.rafael.tictactoe.common.presentation.navigation.Destinations
+import com.rafael.tictactoe.core.navigation.Destinations
 import com.rafael.tictactoe.feature.changelogs.presentation.util.styledChangelog
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
 
@@ -77,12 +77,12 @@ fun WhatsNewDialog(
             }
         },
         confirmButton = {
-            if (true /*navController.currentBackStackEntry?.destination?.route != Destinations.Changelogs.screen*/) {
+            if (navController.currentBackStackEntry?.destination?.route != Destinations.Changelogs.screen) {
                 OutlinedButton(
                     contentPadding = PaddingValues(horizontal = 12.dp),
                     onClick = {
                         onEvent(SettingsEvent.HideWhatsNewDialog)
-                       /* navController.navigate(Destinations.Changelogs.screen) */
+                        navController.navigate(Destinations.Changelogs.screen)
                     },
                 ) {
                     Text(text = stringResource(R.string.see_history))

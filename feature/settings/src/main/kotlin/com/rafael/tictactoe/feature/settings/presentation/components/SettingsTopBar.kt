@@ -30,7 +30,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.rafael.tictactoe.core.resources.R
-//import com.rafael.tictactoe.core.navigation.Destinations
+import com.rafael.tictactoe.core.navigation.Destinations
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 
@@ -75,7 +75,7 @@ fun SettingsTopBar(
                 actions = {
                     IconButton(
                         onClick = {
-                           // navController.navigate(Destinations.SearchSettings.screen)
+                            navController.navigate(Destinations.SearchSettings.screen)
                         },
                     ) {
                         Icon(

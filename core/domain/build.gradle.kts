@@ -8,7 +8,12 @@ plugins {
 android {
     namespace = "com.rafael.tictactoe.core.domain"
     compileSdk = libs.versions.compileSdk.get().toInt()
-    
+
+    defaultConfig {
+        versionCode = libs.versions.versionCode.get().toInt()
+        versionName = libs.versions.versionName.get()
+    }
+
     kotlin {
         jvmToolchain {
             languageVersion = JavaLanguageVersion.of(libs.versions.javaVersion.get().toInt())
