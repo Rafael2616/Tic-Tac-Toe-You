@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.rafael.tictactoe.core.navigation"
+    namespace = "com.rafael.tictactoe.core.navigation-impl"
     compileSdk = libs.versions.compileSdk.get().toInt()
     
     kotlin {

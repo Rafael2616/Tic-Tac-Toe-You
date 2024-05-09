@@ -49,7 +49,7 @@ dependencies {
 
     // Projects
     implementation(project(":core:resources"))
-    //implementation(project(":core:navigation"))
+    implementation(project(":core:navigation"))
     implementation(project(":feature:settings"))
     implementation(project(":feature:changelogs"))
 }
