@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.jetbrains.compose)
 }
 
@@ -71,6 +72,8 @@ dependencies {
     implementation(libs.coil.compose)
     // App Search
     implementation(libs.androidx.appsearch)
+    implementation(libs.androidx.appsearch.localStorage)
+    kapt(libs.androidx.appsearch.compiler)
 
     // Projects
     implementation(project(":core:services"))
