@@ -39,11 +39,11 @@ jobs:
       run: ./gradlew assembleDebug
 
      # Comment the following lines if you dont want to upload the APK
-     #- name: Upload APK
-     # uses: actions/upload-artifact@v4
-     # with:
-     #   name: app-debug
-     #   path: app/build/outputs/apk/debug/*.apk
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: app-debug
+        path: app/build/outputs/apk/debug/*.apk
 
   check-kotlin-style:
     runs-on: ubuntu-latest
