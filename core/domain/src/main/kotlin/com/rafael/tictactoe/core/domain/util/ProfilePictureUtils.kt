@@ -86,6 +86,6 @@ class ProfilePictureUtils() {
     }
 
     companion object {
-        const val PICTURE_PATH = "/storage/emulated/0/Android/data/${BuildConfig.APPLICATION_ID}/files/userProfile/"
+        const val PICTURE_PATH = "/storage/emulated/0/Android/data/com.rafael.tictactoe.${BuildConfig.BUILD_TYPE}/files/userProfile/"
     }
 }
