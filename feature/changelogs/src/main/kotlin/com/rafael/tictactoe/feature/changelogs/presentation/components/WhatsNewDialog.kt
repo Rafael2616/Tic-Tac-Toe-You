@@ -25,9 +25,9 @@ import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.rafael.tictactoe.core.navigation.Destinations
 import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.feature.changelogs.data.getCurrentChangelogFile
-import com.rafael.tictactoe.core.navigation.Destinations
 import com.rafael.tictactoe.feature.changelogs.presentation.util.styledChangelog
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
 

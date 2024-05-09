@@ -7,7 +7,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.navigation.NavController
 import com.rafael.tictactoe.core.resources.R
-import com.rafael.tictactoe.feature.settings.domain.model.SearchItemSpecs
 import com.rafael.tictactoe.feature.settings.presentation.components.preferences.AboutAppPreference
 import com.rafael.tictactoe.feature.settings.presentation.components.preferences.BackgroundMusicPreference
 import com.rafael.tictactoe.feature.settings.presentation.components.preferences.BoardCustomizationPreference

@@ -32,10 +32,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.rafael.tictactoe.feature.game.domain.model.Counter
-import com.rafael.tictactoe.feature.game.domain.model.GameState
 import com.rafael.tictactoe.core.resources.draws.drawCircleinCounter
 import com.rafael.tictactoe.core.resources.draws.drawXinCounter
+import com.rafael.tictactoe.feature.game.domain.model.Counter
+import com.rafael.tictactoe.feature.game.domain.model.GameState
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 
 @Composable

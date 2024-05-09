@@ -7,8 +7,8 @@ import androidx.compose.material.icons.filled.SentimentNeutral
 import androidx.compose.material.icons.filled.SentimentSatisfied
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.core.domain.model.Colors
+import com.rafael.tictactoe.core.resources.R
 
 data class Level(
     val level: CPUDifficultyLevel,

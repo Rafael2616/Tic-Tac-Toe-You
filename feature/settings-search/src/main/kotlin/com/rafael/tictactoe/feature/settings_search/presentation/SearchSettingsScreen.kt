@@ -55,14 +55,14 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.feature.changelogs.presentation.components.WhatsNewDialog
-import com.rafael.tictactoe.feature.settingssearch.domain.model.SearchSettingsEvent
-import com.rafael.tictactoe.feature.settingssearch.presentation.viewmodel.SearchSettingsViewModel
 import com.rafael.tictactoe.feature.settings.domain.model.SettingItem
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.feature.settings.presentation.components.dialogs.BoardCustomizationDialog
 import com.rafael.tictactoe.feature.settings.presentation.components.dialogs.ColorSelectionDialog
-import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsViewModel
 import com.rafael.tictactoe.feature.settings.presentation.components.templates.PreferenceGroup
+import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsViewModel
+import com.rafael.tictactoe.feature.settingssearch.domain.model.SearchSettingsEvent
+import com.rafael.tictactoe.feature.settingssearch.presentation.viewmodel.SearchSettingsViewModel
 
 @Composable
 @ExperimentalMaterial3Api

@@ -54,13 +54,13 @@ import androidx.compose.ui.window.Dialog
 import com.github.skydoves.colorpicker.compose.BrightnessSlider
 import com.github.skydoves.colorpicker.compose.HsvColorPicker
 import com.github.skydoves.colorpicker.compose.rememberColorPickerController
-import com.rafael.tictactoe.core.resources.R
+import com.rafael.tictactoe.core.domain.model.COLORLIST
 import com.rafael.tictactoe.core.domain.util.toColor
+import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.core.resources.draws.drawCircleinColorDialog
 import com.rafael.tictactoe.core.resources.draws.drawWinnerLineinColorDialog
 import com.rafael.tictactoe.core.resources.draws.drawXinColorDialog
 import com.rafael.tictactoe.feature.settings.domain.enums.Customization
-import com.rafael.tictactoe.core.domain.model.COLORLIST
 import com.rafael.tictactoe.feature.settings.domain.model.ColorItem
 import com.rafael.tictactoe.feature.settings.domain.model.IconCustomization
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent

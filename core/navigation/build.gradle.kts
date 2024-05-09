@@ -6,7 +6,7 @@ plugins {
 android {
     namespace = "com.rafael.tictactoe.core.navigation"
     compileSdk = libs.versions.compileSdk.get().toInt()
-    
+
     kotlin {
         jvmToolchain {
             languageVersion = JavaLanguageVersion.of(libs.versions.javaVersion.get().toInt())

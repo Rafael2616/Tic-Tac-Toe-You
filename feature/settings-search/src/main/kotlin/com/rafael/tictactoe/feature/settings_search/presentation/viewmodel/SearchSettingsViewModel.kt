@@ -4,11 +4,11 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rafael.tictactoe.feature.settings.domain.model.SearchItemSpecs
-import com.rafael.tictactoe.feature.settingssearch.domain.model.SearchSettingsEvent
-import com.rafael.tictactoe.feature.settingssearch.domain.model.SearchSettingsState
-import com.rafael.tictactoe.feature.settingssearch.data.repository.AndroidSearchSettingsManager
 import com.rafael.tictactoe.feature.settings.domain.model.SettingItem
 import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsViewModel
+import com.rafael.tictactoe.feature.settingssearch.data.repository.AndroidSearchSettingsManager
+import com.rafael.tictactoe.feature.settingssearch.domain.model.SearchSettingsEvent
+import com.rafael.tictactoe.feature.settingssearch.domain.model.SearchSettingsState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers

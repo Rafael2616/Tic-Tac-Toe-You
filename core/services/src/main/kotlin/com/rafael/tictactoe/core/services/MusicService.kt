@@ -6,7 +6,6 @@ import android.net.Uri
 import android.os.IBinder
 import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
-import com.rafael.tictactoe.core.services.R
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

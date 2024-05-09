@@ -14,7 +14,6 @@ import com.rafael.tictactoe.feature.game.domain.checkers.Checkers
 import com.rafael.tictactoe.feature.game.domain.counter.VictoryCounter
 import com.rafael.tictactoe.feature.game.domain.model.CurrentPlayerName
 import com.rafael.tictactoe.feature.game.domain.model.GameEvent
-import com.rafael.tictactoe.feature.main.domain.model.GameMode
 import com.rafael.tictactoe.feature.game.domain.model.GameState
 import com.rafael.tictactoe.feature.game.domain.model.OnlineGameState
 import com.rafael.tictactoe.feature.game.domain.model.Player
@@ -23,6 +22,7 @@ import com.rafael.tictactoe.feature.game.domain.names.PlayerNamesController
 import com.rafael.tictactoe.feature.game.domain.names.ToastNameController
 import com.rafael.tictactoe.feature.game.domain.repository.GameRepository
 import com.rafael.tictactoe.feature.game.domain.restart.RestartGame
+import com.rafael.tictactoe.feature.main.domain.model.GameMode
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -47,14 +47,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.core.navigation.Destinations
+import com.rafael.tictactoe.core.resources.R
+import com.rafael.tictactoe.feature.changelogs.presentation.components.WhatsNewDialog
 import com.rafael.tictactoe.feature.main.domain.model.GameMode
 import com.rafael.tictactoe.feature.main.domain.model.MainEvent
 import com.rafael.tictactoe.feature.main.domain.model.ScreenItem
 import com.rafael.tictactoe.feature.main.presentation.util.ShortcutsIntentHandler
 import com.rafael.tictactoe.feature.main.presentation.viewmodel.MainViewModel
-import com.rafael.tictactoe.feature.changelogs.presentation.components.WhatsNewDialog
 import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsViewModel
 
 @Composable

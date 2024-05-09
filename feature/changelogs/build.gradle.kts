@@ -34,6 +34,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
 
     // Projects
+    implementation(projects.core.domain)
     implementation(projects.core.resources)
     implementation(projects.core.navigation)
     implementation(projects.feature.settings)

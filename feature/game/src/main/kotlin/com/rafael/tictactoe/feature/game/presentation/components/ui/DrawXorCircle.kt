@@ -10,9 +10,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import com.rafael.tictactoe.feature.game.domain.model.GameState
 import com.rafael.tictactoe.core.resources.draws.drawAnCircle
 import com.rafael.tictactoe.core.resources.draws.drawX
+import com.rafael.tictactoe.feature.game.domain.model.GameState
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 
 @Composable

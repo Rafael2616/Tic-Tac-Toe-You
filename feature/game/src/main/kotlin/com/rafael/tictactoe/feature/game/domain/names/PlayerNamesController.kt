@@ -3,8 +3,8 @@ package com.rafael.tictactoe.feature.game.domain.names
 import android.content.Context
 import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.feature.game.domain.model.CurrentPlayerName
-import com.rafael.tictactoe.feature.main.domain.model.GameMode
 import com.rafael.tictactoe.feature.game.domain.model.GameState
+import com.rafael.tictactoe.feature.main.domain.model.GameMode
 
 class PlayerNamesController {
 

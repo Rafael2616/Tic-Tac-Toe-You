@@ -1,8 +1,8 @@
 package com.rafael.tictactoe.feature.settings.domain.model
 
 import androidx.compose.ui.graphics.Color
-import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.core.domain.model.Colors
+import com.rafael.tictactoe.core.resources.R
 
 data class ColorItem(
     val color: Color,

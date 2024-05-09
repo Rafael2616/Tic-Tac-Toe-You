@@ -61,9 +61,9 @@ dependencies {
     // Media3
     implementation(libs.androidx.media3.common)
     implementation(libs.androidx.media3.exoplayer)
-     // Compose extended colors
+    // Compose extended colors
     implementation(libs.smarttoolfactory.extended.colors)
-   // LazyColumnScrollbar
+    // LazyColumnScrollbar
     implementation(libs.nanihadesuka.lazyColumnScrollbar)
     // ColorPicker Compose
     implementation(libs.skydoves.colorpicker.compose)

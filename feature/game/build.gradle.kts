@@ -61,7 +61,7 @@ dependencies {
     // Media3
     implementation(libs.androidx.media3.common)
     implementation(libs.androidx.media3.exoplayer)
-     //Retrofit
+    // Retrofit
     implementation(libs.retrofit2)
     implementation(libs.retrofit2.converter.kotlinx.serialization)
     implementation(libs.okhttp3)
