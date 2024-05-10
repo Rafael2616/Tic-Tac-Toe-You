@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.com.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.rafael.gradle.spotless)
 }
 
 android {

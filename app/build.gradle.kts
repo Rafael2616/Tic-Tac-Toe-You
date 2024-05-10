@@ -11,6 +11,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.licensee)
+    alias(libs.plugins.rafael.gradle.spotless)
 }
 
 android {

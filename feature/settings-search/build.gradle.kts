@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.jetbrains.compose)
+    alias(libs.plugins.rafael.gradle.spotless)
 }
 
 android {
