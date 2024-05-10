@@ -7,7 +7,6 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.parcelize)
-    alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.rafael.gradle.spotless)
 }
@@ -63,7 +62,6 @@ dependencies {
     // App Search
     implementation(libs.androidx.appsearch)
     implementation(libs.androidx.appsearch.localStorage)
-    kapt(libs.androidx.appsearch.compiler)
 
     implementation(libs.google.guava)
 
