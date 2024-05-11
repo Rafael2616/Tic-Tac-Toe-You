@@ -153,6 +153,12 @@ dependencies {
     ksp(libs.dagger.hilt.android.compiler)
     // Jetpack Compose
     implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.animation)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.material.icons.extended)
+    implementation(libs.androidx.compose.runtime)
+    implementation(libs.androidx.compose.ui)
     // Media3
     implementation(libs.androidx.media3.exoplayer)
     // Tests

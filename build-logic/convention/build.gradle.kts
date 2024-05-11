@@ -39,7 +39,7 @@ gradlePlugin {
         }
         register("composeLibrary") {
             id = "com.rafael.gradle.compose"
-            implementationClass = "AndroidLibraryConventionPlugin"
+            implementationClass = "AndroidComposeConventionPlugin"
         }
     }
 }
