@@ -3,7 +3,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.getByType
 import com.diffplug.gradle.spotless.SpotlessExtension
-import com.rafael.tictactoe.libs
+import com.rafael.gradle.libs
 import org.gradle.kotlin.dsl.configure
 
 class AndroidSpotlessConventionPlugin : Plugin<Project> {
@@ -18,7 +18,6 @@ class AndroidSpotlessConventionPlugin : Plugin<Project> {
                         .customRuleSets(
                             listOf(
                                 libs.findLibrary("ktlint-compose-rules").get().get().toString(),
-                               // "io.nlopez.compose.rules:ktlint:0.3.20",
                             ),
                         )
                     target("src/main/kotlin/**/*.kt", "src/androidTest/java/**/*.kt")

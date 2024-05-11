@@ -1,9 +1,8 @@
 plugins {
+    alias(libs.plugins.rafael.gradle.library)
     alias(libs.plugins.androidx.room)
-    alias(libs.plugins.com.android.library)
     alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.jetbrains.compose)
@@ -12,13 +11,6 @@ plugins {
 
 android {
     namespace = "com.rafael.tictactoe.feature.game"
-    compileSdk = libs.versions.compileSdk.get().toInt()
-
-    kotlin {
-        jvmToolchain {
-            languageVersion = JavaLanguageVersion.of(libs.versions.javaVersion.get().toInt())
-        }
-    }
 
     room {
         schemaDirectory("$projectDir/schemas")

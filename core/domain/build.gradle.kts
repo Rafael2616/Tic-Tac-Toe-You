@@ -1,25 +1,16 @@
 plugins {
-    alias(libs.plugins.com.android.library)
-    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.rafael.gradle.library)
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.rafael.gradle.spotless)
 }
 
 android {
     namespace = "com.rafael.tictactoe.core.domain"
-    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         buildConfigField("int", "VERSION_CODE", libs.versions.versionCode.get())
         buildConfigField("String", "VERSION_NAME", "\"${libs.versions.versionName.get()}\"")
     }
-
-    kotlin {
-        jvmToolchain {
-            languageVersion = JavaLanguageVersion.of(libs.versions.javaVersion.get().toInt())
-        }
-    }
-
     buildFeatures {
         buildConfig = true
     }

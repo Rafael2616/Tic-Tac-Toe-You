@@ -124,3 +124,4 @@ kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref =
 jetbrains-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 licensee = { id = "app.cash.licensee", version.ref = "licensee" }
 rafael-gradle-spotless = { id = "com.rafael.gradle.spotless", version = "unspecified" }
+rafael-gradle-library  = { id = "com.rafael.gradle.library", version = "unspecified" }

@@ -32,5 +32,9 @@ gradlePlugin {
             id = "com.rafael.gradle.spotless"
             implementationClass = "AndroidSpotlessConventionPlugin"
         }
+        register("androidLibrary") {
+            id = "com.rafael.gradle.library"
+            implementationClass = "AndroidLibraryConventionPlugin"
+        }
     }
 }
