@@ -13,7 +13,7 @@ class AndroidComposeConventionPlugin : Plugin<Project> {
             pluginManager.apply("org.jetbrains.kotlin.plugin.compose")
 
             dependencies {
-                "platform"(libs.findLibrary("androidx-compose-bom").get())
+                "implementation"("platform"(libs.findLibrary("androidx-compose-bom").get()))
                 "implementation"(libs.findLibrary("androidx-compose-material3").get())
                 "implementation"(libs.findLibrary("androidx-compose-animation").get())
                 "implementation"(libs.findLibrary("androidx-compose-ui").get())
