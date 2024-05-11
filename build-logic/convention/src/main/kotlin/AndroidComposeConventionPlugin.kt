@@ -13,13 +13,13 @@ class AndroidComposeConventionPlugin : Plugin<Project> {
             pluginManager.apply("org.jetbrains.kotlin.plugin.compose")
 
             dependencies {
-                "platform"(libs.findLibrary("androidx.compose.bom").get())
-                "implementation"(libs.findLibrary("androidx.compose.material3").get())
-                "implementation"(libs.findLibrary("androidx.compose.animation").get())
-                "implementation"(libs.findLibrary("androidx.compose.ui").get())
-                "implementation"(libs.findLibrary("androidx.compose.foundation").get())
-                "implementation"(libs.findLibrary("androidx.compose.runtime").get())
-                "implementation"(libs.findLibrary("androidx.compose.material.icons.extended").get())
+                "platform"(libs.findLibrary("androidx-compose-bom").get())
+                "implementation"(libs.findLibrary("androidx-compose-material3").get())
+                "implementation"(libs.findLibrary("androidx-compose-animation").get())
+                "implementation"(libs.findLibrary("androidx-compose-ui").get())
+                "implementation"(libs.findLibrary("androidx-compose-foundation").get())
+                "implementation"(libs.findLibrary("androidx-compose-runtime").get())
+                "implementation"(libs.findLibrary("androidx-compose-material-icons-extended").get())
             }
             extensions.configure<LibraryExtension> {
                 configureComposeAndroid(this)
