@@ -106,9 +106,12 @@ androidx-test-espresso-core = { module = "androidx.test.espresso:espresso-core",
 mockk = { module = "io.mockk:mockk-android", version.ref = "mockk" }
 
 google-guava = { module = "com.google.guava:guava", version.ref = "guava" }
+
+# Build-logic dependencies
 android-gradle = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 spotless-gradle = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
+composeCompiler-gradle = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
 
 [plugins]
 androidx-room = { id = "androidx.room", version.ref = "room" }
@@ -123,5 +126,7 @@ kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 jetbrains-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 licensee = { id = "app.cash.licensee", version.ref = "licensee" }
+
 rafael-gradle-spotless = { id = "com.rafael.gradle.spotless", version = "unspecified" }
 rafael-gradle-library  = { id = "com.rafael.gradle.library", version = "unspecified" }
+rafael-gradle-compose  = { id = "com.rafael.gradle.compose", version = "unspecified" }

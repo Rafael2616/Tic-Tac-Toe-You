@@ -9,8 +9,8 @@ plugins {
     alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.licensee)
+    alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.rafael.gradle.spotless)
 }
 
@@ -88,7 +88,6 @@ android {
     }
 
     buildFeatures {
-        compose = true
         buildConfig = true
     }
 
@@ -127,7 +126,7 @@ android {
 
 composeCompiler {
     // https://medium.com/androiddevelopers/jetpack-compose-strong-skipping-mode-explained-cbdb2aa4b900
-    enableStrongSkippingMode = true
+    enableStrongSkippingMode.set(true)
 }
 
 licensee {
@@ -154,12 +153,6 @@ dependencies {
     ksp(libs.dagger.hilt.android.compiler)
     // Jetpack Compose
     implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.animation)
-    implementation(libs.androidx.compose.foundation)
-    implementation(libs.androidx.compose.material.icons.extended)
-    implementation(libs.androidx.compose.runtime)
-    implementation(libs.androidx.compose.ui)
     // Media3
     implementation(libs.androidx.media3.exoplayer)
     // Tests

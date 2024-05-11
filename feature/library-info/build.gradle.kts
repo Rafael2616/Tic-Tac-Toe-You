@@ -1,33 +1,20 @@
 plugins {
     alias(libs.plugins.rafael.gradle.library)
+    alias(libs.plugins.rafael.gradle.compose)
+    alias(libs.plugins.rafael.gradle.spotless)
     alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.jetbrains.compose)
-    alias(libs.plugins.rafael.gradle.spotless)
 }
 
-android {
-    namespace = "com.rafael.tictactoe.feature.library_info"
-
-    buildFeatures {
-        compose = true
-    }
-}
+android.namespace = "com.rafael.tictactoe.feature.library_info"
 
 dependencies {
     // Kotlin
     implementation(libs.kotlinx.coroutines)
     implementation(libs.kotlinx.serialization.json)
-    // Jetpack Compose
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.animation)
-    implementation(libs.androidx.compose.foundation)
-    implementation(libs.androidx.compose.material.icons.extended)
-    implementation(libs.androidx.compose.runtime)
-    implementation(libs.androidx.compose.ui)
     // Lifecycle
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)

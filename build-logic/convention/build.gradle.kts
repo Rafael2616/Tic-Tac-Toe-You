@@ -23,6 +23,7 @@ dependencies {
     compileOnly(libs.android.gradle)
     compileOnly(libs.kotlin.gradle)
     compileOnly(libs.spotless.gradle)
+    compileOnly(libs.composeCompiler.gradle)
 }
 
 gradlePlugin {
@@ -34,6 +35,10 @@ gradlePlugin {
         }
         register("androidLibrary") {
             id = "com.rafael.gradle.library"
+            implementationClass = "AndroidLibraryConventionPlugin"
+        }
+        register("composeLibrary") {
+            id = "com.rafael.gradle.compose"
             implementationClass = "AndroidLibraryConventionPlugin"
         }
     }

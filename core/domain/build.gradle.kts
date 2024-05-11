@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.rafael.gradle.library)
+    alias(libs.plugins.rafael.gradle.compose)
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.rafael.gradle.spotless)
 }
@@ -14,8 +15,4 @@ android {
     buildFeatures {
         buildConfig = true
     }
-}
-
-dependencies {
-    implementation(libs.androidx.compose.ui)
 }
