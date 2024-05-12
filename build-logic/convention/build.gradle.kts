@@ -1,7 +1,11 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import com.diffplug.gradle.spotless.SpotlessExtension
+import org.gradle.kotlin.dsl.configure
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 plugins {
     `kotlin-dsl`
+     alias(libs.plugins.spotless)
 }
 
 group = "com.rafael.gradle"
@@ -13,9 +17,9 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
-tasks.withType<KotlinCompile>().configureEach {
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+tasks.withType<KotlinJvmCompile>().configureEach {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_17)
     }
 }
 
@@ -41,5 +45,23 @@ gradlePlugin {
             id = "com.rafael.gradle.compose"
             implementationClass = "AndroidComposeConventionPlugin"
         }
+    }
+}
+
+extensions.configure<SpotlessExtension> {
+    kotlin {
+        ktlint()
+            .setEditorConfigPath(rootProject.file(".editorconfig"))
+            .customRuleSets(
+                listOf(
+                    libs.ktlint.compose.rules.get().toString(),
+                ),
+            )
+        target("src/**/*.kt")
+    }
+    kotlinGradle {
+        ktlint()
+            .setEditorConfigPath(rootProject.file(".editorconfig"))
+        target("*.gradle.kts")
     }
 }

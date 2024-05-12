@@ -1,9 +1,7 @@
-import com.android.build.api.dsl.ApplicationExtension
-import org.gradle.api.Plugin
-import org.gradle.api.Project
-import org.gradle.kotlin.dsl.getByType
 import com.diffplug.gradle.spotless.SpotlessExtension
 import com.rafael.gradle.libs
+import org.gradle.api.Plugin
+import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 
 class AndroidSpotlessConventionPlugin : Plugin<Project> {
