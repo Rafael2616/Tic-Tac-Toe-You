@@ -14,6 +14,7 @@ dependencies {
 
     // Projects
     implementation(projects.core.ui)
+    implementation(projects.core.resources)
     implementation(projects.core.navigation)
     implementation(projects.feature.changelogs)
     implementation(projects.feature.game)
