@@ -11,6 +11,8 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     // Material Motion
     implementation(libs.material.motion.compose)
+    // AndroidX
+    implementation(libs.androidx.core.splashscreen)
 
     // Projects
     implementation(projects.core.ui)
