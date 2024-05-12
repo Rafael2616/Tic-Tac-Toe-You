@@ -10,7 +10,7 @@ Improvements:
 Fixes:
  - fix some preset color appearing selected even if custom color is selected in icons customizations dialog
  - fix RGB Effect preview not starting animation if previous selected shape is different than custom shape and RGB effect setting was on
- - fix crash aftee type '(' or ')' in settings search bar
+ - fix crash after type '(' or ')' in settings search bar
  - minor fixes in main screen
 
 Code:
