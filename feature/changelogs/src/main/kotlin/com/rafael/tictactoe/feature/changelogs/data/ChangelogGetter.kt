@@ -1,10 +1,11 @@
 package com.rafael.tictactoe.feature.changelogs.data
 
 import android.content.Context
+import com.rafael.tictactoe.core.domain.util.getVersionName
 import java.io.IOException
 
 fun Context.getCurrentChangelogFile(): Pair<String, String> {
-    val version = "1.5.3" // getVersionName()
+    val version = getVersionName()
     val versionNumber = if (version.contains("-")) version.split("-")[0] else version
     val variant = if (version.contains("-")) version.split("-")[1] else ""
     val correctedVariant = if (variant != "") "" else variant

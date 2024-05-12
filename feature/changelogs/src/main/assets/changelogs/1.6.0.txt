@@ -14,5 +14,7 @@ Fixes:
  - minor fixes in main screen
 
 Code:
- - the app is now modularized, check https://github.com/Rafael2616/Tic-Tac-Toe-You/commit/3c2d06cf9b32e168a4415b21521e2b33f6c0cf5f
- - settings preferences have an separed file for each settings, checkout: https://github.com/Rafael2616/Tic-Tac-Toe-You/commit/8d15a7d480394854ba670d0441fc3b25bd9e443a
+ - the app is now modularized, check:
+ https://github.com/Rafael2616/Tic-Tac-Toe-You/commit/3c2d06cf9b32e168a4415b21521e2b33f6c0cf5f
+ - settings preferences have an separed file for each settings:
+ https://github.com/Rafael2616/Tic-Tac-Toe-You/commit/8d15a7d480394854ba670d0441fc3b25bd9e443a
