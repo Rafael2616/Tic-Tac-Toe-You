@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.core.domain.util
+package com.rafael.tictactoe.feature.settings.data.profilepicture
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -6,14 +6,15 @@ import android.graphics.Bitmap.CompressFormat
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.webkit.MimeTypeMap
-import com.rafael.tictactoe.core.domain.BuildConfig
+import com.rafael.tictactoe.feature.settings.BuildConfig
+import com.rafael.tictactoe.feature.settings.domain.profilepicture.ProfilePictureUtils
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 
-class ProfilePictureUtils() {
+class AndroidProfilePictureUtils() : ProfilePictureUtils {
 
-    fun savePictureFromUri(context: Context, imageUri: Uri) {
+    override fun savePictureFromUri(context: Context, imageUri: Uri) {
         val contentResolver = context.contentResolver
 
         val inputStream = contentResolver.openInputStream(imageUri) ?: return
@@ -44,7 +45,7 @@ class ProfilePictureUtils() {
         inputStream.close()
     }
 
-    fun getPictureUriIfExists(): Uri {
+    override fun getPictureUriIfExists(): Uri {
         var uriDirWithFileNameExt = Uri.EMPTY
         val directory = File(PICTURE_PATH)
 
@@ -61,13 +62,13 @@ class ProfilePictureUtils() {
         return uriDirWithFileNameExt
     }
 
-    fun getPictureBitmap(): Bitmap {
+    override fun getPictureBitmap(): Bitmap {
         return BitmapFactory.decodeStream(
             FileInputStream(getPictureUriIfExists().path!!),
         )
     }
 
-    fun deletePicture() {
+    override fun deletePicture() {
         val directory = File(PICTURE_PATH)
         val filesInPictureDir = directory.listFiles()
         filesInPictureDir?.forEach { file ->
@@ -86,6 +87,6 @@ class ProfilePictureUtils() {
     }
 
     companion object {
-        const val PICTURE_PATH = "/storage/emulated/0/Android/data/com.rafael.tictactoe.${BuildConfig.BUILD_TYPE}/files/userProfile/"
+        const val PICTURE_PATH = "/storage/emulated/0/Android/data/com.rafael.tictactoe${if (BuildConfig.BUILD_TYPE == "release") "" else "." + BuildConfig.BUILD_TYPE}/files/userProfile/"
     }
 }

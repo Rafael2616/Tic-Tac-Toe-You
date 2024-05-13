@@ -13,6 +13,13 @@ plugins {
 android {
     namespace = "com.rafael.tictactoe.feature.settings"
 
+    defaultConfig {
+        buildConfigField("int", "VERSION_CODE", libs.versions.versionCode.get())
+        buildConfigField("String", "VERSION_NAME", "\"${libs.versions.versionName.get()}\"")
+    }
+    buildFeatures {
+        buildConfig = true
+    }
     room {
         schemaDirectory("$projectDir/schemas")
     }
@@ -56,7 +63,6 @@ dependencies {
     kapt(libs.androidx.appsearch.compiler)
 
     // Projects
-    implementation(projects.core.domain)
     implementation(projects.core.services)
     implementation(projects.core.resources)
     implementation(projects.core.navigation)

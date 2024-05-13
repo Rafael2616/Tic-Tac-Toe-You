@@ -7,11 +7,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.media3.exoplayer.ExoPlayer
-import com.rafael.tictactoe.core.domain.util.ProfilePictureUtils
 import com.rafael.tictactoe.core.domain.util.getVersionName
 import com.rafael.tictactoe.core.domain.util.toColor
 import com.rafael.tictactoe.core.services.MusicService
 import com.rafael.tictactoe.core.services.music.backgroundMusic
+import com.rafael.tictactoe.feature.settings.data.profilepicture.AndroidProfilePictureUtils as ProfilePictureUtils
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsEntity
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
