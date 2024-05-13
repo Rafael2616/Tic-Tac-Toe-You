@@ -86,9 +86,8 @@ class AndroidProfilePictureUtils() : ProfilePictureUtils {
         }
     }
 
-    val buildType = if (BuildConfig.BUILD_TYPE == "release") "" else "." + BuildConfig.BUILD_TYPE
-
     companion object {
+        val buildType = if (BuildConfig.BUILD_TYPE == "release") "" else "." + BuildConfig.BUILD_TYPE    
         const val PICTURE_PATH = "/storage/emulated/0/Android/data/com.rafael.tictactoe$buildType/files/userProfile/"
     }
 }
