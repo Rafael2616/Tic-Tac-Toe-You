@@ -2,8 +2,6 @@ package com.rafael.tictactoe.feature.settings.domain.profilepicture
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.Bitmap.CompressFormat
-import android.graphics.BitmapFactory
 import android.net.Uri
 
 interface ProfilePictureUtils {
@@ -15,5 +13,4 @@ interface ProfilePictureUtils {
     fun getPictureBitmap(): Bitmap
 
     fun deletePicture(): Unit
-
 }
