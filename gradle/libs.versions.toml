@@ -19,7 +19,7 @@ kotlinx-serialization-json = "1.6.3"
 
 core-ktx = "1.13.1"
 activity-compose = "1.9.0"
-androidx-annotation = "1.7.1"
+androidx-annotation = "1.8.0"
 core-splashscreen = "1.2.0-alpha01"
 
 dagger-hilt = "2.51.1"
