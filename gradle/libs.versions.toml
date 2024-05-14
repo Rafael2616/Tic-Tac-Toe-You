@@ -8,7 +8,7 @@ javaVersion = "17"
 
 agp = "8.4.0"
 spotless = "6.25.0"
-ksp = "2.0.0-RC2-1.0.20"
+ksp = "2.0.0-RC3-1.0.20"
 kotlin = "2.0.0-RC3"
 licensee = "1.11.0"
 compose-compiler = "1.5.12"
