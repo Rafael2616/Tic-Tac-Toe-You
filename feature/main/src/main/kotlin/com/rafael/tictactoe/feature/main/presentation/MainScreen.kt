@@ -69,7 +69,6 @@ fun MainScreen(
     val activity = LocalContext.current as ComponentActivity
     val state by settingsVM.state.collectAsState()
     val mainState by mainVM.state.collectAsState()
-    val onEvent = mainVM::onEvent
     val orientation = LocalConfiguration.current.orientation
 
     val items = listOf(
