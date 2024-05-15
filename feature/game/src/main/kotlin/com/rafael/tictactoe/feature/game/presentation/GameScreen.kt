@@ -17,6 +17,7 @@ import androidx.compose.runtime.setValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.feature.game.domain.model.GameEvent
+import com.rafael.tictactoe.feature.game.domain.model.GameMode
 import com.rafael.tictactoe.feature.game.presentation.components.buttons.PlayAgainButton
 import com.rafael.tictactoe.feature.game.presentation.components.buttons.RestartButton
 import com.rafael.tictactoe.feature.game.presentation.components.buttons.SoundAndMusicButtons
@@ -30,7 +31,6 @@ import com.rafael.tictactoe.feature.game.presentation.components.ui.PlayerSearch
 import com.rafael.tictactoe.feature.game.presentation.components.ui.VictoryCounter
 import com.rafael.tictactoe.feature.game.presentation.components.ui.WinnerLines
 import com.rafael.tictactoe.feature.game.presentation.viewmodel.GameViewModel
-import com.rafael.tictactoe.feature.main.domain.model.GameMode
 import com.rafael.tictactoe.feature.settings.presentation.components.dialogs.ColorSelectionDialog
 import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsViewModel
 

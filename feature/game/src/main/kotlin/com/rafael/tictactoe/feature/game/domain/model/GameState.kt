@@ -1,7 +1,5 @@
 package com.rafael.tictactoe.feature.game.domain.model
 
-import com.rafael.tictactoe.feature.main.domain.model.GameMode
-
 data class GameState(
     val currentPlayerName: String = "",
     val player1Name: String = "",

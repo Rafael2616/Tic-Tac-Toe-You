@@ -51,7 +51,5 @@ dependencies {
     implementation(projects.core.domain)
     implementation(projects.core.services)
     implementation(projects.core.resources)
-    // TODO: remove this later
-    implementation(projects.feature.main)
     implementation(projects.feature.settings)
 }
