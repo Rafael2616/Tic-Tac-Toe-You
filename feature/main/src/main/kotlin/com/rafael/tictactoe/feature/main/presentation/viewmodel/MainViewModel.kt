@@ -2,7 +2,6 @@ package com.rafael.tictactoe.feature.main.presentation.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.rafael.tictactoe.feature.main.domain.model.MainEvent
 import com.rafael.tictactoe.feature.main.domain.model.MainState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

@@ -51,7 +51,6 @@ import com.rafael.tictactoe.core.navigation.destinations.Game
 import com.rafael.tictactoe.core.navigation.destinations.Settings
 import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.feature.changelogs.presentation.components.WhatsNewDialog
-import com.rafael.tictactoe.feature.main.domain.model.MainEvent
 import com.rafael.tictactoe.feature.main.domain.model.ScreenItem
 import com.rafael.tictactoe.feature.main.presentation.util.ShortcutsIntentHandler
 import com.rafael.tictactoe.feature.main.presentation.viewmodel.MainViewModel
