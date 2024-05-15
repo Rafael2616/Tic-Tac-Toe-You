@@ -66,7 +66,7 @@ class GameViewModel @Inject constructor(
     fun onEvent(event: GameEvent) {
         when (event) {
             is GameEvent.SetGameMode -> {
-                setupGameMode(event.mode)
+                setupGameMode(event.mode.toGameMode())
             }
             is GameEvent.GetFirstPlayerName -> {
                 getFirstPlayerName(event.name)
@@ -243,7 +243,7 @@ class GameViewModel @Inject constructor(
     }
 
     fun setupGameMode(mode: GameMode) {
-        _state.update { it.copy(gameMode = mode.toGameMode()) }
+        _state.update { it.copy(gameMode = mode) }
         setPlayerNamesOnCounter()
         switchPlayerNamesOrder()
         updateCurrentToastName()
