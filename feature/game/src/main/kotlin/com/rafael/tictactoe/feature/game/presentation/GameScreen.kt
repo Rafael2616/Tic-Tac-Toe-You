@@ -39,9 +39,9 @@ import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsView
 @ExperimentalLayoutApi
 fun GameScreen(
     navController: NavController,
+    gameMode: String,
     settingsVM: SettingsViewModel = hiltViewModel(),
     viewModel: GameViewModel = hiltViewModel(),
-    gameMode: String,
 ) {
     val state by viewModel.state.collectAsState()
     val settingsState by settingsVM.state.collectAsState()

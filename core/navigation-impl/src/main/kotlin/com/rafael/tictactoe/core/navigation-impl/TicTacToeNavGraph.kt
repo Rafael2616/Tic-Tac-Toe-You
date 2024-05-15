@@ -66,7 +66,8 @@ fun TicTacToeNavGraph(
                     )
                 }
                 composable<Game> {
-                    GameScreen(navController)
+                    val args = it.toRoute<Game>()
+                    GameScreen(navController, args.gameMode)
                 }
                 composable<Settings> {
                     SettingsScreen(navController)

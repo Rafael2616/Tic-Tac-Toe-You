@@ -7,7 +7,7 @@ object Main
 
 @Serializable
 data class Game(
-    val mode: String
+    val gameMode: String
 )
 
 @Serializable
