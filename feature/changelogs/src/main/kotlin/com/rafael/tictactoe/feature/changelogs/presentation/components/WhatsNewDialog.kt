@@ -77,7 +77,7 @@ fun WhatsNewDialog(
             }
         },
         confirmButton = {
-            if (navController.currentBackStackEntry?.destination?.route != Changelogs) {
+            if (navController.currentBackStackEntry?.destination?.route != Changelogs::class.simpleName) {
                 OutlinedButton(
                     contentPadding = PaddingValues(horizontal = 12.dp),
                     onClick = {
