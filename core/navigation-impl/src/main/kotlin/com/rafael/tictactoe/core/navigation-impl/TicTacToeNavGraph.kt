@@ -15,8 +15,8 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
-import androidx.navigation.toRoute
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.rafael.tictactoe.core.navigation.destinations.Changelogs
 import com.rafael.tictactoe.core.navigation.destinations.Game
 import com.rafael.tictactoe.core.navigation.destinations.LibraryInfo
