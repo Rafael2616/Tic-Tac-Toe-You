@@ -11,7 +11,6 @@ spotless = "6.25.0"
 ksp = "2.0.0-RC3-1.0.20"
 kotlin = "2.0.0-RC3"
 licensee = "1.11.0"
-compose-compiler = "1.5.12"
 
 kotlinx-coroutines = "1.8.1"
 kotlinx-collections-immutable = "0.3.7"

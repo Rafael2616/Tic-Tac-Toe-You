@@ -4,9 +4,8 @@
   "labels": ["dependencies"],
   "packageRules": [
     {
-      "groupName": "Kotlin, KSP & Compose Compiler",
+      "groupName": "Kotlin & KSP",
       "matchPackagePrefixes": [
-        "androidx.compose.compiler",     
         "com.google.devtools.ksp"
       ],
       "matchPackagePatterns": [
