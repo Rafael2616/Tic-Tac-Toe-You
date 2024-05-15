@@ -13,6 +13,9 @@ env:
   KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
   KEYSTORE: ${{ secrets.KEYSTORE }}
 
+permissions:
+  contents: write
+
 jobs:
   build-debug-apk:
     runs-on: ubuntu-latest
@@ -70,3 +73,16 @@ jobs:
 
     - name: Check Kotlin Style
       run: ./gradlew spotlessCheck
+  name: Dependency Submission
+
+  dependency-submission:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: 22
+
+    - name: Generate and submit dependency graph
+      uses: gradle/actions/dependency-submission@v3
