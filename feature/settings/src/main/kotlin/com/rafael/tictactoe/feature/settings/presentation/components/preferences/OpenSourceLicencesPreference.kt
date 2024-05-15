@@ -5,7 +5,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.outlined.Code
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
-import com.rafael.tictactoe.core.navigation.Destinations
+import com.rafael.tictactoe.core.navigation.destinations.LibraryInfo
 import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.feature.settings.presentation.components.templates.IconPreference
 
@@ -17,6 +17,6 @@ fun OpenSourceLicensesPreference(
         title = R.string.open_source_licenses,
         leadingIcon = Icons.Outlined.Code,
         trailingIcon = Icons.AutoMirrored.Filled.ArrowForward,
-        onClick = { navController.navigate(Destinations.Library.screen) },
+        onClick = { navController.navigate(LibraryInfo) },
     )
 }

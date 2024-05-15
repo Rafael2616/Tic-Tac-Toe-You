@@ -31,7 +31,6 @@ import com.rafael.tictactoe.feature.game.presentation.components.ui.VictoryCount
 import com.rafael.tictactoe.feature.game.presentation.components.ui.WinnerLines
 import com.rafael.tictactoe.feature.game.presentation.viewmodel.GameViewModel
 import com.rafael.tictactoe.feature.main.domain.model.GameMode
-import com.rafael.tictactoe.feature.main.presentation.viewmodel.MainViewModel
 import com.rafael.tictactoe.feature.settings.presentation.components.dialogs.ColorSelectionDialog
 import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsViewModel
 
@@ -42,10 +41,9 @@ fun GameScreen(
     navController: NavController,
     settingsVM: SettingsViewModel = hiltViewModel(),
     viewModel: GameViewModel = hiltViewModel(),
-    mainVM: MainViewModel = hiltViewModel(),
+    gameMode: String,
 ) {
     val state by viewModel.state.collectAsState()
-    val mainState by mainVM.state.collectAsState()
     val settingsState by settingsVM.state.collectAsState()
     val onEvent = viewModel::onEvent
     val onSettingsEvent = settingsVM::onEvent
@@ -140,7 +138,7 @@ fun GameScreen(
     }
 
     DisposableEffect(canSetMode) {
-        onEvent(GameEvent.SetGameMode(mainState.gameMode))
+        onEvent(GameEvent.SetGameMode(gameMode))
         canSetMode = false
         onDispose {}
     }

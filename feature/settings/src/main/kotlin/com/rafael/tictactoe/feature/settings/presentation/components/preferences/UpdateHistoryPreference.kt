@@ -5,7 +5,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.outlined.History
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
-import com.rafael.tictactoe.core.navigation.Destinations
+import com.rafael.tictactoe.core.navigation.destinations.Changelogs
 import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.feature.settings.presentation.components.templates.IconPreference
 
@@ -17,6 +17,6 @@ fun UpdateHistoryPreference(
         title = R.string.update_history,
         leadingIcon = Icons.Outlined.History,
         trailingIcon = Icons.AutoMirrored.Filled.ArrowForward,
-        onClick = { navController.navigate(Destinations.Changelogs.screen) },
+        onClick = { navController.navigate(Changelogs) },
     )
 }

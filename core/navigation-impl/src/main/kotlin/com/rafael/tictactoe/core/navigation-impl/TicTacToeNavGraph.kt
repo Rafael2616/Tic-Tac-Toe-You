@@ -16,7 +16,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
-import com.rafael.tictactoe.core.navigation.Destinations
+import com.rafael.tictactoe.core.navigation.destinations.Changelogs
+import com.rafael.tictactoe.core.navigation.destinations.Game
+import com.rafael.tictactoe.core.navigation.destinations.LibraryInfo
+import com.rafael.tictactoe.core.navigation.destinations.Main
+import com.rafael.tictactoe.core.navigation.destinations.Settings
+import com.rafael.tictactoe.core.navigation.destinations.SettingsSearch
 import com.rafael.tictactoe.core.ui.theme.AppTheme
 import com.rafael.tictactoe.feature.changelogs.presentation.ChangelogsScreen
 import com.rafael.tictactoe.feature.game.presentation.GameScreen
@@ -47,32 +52,32 @@ fun TicTacToeNavGraph(
         ) {
             NavHost(
                 navController = navController,
-                startDestination = Destinations.Main.screen,
+                startDestination = Main,
                 enterTransition = { materialSharedAxisXIn(!isRtl, slideDistance) },
                 exitTransition = { materialSharedAxisXOut(!isRtl, slideDistance) },
                 popEnterTransition = { materialSharedAxisXIn(isRtl, slideDistance) },
                 popExitTransition = { materialSharedAxisXOut(isRtl, slideDistance) },
 
             ) {
-                composable(Destinations.Main.screen) {
+                composable<Main> {
                     MainScreen(
                         navController = navController,
                         intent = intent,
                     )
                 }
-                composable(Destinations.Game.screen) {
+                composable<Game> {
                     GameScreen(navController)
                 }
-                composable(Destinations.Settings.screen) {
+                composable<Settings> {
                     SettingsScreen(navController)
                 }
-                composable(Destinations.Library.screen) {
+                composable<LibraryInfo> {
                     LibraryScreen(navController)
                 }
-                composable(Destinations.SearchSettings.screen) {
+                composable<SettingsSearch> {
                     SearchSettingsScreen(navController)
                 }
-                composable(Destinations.Changelogs.screen) {
+                composable<Changelogs> {
                     ChangelogsScreen(navController)
                 }
             }

@@ -1,9 +1,7 @@
 package com.rafael.tictactoe.feature.game.domain.model
 
-import com.rafael.tictactoe.feature.main.domain.model.GameMode
-
 sealed interface GameEvent {
-    data class SetGameMode(val mode: GameMode = GameMode.PvP) : GameEvent
+    data class SetGameMode(val mode: String) : GameEvent
     data class GetFirstPlayerName(val name: String) : GameEvent
     data class GetSecondPlayerName(val name: String) : GameEvent
     object SwitchPlayerPositions : GameEvent

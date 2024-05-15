@@ -14,16 +14,6 @@ class MainViewModel @Inject constructor(
 
     val state = savedState.getStateFlow("state", MainState())
 
-    fun onEvent(event: MainEvent) {
-        when (event) {
-            is MainEvent.SetGameMode -> {
-                savedState["state"] = savedState.get<MainState>("state")?.copy(
-                    gameMode = event.mode,
-                )
-            }
-        }
-    }
-
     fun canRedirectToAnGameModeScreen(can: Boolean) {
         savedState["state"] = savedState.get<MainState>("state")?.copy(
             canRedirectToAnGameModeScreen = can,

@@ -47,10 +47,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.rafael.tictactoe.core.navigation.Destinations
+import com.rafael.tictactoe.core.navigation.destinations.Game
+import com.rafael.tictactoe.core.navigation.destinations.Settings
 import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.feature.changelogs.presentation.components.WhatsNewDialog
-import com.rafael.tictactoe.feature.main.domain.model.GameMode
 import com.rafael.tictactoe.feature.main.domain.model.MainEvent
 import com.rafael.tictactoe.feature.main.domain.model.ScreenItem
 import com.rafael.tictactoe.feature.main.presentation.util.ShortcutsIntentHandler
@@ -77,34 +77,25 @@ fun MainScreen(
             icon = Icons.Outlined.PlayArrow,
             tint = if (state.isDarkThemeOn) Color.Green else Color(0xFF299961),
             text = R.string.play,
-            onClick = {
-                navController.navigate(Destinations.Game.screen)
-                onEvent(MainEvent.SetGameMode(GameMode.PvP))
-            },
+            onClick = { navController.navigate(Game("PvP")) },
         ),
         ScreenItem(
             icon = Icons.Outlined.Memory,
             tint = Color.Red,
             text = R.string.vs_cpu,
-            onClick = {
-                navController.navigate(Destinations.Game.screen)
-                onEvent(MainEvent.SetGameMode(GameMode.VsCPU))
-            },
+            onClick = { navController.navigate(Game("VsCPU")) },
         ),
         ScreenItem(
             icon = Icons.Outlined.Group,
             tint = MaterialTheme.colorScheme.onSurface,
             text = R.string.online_match,
-            onClick = {
-                navController.navigate(Destinations.Game.screen)
-                onEvent(MainEvent.SetGameMode(GameMode.Online))
-            },
+            onClick = { navController.navigate(Game("Online")) },
         ),
         ScreenItem(
             icon = Icons.Outlined.Settings,
             tint = MaterialTheme.colorScheme.onSurface,
             text = R.string.settings,
-            onClick = { navController.navigate(Destinations.Settings.screen) },
+            onClick = { navController.navigate(Settings) },
         ),
     )
 
@@ -195,7 +186,7 @@ fun MainScreen(
      * the long click app shortcuts
      **/
     if (mainState.canRedirectToAnGameModeScreen && intent != null) {
-        ShortcutsIntentHandler(activity, navController, mainVM::onEvent, intent)
+        ShortcutsIntentHandler(activity, navController, intent)
         mainVM.canRedirectToAnGameModeScreen(false)
     }
 }

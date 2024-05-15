@@ -243,7 +243,7 @@ class GameViewModel @Inject constructor(
     }
 
     fun setupGameMode(mode: GameMode) {
-        _state.update { it.copy(gameMode = mode) }
+        _state.update { it.copy(gameMode = mode.toGameMode()) }
         setPlayerNamesOnCounter()
         switchPlayerNamesOrder()
         updateCurrentToastName()
@@ -601,5 +601,12 @@ class GameViewModel @Inject constructor(
             player,
         )
         _state.update { it.copy(isWinSoundPlaying = isPlaying) }
+    }
+
+    private fun String.toGameMode(): GameMode = when (this) {
+        "PvP" -> GameMode.PvP
+        "Online" -> GameMode.Online
+        "VsCPU" -> GameMode.VsCPU
+        else -> GameMode.PvP
     }
 }
