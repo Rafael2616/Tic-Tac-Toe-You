@@ -10,7 +10,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.licensee)
-    alias(libs.plugins.jetbrains.compose)
+    alias(libs.plugins.rafael.gradle.compose)
     alias(libs.plugins.rafael.gradle.spotless)
 }
 
@@ -124,11 +124,6 @@ android {
     }
 }
 
-composeCompiler {
-    // https://medium.com/androiddevelopers/jetpack-compose-strong-skipping-mode-explained-cbdb2aa4b900
-    enableStrongSkippingMode.set(true)
-}
-
 licensee {
     allow("Apache-2.0")
     allow("EPL-1.0")
@@ -151,20 +146,9 @@ dependencies {
     implementation(libs.dagger.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
     ksp(libs.dagger.hilt.android.compiler)
-    // Jetpack Compose
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.animation)
-    implementation(libs.androidx.compose.foundation)
-    implementation(libs.androidx.compose.material.icons.extended)
-    implementation(libs.androidx.compose.runtime)
-    implementation(libs.androidx.compose.ui)
     // Media3
     implementation(libs.androidx.media3.exoplayer)
-    // Tests
-    debugImplementation(libs.androidx.compose.ui.test.manifest)
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     androidTestImplementation(libs.androidx.test.espresso.core)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.mockk)
