@@ -1,4 +1,4 @@
-import com.android.build.api.dsl.ApplicationExtension
+import com.android.build.api.dsl.LibraryExtension
 import com.rafael.gradle.configureComposeAndroid
 import com.rafael.gradle.libs
 import org.gradle.api.Plugin
@@ -10,7 +10,7 @@ class AndroidLibraryComposeConventionPlugin : Plugin<Project> {
         with(target) {
             pluginManager.apply("org.jetbrains.kotlin.plugin.compose")
 
-            extensions.configure<ApplicationExtension> {
+            extensions.configure<LibraryExtension> {
                 configureComposeAndroid(this)
             }
         }
