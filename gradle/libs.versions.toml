@@ -129,3 +129,4 @@ licensee = { id = "app.cash.licensee", version.ref = "licensee" }
 rafael-gradle-spotless = { id = "com.rafael.gradle.spotless", version = "unspecified" }
 rafael-gradle-library  = { id = "com.rafael.gradle.library", version = "unspecified" }
 rafael-gradle-compose  = { id = "com.rafael.gradle.compose", version = "unspecified" }
+rafael-gradle-compose-application  = { id = "com.rafael.gradle.compose.application", version = "unspecified" }
