@@ -29,7 +29,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -46,6 +45,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.rafael.tictactoe.core.navigation.destinations.Game
 import com.rafael.tictactoe.core.navigation.destinations.Settings
@@ -66,8 +66,8 @@ fun MainScreen(
     mainVM: MainViewModel = hiltViewModel(),
 ) {
     val activity = LocalContext.current as ComponentActivity
-    val state by settingsVM.state.collectAsState()
-    val mainState by mainVM.state.collectAsState()
+    val state by settingsVM.state.collectAsStateWithLifecycle()
+    val mainState by mainVM.state.collectAsStateWithLifecycle()
     val orientation = LocalConfiguration.current.orientation
 
     val items = listOf(

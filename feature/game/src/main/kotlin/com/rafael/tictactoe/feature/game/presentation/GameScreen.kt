@@ -9,11 +9,11 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.rafael.tictactoe.feature.game.domain.model.GameEvent
@@ -43,8 +43,8 @@ fun GameScreen(
     settingsVM: SettingsViewModel = hiltViewModel(),
     viewModel: GameViewModel = hiltViewModel(),
 ) {
-    val state by viewModel.state.collectAsState()
-    val settingsState by settingsVM.state.collectAsState()
+    val state by viewModel.state.collectAsStateWithLifecycle()
+    val settingsState by settingsVM.state.collectAsStateWithLifecycle()
     val onEvent = viewModel::onEvent
     val onSettingsEvent = settingsVM::onEvent
     val showPlayerPrefsDialog = !state.play && state.showGetPrefsDialog

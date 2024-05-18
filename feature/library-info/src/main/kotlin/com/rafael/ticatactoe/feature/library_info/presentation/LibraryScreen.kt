@@ -23,7 +23,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -41,6 +40,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.feature.libraryinfo.presentation.utils.annotatedLink
@@ -57,7 +57,7 @@ fun LibraryScreen(
     val layoutResult = remember { mutableStateOf<TextLayoutResult?>(null) }
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     var isGoBackClicked by rememberSaveable { mutableStateOf(false) }
-    val libraries by viewModel.ossLibraries.collectAsState()
+    val libraries by viewModel.ossLibraries.collectAsStateWithLifecycle()
 
     Scaffold(
         modifier = modifier

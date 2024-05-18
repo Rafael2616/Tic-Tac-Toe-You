@@ -27,6 +27,7 @@ internal fun Project.configureComposeAndroid(
             "implementation"(libs.findLibrary("androidx-compose-foundation").get())
             "implementation"(libs.findLibrary("androidx-compose-runtime").get())
             "implementation"(libs.findLibrary("androidx-compose-material-icons-extended").get())
+            "implementation"(libs.findLibrary("androidx-lifecycle-runtime-compose").get())
             "debugImplementation"(libs.findLibrary("androidx-compose-ui-test-manifest").get())
             "androidTestImplementation"(libs.findLibrary("androidx-compose-ui-test-junit4").get())
         }

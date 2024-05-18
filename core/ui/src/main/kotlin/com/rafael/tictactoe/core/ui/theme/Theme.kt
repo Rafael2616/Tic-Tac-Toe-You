@@ -14,10 +14,10 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsViewModel
 
@@ -91,7 +91,7 @@ fun AppTheme(
     viewModel: SettingsViewModel = hiltViewModel(),
     content: @Composable () -> Unit,
 ) {
-    val state by viewModel.state.collectAsState()
+    val state by viewModel.state.collectAsStateWithLifecycle()
     val isDarkThemeOn = state.isDarkThemeOn
     val isFollowingSystemOn = state.isFollowingSystemOn
     val isDynamicColorsOn = state.isDynamicColorsOn

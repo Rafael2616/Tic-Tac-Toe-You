@@ -34,7 +34,6 @@ import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -52,6 +51,7 @@ import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.feature.changelogs.presentation.components.WhatsNewDialog
@@ -73,8 +73,8 @@ fun SearchSettingsScreen(
     settingsVM: SettingsViewModel = hiltViewModel(),
     searchSettingsVM: SearchSettingsViewModel = hiltViewModel(),
 ) {
-    val state by settingsVM.state.collectAsState()
-    val searchState by searchSettingsVM.state.collectAsState()
+    val state by settingsVM.state.collectAsStateWithLifecycle()
+    val searchState by searchSettingsVM.state.collectAsStateWithLifecycle()
     var expanded by rememberSaveable { mutableStateOf(true) }
     val matchingSettings = searchState.matchingSettings
     val focusManager = LocalFocusManager.current
