@@ -1,6 +1,6 @@
 plugins {
-    alias(libs.plugins.rafael.gradle.library)
-    alias(libs.plugins.rafael.gradle.compose)
+    alias(libs.plugins.rafael.gradle.android.library)
+    alias(libs.plugins.rafael.gradle.android.library.compose)
     alias(libs.plugins.rafael.gradle.spotless)
     alias(libs.plugins.androidx.room)
     alias(libs.plugins.dagger.hilt)

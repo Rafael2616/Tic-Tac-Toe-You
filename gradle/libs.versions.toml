@@ -127,6 +127,7 @@ jetbrains-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = 
 licensee = { id = "app.cash.licensee", version.ref = "licensee" }
 
 rafael-gradle-spotless = { id = "com.rafael.gradle.spotless", version = "unspecified" }
-rafael-gradle-library  = { id = "com.rafael.gradle.library", version = "unspecified" }
-rafael-gradle-compose  = { id = "com.rafael.gradle.compose", version = "unspecified" }
-rafael-gradle-compose-application  = { id = "com.rafael.gradle.compose.application", version = "unspecified" }
+rafael-gradle-android-library  = { id = "com.rafael.gradle.android.library", version = "unspecified" }
+rafael-gradle-android-application  = { id = "com.rafael.gradle.android.application", version = "unspecified" }
+rafael-gradle-android-library-compose  = { id = "com.rafael.gradle.compose.library", version = "unspecified" }
+rafael-gradle-android-application-compose  = { id = "com.rafael.gradle.compose.application", version = "unspecified" }

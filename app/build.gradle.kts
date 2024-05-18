@@ -5,22 +5,19 @@ import java.util.Properties
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    alias(libs.plugins.com.android.application)
+    alias(libs.plugins.rafael.gradle.android.application)
+    alias(libs.plugins.rafael.gradle.android.application.compose)
+    alias(libs.plugins.rafael.gradle.spotless)
     alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.licensee)
-    alias(libs.plugins.rafael.gradle.compose.application)
-    alias(libs.plugins.rafael.gradle.spotless)
 }
 
 android {
-    compileSdk = libs.versions.compileSdk.get().toInt()
     namespace = "com.rafael.tictactoe"
 
     defaultConfig {
         applicationId = "com.rafael.tictactoe"
-        minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = libs.versions.versionCode.get().toInt()
         versionName = libs.versions.versionName.get()
@@ -81,26 +78,8 @@ android {
         }
     }
 
-    kotlin {
-        jvmToolchain {
-            languageVersion = JavaLanguageVersion.of(libs.versions.javaVersion.get().toInt())
-        }
-    }
-
     buildFeatures {
         buildConfig = true
-    }
-
-    packaging {
-        resources {
-            excludes += listOf(
-                "/META-INF/AL2.0",
-                "/META-INF/INDEX.LIST",
-                "/META-INF/LGPL2.1",
-                "/META-INF/LICENSE.md",
-                "/META-INF/LICENSE-notice.md",
-            )
-        }
     }
 
     androidComponents.onVariants { variant ->

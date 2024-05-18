@@ -38,11 +38,15 @@ gradlePlugin {
             implementationClass = "AndroidSpotlessConventionPlugin"
         }
         register("androidLibrary") {
-            id = "com.rafael.gradle.library"
+            id = "com.rafael.gradle.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"
         }
+        register("androidApplication") {
+            id = "com.rafael.gradle.android.application"
+            implementationClass = "AndroidApplicationConventionPlugin"
+        }
         register("composeLibrary") {
-            id = "com.rafael.gradle.compose"
+            id = "com.rafael.gradle.compose.library"
             implementationClass = "AndroidLibraryComposeConventionPlugin"
         }
         register("composeApplication") {
