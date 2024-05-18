@@ -10,7 +10,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.licensee)
-    alias(libs.plugins.rafael.gradle.compose.applcation)
+    alias(libs.plugins.rafael.gradle.compose.application)
     alias(libs.plugins.rafael.gradle.spotless)
 }
 
