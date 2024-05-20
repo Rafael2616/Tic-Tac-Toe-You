@@ -10,7 +10,7 @@ pluginManagement {
             }
         }
         mavenCentral()
-        maven { setUrl("https://jitpack.io") }
+        maven ("https://jitpack.io")
     }
 }
 
@@ -25,7 +25,7 @@ dependencyResolutionManagement {
             }
         }
         mavenCentral()
-        maven { setUrl("https://jitpack.io") }
+        maven("https://jitpack.io")
     }	
     buildCache {
         local {
