@@ -47,7 +47,7 @@ junit = "4.13.2"
 expresso = "3.5.1"
 androidx-test-junit = "1.1.5"
 mockk = "1.13.11"
-guava = "33.2.0-jre"
+guava = "33.2.0-android"
 
 [libraries]
 kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
