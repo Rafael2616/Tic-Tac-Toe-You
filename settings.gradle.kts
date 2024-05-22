@@ -10,7 +10,7 @@ pluginManagement {
             }
         }
         mavenCentral()
-        maven ("https://jitpack.io")
+        maven("https://jitpack.io")
     }
 }
 
