@@ -6,7 +6,6 @@ plugins {
     alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.kotlin.parcelize)
 }
 
 android {
@@ -26,9 +25,6 @@ dependencies {
     implementation(libs.androidx.annotation)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.hilt.navigation.compose)
-    // Lifecycle
-    implementation(libs.androidx.lifecycle.runtime.compose)
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
     // Navigation
     implementation(libs.androidx.navigation.compose)
     // Dagger Hilt

@@ -1,8 +1,8 @@
 plugins {
     alias(libs.plugins.rafael.gradle.android.library)
+    alias(libs.plugins.rafael.gradle.spotless)
     alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.rafael.gradle.spotless)
 }
 
 android.namespace = "com.rafael.tictactoe.core.services"
