@@ -45,7 +45,6 @@ dependencies {
 
     // Projects
     implementation(projects.core.domain)
-    implementation(projects.core.services)
     implementation(projects.core.resources)
     implementation(projects.feature.settings)
 }
