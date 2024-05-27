@@ -6,7 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-internal class LibraryViewModel @Inject constructor(
+class LibraryViewModel @Inject constructor(
     private val libraryRepository: OssLibraryRepository,
 ) : ViewModel() {
 
