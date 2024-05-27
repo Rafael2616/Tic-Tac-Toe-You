@@ -6,7 +6,7 @@ import com.rafael.tictactoe.feature.game.domain.board.levels.mediumLevelCPUMove
 import com.rafael.tictactoe.feature.game.domain.model.CPUDifficultyLevel
 import com.rafael.tictactoe.feature.game.domain.model.GameState
 
-fun cpuMovesHandler(state: GameState): MutableMap<String, Any>? {
+internal fun cpuMovesHandler(state: GameState): MutableMap<String, Any>? {
     val isCardClicked = state.isCardClicked
     val isCPU = state.isCPU
     val isCPUPlayer1 = state.isCPUPlayer1

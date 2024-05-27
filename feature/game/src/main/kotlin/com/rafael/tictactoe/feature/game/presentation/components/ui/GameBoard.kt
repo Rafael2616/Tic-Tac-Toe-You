@@ -40,7 +40,7 @@ import com.rafael.tictactoe.feature.settings.presentation.util.BoardConstants.SH
 import kotlinx.coroutines.delay
 
 @Composable
-fun GameBoard(
+internal fun GameBoard(
     onEvent: (GameEvent) -> Unit,
     state: GameState,
     settingsState: SettingsState,

@@ -8,7 +8,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class ToastNameController {
+internal class ToastNameController {
 
     suspend fun currentToastName(
         state: GameState,
@@ -24,7 +24,7 @@ class ToastNameController {
         }
     }
 
-    fun currentNameForSetupPhase(state: GameState, context: Context): String {
+    private fun currentNameForSetupPhase(state: GameState, context: Context): String {
         val emptyPlayerName = context.getString(R.string.player)
         return if (state.localPlayer1 && state.player1Name.isNotEmpty()) {
             state.player1Name
@@ -35,7 +35,7 @@ class ToastNameController {
         }
     }
 
-    fun currentNameForGameInProgress(state: GameState, context: Context): String {
+    private fun currentNameForGameInProgress(state: GameState, context: Context): String {
         val emptyPlayerName = context.getString(R.string.player)
         return if (state.isPlayer1) {
             if (state.player1Name.isEmpty()) emptyPlayerName else state.player1Name
@@ -44,11 +44,11 @@ class ToastNameController {
         }
     }
 
-    fun currentNameWhenGotOld(context: Context): String {
+    private fun currentNameWhenGotOld(context: Context): String {
         return context.getString(R.string.got_old)
     }
 
-    fun currentNameWhenThereWinner(state: GameState): String {
+    private fun currentNameWhenThereWinner(state: GameState): String {
         return if (state.is1Win) {
             state.player1Name
         } else {
@@ -56,7 +56,7 @@ class ToastNameController {
         }
     }
 
-    suspend fun counterAfterGameStarts(state: GameState): Flow<Pair<String, Boolean>> = flow {
+    private suspend fun counterAfterGameStarts(state: GameState): Flow<Pair<String, Boolean>> = flow {
         var timer = 3
         while (state.isTimerOn) {
             if (timer > 0) {
@@ -71,7 +71,7 @@ class ToastNameController {
         }
     }
 
-    fun getCurrentGamePhase(state: GameState): CurrentPlayerName {
+    private fun getCurrentGamePhase(state: GameState): CurrentPlayerName {
         val play = state.play
         val hasWinner = state.hasWinner
         val gotOld = state.gotOld

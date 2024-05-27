@@ -78,7 +78,7 @@ import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 
 @Composable
 @ExperimentalLayoutApi
-fun GetPlayersPrefsDialog(
+internal fun GetPlayersPrefsDialog(
     onEvent: (GameEvent) -> Unit,
     onSettingsEvent: (SettingsEvent) -> Unit,
     state: GameState,

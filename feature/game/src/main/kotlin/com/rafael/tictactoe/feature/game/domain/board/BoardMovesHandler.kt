@@ -3,7 +3,7 @@ package com.rafael.tictactoe.feature.game.domain.board
 import com.rafael.tictactoe.feature.game.domain.model.GameMode
 import com.rafael.tictactoe.feature.game.domain.model.GameState
 
-fun boardMovesHandler(
+internal fun boardMovesHandler(
     state: GameState,
     rowIndex: Int,
     cardIndex: Int,

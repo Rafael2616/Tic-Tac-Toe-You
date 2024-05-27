@@ -13,8 +13,8 @@ import javax.inject.Inject
 class MusicService @Inject constructor() : Service() {
 
     private lateinit var exoPlayer: ExoPlayer
-    val backgroundMusicFile = R.raw.background_music
-    val backgroundMusic = MediaItem.fromUri(Uri.parse("android.resource://this/$backgroundMusicFile"))
+    private val backgroundMusicFile = R.raw.background_music
+    private val backgroundMusic = MediaItem.fromUri(Uri.parse("android.resource://this/$backgroundMusicFile"))
 
     override fun onBind(intent: Intent): IBinder? {
         return null
@@ -25,7 +25,7 @@ class MusicService @Inject constructor() : Service() {
         return START_STICKY
     }
 
-    fun startBackgroundMusic() {
+    private fun startBackgroundMusic() {
         exoPlayer = ExoPlayer.Builder(this).build()
         exoPlayer.addMediaItem(backgroundMusic)
         exoPlayer.prepare()

@@ -2,14 +2,14 @@ package com.rafael.tictactoe.feature.game.domain.board.levels
 
 import com.rafael.tictactoe.feature.game.domain.model.GameState
 
-fun mediumLevelCPUMove(state: GameState): Triple<Int, Int, Boolean> {
-    val easy = easyLevelCPUMove(state)
-    val hard = hardLevelCPUMove(state)
-    val isUsingEasyLevel = state.isUsingEasyLevel
+internal fun mediumLevelCPUMove(state: GameState): Triple<Int, Int, Boolean> {
+    private val easy = easyLevelCPUMove(state)
+    private val hard = hardLevelCPUMove(state)
+    private val isUsingEasyLevel = state.isUsingEasyLevel
     var usingEasyLevel: Boolean
 
     // Select which mode will be used in next cpu move
-    val useEasy = (0 until 2).random()
+    private val useEasy = (0 until 2).random()
 
     usingEasyLevel = useEasy == 0
 

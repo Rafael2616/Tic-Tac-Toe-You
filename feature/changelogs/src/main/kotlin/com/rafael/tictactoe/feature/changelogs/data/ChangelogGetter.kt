@@ -4,7 +4,7 @@ import android.content.Context
 import com.rafael.tictactoe.core.domain.util.getVersionName
 import java.io.IOException
 
-fun Context.getCurrentChangelogFile(): Pair<String, String> {
+internal fun Context.getCurrentChangelogFile(): Pair<String, String> {
     val version = getVersionName()
     val versionNumber = if (version.contains("-")) version.split("-")[0] else version
     val variant = if (version.contains("-")) version.split("-")[1] else ""
@@ -23,7 +23,7 @@ fun Context.getCurrentChangelogFile(): Pair<String, String> {
     return if (changelogContent.first.isNotEmpty() && changelogContent.second.isNotEmpty()) changelogContent else Pair(versionNumber, "No changelogs provided for this version")
 }
 
-fun Context.getChangelogFiles(): List<Pair<String, String>> {
+internal fun Context.getChangelogFiles(): List<Pair<String, String>> {
     var changelogFiles = mutableListOf<Pair<String, String>>()
 
     try {

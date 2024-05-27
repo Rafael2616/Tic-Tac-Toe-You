@@ -7,7 +7,7 @@ import com.rafael.tictactoe.feature.game.domain.model.RequestState
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 import kotlinx.coroutines.flow.Flow
 
-interface GameRepository {
+internal interface GameRepository {
 
     // Internet data by Retrofit
     suspend fun getRemotePlayers(): Pair<List<Player>?, RequestState>

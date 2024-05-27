@@ -21,11 +21,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
 import retrofit2.create
 
-class GameModule {
+internal class GameModule {
 
     @Module
     @InstallIn(SingletonComponent::class)
-    object GameDataModule {
+    internal object GameDataModule {
 
         @Provides
         @Singleton
@@ -40,7 +40,7 @@ class GameModule {
 
     @Module
     @InstallIn(ViewModelComponent::class)
-    object GameViewModelModule {
+    internal object GameViewModelModule {
 
         @Provides
         @ViewModelScoped
@@ -61,7 +61,7 @@ class GameModule {
 
     @Module
     @InstallIn(SingletonComponent::class)
-    object GameRetrofitServiceModule {
+    internal object GameRetrofitServiceModule {
 
         @Provides
         @Singleton

@@ -2,7 +2,7 @@ package com.rafael.tictactoe.feature.game.domain.board.levels
 
 import com.rafael.tictactoe.feature.game.domain.model.GameState
 
-fun easyLevelCPUMove(state: GameState): Pair<Int, Int> {
+internal fun easyLevelCPUMove(state: GameState): Pair<Int, Int> {
     val isCardClicked = state.isCardClicked
     var firstPosition = (0 until isCardClicked[0].size).random()
     var secondPosition = (0 until isCardClicked[1].size).random()

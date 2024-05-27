@@ -16,7 +16,7 @@ import com.rafael.tictactoe.feature.game.domain.model.GameState
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 
 @Composable
-fun DrawXorCircle(
+private fun DrawXorCircle(
     rowIndex: Int,
     cardIndex: Int,
     state: GameState,

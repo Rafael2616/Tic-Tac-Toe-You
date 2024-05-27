@@ -38,7 +38,7 @@ import com.rafael.tictactoe.feature.game.domain.model.GameState
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 
 @Composable
-fun GameStateToast(
+internal fun GameStateToast(
     state: GameState,
     settingsState: SettingsState,
     modifier: Modifier = Modifier,

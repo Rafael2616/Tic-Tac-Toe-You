@@ -4,7 +4,7 @@ import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 
-data class ScreenItem(
+internal data class ScreenItem(
     val icon: ImageVector,
     val tint: Color,
     @StringRes val text: Int,

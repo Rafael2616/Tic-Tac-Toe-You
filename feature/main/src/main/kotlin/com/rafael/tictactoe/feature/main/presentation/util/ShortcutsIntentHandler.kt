@@ -8,7 +8,7 @@ import com.rafael.tictactoe.core.navigation.destinations.Game
 import com.rafael.tictactoe.core.resources.R
 
 @Composable
-fun ShortcutsIntentHandler(
+internal fun ShortcutsIntentHandler(
     context: ComponentActivity,
     navController: NavController,
     intent: Intent,

@@ -15,7 +15,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import retrofit2.HttpException
 
-class GameRepositoryImpl @Inject constructor(
+internal class GameRepositoryImpl @Inject constructor(
     private val gameService: OnlineGameDao,
 ) : GameRepository {
 

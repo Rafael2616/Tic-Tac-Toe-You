@@ -31,7 +31,7 @@ import com.rafael.tictactoe.feature.game.domain.model.GameState
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 
 @Composable
-fun RestartButton(
+internal fun RestartButton(
     onEvent: (GameEvent) -> Unit,
     state: GameState,
     settingsState: SettingsState,

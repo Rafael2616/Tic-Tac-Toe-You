@@ -8,7 +8,7 @@ import java.io.PrintWriter
 import java.io.StringWriter
 import kotlin.system.exitProcess
 
-class AppExceptionHandler private constructor(
+internal class AppExceptionHandler private constructor(
     private val defaultHandler: Thread.UncaughtExceptionHandler,
 ) : Thread.UncaughtExceptionHandler {
 

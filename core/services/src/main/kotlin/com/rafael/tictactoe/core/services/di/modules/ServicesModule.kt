@@ -10,7 +10,7 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-object ServicesModule {
+internal object ServicesModule {
 
     @Provides
     fun provideExoPlayerInstance(context: Application): ExoPlayer {

@@ -45,7 +45,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 @HiltViewModel
-class GameViewModel @Inject constructor(
+internal class GameViewModel @Inject constructor(
     private val player: ExoPlayer,
     private val settingsVM: SettingsViewModel,
     private val context: Application,

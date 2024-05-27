@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "game")
-data class GameEntity(
+internal data class GameEntity(
     @PrimaryKey
     var currentPlayerName: String,
     var player1Name: String,

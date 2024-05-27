@@ -6,7 +6,7 @@ import com.rafael.tictactoe.feature.game.domain.checkers.Checkers
 import com.rafael.tictactoe.feature.game.domain.model.GameMode
 import com.rafael.tictactoe.feature.game.domain.model.GameState
 
-class VictoryCounter {
+internal class VictoryCounter {
 
     fun updateVictoryCounter(state: GameState): Pair<Int, Int> {
         return if (state.is1Win) {

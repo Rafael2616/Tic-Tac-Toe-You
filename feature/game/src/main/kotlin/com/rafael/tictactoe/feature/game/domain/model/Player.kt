@@ -3,7 +3,7 @@ package com.rafael.tictactoe.feature.game.domain.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Player(
+internal data class Player(
     val id: Int,
     val name: String,
     val color: Int,

@@ -34,7 +34,7 @@ import com.rafael.tictactoe.feature.game.domain.model.GameState
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 
 @Composable
-fun SoundAndMusicButtons(
+internal fun SoundAndMusicButtons(
     onEvent: (GameEvent) -> Unit,
     state: GameState,
     settingsState: SettingsState,

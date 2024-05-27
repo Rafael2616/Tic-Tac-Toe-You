@@ -10,7 +10,7 @@ import androidx.core.graphics.drawable.IconCompat
 import com.rafael.tictactoe.TicTacToeActivity
 import com.rafael.tictactoe.core.resources.R
 
-class GameShortcutsCreator {
+internal class GameShortcutsCreator {
 
     data class Shortcut(
         @StringRes val shortLabel: Int,

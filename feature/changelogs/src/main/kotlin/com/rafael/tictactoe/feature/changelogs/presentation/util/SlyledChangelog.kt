@@ -13,7 +13,7 @@ import androidx.compose.ui.text.withStyle
 
 @Composable
 @ExperimentalTextApi
-fun styledChangelog(changelog: String): AnnotatedString {
+internal fun styledChangelog(changelog: String): AnnotatedString {
     return buildAnnotatedString {
         val keywords = listOf("Added:", "Fixes:", "Improvements:", "Code:", "Others:")
         val textParts = changelog.split("\n")

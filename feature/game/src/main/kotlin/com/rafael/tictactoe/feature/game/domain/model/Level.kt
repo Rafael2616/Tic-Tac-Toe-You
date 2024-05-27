@@ -10,7 +10,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import com.rafael.tictactoe.core.domain.model.Colors
 import com.rafael.tictactoe.core.resources.R
 
-data class Level(
+internal data class Level(
     val level: CPUDifficultyLevel,
     @StringRes val name: Int,
     val icon: ImageVector,

@@ -10,7 +10,7 @@ import com.rafael.tictactoe.feature.game.domain.model.GameState
  * found the best way to win the game
  */
 
-fun hardLevelCPUMove(state: GameState): Pair<Int, Int> {
+internal fun hardLevelCPUMove(state: GameState): Pair<Int, Int> {
     // Represents the clicked state of the card
     val isClicked = state.isCardClicked
 

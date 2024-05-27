@@ -1,6 +1,6 @@
 package com.rafael.tictactoe.feature.game.domain.model
 
-sealed interface GameEvent {
+internal sealed interface GameEvent {
     data class SetGameMode(val mode: String) : GameEvent
     data class GetFirstPlayerName(val name: String) : GameEvent
     data class GetSecondPlayerName(val name: String) : GameEvent

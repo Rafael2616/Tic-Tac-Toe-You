@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.serialization.json.Json
 
-class OssLibraryRepository @Inject constructor(
+internal class OssLibraryRepository @Inject constructor(
     private val application: Application,
 ) {
 

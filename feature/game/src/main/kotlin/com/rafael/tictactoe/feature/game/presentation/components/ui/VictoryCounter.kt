@@ -39,7 +39,7 @@ import com.rafael.tictactoe.feature.game.domain.model.GameState
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 
 @Composable
-fun VictoryCounter(
+internal fun VictoryCounter(
     state: GameState,
     settingsState: SettingsState,
     modifier: Modifier = Modifier,

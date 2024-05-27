@@ -6,13 +6,13 @@ import com.rafael.tictactoe.feature.game.domain.model.CurrentPlayerName
 import com.rafael.tictactoe.feature.game.domain.model.GameMode
 import com.rafael.tictactoe.feature.game.domain.model.GameState
 
-class PlayerNamesController {
+internal class PlayerNamesController {
 
     fun currentPlayerNames(
         state: GameState,
         context: Context,
     ): Pair<String, String> {
-        var currentGamePhase = ToastNameController().getCurrentGamePhase(state)
+        val currentGamePhase = ToastNameController().getCurrentGamePhase(state)
 
         return when (currentGamePhase) {
             CurrentPlayerName.NameForSetupPhase -> playerNamesForSetupPhaseForCPUMode(state, context)
@@ -21,7 +21,7 @@ class PlayerNamesController {
         }
     }
 
-    fun playerNamesForSetupPhaseForCPUMode(state: GameState, context: Context): Pair<String, String> {
+    private fun playerNamesForSetupPhaseForCPUMode(state: GameState, context: Context): Pair<String, String> {
         var player1Name = ""
         var player2Name = ""
         val cpuName = context.getString(R.string.cpu)

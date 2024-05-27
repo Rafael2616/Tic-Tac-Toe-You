@@ -47,7 +47,7 @@ import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 import kotlinx.coroutines.delay
 
 @Composable
-fun PlayerSearchSurface(
+internal fun PlayerSearchSurface(
     gameState: GameState,
     settingsState: SettingsState,
     onEvent: (GameEvent) -> Unit,

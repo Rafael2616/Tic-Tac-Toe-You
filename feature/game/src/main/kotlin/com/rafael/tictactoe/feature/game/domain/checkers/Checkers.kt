@@ -2,7 +2,7 @@ package com.rafael.tictactoe.feature.game.domain.checkers
 
 import com.rafael.tictactoe.feature.game.domain.model.GameState
 
-class Checkers {
+internal class Checkers {
     private val winningPositions = listOf(
         // Lines
         listOf(Pair(0, 0), Pair(0, 1), Pair(0, 2)),

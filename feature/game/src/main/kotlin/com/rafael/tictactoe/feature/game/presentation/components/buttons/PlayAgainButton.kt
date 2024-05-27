@@ -29,7 +29,7 @@ import com.rafael.tictactoe.feature.game.domain.model.GameEvent
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 
 @Composable
-fun PlayAgainButton(
+internal fun PlayAgainButton(
     onEvent: (GameEvent) -> Unit,
     settingsState: SettingsState,
     modifier: Modifier = Modifier,

@@ -11,7 +11,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextDecoration
 
 @Composable
-fun annotatedLink(textLink: String): AnnotatedString {
+internal fun annotatedLink(textLink: String): AnnotatedString {
     val spannable = SpannableString(textLink)
     Linkify.addLinks(spannable, Linkify.WEB_URLS)
     val spans = spannable.getSpans(0, textLink.length, URLSpan::class.java)

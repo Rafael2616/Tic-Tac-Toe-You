@@ -8,7 +8,7 @@ import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.feature.game.domain.model.GameState
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 
-fun cardGridSound(
+internal fun cardGridSound(
     context: Context,
     state: GameState,
     settingsState: SettingsState,

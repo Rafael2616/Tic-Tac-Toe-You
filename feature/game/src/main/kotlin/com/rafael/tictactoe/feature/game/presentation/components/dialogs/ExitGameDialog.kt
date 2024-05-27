@@ -24,7 +24,7 @@ import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.feature.game.domain.model.GameEvent
 
 @Composable
-fun ExitGameDialog(
+internal fun ExitGameDialog(
     navController: NavController,
     onEvent: (GameEvent) -> Unit,
     modifier: Modifier = Modifier,
