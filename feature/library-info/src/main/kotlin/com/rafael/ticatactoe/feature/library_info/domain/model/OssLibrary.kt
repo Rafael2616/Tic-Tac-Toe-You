@@ -3,7 +3,7 @@ package com.rafael.tictactoe.feature.libraryinfo.domain.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-internal data class OssLibrary(
+data class OssLibrary(
     val groupId: String,
     val artifactId: String,
     val version: String,
