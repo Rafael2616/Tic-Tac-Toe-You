@@ -2,7 +2,7 @@ package com.rafael.tictactoe.feature.settings.presentation.util
 
 import androidx.compose.ui.graphics.Color
 
-internal object BoardConstants {
+object BoardConstants {
     const val SHAPE_CUSTOM = 3
     const val DEF_CARDS_CORNER_RADIUS = 24f
     const val DEF_CARDS_BORDER_THICKNESS = 2f
