@@ -51,7 +51,7 @@ class SearchSettingsViewModel @Inject constructor(
 
     fun onEvent(event: SearchSettingsEvent) {
         when (event) {
-            is SearchSettingsEvent.PutSettingsToRepository -> {
+            is PutSettingsToRepository -> {
                 viewModelScope.launch(Dispatchers.IO) {
                     val allSettingsItems = (0 until event.settings.size).map {
                         SearchItemSpecs(
@@ -64,7 +64,7 @@ class SearchSettingsViewModel @Inject constructor(
                     onEvent(SearchSettingsEvent.QuerySettingsFromRepository(null))
                 }
             }
-            is SearchSettingsEvent.QuerySettingsFromRepository -> {
+            is QuerySettingsFromRepository -> {
                 val query = event.query ?: state.value.query
 
                 _state.update { it.copy(query = query) }
@@ -86,7 +86,7 @@ class SearchSettingsViewModel @Inject constructor(
                     _state.update { it.copy(matchingSettings = availableMatchingSettings) }
                 }
             }
-            SearchSettingsEvent.ResetQuery -> {
+            ResetQuery -> {
                 _state.update { it.copy(query = "") }
                 onEvent(SearchSettingsEvent.QuerySettingsFromRepository(null))
             }
