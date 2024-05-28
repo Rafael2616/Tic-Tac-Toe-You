@@ -14,7 +14,7 @@ import com.rafael.tictactoe.feature.settings.domain.model.SettingsEntity
     version = 3,
     exportSchema = false,
 )
-internal abstract class SettingsDatabase : RoomDatabase() {
+abstract class SettingsDatabase : RoomDatabase() {
 
     abstract fun settingsDao(): SettingsDao
 
