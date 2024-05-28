@@ -13,7 +13,7 @@ import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class AndroidSearchSettingsManager @Inject constructor(
+internal class AndroidSearchSettingsManager @Inject constructor(
     private val appContext: Application,
 ) : SearchSettingsManager {
     private var session: AppSearchSession? = null

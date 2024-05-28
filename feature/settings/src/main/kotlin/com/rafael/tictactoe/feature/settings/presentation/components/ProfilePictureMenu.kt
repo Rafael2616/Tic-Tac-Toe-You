@@ -38,7 +38,7 @@ import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 import kotlinx.coroutines.delay
 
 @Composable
-fun ProfilePictureMenu(
+internal fun ProfilePictureMenu(
     state: SettingsState,
     onEvent: (SettingsEvent) -> Unit,
     onDeleteImage: () -> Unit,

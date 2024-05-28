@@ -12,7 +12,7 @@ import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 
-class AndroidProfilePictureUtils() : ProfilePictureUtils {
+internal class AndroidProfilePictureUtils() : ProfilePictureUtils {
 
     override fun savePictureFromUri(context: Context, imageUri: Uri) {
         val contentResolver = context.contentResolver

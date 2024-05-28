@@ -35,4 +35,4 @@ class RGBAnimation {
 }
 
 @Composable
-fun rememberRGBAnimation() = remember { RGBAnimation() }
+internal fun rememberRGBAnimation() = remember { RGBAnimation() }

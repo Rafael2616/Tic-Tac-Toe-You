@@ -5,7 +5,7 @@ import com.rafael.tictactoe.feature.settings.domain.model.SettingsEntity
 import com.rafael.tictactoe.feature.settings.domain.repository.SettingsRepository
 import javax.inject.Inject
 
-class SettingsRepositoryImpl @Inject constructor(
+internal class SettingsRepositoryImpl @Inject constructor(
     private val settingsDao: SettingsDao,
 ) : SettingsRepository {
 

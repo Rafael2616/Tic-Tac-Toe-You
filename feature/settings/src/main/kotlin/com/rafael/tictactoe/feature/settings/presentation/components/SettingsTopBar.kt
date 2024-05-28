@@ -36,7 +36,7 @@ import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 
 @Composable
 @ExperimentalMaterial3Api
-fun SettingsTopBar(
+internal fun SettingsTopBar(
     navController: NavController,
     state: SettingsState,
     onEvent: (SettingsEvent) -> Unit,

@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun SwitchPreference(
+internal fun SwitchPreference(
     title: Int,
     leadingIcon: ImageVector,
     isChecked: Boolean,

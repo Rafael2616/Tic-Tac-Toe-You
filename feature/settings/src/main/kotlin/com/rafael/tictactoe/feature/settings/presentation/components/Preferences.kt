@@ -20,7 +20,7 @@ import com.rafael.tictactoe.feature.settings.presentation.components.groups.Soun
 import com.rafael.tictactoe.feature.settings.presentation.components.groups.ThemePreferenceGroup
 
 @Composable
-fun Preferences(
+internal fun Preferences(
     innerPadding: PaddingValues,
     state: SettingsState,
     onEvent: (SettingsEvent) -> Unit,

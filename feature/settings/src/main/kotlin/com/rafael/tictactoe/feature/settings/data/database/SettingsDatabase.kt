@@ -14,7 +14,7 @@ import com.rafael.tictactoe.feature.settings.domain.model.SettingsEntity
     version = 3,
     exportSchema = false,
 )
-abstract class SettingsDatabase : RoomDatabase() {
+internal abstract class SettingsDatabase : RoomDatabase() {
 
     abstract fun settingsDao(): SettingsDao
 
@@ -24,7 +24,7 @@ abstract class SettingsDatabase : RoomDatabase() {
 }
 
 @Keep
-class Migrations {
+internal class Migrations {
     val migration1To2 = object : Migration(1, 2) {
         override fun migrate(db: SupportSQLiteDatabase) {
             val addAppVersion = "ALTER TABLE 'settings' ADD COLUMN 'appVersion' TEXT NOT NULL DEFAULT 'O'"
