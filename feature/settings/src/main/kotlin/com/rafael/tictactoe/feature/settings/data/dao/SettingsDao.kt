@@ -6,7 +6,7 @@ import androidx.room.Upsert
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsEntity
 
 @Dao
-internal interface SettingsDao {
+interface SettingsDao {
 
     @Query("SELECT * FROM settings WHERE id = :id")
     suspend fun getSettingsValues(id: Int): SettingsEntity?
