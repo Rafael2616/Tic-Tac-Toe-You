@@ -1,6 +1,6 @@
 package com.rafael.tictactoe.feature.game.domain.model
 
-internal data class GameState(
+data class GameState(
     val currentPlayerName: String = "",
     val player1Name: String = "",
     val player2Name: String = "",

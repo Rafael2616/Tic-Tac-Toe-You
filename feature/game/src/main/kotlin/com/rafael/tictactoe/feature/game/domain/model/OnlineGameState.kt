@@ -1,6 +1,6 @@
 package com.rafael.tictactoe.feature.game.domain.model
 
-internal data class OnlineGameState(
+data class OnlineGameState(
     val matchID: Int = 0,
     val player1Wins: Int = 0,
     val player2Wins: Int = 0,

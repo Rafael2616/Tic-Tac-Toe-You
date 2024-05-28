@@ -56,7 +56,7 @@ internal class ToastNameController {
         }
     }
 
-    private suspend fun counterAfterGameStarts(state: GameState): Flow<Pair<String, Boolean>> = flow {
+    suspend fun counterAfterGameStarts(state: GameState): Flow<Pair<String, Boolean>> = flow {
         var timer = 3
         while (state.isTimerOn) {
             if (timer > 0) {
@@ -71,7 +71,7 @@ internal class ToastNameController {
         }
     }
 
-    private fun getCurrentGamePhase(state: GameState): CurrentPlayerName {
+    fun getCurrentGamePhase(state: GameState): CurrentPlayerName {
         val play = state.play
         val hasWinner = state.hasWinner
         val gotOld = state.gotOld
