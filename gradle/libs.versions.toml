@@ -35,7 +35,7 @@ compose-rules = "0.4.2"
 colorpicker-compose = "1.0.8"
 smarttoolfactory-extended-colors = "1.0.0-alpha07"
 
-lifecycle = "2.8.0"
+lifecycle = "2.8.1"
 media3 = "1.3.1"
 room = "2.6.1"
 appsearch = "1.1.0-alpha03"
