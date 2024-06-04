@@ -27,6 +27,7 @@ android {
         tasks.withType<KotlinCompile>().configureEach {
             ksp {
                 arg("room.schemaLocation", "$projectDir/schemas")
+                arg("room.exportSchema", "true")
                 arg("room.incremental", "true")
                 arg("room.generateKotlin", "true")
             }
