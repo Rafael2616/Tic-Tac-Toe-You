@@ -23,6 +23,7 @@ android {
 dependencies {
     // Kotlin
     implementation(libs.kotlinx.coroutines)
+    implementation(libs.kotlinx.coroutines.guava)
     implementation(libs.kotlinx.collections.immutable)
     // AndroidX
     implementation(libs.androidx.annotation)
@@ -37,8 +38,6 @@ dependencies {
     // App Search
     implementation(libs.androidx.appsearch)
     implementation(libs.androidx.appsearch.localStorage)
-
-    implementation(libs.google.guava)
 
     // Projects
     implementation(projects.core.resources)
