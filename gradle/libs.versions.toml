@@ -45,7 +45,7 @@ http3 = "4.12.0"
 
 junit = "4.13.2"
 expresso = "3.6.1"
-androidx-test-junit = "1.2.0"
+androidx-test-junit = "1.2.1"
 mockk = "1.13.11"
 guava = "33.2.1-jre"
 
