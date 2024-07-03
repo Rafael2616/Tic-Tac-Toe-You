@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.core.domain.model
+package com.rafael.tictactoe.core.domain.util
 
 import androidx.compose.ui.graphics.Color
 

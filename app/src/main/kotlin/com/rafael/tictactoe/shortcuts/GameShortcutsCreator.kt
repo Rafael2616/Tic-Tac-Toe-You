@@ -50,7 +50,7 @@ internal class GameShortcutsCreator {
                 .setIntent(
                     Intent(context, TicTacToeActivity::class.java).apply {
                         action = Intent.ACTION_VIEW
-                        putExtra("${context.getString(shortcut.longLabel)}", "s$index")
+                        putExtra(context.getString(shortcut.longLabel), "s$index")
                     },
                 )
                 .build()

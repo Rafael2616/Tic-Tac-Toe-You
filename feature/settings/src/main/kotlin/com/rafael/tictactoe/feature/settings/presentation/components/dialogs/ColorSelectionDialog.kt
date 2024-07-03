@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.itemsIndexed
@@ -54,11 +53,11 @@ import androidx.compose.ui.window.Dialog
 import com.github.skydoves.colorpicker.compose.BrightnessSlider
 import com.github.skydoves.colorpicker.compose.HsvColorPicker
 import com.github.skydoves.colorpicker.compose.rememberColorPickerController
-import com.rafael.tictactoe.core.domain.model.COLORLIST
+import com.rafael.tictactoe.core.domain.util.COLORLIST
 import com.rafael.tictactoe.core.domain.util.toColor
 import com.rafael.tictactoe.core.resources.R
-import com.rafael.tictactoe.core.resources.draws.drawCircleinColorDialog
-import com.rafael.tictactoe.core.resources.draws.drawWinnerLineinColorDialog
+import com.rafael.tictactoe.core.resources.draws.drawCircleInColorDialog
+import com.rafael.tictactoe.core.resources.draws.drawWinnerLineInColorDialog
 import com.rafael.tictactoe.core.resources.draws.drawXinColorDialog
 import com.rafael.tictactoe.feature.settings.domain.enums.Customization
 import com.rafael.tictactoe.feature.settings.domain.model.ColorItem
@@ -120,7 +119,7 @@ fun ColorSelectionDialog(
             selectedIndex = selectedCircleColor,
             color = circleColor,
             isSelected = { it == selectedCircleColor },
-            drawIcon = { drawCircleinColorDialog(circleColor) },
+            drawIcon = { drawCircleInColorDialog(circleColor) },
             onSelect = { newColor ->
                 circleColor = newColor
             },
@@ -139,7 +138,7 @@ fun ColorSelectionDialog(
             selectedIndex = selectedWinnerLineColor,
             color = winnerLineColor,
             isSelected = { it == selectedWinnerLineColor },
-            drawIcon = { drawWinnerLineinColorDialog(winnerLineColor) },
+            drawIcon = { drawWinnerLineInColorDialog(winnerLineColor) },
             onSelect = { newColor ->
                 winnerLineColor = newColor
             },

@@ -3,7 +3,7 @@ package com.rafael.tictactoe.feature.settings.domain.model
 import android.graphics.Bitmap
 import android.net.Uri
 import androidx.compose.ui.graphics.Color
-import com.rafael.tictactoe.core.domain.model.Colors
+import com.rafael.tictactoe.core.domain.util.Colors
 import com.rafael.tictactoe.core.domain.util.getVersionName
 import com.rafael.tictactoe.feature.settings.domain.enums.Customization
 import com.rafael.tictactoe.feature.settings.presentation.util.BoardConstants.DEF_CARDS_BORDER_THICKNESS

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    
+
     <application
         android:name=".TicTacToeApp"
         android:allowBackup="true"
@@ -18,7 +19,8 @@
         android:resizeableActivity="false"
         android:enableOnBackInvokedCallback="true"
         android:isGame="true"
-        android:theme="@style/Theme.AppSplash">
+        android:theme="@style/Theme.AppSplash"
+        tools:targetApi="tiramisu">
 
         <service
             android:name=".core.services.MusicService"

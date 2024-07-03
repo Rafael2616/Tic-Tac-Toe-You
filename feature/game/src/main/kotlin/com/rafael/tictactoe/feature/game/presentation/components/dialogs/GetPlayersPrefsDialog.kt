@@ -47,7 +47,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -64,9 +63,9 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.rafael.tictactoe.core.domain.model.Colors
+import com.rafael.tictactoe.core.domain.util.Colors
 import com.rafael.tictactoe.core.resources.R
-import com.rafael.tictactoe.core.resources.draws.drawCircleinDialog
+import com.rafael.tictactoe.core.resources.draws.drawCircleInDialog
 import com.rafael.tictactoe.core.resources.draws.drawXinDialog
 import com.rafael.tictactoe.feature.game.domain.model.GameEvent
 import com.rafael.tictactoe.feature.game.domain.model.GameMode
@@ -276,7 +275,7 @@ internal fun GetPlayersPrefsDialog(
                             if (state.isXFor1) {
                                 drawXinDialog(xColor)
                             } else {
-                                drawCircleinDialog(circleColor)
+                                drawCircleInDialog(circleColor)
                             }
                         }
                     }
@@ -306,7 +305,7 @@ internal fun GetPlayersPrefsDialog(
                                 modifier = Modifier.fillMaxSize(),
                             ) {
                                 if (state.isXFor1) {
-                                    drawCircleinDialog(circleColor)
+                                    drawCircleInDialog(circleColor)
                                 } else {
                                     drawXinDialog(xColor)
                                 }

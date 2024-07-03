@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import com.rafael.tictactoe.core.resources.draws.drawCircleinToast
+import com.rafael.tictactoe.core.resources.draws.drawCircleInToast
 import com.rafael.tictactoe.core.resources.draws.drawXinToast
 import com.rafael.tictactoe.feature.game.domain.model.GameState
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
@@ -31,12 +31,12 @@ internal fun ToastImage(
     ) {
         // Image showed when game not started yet (configuration fase)
         if (!play) {
-            if (isXFor1) drawXinToast(xColor) else drawCircleinToast(circleColor)
+            if (isXFor1) drawXinToast(xColor) else drawCircleInToast(circleColor)
         }
 
         // Image for case of game is on going
         if (play && !hasWinner) {
-            if (isXImage) drawXinToast(xColor) else drawCircleinToast(circleColor)
+            if (isXImage) drawXinToast(xColor) else drawCircleInToast(circleColor)
         }
 
         // Image for case of has winner
@@ -44,9 +44,9 @@ internal fun ToastImage(
             if (is1Win && isXFor1) {
                 drawXinToast(xColor)
             } else if (is1Win && !isXFor1) {
-                drawCircleinToast(circleColor)
+                drawCircleInToast(circleColor)
             } else if (!is1Win && isXFor1) {
-                drawCircleinToast(circleColor)
+                drawCircleInToast(circleColor)
             } else if (!is1Win && !isXFor1) {
                 drawXinToast(xColor)
             }

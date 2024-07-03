@@ -23,7 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.rafael.tictactoe.core.domain.model.Colors
+import com.rafael.tictactoe.core.domain.util.Colors
 import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.feature.game.domain.model.GameEvent
 import com.rafael.tictactoe.feature.game.domain.model.GameMode

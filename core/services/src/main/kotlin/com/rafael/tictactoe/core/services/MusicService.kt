@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.IBinder
 import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.exoplayer.ExoPlayer.*
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -26,16 +27,20 @@ class MusicService @Inject constructor() : Service() {
     }
 
     private fun startBackgroundMusic() {
-        exoPlayer = ExoPlayer.Builder(this).build()
-        exoPlayer.addMediaItem(backgroundMusic)
-        exoPlayer.prepare()
-        exoPlayer.setRepeatMode(ExoPlayer.REPEAT_MODE_ALL)
-        exoPlayer.play()
+        exoPlayer = Builder(this).build()
+        exoPlayer.run {
+            addMediaItem(backgroundMusic)
+            prepare()
+            repeatMode = REPEAT_MODE_ALL
+            play()
+        }
     }
 
     override fun onDestroy() {
-        exoPlayer.stop()
-        exoPlayer.release()
+        exoPlayer.run {
+            stop()
+            release()
+        }
         super.onDestroy()
     }
 }

@@ -26,13 +26,12 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.rafael.tictactoe.core.resources.draws.drawCircleinCounter
+import com.rafael.tictactoe.core.resources.draws.drawCircleInCounter
 import com.rafael.tictactoe.core.resources.draws.drawXinCounter
 import com.rafael.tictactoe.feature.game.domain.model.Counter
 import com.rafael.tictactoe.feature.game.domain.model.GameState
@@ -129,11 +128,11 @@ internal fun VictoryCounter(
                                 if (state.isXFor1) {
                                     when (index) {
                                         0 -> drawXinCounter(xColor)
-                                        1 -> drawCircleinCounter(circleColor)
+                                        1 -> drawCircleInCounter(circleColor)
                                     }
                                 } else {
                                     when (index) {
-                                        0 -> drawCircleinCounter(circleColor)
+                                        0 -> drawCircleInCounter(circleColor)
                                         1 -> drawXinCounter(xColor)
                                     }
                                 }

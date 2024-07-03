@@ -22,7 +22,7 @@ fun DrawScope.drawCircle(
 }
 
 // Circle Image adjusted for ToastImageHandler
-fun DrawScope.drawCircleinToast(color: Color) = drawCircle(
+fun DrawScope.drawCircleInToast(color: Color) = drawCircle(
     center = Offset(8.dp.toPx(), 8.dp.toPx()),
     radius = 8.dp,
     style = Stroke(width = 3.dp.toPx()),
@@ -30,7 +30,7 @@ fun DrawScope.drawCircleinToast(color: Color) = drawCircle(
 )
 
 // Circle Image adjusted for VictoryCounter
-fun DrawScope.drawCircleinCounter(color: Color) = drawCircle(
+fun DrawScope.drawCircleInCounter(color: Color) = drawCircle(
     center = Offset(7.5.dp.toPx(), 7.dp.toPx()),
     radius = 7.dp,
     style = Stroke(width = 3.dp.toPx()),
@@ -38,7 +38,7 @@ fun DrawScope.drawCircleinCounter(color: Color) = drawCircle(
 )
 
 // Circle Image adjusted for GetPlayersPrefsDialog
-fun DrawScope.drawCircleinDialog(color: Color) = drawCircle(
+fun DrawScope.drawCircleInDialog(color: Color) = drawCircle(
     center = Offset(18.dp.toPx(), 18.dp.toPx()),
     radius = 15.dp,
     style = Stroke(width = 5.dp.toPx()),
@@ -46,7 +46,7 @@ fun DrawScope.drawCircleinDialog(color: Color) = drawCircle(
 )
 
 // Circle Image adjusted for ColorSelectionDialog
-fun DrawScope.drawCircleinColorDialog(color: Color) = drawCircle(
+fun DrawScope.drawCircleInColorDialog(color: Color) = drawCircle(
     center = Offset(15.dp.toPx(), 15.dp.toPx()),
     radius = 14.dp,
     style = Stroke(width = 4.dp.toPx()),

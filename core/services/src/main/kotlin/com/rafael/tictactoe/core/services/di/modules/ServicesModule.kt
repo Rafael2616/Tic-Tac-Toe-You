@@ -13,12 +13,12 @@ import dagger.hilt.components.SingletonComponent
 internal object ServicesModule {
 
     @Provides
-    fun provideExoPlayerInstance(context: Application): ExoPlayer {
+    internal fun provideExoPlayerInstance(context: Application): ExoPlayer {
         return ExoPlayer.Builder(context).build()
     }
 
     @Provides
-    fun provideMusicService(): MusicService {
+    internal fun provideMusicService(): MusicService {
         return MusicService()
     }
 }
