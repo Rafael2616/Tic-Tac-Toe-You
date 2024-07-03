@@ -1,10 +1,8 @@
 <div align="center">
-</br>
 <img src="screenshots/AppLogo.png" width="200" />
 </div>
 
 <h1 align="center">Tic Tac Toe You</h1>
-</br>
 
 [![Build debug APK](https://github.com/Rafael2616/Tic-Tac-Toe-You/actions/workflows/build-debug-apk.yml/badge.svg?branch=dev)](https://github.com/Rafael2616/Tic-Tac-Toe-You/actions/workflows/build-debug-apk.yml?query=branch%eAdev)
 [![Build Release APK](https://github.com/Rafael2616/Tic-Tac-Toe-You/actions/workflows/build-release-apk.yml/badge.svg)](https://github.com/Rafael2616/Tic-Tac-Toe-You/actions/workflows/build-release-apk.yml)
