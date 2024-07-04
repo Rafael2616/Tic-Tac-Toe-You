@@ -20,4 +20,6 @@ object LibraryInfo
 object SettingsSearch
 
 @Serializable
-object Changelogs
+data class Changelogs(
+    val screenName: String = "",
+)
