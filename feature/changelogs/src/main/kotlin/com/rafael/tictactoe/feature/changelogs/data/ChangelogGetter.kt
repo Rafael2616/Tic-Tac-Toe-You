@@ -13,7 +13,7 @@ internal fun Context.getCurrentChangelogFile(): Pair<String, String> {
 
     try {
         assets.open("changelogs/$versionNumber$correctedVariant.txt").use { inputStream ->
-             inputStream.bufferedReader().readText().also {
+            inputStream.bufferedReader().readText().also {
                 changelogContent = Pair(versionNumber, it)
             }
         }
@@ -32,8 +32,10 @@ internal fun Context.getChangelogFiles(): List<Pair<String, String>> {
             ?.filter { it.endsWith(".txt") }
             ?.forEach { changelogFile ->
                 assets.open("changelogs/$changelogFile").use { inputStream ->
-                    val changelog = inputStream.bufferedReader().readText()
-                    changelogFiles.add(Pair(changelogFile.removeSuffix(".txt"), changelog))
+                    inputStream.bufferedReader().readText().also {
+                        changelogFiles.add(Pair(changelogFile.removeSuffix(".txt"), it))
+                    }
+
                 }
             }
     } catch (e: IOException) {
