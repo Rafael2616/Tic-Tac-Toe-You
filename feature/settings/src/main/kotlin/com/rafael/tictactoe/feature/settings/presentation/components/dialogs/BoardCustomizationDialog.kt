@@ -44,6 +44,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -101,10 +102,10 @@ fun BoardCustomizationDialog(
     val colorPickerController = rememberColorPickerController()
     val colorParser = rememberColorParser()
     val scrollState = rememberScrollState()
-    var sliderCornerRadius by remember { mutableStateOf(if (state.shapeSelected == SHAPE_CUSTOM) state.boardCardsCornerRadius else DEF_CARDS_CORNER_RADIUS) }
-    var sliderThickness by remember { mutableStateOf(if (state.shapeSelected == SHAPE_CUSTOM) state.boardCardsThickness else DEF_CARDS_BORDER_THICKNESS) }
-    var sliderElevation by remember { mutableStateOf(if (state.shapeSelected == SHAPE_CUSTOM) state.boardCardsElevation else DEF_CARDS_ELEVATION) }
-    var sliderShadow by remember { mutableStateOf(if (state.shapeSelected == SHAPE_CUSTOM) state.boardCardsShadow else DEF_CARDS_SHADOW) }
+    var sliderCornerRadius by remember { androidx.compose.runtime.mutableFloatStateOf(if (state.shapeSelected == SHAPE_CUSTOM) state.boardCardsCornerRadius else DEF_CARDS_CORNER_RADIUS) }
+    var sliderThickness by remember { androidx.compose.runtime.mutableFloatStateOf(if (state.shapeSelected == SHAPE_CUSTOM) state.boardCardsThickness else DEF_CARDS_BORDER_THICKNESS) }
+    var sliderElevation by remember { androidx.compose.runtime.mutableFloatStateOf(if (state.shapeSelected == SHAPE_CUSTOM) state.boardCardsElevation else DEF_CARDS_ELEVATION) }
+    var sliderShadow by remember { mutableFloatStateOf(if (state.shapeSelected == SHAPE_CUSTOM) state.boardCardsShadow else DEF_CARDS_SHADOW) }
     var localShapeSelected by remember { mutableIntStateOf(state.shapeSelected) }
     var localCardsBorderHexColor by remember { mutableStateOf("FFFFFFFF") }
     var isInitialized by remember { mutableStateOf(false) }

@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rafael.tictactoe.core.domain.util.getVersionName
 import com.rafael.tictactoe.core.domain.util.toColor
-import com.rafael.tictactoe.core.services.MusicService
 import com.rafael.tictactoe.core.services.music.backgroundMusic
 import com.rafael.tictactoe.feature.settings.data.profile_picture.AndroidProfilePictureUtils as ProfilePictureUtils
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsEntity
@@ -28,7 +27,6 @@ import kotlinx.coroutines.launch
 class SettingsViewModel @Inject constructor(
     private val repository: SettingsRepository,
     private val context: Application,
-    private val service: MusicService,
 ) : ViewModel() {
 
     // Get default values for settings from SettingsEntity for first app usage

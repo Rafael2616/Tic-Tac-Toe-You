@@ -1,3 +1,4 @@
+<!--suppress ALL -->
 <div align="center">
 <img src="screenshots/AppLogo.png" width="244" alt="screenshot_logo"/>
 </div>

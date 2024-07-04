@@ -34,6 +34,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -81,9 +82,9 @@ fun ColorSelectionDialog(
         Customization.CIRCLECOLOR -> 1
         Customization.WINNERLINECOLOR -> 2
     }
-    var selectedWinnerLineColor by remember { mutableStateOf(state.selectedWinnerLineColor) }
-    var selectedCircleColor by remember { mutableStateOf(state.selectedCircleColor) }
-    var selectedXColor by remember { mutableStateOf(state.selectedXColor) }
+    var selectedWinnerLineColor by remember { androidx.compose.runtime.mutableIntStateOf(state.selectedWinnerLineColor) }
+    var selectedCircleColor by remember { androidx.compose.runtime.mutableIntStateOf(state.selectedCircleColor) }
+    var selectedXColor by remember { mutableIntStateOf(state.selectedXColor) }
     val colorItems = ColorItem.getColorItems()
     var xColor by remember { mutableStateOf(state.xColor) }
     var circleColor by remember { mutableStateOf(state.circleColor) }

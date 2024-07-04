@@ -13,7 +13,7 @@ internal fun Context.getCurrentChangelogFile(): Pair<String, String> {
 
     try {
         assets.open("changelogs/$versionNumber$correctedVariant.txt").use { inputStream ->
-            val changelog = inputStream.bufferedReader().readText().also {
+             inputStream.bufferedReader().readText().also {
                 changelogContent = Pair(versionNumber, it)
             }
         }

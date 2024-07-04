@@ -7,7 +7,6 @@ import android.os.IBinder
 import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.ExoPlayer.REPEAT_MODE_ALL
-import androidx.media3.exoplayer.ExoPlayer.Builder
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -28,7 +27,7 @@ class MusicService @Inject constructor() : Service() {
     }
 
     private fun startBackgroundMusic() {
-        exoPlayer = Builder(this).build()
+        exoPlayer = ExoPlayer.Builder(this).build()
         exoPlayer.run {
             addMediaItem(backgroundMusic)
             prepare()
