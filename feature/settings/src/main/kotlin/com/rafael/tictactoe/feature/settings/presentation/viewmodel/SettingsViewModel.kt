@@ -6,12 +6,11 @@ import android.net.Uri
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.core.domain.util.getVersionName
 import com.rafael.tictactoe.core.domain.util.toColor
 import com.rafael.tictactoe.core.services.MusicService
 import com.rafael.tictactoe.core.services.music.backgroundMusic
-import com.rafael.tictactoe.feature.settings.data.profilepicture.AndroidProfilePictureUtils as ProfilePictureUtils
+import com.rafael.tictactoe.feature.settings.data.profile_picture.AndroidProfilePictureUtils as ProfilePictureUtils
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsEntity
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
@@ -28,13 +27,12 @@ import kotlinx.coroutines.launch
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     private val repository: SettingsRepository,
-    private val player: ExoPlayer,
     private val context: Application,
     private val service: MusicService,
 ) : ViewModel() {
 
     // Get default values for settings from SettingsEntity for first app usage
-    val defaultSettings = SettingsEntity.getDefaultSettings()
+    private val defaultSettings = SettingsEntity.getDefaultSettings()
 
     private val _state = MutableStateFlow(SettingsState())
     val state = _state.asStateFlow()
@@ -57,17 +55,13 @@ class SettingsViewModel @Inject constructor(
                     xColor = settings.selectedXColor.toColor(),
                     circleColor = settings.selectedCircleColor.toColor(),
                     appVersion = settings.appVersion,
-                    showWhatsNewDialog = if (settings.appVersion == "O" || settings.appVersion != getVersionName()) {
-                        true
-                    } else {
-                        false
-                    },
+                    showWhatsNewDialog = settings.appVersion == "O" || settings.appVersion != getVersionName(),
                     shapeSelected = settings.shapeSelected,
                     boardCardsCornerRadius = settings.boardCardsCornerRadius,
                     boardCardsThickness = settings.boardCardsThickness,
                     boardCardsElevation = settings.boardCardsElevation,
                     boardCardsShadow = settings.boardCardsShadow,
-                    boardCardsBorderColor = Color("${settings.boardCardsBorderColor}".toLong(16)),
+                    boardCardsBorderColor = Color(settings.boardCardsBorderColor.toLong(16)),
                     isRGBEffectOn = settings.isRGBEffectOn,
                     isGradientOn = settings.isGradientOn,
                 )
@@ -76,7 +70,6 @@ class SettingsViewModel @Inject constructor(
                 context = context,
                 isBMPlaying = state.value.isBMPlaying,
                 isBackgroundMusicOn = settings.isBackgroundMusicOn,
-                service = service,
                 isAppInOnStop = false,
             )?.let { isPlaying ->
                 _state.update { it.copy(isBMPlaying = isPlaying) }
@@ -93,7 +86,7 @@ class SettingsViewModel @Inject constructor(
                 _state.update { it.copy(isBackgroundMusicOn = !it.isBackgroundMusicOn) }
 
                 viewModelScope.launch(Dispatchers.IO) {
-                    var settings = repository.getAllSettingsValues(1) ?: defaultSettings
+                    val settings = repository.getAllSettingsValues(1) ?: defaultSettings
                     settings.isBackgroundMusicOn = state.value.isBackgroundMusicOn
                     repository.setAllSettingsValues(settings)
                 }
@@ -101,7 +94,6 @@ class SettingsViewModel @Inject constructor(
                     context = context,
                     isBMPlaying = state.value.isBMPlaying,
                     isBackgroundMusicOn = state.value.isBackgroundMusicOn,
-                    service = service,
                 )?.let { isPlaying ->
                     _state.update { it.copy(isBMPlaying = isPlaying) }
                 }
@@ -110,7 +102,7 @@ class SettingsViewModel @Inject constructor(
                 _state.update { it.copy(isDarkThemeOn = !it.isDarkThemeOn) }
 
                 viewModelScope.launch(Dispatchers.IO) {
-                    var settings = repository.getAllSettingsValues(1) ?: defaultSettings
+                    val settings = repository.getAllSettingsValues(1) ?: defaultSettings
                     settings.isDarkThemeOn = state.value.isDarkThemeOn
                     repository.setAllSettingsValues(settings)
                 }
@@ -119,7 +111,7 @@ class SettingsViewModel @Inject constructor(
                 _state.update { it.copy(isDynamicColorsOn = !it.isDynamicColorsOn) }
 
                 viewModelScope.launch(Dispatchers.IO) {
-                    var settings = repository.getAllSettingsValues(1) ?: defaultSettings
+                    val settings = repository.getAllSettingsValues(1) ?: defaultSettings
                     settings.isDynamicColorsOn = state.value.isDynamicColorsOn
                     repository.setAllSettingsValues(settings)
                 }
@@ -128,7 +120,7 @@ class SettingsViewModel @Inject constructor(
                 _state.update { it.copy(isFollowingSystemOn = !it.isFollowingSystemOn) }
 
                 viewModelScope.launch(Dispatchers.IO) {
-                    var settings = repository.getAllSettingsValues(1) ?: defaultSettings
+                    val settings = repository.getAllSettingsValues(1) ?: defaultSettings
                     settings.isFollowingSystemOn = state.value.isFollowingSystemOn
                     repository.setAllSettingsValues(settings)
                 }
@@ -137,7 +129,7 @@ class SettingsViewModel @Inject constructor(
                 _state.update { it.copy(isSoundEffectsOn = !it.isSoundEffectsOn) }
 
                 viewModelScope.launch(Dispatchers.IO) {
-                    var settings = repository.getAllSettingsValues(1) ?: defaultSettings
+                    val settings = repository.getAllSettingsValues(1) ?: defaultSettings
                     settings.isSoundEffectsOn = state.value.isSoundEffectsOn
                     repository.setAllSettingsValues(settings)
                 }
@@ -146,7 +138,7 @@ class SettingsViewModel @Inject constructor(
                 _state.update { it.copy(isDarkThemeOn = event.value) }
 
                 viewModelScope.launch(Dispatchers.IO) {
-                    var settings = repository.getAllSettingsValues(1) ?: defaultSettings
+                    val settings = repository.getAllSettingsValues(1) ?: defaultSettings
                     settings.isDarkThemeOn = state.value.isDarkThemeOn
                     repository.setAllSettingsValues(settings)
                 }
@@ -164,7 +156,6 @@ class SettingsViewModel @Inject constructor(
                     context = context,
                     isBMPlaying = state.value.isBMPlaying,
                     isBackgroundMusicOn = state.value.isBackgroundMusicOn,
-                    service = service,
                     isAppInOnStop = event.value,
                 )?.let { isPlaying ->
                     _state.update { it.copy(isBMPlaying = isPlaying) }
@@ -190,7 +181,7 @@ class SettingsViewModel @Inject constructor(
             }
             is SettingsEvent.SelectedWinnerLineColor -> {
                 viewModelScope.launch(Dispatchers.IO) {
-                    var settings = repository.getAllSettingsValues(1) ?: defaultSettings
+                    val settings = repository.getAllSettingsValues(1) ?: defaultSettings
                     settings.selectedWinnerLineColor = event.value
                     repository.setAllSettingsValues(settings)
                 }
@@ -198,7 +189,7 @@ class SettingsViewModel @Inject constructor(
             }
             is SettingsEvent.SelectedXColor -> {
                 viewModelScope.launch(Dispatchers.IO) {
-                    var settings = repository.getAllSettingsValues(1) ?: defaultSettings
+                    val settings = repository.getAllSettingsValues(1) ?: defaultSettings
                     settings.selectedXColor = event.value
                     repository.setAllSettingsValues(settings)
                 }
@@ -206,7 +197,7 @@ class SettingsViewModel @Inject constructor(
             }
             is SettingsEvent.SelectedCircleColor -> {
                 viewModelScope.launch(Dispatchers.IO) {
-                    var settings = repository.getAllSettingsValues(1) ?: defaultSettings
+                    val settings = repository.getAllSettingsValues(1) ?: defaultSettings
                     settings.selectedCircleColor = event.value
                     repository.setAllSettingsValues(settings)
                 }
@@ -215,7 +206,7 @@ class SettingsViewModel @Inject constructor(
             SettingsEvent.HideWhatsNewDialog -> {
                 _state.update { it.copy(showWhatsNewDialog = false) }
                 viewModelScope.launch(Dispatchers.IO) {
-                    var settings = repository.getAllSettingsValues(1) ?: defaultSettings
+                    val settings = repository.getAllSettingsValues(1) ?: defaultSettings
                     settings.appVersion = getVersionName()
                     repository.setAllSettingsValues(settings)
                 }
@@ -246,7 +237,7 @@ class SettingsViewModel @Inject constructor(
                     )
                 }
                 viewModelScope.launch(Dispatchers.IO) {
-                    var settings = repository.getAllSettingsValues(1) ?: defaultSettings
+                    val settings = repository.getAllSettingsValues(1) ?: defaultSettings
                     settings.shapeSelected = event.index
                     settings.boardCardsCornerRadius = event.shape.cornerRadius
                     settings.boardCardsThickness = event.shape.thickness

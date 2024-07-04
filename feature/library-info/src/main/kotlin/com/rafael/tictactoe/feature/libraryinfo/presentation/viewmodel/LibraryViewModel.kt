@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LibraryViewModel @Inject constructor(
-    private val libraryRepository: OssLibraryRepository,
+    libraryRepository: OssLibraryRepository,
 ) : ViewModel() {
 
     val ossLibraries = libraryRepository.ossLibraries

@@ -16,7 +16,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:hardwareAccelerated="true"
-        android:resizeableActivity="false"
         android:enableOnBackInvokedCallback="true"
         android:isGame="true"
         android:theme="@style/Theme.AppSplash"

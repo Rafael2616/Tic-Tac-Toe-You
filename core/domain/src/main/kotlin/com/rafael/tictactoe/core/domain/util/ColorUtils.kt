@@ -8,9 +8,9 @@ fun Int.toColor(): Color {
         0 -> color.blue
         1 -> color.red
         2 -> color.yellow
-        3 -> color.burnt_yellow
-        4 -> color.dark_green
-        5 -> color.light_green
+        3 -> color.burntYellow
+        4 -> color.darkGreen
+        5 -> color.lightGreen
         6 -> color.purple
         7 -> color.magenta
         8 -> color.white

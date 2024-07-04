@@ -6,14 +6,13 @@ import com.rafael.tictactoe.core.services.MusicService
 import com.rafael.tictactoe.core.services.util.runningServiceVerifier
 
 fun backgroundMusic(
-    service: MusicService,
     context: Context,
     isBMPlaying: Boolean,
     isBackgroundMusicOn: Boolean,
     isAppInOnStop: Boolean = false,
 ): Boolean? {
     val isServiceRunning = ::runningServiceVerifier
-    val serviceIntent = Intent(context, service::class.java)
+    val serviceIntent = Intent(context, MusicService::class.java)
     var isBGMusicPlaying: Boolean? = null
 
     if (!isAppInOnStop) {

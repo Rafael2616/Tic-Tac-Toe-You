@@ -20,10 +20,7 @@ internal class VictoryCounter {
         val isCounterReset = state.player1Wins + state.player2Wins
         val hasWinner = Checkers().checkWinner(state).first
 
-        if (isCounterReset > 0 || hasWinner) {
-            return true
-        }
-        return false
+        return isCounterReset > 0 || hasWinner
     }
 
     fun setFirstName(state: GameState, context: Context): String {
@@ -41,16 +38,12 @@ internal class VictoryCounter {
             isCPUMode && state.isCPUPlayer1 -> cpuName
             !state.play -> {
                 if (state.localPlayer1) {
-                    if (player1Name.isEmpty()) {
+                    player1Name.ifEmpty {
                         if (isXFor1) genericPlayerX else genericPlayerO
-                    } else {
-                        player1Name
                     }
                 } else {
-                    if (player2Name.isEmpty()) {
+                    player2Name.ifEmpty {
                         if (isXFor1) genericPlayerX else genericPlayerO
-                    } else {
-                        player2Name
                     }
                 }
             }
@@ -81,16 +74,12 @@ internal class VictoryCounter {
             isCPUMode && !state.isCPUPlayer1 -> cpuName
             !state.play -> {
                 if (state.localPlayer1) {
-                    if (player2Name.isEmpty()) {
+                    player2Name.ifEmpty {
                         if (isXFor1) genericPlayerO else genericPlayerX
-                    } else {
-                        player2Name
                     }
                 } else {
-                    if (player1Name.isEmpty()) {
+                    player1Name.ifEmpty {
                         if (isXFor1) genericPlayerO else genericPlayerX
-                    } else {
-                        player1Name
                     }
                 }
             }

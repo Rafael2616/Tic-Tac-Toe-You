@@ -4,13 +4,13 @@ import androidx.compose.ui.graphics.Color
 import com.rafael.tictactoe.feature.settings.domain.enums.Customization
 
 sealed interface SettingsEvent {
-    object ToggleIsBackgroundMusicOn : SettingsEvent
-    object ToggleIsSoundEffectsOn : SettingsEvent
-    object ToggleIsDarkThemeOn : SettingsEvent
-    object ToggleIsFollowingSystemOn : SettingsEvent
-    object ToggleIsDynamicColorsOn : SettingsEvent
+    data object ToggleIsBackgroundMusicOn : SettingsEvent
+    data object ToggleIsSoundEffectsOn : SettingsEvent
+    data object ToggleIsDarkThemeOn : SettingsEvent
+    data object ToggleIsFollowingSystemOn : SettingsEvent
+    data object ToggleIsDynamicColorsOn : SettingsEvent
     data class SetIsDarkThemeOn(val value: Boolean) : SettingsEvent
-    object OnSettingsScreenDestroyment : SettingsEvent
+    data object OnSettingsScreenDestroyment : SettingsEvent
     data class ShowAboutAppCard(val value: Boolean) : SettingsEvent
     data class SetCustomizationType(val type: Customization) : SettingsEvent
     data class ShowColorSelectionDialog(val value: Boolean) : SettingsEvent
@@ -21,10 +21,10 @@ sealed interface SettingsEvent {
     data class SelectedXColor(val value: Int) : SettingsEvent
     data class SelectedCircleColor(val value: Int) : SettingsEvent
     data class StartBackgroundMusic(val value: Boolean) : SettingsEvent
-    object ShowWhatsNewDialog : SettingsEvent
-    object HideWhatsNewDialog : SettingsEvent
-    object ToggleShowProfilePictureMenu : SettingsEvent
-    object HideProfilePictureMenu : SettingsEvent
+    data object ShowWhatsNewDialog : SettingsEvent
+    data object HideWhatsNewDialog : SettingsEvent
+    data object ToggleShowProfilePictureMenu : SettingsEvent
+    data object HideProfilePictureMenu : SettingsEvent
     data class ShowBoardCustomizationDialog(val value: Boolean) : SettingsEvent
     data class SetBoardShape(val shape: BoardShape, val index: Int, val isRGBEffectOn: Boolean, val isGradientOn: Boolean) : SettingsEvent
     data class UpdateBoardCardsBorderColor(val color: Color) : SettingsEvent

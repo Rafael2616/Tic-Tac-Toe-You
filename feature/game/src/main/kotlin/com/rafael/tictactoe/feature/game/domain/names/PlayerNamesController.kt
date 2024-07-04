@@ -46,10 +46,10 @@ internal class PlayerNamesController {
         return Pair(player1Name, player2Name)
     }
 
-    fun playerNamesForGameInProgress(state: GameState, context: Context): Pair<String, String> {
+    private fun playerNamesForGameInProgress(state: GameState, context: Context): Pair<String, String> {
         val emptyPlayerName = context.getString(R.string.player)
-        val player1Name = if (state.player1Name.isEmpty()) emptyPlayerName else state.player1Name
-        val player2Name = if (state.player2Name.isEmpty()) emptyPlayerName else state.player2Name
+        val player1Name = state.player1Name.ifEmpty { emptyPlayerName }
+        val player2Name = state.player2Name.ifEmpty { emptyPlayerName }
         return Pair(player1Name, player2Name)
     }
 }

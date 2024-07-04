@@ -20,16 +20,14 @@ class RGBAnimation {
         RGBColor.CyanAqua to Color(0xFF00FFEF),
         RGBColor.AzureRadiance to Color(0xFF008CFF),
         RGBColor.Blue to Color.Blue,
-        RGBColor.EletricVolt to Color(0xFF9D0DFF),
+        RGBColor.ElectricVolt to Color(0xFF9D0DFF),
         RGBColor.Magenta to Color(0xFFFF11F3),
         RGBColor.Rose to Color(0xFFFF0088),
     )
 
     fun animate() = flow {
         while (true) {
-            rgbColors.values.forEach { color ->
-                emit(color)
-            }
+            rgbColors.values.forEach { color -> emit(color) }
         }
     }.flowOn(Dispatchers.IO)
 }

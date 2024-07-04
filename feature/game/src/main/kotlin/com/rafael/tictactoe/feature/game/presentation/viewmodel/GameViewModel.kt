@@ -35,8 +35,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
@@ -60,8 +58,8 @@ class GameViewModel @Inject constructor(
             SharingStarted.WhileSubscribed(5000),
             GameState(),
         )
-    var onlineGameState: Flow<OnlineGameState>? = null
-    var searchPlayersJob: Job? = null
+    private var onlineGameState: Flow<OnlineGameState>? = null
+    private var searchPlayersJob: Job? = null
 
     fun onEvent(event: GameEvent) {
         when (event) {
@@ -129,7 +127,7 @@ class GameViewModel @Inject constructor(
                                 players.isPlayer1 == !state.value.isYouPlayer1
                             }
                         }.first()
-                        val randomPlayer = (0 until possiblePlayers.size).random()
+                        val randomPlayer = possiblePlayers.indices.random()
                         _state.update { it.copy(secondPlayer = possiblePlayers[randomPlayer]) }
 
                         val onlinePlayerName = state.value.secondPlayer!!.name
@@ -242,14 +240,14 @@ class GameViewModel @Inject constructor(
         }
     }
 
-    fun setupGameMode(mode: GameMode) {
+    private fun setupGameMode(mode: GameMode) {
         _state.update { it.copy(gameMode = mode) }
         setPlayerNamesOnCounter()
         switchPlayerNamesOrder()
         updateCurrentToastName()
     }
 
-    fun getFirstPlayerName(name: String) {
+    private fun getFirstPlayerName(name: String) {
         _state.update {
             if (state.value.localPlayer1) {
                 it.copy(player1Name = name)
@@ -261,7 +259,7 @@ class GameViewModel @Inject constructor(
         updateCurrentToastName()
     }
 
-    fun getSecondPlayerName(name: String) {
+    private fun getSecondPlayerName(name: String) {
         _state.update {
             if (state.value.localPlayer1) {
                 it.copy(player2Name = name)
@@ -273,7 +271,7 @@ class GameViewModel @Inject constructor(
         updateCurrentToastName()
     }
 
-    fun switchPlayerPositions() {
+    private fun switchPlayerPositions() {
         val isCPUMode = state.value.gameMode == GameMode.VsCPU
         _state.update {
             if (isCPUMode) {
@@ -287,7 +285,7 @@ class GameViewModel @Inject constructor(
         setPlayerNamesOnCounter()
     }
 
-    fun startGame() {
+    private fun startGame() {
         val isCPUMode = state.value.gameMode == GameMode.VsCPU
         val player1Name = if (state.value.localPlayer1) {
             state.value.player1Name
@@ -333,7 +331,7 @@ class GameViewModel @Inject constructor(
         updateCurrentToastName()
     }
 
-    fun resetVicoryCounter() {
+    private fun resetVicoryCounter() {
         _state.update {
             it.copy(
                 showVictoryCounterReseter = false,
@@ -343,9 +341,9 @@ class GameViewModel @Inject constructor(
         }
     }
 
-    fun playAgain() {
+    private fun playAgain() {
         val isCPUMode = state.value.gameMode == GameMode.VsCPU
-        val allFalse = List(3) { List<Boolean>(3) { false } }
+        val allFalse = List(3) { List(3) { false } }
         val restartGame = RestartGame()
         val checkers = Checkers()
         _state.update {
@@ -373,7 +371,7 @@ class GameViewModel @Inject constructor(
         updateCurrentToastName()
     }
 
-    fun updateCard(rowIndex: Int, cardIndex: Int, newValue: Boolean) {
+    private fun updateCard(rowIndex: Int, cardIndex: Int, newValue: Boolean) {
         val isGameFinished = state.value.isGameFinished
 
         if (!isGameFinished) {
@@ -389,7 +387,7 @@ class GameViewModel @Inject constructor(
         }
     }
 
-    fun updateIsCardClicked(rowIndex: Int, cardIndex: Int, newValue: Boolean) {
+    private fun updateIsCardClicked(rowIndex: Int, cardIndex: Int, newValue: Boolean) {
         val isGameFinished = state.value.isGameFinished
 
         if (!isGameFinished) {
@@ -405,7 +403,7 @@ class GameViewModel @Inject constructor(
         }
     }
 
-    fun updateGameState() {
+    private fun updateGameState() {
         val checkers = Checkers()
         val counter = VictoryCounter()
         val restart = RestartGame()
@@ -431,7 +429,7 @@ class GameViewModel @Inject constructor(
         onGameFinish(checkers.checkGameFinished(state.value))
     }
 
-    fun performBoardMove(rowIndex: Int, cardIndex: Int) {
+    private fun performBoardMove(rowIndex: Int, cardIndex: Int) {
         val moveParams = boardMovesHandler(
             state.value,
             rowIndex,
@@ -456,7 +454,7 @@ class GameViewModel @Inject constructor(
             }
             updateCard(card[0] as Int, card[1] as Int, card[2] as Boolean)
             updateIsCardClicked(cardClicked[0] as Int, cardClicked[1] as Int, cardClicked[2] as Boolean)
-            if (state.value.gameMode == GameMode.VsCPU && param["isCPU"] as Boolean == true) {
+            if (state.value.gameMode == GameMode.VsCPU && param["isCPU"] as Boolean) {
                 execCPUMove()
             }
             updateGameState()
@@ -466,7 +464,7 @@ class GameViewModel @Inject constructor(
         _state.update { it.copy(isExpandButtonShown = false) }
     }
 
-    fun execCPUMove() {
+    private fun execCPUMove() {
         val delayTime = if (state.value.isTimerOn) 2300L else 570L
         viewModelScope.launch {
             delay(delayTime)
@@ -498,7 +496,7 @@ class GameViewModel @Inject constructor(
         }
     }
 
-    fun setPlayerNamesOnCounter() {
+    private fun setPlayerNamesOnCounter() {
         val counter = VictoryCounter()
         _state.update {
             it.copy(
@@ -508,7 +506,7 @@ class GameViewModel @Inject constructor(
         }
     }
 
-    fun switchPlayerNamesOrder() {
+    private fun switchPlayerNamesOrder() {
         PlayerNamesController().currentPlayerNames(state.value, context).let { (player1Name, player2Name) ->
             _state.update {
                 it.copy(
@@ -519,7 +517,7 @@ class GameViewModel @Inject constructor(
         }
     }
 
-    fun updateCurrentToastName() {
+    private fun updateCurrentToastName() {
         val toastController = ToastNameController()
         viewModelScope.launch {
             toastController.currentToastName(state.value, context)?.let { name ->
@@ -541,7 +539,7 @@ class GameViewModel @Inject constructor(
         }
     }
 
-    fun onGameFinish(isGameFinished: Boolean) {
+    private fun onGameFinish(isGameFinished: Boolean) {
         _state.update {
             it.copy(
                 isGameFinished = isGameFinished,
@@ -563,7 +561,7 @@ class GameViewModel @Inject constructor(
         }
     }
 
-    fun exitGame() {
+    private fun exitGame() {
         settingsVM.onEvent(SettingsEvent.ShowColorSelectionDialog(false))
         val cardState = state.value.card
         _state.update { GameState() }
@@ -574,7 +572,7 @@ class GameViewModel @Inject constructor(
         _state.update { it.copy(card = cardState) }
     }
 
-    fun execCardGridSound() {
+    private fun execCardGridSound() {
         cardGridSound(
             context,
             state.value,
@@ -583,7 +581,7 @@ class GameViewModel @Inject constructor(
         )
     }
 
-    fun execGotOldSound() {
+    private fun execGotOldSound() {
         val isPlaying = gotOldSound(
             context,
             state.value,
@@ -593,7 +591,7 @@ class GameViewModel @Inject constructor(
         _state.update { it.copy(isGotOldSoundPlaying = isPlaying) }
     }
 
-    fun execWinnerSound() {
+    private fun execWinnerSound() {
         val isPlaying = winnerSound(
             context,
             state.value,

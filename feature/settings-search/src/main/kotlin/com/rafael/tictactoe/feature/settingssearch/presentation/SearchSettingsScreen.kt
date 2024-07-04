@@ -152,7 +152,7 @@ fun SearchSettingsScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 item {
-                    if (matchingSettings.size > 0) {
+                    if (matchingSettings.isNotEmpty()) {
                         PreferenceGroup(R.string.settings) {
                             matchingSettings.forEach { setting ->
                                 setting.content?.invoke(settingsVM::onEvent, state, navController)

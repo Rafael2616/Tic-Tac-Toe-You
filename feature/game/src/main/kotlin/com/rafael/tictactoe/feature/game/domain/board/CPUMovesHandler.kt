@@ -13,7 +13,7 @@ internal fun cpuMovesHandler(state: GameState): MutableMap<String, Any>? {
     val isXImage = state.isXImage
     val isGameFinished = state.isGameFinished
     val level = state.cpuDifficultyLevel
-    var moveParams: MutableMap<String, Any> = mutableMapOf()
+    val moveParams: MutableMap<String, Any> = mutableMapOf()
 
     if (isGameFinished) return null
     if (isCardClicked.flatten().all { it }) return null

@@ -10,11 +10,11 @@ import kotlinx.coroutines.flow.flow
 
 internal class ToastNameController {
 
-    suspend fun currentToastName(
+    fun currentToastName(
         state: GameState,
         context: Context,
     ): String? {
-        var currentGamePhase = getCurrentGamePhase(state)
+        val currentGamePhase = getCurrentGamePhase(state)
         return when (currentGamePhase) {
             CurrentPlayerName.NameForSetupPhase -> currentNameForSetupPhase(state, context)
             CurrentPlayerName.CounterAfterGameStarts -> null // counterAfterGameStarts(state)
@@ -38,9 +38,9 @@ internal class ToastNameController {
     private fun currentNameForGameInProgress(state: GameState, context: Context): String {
         val emptyPlayerName = context.getString(R.string.player)
         return if (state.isPlayer1) {
-            if (state.player1Name.isEmpty()) emptyPlayerName else state.player1Name
+            state.player1Name.ifEmpty { emptyPlayerName }
         } else {
-            if (state.player2Name.isEmpty()) emptyPlayerName else state.player2Name
+            state.player2Name.ifEmpty { emptyPlayerName }
         }
     }
 

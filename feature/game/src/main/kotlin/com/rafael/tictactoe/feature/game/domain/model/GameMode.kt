@@ -1,7 +1,7 @@
 package com.rafael.tictactoe.feature.game.domain.model
 
 sealed interface GameMode {
-    object PvP : GameMode
-    object VsCPU : GameMode
-    object Online : GameMode
+    data object PvP : GameMode
+    data object VsCPU : GameMode
+    data object Online : GameMode
 }

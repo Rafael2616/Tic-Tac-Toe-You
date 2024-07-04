@@ -25,15 +25,15 @@ data class ColorItem(
                     name = R.string.color_yellow,
                 ),
                 ColorItem(
-                    color = colors.burnt_yellow,
+                    color = colors.burntYellow,
                     name = R.string.color_burnt_yellow,
                 ),
                 ColorItem(
-                    color = colors.dark_green,
+                    color = colors.darkGreen,
                     name = R.string.color_dark_green,
                 ),
                 ColorItem(
-                    color = colors.light_green,
+                    color = colors.lightGreen,
                     name = R.string.color_green,
                 ),
                 ColorItem(

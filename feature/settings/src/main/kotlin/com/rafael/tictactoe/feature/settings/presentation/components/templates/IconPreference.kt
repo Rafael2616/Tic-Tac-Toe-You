@@ -133,7 +133,7 @@ internal fun IconPreference(
         }
 
         // An optional extra content next to preference title
-        extraContent?.let { it.invoke() }
+        extraContent?.invoke()
 
         Box(
             modifier = Modifier

@@ -11,7 +11,7 @@ enum class RGBColor {
     CyanAqua,
     AzureRadiance,
     Blue,
-    EletricVolt,
+    ElectricVolt,
     Magenta,
     Rose,
 }

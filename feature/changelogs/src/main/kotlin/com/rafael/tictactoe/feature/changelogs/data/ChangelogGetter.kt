@@ -13,8 +13,9 @@ internal fun Context.getCurrentChangelogFile(): Pair<String, String> {
 
     try {
         assets.open("changelogs/$versionNumber$correctedVariant.txt").use { inputStream ->
-            val changelog = inputStream.bufferedReader().readText()
-            changelogContent = Pair(versionNumber, changelog)
+            val changelog = inputStream.bufferedReader().readText().also {
+                changelogContent = Pair(versionNumber, it)
+            }
         }
     } catch (e: IOException) {
         e.printStackTrace()
@@ -24,13 +25,13 @@ internal fun Context.getCurrentChangelogFile(): Pair<String, String> {
 }
 
 internal fun Context.getChangelogFiles(): List<Pair<String, String>> {
-    var changelogFiles = mutableListOf<Pair<String, String>>()
+    val changelogFiles = mutableListOf<Pair<String, String>>()
 
     try {
         assets.list("changelogs/")
             ?.filter { it.endsWith(".txt") }
             ?.forEach { changelogFile ->
-                assets.open("changelogs/" + changelogFile).use { inputStream ->
+                assets.open("changelogs/$changelogFile").use { inputStream ->
                     val changelog = inputStream.bufferedReader().readText()
                     changelogFiles.add(Pair(changelogFile.removeSuffix(".txt"), changelog))
                 }

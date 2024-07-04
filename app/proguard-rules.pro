@@ -64,8 +64,5 @@
 -if interface * { @retrofit2.http.* <methods>; }
 -keep,allowobfuscation interface * extends <1>
 
-# With R8 full mode generic signatures are stripped for classes that are not kept.
--keep,allowobfuscation,allowshrinking class retrofit2.Response
-
 # AppSearch
 -keep class com.google.android.icing.** { *; }

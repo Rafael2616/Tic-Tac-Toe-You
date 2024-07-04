@@ -6,7 +6,7 @@ import android.net.Uri
 
 interface ProfilePictureUtils {
 
-    fun savePictureFromUri(context: Context, imageUri: Uri): Unit
+    fun savePictureFromUri(context: Context, imageUri: Uri)
 
     fun getPictureUriIfExists(): Uri
 

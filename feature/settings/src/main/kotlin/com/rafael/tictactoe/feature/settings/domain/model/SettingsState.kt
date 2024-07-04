@@ -25,7 +25,7 @@ data class SettingsState(
     val selectedWinnerLineColor: Int = 2,
     val xColor: Color = color.red,
     val selectedXColor: Int = 1,
-    val circleColor: Color = color.light_green,
+    val circleColor: Color = color.lightGreen,
     val selectedCircleColor: Int = 5,
     val isBMPlaying: Boolean = false,
     val customizationType: Customization = Customization.XCOLOR,

@@ -1,6 +1,5 @@
 import com.android.build.api.dsl.LibraryExtension
 import com.rafael.gradle.configureComposeAndroid
-import com.rafael.gradle.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure

@@ -22,7 +22,7 @@ internal class Checkers {
     fun checkWinner(state: GameState): Triple<Boolean, Int, List<Int>> {
         var winner = -1
         var hasWinner = false
-        var winningPositionsIndices = mutableListOf<Int>()
+        val winningPositionsIndices = mutableListOf<Int>()
 
         for ((index, positions) in winningPositions.withIndex()) {
             val areAllClicked = positions.all { (x, y) -> state.isCardClicked[x][y] }
@@ -32,19 +32,19 @@ internal class Checkers {
             if (areAllClicked && areAllClickedByPlayer1) {
                 winningPositionsIndices.add(index)
                 hasWinner = true
-                if (state.isXFor1) {
-                    winner = 1
+                winner = if (state.isXFor1) {
+                    1
                 } else {
-                    winner = 2
+                    2
                 }
             }
             if (areAllClicked && areAllClickedByPlayer2) {
                 winningPositionsIndices.add(index)
                 hasWinner = true
-                if (state.isXFor1) {
-                    winner = 2
+                winner = if (state.isXFor1) {
+                    2
                 } else {
-                    winner = 1
+                    1
                 }
             }
         }
@@ -53,20 +53,14 @@ internal class Checkers {
 
     fun checkIfGotOld(state: GameState): Boolean {
         val hasWinner = checkWinner(state).first
-        if ((state.isCardClicked.flatten().all { it }) && (!hasWinner)) {
-            return true
-        }
-        return false
+        return (state.isCardClicked.flatten().all { it }) && (!hasWinner)
     }
 
     fun checkGameFinished(state: GameState): Boolean {
         val gotOld = checkIfGotOld(state)
         val hasWinner = checkWinner(state).first
 
-        if (gotOld && !hasWinner || hasWinner) {
-            return true
-        }
-        return false
+        return gotOld && !hasWinner || hasWinner
     }
 
     fun hasLastWinner(state: GameState): Boolean {
@@ -77,7 +71,6 @@ internal class Checkers {
 
     fun whoPlayerWin(state: GameState): Boolean {
         val is1Win = checkWinner(state).second
-        if (is1Win == 1) return true
-        return false
+        return is1Win == 1
     }
 }

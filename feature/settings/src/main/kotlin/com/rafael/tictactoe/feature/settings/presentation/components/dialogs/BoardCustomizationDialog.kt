@@ -4,7 +4,6 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -118,7 +117,7 @@ fun BoardCustomizationDialog(
     val rgbColorCurrentAnimated by animateColorAsState(rgbColorCurrent)
     val rgbColorOldAnimated by animateColorAsState(rgbColorOld)
     var localBoardCardsBorderColor by remember { mutableStateOf(if (state.shapeSelected == SHAPE_CUSTOM) state.boardCardsBorderColor else DEF_CARDS_COLOR) }
-    var localBoardCardsBorderColorRGB by remember(rgbColorCurrentAnimated) {
+    val localBoardCardsBorderColorRGB by remember(rgbColorCurrentAnimated) {
         mutableStateOf(rgbColorCurrentAnimated)
     }
     val rgbGradientBrush = Brush.linearGradient(

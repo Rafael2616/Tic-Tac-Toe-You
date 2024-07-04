@@ -1,12 +1,12 @@
 package com.rafael.tictactoe.feature.game.domain.model
 
 sealed interface RequestState {
-    object Success : RequestState
+    data object Success : RequestState
     data class Failure(val type: Error = Error.IOError, val message: String = "", val code: Int = -1) : RequestState
-    object Loading : RequestState
+    data object Loading : RequestState
 }
 
 sealed interface Error {
-    object IOError : Error
-    object HttpError : Error
+    data object IOError : Error
+    data object HttpError : Error
 }

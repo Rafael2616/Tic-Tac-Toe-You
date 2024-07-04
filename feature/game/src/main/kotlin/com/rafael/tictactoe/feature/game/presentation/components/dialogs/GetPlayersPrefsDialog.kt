@@ -93,7 +93,7 @@ internal fun GetPlayersPrefsDialog(
     val xColor by animateColorAsState(settingsState.xColor)
     val circleColor by animateColorAsState(settingsState.circleColor)
     val isDarkThemeOn = settingsState.isDarkThemeOn
-    val textField1State = if (state.isCPUPlayer1) false else true
+    val textField1State = !state.isCPUPlayer1
     val dialogHeight by animateDpAsState(
         when (state.gameMode) {
             GameMode.VsCPU -> 270.dp

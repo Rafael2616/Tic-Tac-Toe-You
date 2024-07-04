@@ -22,7 +22,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -66,7 +65,7 @@ internal fun SoundAndMusicButtons(
             }
             if (state.isExpandButtonShown) {
                 Spacer(Modifier.height(3.dp))
-                Buttons.values().forEach { button ->
+                Buttons.entries.forEach { button ->
                     FilledTonalIconButton(
                         modifier = Modifier
                             .size(45.dp),

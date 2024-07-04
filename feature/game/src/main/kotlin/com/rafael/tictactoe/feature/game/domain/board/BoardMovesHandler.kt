@@ -17,7 +17,7 @@ internal fun boardMovesHandler(
     val isGameFinished = state.isGameFinished
     val gameMode = state.gameMode
     val isOnlinePlayerTurn = state.isOnlinePlayerTurn
-    var moveParams: MutableMap<String, Any> = mutableMapOf()
+    val moveParams: MutableMap<String, Any> = mutableMapOf()
 
     if (isTimerOn) return null
     if (isGameFinished) return null

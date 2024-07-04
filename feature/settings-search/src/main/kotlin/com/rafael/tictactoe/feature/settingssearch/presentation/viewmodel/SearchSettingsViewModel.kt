@@ -36,15 +36,15 @@ class SearchSettingsViewModel @Inject constructor(
             SharingStarted.WhileSubscribed(5000),
             SearchSettingsState(),
         )
-    var searchJob: Job? = null
+    private var searchJob: Job? = null
 
     init {
         viewModelScope.launch(Dispatchers.IO) { searchManager.init() }
 
-        var allSettings: List<SettingItem> = emptyList()
+        val allSettings: MutableList<SettingItem> = mutableListOf()
 
         for (setting in SettingItem.getSettingsItems(context, settingsVM.state.value)) {
-            allSettings += setting
+            allSettings.add(setting)
         }
         onEvent(SearchSettingsEvent.PutSettingsToRepository(allSettings))
     }

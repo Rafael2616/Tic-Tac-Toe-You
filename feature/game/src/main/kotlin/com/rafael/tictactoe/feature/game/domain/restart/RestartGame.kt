@@ -13,21 +13,17 @@ class RestartGame {
         var isXImage = state.isXImage
 
         if (state.hasWinner || state.hasLastWinningPlayer) {
-            if (is1Win && isXFor1) {
-                isXImage = true
+            isXImage = if (is1Win && isXFor1) {
+                true
             } else if (!is1Win && !isXFor1) {
-                isXImage = true
+                true
             } else {
-                isXImage = false
+                false
             }
         }
 
         if (!state.hasWinner && !state.hasLastWinningPlayer) {
-            if (isXFor1) {
-                isXImage = true
-            } else {
-                isXImage = false
-            }
+            isXImage = isXFor1
         }
         return isXImage
     }
@@ -44,30 +40,26 @@ class RestartGame {
         val is1Win = state.is1Win
         val isCPUPlayer1 = state.isCPUPlayer1
         val hasWinner = state.hasWinner
-        var isCPU: Boolean
+        val isCPU: Boolean
 
         if (hasWinner) {
-            if (is1Win && isCPUPlayer1) {
-                isCPU = true
+            isCPU = if (is1Win && isCPUPlayer1) {
+                true
             } else if (!is1Win && !isCPUPlayer1) {
-                isCPU = true
+                true
             } else {
-                isCPU = false
+                false
             }
         } else {
-            if (!state.hasLastWinningPlayer) {
-                if (isCPUPlayer1) {
-                    isCPU = true
-                } else {
-                    isCPU = false
-                }
+            isCPU = if (!state.hasLastWinningPlayer) {
+                isCPUPlayer1
             } else {
                 if (isCPUPlayer1 && is1Win) {
-                    isCPU = true
+                    true
                 } else if (!isCPUPlayer1 && !is1Win) {
-                    isCPU = true
+                    true
                 } else {
-                    isCPU = false
+                    false
                 }
             }
         }
@@ -79,9 +71,6 @@ class RestartGame {
         val isGameFinished = state.isGameFinished
         val play = state.play
 
-        if (isCardClicked.flatten().all { !it } || isGameFinished || !play) {
-            return false
-        }
-        return true
+        return !(isCardClicked.flatten().all { !it } || isGameFinished || !play)
     }
 }

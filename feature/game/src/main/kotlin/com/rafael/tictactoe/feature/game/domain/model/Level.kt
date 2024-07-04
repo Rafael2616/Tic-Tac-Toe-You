@@ -31,7 +31,7 @@ data class Level(
                     level = CPUDifficultyLevel.Medium,
                     name = R.string.level_medium,
                     icon = Icons.Filled.SentimentNeutral,
-                    tint = if (isDarkThemeOn) Color.Yellow else Colors.get().burnt_yellow,
+                    tint = if (isDarkThemeOn) Color.Yellow else Colors.get().burntYellow,
                     index = 1,
                 ),
                 Level(

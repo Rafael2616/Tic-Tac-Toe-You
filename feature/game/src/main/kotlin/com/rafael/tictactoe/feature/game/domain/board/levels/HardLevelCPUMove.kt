@@ -2,7 +2,7 @@ package com.rafael.tictactoe.feature.game.domain.board.levels
 
 import com.rafael.tictactoe.feature.game.domain.model.GameState
 
-/*
+/**
  * @author Rafael de Moura Nascimento in 2023/10/27
  *
  * Algorithm to execute the best move for "CPU player"

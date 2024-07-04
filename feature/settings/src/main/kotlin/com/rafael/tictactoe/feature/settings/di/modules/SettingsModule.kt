@@ -47,7 +47,6 @@ object SettingsModule {
     ): SettingsViewModel {
         return SettingsViewModel(
             repository,
-            player,
             context,
             service,
         )

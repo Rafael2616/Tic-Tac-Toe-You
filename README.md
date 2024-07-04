@@ -1,5 +1,5 @@
 <div align="center">
-<img src="screenshots/AppLogo.png" width="200" />
+<img src="screenshots/AppLogo.png" width="244" alt="screenshot_logo"/>
 </div>
 
 <h1 align="center">Tic Tac Toe You</h1>
@@ -20,22 +20,22 @@
 
 # Game Screenshots:
 
-<div align="center"; style="width:100%; display:flex; justify-content:space-between;">
-<img src="screenshots/Screenshot_1d.png" width=31% alt="home">
-<img src="screenshots/Screenshot_2d.png" width=31% alt="settings">
-<img src="screenshots/Screenshot_3d.png" width=31% alt ="PvP dialog">
-<img src="screenshots/Screenshot_4d.png" width=31% alt ="PvP screen">
-<img src="screenshots/Screenshot_5d.png" width=31% alt ="vs CPU dialog">
-<img src="screenshots/Screenshot_6d.png" width=31% alt ="online match loading">
+<div align="center" style="width:100%; display:flex; justify-content:space-between;">
+<img src="screenshots/Screenshot_1d.png" width=720 alt="home">
+<img src="screenshots/Screenshot_2d.png" width=720 alt="settings">
+<img src="screenshots/Screenshot_3d.png" width=720 alt ="PvP dialog">
+<img src="screenshots/Screenshot_4d.png" width=720 alt ="PvP screen">
+<img src="screenshots/Screenshot_5d.png" width=720 alt ="vs CPU dialog">
+<img src="screenshots/Screenshot_6d.png" width=720 alt ="online match loading">
 </div>
 
-<div align="center"; style="width:100%; display:flex; justify-content:space-between;">
-<img src="screenshots/Screenshot_1.png" width=31% alt="home">
-<img src="screenshots/Screenshot_2.png" width=31% alt="settings">
-<img src="screenshots/Screenshot_3.png" width=31% alt="PvP dialog">
-<img src="screenshots/Screenshot_4.png" width=31% alt="PvP screen">
-<img src="screenshots/Screenshot_5.png" width=31% alt="vs CPU dialog">
-<img src="screenshots/Screenshot_6.png" width=31% alt ="online match dialog">
+<div align="center" style="width:100%; display:flex; justify-content:space-between;">
+<img src="screenshots/Screenshot_1.png" width=720 alt="home">
+<img src="screenshots/Screenshot_2.png" width=720 alt="settings">
+<img src="screenshots/Screenshot_3.png" width=720 alt="PvP dialog">
+<img src="screenshots/Screenshot_4.png" width=720 alt="PvP screen">
+<img src="screenshots/Screenshot_5.png" width=720 alt="vs CPU dialog">
+<img src="screenshots/Screenshot_6.png" width=720 alt ="online match dialog">
 </div>
 
 # Employed technologies:

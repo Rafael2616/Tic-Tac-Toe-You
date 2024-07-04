@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.feature.settings.data.profilepicture
+package com.rafael.tictactoe.feature.settings.data.profile_picture
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -12,7 +12,7 @@ import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 
-internal class AndroidProfilePictureUtils() : ProfilePictureUtils {
+internal class AndroidProfilePictureUtils : ProfilePictureUtils {
 
     override fun savePictureFromUri(context: Context, imageUri: Uri) {
         val contentResolver = context.contentResolver
@@ -51,10 +51,10 @@ internal class AndroidProfilePictureUtils() : ProfilePictureUtils {
 
         if (directory.exists() && directory.isDirectory) {
             val files = directory.listFiles()
-            if (files != null && !files.isEmpty()) {
+            if (files != null && files.isNotEmpty()) {
                 files.forEach { file ->
                     if (file.isFile && file.nameWithoutExtension == "profilePicture") {
-                        uriDirWithFileNameExt = Uri.parse(PICTURE_PATH + "${file.name}")
+                        uriDirWithFileNameExt = Uri.parse(PICTURE_PATH + file.name)
                     }
                 }
             }
@@ -80,14 +80,14 @@ internal class AndroidProfilePictureUtils() : ProfilePictureUtils {
 
     private fun compressionFormat(extension: String?): CompressFormat {
         return when (extension) {
-            "jpg", "jpeg" -> Bitmap.CompressFormat.JPEG
-            "png" -> Bitmap.CompressFormat.PNG
-            else -> Bitmap.CompressFormat.JPEG
+            "jpg", "jpeg" -> CompressFormat.JPEG
+            "png" -> CompressFormat.PNG
+            else -> CompressFormat.JPEG
         }
     }
 
     companion object {
-        val buildType = if (BuildConfig.BUILD_TYPE == "release") "" else "." + BuildConfig.BUILD_TYPE
+        private val buildType = if (BuildConfig.BUILD_TYPE == "release") "" else "." + BuildConfig.BUILD_TYPE
         val PICTURE_PATH = "/storage/emulated/0/Android/data/com.rafael.tictactoe$buildType/files/userProfile/"
     }
 }

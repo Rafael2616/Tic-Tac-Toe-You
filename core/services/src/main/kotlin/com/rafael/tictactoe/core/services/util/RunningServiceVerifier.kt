@@ -8,10 +8,7 @@ fun runningServiceVerifier(context: Context, serviceClass: Class<*>): Boolean {
     val runningProcesses = activityManager.runningAppProcesses
 
     runningProcesses.forEach { runningProcess ->
-        if (runningProcess.processName == serviceClass.name) {
-            return true
-        }
-        return false
+        return runningProcess.processName == serviceClass.name
     }
     return false
 }
