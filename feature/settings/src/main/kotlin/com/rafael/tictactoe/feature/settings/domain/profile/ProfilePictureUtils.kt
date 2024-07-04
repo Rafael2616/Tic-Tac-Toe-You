@@ -12,5 +12,5 @@ interface ProfilePictureUtils {
 
     fun getPictureBitmap(): Bitmap
 
-    fun deletePicture(): Unit
+    fun deletePicture()
 }
