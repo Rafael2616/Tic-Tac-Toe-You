@@ -35,7 +35,6 @@ internal fun Context.getChangelogFiles(): List<Pair<String, String>> {
                     inputStream.bufferedReader().readText().also {
                         changelogFiles.add(Pair(changelogFile.removeSuffix(".txt"), it))
                     }
-
                 }
             }
     } catch (e: IOException) {
