@@ -22,7 +22,7 @@
         tools:targetApi="tiramisu">
 
         <service
-            android:name=".core.services.MusicService"
+            android:name=".core.services.music.MusicService"
             android:foregroundServiceType="mediaPlayback" />
 
         <activity

@@ -7,7 +7,7 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.webkit.MimeTypeMap
 import com.rafael.tictactoe.feature.settings.BuildConfig
-import com.rafael.tictactoe.feature.settings.domain.profilepicture.ProfilePictureUtils
+import com.rafael.tictactoe.feature.settings.domain.profile.ProfilePictureUtils
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream

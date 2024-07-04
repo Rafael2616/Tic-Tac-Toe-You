@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.core.services
+package com.rafael.tictactoe.core.services.music
 
 import android.app.Service
 import android.content.Intent
@@ -7,6 +7,7 @@ import android.os.IBinder
 import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.ExoPlayer.REPEAT_MODE_ALL
+import com.rafael.tictactoe.core.services.R
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

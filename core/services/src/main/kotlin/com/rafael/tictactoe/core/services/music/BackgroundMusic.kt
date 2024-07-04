@@ -2,7 +2,6 @@ package com.rafael.tictactoe.core.services.music
 
 import android.content.Context
 import android.content.Intent
-import com.rafael.tictactoe.core.services.MusicService
 import com.rafael.tictactoe.core.services.util.runningServiceVerifier
 
 fun backgroundMusic(

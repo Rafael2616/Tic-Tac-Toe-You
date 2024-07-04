@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.feature.settings.domain.profilepicture
+package com.rafael.tictactoe.feature.settings.domain.profile
 
 import android.content.Context
 import android.graphics.Bitmap
