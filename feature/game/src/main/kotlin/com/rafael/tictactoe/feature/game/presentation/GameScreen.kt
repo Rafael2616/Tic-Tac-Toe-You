@@ -90,7 +90,7 @@ fun GameScreen(
             onEvent,
             settingsState,
         )
-        AnimatedVisibility(state.showVictoryCounterReseter) {
+        AnimatedVisibility(state.showVictoryCounterReset) {
             VictoryCounterReseterButton(onEvent)
         }
     }

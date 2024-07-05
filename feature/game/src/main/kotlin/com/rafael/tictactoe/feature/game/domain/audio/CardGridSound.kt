@@ -18,13 +18,13 @@ internal fun cardGridSound(
     val isGameFinished = state.isGameFinished
     val isSoundEffectsOn = settingsState.isSoundEffectsOn
 
-    // Avoid click sound if it action is perfomed by @RandomCardSorter,
+    // Avoid click sound if it action is performed by @RandomCardSorter,
     // This is needed due a bug in mentioned component.
     if (isGameFinished) {
         return
     }
 
-    if (isSoundEffectsOn) {	
+    if (isSoundEffectsOn) {
         val clickSoundFile = R.raw.click1_sound
         val clickSound2File = R.raw.click2_sound
         val clickSound1 = MediaItem.fromUri(Uri.parse("android.resource://$context/$clickSoundFile"))

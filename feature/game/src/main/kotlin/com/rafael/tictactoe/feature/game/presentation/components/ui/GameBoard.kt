@@ -55,8 +55,8 @@ internal fun GameBoard(
     val rgbAnimController = rememberRGBAnimation()
     var rgbColorCurrent by remember { mutableStateOf(Color.Red) }
     var rgbColorOld by remember { mutableStateOf(Color.Yellow) }
-    val rgbColorCurrentAnimated by animateColorAsState(rgbColorCurrent)
-    val rgbColorOldAnimated by animateColorAsState(rgbColorOld)
+    val rgbColorCurrentAnimated by animateColorAsState(rgbColorCurrent, label = "")
+    val rgbColorOldAnimated by animateColorAsState(rgbColorOld, label = "")
     val rgbGradientBrush = Brush.linearGradient(
         colors = listOf(rgbColorCurrentAnimated, rgbColorOldAnimated),
     )

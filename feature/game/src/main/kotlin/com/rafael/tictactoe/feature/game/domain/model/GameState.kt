@@ -9,7 +9,7 @@ data class GameState(
     val card: List<List<Boolean>> = List(3) { List(3) { false } },
     val isCardClicked: List<List<Boolean>> = List(3) { List(3) { false } },
     val isTimerOn: Boolean = false,
-    val showVictoryCounterReseter: Boolean = false,
+    val showVictoryCounterReset: Boolean = false,
     val play: Boolean = false,
     val isXImage: Boolean = true,
     val is1Win: Boolean = false,

@@ -17,8 +17,8 @@ internal fun ToastImage(
     settingsState: SettingsState,
     modifier: Modifier = Modifier,
 ) {
-    val xColor by animateColorAsState(settingsState.xColor)
-    val circleColor by animateColorAsState(settingsState.circleColor)
+    val xColor by animateColorAsState(settingsState.xColor, label = "")
+    val circleColor by animateColorAsState(settingsState.circleColor, label = "")
     val play = state.play
     val isXFor1 = state.isXFor1
     val is1Win = state.is1Win

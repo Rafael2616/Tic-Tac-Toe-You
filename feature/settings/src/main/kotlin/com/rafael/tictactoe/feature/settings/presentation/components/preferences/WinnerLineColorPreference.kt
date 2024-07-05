@@ -18,7 +18,7 @@ fun WinnerLineColorPreference(
     onEvent: (SettingsEvent) -> Unit,
     state: SettingsState,
 ) {
-    val winnerLineColor by animateColorAsState(state.winnerLineColor)
+    val winnerLineColor by animateColorAsState(state.winnerLineColor, label = "")
 
     IconPreference(
         title = R.string.winner_line_color,

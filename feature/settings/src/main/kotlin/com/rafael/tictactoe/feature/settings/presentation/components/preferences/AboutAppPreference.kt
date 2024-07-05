@@ -23,7 +23,7 @@ import coil.compose.AsyncImagePainter
 import coil.compose.SubcomposeAsyncImage
 import coil.compose.SubcomposeAsyncImageContent
 import coil.request.ImageRequest
-import com.rafael.tictactoe.core.domain.util.versionCode
+import com.rafael.tictactoe.core.domain.util.VERSION_CODE
 import com.rafael.tictactoe.core.domain.util.getVersionName
 import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
@@ -42,13 +42,14 @@ fun AboutAppPreference(
             dampingRatio = Spring.DampingRatioMediumBouncy,
             stiffness = Spring.StiffnessLow,
         ),
+        label = "",
     )
 
     IconPreference(
         title = R.string.about_app,
         description = if (state.isAboutShown) {
             stringResource(R.string.creator_message) + "\n" + stringResource(R.string.app_version) + " " +
-                getVersionName() + " (" + versionCode + ")"
+                getVersionName() + " (" + VERSION_CODE + ")"
         } else {
             null
         },

@@ -90,8 +90,8 @@ internal fun GetPlayersPrefsDialog(
     val density = LocalDensity.current.density
     val densityHeight = (view.height / density).dp
     val focusRequester = remember { FocusRequester() }
-    val xColor by animateColorAsState(settingsState.xColor)
-    val circleColor by animateColorAsState(settingsState.circleColor)
+    val xColor by animateColorAsState(settingsState.xColor, label = "")
+    val circleColor by animateColorAsState(settingsState.circleColor, label = "")
     val isDarkThemeOn = settingsState.isDarkThemeOn
     val textField1State = !state.isCPUPlayer1
     val dialogHeight by animateDpAsState(
@@ -100,8 +100,11 @@ internal fun GetPlayersPrefsDialog(
             GameMode.PvP -> 215.dp
             GameMode.Online -> 235.dp
         },
+        label = "",
     )
-    val dialogWidth by animateDpAsState(if (state.gameMode == GameMode.Online) 245.dp else 380.dp)
+    val dialogWidth by animateDpAsState(if (state.gameMode == GameMode.Online) 245.dp else 380.dp,
+        label = ""
+    )
     val maxLetterLength by rememberSaveable { mutableIntStateOf(10) }
     val containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(18.dp)
     val bottomPadding by animateDpAsState(
@@ -114,6 +117,7 @@ internal fun GetPlayersPrefsDialog(
             dampingRatio = Spring.DampingRatioMediumBouncy,
             stiffness = Spring.StiffnessLow,
         ),
+        label = "",
     )
     val levels = Level.getLevels(isDarkThemeOn)
 

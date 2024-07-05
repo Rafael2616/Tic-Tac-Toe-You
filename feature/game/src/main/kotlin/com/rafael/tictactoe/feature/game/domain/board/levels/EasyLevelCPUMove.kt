@@ -24,6 +24,6 @@ internal fun easyLevelCPUMove(state: GameState): Pair<Int, Int> {
         }
     }
 
-    // Shoudn't reach here
+    // Shouldn't reach here
     return Pair(-1, -1)
 }

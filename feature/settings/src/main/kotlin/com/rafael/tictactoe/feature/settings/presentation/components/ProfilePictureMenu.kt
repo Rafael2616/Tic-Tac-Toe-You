@@ -3,6 +3,7 @@ package com.rafael.tictactoe.feature.settings.presentation.components
 import android.Manifest
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
@@ -57,8 +58,14 @@ internal fun ProfilePictureMenu(
     // to show PickVisualMedia
     LaunchedEffect(isClicked) {
         while (isClicked) {
-            if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                if (!isStoragePermissionGranted) isStoragePermissionGranted = true
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                 if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.MANAGE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                     if (!isStoragePermissionGranted) isStoragePermissionGranted = true
+                 }
+            } else {
+                if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                    if (!isStoragePermissionGranted) isStoragePermissionGranted = true
+                }
             }
             delay(200L)
         }
@@ -80,11 +87,22 @@ internal fun ProfilePictureMenu(
                 onClick = {
                     isClicked = true
                     if (!isStoragePermissionGranted) {
-                        ActivityCompat.requestPermissions(
-                            activity,
-                            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                            0,
-                        )
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                            ActivityCompat.requestPermissions(
+                                activity,
+                                arrayOf(
+                                    Manifest.permission.READ_MEDIA_IMAGES,
+                                    Manifest.permission.MANAGE_EXTERNAL_STORAGE
+                                ),
+                                0,
+                            )
+                        } else {
+                            ActivityCompat.requestPermissions(
+                                activity,
+                                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                                0,
+                            )
+                        }
                     }
                 },
                 leadingIcon = {

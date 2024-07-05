@@ -177,6 +177,7 @@ fun SearchSettingsScreen(
                                 transitionSpec = {
                                     fadeIn() togetherWith fadeOut()
                                 },
+                                label = "",
                             ) { textHint ->
                                 Column(
                                     modifier = Modifier.fillMaxSize(),

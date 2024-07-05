@@ -1,6 +1,5 @@
 package com.rafael.tictactoe.feature.settings.presentation.components.groups
 
-import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.runtime.Composable
 import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
@@ -10,7 +9,7 @@ import com.rafael.tictactoe.feature.settings.presentation.components.preferences
 import com.rafael.tictactoe.feature.settings.presentation.components.templates.PreferenceGroup
 
 @Composable
-fun LazyItemScope.SoundPreferenceGroup(
+fun SoundPreferenceGroup(
     onEvent: (SettingsEvent) -> Unit,
     state: SettingsState,
 ) {
