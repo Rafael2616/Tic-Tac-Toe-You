@@ -33,7 +33,7 @@ fun PreferenceGroup(
     val isInLandscape = orientation == Configuration.ORIENTATION_LANDSCAPE
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .wrapContentSize(),
     ) {
         Text(
@@ -41,7 +41,7 @@ fun PreferenceGroup(
             style = MaterialTheme.typography.titleLarge.copy(fontSize = 18.sp),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Start,
-            modifier = modifier
+            modifier = Modifier
                 .padding(bottom = 6.dp)
                 .fillMaxWidth(if (isInLandscape) 0.7f else 0.95f),
         )
