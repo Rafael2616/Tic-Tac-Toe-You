@@ -82,7 +82,7 @@ class GameViewModel @Inject constructor(
                 performBoardMove(event.rowIndex, event.cardIndex)
             }
             GameEvent.ResetVictoryCounter -> {
-                resetVicoryCounter()
+                resetVictoryCounter()
             }
             GameEvent.PlayAgain -> {
                 playAgain()
@@ -313,11 +313,11 @@ class GameViewModel @Inject constructor(
                 )
             }
         } else {
-            val randomicID = (1 until 999999).random()
+            val randomID = (1 until 999999).random()
             _state.update {
                 it.copy(
                     showSearchForPlayersSurface = true,
-                    matchID = randomicID,
+                    matchID = randomID,
                 )
             }
             onEvent(GameEvent.UpdateIsYouPlayer1)
@@ -331,10 +331,10 @@ class GameViewModel @Inject constructor(
         updateCurrentToastName()
     }
 
-    private fun resetVicoryCounter() {
+    private fun resetVictoryCounter() {
         _state.update {
             it.copy(
-                showVictoryCounterReseter = false,
+                showVictoryCounterReset = false,
                 player1Wins = 0,
                 player2Wins = 0,
             )
@@ -412,7 +412,7 @@ class GameViewModel @Inject constructor(
                 isExpandButtonShown = false,
                 isGameFinished = checkers.checkGameFinished(state.value),
                 gotOld = checkers.checkIfGotOld(state.value),
-                showVictoryCounterReseter = counter.shouldShowVictoryCounterReseter(state.value),
+                showVictoryCounterReset = counter.shouldShowVictoryCounterReseter(state.value),
                 hasWinner = checkers.checkWinner(state.value).first,
                 showRestartButton = restart.shouldShowRestartButton(state.value),
             )

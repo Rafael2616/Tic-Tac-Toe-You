@@ -102,9 +102,9 @@ fun BoardCustomizationDialog(
     val colorPickerController = rememberColorPickerController()
     val colorParser = rememberColorParser()
     val scrollState = rememberScrollState()
-    var sliderCornerRadius by remember { androidx.compose.runtime.mutableFloatStateOf(if (state.shapeSelected == SHAPE_CUSTOM) state.boardCardsCornerRadius else DEF_CARDS_CORNER_RADIUS) }
-    var sliderThickness by remember { androidx.compose.runtime.mutableFloatStateOf(if (state.shapeSelected == SHAPE_CUSTOM) state.boardCardsThickness else DEF_CARDS_BORDER_THICKNESS) }
-    var sliderElevation by remember { androidx.compose.runtime.mutableFloatStateOf(if (state.shapeSelected == SHAPE_CUSTOM) state.boardCardsElevation else DEF_CARDS_ELEVATION) }
+    var sliderCornerRadius by remember { mutableFloatStateOf(if (state.shapeSelected == SHAPE_CUSTOM) state.boardCardsCornerRadius else DEF_CARDS_CORNER_RADIUS) }
+    var sliderThickness by remember { mutableFloatStateOf(if (state.shapeSelected == SHAPE_CUSTOM) state.boardCardsThickness else DEF_CARDS_BORDER_THICKNESS) }
+    var sliderElevation by remember { mutableFloatStateOf(if (state.shapeSelected == SHAPE_CUSTOM) state.boardCardsElevation else DEF_CARDS_ELEVATION) }
     var sliderShadow by remember { mutableFloatStateOf(if (state.shapeSelected == SHAPE_CUSTOM) state.boardCardsShadow else DEF_CARDS_SHADOW) }
     var localShapeSelected by remember { mutableIntStateOf(state.shapeSelected) }
     var localCardsBorderHexColor by remember { mutableStateOf("FFFFFFFF") }
@@ -115,8 +115,8 @@ fun BoardCustomizationDialog(
     val rgbAnimController = rememberRGBAnimation()
     var rgbColorCurrent by remember { mutableStateOf(Color.Red) }
     var rgbColorOld by remember { mutableStateOf(Color.Yellow) }
-    val rgbColorCurrentAnimated by animateColorAsState(rgbColorCurrent)
-    val rgbColorOldAnimated by animateColorAsState(rgbColorOld)
+    val rgbColorCurrentAnimated by animateColorAsState(rgbColorCurrent, label = "")
+    val rgbColorOldAnimated by animateColorAsState(rgbColorOld, label = "")
     var localBoardCardsBorderColor by remember { mutableStateOf(if (state.shapeSelected == SHAPE_CUSTOM) state.boardCardsBorderColor else DEF_CARDS_COLOR) }
     val localBoardCardsBorderColorRGB by remember(rgbColorCurrentAnimated) {
         mutableStateOf(rgbColorCurrentAnimated)

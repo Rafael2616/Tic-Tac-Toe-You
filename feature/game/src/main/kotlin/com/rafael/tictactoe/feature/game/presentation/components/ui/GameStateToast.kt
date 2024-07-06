@@ -50,7 +50,7 @@ internal fun GameStateToast(
     } else {
         MaterialTheme.colorScheme.error
     }
-    val textColor by animateColorAsState(color)
+    val textColor by animateColorAsState(color, label = "")
     val winnerString = stringResource(R.string.winner)
     val winnerState = if (state.hasWinner) winnerString else ""
 
@@ -72,6 +72,7 @@ internal fun GameStateToast(
                 transitionSpec = {
                     fadeIn() togetherWith fadeOut()
                 },
+                label = "",
             ) { currentPlayerName ->
                 Text(
                     text = currentPlayerName,
@@ -102,6 +103,7 @@ internal fun GameStateToast(
                 transitionSpec = {
                     slideInHorizontally() togetherWith slideOutHorizontally()
                 },
+                label = "",
             ) { winnerText ->
                 Text(
                     text = winnerText,

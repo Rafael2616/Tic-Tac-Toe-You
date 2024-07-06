@@ -37,7 +37,7 @@ internal class GameRepositoryImpl @Inject constructor(
                     throw IOException("Request failed with code: " + response.code() + response.message())
                 }
                 if (response.body() == null) {
-                    val message = " message: No players avaliable in server"
+                    val message = " message: No players available in server"
                     Log.e(TAG, message)
                     throw IOException("Request failed with code: " + response.code() + message)
                 }

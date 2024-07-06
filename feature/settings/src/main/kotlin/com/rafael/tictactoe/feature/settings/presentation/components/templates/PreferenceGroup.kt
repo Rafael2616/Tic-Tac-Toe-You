@@ -3,9 +3,11 @@ package com.rafael.tictactoe.feature.settings.presentation.components.templates
 import android.content.res.Configuration
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -30,33 +32,38 @@ fun PreferenceGroup(
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = orientation == Configuration.ORIENTATION_LANDSCAPE
 
-    Text(
-        text = stringResource(heading),
-        style = MaterialTheme.typography.titleLarge.copy(fontSize = 18.sp),
-        color = MaterialTheme.colorScheme.onSurfaceVariant,
-        textAlign = TextAlign.Start,
+    Box(
         modifier = modifier
-            .padding(bottom = 6.dp)
-            .fillMaxWidth(if (isInLandscape) 0.7f else 0.95f),
-    )
-    Card(
-        shape = MaterialTheme.shapes.medium,
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface,
-        ),
-        modifier = Modifier
-            .animateContentSize()
-            .fillMaxWidth(if (isInLandscape) 0.65f else 0.93f)
-            .clip(RoundedCornerShape(26.dp)),
+            .wrapContentSize(),
     ) {
-        Column(
+        Text(
+            text = stringResource(heading),
+            style = MaterialTheme.typography.titleLarge.copy(fontSize = 18.sp),
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            textAlign = TextAlign.Start,
             modifier = Modifier
-                .fillMaxWidth()
-                .animateContentSize(),
-            verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterVertically),
-            horizontalAlignment = Alignment.Start,
+                .padding(bottom = 6.dp)
+                .fillMaxWidth(if (isInLandscape) 0.7f else 0.95f),
+        )
+        Card(
+            shape = MaterialTheme.shapes.medium,
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surface,
+            ),
+            modifier = Modifier
+                .animateContentSize()
+                .fillMaxWidth(if (isInLandscape) 0.65f else 0.93f)
+                .clip(RoundedCornerShape(26.dp)),
         ) {
-            preferences()
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .animateContentSize(),
+                verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterVertically),
+                horizontalAlignment = Alignment.Start,
+            ) {
+                preferences()
+            }
         }
     }
 }

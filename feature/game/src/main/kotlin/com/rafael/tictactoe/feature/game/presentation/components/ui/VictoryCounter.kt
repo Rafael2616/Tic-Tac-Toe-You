@@ -43,8 +43,8 @@ internal fun VictoryCounter(
     settingsState: SettingsState,
     modifier: Modifier = Modifier,
 ) {
-    val xColor by animateColorAsState(settingsState.xColor)
-    val circleColor by animateColorAsState(settingsState.circleColor)
+    val xColor by animateColorAsState(settingsState.xColor, label = "")
+    val circleColor by animateColorAsState(settingsState.circleColor, label = "")
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = orientation == Configuration.ORIENTATION_LANDSCAPE
     val counters = listOf(
@@ -88,6 +88,7 @@ internal fun VictoryCounter(
                             transitionSpec = {
                                 fadeIn() togetherWith fadeOut()
                             },
+                            label = "",
                         ) { playerName ->
                             Text(
                                 text = playerName,

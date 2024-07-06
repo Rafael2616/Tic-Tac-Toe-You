@@ -9,7 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.rafael.tictactoe.core.domain.util.getVersionName
 import com.rafael.tictactoe.core.domain.util.toColor
 import com.rafael.tictactoe.core.services.music.backgroundMusic
-import com.rafael.tictactoe.feature.settings.data.profile_picture.AndroidProfilePictureUtils as ProfilePictureUtils
+import com.rafael.tictactoe.feature.settings.data.profile.AndroidProfilePictureUtils as ProfilePictureUtils
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsEntity
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsState

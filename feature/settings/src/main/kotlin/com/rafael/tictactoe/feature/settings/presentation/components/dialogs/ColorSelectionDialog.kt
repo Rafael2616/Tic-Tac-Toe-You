@@ -82,8 +82,8 @@ fun ColorSelectionDialog(
         Customization.CIRCLECOLOR -> 1
         Customization.WINNERLINECOLOR -> 2
     }
-    var selectedWinnerLineColor by remember { androidx.compose.runtime.mutableIntStateOf(state.selectedWinnerLineColor) }
-    var selectedCircleColor by remember { androidx.compose.runtime.mutableIntStateOf(state.selectedCircleColor) }
+    var selectedWinnerLineColor by remember { mutableIntStateOf(state.selectedWinnerLineColor) }
+    var selectedCircleColor by remember { mutableIntStateOf(state.selectedCircleColor) }
     var selectedXColor by remember { mutableIntStateOf(state.selectedXColor) }
     val colorItems = ColorItem.getColorItems()
     var xColor by remember { mutableStateOf(state.xColor) }

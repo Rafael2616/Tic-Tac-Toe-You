@@ -18,7 +18,7 @@ fun XColorPreference(
     onEvent: (SettingsEvent) -> Unit,
     state: SettingsState,
 ) {
-    val xColor by animateColorAsState(state.xColor)
+    val xColor by animateColorAsState(state.xColor, label = "")
 
     IconPreference(
         title = R.string.color_x,

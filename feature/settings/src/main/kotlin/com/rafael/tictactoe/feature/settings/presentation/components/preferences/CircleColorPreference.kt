@@ -19,7 +19,7 @@ fun CircleColorPreference(
     onEvent: (SettingsEvent) -> Unit,
     state: SettingsState,
 ) {
-    val circleColor by animateColorAsState(state.circleColor)
+    val circleColor by animateColorAsState(state.circleColor, label = "")
 
     IconPreference(
         title = R.string.color_circle,
