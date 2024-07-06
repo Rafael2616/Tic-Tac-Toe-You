@@ -89,7 +89,7 @@ internal fun ProfilePictureMenu(
                 onClick = {
                     isClicked = true
                     if (!isStoragePermissionGranted) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                             ActivityCompat.requestPermissions(
                                 activity,
                                 arrayOf(
