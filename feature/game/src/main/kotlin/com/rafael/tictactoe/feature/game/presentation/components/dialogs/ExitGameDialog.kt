@@ -33,7 +33,7 @@ internal fun ExitGameDialog(
 
     AlertDialog(
         onDismissRequest = {
-            onEvent(GameEvent.DimissExitDialog)
+            onEvent(GameEvent.DismissExitDialog)
         },
         icon = { Icon(Icons.AutoMirrored.Outlined.Logout, contentDescription = null) },
         title = {
@@ -49,7 +49,7 @@ internal fun ExitGameDialog(
         confirmButton = {
             OutlinedButton(
                 onClick = {
-                    onEvent(GameEvent.DimissExitDialog)
+                    onEvent(GameEvent.DismissExitDialog)
                 },
             ) {
                 Text(stringResource(R.string.stay))

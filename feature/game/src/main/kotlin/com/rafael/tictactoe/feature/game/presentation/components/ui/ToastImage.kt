@@ -29,7 +29,7 @@ internal fun ToastImage(
         modifier = modifier
             .fillMaxSize(),
     ) {
-        // Image showed when game not started yet (configuration fase)
+        // Image showed when game not started yet (configuration phase)
         if (!play) {
             if (isXFor1) drawXinToast(xColor) else drawCircleInToast(circleColor)
         }

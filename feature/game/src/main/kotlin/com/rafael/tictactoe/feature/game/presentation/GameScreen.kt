@@ -21,7 +21,7 @@ import com.rafael.tictactoe.feature.game.domain.model.GameMode
 import com.rafael.tictactoe.feature.game.presentation.components.buttons.PlayAgainButton
 import com.rafael.tictactoe.feature.game.presentation.components.buttons.RestartButton
 import com.rafael.tictactoe.feature.game.presentation.components.buttons.SoundAndMusicButtons
-import com.rafael.tictactoe.feature.game.presentation.components.buttons.VictoryCounterReseterButton
+import com.rafael.tictactoe.feature.game.presentation.components.buttons.VictoryCounterResetButton
 import com.rafael.tictactoe.feature.game.presentation.components.dialogs.ExitGameDialog
 import com.rafael.tictactoe.feature.game.presentation.components.dialogs.GetPlayersPrefsDialog
 import com.rafael.tictactoe.feature.game.presentation.components.ui.DifficultyLevelSwitcher
@@ -91,7 +91,7 @@ fun GameScreen(
             settingsState,
         )
         AnimatedVisibility(state.showVictoryCounterReset) {
-            VictoryCounterReseterButton(onEvent)
+            VictoryCounterResetButton(onEvent)
         }
     }
 

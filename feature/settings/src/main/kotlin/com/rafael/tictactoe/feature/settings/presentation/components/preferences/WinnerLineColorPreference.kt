@@ -22,7 +22,7 @@ fun WinnerLineColorPreference(
 
     IconPreference(
         title = R.string.winner_line_color,
-        leadingCanva = {
+        leadingCanvas = {
             drawLine(
                 strokeWidth = 5.dp.toPx(),
                 start = Offset(x = 26.dp.toPx(), y = 2.dp.toPx()),

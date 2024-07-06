@@ -16,7 +16,7 @@ internal class VictoryCounter {
         }
     }
 
-    fun shouldShowVictoryCounterReseter(state: GameState): Boolean {
+    fun shouldShowVictoryCounterReset(state: GameState): Boolean {
         val isCounterReset = state.player1Wins + state.player2Wins
         val hasWinner = Checkers().checkWinner(state).first
 

@@ -221,7 +221,7 @@ fun SearchSettingsScreen(
 
     DisposableEffect(Unit) {
         onDispose {
-            settingsVM.onEvent(SettingsEvent.OnSettingsScreenDestroyment)
+            settingsVM.onEvent(SettingsEvent.OnSettingsScreenDestroy)
         }
     }
 }

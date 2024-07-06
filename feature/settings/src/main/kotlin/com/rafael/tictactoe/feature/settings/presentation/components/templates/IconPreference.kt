@@ -43,7 +43,7 @@ internal fun IconPreference(
     modifier: Modifier = Modifier,
     description: String? = null,
     rowHeight: Dp = 58.dp,
-    leadingCanva: (DrawScope.() -> Unit)? = null,
+    leadingCanvas: (DrawScope.() -> Unit)? = null,
     leadingWidget: (@Composable BoxScope.() -> Unit)? = null,
     extraContent: (@Composable () -> Unit)? = null,
     leadingIcon: ImageVector? = null,
@@ -70,7 +70,7 @@ internal fun IconPreference(
                     .size(32.dp),
             )
         }
-        leadingCanva?.let {
+        leadingCanvas?.let {
             Box(
                 modifier = Modifier
                     .clip(CircleShape)
@@ -87,7 +87,7 @@ internal fun IconPreference(
                         modifier = Modifier
                             .fillMaxSize(),
                     ) {
-                        leadingCanva(this)
+                        leadingCanvas(this)
                     }
                 }
             }

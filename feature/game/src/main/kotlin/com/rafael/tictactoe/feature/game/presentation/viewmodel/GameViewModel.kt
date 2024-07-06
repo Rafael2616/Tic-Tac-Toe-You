@@ -99,7 +99,7 @@ class GameViewModel @Inject constructor(
             GameEvent.ToggleExpandButton -> {
                 _state.update { it.copy(isExpandButtonShown = !it.isExpandButtonShown) }
             }
-            GameEvent.DimissExitDialog -> {
+            GameEvent.DismissExitDialog -> {
                 _state.update { it.copy(showExitGameDialog = false) }
             }
             GameEvent.ToggleExitDialog -> {
@@ -412,7 +412,7 @@ class GameViewModel @Inject constructor(
                 isExpandButtonShown = false,
                 isGameFinished = checkers.checkGameFinished(state.value),
                 gotOld = checkers.checkIfGotOld(state.value),
-                showVictoryCounterReset = counter.shouldShowVictoryCounterReseter(state.value),
+                showVictoryCounterReset = counter.shouldShowVictoryCounterReset(state.value),
                 hasWinner = checkers.checkWinner(state.value).first,
                 showRestartButton = restart.shouldShowRestartButton(state.value),
             )

@@ -57,7 +57,7 @@ fun SettingsScreen(
 
     DisposableEffect(Unit) {
         onDispose {
-            onEvent(SettingsEvent.OnSettingsScreenDestroyment)
+            onEvent(SettingsEvent.OnSettingsScreenDestroy)
         }
     }
 }

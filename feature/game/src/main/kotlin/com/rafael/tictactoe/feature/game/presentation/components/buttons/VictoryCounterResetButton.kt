@@ -24,7 +24,7 @@ import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.feature.game.domain.model.GameEvent
 
 @Composable
-internal fun VictoryCounterReseterButton(
+internal fun VictoryCounterResetButton(
     onEvent: (GameEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {

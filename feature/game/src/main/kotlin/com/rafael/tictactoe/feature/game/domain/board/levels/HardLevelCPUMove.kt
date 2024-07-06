@@ -131,7 +131,7 @@ internal fun hardLevelCPUMove(state: GameState): Pair<Int, Int> {
         }
     }
 
-    // Choose the best side based in which side is cliked when center [1][1] is already clicked too and which player has been clicked
+    // Choose the best side based in which side is clicked when center [1][1] is already clicked too and which player has been clicked
     if ((card[center.first][center.second] && isClicked[center.first][center.second]) &&
         (card[sides[0].first][sides[0].second] && isClicked[sides[0].first][sides[0].second])
     ) {
@@ -188,7 +188,7 @@ internal fun hardLevelCPUMove(state: GameState): Pair<Int, Int> {
         }
     }
 
-    // Choose the best corner based in which corner is cliked when center [1][1] is already clicked too and which player has been clicked
+    // Choose the best corner based in which corner is clicked when center [1][1] is already clicked too and which player has been clicked
     if ((card[center.first][center.second] && isClicked[center.first][center.second]) &&
         (card[corners[0].first][corners[0].second] && isClicked[corners[0].first][corners[0].second])
     ) {
@@ -245,7 +245,7 @@ internal fun hardLevelCPUMove(state: GameState): Pair<Int, Int> {
         }
     }
 
-    // Choose the best corner based in which side and corner is cliked and which player has been clicked
+    // Choose the best corner based in which side and corner is clicked and which player has been clicked
     if (
         (card[corners[0].first][corners[0].second] && isClicked[corners[0].first][corners[0].second]) &&
         (card[sides[0].first][sides[0].second] && isClicked[sides[0].first][sides[0].second]) ||
@@ -456,6 +456,6 @@ internal fun hardLevelCPUMove(state: GameState): Pair<Int, Int> {
         }
     }
 
-    // Shoudn't reach here
+    // Shouldn't reach here
     return Pair(-1, -1)
 }

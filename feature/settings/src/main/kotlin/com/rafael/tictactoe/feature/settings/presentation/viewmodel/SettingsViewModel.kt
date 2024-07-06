@@ -141,7 +141,7 @@ class SettingsViewModel @Inject constructor(
                     repository.setAllSettingsValues(settings)
                 }
             }
-            SettingsEvent.OnSettingsScreenDestroyment -> {
+            SettingsEvent.OnSettingsScreenDestroy -> {
                 _state.update {
                     it.copy(
                         isAboutShown = false,

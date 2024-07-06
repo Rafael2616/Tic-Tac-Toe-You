@@ -10,7 +10,7 @@ sealed interface SettingsEvent {
     data object ToggleIsFollowingSystemOn : SettingsEvent
     data object ToggleIsDynamicColorsOn : SettingsEvent
     data class SetIsDarkThemeOn(val value: Boolean) : SettingsEvent
-    data object OnSettingsScreenDestroyment : SettingsEvent
+    data object OnSettingsScreenDestroy : SettingsEvent
     data class ShowAboutAppCard(val value: Boolean) : SettingsEvent
     data class SetCustomizationType(val type: Customization) : SettingsEvent
     data class ShowColorSelectionDialog(val value: Boolean) : SettingsEvent

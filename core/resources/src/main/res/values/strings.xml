@@ -93,7 +93,7 @@
     <string name="alpha">Alpha</string>
     <string name="rgb_effect">RGB Effect</string>
     <string name="color_gradient">Color gradient</string>
-    <string name="overheat_warning">Warning: this option may cause overheating and loss of perfomance</string>
+    <string name="overheat_warning">Warning: this option may cause overheating and loss of performance</string>
     <string name="current">Current</string>
     <string name="update_history">Update history</string>
     <string name="presets">Presets</string>

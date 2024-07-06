@@ -22,7 +22,7 @@ fun XColorPreference(
 
     IconPreference(
         title = R.string.color_x,
-        leadingCanva = {
+        leadingCanvas = {
             drawLine(
                 strokeWidth = 5.dp.toPx(),
                 start = Offset(x = 2.dp.toPx(), y = 2.dp.toPx()),

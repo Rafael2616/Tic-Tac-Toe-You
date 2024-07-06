@@ -201,7 +201,7 @@ internal fun GetPlayersPrefsDialog(
                             .focusRequester(focusRequester),
                     )
 
-                    // Show an second Textfield and toggle only in PvP and CPU Modes
+                    // Show an second text field and toggle only in PvP and CPU Modes
                     if (state.gameMode != GameMode.Online) {
                         IconButton(
                             modifier = Modifier

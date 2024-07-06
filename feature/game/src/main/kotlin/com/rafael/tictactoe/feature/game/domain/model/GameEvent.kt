@@ -15,7 +15,7 @@ sealed interface GameEvent {
     data object ToggleExpandButton : GameEvent
     data object ToggleExitDialog : GameEvent
     data object ToggleIsXForPlayer1 : GameEvent
-    data object DimissExitDialog : GameEvent
+    data object DismissExitDialog : GameEvent
     data class SelectCPUDifficultyMode(val level: Level) : GameEvent
     data class UpdateRequestState(val state: RequestState) : GameEvent
     data object GetRemotePlayers : GameEvent

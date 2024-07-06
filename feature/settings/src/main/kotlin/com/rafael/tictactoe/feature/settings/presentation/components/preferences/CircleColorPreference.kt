@@ -23,7 +23,7 @@ fun CircleColorPreference(
 
     IconPreference(
         title = R.string.color_circle,
-        leadingCanva = {
+        leadingCanvas = {
             drawCircle(
                 center = Offset(14.dp.toPx(), 14.dp.toPx()),
                 radius = 12.dp.toPx(),
