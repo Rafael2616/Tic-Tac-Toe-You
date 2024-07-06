@@ -41,9 +41,6 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
-    // Media3
-    implementation(libs.androidx.media3.common)
-    implementation(libs.androidx.media3.exoplayer)
     // Compose extended colors
     implementation(libs.smarttoolfactory.extended.colors)
     // LazyColumnScrollbar

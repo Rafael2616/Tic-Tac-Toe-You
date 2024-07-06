@@ -2,19 +2,12 @@ plugins {
     alias(libs.plugins.rafael.gradle.android.library)
     alias(libs.plugins.rafael.gradle.android.library.compose)
     alias(libs.plugins.rafael.gradle.spotless)
-    alias(libs.plugins.androidx.room)
     alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.serialization)
 }
 
-android {
-    namespace = "com.rafael.tictactoe.feature.game"
-
-    room {
-        schemaDirectory("$projectDir/schemas")
-    }
-}
+android.namespace = "com.rafael.tictactoe.feature.game"
 
 dependencies {
     // Kotlin
@@ -31,10 +24,6 @@ dependencies {
     implementation(libs.dagger.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
     ksp(libs.dagger.hilt.android.compiler)
-    // Room
-    implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.room.ktx)
-    ksp(libs.androidx.room.compiler)
     // Media3
     implementation(libs.androidx.media3.common)
     implementation(libs.androidx.media3.exoplayer)
