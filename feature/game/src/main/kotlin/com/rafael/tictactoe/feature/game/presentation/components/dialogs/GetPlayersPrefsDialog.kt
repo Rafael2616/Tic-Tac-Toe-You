@@ -102,8 +102,9 @@ internal fun GetPlayersPrefsDialog(
         },
         label = "",
     )
-    val dialogWidth by animateDpAsState(if (state.gameMode == GameMode.Online) 245.dp else 380.dp,
-        label = ""
+    val dialogWidth by animateDpAsState(
+        if (state.gameMode == GameMode.Online) 245.dp else 380.dp,
+        label = "",
     )
     val maxLetterLength by rememberSaveable { mutableIntStateOf(10) }
     val containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(18.dp)

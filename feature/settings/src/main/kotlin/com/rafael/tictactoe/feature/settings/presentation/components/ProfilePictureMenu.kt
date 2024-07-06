@@ -59,9 +59,9 @@ internal fun ProfilePictureMenu(
     LaunchedEffect(isClicked) {
         while (isClicked) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                 if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.MANAGE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                     if (!isStoragePermissionGranted) isStoragePermissionGranted = true
-                 }
+                if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.MANAGE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                    if (!isStoragePermissionGranted) isStoragePermissionGranted = true
+                }
             } else {
                 if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                     if (!isStoragePermissionGranted) isStoragePermissionGranted = true
@@ -92,7 +92,7 @@ internal fun ProfilePictureMenu(
                                 activity,
                                 arrayOf(
                                     Manifest.permission.READ_MEDIA_IMAGES,
-                                    Manifest.permission.MANAGE_EXTERNAL_STORAGE
+                                    Manifest.permission.MANAGE_EXTERNAL_STORAGE,
                                 ),
                                 0,
                             )
