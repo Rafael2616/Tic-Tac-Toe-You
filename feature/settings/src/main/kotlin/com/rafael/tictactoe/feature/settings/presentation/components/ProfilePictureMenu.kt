@@ -8,7 +8,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -39,7 +38,6 @@ import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 import kotlinx.coroutines.delay
 
-@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
 internal fun ProfilePictureMenu(
     state: SettingsState,
