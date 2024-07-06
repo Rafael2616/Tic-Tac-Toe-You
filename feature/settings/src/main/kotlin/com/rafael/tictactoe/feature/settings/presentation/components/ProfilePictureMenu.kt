@@ -8,6 +8,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -38,6 +39,7 @@ import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 import kotlinx.coroutines.delay
 
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
 internal fun ProfilePictureMenu(
     state: SettingsState,
@@ -59,7 +61,7 @@ internal fun ProfilePictureMenu(
     LaunchedEffect(isClicked) {
         while (isClicked) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.MANAGE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED) {
                     if (!isStoragePermissionGranted) isStoragePermissionGranted = true
                 }
             } else {
@@ -87,12 +89,11 @@ internal fun ProfilePictureMenu(
                 onClick = {
                     isClicked = true
                     if (!isStoragePermissionGranted) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                             ActivityCompat.requestPermissions(
                                 activity,
                                 arrayOf(
                                     Manifest.permission.READ_MEDIA_IMAGES,
-                                    Manifest.permission.MANAGE_EXTERNAL_STORAGE,
                                 ),
                                 0,
                             )

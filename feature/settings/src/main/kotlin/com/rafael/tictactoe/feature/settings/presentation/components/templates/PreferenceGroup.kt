@@ -32,7 +32,7 @@ fun PreferenceGroup(
     val orientation = LocalConfiguration.current.orientation
     val isInLandscape = orientation == Configuration.ORIENTATION_LANDSCAPE
 
-    Box(
+    Column(
         modifier = modifier
             .wrapContentSize(),
     ) {
