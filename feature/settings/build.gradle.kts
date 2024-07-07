@@ -54,7 +54,7 @@ dependencies {
     kapt(libs.androidx.appsearch.compiler)
 
     // Projects
-    implementation(projects.core.domain)
+    api(projects.core.domain)
     implementation(projects.core.services)
     implementation(projects.core.resources)
     implementation(projects.core.navigation)
