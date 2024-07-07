@@ -30,7 +30,6 @@ dependencies {
     // AndroidX
     implementation(libs.androidx.annotation)
     implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.hilt.navigation.compose)
     // Navigation
     implementation(libs.androidx.navigation.compose)
     // Dagger Hilt

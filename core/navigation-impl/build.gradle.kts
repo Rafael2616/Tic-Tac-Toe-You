@@ -11,6 +11,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     // Material Motion
     implementation(libs.material.motion.compose)
+    implementation(libs.androidx.hilt.navigation.compose)
 
     // Projects
     implementation(projects.core.ui)

@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.compose.compiler.gradle.ComposeCompilerGradlePluginE
 internal fun Project.configureComposeAndroid(
     commonExtension: CommonExtension<*, *, *, *, *, *>,
 ) {
-    commonExtension.apply { 
+    commonExtension.apply {
         buildFeatures {
             compose = true
         }
@@ -29,6 +29,7 @@ internal fun Project.configureComposeAndroid(
             "implementation"(libs.findLibrary("androidx-compose-material-icons-extended").get())
             "implementation"(libs.findLibrary("androidx-lifecycle-runtime-compose").get())
             "implementation"(libs.findLibrary("androidx-lifecycle-viewmodel-compose").get())
+            "debugImplementation"(libs.findLibrary("androidx-compose-ui-tooling-preview").get())
             "debugImplementation"(libs.findLibrary("androidx-compose-ui-test-manifest").get())
             "androidTestImplementation"(libs.findLibrary("androidx-compose-ui-test-junit4").get())
         }

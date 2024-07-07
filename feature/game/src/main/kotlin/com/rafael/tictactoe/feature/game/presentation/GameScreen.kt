@@ -13,7 +13,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.rafael.tictactoe.feature.game.domain.model.GameEvent
@@ -40,8 +39,8 @@ import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsView
 fun GameScreen(
     navController: NavController,
     gameMode: String,
-    settingsVM: SettingsViewModel = hiltViewModel(),
-    viewModel: GameViewModel = hiltViewModel(),
+    settingsVM: SettingsViewModel,
+    viewModel: GameViewModel,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val settingsState by settingsVM.state.collectAsStateWithLifecycle()

@@ -10,12 +10,13 @@ plugins {
 android.namespace = "com.rafael.tictactoe.feature.library_info"
 
 dependencies {
+    // Navigation
+    implementation(libs.androidx.navigation.compose)
     // Kotlin
     implementation(libs.kotlinx.coroutines)
     implementation(libs.kotlinx.serialization.json)
     // Dagger Hilt
     implementation(libs.dagger.hilt.android)
-    implementation(libs.androidx.hilt.navigation.compose)
     ksp(libs.dagger.hilt.android.compiler)
     // Projects
     implementation(projects.core.resources)

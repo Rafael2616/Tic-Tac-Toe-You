@@ -59,7 +59,6 @@ gradlePlugin {
 extensions.configure<SpotlessExtension> {
     kotlin {
         ktlint()
-            .setEditorConfigPath(rootProject.file(".editorconfig"))
             .customRuleSets(
                 listOf(
                     libs.ktlint.compose.rules.get().toString(),
@@ -69,7 +68,6 @@ extensions.configure<SpotlessExtension> {
     }
     kotlinGradle {
         ktlint()
-            .setEditorConfigPath(rootProject.file(".editorconfig"))
         target("*.gradle.kts")
     }
 }

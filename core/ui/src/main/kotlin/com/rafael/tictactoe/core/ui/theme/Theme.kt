@@ -14,12 +14,9 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsViewModel
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 
 private val LightColors = lightColorScheme(
     primary = md_theme_light_primary,
@@ -88,16 +85,15 @@ private val DarkColors = darkColorScheme(
 @Composable
 fun AppTheme(
     isSystemInDarkTheme: Boolean = isSystemInDarkTheme(),
-    viewModel: SettingsViewModel = hiltViewModel(),
+    state: SettingsState = SettingsState(),
+    onEvent: (SettingsEvent) -> Unit,
     content: @Composable () -> Unit,
 ) {
-    val state by viewModel.state.collectAsStateWithLifecycle()
     val isDarkThemeOn = state.isDarkThemeOn
     val isFollowingSystemOn = state.isFollowingSystemOn
     val isDynamicColorsOn = state.isDynamicColorsOn
     val context = LocalContext.current
     val isAndroidS = VERSION.SDK_INT >= VERSION_CODES.S
-    val onEvent = viewModel::onEvent
 
     // Handle which color scheme will be applied
     val colors = if (isFollowingSystemOn) {

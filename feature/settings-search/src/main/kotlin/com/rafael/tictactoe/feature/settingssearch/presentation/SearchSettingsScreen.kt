@@ -50,31 +50,29 @@ import androidx.compose.ui.semantics.traversalIndex
 import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.feature.changelogs.presentation.components.WhatsNewDialog
 import com.rafael.tictactoe.feature.settings.domain.model.SettingItem
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.settings.presentation.components.dialogs.BoardCustomizationDialog
 import com.rafael.tictactoe.feature.settings.presentation.components.dialogs.ColorSelectionDialog
 import com.rafael.tictactoe.feature.settings.presentation.components.templates.PreferenceGroup
-import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsViewModel
 import com.rafael.tictactoe.feature.settingssearch.domain.model.SearchSettingsEvent
-import com.rafael.tictactoe.feature.settingssearch.presentation.viewmodel.SearchSettingsViewModel
+import com.rafael.tictactoe.feature.settingssearch.domain.model.SearchSettingsState
 
 @Composable
 @ExperimentalMaterial3Api
 @ExperimentalTextApi
 fun SearchSettingsScreen(
     navController: NavController,
+    searchState: SearchSettingsState,
+    settingsState: SettingsState,
+    onEvent: (SettingsEvent) -> Unit,
+    onSearchEvent: (SearchSettingsEvent) -> Unit,
     modifier: Modifier = Modifier,
-    settingsVM: SettingsViewModel = hiltViewModel(),
-    searchSettingsVM: SearchSettingsViewModel = hiltViewModel(),
 ) {
-    val state by settingsVM.state.collectAsStateWithLifecycle()
-    val searchState by searchSettingsVM.state.collectAsStateWithLifecycle()
     var expanded by rememberSaveable { mutableStateOf(true) }
     val matchingSettings = searchState.matchingSettings
     val focusManager = LocalFocusManager.current
@@ -94,7 +92,7 @@ fun SearchSettingsScreen(
             inputField = {
                 SearchBarDefaults.InputField(
                     query = searchState.query,
-                    onQueryChange = { searchSettingsVM.onEvent(SearchSettingsEvent.QuerySettingsFromRepository(it)) },
+                    onQueryChange = { onSearchEvent(SearchSettingsEvent.QuerySettingsFromRepository(it)) },
                     onSearch = { expanded = false },
                     expanded = expanded,
                     onExpandedChange = { expanded = it },
@@ -112,9 +110,7 @@ fun SearchSettingsScreen(
                     trailingIcon = {
                         if (searchState.query.isNotEmpty()) {
                             IconButton(
-                                onClick = {
-                                    searchSettingsVM.onEvent(SearchSettingsEvent.ResetQuery)
-                                },
+                                onClick = { onSearchEvent(SearchSettingsEvent.ResetQuery) },
                             ) {
                                 Icon(
                                     imageVector = Icons.Outlined.Close,
@@ -155,7 +151,7 @@ fun SearchSettingsScreen(
                     if (matchingSettings.isNotEmpty()) {
                         PreferenceGroup(R.string.settings) {
                             matchingSettings.forEach { setting ->
-                                setting.content?.invoke(settingsVM::onEvent, state, navController)
+                                setting.content?.invoke(onEvent, settingsState, navController)
                             }
                         }
                     } else {
@@ -169,7 +165,7 @@ fun SearchSettingsScreen(
                                 targetState = if (searchState.query.isNotEmpty()) {
                                     stringResource(R.string.no_matching_settings_msg) + ": ${searchState.query}"
                                 } else {
-                                    val randomSetting = SettingItem.getSettingsItems(context, state)
+                                    val randomSetting = SettingItem.getSettingsItems(context, settingsState)
                                         .filter { it.isAvailable }
                                         .random()
                                     stringResource(R.string.search_tip) + ": ${randomSetting.searchSpecs.text}"
@@ -204,24 +200,24 @@ fun SearchSettingsScreen(
         }
     }
 
-    AnimatedVisibility(state.showColorSelectionDialog) {
-        ColorSelectionDialog(settingsVM::onEvent, state)
+    AnimatedVisibility(settingsState.showColorSelectionDialog) {
+        ColorSelectionDialog(onEvent, settingsState)
     }
 
-    AnimatedVisibility(state.showWhatsNewDialog) {
+    AnimatedVisibility(settingsState.showWhatsNewDialog) {
         WhatsNewDialog(
-            settingsVM::onEvent,
+            onEvent,
             navController,
         )
     }
 
-    AnimatedVisibility(state.showBoardCustomizationDialog) {
-        BoardCustomizationDialog(settingsVM::onEvent, state)
+    AnimatedVisibility(settingsState.showBoardCustomizationDialog) {
+        BoardCustomizationDialog(onEvent, settingsState)
     }
 
     DisposableEffect(Unit) {
         onDispose {
-            settingsVM.onEvent(SettingsEvent.OnSettingsScreenDestroy)
+            onEvent(SettingsEvent.OnSettingsScreenDestroy)
         }
     }
 }

@@ -40,17 +40,20 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.rafael.tictactoe.core.domain.util.getVersionName
 import com.rafael.tictactoe.core.resources.R
+import com.rafael.tictactoe.core.ui.theme.AppTheme
 import com.rafael.tictactoe.feature.changelogs.data.getChangelogFiles
 import com.rafael.tictactoe.feature.changelogs.presentation.components.WhatsNewDialog
 import com.rafael.tictactoe.feature.changelogs.presentation.util.styledChangelog
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsViewModel
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 
 @Composable
 @ExperimentalMaterial3Api
@@ -58,7 +61,8 @@ import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsView
 fun ChangelogsScreen(
     navController: NavController,
     modifier: Modifier = Modifier,
-    settingsVM: SettingsViewModel = hiltViewModel(),
+    settingsState: SettingsState,
+    onEvent: (SettingsEvent) -> Unit,
 ) {
     val context = LocalContext.current
     val changelogs = context.getChangelogFiles()
@@ -66,7 +70,6 @@ fun ChangelogsScreen(
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val version = getVersionName()
     val currentVersion = if (version.contains("-")) version.split("-")[0] else version
-    val state by settingsVM.state.collectAsStateWithLifecycle()
     val uriHandler = LocalUriHandler.current
     val layoutResult = remember { mutableStateOf<TextLayoutResult?>(null) }
 
@@ -96,7 +99,7 @@ fun ChangelogsScreen(
                 },
                 actions = {
                     IconButton(
-                        onClick = { settingsVM.onEvent(SettingsEvent.ShowWhatsNewDialog) },
+                        onClick = { onEvent(SettingsEvent.ShowWhatsNewDialog) },
                     ) {
                         Icon(
                             imageVector = Icons.Outlined.NewReleases,
@@ -161,10 +164,29 @@ fun ChangelogsScreen(
         }
     }
 
-    AnimatedVisibility(state.showWhatsNewDialog) {
+    AnimatedVisibility(settingsState.showWhatsNewDialog) {
         WhatsNewDialog(
-            settingsVM::onEvent,
+            onEvent,
             navController,
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@PreviewLightDark
+@PreviewScreenSizes
+@Composable
+@ExperimentalMaterial3Api
+@ExperimentalTextApi
+fun ChangelogsScreenPreview() {
+    AppTheme(
+        state = SettingsState(),
+        onEvent = {},
+    ) {
+        ChangelogsScreen(
+            navController = rememberNavController(),
+            settingsState = SettingsState(),
+            onEvent = {},
         )
     }
 }

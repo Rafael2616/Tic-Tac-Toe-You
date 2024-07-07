@@ -7,8 +7,8 @@ plugins {
 android.namespace = "com.rafael.tictactoe.core.ui"
 
 dependencies {
-    // Dagger Hilt
-    implementation(libs.androidx.hilt.navigation.compose)
+    // AndroidX
+    implementation(libs.androidx.activity.compose)
 
     // Projects
     implementation(projects.feature.settings)
