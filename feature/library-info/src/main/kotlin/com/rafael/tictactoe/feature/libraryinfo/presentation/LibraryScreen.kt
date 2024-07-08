@@ -37,26 +37,29 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.rafael.tictactoe.core.resources.R
+import com.rafael.tictactoe.core.ui.theme.AppTheme
+import com.rafael.tictactoe.feature.libraryinfo.domain.model.OssLibrary
 import com.rafael.tictactoe.feature.libraryinfo.presentation.utils.annotatedLink
-import com.rafael.tictactoe.feature.libraryinfo.presentation.viewmodel.LibraryViewModel
 
 @Composable
 @ExperimentalMaterial3Api
 fun LibraryScreen(
     navController: NavController,
+    libraries: List<OssLibrary>,
     modifier: Modifier = Modifier,
-    settingsVM: LibraryViewModel ,
 ) {
     val uriHandler = LocalUriHandler.current
     val layoutResult = remember { mutableStateOf<TextLayoutResult?>(null) }
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     var isGoBackClicked by rememberSaveable { mutableStateOf(false) }
-    val libraries by settingsVM.ossLibraries.collectAsStateWithLifecycle()
 
     Scaffold(
         modifier = modifier
@@ -151,5 +154,44 @@ fun LibraryScreen(
                 }
             }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@PreviewLightDark
+@PreviewScreenSizes
+@Composable
+@ExperimentalMaterial3Api
+private fun LibraryScreenPreview() {
+    AppTheme(
+        onEvent = {},
+    ) {
+        LibraryScreen(
+            navController = rememberNavController(),
+            libraries = listOf(
+                OssLibrary(
+                    name = "Compose",
+                    version = "1.4.3",
+                    artifactId = "androidx.compose.material3",
+                    groupId = "androidx.compose.material3",
+                    spdxLicenses = listOf(
+                        OssLibrary.License(
+                            url = "https://spdx.org/licenses/Apache-2.0.html",
+                        ),
+                    ),
+                ),
+                OssLibrary(
+                    name = "Firebase",
+                    version = "1.0.0",
+                    artifactId = "com.google.firebase",
+                    groupId = "com.google.firebase",
+                    spdxLicenses = listOf(
+                        OssLibrary.License(
+                            url = "https://spdx.org/licenses/Apache-2.0.html",
+                        ),
+                    ),
+                ),
+            ),
+        )
     }
 }

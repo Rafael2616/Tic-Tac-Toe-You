@@ -29,7 +29,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -41,32 +40,36 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.rafael.tictactoe.core.navigation.destinations.Game
 import com.rafael.tictactoe.core.navigation.destinations.Settings
 import com.rafael.tictactoe.core.resources.R
+import com.rafael.tictactoe.core.ui.theme.AppTheme
 import com.rafael.tictactoe.feature.changelogs.presentation.components.WhatsNewDialog
+import com.rafael.tictactoe.feature.main.domain.model.MainState
 import com.rafael.tictactoe.feature.main.domain.model.ScreenItem
 import com.rafael.tictactoe.feature.main.presentation.util.ShortcutsIntentHandler
-import com.rafael.tictactoe.feature.main.presentation.viewmodel.MainViewModel
-import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsViewModel
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 
 @Composable
 @ExperimentalTextApi
 fun MainScreen(
     navController: NavController,
+    state: SettingsState,
+    mainState: MainState,
+    onRedirectToGameModes: (Boolean) -> Unit,
+    onSettingsEvent: (SettingsEvent) -> Unit,
     modifier: Modifier = Modifier,
     intent: Intent? = null,
-    settingsVM: SettingsViewModel = hiltViewModel(),
-    mainVM: MainViewModel = hiltViewModel(),
 ) {
     val activity = LocalContext.current as ComponentActivity
-    val state by settingsVM.state.collectAsStateWithLifecycle()
-    val mainState by mainVM.state.collectAsStateWithLifecycle()
     val orientation = LocalConfiguration.current.orientation
 
     val items = listOf(
@@ -173,7 +176,7 @@ fun MainScreen(
 
     AnimatedVisibility(state.showWhatsNewDialog) {
         WhatsNewDialog(
-            settingsVM::onEvent,
+            onSettingsEvent,
             navController,
         )
     }
@@ -184,6 +187,26 @@ fun MainScreen(
      **/
     if (mainState.canRedirectToAnGameModeScreen && intent != null) {
         ShortcutsIntentHandler(activity, navController, intent)
-        mainVM.canRedirectToAnGameModeScreen(false)
+        onRedirectToGameModes(false)
+    }
+}
+
+@Preview(showBackground = true)
+@PreviewLightDark
+@PreviewScreenSizes
+@Composable
+@ExperimentalTextApi
+private fun MainScreenPreview() {
+    AppTheme(
+        state = SettingsState(),
+        onEvent = {},
+    ) {
+        MainScreen(
+            navController = rememberNavController(),
+            state = SettingsState(),
+            mainState = MainState(),
+            onRedirectToGameModes = {},
+            onSettingsEvent = {},
+        )
     }
 }

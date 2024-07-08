@@ -18,6 +18,8 @@ dependencies {
     // Dagger Hilt
     implementation(libs.dagger.hilt.android)
     ksp(libs.dagger.hilt.android.compiler)
+
     // Projects
     implementation(projects.core.resources)
+    implementation(projects.core.ui)
 }

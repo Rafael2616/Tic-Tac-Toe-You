@@ -36,6 +36,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -78,6 +79,7 @@ fun SearchSettingsScreen(
     onSearchEvent: (SearchSettingsEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val latestOnEvent by rememberUpdatedState(onEvent)
     var expanded by rememberSaveable { mutableStateOf(true) }
     val matchingSettings = searchState.matchingSettings
     val focusManager = LocalFocusManager.current
@@ -156,7 +158,7 @@ fun SearchSettingsScreen(
                     if (matchingSettings.isNotEmpty()) {
                         PreferenceGroup(R.string.settings) {
                             matchingSettings.forEach { setting ->
-                                setting.content?.invoke(onEvent, settingsState, navController)
+                                setting.content?.invoke(latestOnEvent, settingsState, navController)
                             }
                         }
                     } else {
@@ -206,23 +208,23 @@ fun SearchSettingsScreen(
     }
 
     AnimatedVisibility(settingsState.showColorSelectionDialog) {
-        ColorSelectionDialog(onEvent, settingsState)
+        ColorSelectionDialog(latestOnEvent, settingsState)
     }
 
     AnimatedVisibility(settingsState.showWhatsNewDialog) {
         WhatsNewDialog(
-            onEvent,
+            latestOnEvent,
             navController,
         )
     }
 
     AnimatedVisibility(settingsState.showBoardCustomizationDialog) {
-        BoardCustomizationDialog(onEvent, settingsState)
+        BoardCustomizationDialog(latestOnEvent, settingsState)
     }
 
     DisposableEffect(Unit) {
         onDispose {
-            onEvent(SettingsEvent.OnSettingsScreenDestroy)
+            latestOnEvent(SettingsEvent.OnSettingsScreenDestroy)
         }
     }
 }
@@ -233,7 +235,7 @@ fun SearchSettingsScreen(
 @Composable
 @ExperimentalMaterial3Api
 @ExperimentalTextApi
-fun SearchSettingsScreenPreview() {
+private fun SearchSettingsScreenPreview() {
     AppTheme(
         state = SettingsState(),
         onEvent = {},

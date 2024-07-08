@@ -33,7 +33,6 @@ dependencies {
     // Dagger Hilt
     implementation(libs.dagger.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
-    implementation(project(":core:ui"))
     ksp(libs.dagger.hilt.android.compiler)
     // App Search
     implementation(libs.androidx.appsearch)
@@ -45,4 +44,5 @@ dependencies {
     implementation(projects.core.resources)
     implementation(projects.feature.changelogs)
     implementation(projects.feature.settings)
+    implementation(projects.core.ui)
 }

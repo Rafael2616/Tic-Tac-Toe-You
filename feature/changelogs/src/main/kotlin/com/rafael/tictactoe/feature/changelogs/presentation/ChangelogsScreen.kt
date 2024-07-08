@@ -1,5 +1,6 @@
 package com.rafael.tictactoe.feature.changelogs.presentation
 
+import android.content.Context
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
@@ -60,12 +61,12 @@ import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 @ExperimentalTextApi
 fun ChangelogsScreen(
     navController: NavController,
-    modifier: Modifier = Modifier,
     settingsState: SettingsState,
+    modifier: Modifier = Modifier,
+    context: Context = LocalContext.current,
+    changelogs: List<Pair<String, String>> = context.getChangelogFiles(),
     onEvent: (SettingsEvent) -> Unit,
 ) {
-    val context = LocalContext.current
-    val changelogs = context.getChangelogFiles()
     var isGoBackClicked by rememberSaveable { mutableStateOf(false) }
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val version = getVersionName()
@@ -178,13 +179,23 @@ fun ChangelogsScreen(
 @Composable
 @ExperimentalMaterial3Api
 @ExperimentalTextApi
-fun ChangelogsScreenPreview() {
+private fun ChangelogsScreenPreview() {
     AppTheme(
         state = SettingsState(),
         onEvent = {},
     ) {
         ChangelogsScreen(
             navController = rememberNavController(),
+            changelogs = listOf(
+                Pair("1.0.0", "Initial release"),
+                Pair("1.0.1", "Fixes: fix one issue"),
+                Pair(
+                    "1.0.2",
+                    "" +
+                        "Added: add new feature" +
+                        "\nhttps://test.com.br/",
+                ),
+            ),
             settingsState = SettingsState(),
             onEvent = {},
         )

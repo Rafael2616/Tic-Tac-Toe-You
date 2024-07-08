@@ -32,6 +32,7 @@ dependencies {
     implementation(libs.okhttp3)
 
     // Projects
+    implementation(projects.core.ui)
     implementation(projects.core.domain)
     implementation(projects.core.resources)
     implementation(projects.feature.settings)

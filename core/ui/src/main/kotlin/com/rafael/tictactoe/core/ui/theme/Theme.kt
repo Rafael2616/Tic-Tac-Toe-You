@@ -84,9 +84,9 @@ private val DarkColors = darkColorScheme(
 
 @Composable
 fun AppTheme(
+    onEvent: (SettingsEvent) -> Unit,
     isSystemInDarkTheme: Boolean = isSystemInDarkTheme(),
     state: SettingsState = SettingsState(),
-    onEvent: (SettingsEvent) -> Unit,
     content: @Composable () -> Unit,
 ) {
     val isDarkThemeOn = state.isDarkThemeOn

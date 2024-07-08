@@ -17,10 +17,10 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     // Dagger Hilt
     implementation(libs.dagger.hilt.android)
-    implementation(libs.androidx.hilt.navigation.compose)
     ksp(libs.dagger.hilt.android.compiler)
 
     // Projects
+    implementation(projects.core.ui)
     implementation(projects.core.resources)
     implementation(projects.core.navigation)
     implementation(projects.feature.settings)

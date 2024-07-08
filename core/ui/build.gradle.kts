@@ -11,5 +11,5 @@ dependencies {
     implementation(libs.androidx.activity.compose)
 
     // Projects
-    implementation(projects.feature.settings)
+    api(projects.feature.settings)
 }

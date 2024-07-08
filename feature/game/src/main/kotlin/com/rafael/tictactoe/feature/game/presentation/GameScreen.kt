@@ -11,12 +11,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.rafael.tictactoe.core.ui.theme.AppTheme
 import com.rafael.tictactoe.feature.game.domain.model.GameEvent
 import com.rafael.tictactoe.feature.game.domain.model.GameMode
+import com.rafael.tictactoe.feature.game.domain.model.GameState
 import com.rafael.tictactoe.feature.game.presentation.components.buttons.PlayAgainButton
 import com.rafael.tictactoe.feature.game.presentation.components.buttons.RestartButton
 import com.rafael.tictactoe.feature.game.presentation.components.buttons.SoundAndMusicButtons
@@ -29,9 +35,9 @@ import com.rafael.tictactoe.feature.game.presentation.components.ui.GameStateToa
 import com.rafael.tictactoe.feature.game.presentation.components.ui.PlayerSearchSurface
 import com.rafael.tictactoe.feature.game.presentation.components.ui.VictoryCounter
 import com.rafael.tictactoe.feature.game.presentation.components.ui.WinnerLines
-import com.rafael.tictactoe.feature.game.presentation.viewmodel.GameViewModel
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.settings.presentation.components.dialogs.ColorSelectionDialog
-import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsViewModel
 
 @Composable
 @ExperimentalMaterial3Api
@@ -39,110 +45,132 @@ import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsView
 fun GameScreen(
     navController: NavController,
     gameMode: String,
-    settingsVM: SettingsViewModel,
-    viewModel: GameViewModel,
+    gameState: GameState,
+    settingsState: SettingsState,
+    onGameEvent: (GameEvent) -> Unit,
+    onSettingsEvent: (SettingsEvent) -> Unit,
 ) {
-    val state by viewModel.state.collectAsStateWithLifecycle()
-    val settingsState by settingsVM.state.collectAsStateWithLifecycle()
-    val onEvent = viewModel::onEvent
-    val onSettingsEvent = settingsVM::onEvent
-    val showPlayerPrefsDialog = !state.play && state.showGetPrefsDialog
+    val latestOnSettingsEvent by rememberUpdatedState(onSettingsEvent)
+    val latestOnGameEvent by rememberUpdatedState(onGameEvent)
+    val showPlayerPrefsDialog = !gameState.play && gameState.showGetPrefsDialog
     var canSetMode by rememberSaveable { mutableStateOf(true) }
 
     GameBoard(
-        onEvent,
-        state,
+        latestOnGameEvent,
+        gameState,
         settingsState,
     )
     SoundAndMusicButtons(
-        onEvent,
-        state,
+        latestOnGameEvent,
+        gameState,
         settingsState,
     )
     VictoryCounter(
-        state,
+        gameState,
         settingsState,
     )
     GameStateToast(
-        state,
+        gameState,
         settingsState,
     )
 
-    AnimatedVisibility(state.showRestartButton) {
+    AnimatedVisibility(gameState.showRestartButton) {
         RestartButton(
-            onEvent,
-            state,
+            latestOnGameEvent,
+            gameState,
             settingsState,
         )
     }
 
-    if (state.gameMode == GameMode.VsCPU) {
+    if (gameState.gameMode == GameMode.VsCPU) {
         DifficultyLevelSwitcher(
-            state,
-            onEvent,
+            gameState,
+            latestOnGameEvent,
             settingsState,
         )
     }
 
-    AnimatedVisibility(state.isGameFinished) {
+    AnimatedVisibility(gameState.isGameFinished) {
         PlayAgainButton(
-            onEvent,
+            latestOnGameEvent,
             settingsState,
         )
-        AnimatedVisibility(state.showVictoryCounterReset) {
-            VictoryCounterResetButton(onEvent)
+        AnimatedVisibility(gameState.showVictoryCounterReset) {
+            VictoryCounterResetButton(latestOnGameEvent)
         }
     }
 
     AnimatedVisibility(
-        visible = state.hasWinner,
+        visible = gameState.hasWinner,
         enter = fadeIn() + scaleIn(),
         exit = fadeOut(),
     ) {
         WinnerLines(
-            state,
+            gameState,
             settingsState,
         )
     }
 
     AnimatedVisibility(showPlayerPrefsDialog) {
         GetPlayersPrefsDialog(
-            onEvent,
-            onSettingsEvent,
-            state,
+            latestOnGameEvent,
+            latestOnSettingsEvent,
+            gameState,
             settingsState,
         )
     }
 
     AnimatedVisibility(settingsState.showColorSelectionDialog) {
         ColorSelectionDialog(
-            onSettingsEvent,
+            latestOnSettingsEvent,
             settingsState,
         )
     }
 
-    AnimatedVisibility(state.showSearchForPlayersSurface) {
+    AnimatedVisibility(gameState.showSearchForPlayersSurface) {
         PlayerSearchSurface(
-            state,
+            gameState,
             settingsState,
-            onEvent,
+            latestOnGameEvent,
         )
     }
 
-    AnimatedVisibility(state.showExitGameDialog) {
+    AnimatedVisibility(gameState.showExitGameDialog) {
         ExitGameDialog(
             navController,
-            onEvent,
+            latestOnGameEvent,
         )
     }
 
     DisposableEffect(canSetMode) {
-        onEvent(GameEvent.SetGameMode(gameMode))
+        latestOnGameEvent(GameEvent.SetGameMode(gameMode))
         canSetMode = false
         onDispose {}
     }
 
     BackHandler {
-        onEvent(GameEvent.ToggleExitDialog)
+        latestOnGameEvent(GameEvent.ToggleExitDialog)
+    }
+}
+
+@Preview(showBackground = true)
+@PreviewLightDark
+@PreviewScreenSizes
+@Composable
+@ExperimentalMaterial3Api
+@ExperimentalLayoutApi
+private fun GameScreenPreview() {
+    AppTheme(
+        state = SettingsState(),
+        onEvent = {},
+    ) {
+        GameScreen(
+            navController = rememberNavController(),
+            gameMode = "PvP",
+            gameState = GameState(),
+            settingsState = SettingsState(),
+            onGameEvent = {},
+            onSettingsEvent = {},
+        )
     }
 }

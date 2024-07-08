@@ -7,6 +7,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.ExperimentalTextApi
@@ -46,7 +47,8 @@ import soup.compose.material.motion.animation.rememberSlideDistance
 fun TicTacToeNavGraph(
     modifier: Modifier = Modifier,
     intent: Intent? = null,
-    settingsViewModel: SettingsViewModel = hiltViewModel(),) {
+    settingsViewModel: SettingsViewModel = hiltViewModel(),
+) {
     val navController = rememberNavController()
     val isRtl = LocalLayoutDirection.current == LayoutDirection.Rtl
     val slideDistance = rememberSlideDistance()
@@ -72,24 +74,46 @@ fun TicTacToeNavGraph(
             ) {
                 composable<Main> {
                     val mainViewModel = hiltViewModel<MainViewModel>()
+                    val mainState = mainViewModel.state.collectAsStateWithLifecycle()
                     MainScreen(
                         navController = navController,
                         intent = intent,
-                        settingsVM = settingsViewModel,
-                        mainVM = mainViewModel,
+                        state = settingsState.value,
+                        mainState = mainState.value,
+                        onSettingsEvent = onSettingsEvent,
+                        onRedirectToGameModes = mainViewModel::canRedirectToAnGameModeScreen,
                     )
                 }
                 composable<Game> {
                     val args = it.toRoute<Game>()
                     val gameViewModel = hiltViewModel<GameViewModel>()
-                    GameScreen(navController, args.gameMode, viewModel = gameViewModel, settingsVM = settingsViewModel)
+                    val gameState by gameViewModel.state.collectAsStateWithLifecycle()
+                    val onGameEvent = gameViewModel::onEvent
+                    GameScreen(
+                        navController,
+                        args.gameMode,
+                        gameState = gameState,
+                        settingsState = settingsState.value,
+                        onGameEvent = onGameEvent,
+                        onSettingsEvent = onSettingsEvent,
+                    )
                 }
                 composable<Settings> {
-                    SettingsScreen(navController, settingsVM = settingsViewModel)
+                    SettingsScreen(
+                        navController = navController,
+                        state = settingsState.value,
+                        onEvent = onSettingsEvent,
+                        onDeleteImage = settingsViewModel::onDeleteImage,
+                        onSaveImage = settingsViewModel::onSaveImage,
+                    )
                 }
                 composable<LibraryInfo> {
                     val libraryViewModel = hiltViewModel<LibraryViewModel>()
-                    LibraryScreen(navController, settingsVM = libraryViewModel)
+                    val libraries by libraryViewModel.ossLibraries.collectAsStateWithLifecycle()
+                    LibraryScreen(
+                        navController = navController,
+                        libraries = libraries,
+                    )
                 }
                 composable<SettingsSearch> {
                     val searchSettingsViewModel = hiltViewModel<SearchSettingsViewModel>()
