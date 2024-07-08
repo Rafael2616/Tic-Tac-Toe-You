@@ -8,8 +8,8 @@ javaVersion = "17"
 
 agp = "8.5.0"
 spotless = "6.25.0"
-ksp = "2.0.20-Beta1-1.0.22"
-kotlin = "2.0.20-Beta1"
+ksp = "2.0.0-1.0.22"
+kotlin = "2.0.0"
 licensee = "1.11.0"
 
 kotlinx-coroutines = "1.8.1"
