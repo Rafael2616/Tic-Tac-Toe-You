@@ -29,7 +29,7 @@ internal fun Project.configureComposeAndroid(
             "implementation"(libs.findLibrary("androidx-compose-material-icons-extended").get())
             "implementation"(libs.findLibrary("androidx-lifecycle-runtime-compose").get())
             "implementation"(libs.findLibrary("androidx-lifecycle-viewmodel-compose").get())
-            "debugImplementation"(libs.findLibrary("androidx-compose-ui-tooling-preview").get())
+            "implementation"(libs.findLibrary("androidx-compose-ui-tooling-preview").get())
             "debugImplementation"(libs.findLibrary("androidx-compose-ui-test-manifest").get())
             "androidTestImplementation"(libs.findLibrary("androidx-compose-ui-test-junit4").get())
         }
