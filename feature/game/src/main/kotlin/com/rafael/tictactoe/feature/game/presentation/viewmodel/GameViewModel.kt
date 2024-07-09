@@ -128,14 +128,16 @@ class GameViewModel @Inject constructor(
                             }
                         }.first()
                         val randomPlayer = possiblePlayers.indices.random()
-                        _state.update { it.copy(secondPlayer = possiblePlayers[randomPlayer]) }
-
                         val onlinePlayerName = state.value.secondPlayer!!.name
+
                         _state.update {
-                            it.copy(
-                                currentPlayerName = onlinePlayerName,
-                                isXFor1 = !state.value.secondPlayer!!.isXFor1,
+                             it.copy(
+                                 secondPlayer = possiblePlayers[randomPlayer],
+                                 currentPlayerName = onlinePlayerName,
+                                 isXFor1 = !state.value.secondPlayer!!.isXFor1,
                             )
+                        }
+                        _state.update {
                             if (state.value.secondPlayer!!.isPlayer1) {
                                 it.copy(
                                     player1Name = onlinePlayerName,
