@@ -132,9 +132,9 @@ class GameViewModel @Inject constructor(
 
                         _state.update {
                             it.copy(
-                                 secondPlayer = possiblePlayers[randomPlayer],
-                                 currentPlayerName = onlinePlayerName,
-                                 isXFor1 = !state.value.secondPlayer!!.isXFor1,
+                                secondPlayer = possiblePlayers[randomPlayer],
+                                currentPlayerName = onlinePlayerName,
+                                isXFor1 = !state.value.secondPlayer!!.isXFor1,
                             )
                         }
                         _state.update {
