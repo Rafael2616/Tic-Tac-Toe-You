@@ -131,7 +131,7 @@ class GameViewModel @Inject constructor(
                         val onlinePlayerName = state.value.secondPlayer!!.name
 
                         _state.update {
-                             it.copy(
+                            it.copy(
                                  secondPlayer = possiblePlayers[randomPlayer],
                                  currentPlayerName = onlinePlayerName,
                                  isXFor1 = !state.value.secondPlayer!!.isXFor1,
