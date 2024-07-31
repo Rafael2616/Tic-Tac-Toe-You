@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <string name="play">Play</string>
+        <string name="vs_cpu">Versus CPU</string>
+        <string name="online_match">Online Match</string>
+        <string name="short_label">Start match</string>
+        <string name="app_name">Tic-Tac-Toe - Material You</string>
+</resources>

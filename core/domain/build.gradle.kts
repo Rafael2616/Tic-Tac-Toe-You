@@ -1,7 +1,7 @@
 plugins {
-    alias(libs.plugins.rafael.gradle.android.library)
-    alias(libs.plugins.rafael.gradle.android.library.compose)
-    alias(libs.plugins.rafael.gradle.spotless)
+    alias(libs.plugins.rafael.android.library)
+    alias(libs.plugins.rafael.android.library.compose)
+    alias(libs.plugins.rafael.spotless)
 }
 
 android {

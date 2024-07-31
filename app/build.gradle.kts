@@ -2,14 +2,11 @@ import app.cash.licensee.LicenseeTask
 import app.cash.licensee.UnusedAction.IGNORE
 import com.android.build.gradle.internal.api.ApkVariantOutputImpl
 import java.util.Properties
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    alias(libs.plugins.rafael.gradle.android.application)
-    alias(libs.plugins.rafael.gradle.android.application.compose)
-    alias(libs.plugins.rafael.gradle.spotless)
-    alias(libs.plugins.dagger.hilt)
-    alias(libs.plugins.ksp)
+    alias(libs.plugins.rafael.android.application)
+    alias(libs.plugins.rafael.android.application.compose)
+    alias(libs.plugins.rafael.spotless)
     alias(libs.plugins.licensee)
 }
 
@@ -23,15 +20,6 @@ android {
         versionName = libs.versions.versionName.get()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
-        tasks.withType<KotlinCompile>().configureEach {
-            ksp {
-                arg("room.schemaLocation", "$projectDir/schemas")
-                arg("room.exportSchema", "true")
-                arg("room.incremental", "true")
-                arg("room.generateKotlin", "true")
-            }
-        }
     }
 
     val releaseSigningFile = rootProject.file("keystore.properties")
@@ -62,7 +50,10 @@ android {
             applicationIdSuffix = ".beta"
             versionNameSuffix = "-beta"
             resValue("string", "app_name_beta", "Jogo da Velha - Beta")
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+            )
         }
 
         named("debug") {
@@ -75,7 +66,10 @@ android {
         named("release") {
             isMinifyEnabled = true
             signingConfig = releaseSigningConfig
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+            )
         }
     }
 
@@ -109,34 +103,46 @@ licensee {
     allow("EPL-1.0")
     allow("LGPL-2.1-only")
     allow("MIT")
+    allow("BSD-3-Clause")
     allowUrl("https://www.gnu.org/licenses/gpl-3.0.en.html")
-    allowDependency("com.github.SmartToolFactory", "Compose-Extended-Colors", libs.versions.smarttoolfactory.extended.colors.get()) {
-        because("No license provided for this dependency")
-    }
+    allowUrl("http://openjdk.java.net/legal/gplv2+ce.html")
+    allowUrl("https://glassfish.dev.java.net/nonav/public/CDDL+GPL.html")
+
     unusedAction(IGNORE)
 }
 
-dependencies {
-    // Android Core
-    implementation(libs.androidx.core)
-    implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.annotation)
-    implementation(libs.androidx.core.splashscreen)
-    // Dagger Hilt
-    implementation(libs.dagger.hilt.android)
-    implementation(libs.androidx.hilt.navigation.compose)
-    ksp(libs.dagger.hilt.android.compiler)
-    // Media3
-    implementation(libs.androidx.media3.exoplayer)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.test.espresso.core)
-    androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.mockk)
+kotlin {
+    sourceSets {
 
-    // Projects
-    implementation(projects.core.navigation)
-    implementation(projects.core.navigationImpl)
-    implementation(projects.core.resources)
-    implementation(projects.core.services)
-    implementation(projects.feature.settings)
+        androidMain.dependencies {
+            // Android Core
+            implementation(libs.androidx.core)
+            implementation(libs.androidx.activity.compose)
+            // Media3
+            implementation(libs.androidx.media3.exoplayer)
+            // Koin
+            implementation(libs.koin.android)
+            implementation(libs.koin.androidx.compose)
+        }
+
+        androidUnitTest.dependencies {
+            implementation(libs.junit)
+        }
+
+        androidInstrumentedTest.dependencies {
+            implementation(libs.androidx.test.espresso.core)
+            implementation(libs.androidx.test.ext.junit)
+            implementation(libs.mockk)
+        }
+
+        commonMain.dependencies {
+            implementation(libs.androidx.annotation)
+            implementation(libs.androidx.core.splashscreen)
+            // Projects
+            implementation(projects.core.navigation)
+            implementation(projects.core.navigationImpl)
+            implementation(projects.core.resources)
+            implementation(projects.feature.settings)
+        }
+    }
 }

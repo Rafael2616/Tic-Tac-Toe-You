@@ -8,7 +8,7 @@ plugins {
      alias(libs.plugins.spotless)
 }
 
-group = "com.rafael.gradle"
+group = "com.rafael"
 
 // Configure the build-logic plugins to target JDK 17
 // This matches the JDK used to build the project, and is not related to what is running on device.
@@ -28,29 +28,30 @@ dependencies {
     compileOnly(libs.kotlin.gradle)
     compileOnly(libs.spotless.gradle)
     compileOnly(libs.composeCompiler.gradle)
+    compileOnly(libs.compose.gradle)
 }
 
 gradlePlugin {
     // register the convention plugin
     plugins {
         register("spotlessLibrary") {
-            id = "com.rafael.gradle.spotless"
+            id = "com.rafael.spotless"
             implementationClass = "AndroidSpotlessConventionPlugin"
         }
         register("androidLibrary") {
-            id = "com.rafael.gradle.android.library"
+            id = "com.rafael.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"
         }
         register("androidApplication") {
-            id = "com.rafael.gradle.android.application"
+            id = "com.rafael.android.application"
             implementationClass = "AndroidApplicationConventionPlugin"
         }
         register("composeLibrary") {
-            id = "com.rafael.gradle.compose.library"
+            id = "com.rafael.compose.library"
             implementationClass = "AndroidLibraryComposeConventionPlugin"
         }
         register("composeApplication") {
-            id = "com.rafael.gradle.compose.application"
+            id = "com.rafael.compose.application"
             implementationClass = "AndroidApplicationComposeConventionPlugin"
         }
     }

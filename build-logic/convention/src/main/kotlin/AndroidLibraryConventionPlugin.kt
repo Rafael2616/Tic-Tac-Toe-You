@@ -1,5 +1,5 @@
 import com.android.build.api.dsl.LibraryExtension
-import com.rafael.gradle.configureKotlinAndroid
+import com.rafael.gradle.configureKotlinMultiplatform
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
@@ -9,11 +9,11 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
         with(target) {
             with(pluginManager) {
                 apply("com.android.library")
-                apply("org.jetbrains.kotlin.android")
+                apply("org.jetbrains.kotlin.multiplatform")
             }
 
             extensions.configure<LibraryExtension> {
-                configureKotlinAndroid(this)
+                configureKotlinMultiplatform(this)
             }
         }
     }
