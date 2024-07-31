@@ -55,12 +55,12 @@ fun TicTacToeNavGraph(
     val navController = rememberNavController()
     val isRtl = LocalLayoutDirection.current == LayoutDirection.Rtl
     val slideDistance = rememberSlideDistance()
-    val settingsState = settingsViewModel.state.collectAsStateWithLifecycle()
+    val settingsState by settingsViewModel.state.collectAsStateWithLifecycle()
     val onSettingsEvent = settingsViewModel::onEvent
 
     KoinContext {
         AppTheme(
-            state = settingsState.value,
+            state = settingsState,
             onEvent = onSettingsEvent,
         ) {
             Surface(
@@ -77,12 +77,12 @@ fun TicTacToeNavGraph(
                 ) {
                     composable<Main> {
                         val mainViewModel = koinViewModel<MainViewModel>()
-                        val mainState = mainViewModel.state.collectAsStateWithLifecycle()
+                        val mainState by mainViewModel.state.collectAsStateWithLifecycle()
                         MainScreen(
                             navController = navController,
                             destination = destination,
-                            state = settingsState.value,
-                            mainState = mainState.value,
+                            state = settingsState,
+                            mainState = mainState,
                             onSettingsEvent = onSettingsEvent,
                             onRedirectToGameModes = mainViewModel::canRedirectToAnGameModeScreen,
                         )
@@ -93,10 +93,10 @@ fun TicTacToeNavGraph(
                         val gameState by gameViewModel.state.collectAsStateWithLifecycle()
                         val onGameEvent = gameViewModel::onEvent
                         GameScreen(
-                            navController,
-                            args.gameMode,
+                            navController = navController,
+                            gameMode = args.gameMode,
                             gameState = gameState,
-                            settingsState = settingsState.value,
+                            settingsState = settingsState,
                             onGameEvent = onGameEvent,
                             onSettingsEvent = onSettingsEvent,
                         )
@@ -104,7 +104,7 @@ fun TicTacToeNavGraph(
                     composable<Settings> {
                         SettingsScreen(
                             navController = navController,
-                            state = settingsState.value,
+                            state = settingsState,
                             onEvent = onSettingsEvent,
                             onDeleteImage = settingsViewModel::onDeleteImage,
                             onSaveImage = settingsViewModel::onSaveImage,
@@ -120,13 +120,12 @@ fun TicTacToeNavGraph(
                     }
                     composable<SettingsSearch> {
                         val searchSettingsViewModel = koinViewModel<SearchSettingsViewModel>()
-                        val searchState =
-                            searchSettingsViewModel.state.collectAsStateWithLifecycle()
+                        val searchState by searchSettingsViewModel.state.collectAsStateWithLifecycle()
                         val onSearchEvent = searchSettingsViewModel::onEvent
                         SearchSettingsScreen(
                             navController = navController,
-                            searchState = searchState.value,
-                            settingsState = settingsState.value,
+                            searchState = searchState,
+                            settingsState = settingsState,
                             onSearchEvent = onSearchEvent,
                             onEvent = onSettingsEvent,
                         )
@@ -134,7 +133,7 @@ fun TicTacToeNavGraph(
                     composable<Changelogs> {
                         ChangelogsScreen(
                             navController = navController,
-                            settingsState = settingsState.value,
+                            settingsState = settingsState,
                             onEvent = onSettingsEvent,
                         )
                     }

@@ -31,6 +31,7 @@ import com.rafael.tictactoe.core.resources.active_music
 import com.rafael.tictactoe.core.resources.active_sound
 import com.rafael.tictactoe.feature.game.domain.model.GameEvent
 import com.rafael.tictactoe.feature.game.domain.model.GameState
+import com.rafael.tictactoe.feature.game.domain.model.SoundItem
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 import org.jetbrains.compose.resources.stringResource
 
@@ -41,6 +42,19 @@ internal fun SoundAndMusicButtons(
     settingsState: SettingsState,
     modifier: Modifier = Modifier,
 ) {
+    val buttons = listOf(
+        SoundItem(
+            name = Res.string.active_sound,
+            icon = if (settingsState.isSoundEffectsOn) Icons.Outlined.MusicNote else Icons.Outlined.MusicOff,
+            onClick = { onEvent(GameEvent.ToggleSoundEffectsButton) },
+        ),
+        SoundItem(
+            name = Res.string.active_music,
+            icon = if (settingsState.isBackgroundMusicOn) Icons.AutoMirrored.Outlined.VolumeUp else Icons.AutoMirrored.Outlined.VolumeOff,
+            onClick = { onEvent(GameEvent.ToggleBgMusicButton) },
+        ),
+    )
+
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -67,38 +81,22 @@ internal fun SoundAndMusicButtons(
             }
             if (state.isExpandButtonShown) {
                 Spacer(Modifier.height(3.dp))
-                Buttons.entries.forEach { button ->
+                buttons.forEach { button ->
                     FilledTonalIconButton(
                         modifier = Modifier
                             .size(45.dp),
-                        onClick = {
-                            when (button) {
-                                Buttons.SOUND_EFFECTS -> onEvent(GameEvent.ToggleSoundEffectsButton)
-                                Buttons.BG_MUSIC -> onEvent(GameEvent.ToggleBgMusicButton)
-                            }
-                        },
+                        onClick = { button.onClick() },
                     ) {
                         Icon(
-                            imageVector = when (button) {
-                                Buttons.SOUND_EFFECTS -> if (settingsState.isSoundEffectsOn) Icons.Outlined.MusicNote else Icons.Outlined.MusicOff
-                                Buttons.BG_MUSIC -> if (settingsState.isBackgroundMusicOn) Icons.AutoMirrored.Outlined.VolumeUp else Icons.AutoMirrored.Outlined.VolumeOff
-                            },
-                            contentDescription = when (button) {
-                                Buttons.SOUND_EFFECTS -> "Sound Effects Button"
-                                Buttons.BG_MUSIC -> "Background Music Button"
-                            },
+                            imageVector = button.icon,
+                            contentDescription = stringResource(button.name),
                             tint = MaterialTheme.colorScheme.onSurface,
                             modifier = Modifier
                                 .size(38.dp),
                         )
                     }
                     Text(
-                        text = stringResource(
-                            when (button) {
-                                Buttons.SOUND_EFFECTS -> Res.string.active_sound
-                                Buttons.BG_MUSIC -> Res.string.active_music
-                            },
-                        ),
+                        text = stringResource(button.name),
                         style = MaterialTheme.typography.bodyMedium.copy(fontSize = 12.sp),
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier
@@ -109,9 +107,4 @@ internal fun SoundAndMusicButtons(
             }
         }
     }
-}
-
-enum class Buttons {
-    SOUND_EFFECTS,
-    BG_MUSIC,
 }
