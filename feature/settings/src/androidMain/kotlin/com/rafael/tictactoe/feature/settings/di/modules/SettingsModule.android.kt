@@ -26,9 +26,6 @@ actual val settingsModule: Module
             SettingsRepositoryImpl(get<SettingsDatabase>().settingsDao())
         }
         viewModel {
-            SettingsViewModel(
-                get<SettingsRepositoryImpl>(),
-                // androidApplication(),
-            )
+            SettingsViewModel(get<SettingsRepositoryImpl>())
         }
     }

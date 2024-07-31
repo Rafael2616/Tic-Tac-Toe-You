@@ -101,6 +101,7 @@ import com.rafael.tictactoe.feature.settings.presentation.util.BoardConstants.DE
 import com.rafael.tictactoe.feature.settings.presentation.util.BoardConstants.DEF_CARDS_SHADOW
 import com.rafael.tictactoe.feature.settings.presentation.util.BoardConstants.SHAPE_CUSTOM
 import com.smarttoolfactory.extendedcolors.parser.rememberColorParser
+import com.smarttoolfactory.extendedcolors.util.roundToTwoDigits
 import kotlin.math.roundToInt
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -344,9 +345,7 @@ fun BoardCustomizationDialog(
                                 text = customization.name +
                                     ": " +
                                     if (index == 1) {
-                                        // TODO
-                                        // "%.2f".format(customization.value)
-                                        customization.value
+                                        customization.value.roundToTwoDigits()
                                     } else {
                                         customization.value.roundToInt()
                                     } +

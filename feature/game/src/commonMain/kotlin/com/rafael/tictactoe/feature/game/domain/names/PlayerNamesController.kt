@@ -1,6 +1,5 @@
 package com.rafael.tictactoe.feature.game.domain.names
 
-// import android.content.Context
 import com.rafael.tictactoe.core.resources.Res
 import com.rafael.tictactoe.core.resources.cpu
 import com.rafael.tictactoe.core.resources.player
@@ -11,10 +10,7 @@ import org.jetbrains.compose.resources.getString
 
 internal class PlayerNamesController {
 
-    suspend fun currentPlayerNames(
-        state: GameState,
-        // context: Context,
-    ): Pair<String, String> {
+    suspend fun currentPlayerNames(state: GameState): Pair<String, String> {
         val currentGamePhase = ToastNameController().getCurrentGamePhase(state)
 
         return when (currentGamePhase) {

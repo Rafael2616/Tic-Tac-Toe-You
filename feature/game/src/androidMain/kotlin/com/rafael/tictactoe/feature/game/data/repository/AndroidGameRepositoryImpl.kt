@@ -22,7 +22,6 @@ internal class AndroidGameRepositoryImpl(
         println("Game repository has been initialized")
     }
 
-    // Internet data by Retrofit
     override suspend fun getRemotePlayers(): Pair<List<Player>?, RequestState> {
         try {
             val response = gameService.getPlayers()
@@ -75,7 +74,7 @@ internal class AndroidGameRepositoryImpl(
             } else {
                 throw IOException("Request failed with code: " + response.code())
             }
-        } catch (e: Exception) {
+        } catch (e: IOException) {
             Log.e(TAG, "IO error: $e")
             return RequestState.Failure(Error.IOError, e.toString())
         } catch (e: HttpException) {
