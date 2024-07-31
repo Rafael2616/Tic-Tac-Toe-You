@@ -9,6 +9,7 @@ import android.os.IBinder
 import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.ExoPlayer.REPEAT_MODE_ALL
+import com.rafael.tictactoe.core.domain.util.PACKAGE_NAME
 import com.rafael.tictactoe.core.services.R
 import org.koin.java.KoinJavaComponent.inject
 
@@ -18,7 +19,8 @@ actual class MusicService : Service() {
     private val context: Context by inject(Application::class.java)
     private val exoPlayer: ExoPlayer = ExoPlayer.Builder(context).build()
     private val backgroundMusicFile = R.raw.background_music
-    private val backgroundMusic = MediaItem.fromUri(Uri.parse("android.resource://com.rafael.tictactoe.debug/$backgroundMusicFile"))
+    private val backgroundMusic =
+        MediaItem.fromUri(Uri.parse("android.resource://$PACKAGE_NAME/$backgroundMusicFile"))
 
     override fun onBind(intent: Intent): IBinder? {
         return null
