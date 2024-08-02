@@ -23,6 +23,7 @@ import com.rafael.tictactoe.core.navigation.LibraryInfo
 import com.rafael.tictactoe.core.navigation.Main
 import com.rafael.tictactoe.core.navigation.Settings
 import com.rafael.tictactoe.core.navigation.SettingsSearch
+import com.rafael.tictactoe.core.platform.permissions.PermissionsViewModel
 import com.rafael.tictactoe.core.ui.theme.AppTheme
 import com.rafael.tictactoe.feature.changelogs.presentation.ChangelogsScreen
 import com.rafael.tictactoe.feature.game.presentation.GameScreen
@@ -35,9 +36,12 @@ import com.rafael.tictactoe.feature.settings.presentation.SettingsScreen
 import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsViewModel
 import com.rafael.tictactoe.feature.settingssearch.presentation.SearchSettingsScreen
 import com.rafael.tictactoe.feature.settingssearch.presentation.viewmodel.SearchSettingsViewModel
+import dev.icerock.moko.permissions.compose.BindEffect
+import dev.icerock.moko.permissions.compose.rememberPermissionsControllerFactory
 import org.koin.compose.KoinContext
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
+import org.koin.core.parameter.parametersOf
 import soup.compose.material.motion.animation.materialSharedAxisXIn
 import soup.compose.material.motion.animation.materialSharedAxisXOut
 import soup.compose.material.motion.animation.rememberSlideDistance
@@ -55,8 +59,15 @@ fun TicTacToeNavGraph(
     val navController = rememberNavController()
     val isRtl = LocalLayoutDirection.current == LayoutDirection.Rtl
     val slideDistance = rememberSlideDistance()
+    val factory = rememberPermissionsControllerFactory()
+    val permissionsController = factory.createPermissionsController()
+    val permissionsViewModel =
+        koinViewModel<PermissionsViewModel>(parameters = { parametersOf(permissionsController) })
+    val permissionsState by permissionsViewModel.permissionsState.collectAsStateWithLifecycle()
     val settingsState by settingsViewModel.state.collectAsStateWithLifecycle()
     val onSettingsEvent = settingsViewModel::onEvent
+
+    BindEffect(permissionsController)
 
     KoinContext {
         AppTheme(
@@ -105,6 +116,8 @@ fun TicTacToeNavGraph(
                         SettingsScreen(
                             navController = navController,
                             state = settingsState,
+                            permissionsState = permissionsState,
+                            requestGalleryPermission = permissionsViewModel::provideOrRequestGalleryPermission,
                             onEvent = onSettingsEvent,
                             onDeleteImage = settingsViewModel::onDeleteImage,
                             onSaveImage = settingsViewModel::onSaveImage,

@@ -1,9 +1,5 @@
 package com.rafael.tictactoe.feature.settings.presentation.components
 
-import android.Manifest
-import android.content.pm.PackageManager
-import android.os.Build
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -28,50 +24,40 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.core.app.ActivityCompat
 import coil3.Uri
 import coil3.toCoilUri
+import com.rafael.tictactoe.core.platform.permissions.PermissionsState
 import com.rafael.tictactoe.core.resources.Res
 import com.rafael.tictactoe.core.resources.add_photo
 import com.rafael.tictactoe.core.resources.change_photo
 import com.rafael.tictactoe.core.resources.remove_photo
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
-import kotlinx.coroutines.delay
+import dev.icerock.moko.permissions.PermissionState
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 actual fun ProfilePictureMenu(
     state: SettingsState,
     onEvent: (SettingsEvent) -> Unit,
+    permissionsState: PermissionsState,
+    requestGalleryPermission: () -> Unit,
     onDeleteImage: () -> Unit,
     onSaveImage: (uri: Uri) -> Unit,
     modifier: Modifier,
 ) {
     val profilePicture = state.profilePictureBitmap
-    val launcher = rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-        uri?.takeIf { uri != android.net.Uri.EMPTY }?.let { onSaveImage(uri.toCoilUri()) }
-    }
-    val activity = LocalContext.current as ComponentActivity
-    var isStoragePermissionGranted by remember { mutableStateOf(false) }
-    var isClicked by remember { mutableStateOf(false) }
+    val launcher =
+        rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+            uri?.takeIf { uri != android.net.Uri.EMPTY }?.let { onSaveImage(uri.toCoilUri()) }
+        }
+    var showVisualMediaPicker by remember { mutableStateOf(false) }
 
-    // An "callback" that observes when storage permission is granted
-    // to show PickVisualMedia
-    LaunchedEffect(isClicked) {
-        while (isClicked) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.READ_MEDIA_IMAGES) == PackageManager.PERMISSION_GRANTED) {
-                    if (!isStoragePermissionGranted) isStoragePermissionGranted = true
-                }
-            } else {
-                if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                    if (!isStoragePermissionGranted) isStoragePermissionGranted = true
-                }
-            }
-            delay(200L)
+    // An "callback" that observes when storage permission is granted to show PickVisualMedia
+    LaunchedEffect(permissionsState.galleryPermissionState) {
+        if (permissionsState.galleryPermissionState == PermissionState.Granted && showVisualMediaPicker) {
+            launcher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
     }
 
@@ -89,23 +75,11 @@ actual fun ProfilePictureMenu(
             DropdownMenuItem(
                 text = { Text(text = stringResource(if (profilePicture == null) Res.string.add_photo else Res.string.change_photo)) },
                 onClick = {
-                    isClicked = true
-                    if (!isStoragePermissionGranted) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                            ActivityCompat.requestPermissions(
-                                activity,
-                                arrayOf(
-                                    Manifest.permission.READ_MEDIA_IMAGES,
-                                ),
-                                0,
-                            )
-                        } else {
-                            ActivityCompat.requestPermissions(
-                                activity,
-                                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-                                0,
-                            )
-                        }
+                    if (permissionsState.galleryPermissionState == PermissionState.Granted) {
+                        showVisualMediaPicker = true
+                        launcher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+                    } else {
+                        requestGalleryPermission()
                     }
                 },
                 leadingIcon = {
@@ -128,10 +102,5 @@ actual fun ProfilePictureMenu(
                 )
             }
         }
-    }
-
-    if (isStoragePermissionGranted && isClicked) {
-        launcher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-        isClicked = false
     }
 }

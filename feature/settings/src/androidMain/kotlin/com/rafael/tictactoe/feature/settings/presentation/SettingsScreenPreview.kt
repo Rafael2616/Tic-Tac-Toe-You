@@ -10,6 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.navigation.compose.rememberNavController
+import com.rafael.tictactoe.core.platform.permissions.PermissionsState
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 
 @Preview(showBackground = true)
@@ -26,6 +27,8 @@ private fun SettingsScreenPreview() {
             SettingsScreen(
                 navController = rememberNavController(),
                 state = SettingsState(),
+                permissionsState = PermissionsState(),
+                requestGalleryPermission = {},
                 onEvent = {},
                 onDeleteImage = {},
                 onSaveImage = {},

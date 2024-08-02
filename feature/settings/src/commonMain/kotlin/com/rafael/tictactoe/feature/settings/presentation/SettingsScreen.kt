@@ -8,6 +8,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.navigation.NavController
 import coil3.Uri
+import com.rafael.tictactoe.core.platform.permissions.PermissionsState
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.settings.presentation.components.Preferences
@@ -21,6 +22,8 @@ import com.rafael.tictactoe.feature.settings.presentation.components.dialogs.Col
 fun SettingsScreen(
     navController: NavController,
     state: SettingsState,
+    permissionsState: PermissionsState,
+    requestGalleryPermission: () -> Unit,
     onEvent: (SettingsEvent) -> Unit,
     onDeleteImage: () -> Unit,
     onSaveImage: (Uri) -> Unit,
@@ -44,6 +47,8 @@ fun SettingsScreen(
         ProfilePictureMenu(
             state,
             latestOnEvent,
+            permissionsState,
+            requestGalleryPermission,
             onDeleteImage,
             onSaveImage,
         )

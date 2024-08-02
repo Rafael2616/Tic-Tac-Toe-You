@@ -54,7 +54,7 @@ class TicTacToeActivity : ComponentActivity() {
         super.onDestroy()
     }
 
-    fun handleIntent(intent: Intent): Destinations? {
+    private fun handleIntent(intent: Intent): Destinations? {
         if (intent.getStringExtra(getString(R.string.play)) == "s2") {
             return Game("PvP")
         }

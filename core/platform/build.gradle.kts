@@ -13,6 +13,12 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(libs.kotlinx.datetime)
+            implementation(libs.androidx.viewmodel.compose)
+            api(libs.moko.permissions)
+            api(libs.moko.permissions.compose)
+            api(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
         }
     }
 }
