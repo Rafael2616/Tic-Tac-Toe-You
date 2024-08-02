@@ -1,0 +1,10 @@
+package com.rafael.tictactoe.core.platform.permissions
+
+import dev.icerock.moko.permissions.PermissionState
+
+data class PermissionsState(
+    val storagePermissionState: PermissionState = PermissionState.NotDetermined,
+    val writeStoragePermissionState: PermissionState = PermissionState.NotDetermined,
+    val galleryPermissionState: PermissionState = PermissionState.NotDetermined,
+    val recordAudioPermissionState: PermissionState = PermissionState.NotDetermined,
+)

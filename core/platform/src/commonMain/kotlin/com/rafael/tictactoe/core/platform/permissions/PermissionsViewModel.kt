@@ -79,10 +79,3 @@ class PermissionsViewModel(
         }
     }
 }
-
-data class PermissionsState(
-    val storagePermissionState: PermissionState = PermissionState.NotDetermined,
-    val writeStoragePermissionState: PermissionState = PermissionState.NotDetermined,
-    val galleryPermissionState: PermissionState = PermissionState.NotDetermined,
-    val recordAudioPermissionState: PermissionState = PermissionState.NotDetermined,
-)
