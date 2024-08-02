@@ -5,7 +5,7 @@ import com.rafael.tictactoe.feature.libraryinfo.presentation.viewmodel.LibraryVi
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
-actual val ossLibraryModule = module {
+actual val libraryInfoModule = module {
     single { OssLibraryRepository() }
     viewModel {
         LibraryViewModel(
