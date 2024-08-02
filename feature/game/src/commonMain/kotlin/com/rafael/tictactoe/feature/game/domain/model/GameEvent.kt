@@ -10,8 +10,6 @@ sealed interface GameEvent {
     data object ResetVictoryCounter : GameEvent
     data object PlayAgain : GameEvent
     data object ExitGame : GameEvent
-    data object ToggleBgMusicButton : GameEvent
-    data object ToggleSoundEffectsButton : GameEvent
     data object ToggleExpandButton : GameEvent
     data object ToggleExitDialog : GameEvent
     data object ToggleIsXForPlayer1 : GameEvent

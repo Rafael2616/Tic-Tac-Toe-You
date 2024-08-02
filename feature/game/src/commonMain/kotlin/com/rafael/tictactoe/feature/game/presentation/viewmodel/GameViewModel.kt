@@ -84,12 +84,6 @@ class GameViewModel(
             GameEvent.ExitGame -> {
                 exitGame()
             }
-            GameEvent.ToggleBgMusicButton -> {
-                settingsVM.onEvent(SettingsEvent.ToggleIsBackgroundMusicOn)
-            }
-            GameEvent.ToggleSoundEffectsButton -> {
-                settingsVM.onEvent(SettingsEvent.ToggleIsSoundEffectsOn)
-            }
             GameEvent.ToggleExpandButton -> {
                 _state.update { it.copy(isExpandButtonShown = !it.isExpandButtonShown) }
             }

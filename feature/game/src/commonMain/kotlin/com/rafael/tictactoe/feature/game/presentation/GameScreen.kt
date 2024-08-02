@@ -61,6 +61,7 @@ fun GameScreen(
     SoundAndMusicButtons(
         latestOnGameEvent,
         gameState,
+        latestOnSettingsEvent,
         settingsState,
     )
     VictoryCounter(

@@ -32,6 +32,7 @@ import com.rafael.tictactoe.core.resources.active_sound
 import com.rafael.tictactoe.feature.game.domain.model.GameEvent
 import com.rafael.tictactoe.feature.game.domain.model.GameState
 import com.rafael.tictactoe.feature.game.domain.model.SoundItem
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 import org.jetbrains.compose.resources.stringResource
 
@@ -39,6 +40,7 @@ import org.jetbrains.compose.resources.stringResource
 internal fun SoundAndMusicButtons(
     onEvent: (GameEvent) -> Unit,
     state: GameState,
+    onSettingsEvent: (SettingsEvent) -> Unit,
     settingsState: SettingsState,
     modifier: Modifier = Modifier,
 ) {
@@ -46,12 +48,12 @@ internal fun SoundAndMusicButtons(
         SoundItem(
             name = Res.string.active_sound,
             icon = if (settingsState.isSoundEffectsOn) Icons.Outlined.MusicNote else Icons.Outlined.MusicOff,
-            onClick = { onEvent(GameEvent.ToggleSoundEffectsButton) },
+            onClick = { onSettingsEvent(SettingsEvent.ToggleIsSoundEffectsOn) },
         ),
         SoundItem(
             name = Res.string.active_music,
             icon = if (settingsState.isBackgroundMusicOn) Icons.AutoMirrored.Outlined.VolumeUp else Icons.AutoMirrored.Outlined.VolumeOff,
-            onClick = { onEvent(GameEvent.ToggleBgMusicButton) },
+            onClick = { onSettingsEvent(SettingsEvent.ToggleIsBackgroundMusicOn) },
         ),
     )
 
