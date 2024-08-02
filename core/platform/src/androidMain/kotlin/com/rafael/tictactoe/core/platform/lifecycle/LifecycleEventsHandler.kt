@@ -28,16 +28,14 @@ actual class LifecycleEventsHandler {
                         Lifecycle.Event.ON_STOP -> {
                             latestOnStop()
                         }
-
                         Lifecycle.Event.ON_RESUME -> {
                             latestOnResume()
                         }
-
                         Lifecycle.Event.ON_DESTROY -> {
                             latestOnDestroy()
                         }
-
-                        else -> { /* Do nothing */
+                        else -> {
+                            /* Do nothing */
                         }
                     }
                 }
