@@ -56,7 +56,6 @@ import soup.compose.material.motion.animation.rememberSlideDistance
 fun TicTacToeNavGraph(
     modifier: Modifier = Modifier,
     destination: Destinations? = null,
-    settingsViewModel: SettingsViewModel = koinViewModel<SettingsViewModel>(),
 ) {
     val navController = rememberNavController()
     val isRtl = LocalLayoutDirection.current == LayoutDirection.Rtl
@@ -66,12 +65,14 @@ fun TicTacToeNavGraph(
     val permissionsViewModel =
         koinViewModel<PermissionsViewModel>(parameters = { parametersOf(permissionsController) })
     val permissionsState by permissionsViewModel.permissionsState.collectAsStateWithLifecycle()
-    val settingsState by settingsViewModel.state.collectAsStateWithLifecycle()
-    val onSettingsEvent = settingsViewModel::onEvent
 
     BindEffect(permissionsController)
 
     KoinContext {
+        val settingsViewModel = koinViewModel<SettingsViewModel>()
+        val settingsState by settingsViewModel.state.collectAsStateWithLifecycle()
+        val onSettingsEvent = settingsViewModel::onEvent
+
         AppTheme(
             state = settingsState,
             onEvent = onSettingsEvent,
@@ -155,9 +156,9 @@ fun TicTacToeNavGraph(
                 }
             }
         }
+        LifecycleEventsHandler.Handle(
+            onStop = { onSettingsEvent(SettingsEvent.StartBackgroundMusic(isAppInOnStop = true)) },
+            onResume = { onSettingsEvent(SettingsEvent.StartBackgroundMusic(isAppInOnStop = false)) },
+        )
     }
-    LifecycleEventsHandler.Handle(
-        onStop = { onSettingsEvent(SettingsEvent.StartBackgroundMusic(isAppInOnStop = true)) },
-        onResume = { onSettingsEvent(SettingsEvent.StartBackgroundMusic(isAppInOnStop = false)) },
-    )
 }
