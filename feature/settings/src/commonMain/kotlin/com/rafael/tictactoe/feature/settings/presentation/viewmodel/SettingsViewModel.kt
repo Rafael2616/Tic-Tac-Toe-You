@@ -60,12 +60,9 @@ class SettingsViewModel(
                 )
             }
             backgroundMusic(
-                isBMPlaying = state.value.isBMPlaying,
                 isBackgroundMusicOn = settings.isBackgroundMusicOn,
                 isAppInOnStop = false,
-            )?.let { isPlaying ->
-                _state.update { it.copy(isBMPlaying = isPlaying) }
-            }
+            )
             _state.update { it.copy(profilePictureUri = ProfilePictureUtilsImpl().getPictureUriIfExists()) }
             onSaveImage()
             this.cancel()
@@ -83,11 +80,9 @@ class SettingsViewModel(
                     repository.setAllSettingsValues(settings)
                 }
                 backgroundMusic(
-                    isBMPlaying = state.value.isBMPlaying,
                     isBackgroundMusicOn = state.value.isBackgroundMusicOn,
-                )?.let { isPlaying ->
-                    _state.update { it.copy(isBMPlaying = isPlaying) }
-                }
+                    isAppInOnStop = false,
+                )
             }
             SettingsEvent.ToggleIsDarkThemeOn -> {
                 _state.update { it.copy(isDarkThemeOn = !it.isDarkThemeOn) }
@@ -144,12 +139,9 @@ class SettingsViewModel(
             }
             is SettingsEvent.StartBackgroundMusic -> {
                 backgroundMusic(
-                    isBMPlaying = state.value.isBMPlaying,
                     isBackgroundMusicOn = state.value.isBackgroundMusicOn,
-                    isAppInOnStop = event.value,
-                )?.let { isPlaying ->
-                    _state.update { it.copy(isBMPlaying = isPlaying) }
-                }
+                    isAppInOnStop = event.isAppInOnStop,
+                )
             }
             is SettingsEvent.ShowAboutAppCard -> {
                 _state.update { it.copy(isAboutShown = event.value) }

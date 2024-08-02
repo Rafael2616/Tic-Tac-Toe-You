@@ -27,7 +27,6 @@ data class SettingsState(
     val selectedXColor: Int = 1,
     val circleColor: Color = color.lightGreen,
     val selectedCircleColor: Int = 5,
-    val isBMPlaying: Boolean = false,
     val customizationType: Customization = Customization.XCOLOR,
     val appVersion: String = getVersionName(),
     val showWhatsNewDialog: Boolean = false,

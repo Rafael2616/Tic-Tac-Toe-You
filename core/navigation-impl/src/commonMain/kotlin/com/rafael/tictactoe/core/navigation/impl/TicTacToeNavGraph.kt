@@ -23,6 +23,7 @@ import com.rafael.tictactoe.core.navigation.LibraryInfo
 import com.rafael.tictactoe.core.navigation.Main
 import com.rafael.tictactoe.core.navigation.Settings
 import com.rafael.tictactoe.core.navigation.SettingsSearch
+import com.rafael.tictactoe.core.platform.lifecycle.LifecycleEventsHandler
 import com.rafael.tictactoe.core.platform.permissions.PermissionsViewModel
 import com.rafael.tictactoe.core.ui.theme.AppTheme
 import com.rafael.tictactoe.feature.changelogs.presentation.ChangelogsScreen
@@ -32,6 +33,7 @@ import com.rafael.tictactoe.feature.libraryinfo.presentation.LibraryScreen
 import com.rafael.tictactoe.feature.libraryinfo.presentation.viewmodel.LibraryViewModel
 import com.rafael.tictactoe.feature.main.presentation.MainScreen
 import com.rafael.tictactoe.feature.main.presentation.viewmodel.MainViewModel
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.feature.settings.presentation.SettingsScreen
 import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsViewModel
 import com.rafael.tictactoe.feature.settingssearch.presentation.SearchSettingsScreen
@@ -154,4 +156,8 @@ fun TicTacToeNavGraph(
             }
         }
     }
+    LifecycleEventsHandler.Handle(
+        onStop = { onSettingsEvent(SettingsEvent.StartBackgroundMusic(isAppInOnStop = true)) },
+        onResume = { onSettingsEvent(SettingsEvent.StartBackgroundMusic(isAppInOnStop = false)) },
+    )
 }

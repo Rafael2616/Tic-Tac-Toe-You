@@ -20,7 +20,7 @@ sealed interface SettingsEvent {
     data class SelectedWinnerLineColor(val value: Int) : SettingsEvent
     data class SelectedXColor(val value: Int) : SettingsEvent
     data class SelectedCircleColor(val value: Int) : SettingsEvent
-    data class StartBackgroundMusic(val value: Boolean) : SettingsEvent
+    data class StartBackgroundMusic(val isAppInOnStop: Boolean) : SettingsEvent
     data object ShowWhatsNewDialog : SettingsEvent
     data object HideWhatsNewDialog : SettingsEvent
     data object ToggleShowProfilePictureMenu : SettingsEvent
