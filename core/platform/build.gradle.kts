@@ -15,7 +15,7 @@ kotlin {
         commonMain.dependencies {
             // Kotlin
             implementation(libs.kotlinx.datetime)
-            //AndroidX
+            // AndroidX
             implementation(libs.androidx.viewmodel.compose)
             // Moko
             api(libs.moko.permissions)
