@@ -15,10 +15,6 @@ internal fun Project.configureComposeMultiplatform(
     commonExtension: CommonExtension<*, *, *, *, *, *>,
 ) {
     commonExtension.apply {
-        buildFeatures {
-            compose = true
-        }
-
         composeCompiler {
             // https://medium.com/androiddevelopers/jetpack-compose-strong-skipping-mode-explained-cbdb2aa4b900
             enableStrongSkippingMode.set(true)
