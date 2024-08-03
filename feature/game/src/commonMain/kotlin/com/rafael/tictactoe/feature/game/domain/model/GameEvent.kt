@@ -18,7 +18,7 @@ sealed interface GameEvent {
     data object DismissExitDialog : GameEvent
     data class SelectCPUDifficultyMode(val level: Level) : GameEvent
     data class UpdateRequestState(val state: RequestState) : GameEvent
-    data class GetRemotePlayers(val onSettingsEvent: (SettingsEvent) -> Unit) : GameEvent
+    data class GetRemotePlayers(val onSettingsEvent: ((SettingsEvent) -> Unit)? = null) : GameEvent
     data object PostRemotePlayer : GameEvent
     data object RemoveRemotePlayer : GameEvent
     data object SendInitialOnlineGameState : GameEvent

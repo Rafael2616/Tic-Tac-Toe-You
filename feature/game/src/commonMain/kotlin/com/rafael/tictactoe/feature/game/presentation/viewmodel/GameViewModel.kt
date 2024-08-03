@@ -140,9 +140,9 @@ class GameViewModel(
                             }
                         }
                         if (state.value.secondPlayer!!.isXFor1) {
-                            event.onSettingsEvent(SettingsEvent.SetXColor(state.value.secondPlayer!!.color.toColor()))
+                            event.onSettingsEvent?.invoke(SettingsEvent.SetXColor(state.value.secondPlayer!!.color.toColor()))
                         } else {
-                            event.onSettingsEvent(SettingsEvent.SetCircleColor(state.value.secondPlayer!!.color.toColor()))
+                            event.onSettingsEvent?.invoke(SettingsEvent.SetCircleColor(state.value.secondPlayer!!.color.toColor()))
                         }
                     }
                     _state.update { it.copy(requestState = requestState) }
@@ -216,6 +216,7 @@ class GameViewModel(
                         localPlayer1 = value,
                     )
                 }
+                onEvent(GameEvent.GetRemotePlayers())
             }
             GameEvent.StartOnlineMatch -> {
                 _state.update {
