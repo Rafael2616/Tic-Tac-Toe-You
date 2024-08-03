@@ -25,12 +25,14 @@ import com.rafael.tictactoe.core.resources.leave_game_description
 import com.rafael.tictactoe.core.resources.leave_game_msg
 import com.rafael.tictactoe.core.resources.stay
 import com.rafael.tictactoe.feature.game.domain.model.GameEvent
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun ExitGameDialog(
     navController: NavController,
     onEvent: (GameEvent) -> Unit,
+    onSettingsEvent: (SettingsEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     var isExitClicked by rememberSaveable { mutableStateOf(false) }
@@ -64,7 +66,7 @@ internal fun ExitGameDialog(
                 onClick = {
                     if (!isExitClicked) {
                         isExitClicked = true
-                        onEvent(GameEvent.ExitGame)
+                        onEvent(GameEvent.ExitGame(onSettingsEvent))
                         navController.popBackStack()
                     }
                 },

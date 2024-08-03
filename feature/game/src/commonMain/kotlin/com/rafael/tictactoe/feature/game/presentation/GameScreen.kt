@@ -47,9 +47,11 @@ fun GameScreen(
     settingsState: SettingsState,
     onGameEvent: (GameEvent) -> Unit,
     onSettingsEvent: (SettingsEvent) -> Unit,
+    onUpdateSettingsState: (SettingsState) -> Unit,
 ) {
     val latestOnSettingsEvent by rememberUpdatedState(onSettingsEvent)
     val latestOnGameEvent by rememberUpdatedState(onGameEvent)
+    val latestOnUpdateSettingsState by rememberUpdatedState(onUpdateSettingsState)
     val showPlayerPrefsDialog = !gameState.play && gameState.showGetPrefsDialog
     var canSetMode by rememberSaveable { mutableStateOf(true) }
 
@@ -57,6 +59,7 @@ fun GameScreen(
         latestOnGameEvent,
         gameState,
         settingsState,
+        latestOnUpdateSettingsState,
     )
     SoundAndMusicButtons(
         latestOnGameEvent,
@@ -131,6 +134,7 @@ fun GameScreen(
             gameState,
             settingsState,
             latestOnGameEvent,
+            latestOnSettingsEvent,
         )
     }
 
@@ -138,6 +142,7 @@ fun GameScreen(
         ExitGameDialog(
             navController,
             latestOnGameEvent,
+            latestOnSettingsEvent,
         )
     }
 
@@ -170,6 +175,7 @@ private fun GameScreenPreview() {
             settingsState = SettingsState(),
             onGameEvent = {},
             onSettingsEvent = {},
+            onUpdateSettingsState = {},
         )
     }
 }

@@ -1,5 +1,7 @@
 package com.rafael.tictactoe.feature.game.domain.model
 
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
+
 sealed interface GameEvent {
     data class SetGameMode(val mode: String) : GameEvent
     data class GetFirstPlayerName(val name: String) : GameEvent
@@ -9,14 +11,14 @@ sealed interface GameEvent {
     data class OnCardClick(val rowIndex: Int, val cardIndex: Int) : GameEvent
     data object ResetVictoryCounter : GameEvent
     data object PlayAgain : GameEvent
-    data object ExitGame : GameEvent
+    data class ExitGame(val onSettingsEvent: (SettingsEvent) -> Unit) : GameEvent
     data object ToggleExpandButton : GameEvent
     data object ToggleExitDialog : GameEvent
     data object ToggleIsXForPlayer1 : GameEvent
     data object DismissExitDialog : GameEvent
     data class SelectCPUDifficultyMode(val level: Level) : GameEvent
     data class UpdateRequestState(val state: RequestState) : GameEvent
-    data object GetRemotePlayers : GameEvent
+    data class GetRemotePlayers(val onSettingsEvent: (SettingsEvent) -> Unit) : GameEvent
     data object PostRemotePlayer : GameEvent
     data object RemoveRemotePlayer : GameEvent
     data object SendInitialOnlineGameState : GameEvent

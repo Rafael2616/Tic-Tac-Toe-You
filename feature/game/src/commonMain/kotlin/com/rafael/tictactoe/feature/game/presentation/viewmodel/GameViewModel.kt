@@ -22,7 +22,7 @@ import com.rafael.tictactoe.feature.game.domain.names.ToastNameController
 import com.rafael.tictactoe.feature.game.domain.repository.GameRepository
 import com.rafael.tictactoe.feature.game.domain.restart.RestartGame
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsViewModel
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.Job
@@ -40,7 +40,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class GameViewModel(
-    private val settingsVM: SettingsViewModel,
     private val repository: GameRepository,
 ) : ViewModel() {
 
@@ -54,6 +53,8 @@ class GameViewModel(
         )
     private var onlineGameState: Flow<OnlineGameState>? = null
     private var searchPlayersJob: Job? = null
+    private var _settingsState = MutableStateFlow(SettingsState())
+    val settingsState = _settingsState.asStateFlow()
 
     fun onEvent(event: GameEvent) {
         when (event) {
@@ -81,8 +82,8 @@ class GameViewModel(
             GameEvent.PlayAgain -> {
                 playAgain()
             }
-            GameEvent.ExitGame -> {
-                exitGame()
+            is GameEvent.ExitGame -> {
+                exitGame(event.onSettingsEvent)
             }
             GameEvent.ToggleExpandButton -> {
                 _state.update { it.copy(isExpandButtonShown = !it.isExpandButtonShown) }
@@ -104,7 +105,7 @@ class GameViewModel(
                     )
                 }
             }
-            GameEvent.GetRemotePlayers -> {
+            is GameEvent.GetRemotePlayers -> {
                 searchPlayersJob?.cancel()
                 searchPlayersJob = viewModelScope.launch(Dispatchers.IO) {
                     val (response, requestState) = repository.getRemotePlayers()
@@ -139,9 +140,9 @@ class GameViewModel(
                             }
                         }
                         if (state.value.secondPlayer!!.isXFor1) {
-                            settingsVM.onEvent(SettingsEvent.SetXColor(state.value.secondPlayer!!.color.toColor()))
+                            event.onSettingsEvent(SettingsEvent.SetXColor(state.value.secondPlayer!!.color.toColor()))
                         } else {
-                            settingsVM.onEvent(SettingsEvent.SetCircleColor(state.value.secondPlayer!!.color.toColor()))
+                            event.onSettingsEvent(SettingsEvent.SetCircleColor(state.value.secondPlayer!!.color.toColor()))
                         }
                     }
                     _state.update { it.copy(requestState = requestState) }
@@ -150,7 +151,7 @@ class GameViewModel(
             }
             GameEvent.PostRemotePlayer -> {
                 viewModelScope.launch(Dispatchers.IO) {
-                    val requestState = repository.postPlayer(state.value, settingsVM.state.value)
+                    val requestState = repository.postPlayer(state.value, settingsState.value)
                     _state.update { it.copy(requestState = requestState) }
                 }
             }
@@ -205,7 +206,7 @@ class GameViewModel(
             is GameEvent.UpdateRequestState -> {
                 _state.update { it.copy(requestState = event.state) }
             }
-            GameEvent.UpdateIsYouPlayer1 -> {
+            is GameEvent.UpdateIsYouPlayer1 -> {
                 val isYouPlayer1 = (1..2).random()
                 val value = isYouPlayer1 == 1
 
@@ -215,7 +216,6 @@ class GameViewModel(
                         localPlayer1 = value,
                     )
                 }
-                onEvent(GameEvent.GetRemotePlayers)
             }
             GameEvent.StartOnlineMatch -> {
                 _state.update {
@@ -556,8 +556,8 @@ class GameViewModel(
         }
     }
 
-    private fun exitGame() {
-        settingsVM.onEvent(SettingsEvent.ShowColorSelectionDialog(false))
+    private fun exitGame(onEvent: (SettingsEvent) -> Unit) {
+        onEvent(SettingsEvent.ShowColorSelectionDialog(false))
         val cardState = state.value.card
         _state.update { GameState() }
         searchPlayersJob?.cancel()
@@ -570,14 +570,14 @@ class GameViewModel(
     private fun execCardGridSound() {
         cardGridSound(
             state.value,
-            settingsVM.state.value,
+            settingsState.value,
         )
     }
 
     private fun execGotOldSound() {
         val isPlaying = gotOldSound(
             state.value,
-            settingsVM.state.value,
+            settingsState.value,
         )
         _state.update { it.copy(isGotOldSoundPlaying = isPlaying) }
     }
@@ -585,9 +585,14 @@ class GameViewModel(
     private fun execWinnerSound() {
         val isPlaying = winnerSound(
             state.value,
-            settingsVM.state.value,
+            settingsState.value,
         )
         _state.update { it.copy(isWinSoundPlaying = isPlaying) }
+    }
+
+    // Manually trigger settings state update
+    fun updateSettingsState(settingsState: SettingsState) {
+        _settingsState.update { settingsState }
     }
 
     private fun String.toGameMode(): GameMode = when (this) {

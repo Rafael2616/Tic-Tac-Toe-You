@@ -113,6 +113,7 @@ fun TicTacToeNavGraph(
                             settingsState = settingsState,
                             onGameEvent = onGameEvent,
                             onSettingsEvent = onSettingsEvent,
+                            onUpdateSettingsState = gameViewModel::updateSettingsState,
                         )
                     }
                     composable<Settings> {

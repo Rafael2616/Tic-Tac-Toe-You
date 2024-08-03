@@ -5,7 +5,6 @@ import com.rafael.tictactoe.feature.game.data.dao.OnlineGameDao
 import com.rafael.tictactoe.feature.game.data.repository.AndroidGameRepositoryImpl
 import com.rafael.tictactoe.feature.game.domain.repository.GameRepository
 import com.rafael.tictactoe.feature.game.presentation.viewmodel.GameViewModel
-import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsViewModel
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -23,10 +22,7 @@ actual val gameModule: Module = module {
         AndroidGameRepositoryImpl(get<OnlineGameDao>())
     }
     viewModel {
-        GameViewModel(
-            get<SettingsViewModel>(),
-            get<GameRepository>(),
-        )
+        GameViewModel(get<GameRepository>())
     }
     single {
         Retrofit.Builder()

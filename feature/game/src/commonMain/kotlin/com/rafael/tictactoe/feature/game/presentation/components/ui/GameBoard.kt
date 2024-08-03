@@ -43,6 +43,7 @@ internal fun GameBoard(
     onEvent: (GameEvent) -> Unit,
     state: GameState,
     settingsState: SettingsState,
+    onUpdateSettingsState: (SettingsState) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val cardItems = remember { listOf(0, 1, 2) }
@@ -104,6 +105,7 @@ internal fun GameBoard(
                             .shadow(settingsState.boardCardsShadow.dp, RoundedCornerShape(settingsState.boardCardsCornerRadius.dp))
                             .clip(RoundedCornerShape(settingsState.boardCardsCornerRadius.dp))
                             .clickable {
+                                onUpdateSettingsState(settingsState)
                                 onEvent(GameEvent.OnCardClick(rowIndex, cardIndex))
                             },
                     ) {

@@ -54,6 +54,7 @@ import com.rafael.tictactoe.feature.game.domain.model.Error
 import com.rafael.tictactoe.feature.game.domain.model.GameEvent
 import com.rafael.tictactoe.feature.game.domain.model.GameState
 import com.rafael.tictactoe.feature.game.domain.model.RequestState
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.stringResource
@@ -63,6 +64,7 @@ internal fun PlayerSearchSurface(
     gameState: GameState,
     settingsState: SettingsState,
     onEvent: (GameEvent) -> Unit,
+    onSettingsEvent: (SettingsEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val requestState = gameState.requestState
@@ -98,7 +100,7 @@ internal fun PlayerSearchSurface(
                         .size(45.dp),
                     onClick = {
                         onEvent(GameEvent.UpdateRequestState(RequestState.Loading))
-                        onEvent(GameEvent.GetRemotePlayers)
+                        onEvent(GameEvent.GetRemotePlayers(onSettingsEvent))
                     },
                 ) {
                     Icon(
