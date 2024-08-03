@@ -119,8 +119,6 @@ kotlin {
             // Android Core
             implementation(libs.androidx.core)
             implementation(libs.androidx.activity.compose)
-            // Media3
-            implementation(libs.androidx.media3.exoplayer)
             // Koin
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)

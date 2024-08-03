@@ -12,19 +12,20 @@ actual fun backgroundMusic(
     isBackgroundMusicOn: Boolean,
 ) {
     val context: Context by inject(Application::class.java)
-    val isServiceRunning = ::runningServiceVerifier
+    val isServiceRunning = runningServiceVerifier(context, MusicService::class.java)
     val serviceIntent = Intent(context, MusicService::class.java)
 
-    if (isAppInOnStop || !isBackgroundMusicOn) {
-        context.stopService(serviceIntent).also {
-            Log.i("MusicService", "Stopping service ${MusicService::class.java.name}")
+    if (isBackgroundMusicOn && !isServiceRunning) {
+        context.startService(serviceIntent).also {
+            Log.i("MusicService", "Starting service ${MusicService::class.java.name}")
         }
         return
     }
 
-    if (!isServiceRunning(context, MusicService::class.java)) {
-        context.startService(serviceIntent).also {
-            Log.i("MusicService", "Starting service ${MusicService::class.java.name}")
+    if (isAppInOnStop && isServiceRunning || !isBackgroundMusicOn && isServiceRunning) {
+        context.stopService(serviceIntent).also {
+            Log.i("MusicService", "Stopping service ${MusicService::class.java.name}")
         }
+        return
     }
 }

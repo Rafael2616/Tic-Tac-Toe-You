@@ -9,22 +9,15 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.core.navigation.Destinations
 import com.rafael.tictactoe.core.navigation.Game
 import com.rafael.tictactoe.core.navigation.impl.TicTacToeNavGraph
 import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.exception.AppExceptionHandler
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsViewModel
 import com.rafael.tictactoe.shortcuts.GameShortcutsCreator
-import org.koin.android.ext.android.inject
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class, ExperimentalTextApi::class)
 class TicTacToeActivity : ComponentActivity() {
-
-    private val settingsVM: SettingsViewModel by inject()
-    private val exoPlayer: ExoPlayer by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
@@ -37,21 +30,6 @@ class TicTacToeActivity : ComponentActivity() {
         setContent {
             TicTacToeNavGraph(destination = destination)
         }
-    }
-
-    override fun onResume() {
-        settingsVM.onEvent(SettingsEvent.StartBackgroundMusic(false))
-        super.onResume()
-    }
-
-    override fun onStop() {
-        settingsVM.onEvent(SettingsEvent.StartBackgroundMusic(true))
-        super.onStop()
-    }
-
-    override fun onDestroy() {
-        exoPlayer.release()
-        super.onDestroy()
     }
 
     private fun handleIntent(intent: Intent): Destinations? {
