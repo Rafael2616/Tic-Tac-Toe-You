@@ -60,6 +60,10 @@ jobs:
         distribution: 'temurin'
         java-version: 21
 
+    - uses: gradle/actions/setup-gradle@v4
+      with:
+        cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
