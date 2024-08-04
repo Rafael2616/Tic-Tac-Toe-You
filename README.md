@@ -55,6 +55,8 @@
 - [Material Motion](https://fornewid.github.io/material-motion-compose/) for screen transition animation
 - [App Search](https://developer.android.com/jetpack/androidx/releases/appsearch?hl=en) for in app search
 - [Androidx Libraries](https://developer.android.com/jetpack/androidx?hl=en) for core and base features for Android
+- [Moko permissions](https://github.com/icerockdev/moko-permissions) for permission handling in
+  Kotlin multiplatform
 
 # Follow me on Instagram
 [Instagram](https://www.instagram.com/rafael_mourana/)
