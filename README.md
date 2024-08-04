@@ -22,25 +22,25 @@
 # Game Screenshots:
 
 <div align="center" style="width:100%; display:flex; justify-content:space-between;">
-<img src="screenshots/Screenshot_1d.png" width=33% alt="home">
-<img src="screenshots/Screenshot_2d.png" width=33% alt="settings">
-<img src="screenshots/Screenshot_3d.png" width=33% alt ="PvP dialog">
+<img src="screenshots/Screenshot_1d.png" width=32% alt="home">
+<img src="screenshots/Screenshot_2d.png" width=32% alt="settings">
+<img src="screenshots/Screenshot_3d.png" width=32% alt ="PvP dialog">
 </div>
 <div align="center" style="width:100%; display:flex; justify-content:space-between;">
-<img src="screenshots/Screenshot_4d.png" width=33% alt ="PvP screen">
-<img src="screenshots/Screenshot_5d.png" width=33% alt ="vs CPU dialog">
-<img src="screenshots/Screenshot_6d.png" width=33% alt ="online match loading">
+<img src="screenshots/Screenshot_4d.png" width=32% alt ="PvP screen">
+<img src="screenshots/Screenshot_5d.png" width=32% alt ="vs CPU dialog">
+<img src="screenshots/Screenshot_6d.png" width=32% alt ="online match loading">
 </div>
 
 <div align="center" style="width:100%; display:flex; justify-content:space-between;">
-<img src="screenshots/Screenshot_1.png" width=33% alt="home">
-<img src="screenshots/Screenshot_2.png" width=33% alt="settings">
-<img src="screenshots/Screenshot_3.png" width=33% alt="PvP dialog">
+<img src="screenshots/Screenshot_1.png" width=32% alt="home">
+<img src="screenshots/Screenshot_2.png" width=32% alt="settings">
+<img src="screenshots/Screenshot_3.png" width=32% alt="PvP dialog">
 </div>
 <div align="center" style="width:100%; display:flex; justify-content:space-between;">
-<img src="screenshots/Screenshot_4.png" width=33% alt="PvP screen">
-<img src="screenshots/Screenshot_5.png" width=33% alt="vs CPU dialog">
-<img src="screenshots/Screenshot_6.png" width=33% alt ="online match dialog">
+<img src="screenshots/Screenshot_4.png" width=32% alt="PvP screen">
+<img src="screenshots/Screenshot_5.png" width=32% alt="vs CPU dialog">
+<img src="screenshots/Screenshot_6.png" width=32% alt ="online match dialog">
 </div>
 
 # Employed technologies:
