@@ -1,9 +1,8 @@
 plugins {
-    alias(libs.plugins.rafael.gradle.android.library)
-    alias(libs.plugins.rafael.gradle.android.library.compose)
-    alias(libs.plugins.rafael.gradle.spotless)
+    alias(libs.plugins.rafael.android.library)
+    alias(libs.plugins.rafael.android.library.compose)
+    alias(libs.plugins.rafael.spotless)
     alias(libs.plugins.androidx.room)
-    alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.kapt)
 }
@@ -23,39 +22,63 @@ android {
     }
 }
 
-dependencies {
-    // Kotlin
-    implementation(libs.kotlinx.coroutines)
-    implementation(libs.kotlinx.collections.immutable)
-    // AndroidX
-    implementation(libs.androidx.annotation)
-    implementation(libs.androidx.activity.compose)
-    // Navigation
-    implementation(libs.androidx.navigation.compose)
-    // Dagger Hilt
-    implementation(libs.dagger.hilt.android)
-    implementation(libs.androidx.hilt.navigation.compose)
-    ksp(libs.dagger.hilt.android.compiler)
-    // Room
-    implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.room.ktx)
-    ksp(libs.androidx.room.compiler)
-    // Compose extended colors
-    implementation(libs.smarttoolfactory.extended.colors)
-    // LazyColumnScrollbar
-    implementation(libs.nanihadesuka.lazyColumnScrollbar)
-    // ColorPicker Compose
-    implementation(libs.skydoves.colorpicker.compose)
-    // Coil
-    implementation(libs.coil.compose)
-    // App Search
-    implementation(libs.androidx.appsearch)
-    implementation(libs.androidx.appsearch.localStorage)
-    kapt(libs.androidx.appsearch.compiler)
+kotlin {
+    sourceSets {
+        androidMain.dependencies {
+            // AndroidX
+            implementation(libs.androidx.activity.compose)
+            // Room
+            implementation(libs.androidx.room.ktx)
+            // App Search
+            implementation(libs.androidx.appsearch)
+            implementation(libs.androidx.appsearch.localStorage)
+            // Koin
+            implementation(libs.koin.android)
+            implementation(libs.koin.androidx.compose)
+        }
+        commonMain.dependencies {
+            // Kotlin
+            implementation(libs.kotlinx.coroutines)
+            implementation(libs.kotlinx.collections.immutable)
+            // AndroidX
+            implementation(libs.androidx.annotation)
+            // Navigation
+            implementation(libs.androidx.navigation.compose)
+            // Koin
+            api(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
+            // Room
+            implementation(libs.androidx.room.runtime)
+            // Coil
+            api(libs.coil.compose)
+            // ColorPicker Compose
+            implementation(libs.skydoves.colorpicker.compose)
 
-    // Projects
-    api(projects.core.domain)
-    implementation(projects.core.services)
-    implementation(projects.core.resources)
-    implementation(projects.core.navigation)
+            // Projects
+            api(projects.core.domain)
+            api(projects.core.services)
+            api(projects.core.resources)
+            api(projects.core.navigation)
+            api(projects.core.platform)
+
+            // My multiplatform core implementation of smart-tool factory extended colors library
+            api(projects.libs.extendedColors)
+            // My multiplatform implementation of LazyColumnScrollbar library
+            api(projects.libs.lazyColumnScrollbar)
+        }
+    }
+}
+
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
+    arg("room.incremental", "true")
+    arg("room.generateKotlin", "true")
+}
+
+dependencies {
+    add("kspAndroid", libs.androidx.room.compiler)
+    add("kspIosX64", libs.androidx.room.compiler)
+
+    add("kapt", libs.androidx.appsearch.compiler)
 }

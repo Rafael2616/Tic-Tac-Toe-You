@@ -30,9 +30,8 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
 
-    - uses: gradle/actions/setup-gradle@v3
+    - uses: gradle/actions/setup-gradle@v4
       with:
-        gradle-home-cache-cleanup: true
         dependency-graph: generate-and-submit
         cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
 
@@ -65,9 +64,9 @@ jobs:
         distribution: 'temurin'
         java-version: 21
 
-    - uses: gradle/actions/setup-gradle@v3
+    - uses: gradle/actions/setup-gradle@v4
       with:
-        gradle-home-cache-cleanup: true
+        cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew

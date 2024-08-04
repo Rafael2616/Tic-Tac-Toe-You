@@ -1,12 +1,22 @@
 plugins {
-    alias(libs.plugins.rafael.gradle.android.library)
-    alias(libs.plugins.rafael.gradle.android.library.compose)
-    alias(libs.plugins.rafael.gradle.spotless)
+    alias(libs.plugins.rafael.android.library)
+    alias(libs.plugins.rafael.android.library.compose)
+    alias(libs.plugins.rafael.spotless)
 }
 
 android.namespace = "com.rafael.tictactoe.core.resources"
 
-dependencies {
-    // AndroidX
-    implementation(libs.androidx.core.splashscreen)
+kotlin {
+    sourceSets {
+        androidMain.dependencies {
+            // AndroidX
+            implementation(libs.androidx.core.splashscreen)
+        }
+    }
+}
+
+compose.resources {
+    publicResClass = true
+    packageOfResClass = "com.rafael.tictactoe.core.resources"
+    generateResClass = always
 }

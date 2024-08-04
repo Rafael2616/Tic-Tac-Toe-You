@@ -1,5 +1,9 @@
 @file:Suppress("UnstableApiUsage")
 
+rootProject.name = "TicTacToe-You"
+
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 pluginManagement {
     includeBuild("build-logic")
     repositories {
@@ -36,10 +40,6 @@ dependencyResolutionManagement {
     }
 }
 
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-
-rootProject.name = "TicTacToe-You"
-
 include(":app")
 include(":core:domain")
 include(":core:navigation")
@@ -47,9 +47,13 @@ include(":core:navigation-impl")
 include(":core:resources")
 include(":core:services")
 include(":core:ui")
+include(":core:platform")
 include(":feature:changelogs")
 include(":feature:game")
 include(":feature:library-info")
 include(":feature:main")
 include(":feature:settings")
 include(":feature:settings-search")
+
+include(":libs:lazyColumnScrollbar")
+include(":libs:extendedColors")

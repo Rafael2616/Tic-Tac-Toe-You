@@ -1,0 +1,88 @@
+package com.rafael.tictactoe.core.ui.theme
+
+import android.graphics.Color
+import android.os.Build
+import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.dynamicDarkColorScheme
+import androidx.compose.material3.dynamicLightColorScheme
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.ui.platform.LocalContext
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
+
+@Composable
+actual fun AppTheme(
+    onEvent: (SettingsEvent) -> Unit,
+    isSystemInDarkTheme: Boolean,
+    state: SettingsState,
+    content: @Composable () -> Unit,
+) {
+    val isDarkThemeOn = state.isDarkThemeOn
+    val isFollowingSystemOn = state.isFollowingSystemOn
+    val isDynamicColorsOn = state.isDynamicColorsOn
+    val context = LocalContext.current
+    val isAndroidS = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+
+    // Handle which color scheme will be applied
+    val colors = if (isFollowingSystemOn) {
+        if (isAndroidS && isDynamicColorsOn) {
+            if (isSystemInDarkTheme) {
+                dynamicDarkColorScheme(context)
+            } else {
+                dynamicLightColorScheme(context)
+            }
+        } else if (isSystemInDarkTheme) {
+            DarkColors
+        } else {
+            LightColors
+        }
+    } else {
+        if (isAndroidS && isDynamicColorsOn) {
+            if (isDarkThemeOn) {
+                dynamicDarkColorScheme(context)
+            } else {
+                dynamicLightColorScheme(context)
+            }
+        } else {
+            if (isDarkThemeOn) {
+                DarkColors
+            } else {
+                LightColors
+            }
+        }
+    }
+
+    MaterialTheme(
+        colorScheme = colors,
+        shapes = Shapes,
+        typography = Typography,
+        content = content,
+    )
+
+    // Sync dark theme with value of system theme
+    if (isSystemInDarkTheme && isFollowingSystemOn) {
+        onEvent(SettingsEvent.SetIsDarkThemeOn(true))
+    } else if (!isSystemInDarkTheme && isFollowingSystemOn) {
+        onEvent(SettingsEvent.SetIsDarkThemeOn(false))
+    }
+
+    // Set System Bars Colors
+    DisposableEffect(isDarkThemeOn) {
+        val activity = context as ComponentActivity
+        activity.enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.auto(
+                Color.TRANSPARENT,
+                Color.TRANSPARENT,
+            ) { isDarkThemeOn },
+            navigationBarStyle = SystemBarStyle.auto(
+                Color.TRANSPARENT,
+                Color.TRANSPARENT,
+            ) { isDarkThemeOn },
+        )
+        onDispose {}
+    }
+}

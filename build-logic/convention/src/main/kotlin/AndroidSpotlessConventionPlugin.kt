@@ -18,7 +18,7 @@ class AndroidSpotlessConventionPlugin : Plugin<Project> {
                                 libs.findLibrary("ktlint-compose-rules").get().get().toString(),
                             ),
                         )
-                    target("src/main/kotlin/**/*.kt", "src/androidTest/java/**/*.kt")
+                    target("src/**/*.kt")
                 }
                 kotlinGradle {
                     ktlint()

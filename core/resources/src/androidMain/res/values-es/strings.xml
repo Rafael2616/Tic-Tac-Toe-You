@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tres en Raia - Material You</string>
+    <string name="play">Jugar</string>
+    <string name="vs_cpu">Contra la CPU</string>
+    <string name="online_match">Partida Online</string>
+    <string name="short_label">Iniciar partida</string>
+</resources>
