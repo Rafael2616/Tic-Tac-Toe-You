@@ -2,7 +2,6 @@ package com.rafael.tictactoe.feature.settings.domain.model
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
-import coil3.Uri
 import com.rafael.tictactoe.core.domain.util.Colors
 import com.rafael.tictactoe.core.domain.util.getVersionName
 import com.rafael.tictactoe.feature.settings.domain.enums.Customization
@@ -32,7 +31,6 @@ data class SettingsState(
     val showWhatsNewDialog: Boolean = false,
     val showProfilePictureMenu: Boolean = false,
     val profilePictureBitmap: ImageBitmap? = null,
-    val profilePictureUri: Uri? = null,
     val showBoardCustomizationDialog: Boolean = false,
     val shapeSelected: Int = 1,
     val boardCardsCornerRadius: Float = DEF_CARDS_CORNER_RADIUS,

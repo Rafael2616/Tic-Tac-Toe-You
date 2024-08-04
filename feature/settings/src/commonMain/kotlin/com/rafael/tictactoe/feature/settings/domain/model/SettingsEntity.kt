@@ -28,6 +28,7 @@ data class SettingsEntity(
     var boardCardsBorderColor: String,
     var isRGBEffectOn: Boolean,
     var isGradientOn: Boolean,
+    var profilePicture: ByteArray?,
 ) {
     companion object {
         fun getDefaultSettings(): SettingsEntity {
@@ -50,6 +51,7 @@ data class SettingsEntity(
                 boardCardsBorderColor = "FFFFFFFF",
                 isRGBEffectOn = false,
                 isGradientOn = true,
+                profilePicture = null,
             )
         }
     }

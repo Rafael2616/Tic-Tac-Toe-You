@@ -8,77 +8,24 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import coil3.Uri
 import coil3.toAndroidUri
-import coil3.toCoilUri
-import com.rafael.tictactoe.feature.settings.BuildConfig
 import com.rafael.tictactoe.feature.settings.domain.profile.ProfilePictureUtils
-import java.io.File
-import java.io.FileInputStream
-import java.io.FileOutputStream
 import org.koin.java.KoinJavaComponent.inject
 
 internal class AndroidProfilePictureUtils : ProfilePictureUtils {
-    override fun savePictureFromUri(imageUri: Uri) {
+    override fun getPictureBitmap(imageUri: Uri): ImageBitmap {
         val context: Application by inject(Application::class.java)
         val contentResolver = context.contentResolver
-        val inputStream = contentResolver.openInputStream(imageUri.toAndroidUri()) ?: return
-        val directory = File(PICTURE_PATH)
-        if (!directory.exists()) {
-            directory.mkdirs()
-        }
-
-        val filesInPictureDir = directory.listFiles()
-        filesInPictureDir?.forEach { file ->
-            if (file.isFile && file.nameWithoutExtension == "profilePicture") {
-                file.delete()
-            }
-        }
-
+        val inputStream = contentResolver.openInputStream(imageUri.toAndroidUri())!! // return
         val imageMimeType = contentResolver.getType(imageUri.toAndroidUri())
         val imageExtension = MimeTypeMap.getSingleton().getExtensionFromMimeType(imageMimeType)
-        val targetFile = File(PICTURE_PATH + "profilePicture.$imageExtension")
-        val outputStream = FileOutputStream(targetFile)
+        val outputStream = context.openFileOutput("profilePicture.$imageExtension", 0)
         val options = BitmapFactory.Options()
         options.inSampleSize = 3
 
         val bitmap = BitmapFactory.decodeStream(inputStream, null, options)
         bitmap?.compress(compressionFormat(imageExtension), 80, outputStream)
 
-        outputStream.flush()
-        outputStream.close()
-        inputStream.close()
-    }
-
-    override fun getPictureUriIfExists(): Uri? {
-        var uriDirWithFileNameExt: Uri? = null
-        val directory = File(PICTURE_PATH)
-
-        if (directory.exists() && directory.isDirectory) {
-            val files = directory.listFiles()
-            if (files != null && files.isNotEmpty()) {
-                files.forEach { file ->
-                    if (file.isFile && file.nameWithoutExtension == "profilePicture") {
-                        uriDirWithFileNameExt = android.net.Uri.parse(PICTURE_PATH + file.name).toCoilUri()
-                    }
-                }
-            }
-        }
-        return uriDirWithFileNameExt
-    }
-
-    override fun getPictureBitmap(): ImageBitmap {
-        return BitmapFactory.decodeStream(
-            FileInputStream(getPictureUriIfExists()?.path!!),
-        ).asImageBitmap()
-    }
-
-    override fun deletePicture() {
-        val directory = File(PICTURE_PATH)
-        val filesInPictureDir = directory.listFiles()
-        filesInPictureDir?.forEach { file ->
-            if (file.isFile && file.nameWithoutExtension == "profilePicture") {
-                file.delete()
-            }
-        }
+        return bitmap!!.asImageBitmap()
     }
 
     private fun compressionFormat(extension: String?): CompressFormat {
@@ -87,10 +34,5 @@ internal class AndroidProfilePictureUtils : ProfilePictureUtils {
             "png" -> CompressFormat.PNG
             else -> CompressFormat.JPEG
         }
-    }
-
-    companion object {
-        private val buildType = if (BuildConfig.BUILD_TYPE == "release") "" else "." + BuildConfig.BUILD_TYPE
-        val PICTURE_PATH = "/storage/emulated/0/Android/data/com.rafael.tictactoe$buildType/files/userProfile/"
     }
 }

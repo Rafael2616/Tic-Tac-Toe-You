@@ -7,19 +7,10 @@ plugins {
     alias(libs.plugins.kotlin.kapt)
 }
 
-android {
-    namespace = "com.rafael.tictactoe.feature.settings"
+android.namespace = "com.rafael.tictactoe.feature.settings"
 
-    defaultConfig {
-        buildConfigField("int", "VERSION_CODE", libs.versions.versionCode.get())
-        buildConfigField("String", "VERSION_NAME", "\"${libs.versions.versionName.get()}\"")
-    }
-    buildFeatures {
-        buildConfig = true
-    }
-    room {
-        schemaDirectory("$projectDir/schemas")
-    }
+room {
+    schemaDirectory("$projectDir/schemas")
 }
 
 kotlin {

@@ -13,4 +13,10 @@ interface SettingsDao {
 
     @Upsert
     suspend fun setAllSettingsValues(settingsEntity: SettingsEntity)
+
+    @Query("SELECT profilePicture FROM settings WHERE id = 1")
+    suspend fun getProfilePicture(): ByteArray?
+
+    @Query("DELETE FROM settings WHERE profilePicture = :profilePicture")
+    suspend fun deleteProfilePicture(profilePicture: ByteArray)
 }

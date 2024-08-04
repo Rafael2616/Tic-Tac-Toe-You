@@ -7,6 +7,8 @@ import coil3.Uri
 import com.rafael.tictactoe.core.domain.util.getVersionName
 import com.rafael.tictactoe.core.domain.util.toColor
 import com.rafael.tictactoe.core.services.music.backgroundMusic
+import com.rafael.tictactoe.feature.settings.data.utils.toBitmap
+import com.rafael.tictactoe.feature.settings.data.utils.toByteArray
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsEntity
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
@@ -57,13 +59,13 @@ class SettingsViewModel(
                     boardCardsBorderColor = Color(settings.boardCardsBorderColor.toLong(16)),
                     isRGBEffectOn = settings.isRGBEffectOn,
                     isGradientOn = settings.isGradientOn,
+                    profilePictureBitmap = settings.profilePicture?.toBitmap(),
                 )
             }
             backgroundMusic(
                 isBackgroundMusicOn = settings.isBackgroundMusicOn,
                 isAppInOnStop = false,
             )
-            _state.update { it.copy(profilePictureUri = ProfilePictureUtilsImpl().getPictureUriIfExists()) }
             onSaveImage()
             this.cancel()
         }
@@ -84,6 +86,7 @@ class SettingsViewModel(
                     isAppInOnStop = false,
                 )
             }
+
             SettingsEvent.ToggleIsDarkThemeOn -> {
                 _state.update { it.copy(isDarkThemeOn = !it.isDarkThemeOn) }
 
@@ -93,6 +96,7 @@ class SettingsViewModel(
                     repository.setAllSettingsValues(settings)
                 }
             }
+
             SettingsEvent.ToggleIsDynamicColorsOn -> {
                 _state.update { it.copy(isDynamicColorsOn = !it.isDynamicColorsOn) }
 
@@ -102,6 +106,7 @@ class SettingsViewModel(
                     repository.setAllSettingsValues(settings)
                 }
             }
+
             SettingsEvent.ToggleIsFollowingSystemOn -> {
                 _state.update { it.copy(isFollowingSystemOn = !it.isFollowingSystemOn) }
 
@@ -111,6 +116,7 @@ class SettingsViewModel(
                     repository.setAllSettingsValues(settings)
                 }
             }
+
             SettingsEvent.ToggleIsSoundEffectsOn -> {
                 _state.update { it.copy(isSoundEffectsOn = !it.isSoundEffectsOn) }
 
@@ -120,6 +126,7 @@ class SettingsViewModel(
                     repository.setAllSettingsValues(settings)
                 }
             }
+
             is SettingsEvent.SetIsDarkThemeOn -> {
                 _state.update { it.copy(isDarkThemeOn = event.value) }
 
@@ -129,6 +136,7 @@ class SettingsViewModel(
                     repository.setAllSettingsValues(settings)
                 }
             }
+
             SettingsEvent.OnSettingsScreenDestroy -> {
                 _state.update {
                     it.copy(
@@ -137,30 +145,38 @@ class SettingsViewModel(
                     )
                 }
             }
+
             is SettingsEvent.StartBackgroundMusic -> {
                 backgroundMusic(
                     isBackgroundMusicOn = state.value.isBackgroundMusicOn,
                     isAppInOnStop = event.isAppInOnStop,
                 )
             }
+
             is SettingsEvent.ShowAboutAppCard -> {
                 _state.update { it.copy(isAboutShown = event.value) }
             }
+
             is SettingsEvent.SetCustomizationType -> {
                 _state.update { it.copy(customizationType = event.type) }
             }
+
             is SettingsEvent.ShowColorSelectionDialog -> {
                 _state.update { it.copy(showColorSelectionDialog = event.value) }
             }
+
             is SettingsEvent.SetWinnerLineColor -> {
                 _state.update { it.copy(winnerLineColor = event.color) }
             }
+
             is SettingsEvent.SetXColor -> {
                 _state.update { it.copy(xColor = event.color) }
             }
+
             is SettingsEvent.SetCircleColor -> {
                 _state.update { it.copy(circleColor = event.color) }
             }
+
             is SettingsEvent.SelectedWinnerLineColor -> {
                 viewModelScope.launch(Dispatchers.IO) {
                     val settings = repository.getAllSettingsValues(1) ?: defaultSettings
@@ -169,6 +185,7 @@ class SettingsViewModel(
                 }
                 _state.update { it.copy(selectedWinnerLineColor = event.value) }
             }
+
             is SettingsEvent.SelectedXColor -> {
                 viewModelScope.launch(Dispatchers.IO) {
                     val settings = repository.getAllSettingsValues(1) ?: defaultSettings
@@ -177,6 +194,7 @@ class SettingsViewModel(
                 }
                 _state.update { it.copy(selectedXColor = event.value) }
             }
+
             is SettingsEvent.SelectedCircleColor -> {
                 viewModelScope.launch(Dispatchers.IO) {
                     val settings = repository.getAllSettingsValues(1) ?: defaultSettings
@@ -185,6 +203,7 @@ class SettingsViewModel(
                 }
                 _state.update { it.copy(selectedCircleColor = event.value) }
             }
+
             SettingsEvent.HideWhatsNewDialog -> {
                 _state.update { it.copy(showWhatsNewDialog = false) }
                 viewModelScope.launch(Dispatchers.IO) {
@@ -193,18 +212,23 @@ class SettingsViewModel(
                     repository.setAllSettingsValues(settings)
                 }
             }
+
             SettingsEvent.ShowWhatsNewDialog -> {
                 _state.update { it.copy(showWhatsNewDialog = true) }
             }
+
             SettingsEvent.ToggleShowProfilePictureMenu -> {
                 _state.update { it.copy(showProfilePictureMenu = !it.showProfilePictureMenu) }
             }
+
             SettingsEvent.HideProfilePictureMenu -> {
                 _state.update { it.copy(showProfilePictureMenu = false) }
             }
+
             is SettingsEvent.ShowBoardCustomizationDialog -> {
                 _state.update { it.copy(showBoardCustomizationDialog = event.value) }
             }
+
             is SettingsEvent.SetBoardShape -> {
                 _state.update {
                     it.copy(
@@ -232,6 +256,7 @@ class SettingsViewModel(
                     repository.setAllSettingsValues(settings)
                 }
             }
+
             is SettingsEvent.UpdateBoardCardsBorderColor -> {
                 _state.update { it.copy(boardCardsBorderColor = event.color) }
             }
@@ -241,27 +266,30 @@ class SettingsViewModel(
     fun onDeleteImage() {
         _state.update {
             it.copy(
-                profilePictureUri = null,
                 profilePictureBitmap = null,
                 showProfilePictureMenu = false,
             )
         }
-        ProfilePictureUtilsImpl().deletePicture()
+        viewModelScope.launch(Dispatchers.IO) {
+            val settings = repository.getAllSettingsValues(1) ?: defaultSettings
+            settings.profilePicture = null
+            repository.setAllSettingsValues(settings)
+        }
     }
 
     fun onSaveImage(imageUri: Uri? = null) {
         val profileManager = ProfilePictureUtilsImpl()
-        imageUri?.let {
-            profileManager.savePictureFromUri(imageUri)
-        }
-        _state.update {
-            it.copy(
-                profilePictureUri = profileManager.getPictureUriIfExists(),
-                showProfilePictureMenu = false,
-            )
-        }
-        state.value.profilePictureUri?.let {
-            _state.update { it.copy(profilePictureBitmap = profileManager.getPictureBitmap()) }
+        _state.update { it.copy(showProfilePictureMenu = false) }
+
+        viewModelScope.launch(Dispatchers.IO) {
+            imageUri?.let {
+                val settings = repository.getAllSettingsValues(1) ?: defaultSettings
+                settings.profilePicture = profileManager.getPictureBitmap(imageUri).toByteArray()
+                repository.setAllSettingsValues(settings)
+                _state.update {
+                    it.copy(profilePictureBitmap = settings.profilePicture?.toBitmap())
+                }
+            }
         }
     }
 }
