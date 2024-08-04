@@ -41,7 +41,7 @@
 
 # Employed technologies:
 - [Room database](https://developer.android.com/jetpack/androidx/releases/room?hl=en) for persistent data storage
-- [Dagger Hilt](https://dagger.dev/) for dependency injection
+- [Koin](https://insert-koin.io/) for dependency injection
 - [Clean Architecture](https://medium.com/simform-engineering/clean-architecture-in-android-12d61c4f5318) and [MVVM](https://www.google.com/amp/s/www.geeksforgeeks.org/mvvm-model-view-viewmodel-architecture-pattern-in-android/amp/) patterns
 - [Jetpack Compose](https://developer.android.com/jetpack/compose?hl=en) for UI development kit
 - [Media3](https://developer.android.com/jetpack/androidx/releases/media3?hl=en) for sound related features
