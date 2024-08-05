@@ -26,6 +26,8 @@ kotlin {
             // Koin
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
+            // Ktor
+            implementation(libs.ktor.client.android)
         }
         commonMain.dependencies {
             // Kotlin
@@ -43,6 +45,7 @@ kotlin {
             implementation(libs.androidx.room.runtime)
             // Coil
             api(libs.coil.compose)
+            api(libs.coil.network)
             // ColorPicker Compose
             implementation(libs.skydoves.colorpicker.compose)
 
@@ -57,6 +60,10 @@ kotlin {
             api(projects.libs.extendedColors)
             // My multiplatform implementation of LazyColumnScrollbar library
             api(projects.libs.lazyColumnScrollbar)
+        }
+        iosMain.dependencies {
+            // Ktor
+            implementation(libs.ktor.client.ios)
         }
     }
 }
