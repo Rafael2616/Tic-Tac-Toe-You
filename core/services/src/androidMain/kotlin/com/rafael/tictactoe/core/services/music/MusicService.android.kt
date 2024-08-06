@@ -13,7 +13,6 @@ import com.rafael.tictactoe.core.domain.util.PACKAGE_NAME
 import com.rafael.tictactoe.core.services.R
 import org.koin.java.KoinJavaComponent.inject
 
-@Suppress("EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING")
 actual class MusicService : Service() {
 
     private val context: Context by inject(Application::class.java)

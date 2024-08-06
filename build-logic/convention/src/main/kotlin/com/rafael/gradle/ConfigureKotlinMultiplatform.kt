@@ -5,9 +5,11 @@ import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.get
+import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 internal fun Project.configureKotlinMultiplatform(
     commonExtension: CommonExtension<*, *, *, *, *, *>,
@@ -69,6 +71,12 @@ internal fun Project.configureKotlinMultiplatform(
                     baseName = this@configureKotlinMultiplatform.name
                     isStatic = true
                 }
+            }
+        }
+        tasks.withType<KotlinCompile>().configureEach {
+            // Remove when expect/actual declaration becomes stable
+            compilerOptions {
+                freeCompilerArgs.add("-Xexpect-actual-classes")
             }
         }
     }
