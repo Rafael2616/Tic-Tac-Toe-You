@@ -57,7 +57,6 @@
 - [Spotless](https://github.com/diffplug/spotless) for Kotlin code linting
 - [Coil Compose](https://coil-kt.github.io/coil/compose/) for async image loading
 - [Material Motion](https://fornewid.github.io/material-motion-compose/) for screen transition animation
-- [App Search](https://developer.android.com/jetpack/androidx/releases/appsearch?hl=en) for in app search
 - [Androidx Libraries](https://developer.android.com/jetpack/androidx?hl=en) for core and base features for Android
 - [Moko permissions](https://github.com/icerockdev/moko-permissions) for permission handling in
   Kotlin multiplatform
