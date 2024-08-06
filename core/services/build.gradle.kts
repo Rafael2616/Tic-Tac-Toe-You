@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.rafael.android.library)
     alias(libs.plugins.rafael.spotless)
-    alias(libs.plugins.ksp)
 }
 
 android.namespace = "com.rafael.tictactoe.core.services"
@@ -14,9 +13,6 @@ kotlin {
             implementation(libs.androidx.media3.exoplayer)
             // Koin
             implementation(libs.koin.android)
-
-            // Projects
-            implementation(projects.core.domain)
         }
         commonMain.dependencies {
             // Koin
