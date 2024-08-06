@@ -54,18 +54,18 @@ data class SettingItem(
                 SettingItem(
                     content = { onEvent, state, _ -> FollowSystemPreference(onEvent, state) },
                     searchSpecs = SearchItemSpecs(
-                        _namespace = NAMESPACE,
-                        _id = UUID.randomUUID().toString(),
-                        _text = getString(Res.string.system_theme),
+                        namespace = NAMESPACE,
+                        id = UUID.randomUUID().toString(),
+                        text = getString(Res.string.system_theme),
                     ),
                 ),
                 // Dark Theme
                 SettingItem(
                     content = { onEvent, state, _ -> DarkThemePreference(onEvent, state) },
                     searchSpecs = SearchItemSpecs(
-                        _namespace = NAMESPACE,
-                        _id = UUID.randomUUID().toString(),
-                        _text = getString(Res.string.dark_theme),
+                        namespace = NAMESPACE,
+                        id = UUID.randomUUID().toString(),
+                        text = getString(Res.string.dark_theme),
                     ),
                     isAvailable = !settingsState.isFollowingSystemOn,
 
@@ -74,9 +74,9 @@ data class SettingItem(
                 SettingItem(
                     content = { onEvent, state, _ -> DynamicColorsPreference(onEvent, state) },
                     searchSpecs = SearchItemSpecs(
-                        _namespace = NAMESPACE,
-                        _id = UUID.randomUUID().toString(),
-                        _text = getString(Res.string.material_you),
+                        namespace = NAMESPACE,
+                        id = UUID.randomUUID().toString(),
+                        text = getString(Res.string.material_you),
                     ),
                     isAvailable = dynamicColorsAvailability,
                 ),
@@ -84,90 +84,90 @@ data class SettingItem(
                 SettingItem(
                     content = { onEvent, state, _ -> SoundEffectsPreference(onEvent, state) },
                     searchSpecs = SearchItemSpecs(
-                        _namespace = NAMESPACE,
-                        _id = UUID.randomUUID().toString(),
-                        _text = getString(Res.string.sound_effects),
+                        namespace = NAMESPACE,
+                        id = UUID.randomUUID().toString(),
+                        text = getString(Res.string.sound_effects),
                     ),
                 ),
                 // Background Music
                 SettingItem(
                     content = { onEvent, state, _ -> BackgroundMusicPreference(onEvent, state) },
                     searchSpecs = SearchItemSpecs(
-                        _namespace = NAMESPACE,
-                        _id = UUID.randomUUID().toString(),
-                        _text = getString(Res.string.background_music),
+                        namespace = NAMESPACE,
+                        id = UUID.randomUUID().toString(),
+                        text = getString(Res.string.background_music),
                     ),
                 ),
                 // Winner Line Color
                 SettingItem(
                     content = { onEvent, state, _ -> WinnerLineColorPreference(onEvent, state) },
                     searchSpecs = SearchItemSpecs(
-                        _namespace = NAMESPACE,
-                        _id = UUID.randomUUID().toString(),
-                        _text = getString(Res.string.winner_line_color),
+                        namespace = NAMESPACE,
+                        id = UUID.randomUUID().toString(),
+                        text = getString(Res.string.winner_line_color),
                     ),
                 ),
                 // Circle Color
                 SettingItem(
                     content = { onEvent, state, _ -> CircleColorPreference(onEvent, state) },
                     searchSpecs = SearchItemSpecs(
-                        _namespace = NAMESPACE,
-                        _id = UUID.randomUUID().toString(),
-                        _text = getString(Res.string.color_circle),
+                        namespace = NAMESPACE,
+                        id = UUID.randomUUID().toString(),
+                        text = getString(Res.string.color_circle),
                     ),
                 ),
                 // X Color
                 SettingItem(
                     content = { onEvent, state, _ -> XColorPreference(onEvent, state) },
                     searchSpecs = SearchItemSpecs(
-                        _namespace = NAMESPACE,
-                        _id = UUID.randomUUID().toString(),
-                        _text = getString(Res.string.color_x),
+                        namespace = NAMESPACE,
+                        id = UUID.randomUUID().toString(),
+                        text = getString(Res.string.color_x),
                     ),
                 ),
                 // Board Cards
                 SettingItem(
                     content = { onEvent, state, _ -> BoardCustomizationPreference(onEvent, state) },
                     searchSpecs = SearchItemSpecs(
-                        _namespace = NAMESPACE,
-                        _id = UUID.randomUUID().toString(),
-                        _text = getString(Res.string.board_customization),
+                        namespace = NAMESPACE,
+                        id = UUID.randomUUID().toString(),
+                        text = getString(Res.string.board_customization),
                     ),
                 ),
                 // About App
                 SettingItem(
                     content = { onEvent, state, _ -> AboutAppPreference(onEvent, state) },
                     searchSpecs = SearchItemSpecs(
-                        _namespace = NAMESPACE,
-                        _id = UUID.randomUUID().toString(),
-                        _text = getString(Res.string.about_app),
+                        namespace = NAMESPACE,
+                        id = UUID.randomUUID().toString(),
+                        text = getString(Res.string.about_app),
                     ),
                 ),
                 // Github repo
                 SettingItem(
                     content = { _, _, _ -> ViewOnGithubPreference() },
                     searchSpecs = SearchItemSpecs(
-                        _namespace = NAMESPACE,
-                        _id = UUID.randomUUID().toString(),
-                        _text = getString(Res.string.view_on_github),
+                        namespace = NAMESPACE,
+                        id = UUID.randomUUID().toString(),
+                        text = getString(Res.string.view_on_github),
                     ),
                 ),
                 // Update History
                 SettingItem(
                     content = { _, _, navController -> UpdateHistoryPreference(navController) },
                     searchSpecs = SearchItemSpecs(
-                        _namespace = NAMESPACE,
-                        _id = UUID.randomUUID().toString(),
-                        _text = getString(Res.string.update_history),
+                        namespace = NAMESPACE,
+                        id = UUID.randomUUID().toString(),
+                        text = getString(Res.string.update_history),
                     ),
                 ),
                 // Licences Screen
                 SettingItem(
                     content = { _, _, navController -> OpenSourceLicensesPreference(navController) },
                     searchSpecs = SearchItemSpecs(
-                        _namespace = NAMESPACE,
-                        _id = UUID.randomUUID().toString(),
-                        _text = getString(Res.string.open_source_licenses),
+                        namespace = NAMESPACE,
+                        id = UUID.randomUUID().toString(),
+                        text = getString(Res.string.open_source_licenses),
                     ),
                 ),
             )

@@ -109,7 +109,14 @@ fun SearchSettingsScreen(
             inputField = {
                 SearchBarDefaults.InputField(
                     query = searchState.query,
-                    onQueryChange = { onSearchEvent(SearchSettingsEvent.QuerySettingsFromRepository(it)) },
+                    onQueryChange = {
+                        onSearchEvent(
+                            SearchSettingsEvent.QuerySettingsFromRepository(
+                                it,
+                                settingsState,
+                            ),
+                        )
+                    },
                     onSearch = { expanded = false },
                     expanded = expanded,
                     onExpandedChange = { expanded = it },

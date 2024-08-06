@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.rafael.spotless)
     alias(libs.plugins.androidx.room)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.kotlin.kapt)
 }
 
 android.namespace = "com.rafael.tictactoe.feature.settings"
@@ -20,9 +19,6 @@ kotlin {
             implementation(libs.androidx.activity.compose)
             // Room
             implementation(libs.androidx.room.ktx)
-            // App Search
-            implementation(libs.androidx.appsearch)
-            implementation(libs.androidx.appsearch.localStorage)
             // Koin
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
@@ -77,6 +73,4 @@ ksp {
 dependencies {
     add("kspAndroid", libs.androidx.room.compiler)
     add("kspIosX64", libs.androidx.room.compiler)
-
-    add("kapt", libs.androidx.appsearch.compiler)
 }
