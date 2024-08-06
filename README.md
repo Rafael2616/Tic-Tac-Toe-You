@@ -25,6 +25,8 @@
 <img src="screenshots/Screenshot_1d.png" width=31% alt="home">
 <img src="screenshots/Screenshot_2d.png" width=31% alt="settings">
 <img src="screenshots/Screenshot_3d.png" width=31% alt ="PvP dialog">
+</div>
+<div align="center" style="width:100%; display:flex; justify-content:space-between;">
 <img src="screenshots/Screenshot_4d.png" width=31% alt ="PvP screen">
 <img src="screenshots/Screenshot_5d.png" width=31% alt ="vs CPU dialog">
 <img src="screenshots/Screenshot_6d.png" width=31% alt ="online match loading">
@@ -34,6 +36,8 @@
 <img src="screenshots/Screenshot_1.png" width=31% alt="home">
 <img src="screenshots/Screenshot_2.png" width=31% alt="settings">
 <img src="screenshots/Screenshot_3.png" width=31% alt="PvP dialog">
+</div>
+<div align="center" style="width:100%; display:flex; justify-content:space-between;">
 <img src="screenshots/Screenshot_4.png" width=31% alt="PvP screen">
 <img src="screenshots/Screenshot_5.png" width=31% alt="vs CPU dialog">
 <img src="screenshots/Screenshot_6.png" width=31% alt ="online match dialog">
@@ -41,7 +45,7 @@
 
 # Employed technologies:
 - [Room database](https://developer.android.com/jetpack/androidx/releases/room?hl=en) for persistent data storage
-- [Dagger Hilt](https://dagger.dev/) for dependency injection
+- [Koin](https://insert-koin.io/) for dependency injection
 - [Clean Architecture](https://medium.com/simform-engineering/clean-architecture-in-android-12d61c4f5318) and [MVVM](https://www.google.com/amp/s/www.geeksforgeeks.org/mvvm-model-view-viewmodel-architecture-pattern-in-android/amp/) patterns
 - [Jetpack Compose](https://developer.android.com/jetpack/compose?hl=en) for UI development kit
 - [Media3](https://developer.android.com/jetpack/androidx/releases/media3?hl=en) for sound related features
@@ -53,8 +57,9 @@
 - [Spotless](https://github.com/diffplug/spotless) for Kotlin code linting
 - [Coil Compose](https://coil-kt.github.io/coil/compose/) for async image loading
 - [Material Motion](https://fornewid.github.io/material-motion-compose/) for screen transition animation
-- [App Search](https://developer.android.com/jetpack/androidx/releases/appsearch?hl=en) for in app search
 - [Androidx Libraries](https://developer.android.com/jetpack/androidx?hl=en) for core and base features for Android
+- [Moko permissions](https://github.com/icerockdev/moko-permissions) for permission handling in
+  Kotlin multiplatform
 
 # Follow me on Instagram
 [Instagram](https://www.instagram.com/rafael_mourana/)

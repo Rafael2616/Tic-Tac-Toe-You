@@ -19,4 +19,12 @@ internal class SettingsRepositoryImpl(
     override suspend fun setAllSettingsValues(settingsEntity: SettingsEntity) {
         settingsDao.setAllSettingsValues(settingsEntity)
     }
+
+    override suspend fun getProfilePicture(): ByteArray? {
+        return settingsDao.getProfilePicture()
+    }
+
+    override suspend fun deleteProfilePicture(profilePicture: ByteArray) {
+        settingsDao.deleteProfilePicture(profilePicture)
+    }
 }

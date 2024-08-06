@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">Tres en Raia - Material You</string>
     <string name="inapp_title">Tres en Raya</string>
     <string name="play">Jugar</string>
@@ -17,9 +17,9 @@
     <string name="dark_theme">Tema oscuro</string>
     <string name="material_you">Colores dinámicos</string>
     <string name="sound_effects">Efectos sonoros</string>
-    <string name="background_music" tools:ignore="Typos">Musica de fondo</string>
+    <string name="background_music" ignore="Typos">Musica de fondo</string>
     <string name="active_sound">Efectos</string>
-    <string name="active_music" tools:ignore="Typos">Musica</string>
+    <string name="active_music" ignore="Typos">Musica</string>
     <string name="about_app">Sobre el app</string>
     <string name="system_theme">Sigue el sistema</string>
     <string name="vs_cpu">Contra la CPU</string>

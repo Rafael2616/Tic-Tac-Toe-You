@@ -18,7 +18,11 @@ actual val settingsModule: Module
                 SettingsDatabase::class.java,
                 SettingsDatabase.DATABASE_NAME,
             )
-                .addMigrations(Migrations().migration1To2, Migrations().migration2To3)
+                .addMigrations(
+                    Migrations().migration1To2,
+                    Migrations().migration2To3,
+                    Migrations().migration3To4,
+                )
                 .fallbackToDestructiveMigration(true)
                 .build()
         }

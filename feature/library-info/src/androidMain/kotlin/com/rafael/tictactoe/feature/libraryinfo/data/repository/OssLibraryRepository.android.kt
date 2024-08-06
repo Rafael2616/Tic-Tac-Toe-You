@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.serialization.json.Json
 import org.koin.java.KoinJavaComponent.inject
 
-@Suppress("EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING")
 actual class OssLibraryRepository {
 
     private val application: Application by inject(Application::class.java)

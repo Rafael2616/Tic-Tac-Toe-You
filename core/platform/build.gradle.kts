@@ -24,6 +24,9 @@ kotlin {
             // Koin
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
+            // Coil
+            api(libs.coil.compose)
+            api(libs.coil.compose.core)
         }
     }
 }

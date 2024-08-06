@@ -18,13 +18,9 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import coil3.ImageLoader
 import coil3.compose.AsyncImagePainter
-import coil3.compose.LocalPlatformContext
 import coil3.compose.SubcomposeAsyncImage
 import coil3.compose.SubcomposeAsyncImageContent
-import coil3.request.ImageRequest
-import coil3.request.crossfade
 import com.rafael.tictactoe.core.domain.util.VERSION_CODE
 import com.rafael.tictactoe.core.domain.util.getVersionName
 import com.rafael.tictactoe.core.resources.Res
@@ -64,12 +60,8 @@ fun AboutAppPreference(
         extraContent = if (state.isAboutShown) {
             {
                 SubcomposeAsyncImage(
-                    model = ImageRequest.Builder(LocalPlatformContext.current)
-                        .data("https://avatars.githubusercontent.com/u/93414086?s=96&v=4")
-                        .crossfade(true)
-                        .build(),
+                    model = "https://avatars.githubusercontent.com/u/93414086?s=96&v=4",
                     contentScale = ContentScale.Crop,
-                    imageLoader = ImageLoader.Builder(LocalPlatformContext.current).build(),
                     contentDescription = null,
                     modifier = modifier
                         .size(45.dp)

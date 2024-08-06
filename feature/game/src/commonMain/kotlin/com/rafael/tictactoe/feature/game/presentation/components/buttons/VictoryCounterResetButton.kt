@@ -45,7 +45,7 @@ internal fun VictoryCounterResetButton(
             ) {
                 Icon(
                     imageVector = Icons.Outlined.Delete,
-                    contentDescription = "Victory Counter Reseter Button",
+                    contentDescription = "Victory Counter Reset Button",
                     modifier = Modifier
                         .size(38.dp),
                     tint = MaterialTheme.colorScheme.error,

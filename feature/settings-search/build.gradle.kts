@@ -27,11 +27,6 @@ kotlin {
             implementation(libs.koin.compose.viewmodel)
             // Navigation
             implementation(libs.androidx.navigation.compose)
-            // App Search
-            implementation(libs.androidx.appsearch)
-            implementation(libs.androidx.appsearch.localStorage)
-
-            implementation(libs.google.guava)
 
             // Projects
             implementation(projects.core.resources)

@@ -4,22 +4,12 @@ plugins {
     alias(libs.plugins.rafael.spotless)
     alias(libs.plugins.androidx.room)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.kotlin.kapt)
 }
 
-android {
-    namespace = "com.rafael.tictactoe.feature.settings"
+android.namespace = "com.rafael.tictactoe.feature.settings"
 
-    defaultConfig {
-        buildConfigField("int", "VERSION_CODE", libs.versions.versionCode.get())
-        buildConfigField("String", "VERSION_NAME", "\"${libs.versions.versionName.get()}\"")
-    }
-    buildFeatures {
-        buildConfig = true
-    }
-    room {
-        schemaDirectory("$projectDir/schemas")
-    }
+room {
+    schemaDirectory("$projectDir/schemas")
 }
 
 kotlin {
@@ -29,12 +19,11 @@ kotlin {
             implementation(libs.androidx.activity.compose)
             // Room
             implementation(libs.androidx.room.ktx)
-            // App Search
-            implementation(libs.androidx.appsearch)
-            implementation(libs.androidx.appsearch.localStorage)
             // Koin
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
+            // Ktor
+            implementation(libs.ktor.client.android)
         }
         commonMain.dependencies {
             // Kotlin
@@ -52,6 +41,7 @@ kotlin {
             implementation(libs.androidx.room.runtime)
             // Coil
             api(libs.coil.compose)
+            api(libs.coil.network)
             // ColorPicker Compose
             implementation(libs.skydoves.colorpicker.compose)
 
@@ -67,6 +57,10 @@ kotlin {
             // My multiplatform implementation of LazyColumnScrollbar library
             api(projects.libs.lazyColumnScrollbar)
         }
+        iosMain.dependencies {
+            // Ktor
+            implementation(libs.ktor.client.ios)
+        }
     }
 }
 
@@ -79,6 +73,4 @@ ksp {
 dependencies {
     add("kspAndroid", libs.androidx.room.compiler)
     add("kspIosX64", libs.androidx.room.compiler)
-
-    add("kapt", libs.androidx.appsearch.compiler)
 }
