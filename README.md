@@ -53,7 +53,8 @@
 - [Coroutines](https://kotlinlang.org/docs/coroutines-guide.html) and [Flows](https://developer.android.com/kotlin/flow) for asynchronous and reactive programming
 - [Androidx SplashScreen](https://developer.android.com/reference/kotlin/androidx/core/splashscreen/SplashScreen) for splash screen implementation
 - [Navigation Compose](https://developer.android.com/jetpack/compose/navigation?hl=en) for navigation between screens
-- [Retrofit](https://square.github.io/retrofit/) and [OkHttp3](https://square.github.io/okhttp/) for network operations
+- [Ktor](https://github.com/ktorio/ktor) and [OkHttp3](https://square.github.io/okhttp/) for network
+  operations
 - [Spotless](https://github.com/diffplug/spotless) for Kotlin code linting
 - [Coil Compose](https://coil-kt.github.io/coil/compose/) for async image loading
 - [Material Motion](https://fornewid.github.io/material-motion-compose/) for screen transition animation

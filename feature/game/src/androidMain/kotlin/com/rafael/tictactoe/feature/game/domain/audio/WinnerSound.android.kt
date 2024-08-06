@@ -1,9 +1,10 @@
 package com.rafael.tictactoe.feature.game.domain.audio
 
+import android.app.Application
+import android.content.Context
 import android.net.Uri
 import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
-import com.rafael.tictactoe.core.domain.util.PACKAGE_NAME
 import com.rafael.tictactoe.core.resources.R
 import com.rafael.tictactoe.feature.game.domain.model.GameState
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
@@ -14,8 +15,10 @@ actual fun winnerSound(
     settingsState: SettingsState,
 ): Boolean {
     val exoPlayer: ExoPlayer by inject(ExoPlayer::class.java)
+    val context: Context by inject(Application::class.java)
     val winnerSoundFile = R.raw.winner_victory_sound
-    val winnerSound = MediaItem.fromUri(Uri.parse("android.resource://$PACKAGE_NAME/$winnerSoundFile"))
+    val winnerSound =
+        MediaItem.fromUri(Uri.parse("android.resource://${context.packageName}/$winnerSoundFile"))
     val isSoundEffectsOn = settingsState.isSoundEffectsOn
     val isWinSoundPlaying = state.isWinSoundPlaying
 

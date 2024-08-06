@@ -1,5 +1,9 @@
 package com.rafael.tictactoe.feature.game.domain.model
 
+import com.rafael.tictactoe.core.platform.network.utils.Error
+import com.rafael.tictactoe.core.platform.network.utils.Result
+import com.rafael.tictactoe.feature.game.domain.repository.ErrorMessage
+
 data class GameState(
     val currentPlayerName: String = "",
     val player1Name: String = "",
@@ -34,7 +38,7 @@ data class GameState(
     val winningPositionsIndices: List<Int> = emptyList(),
     val selectedDifficultyLevel: Level = Level.getLevels(true)[1],
     val hasLastWinningPlayer: Boolean = false,
-    val requestState: RequestState = RequestState.Loading,
+    val requestState: Pair<Result<Any, Error>, ErrorMessage>? = null,
     val matchID: Int = 0,
     val secondPlayer: Player? = null,
     val isOnlinePlayerTurn: Boolean = false,

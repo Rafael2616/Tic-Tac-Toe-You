@@ -37,6 +37,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.rafael.tictactoe.core.platform.network.utils.NetworkError
+import com.rafael.tictactoe.core.platform.network.utils.Result
 import com.rafael.tictactoe.core.resources.Res
 import com.rafael.tictactoe.core.resources.cannot_find_player
 import com.rafael.tictactoe.core.resources.connection_error
@@ -50,10 +52,8 @@ import com.rafael.tictactoe.core.resources.unable_connect_server
 import com.rafael.tictactoe.core.resources.unknown_error
 import com.rafael.tictactoe.core.resources.you_will_be_second_player
 import com.rafael.tictactoe.core.resources.you_will_start_game
-import com.rafael.tictactoe.feature.game.domain.model.Error
 import com.rafael.tictactoe.feature.game.domain.model.GameEvent
 import com.rafael.tictactoe.feature.game.domain.model.GameState
-import com.rafael.tictactoe.feature.game.domain.model.RequestState
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 import kotlinx.coroutines.delay
@@ -67,7 +67,8 @@ internal fun PlayerSearchSurface(
     onSettingsEvent: (SettingsEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val requestState = gameState.requestState
+    val requestState = gameState.requestState?.first
+    val errorMessage = gameState.requestState?.second
     val actualOnEvent by rememberUpdatedState(onEvent)
 
     Surface(
@@ -99,7 +100,7 @@ internal fun PlayerSearchSurface(
                         .padding(end = 15.dp)
                         .size(45.dp),
                     onClick = {
-                        onEvent(GameEvent.UpdateRequestState(RequestState.Loading))
+                        onEvent(GameEvent.UpdateRequestState(null))
                         onEvent(GameEvent.GetRemotePlayers(onSettingsEvent))
                     },
                 ) {
@@ -131,24 +132,14 @@ internal fun PlayerSearchSurface(
                     .weight(1.4f),
                 text = stringResource(
                     when (requestState) {
-                        RequestState.Loading -> Res.string.searching_for_players
-                        RequestState.Success -> Res.string.player_found
-                        is RequestState.Failure -> {
-                            when (requestState.type) {
-                                Error.IOError -> {
-                                    if (requestState.message.contains("404") && !requestState.message.contains("No players")) {
-                                        Res.string.unable_connect_server
-                                    } else if (requestState.message.contains("UnknownHostException")) {
-                                        Res.string.connection_error
-                                    } else if (requestState.message.contains("No players")) {
-                                        Res.string.cannot_find_player
-                                    } else {
-                                        Res.string.unknown_error
-                                    }
-                                }
-                                Error.HttpError -> Res.string.problem_during_server_connection
-                            }
-                        }
+                        Result.Error(NetworkError.NO_INTERNET) -> Res.string.unable_connect_server
+                        Result.Error(NetworkError.SERVER_ERROR) -> Res.string.connection_error
+                        Result.Error(NetworkError.UNKNOWN) -> Res.string.unknown_error
+                        Result.Error(NetworkError.UNAUTHORIZED) -> Res.string.problem_during_server_connection
+                        Result.Error(NetworkError.SERIALIZATION) -> Res.string.cannot_find_player
+                        is Result.Success -> Res.string.player_found
+                        null -> Res.string.searching_for_players
+                        else -> Res.string.unknown_error
                     },
                 ),
                 style = MaterialTheme.typography.titleMedium.copy(
@@ -171,7 +162,7 @@ internal fun PlayerSearchSurface(
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
                     .weight(0.4f),
-                text = if (requestState == RequestState.Success) {
+                text = if (requestState is Result.Success) {
                     stringResource(Res.string.player_n) + " ${gameState.secondPlayer?.name ?: "null"}"
                 } else {
                     ""
@@ -182,7 +173,7 @@ internal fun PlayerSearchSurface(
             )
 
             var timer by rememberSaveable { mutableIntStateOf(4) }
-            if (requestState == RequestState.Success) {
+            if (requestState is Result.Success) {
                 LaunchedEffect(timer >= 0) {
                     while (timer >= 0) {
                         timer--
@@ -197,7 +188,7 @@ internal fun PlayerSearchSurface(
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
                     .weight(0.4f),
-                text = if (requestState == RequestState.Success) {
+                text = if (requestState is Result.Success) {
                     stringResource(Res.string.game_will_start) + " " + timer.toString()
                 } else {
                     ""
@@ -213,7 +204,7 @@ internal fun PlayerSearchSurface(
                 contentAlignment = Alignment.Center,
             ) {
                 when (requestState) {
-                    RequestState.Loading -> {
+                    null -> {
                         CircularProgressIndicator(
                             modifier = Modifier
                                 .size(70.dp),
@@ -221,7 +212,8 @@ internal fun PlayerSearchSurface(
                             strokeWidth = 6.dp,
                         )
                     }
-                    is RequestState.Failure -> {
+
+                    is Result.Error -> {
                         Icon(
                             imageVector = Icons.Outlined.SentimentDissatisfied,
                             contentDescription = null,
@@ -230,7 +222,8 @@ internal fun PlayerSearchSurface(
                             tint = Color.Red,
                         )
                     }
-                    RequestState.Success -> {
+
+                    is Result.Success -> {
                         Icon(
                             imageVector = Icons.Outlined.Check,
                             contentDescription = null,
@@ -259,15 +252,7 @@ internal fun PlayerSearchSurface(
                 modifier = Modifier
                     .weight(1f)
                     .fillMaxWidth(0.9f),
-                text = when (requestState) {
-                    is RequestState.Failure -> {
-                        when (requestState.type) {
-                            Error.HttpError -> "Failure: ${requestState.message}\nCode: ${requestState.code}"
-                            Error.IOError -> "Failure: ${requestState.message}"
-                        }
-                    }
-                    else -> ""
-                },
+                text = if (requestState is Result.Error) "Failure: code $errorMessage" else "",
                 style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,

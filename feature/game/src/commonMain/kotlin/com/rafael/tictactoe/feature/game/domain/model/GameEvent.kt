@@ -1,5 +1,8 @@
 package com.rafael.tictactoe.feature.game.domain.model
 
+import com.rafael.tictactoe.core.platform.network.utils.Error
+import com.rafael.tictactoe.core.platform.network.utils.Result
+import com.rafael.tictactoe.feature.game.domain.repository.ErrorMessage
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
 
 sealed interface GameEvent {
@@ -17,7 +20,8 @@ sealed interface GameEvent {
     data object ToggleIsXForPlayer1 : GameEvent
     data object DismissExitDialog : GameEvent
     data class SelectCPUDifficultyMode(val level: Level) : GameEvent
-    data class UpdateRequestState(val state: RequestState) : GameEvent
+    data class UpdateRequestState(val state: Pair<Result<Any, Error>, ErrorMessage>? = null) :
+        GameEvent
     data class GetRemotePlayers(val onSettingsEvent: ((SettingsEvent) -> Unit)? = null) : GameEvent
     data object PostRemotePlayer : GameEvent
     data object RemoveRemotePlayer : GameEvent

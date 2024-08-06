@@ -3,6 +3,7 @@ package com.rafael.tictactoe.feature.game.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rafael.tictactoe.core.domain.util.toColor
+import com.rafael.tictactoe.core.platform.network.utils.onSuccess
 import com.rafael.tictactoe.feature.game.domain.audio.cardGridSound
 import com.rafael.tictactoe.feature.game.domain.audio.gotOldSound
 import com.rafael.tictactoe.feature.game.domain.audio.winnerSound
@@ -16,7 +17,6 @@ import com.rafael.tictactoe.feature.game.domain.model.GameMode
 import com.rafael.tictactoe.feature.game.domain.model.GameState
 import com.rafael.tictactoe.feature.game.domain.model.OnlineGameState
 import com.rafael.tictactoe.feature.game.domain.model.Player
-import com.rafael.tictactoe.feature.game.domain.model.RequestState
 import com.rafael.tictactoe.feature.game.domain.names.PlayerNamesController
 import com.rafael.tictactoe.feature.game.domain.names.ToastNameController
 import com.rafael.tictactoe.feature.game.domain.repository.GameRepository
@@ -61,42 +61,55 @@ class GameViewModel(
             is GameEvent.SetGameMode -> {
                 setupGameMode(event.mode.toGameMode())
             }
+
             is GameEvent.GetFirstPlayerName -> {
                 getFirstPlayerName(event.name)
             }
+
             is GameEvent.GetSecondPlayerName -> {
                 getSecondPlayerName(event.name)
             }
+
             GameEvent.SwitchPlayerPositions -> {
                 switchPlayerPositions()
             }
+
             GameEvent.StartGame -> {
                 startGame()
             }
+
             is GameEvent.OnCardClick -> {
                 performBoardMove(event.rowIndex, event.cardIndex)
             }
+
             GameEvent.ResetVictoryCounter -> {
                 resetVictoryCounter()
             }
+
             GameEvent.PlayAgain -> {
                 playAgain()
             }
+
             is GameEvent.ExitGame -> {
                 exitGame(event.onSettingsEvent)
             }
+
             GameEvent.ToggleExpandButton -> {
                 _state.update { it.copy(isExpandButtonShown = !it.isExpandButtonShown) }
             }
+
             GameEvent.DismissExitDialog -> {
                 _state.update { it.copy(showExitGameDialog = false) }
             }
+
             GameEvent.ToggleExitDialog -> {
                 _state.update { it.copy(showExitGameDialog = !it.showExitGameDialog) }
             }
+
             GameEvent.ToggleIsXForPlayer1 -> {
                 _state.update { it.copy(isXFor1 = !it.isXFor1) }
             }
+
             is GameEvent.SelectCPUDifficultyMode -> {
                 _state.update {
                     it.copy(
@@ -105,11 +118,12 @@ class GameViewModel(
                     )
                 }
             }
+
             is GameEvent.GetRemotePlayers -> {
                 searchPlayersJob?.cancel()
                 searchPlayersJob = viewModelScope.launch(Dispatchers.IO) {
-                    val (response, requestState) = repository.getRemotePlayers()
-                    response?.let { players ->
+                    val response = repository.getRemotePlayers()
+                    response.first.onSuccess { players ->
                         val availablePlayers: Flow<List<Player>> = flow { emit(players) }
                         val possiblePlayers: List<Player> = availablePlayers.map {
                             it.filter { players ->
@@ -145,56 +159,62 @@ class GameViewModel(
                             event.onSettingsEvent?.invoke(SettingsEvent.SetCircleColor(state.value.secondPlayer!!.color.toColor()))
                         }
                     }
-                    _state.update { it.copy(requestState = requestState) }
+                    _state.update { it.copy(requestState = response) }
                     this.cancel()
                 }
             }
+
             GameEvent.PostRemotePlayer -> {
                 viewModelScope.launch(Dispatchers.IO) {
                     val requestState = repository.postPlayer(state.value, settingsState.value)
                     _state.update { it.copy(requestState = requestState) }
                 }
             }
+
             GameEvent.RemoveRemotePlayer -> {
                 viewModelScope.launch(Dispatchers.IO) {
                     val requestState = repository.removePlayer(state.value.matchID)
                     _state.update { it.copy(requestState = requestState) }
                 }
             }
+
             GameEvent.SendInitialOnlineGameState -> {
                 viewModelScope.launch(Dispatchers.IO) {
                     val requestState = repository.postInitialGameState(state.value.matchID)
                     _state.update { it.copy(requestState = requestState) }
                 }
             }
+
             GameEvent.GetOnlineGameState -> {
                 viewModelScope.launch(Dispatchers.IO) {
-                    val (response, requestState) = repository.getGameState()
-                    response?.let {
-                        onlineGameState = response
+                    val response = repository.getGameState()
+                    response.first.onSuccess { gameState ->
+                        onlineGameState = gameState
                         _state.update {
                             it.copy(
-                                requestState = RequestState.Success,
-                             /* player1Wins = onlineGameState.player1Wins.value,
-                                player2Wins = onlineGameState.player2Wins.value,
-                                card = onlineGameState.card.value,
-                                isCardClicked = onlineGameState.isCardClicked.value,
-                                play = onlineGameState.play.value,
-                                isPlayer1 = onlineGameState.isPlayer1.value,
-                                hasWinner = onlineGameState.hasWinner.value,
-                                gotOld = onlineGameState.gotOld.value,
-                                isGameFinished = onlineGameState.isGameFinished.value */
+                                /* player1Wins = onlineGameState.player1Wins.value,
+                                   player2Wins = onlineGameState.player2Wins.value,
+                                   card = onlineGameState.card.value,
+                                   isCardClicked = onlineGameState.isCardClicked.value,
+                                   play = onlineGameState.play.value,
+                                   isPlayer1 = onlineGameState.isPlayer1.value,
+                                   hasWinner = onlineGameState.hasWinner.value,
+                                   gotOld = onlineGameState.gotOld.value,
+                                   isGameFinished = onlineGameState.isGameFinished.value */
                             )
                         }
                     }
-                    _state.update { it.copy(requestState = requestState) }
+                    _state.update { it.copy(requestState = response) }
                 }
             }
+
             GameEvent.UpdateOnlineGameState -> {
                 viewModelScope.launch(Dispatchers.IO) {
-                    val (response, requestState) = repository.updateGameState(state.value)
+                    val requestState = repository.updateGameState(state.value)
                     _state.update { it.copy(requestState = requestState) }
-                    onlineGameState = response!!
+                    requestState.first.onSuccess { gameStateAsFlow ->
+                        onlineGameState = gameStateAsFlow
+                    }
                 }
             }
             GameEvent.EndOnlineMatch -> {
@@ -203,9 +223,11 @@ class GameViewModel(
                     _state.update { it.copy(requestState = requestState) }
                 }
             }
+
             is GameEvent.UpdateRequestState -> {
                 _state.update { it.copy(requestState = event.state) }
             }
+
             is GameEvent.UpdateIsYouPlayer1 -> {
                 val isYouPlayer1 = (1..2).random()
                 val value = isYouPlayer1 == 1
@@ -218,6 +240,7 @@ class GameViewModel(
                 }
                 onEvent(GameEvent.GetRemotePlayers())
             }
+
             GameEvent.StartOnlineMatch -> {
                 _state.update {
                     it.copy(
@@ -437,14 +460,19 @@ class GameViewModel(
 
             _state.update {
                 it.copy(
-                    isOnlinePlayerTurn = param["isOnlinePlayerTurn"] as Boolean? ?: state.value.isOnlinePlayerTurn,
+                    isOnlinePlayerTurn = param["isOnlinePlayerTurn"] as Boolean?
+                        ?: state.value.isOnlinePlayerTurn,
                     isXImage = param["isXImage"] as Boolean,
                     isCPU = param["isCPU"] as Boolean? ?: state.value.isCPU,
                     isPlayer1 = param["isPlayer1"] as Boolean,
                 )
             }
             updateCard(card[0] as Int, card[1] as Int, card[2] as Boolean)
-            updateIsCardClicked(cardClicked[0] as Int, cardClicked[1] as Int, cardClicked[2] as Boolean)
+            updateIsCardClicked(
+                cardClicked[0] as Int,
+                cardClicked[1] as Int,
+                cardClicked[2] as Boolean,
+            )
             if (state.value.gameMode == GameMode.VsCPU && param["isCPU"] as Boolean) {
                 execCPUMove()
             }
@@ -472,14 +500,19 @@ class GameViewModel(
 
                 _state.update {
                     it.copy(
-                        isUsingEasyLevel = param["isUsingEasyLevel"] as Boolean? ?: state.value.isUsingEasyLevel,
+                        isUsingEasyLevel = param["isUsingEasyLevel"] as Boolean?
+                            ?: state.value.isUsingEasyLevel,
                         isXImage = param["isXImage"] as Boolean,
                         isCPU = param["isCPU"] as Boolean,
                         isPlayer1 = param["isPlayer1"] as Boolean,
                     )
                 }
                 updateCard(card[0] as Int, card[1] as Int, card[2] as Boolean)
-                updateIsCardClicked(cardClicked[0] as Int, cardClicked[1] as Int, cardClicked[2] as Boolean)
+                updateIsCardClicked(
+                    cardClicked[0] as Int,
+                    cardClicked[1] as Int,
+                    cardClicked[2] as Boolean,
+                )
                 updateGameState()
                 updateCurrentToastName()
                 switchPlayerNamesOrder()
@@ -520,17 +553,18 @@ class GameViewModel(
                 _state.update { it.copy(currentPlayerName = name) }
             }
             if (toastController.getCurrentGamePhase(state.value) == CurrentPlayerName.CounterAfterGameStarts) {
-                toastController.counterAfterGameStarts(state.value).collect { (name, isTimerOn) ->
-                    _state.update {
-                        it.copy(
-                            currentPlayerName = name,
-                            isTimerOn = isTimerOn,
-                        )
+                toastController.counterAfterGameStarts(state.value)
+                    .collect { (name, isTimerOn) ->
+                        _state.update {
+                            it.copy(
+                                currentPlayerName = name,
+                                isTimerOn = isTimerOn,
+                            )
+                        }
+                        if (!isTimerOn) {
+                            updateCurrentToastName()
+                        }
                     }
-                    if (!isTimerOn) {
-                        updateCurrentToastName()
-                    }
-                }
             }
         }
     }

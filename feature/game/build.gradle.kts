@@ -14,10 +14,8 @@ kotlin {
             // Koin
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
-            // Retrofit
-            implementation(libs.retrofit2)
-            implementation(libs.retrofit2.converter.kotlinx.serialization)
-            implementation(libs.okhttp3)
+            // Ktor
+            implementation(libs.ktor.client.android)
         }
         commonMain.dependencies {
             // Kotlin
@@ -35,13 +33,20 @@ kotlin {
             api(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
+            // Ktor
+            api(libs.ktor.client.core)
+            implementation(libs.ktor.serialization.kotlinx.json)
+            implementation(libs.ktor.client.logging)
+            implementation(libs.ktor.client.content.negotiation)
 
             // Projects
             implementation(projects.core.ui)
-            implementation(projects.core.domain)
             implementation(projects.core.resources)
             implementation(projects.core.platform)
             implementation(projects.feature.settings)
+        }
+        iosMain.dependencies {
+            implementation(libs.ktor.client.ios)
         }
     }
 }
