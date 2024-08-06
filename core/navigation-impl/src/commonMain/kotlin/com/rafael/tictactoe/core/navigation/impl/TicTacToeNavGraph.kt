@@ -16,6 +16,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import coil3.annotation.ExperimentalCoilApi
 import com.rafael.tictactoe.core.navigation.Changelogs
 import com.rafael.tictactoe.core.navigation.Destinations
 import com.rafael.tictactoe.core.navigation.Game
@@ -24,6 +25,7 @@ import com.rafael.tictactoe.core.navigation.Main
 import com.rafael.tictactoe.core.navigation.Settings
 import com.rafael.tictactoe.core.navigation.SettingsSearch
 import com.rafael.tictactoe.core.platform.lifecycle.LifecycleEventsHandler
+import com.rafael.tictactoe.core.platform.network.SingletonCoilImageLoader
 import com.rafael.tictactoe.core.platform.permissions.PermissionsViewModel
 import com.rafael.tictactoe.core.ui.theme.AppTheme
 import com.rafael.tictactoe.feature.changelogs.presentation.ChangelogsScreen
@@ -48,11 +50,12 @@ import soup.compose.material.motion.animation.materialSharedAxisXIn
 import soup.compose.material.motion.animation.materialSharedAxisXOut
 import soup.compose.material.motion.animation.rememberSlideDistance
 
-@OptIn(KoinExperimentalAPI::class)
 @Composable
 @ExperimentalLayoutApi
 @ExperimentalMaterial3Api
 @ExperimentalTextApi
+@ExperimentalCoilApi
+@KoinExperimentalAPI
 fun TicTacToeNavGraph(
     modifier: Modifier = Modifier,
     destination: Destinations? = null,
@@ -157,6 +160,8 @@ fun TicTacToeNavGraph(
                 }
             }
         }
+        SingletonCoilImageLoader()
+
         LifecycleEventsHandler.Handle(
             onStop = { onSettingsEvent(SettingsEvent.StartBackgroundMusic(isAppInOnStop = true)) },
             onResume = { onSettingsEvent(SettingsEvent.StartBackgroundMusic(isAppInOnStop = false)) },
