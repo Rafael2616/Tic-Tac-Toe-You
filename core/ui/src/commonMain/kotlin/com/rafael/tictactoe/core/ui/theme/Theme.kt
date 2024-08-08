@@ -4,7 +4,6 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 
 val LightColors = lightColorScheme(
@@ -73,7 +72,6 @@ val DarkColors = darkColorScheme(
 
 @Composable
 expect fun AppTheme(
-    onEvent: (SettingsEvent) -> Unit,
     isSystemInDarkTheme: Boolean = isSystemInDarkTheme(),
     state: SettingsState = SettingsState(),
     content: @Composable () -> Unit,

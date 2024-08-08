@@ -1,5 +1,6 @@
 package com.rafael.tictactoe.feature.settings.presentation.components.preferences
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.BrightnessMedium
 import androidx.compose.runtime.Composable
@@ -14,10 +15,11 @@ fun FollowSystemPreference(
     onEvent: (SettingsEvent) -> Unit,
     state: SettingsState,
 ) {
+    val isSystemInDarkTheme = isSystemInDarkTheme()
     SwitchPreference(
         title = Res.string.system_theme,
         leadingIcon = Icons.Outlined.BrightnessMedium,
         isChecked = state.isFollowingSystemOn,
-        onCheckedChange = { onEvent(SettingsEvent.ToggleIsFollowingSystemOn) },
+        onCheckedChange = { onEvent(SettingsEvent.ToggleIsFollowingSystemOn(isSystemInDarkTheme)) },
     )
 }

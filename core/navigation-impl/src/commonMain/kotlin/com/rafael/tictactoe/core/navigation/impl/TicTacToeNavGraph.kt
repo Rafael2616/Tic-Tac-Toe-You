@@ -78,7 +78,6 @@ fun TicTacToeNavGraph(
 
         AppTheme(
             state = settingsState,
-            onEvent = onSettingsEvent,
         ) {
             Surface(
                 color = MaterialTheme.colorScheme.background,

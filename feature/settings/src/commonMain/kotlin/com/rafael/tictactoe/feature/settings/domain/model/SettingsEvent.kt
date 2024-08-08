@@ -7,7 +7,7 @@ sealed interface SettingsEvent {
     data object ToggleIsBackgroundMusicOn : SettingsEvent
     data object ToggleIsSoundEffectsOn : SettingsEvent
     data object ToggleIsDarkThemeOn : SettingsEvent
-    data object ToggleIsFollowingSystemOn : SettingsEvent
+    data class ToggleIsFollowingSystemOn(val isSystemInDarkTheme: Boolean) : SettingsEvent
     data object ToggleIsDynamicColorsOn : SettingsEvent
     data class SetIsDarkThemeOn(val value: Boolean) : SettingsEvent
     data object OnSettingsScreenDestroy : SettingsEvent

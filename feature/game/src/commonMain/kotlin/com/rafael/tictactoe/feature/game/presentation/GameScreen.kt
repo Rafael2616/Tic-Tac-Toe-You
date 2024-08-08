@@ -164,10 +164,7 @@ fun GameScreen(
 @ExperimentalMaterial3Api
 @ExperimentalLayoutApi
 private fun GameScreenPreview() {
-    AppTheme(
-        state = SettingsState(),
-        onEvent = {},
-    ) {
+    AppTheme {
         GameScreen(
             navController = rememberNavController(),
             gameMode = "PvP",

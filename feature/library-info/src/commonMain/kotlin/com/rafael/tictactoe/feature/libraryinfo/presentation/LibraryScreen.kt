@@ -162,9 +162,7 @@ fun LibraryScreen(
 @Composable
 @ExperimentalMaterial3Api
 private fun LibraryScreenPreview() {
-    AppTheme(
-        onEvent = {},
-    ) {
+    AppTheme {
         LibraryScreen(
             navController = rememberNavController(),
             libraries = listOf(

@@ -107,12 +107,19 @@ class SettingsViewModel(
                 }
             }
 
-            SettingsEvent.ToggleIsFollowingSystemOn -> {
-                _state.update { it.copy(isFollowingSystemOn = !it.isFollowingSystemOn) }
+            is SettingsEvent.ToggleIsFollowingSystemOn -> {
+                _state.update {
+                    it.copy(
+                        isFollowingSystemOn = !it.isFollowingSystemOn,
+                        isDarkThemeOn = event.isSystemInDarkTheme,
+                    )
+                }
 
                 viewModelScope.launch(Dispatchers.IO) {
                     val settings = repository.getAllSettingsValues(1) ?: defaultSettings
                     settings.isFollowingSystemOn = state.value.isFollowingSystemOn
+                    settings.isDarkThemeOn = event.isSystemInDarkTheme
+
                     repository.setAllSettingsValues(settings)
                 }
             }

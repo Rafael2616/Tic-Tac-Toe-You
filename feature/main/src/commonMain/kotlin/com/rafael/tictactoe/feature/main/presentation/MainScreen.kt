@@ -193,10 +193,7 @@ fun MainScreen(
 @Composable
 @ExperimentalTextApi
 private fun MainScreenPreview() {
-    AppTheme(
-        state = SettingsState(),
-        onEvent = {},
-    ) {
+    AppTheme {
         MainScreen(
             navController = rememberNavController(),
             state = SettingsState(),

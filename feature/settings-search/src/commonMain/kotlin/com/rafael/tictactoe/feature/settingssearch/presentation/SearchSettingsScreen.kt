@@ -250,10 +250,7 @@ fun SearchSettingsScreen(
 @ExperimentalMaterial3Api
 @ExperimentalTextApi
 private fun SearchSettingsScreenPreview() {
-    AppTheme(
-        state = SettingsState(),
-        onEvent = {},
-    ) {
+    AppTheme {
         SearchSettingsScreen(
             navController = rememberNavController(),
             searchState = SearchSettingsState(),

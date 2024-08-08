@@ -11,12 +11,10 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.platform.LocalContext
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 
 @Composable
 actual fun AppTheme(
-    onEvent: (SettingsEvent) -> Unit,
     isSystemInDarkTheme: Boolean,
     state: SettingsState,
     content: @Composable () -> Unit,
@@ -62,13 +60,6 @@ actual fun AppTheme(
         typography = Typography,
         content = content,
     )
-
-    // Sync dark theme with value of system theme
-    if (isSystemInDarkTheme && isFollowingSystemOn) {
-        onEvent(SettingsEvent.SetIsDarkThemeOn(true))
-    } else if (!isSystemInDarkTheme && isFollowingSystemOn) {
-        onEvent(SettingsEvent.SetIsDarkThemeOn(false))
-    }
 
     // Set System Bars Colors
     DisposableEffect(isDarkThemeOn) {

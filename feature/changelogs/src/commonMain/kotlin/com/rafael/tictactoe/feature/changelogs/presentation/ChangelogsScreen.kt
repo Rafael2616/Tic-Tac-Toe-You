@@ -177,10 +177,7 @@ fun ChangelogsScreen(
 @ExperimentalMaterial3Api
 @ExperimentalTextApi
 private fun ChangelogsScreenPreview() {
-    AppTheme(
-        state = SettingsState(),
-        onEvent = {},
-    ) {
+    AppTheme {
         ChangelogsScreen(
             navController = rememberNavController(),
             changelogs = listOf(
