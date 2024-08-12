@@ -1,18 +1,19 @@
 package com.rafael.tictactoe.feature.main.presentation.viewmodel
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.rafael.tictactoe.feature.main.domain.model.MainState
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 
-class MainViewModel(
-    private val savedState: SavedStateHandle,
-) : ViewModel() {
+class MainViewModel : ViewModel() {
 
-    val state = savedState.getStateFlow("state", MainState())
+    private val _state = MutableStateFlow(MainState())
+    val state = _state.asStateFlow()
 
     fun canRedirectToAnGameModeScreen(can: Boolean) {
-        savedState["state"] = savedState.get<MainState>("state")?.copy(
-            canRedirectToAnGameModeScreen = can,
-        )
+        _state.update {
+            it.copy(canRedirectToAnGameModeScreen = can)
+        }
     }
 }

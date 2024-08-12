@@ -80,7 +80,7 @@ fun MainScreen(
             icon = Icons.Outlined.Memory,
             tint = Color.Red,
             text = Res.string.vs_cpu,
-            onClick = { navController.navigate(Game(GameMode.PvP)) },
+            onClick = { navController.navigate(Game(GameMode.VsCPU)) },
         ),
         ScreenItem(
             icon = Icons.Outlined.Group,
