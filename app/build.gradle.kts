@@ -134,6 +134,7 @@ kotlin {
             implementation(libs.androidx.annotation)
             implementation(libs.androidx.core.splashscreen)
             // Projects
+            implementation(projects.core.game)
             implementation(projects.core.navigation)
             implementation(projects.core.navigationImpl)
             implementation(projects.core.resources)

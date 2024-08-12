@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.rafael.tictactoe.core.game.domain.model.GameMode
 import com.rafael.tictactoe.core.navigation.Destinations
 import com.rafael.tictactoe.core.navigation.Game
 import com.rafael.tictactoe.core.navigation.Settings
@@ -73,19 +74,19 @@ fun MainScreen(
             icon = Icons.Outlined.PlayArrow,
             tint = if (state.isDarkThemeOn) Color.Green else Color(0xFF299961),
             text = Res.string.play,
-            onClick = { navController.navigate(Game("PvP")) },
+            onClick = { navController.navigate(Game(GameMode.PvP)) },
         ),
         ScreenItem(
             icon = Icons.Outlined.Memory,
             tint = Color.Red,
             text = Res.string.vs_cpu,
-            onClick = { navController.navigate(Game("VsCPU")) },
+            onClick = { navController.navigate(Game(GameMode.PvP)) },
         ),
         ScreenItem(
             icon = Icons.Outlined.Group,
             tint = MaterialTheme.colorScheme.onSurface,
             text = Res.string.online_match,
-            onClick = { navController.navigate(Game("Online")) },
+            onClick = { navController.navigate(Game(GameMode.Online)) },
         ),
         ScreenItem(
             icon = Icons.Outlined.Settings,

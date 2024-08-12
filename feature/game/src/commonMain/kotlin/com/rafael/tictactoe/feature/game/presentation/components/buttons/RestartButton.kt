@@ -21,11 +21,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rafael.tictactoe.core.domain.util.Colors
+import com.rafael.tictactoe.core.game.domain.model.GameMode
 import com.rafael.tictactoe.core.platform.configuration.isInLandscape
 import com.rafael.tictactoe.core.resources.Res
 import com.rafael.tictactoe.core.resources.restart
 import com.rafael.tictactoe.feature.game.domain.model.GameEvent
-import com.rafael.tictactoe.feature.game.domain.model.GameMode
 import com.rafael.tictactoe.feature.game.domain.model.GameState
 import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 import org.jetbrains.compose.resources.stringResource

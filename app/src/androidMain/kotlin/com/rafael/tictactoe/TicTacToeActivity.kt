@@ -10,6 +10,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import coil3.annotation.ExperimentalCoilApi
+import com.rafael.tictactoe.core.game.domain.model.GameMode
 import com.rafael.tictactoe.core.navigation.Destinations
 import com.rafael.tictactoe.core.navigation.Game
 import com.rafael.tictactoe.core.navigation.impl.TicTacToeNavGraph
@@ -41,13 +42,13 @@ class TicTacToeActivity : ComponentActivity() {
 
     private fun handleIntent(intent: Intent): Destinations? {
         if (intent.getStringExtra(getString(R.string.play)) == "s2") {
-            return Game("PvP")
+            return Game(GameMode.PvP)
         }
         if (intent.getStringExtra(getString(R.string.vs_cpu)) == "s1") {
-            return Game("VsCPU")
+            return Game(GameMode.VsCPU)
         }
         if (intent.getStringExtra(getString(R.string.online_match)) == "s0") {
-            return Game("Online")
+            return Game(GameMode.Online)
         }
         return null
     }

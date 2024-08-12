@@ -40,6 +40,7 @@ kotlin {
             implementation(libs.ktor.client.content.negotiation)
 
             // Projects
+            implementation(projects.core.game)
             implementation(projects.core.ui)
             implementation(projects.core.resources)
             implementation(projects.core.platform)

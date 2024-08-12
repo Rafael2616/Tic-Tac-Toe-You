@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.rafael.android.library)
     alias(libs.plugins.rafael.android.library.compose)
     alias(libs.plugins.rafael.spotless)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android.namespace = "com.rafael.tictactoe.core.navigation_impl"
@@ -14,6 +15,8 @@ kotlin {
             implementation(libs.koin.androidx.compose)
         }
         commonMain.dependencies {
+            // Kotlin
+            implementation(libs.kotlinx.serialization.json)
             // Navigation
             implementation(libs.androidx.navigation.compose)
             // Koin
@@ -24,6 +27,7 @@ kotlin {
             implementation(libs.material.motion.compose)
 
             // Projects
+            implementation(projects.core.game)
             implementation(projects.core.ui)
             implementation(projects.core.navigation)
             implementation(projects.feature.changelogs)

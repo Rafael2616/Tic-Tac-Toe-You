@@ -3,6 +3,7 @@ package com.rafael.tictactoe.feature.game.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rafael.tictactoe.core.domain.util.toColor
+import com.rafael.tictactoe.core.game.domain.model.GameMode
 import com.rafael.tictactoe.core.platform.network.utils.onSuccess
 import com.rafael.tictactoe.feature.game.domain.audio.cardGridSound
 import com.rafael.tictactoe.feature.game.domain.audio.gotOldSound
@@ -13,7 +14,6 @@ import com.rafael.tictactoe.feature.game.domain.checkers.Checkers
 import com.rafael.tictactoe.feature.game.domain.counter.VictoryCounter
 import com.rafael.tictactoe.feature.game.domain.model.CurrentPlayerName
 import com.rafael.tictactoe.feature.game.domain.model.GameEvent
-import com.rafael.tictactoe.feature.game.domain.model.GameMode
 import com.rafael.tictactoe.feature.game.domain.model.GameState
 import com.rafael.tictactoe.feature.game.domain.model.OnlineGameState
 import com.rafael.tictactoe.feature.game.domain.model.Player
@@ -59,7 +59,7 @@ class GameViewModel(
     fun onEvent(event: GameEvent) {
         when (event) {
             is GameEvent.SetGameMode -> {
-                setupGameMode(event.mode.toGameMode())
+                setupGameMode(event.mode)
             }
 
             is GameEvent.GetFirstPlayerName -> {
@@ -255,7 +255,10 @@ class GameViewModel(
     }
 
     private fun setupGameMode(mode: GameMode) {
-        _state.update { it.copy(gameMode = mode) }
+        _state.update { it.copy(gameMode = mode) }.also {
+            println("Starting new match in ${state.value.gameMode} game mode!")
+        }
+
         setPlayerNamesOnCounter()
         switchPlayerNamesOrder()
         updateCurrentToastName()
@@ -628,12 +631,5 @@ class GameViewModel(
     // Manually trigger settings state update
     fun updateSettingsState(settingsState: SettingsState) {
         _settingsState.update { settingsState }
-    }
-
-    private fun String.toGameMode(): GameMode = when (this) {
-        "PvP" -> GameMode.PvP
-        "Online" -> GameMode.Online
-        "VsCPU" -> GameMode.VsCPU
-        else -> GameMode.PvP
     }
 }

@@ -61,6 +61,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.rafael.tictactoe.core.domain.util.Colors
+import com.rafael.tictactoe.core.game.domain.model.GameMode
 import com.rafael.tictactoe.core.platform.configuration.isImeVisible
 import com.rafael.tictactoe.core.platform.presentation.LocalViewCurrent
 import com.rafael.tictactoe.core.resources.Res
@@ -74,7 +75,6 @@ import com.rafael.tictactoe.core.resources.player_o
 import com.rafael.tictactoe.core.resources.player_x
 import com.rafael.tictactoe.core.resources.type_your_name
 import com.rafael.tictactoe.feature.game.domain.model.GameEvent
-import com.rafael.tictactoe.feature.game.domain.model.GameMode
 import com.rafael.tictactoe.feature.game.domain.model.GameState
 import com.rafael.tictactoe.feature.game.domain.model.Level
 import com.rafael.tictactoe.feature.settings.domain.enums.Customization

@@ -1,6 +1,6 @@
 package com.rafael.tictactoe.feature.game.domain.board
 
-import com.rafael.tictactoe.feature.game.domain.model.GameMode
+import com.rafael.tictactoe.core.game.domain.model.GameMode
 import com.rafael.tictactoe.feature.game.domain.model.GameState
 
 internal fun boardMovesHandler(

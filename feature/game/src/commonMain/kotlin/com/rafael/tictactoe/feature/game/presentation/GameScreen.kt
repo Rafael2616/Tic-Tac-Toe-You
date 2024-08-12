@@ -15,10 +15,10 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.rafael.tictactoe.core.game.domain.model.GameMode
 import com.rafael.tictactoe.core.platform.presentation.OnBack
 import com.rafael.tictactoe.core.ui.theme.AppTheme
 import com.rafael.tictactoe.feature.game.domain.model.GameEvent
-import com.rafael.tictactoe.feature.game.domain.model.GameMode
 import com.rafael.tictactoe.feature.game.domain.model.GameState
 import com.rafael.tictactoe.feature.game.presentation.components.buttons.PlayAgainButton
 import com.rafael.tictactoe.feature.game.presentation.components.buttons.RestartButton
@@ -42,7 +42,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @ExperimentalLayoutApi
 fun GameScreen(
     navController: NavController,
-    gameMode: String,
+    gameMode: GameMode,
     gameState: GameState,
     settingsState: SettingsState,
     onGameEvent: (GameEvent) -> Unit,
@@ -167,7 +167,7 @@ private fun GameScreenPreview() {
     AppTheme {
         GameScreen(
             navController = rememberNavController(),
-            gameMode = "PvP",
+            gameMode = GameMode.PvP,
             gameState = GameState(),
             settingsState = SettingsState(),
             onGameEvent = {},

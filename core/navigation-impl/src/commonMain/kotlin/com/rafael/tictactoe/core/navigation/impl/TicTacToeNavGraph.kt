@@ -17,6 +17,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import coil3.annotation.ExperimentalCoilApi
+import com.rafael.tictactoe.core.game.domain.model.GameMode
 import com.rafael.tictactoe.core.navigation.Changelogs
 import com.rafael.tictactoe.core.navigation.Destinations
 import com.rafael.tictactoe.core.navigation.Game
@@ -24,6 +25,7 @@ import com.rafael.tictactoe.core.navigation.LibraryInfo
 import com.rafael.tictactoe.core.navigation.Main
 import com.rafael.tictactoe.core.navigation.Settings
 import com.rafael.tictactoe.core.navigation.SettingsSearch
+import com.rafael.tictactoe.core.navigation.impl.types.gameModeNavType
 import com.rafael.tictactoe.core.platform.lifecycle.LifecycleEventsHandler
 import com.rafael.tictactoe.core.platform.network.SingletonCoilImageLoader
 import com.rafael.tictactoe.core.platform.permissions.PermissionsViewModel
@@ -42,6 +44,7 @@ import com.rafael.tictactoe.feature.settingssearch.presentation.SearchSettingsSc
 import com.rafael.tictactoe.feature.settingssearch.presentation.viewmodel.SearchSettingsViewModel
 import dev.icerock.moko.permissions.compose.BindEffect
 import dev.icerock.moko.permissions.compose.rememberPermissionsControllerFactory
+import kotlin.reflect.typeOf
 import org.koin.compose.KoinContext
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -103,7 +106,9 @@ fun TicTacToeNavGraph(
                             onRedirectToGameModes = mainViewModel::canRedirectToAnGameModeScreen,
                         )
                     }
-                    composable<Game> {
+                    composable<Game>(
+                        typeMap = mapOf(typeOf<GameMode>() to gameModeNavType),
+                    ) {
                         val args = it.toRoute<Game>()
                         val gameViewModel = koinViewModel<GameViewModel>()
                         val gameState by gameViewModel.state.collectAsStateWithLifecycle()

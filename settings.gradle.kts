@@ -42,6 +42,7 @@ dependencyResolutionManagement {
 
 include(":app")
 include(":core:domain")
+include(":core:game")
 include(":core:navigation")
 include(":core:navigation-impl")
 include(":core:resources")

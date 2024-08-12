@@ -1,5 +1,6 @@
 package com.rafael.tictactoe.core.navigation
 
+import com.rafael.tictactoe.core.game.domain.model.GameMode
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -7,7 +8,7 @@ data object Main : Destinations
 
 @Serializable
 data class Game(
-    val gameMode: String,
+    val gameMode: GameMode,
 ) : Destinations
 
 @Serializable

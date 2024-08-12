@@ -27,6 +27,7 @@ kotlin {
             implementation(libs.koin.compose.viewmodel)
 
             // Projects
+            implementation(projects.core.game)
             implementation(projects.core.ui)
             implementation(projects.core.resources)
             implementation(projects.core.platform)

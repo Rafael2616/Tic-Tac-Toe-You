@@ -1,12 +1,12 @@
 package com.rafael.tictactoe.feature.game.domain.counter
 
+import com.rafael.tictactoe.core.game.domain.model.GameMode
 import com.rafael.tictactoe.core.resources.Res
 import com.rafael.tictactoe.core.resources.cpu
 import com.rafael.tictactoe.core.resources.player
 import com.rafael.tictactoe.core.resources.player_o
 import com.rafael.tictactoe.core.resources.player_x
 import com.rafael.tictactoe.feature.game.domain.checkers.Checkers
-import com.rafael.tictactoe.feature.game.domain.model.GameMode
 import com.rafael.tictactoe.feature.game.domain.model.GameState
 import org.jetbrains.compose.resources.getString
 
