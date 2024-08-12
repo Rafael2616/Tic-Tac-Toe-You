@@ -23,8 +23,8 @@ kotlin {
             implementation(libs.androidx.navigation.compose)
             // Koin
             api(libs.koin.core)
+            implementation(libs.koin.core.viewmodel)
             implementation(libs.koin.compose)
-            implementation(libs.koin.compose.viewmodel)
 
             // Projects
             implementation(projects.core.game)

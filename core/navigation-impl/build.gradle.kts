@@ -9,11 +9,6 @@ android.namespace = "com.rafael.tictactoe.core.navigation_impl"
 
 kotlin {
     sourceSets {
-        androidMain.dependencies {
-            // Koin
-            implementation(libs.koin.android)
-            implementation(libs.koin.androidx.compose)
-        }
         commonMain.dependencies {
             // Kotlin
             implementation(libs.kotlinx.serialization.json)
@@ -21,8 +16,9 @@ kotlin {
             implementation(libs.androidx.navigation.compose)
             // Koin
             api(libs.koin.core)
-            implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
+            implementation(libs.koin.compose)
+
             // Material Motion
             implementation(libs.material.motion.compose)
 

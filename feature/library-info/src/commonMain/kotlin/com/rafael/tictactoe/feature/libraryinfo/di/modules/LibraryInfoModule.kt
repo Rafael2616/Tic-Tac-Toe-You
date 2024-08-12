@@ -1,5 +1,15 @@
 package com.rafael.tictactoe.feature.libraryinfo.di.modules
 
-import org.koin.core.module.Module
+import com.rafael.tictactoe.feature.libraryinfo.data.repository.OssLibraryRepository
+import com.rafael.tictactoe.feature.libraryinfo.presentation.viewmodel.LibraryViewModel
+import org.koin.core.module.dsl.viewModel
+import org.koin.dsl.module
 
-expect val libraryInfoModule: Module
+val libraryInfoModule = module {
+    single { OssLibraryRepository() }
+    viewModel {
+        LibraryViewModel(
+            get<OssLibraryRepository>(),
+        )
+    }
+}

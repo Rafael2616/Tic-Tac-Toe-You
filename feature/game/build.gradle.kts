@@ -31,8 +31,8 @@ kotlin {
             implementation(libs.androidx.media3.exoplayer)
             // Koin
             api(libs.koin.core)
+            implementation(libs.koin.core.viewmodel)
             implementation(libs.koin.compose)
-            implementation(libs.koin.compose.viewmodel)
             // Ktor
             api(libs.ktor.client.core)
             implementation(libs.ktor.serialization.kotlinx.json)

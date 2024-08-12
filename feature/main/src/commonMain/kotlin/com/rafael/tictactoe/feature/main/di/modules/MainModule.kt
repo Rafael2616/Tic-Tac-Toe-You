@@ -1,5 +1,9 @@
 package com.rafael.tictactoe.feature.main.di.modules
 
-import org.koin.core.module.Module
+import com.rafael.tictactoe.feature.main.presentation.viewmodel.MainViewModel
+import org.koin.core.module.dsl.viewModel
+import org.koin.dsl.module
 
-expect val mainModule: Module
+val mainModule = module {
+    viewModel { MainViewModel() }
+}

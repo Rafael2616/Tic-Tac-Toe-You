@@ -20,10 +20,10 @@ kotlin {
             // Moko
             api(libs.moko.permissions)
             api(libs.moko.permissions.compose)
-            api(libs.koin.core)
             // Koin
+            api(libs.koin.core)
+            implementation(libs.koin.core.viewmodel)
             implementation(libs.koin.compose)
-            implementation(libs.koin.compose.viewmodel)
             // Coil
             api(libs.coil.compose)
             api(libs.coil.compose.core)

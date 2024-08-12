@@ -11,16 +11,8 @@ kotlin {
         androidMain.dependencies {
             // AndroidX
             implementation(libs.androidx.activity.compose)
-            // Koin
-            implementation(libs.koin.android)
-            implementation(libs.koin.androidx.compose)
         }
         commonMain.dependencies {
-            // Koin
-            api(libs.koin.core)
-            implementation(libs.koin.compose)
-            implementation(libs.koin.compose.viewmodel)
-
             // Projects
             api(projects.feature.settings)
         }

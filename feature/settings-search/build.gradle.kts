@@ -23,8 +23,8 @@ kotlin {
             implementation(libs.androidx.annotation)
             // Koin
             api(libs.koin.core)
+            implementation(libs.koin.core.viewmodel)
             implementation(libs.koin.compose)
-            implementation(libs.koin.compose.viewmodel)
             // Navigation
             implementation(libs.androidx.navigation.compose)
 
