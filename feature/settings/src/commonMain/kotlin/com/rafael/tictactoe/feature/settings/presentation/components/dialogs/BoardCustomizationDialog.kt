@@ -127,7 +127,6 @@ fun BoardCustomizationDialog(
     var sliderShadow by remember { mutableFloatStateOf(if (state.shapeSelected == SHAPE_CUSTOM) state.boardCardsShadow else DEF_CARDS_SHADOW) }
     var localShapeSelected by remember { mutableIntStateOf(state.shapeSelected) }
     var localCardsBorderHexColor by remember { mutableStateOf("FFFFFFFF") }
-    var isInitialized by remember { mutableStateOf(false) }
     val clipboardManager = LocalClipboardManager.current
     var isRGBEffectOn by remember { mutableStateOf(state.isRGBEffectOn) }
     var isGradientOn by remember { mutableStateOf(state.isGradientOn) }
@@ -152,7 +151,6 @@ fun BoardCustomizationDialog(
                 rgbColorOld = currentColor
                 delay(125L)
             }
-            if (!isInitialized) isInitialized = true
         }
     }
 
@@ -288,7 +286,6 @@ fun BoardCustomizationDialog(
                                         .clip(RoundedCornerShape(24.dp))
                                         .clickable {
                                             localShapeSelected = index
-                                            isInitialized = false
                                             scope.launch { listState.animateScrollToItem(index, 1) }
                                         },
                                 ) {
@@ -445,7 +442,7 @@ fun BoardCustomizationDialog(
                                             .padding(vertical = 12.dp)
                                             .size(240.dp),
                                         controller = colorPickerController,
-                                        initialColor = remember { if (isInitialized) DEF_CARDS_COLOR else localBoardCardsBorderColor },
+                                        initialColor = localBoardCardsBorderColor,
                                         onColorChanged = { colorEnvelope ->
                                             localBoardCardsBorderColor = colorEnvelope.color
                                             localCardsBorderHexColor = colorEnvelope.hexCode
@@ -463,7 +460,7 @@ fun BoardCustomizationDialog(
                                     wheelRadius = 12.dp,
                                     wheelColor = Color.Gray,
                                     borderRadius = 8.dp,
-                                    initialColor = remember { if (isInitialized) DEF_CARDS_COLOR else localBoardCardsBorderColor },
+                                    initialColor = localBoardCardsBorderColor,
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .height(25.dp),
@@ -479,7 +476,7 @@ fun BoardCustomizationDialog(
                                     wheelRadius = 12.dp,
                                     wheelColor = Color.Gray,
                                     borderRadius = 8.dp,
-                                    initialColor = remember { if (isInitialized) DEF_CARDS_COLOR else localBoardCardsBorderColor },
+                                    initialColor = localBoardCardsBorderColor,
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .height(25.dp),
