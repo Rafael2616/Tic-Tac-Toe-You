@@ -25,7 +25,7 @@ androidx-test-junit = "1.2.1"
 mockk = "1.13.12"
 
 # Multiplatform-ready dependencies
-kotlinx-coroutines = "1.9.0-RC"
+kotlinx-coroutines = "1.9.0-RC.2"
 kotlinx-collections-immutable = "0.3.7"
 kotlinx-serialization = "1.7.1"
 kotlinx-datetime = "0.6.0"
