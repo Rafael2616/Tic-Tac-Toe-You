@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.navigation.NavController
 import com.rafael.tictactoe.core.platform.presentation.dynamicColorsAvailability
-import com.rafael.tictactoe.core.platform.util.UUID
 import com.rafael.tictactoe.core.resources.Res
 import com.rafael.tictactoe.core.resources.about_app
 import com.rafael.tictactoe.core.resources.background_music
@@ -32,6 +31,8 @@ import com.rafael.tictactoe.feature.settings.presentation.components.preferences
 import com.rafael.tictactoe.feature.settings.presentation.components.preferences.ViewOnGithubPreference
 import com.rafael.tictactoe.feature.settings.presentation.components.preferences.WinnerLineColorPreference
 import com.rafael.tictactoe.feature.settings.presentation.components.preferences.XColorPreference
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
 import org.jetbrains.compose.resources.getString
@@ -45,6 +46,7 @@ data class SettingItem(
     companion object {
         private const val NAMESPACE = "settings"
 
+        @OptIn(ExperimentalUuidApi::class)
         @Stable
         suspend fun getSettingsItems(
             settingsState: SettingsState,
@@ -55,7 +57,7 @@ data class SettingItem(
                     content = { onEvent, state, _ -> FollowSystemPreference(onEvent, state) },
                     searchSpecs = SearchItemSpecs(
                         namespace = NAMESPACE,
-                        id = UUID.randomUUID().toString(),
+                        id = Uuid.random().toString(),
                         text = getString(Res.string.system_theme),
                     ),
                 ),
@@ -64,7 +66,7 @@ data class SettingItem(
                     content = { onEvent, state, _ -> DarkThemePreference(onEvent, state) },
                     searchSpecs = SearchItemSpecs(
                         namespace = NAMESPACE,
-                        id = UUID.randomUUID().toString(),
+                        id = Uuid.random().toString(),
                         text = getString(Res.string.dark_theme),
                     ),
                     isAvailable = !settingsState.isFollowingSystemOn,
@@ -75,7 +77,7 @@ data class SettingItem(
                     content = { onEvent, state, _ -> DynamicColorsPreference(onEvent, state) },
                     searchSpecs = SearchItemSpecs(
                         namespace = NAMESPACE,
-                        id = UUID.randomUUID().toString(),
+                        id = Uuid.random().toString(),
                         text = getString(Res.string.material_you),
                     ),
                     isAvailable = dynamicColorsAvailability,
@@ -85,7 +87,7 @@ data class SettingItem(
                     content = { onEvent, state, _ -> SoundEffectsPreference(onEvent, state) },
                     searchSpecs = SearchItemSpecs(
                         namespace = NAMESPACE,
-                        id = UUID.randomUUID().toString(),
+                        id = Uuid.random().toString(),
                         text = getString(Res.string.sound_effects),
                     ),
                 ),
@@ -94,7 +96,7 @@ data class SettingItem(
                     content = { onEvent, state, _ -> BackgroundMusicPreference(onEvent, state) },
                     searchSpecs = SearchItemSpecs(
                         namespace = NAMESPACE,
-                        id = UUID.randomUUID().toString(),
+                        id = Uuid.random().toString(),
                         text = getString(Res.string.background_music),
                     ),
                 ),
@@ -103,7 +105,7 @@ data class SettingItem(
                     content = { onEvent, state, _ -> WinnerLineColorPreference(onEvent, state) },
                     searchSpecs = SearchItemSpecs(
                         namespace = NAMESPACE,
-                        id = UUID.randomUUID().toString(),
+                        id = Uuid.random().toString(),
                         text = getString(Res.string.winner_line_color),
                     ),
                 ),
@@ -112,7 +114,7 @@ data class SettingItem(
                     content = { onEvent, state, _ -> CircleColorPreference(onEvent, state) },
                     searchSpecs = SearchItemSpecs(
                         namespace = NAMESPACE,
-                        id = UUID.randomUUID().toString(),
+                        id = Uuid.random().toString(),
                         text = getString(Res.string.color_circle),
                     ),
                 ),
@@ -121,7 +123,7 @@ data class SettingItem(
                     content = { onEvent, state, _ -> XColorPreference(onEvent, state) },
                     searchSpecs = SearchItemSpecs(
                         namespace = NAMESPACE,
-                        id = UUID.randomUUID().toString(),
+                        id = Uuid.random().toString(),
                         text = getString(Res.string.color_x),
                     ),
                 ),
@@ -130,7 +132,7 @@ data class SettingItem(
                     content = { onEvent, state, _ -> BoardCustomizationPreference(onEvent, state) },
                     searchSpecs = SearchItemSpecs(
                         namespace = NAMESPACE,
-                        id = UUID.randomUUID().toString(),
+                        id = Uuid.random().toString(),
                         text = getString(Res.string.board_customization),
                     ),
                 ),
@@ -139,7 +141,7 @@ data class SettingItem(
                     content = { onEvent, state, _ -> AboutAppPreference(onEvent, state) },
                     searchSpecs = SearchItemSpecs(
                         namespace = NAMESPACE,
-                        id = UUID.randomUUID().toString(),
+                        id = Uuid.random().toString(),
                         text = getString(Res.string.about_app),
                     ),
                 ),
@@ -148,7 +150,7 @@ data class SettingItem(
                     content = { _, _, _ -> ViewOnGithubPreference() },
                     searchSpecs = SearchItemSpecs(
                         namespace = NAMESPACE,
-                        id = UUID.randomUUID().toString(),
+                        id = Uuid.random().toString(),
                         text = getString(Res.string.view_on_github),
                     ),
                 ),
@@ -157,7 +159,7 @@ data class SettingItem(
                     content = { _, _, navController -> UpdateHistoryPreference(navController) },
                     searchSpecs = SearchItemSpecs(
                         namespace = NAMESPACE,
-                        id = UUID.randomUUID().toString(),
+                        id = Uuid.random().toString(),
                         text = getString(Res.string.update_history),
                     ),
                 ),
@@ -166,7 +168,7 @@ data class SettingItem(
                     content = { _, _, navController -> OpenSourceLicensesPreference(navController) },
                     searchSpecs = SearchItemSpecs(
                         namespace = NAMESPACE,
-                        id = UUID.randomUUID().toString(),
+                        id = Uuid.random().toString(),
                         text = getString(Res.string.open_source_licenses),
                     ),
                 ),
