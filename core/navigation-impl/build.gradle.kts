@@ -18,7 +18,6 @@ kotlin {
             api(libs.koin.core)
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.koin.compose)
-
             // Material Motion
             implementation(libs.material.motion.compose)
 

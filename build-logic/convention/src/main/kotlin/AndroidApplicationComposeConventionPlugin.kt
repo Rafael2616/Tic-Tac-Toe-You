@@ -13,7 +13,7 @@ class AndroidApplicationComposeConventionPlugin : Plugin<Project> {
             }
 
             extensions.configure<ApplicationExtension> {
-                configureComposeMultiplatform(this)
+                configureComposeMultiplatform()
             }
         }
     }

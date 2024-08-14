@@ -13,7 +13,7 @@ class AndroidLibraryComposeConventionPlugin : Plugin<Project> {
             }
 
             extensions.configure<LibraryExtension> {
-                configureComposeMultiplatform(this)
+                configureComposeMultiplatform()
             }
         }
     }

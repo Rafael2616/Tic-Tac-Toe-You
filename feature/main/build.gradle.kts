@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.rafael.android.library)
     alias(libs.plugins.rafael.android.library.compose)
     alias(libs.plugins.rafael.spotless)
-    alias(libs.plugins.kotlin.parcelize)
 }
 
 android.namespace = "com.rafael.tictactoe.feature.main"
