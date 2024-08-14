@@ -118,6 +118,7 @@ kotlin {
             // Android Core
             implementation(libs.androidx.core)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.androidx.core.splashscreen)
             // Koin
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
@@ -132,13 +133,14 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(libs.androidx.annotation)
-            implementation(libs.androidx.core.splashscreen)
+            // Coil
+            implementation(libs.coil.compose)
+
             // Projects
             implementation(projects.core.game)
             implementation(projects.core.navigation)
             implementation(projects.core.navigationImpl)
             implementation(projects.core.resources)
-            implementation(projects.feature.settings)
         }
     }
 }
