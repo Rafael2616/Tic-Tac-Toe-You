@@ -24,7 +24,7 @@ internal class AppExceptionHandler private constructor(
 
             p1.printStackTrace(PrintWriter(sw))
             crashLogsFile.use { it.write(sw.toString().toByteArray()) }
-            kotlin.runCatching {
+            runCatching {
                 Log.e(this.toString(), p1.stackTraceToString())
                 exitProcess(0)
             }.getOrElse {
