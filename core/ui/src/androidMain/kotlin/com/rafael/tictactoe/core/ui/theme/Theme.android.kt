@@ -11,7 +11,7 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.platform.LocalContext
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
+import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 
 @Composable
 actual fun AppTheme(

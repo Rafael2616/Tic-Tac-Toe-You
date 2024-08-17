@@ -30,9 +30,10 @@ kotlin {
 
             // Projects
             implementation(projects.core.resources)
+            implementation(projects.core.settings)
+            implementation(projects.core.ui)
             implementation(projects.feature.changelogs)
             implementation(projects.feature.settings)
-            implementation(projects.core.ui)
         }
     }
 }

@@ -48,12 +48,12 @@ import com.rafael.tictactoe.core.resources.online_match
 import com.rafael.tictactoe.core.resources.play
 import com.rafael.tictactoe.core.resources.settings
 import com.rafael.tictactoe.core.resources.vs_cpu
+import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.core.ui.theme.AppTheme
 import com.rafael.tictactoe.feature.changelogs.presentation.components.WhatsNewDialog
 import com.rafael.tictactoe.feature.main.domain.model.MainState
 import com.rafael.tictactoe.feature.main.domain.model.ScreenItem
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 

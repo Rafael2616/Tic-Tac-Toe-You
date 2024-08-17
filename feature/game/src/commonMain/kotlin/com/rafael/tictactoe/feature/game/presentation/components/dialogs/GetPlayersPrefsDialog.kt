@@ -73,12 +73,12 @@ import com.rafael.tictactoe.core.resources.player2_name
 import com.rafael.tictactoe.core.resources.player_o
 import com.rafael.tictactoe.core.resources.player_x
 import com.rafael.tictactoe.core.resources.type_your_name
+import com.rafael.tictactoe.core.settings.domain.enums.Customization
+import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.game.domain.model.GameEvent
 import com.rafael.tictactoe.feature.game.domain.model.GameState
 import com.rafael.tictactoe.feature.game.domain.model.Level
-import com.rafael.tictactoe.feature.settings.domain.enums.Customization
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

@@ -67,11 +67,11 @@ import com.rafael.tictactoe.core.resources.draws.drawWinnerLineInColorDialog
 import com.rafael.tictactoe.core.resources.draws.drawXinColorDialog
 import com.rafael.tictactoe.core.resources.presets
 import com.rafael.tictactoe.core.resources.winner_line_color
-import com.rafael.tictactoe.feature.settings.domain.enums.Customization
+import com.rafael.tictactoe.core.settings.domain.enums.Customization
+import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.settings.domain.model.ColorItem
 import com.rafael.tictactoe.feature.settings.domain.model.IconCustomization
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 import com.smarttoolfactory.extendedcolors.parser.rememberColorParser
 import my.nanihadesuka.compose.ColumnScrollbar
 import my.nanihadesuka.compose.ScrollbarSettings

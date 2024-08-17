@@ -29,11 +29,11 @@ import androidx.compose.ui.unit.sp
 import com.rafael.tictactoe.core.resources.Res
 import com.rafael.tictactoe.core.resources.active_music
 import com.rafael.tictactoe.core.resources.active_sound
+import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.game.domain.model.GameEvent
 import com.rafael.tictactoe.feature.game.domain.model.GameState
 import com.rafael.tictactoe.feature.game.domain.model.SoundItem
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

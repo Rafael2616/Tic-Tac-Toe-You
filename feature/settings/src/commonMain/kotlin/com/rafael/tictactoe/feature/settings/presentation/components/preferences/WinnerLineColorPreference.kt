@@ -9,9 +9,9 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.unit.dp
 import com.rafael.tictactoe.core.resources.Res
 import com.rafael.tictactoe.core.resources.winner_line_color
-import com.rafael.tictactoe.feature.settings.domain.enums.Customization
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
+import com.rafael.tictactoe.core.settings.domain.enums.Customization
+import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.settings.presentation.components.templates.IconPreference
 
 @Composable
@@ -33,7 +33,11 @@ fun WinnerLineColorPreference(
         },
         trailingIcon = Icons.AutoMirrored.Filled.ArrowForward,
         onClick = {
-            onEvent(SettingsEvent.SetCustomizationType(Customization.WINNERLINECOLOR))
+            onEvent(
+                SettingsEvent.SetCustomizationType(
+                    Customization.WINNERLINECOLOR,
+                ),
+            )
             onEvent(SettingsEvent.ShowColorSelectionDialog(true))
         },
     )

@@ -32,8 +32,8 @@ import com.rafael.tictactoe.core.resources.Res
 import com.rafael.tictactoe.core.resources.add_photo
 import com.rafael.tictactoe.core.resources.change_photo
 import com.rafael.tictactoe.core.resources.remove_photo
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
+import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import dev.icerock.moko.permissions.PermissionState
 import org.jetbrains.compose.resources.stringResource
 

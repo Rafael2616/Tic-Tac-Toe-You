@@ -9,9 +9,9 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.unit.dp
 import com.rafael.tictactoe.core.resources.Res
 import com.rafael.tictactoe.core.resources.color_x
-import com.rafael.tictactoe.feature.settings.domain.enums.Customization
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
+import com.rafael.tictactoe.core.settings.domain.enums.Customization
+import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.settings.presentation.components.templates.IconPreference
 
 @Composable
@@ -39,7 +39,11 @@ fun XColorPreference(
         },
         trailingIcon = Icons.AutoMirrored.Filled.ArrowForward,
         onClick = {
-            onEvent(SettingsEvent.SetCustomizationType(Customization.XCOLOR))
+            onEvent(
+                SettingsEvent.SetCustomizationType(
+                    Customization.XCOLOR,
+                ),
+            )
             onEvent(SettingsEvent.ShowColorSelectionDialog(true))
         },
     )

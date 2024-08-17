@@ -22,10 +22,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.rafael.tictactoe.core.resources.Res
 import com.rafael.tictactoe.core.resources.board_customization
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
+import com.rafael.tictactoe.core.settings.domain.model.BoardConstants.SHAPE_CUSTOM
+import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.settings.presentation.components.templates.IconPreference
-import com.rafael.tictactoe.feature.settings.presentation.util.BoardConstants.SHAPE_CUSTOM
 import kotlin.math.roundToInt
 
 @Composable

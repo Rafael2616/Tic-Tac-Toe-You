@@ -18,6 +18,8 @@ import com.rafael.tictactoe.core.resources.system_theme
 import com.rafael.tictactoe.core.resources.update_history
 import com.rafael.tictactoe.core.resources.view_on_github
 import com.rafael.tictactoe.core.resources.winner_line_color
+import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.settings.presentation.components.preferences.AboutAppPreference
 import com.rafael.tictactoe.feature.settings.presentation.components.preferences.BackgroundMusicPreference
 import com.rafael.tictactoe.feature.settings.presentation.components.preferences.BoardCustomizationPreference

@@ -31,7 +31,7 @@ kotlin {
             implementation(projects.core.resources)
             implementation(projects.core.platform)
             implementation(projects.core.navigation)
-            implementation(projects.feature.settings)
+            implementation(projects.core.settings)
             implementation(projects.feature.changelogs)
         }
     }

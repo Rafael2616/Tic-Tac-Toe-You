@@ -25,6 +25,7 @@ import com.rafael.tictactoe.core.navigation.impl.types.gameModeNavType
 import com.rafael.tictactoe.core.platform.lifecycle.LifecycleEventsHandler
 import com.rafael.tictactoe.core.platform.network.SingletonCoilImageLoader
 import com.rafael.tictactoe.core.platform.permissions.PermissionsViewModel
+import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.core.ui.theme.AppTheme
 import com.rafael.tictactoe.feature.changelogs.presentation.ChangelogsScreen
 import com.rafael.tictactoe.feature.game.presentation.GameScreen
@@ -33,7 +34,6 @@ import com.rafael.tictactoe.feature.libraryinfo.presentation.LibraryScreen
 import com.rafael.tictactoe.feature.libraryinfo.presentation.viewmodel.LibraryViewModel
 import com.rafael.tictactoe.feature.main.presentation.MainScreen
 import com.rafael.tictactoe.feature.main.presentation.viewmodel.MainViewModel
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.feature.settings.presentation.SettingsScreen
 import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsViewModel
 import com.rafael.tictactoe.feature.settingssearch.presentation.SearchSettingsScreen
@@ -43,14 +43,12 @@ import dev.icerock.moko.permissions.compose.rememberPermissionsControllerFactory
 import kotlin.reflect.typeOf
 import org.koin.compose.KoinContext
 import org.koin.compose.viewmodel.koinViewModel
-import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.core.parameter.parametersOf
 import soup.compose.material.motion.animation.materialSharedAxisXIn
 import soup.compose.material.motion.animation.materialSharedAxisXOut
 import soup.compose.material.motion.animation.rememberSlideDistance
 
 @Composable
-@OptIn(KoinExperimentalAPI::class)
 fun TicTacToeNavGraph(
     modifier: Modifier = Modifier,
     destination: Destinations? = null,

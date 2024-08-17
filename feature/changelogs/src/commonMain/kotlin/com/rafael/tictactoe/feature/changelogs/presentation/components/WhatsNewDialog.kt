@@ -28,9 +28,9 @@ import com.rafael.tictactoe.core.resources.Res
 import com.rafael.tictactoe.core.resources.close
 import com.rafael.tictactoe.core.resources.see_history
 import com.rafael.tictactoe.core.resources.whats_new
+import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.feature.changelogs.data.getCurrentChangelogFile
 import com.rafael.tictactoe.feature.changelogs.presentation.util.styledChangelog
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

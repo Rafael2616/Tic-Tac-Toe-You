@@ -14,7 +14,7 @@ kotlin {
         }
         commonMain.dependencies {
             // Projects
-            api(projects.feature.settings)
+            api(projects.core.settings)
         }
     }
 }

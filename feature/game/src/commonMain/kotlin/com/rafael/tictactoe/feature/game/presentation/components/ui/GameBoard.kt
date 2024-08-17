@@ -31,11 +31,11 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.rafael.tictactoe.core.platform.configuration.isInLandscape
+import com.rafael.tictactoe.core.settings.domain.model.BoardConstants.SHAPE_CUSTOM
+import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.game.domain.model.GameEvent
 import com.rafael.tictactoe.feature.game.domain.model.GameState
 import com.rafael.tictactoe.feature.settings.domain.animations.rememberRGBAnimation
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
-import com.rafael.tictactoe.feature.settings.presentation.util.BoardConstants.SHAPE_CUSTOM
 import kotlinx.coroutines.delay
 
 @Composable

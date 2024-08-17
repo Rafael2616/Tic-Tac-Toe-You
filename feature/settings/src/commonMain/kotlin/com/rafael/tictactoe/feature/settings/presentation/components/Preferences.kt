@@ -12,8 +12,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
+import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.settings.presentation.components.groups.CustomizationPreferenceGroup
 import com.rafael.tictactoe.feature.settings.presentation.components.groups.OthersPreferenceGroup
 import com.rafael.tictactoe.feature.settings.presentation.components.groups.SoundPreferenceGroup

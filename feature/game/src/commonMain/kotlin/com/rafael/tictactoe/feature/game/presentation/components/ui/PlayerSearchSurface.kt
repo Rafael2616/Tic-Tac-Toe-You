@@ -52,10 +52,10 @@ import com.rafael.tictactoe.core.resources.unable_connect_server
 import com.rafael.tictactoe.core.resources.unknown_error
 import com.rafael.tictactoe.core.resources.you_will_be_second_player
 import com.rafael.tictactoe.core.resources.you_will_start_game
+import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.game.domain.model.GameEvent
 import com.rafael.tictactoe.feature.game.domain.model.GameState
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.stringResource
 

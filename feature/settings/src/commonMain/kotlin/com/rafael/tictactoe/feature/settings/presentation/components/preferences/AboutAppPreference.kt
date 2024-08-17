@@ -27,8 +27,8 @@ import com.rafael.tictactoe.core.resources.Res
 import com.rafael.tictactoe.core.resources.about_app
 import com.rafael.tictactoe.core.resources.app_version
 import com.rafael.tictactoe.core.resources.creator_message
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
+import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.settings.presentation.components.templates.IconPreference
 import org.jetbrains.compose.resources.stringResource
 

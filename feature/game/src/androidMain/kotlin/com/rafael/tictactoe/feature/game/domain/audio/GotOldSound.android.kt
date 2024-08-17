@@ -6,8 +6,8 @@ import android.net.Uri
 import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
 import com.rafael.tictactoe.core.resources.R
+import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.game.domain.model.GameState
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 import org.koin.java.KoinJavaComponent.inject
 
 actual fun gotOldSound(

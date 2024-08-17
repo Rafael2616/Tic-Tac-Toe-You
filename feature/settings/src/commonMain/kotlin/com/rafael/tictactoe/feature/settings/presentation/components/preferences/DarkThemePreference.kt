@@ -6,8 +6,8 @@ import androidx.compose.material.icons.outlined.LightMode
 import androidx.compose.runtime.Composable
 import com.rafael.tictactoe.core.resources.Res
 import com.rafael.tictactoe.core.resources.dark_theme
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
+import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.settings.presentation.components.templates.SwitchPreference
 
 @Composable

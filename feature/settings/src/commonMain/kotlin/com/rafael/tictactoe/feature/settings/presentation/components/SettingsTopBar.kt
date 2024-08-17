@@ -30,8 +30,8 @@ import androidx.navigation.NavController
 import com.rafael.tictactoe.core.navigation.SettingsSearch
 import com.rafael.tictactoe.core.resources.Res
 import com.rafael.tictactoe.core.resources.settings
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
+import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

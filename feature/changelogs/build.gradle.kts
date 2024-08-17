@@ -13,10 +13,10 @@ kotlin {
             implementation(libs.androidx.navigation.compose)
             // Projects
             implementation(projects.core.domain)
-            implementation(projects.core.resources)
             implementation(projects.core.navigation)
+            implementation(projects.core.resources)
+            implementation(projects.core.settings)
             implementation(projects.core.ui)
-            implementation(projects.feature.settings)
         }
     }
 }

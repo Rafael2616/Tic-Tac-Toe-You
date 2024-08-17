@@ -16,8 +16,8 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.unit.dp
 import com.rafael.tictactoe.core.platform.configuration.isInLandscape
+import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.game.domain.model.GameState
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 
 @Composable
 internal fun WinnerLines(

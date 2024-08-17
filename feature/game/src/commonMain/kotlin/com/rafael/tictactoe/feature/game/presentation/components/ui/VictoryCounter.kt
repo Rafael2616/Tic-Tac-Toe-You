@@ -32,9 +32,9 @@ import androidx.compose.ui.unit.dp
 import com.rafael.tictactoe.core.platform.configuration.isInLandscape
 import com.rafael.tictactoe.core.resources.draws.drawCircleInCounter
 import com.rafael.tictactoe.core.resources.draws.drawXinCounter
+import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.game.domain.model.Counter
 import com.rafael.tictactoe.feature.game.domain.model.GameState
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 
 @Composable
 internal fun VictoryCounter(

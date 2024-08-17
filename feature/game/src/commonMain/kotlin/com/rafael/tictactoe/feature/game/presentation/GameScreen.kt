@@ -17,6 +17,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.rafael.tictactoe.core.game.domain.model.GameMode
 import com.rafael.tictactoe.core.platform.presentation.OnBack
+import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.core.ui.theme.AppTheme
 import com.rafael.tictactoe.feature.game.domain.model.GameEvent
 import com.rafael.tictactoe.feature.game.domain.model.GameState
@@ -32,8 +34,6 @@ import com.rafael.tictactoe.feature.game.presentation.components.ui.GameStateToa
 import com.rafael.tictactoe.feature.game.presentation.components.ui.PlayerSearchSurface
 import com.rafael.tictactoe.feature.game.presentation.components.ui.VictoryCounter
 import com.rafael.tictactoe.feature.game.presentation.components.ui.WinnerLines
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.settings.presentation.components.dialogs.ColorSelectionDialog
 import org.jetbrains.compose.ui.tooling.preview.Preview
 

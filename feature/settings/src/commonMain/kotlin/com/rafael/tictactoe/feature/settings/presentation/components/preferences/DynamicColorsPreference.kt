@@ -6,8 +6,8 @@ import androidx.compose.runtime.Composable
 import com.rafael.tictactoe.core.platform.presentation.dynamicColorsAvailability
 import com.rafael.tictactoe.core.resources.Res
 import com.rafael.tictactoe.core.resources.material_you
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
+import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.settings.presentation.components.templates.SwitchPreference
 
 @Composable

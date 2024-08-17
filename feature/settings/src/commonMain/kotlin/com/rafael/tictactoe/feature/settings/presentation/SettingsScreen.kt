@@ -8,8 +8,8 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.navigation.NavController
 import coil3.Uri
 import com.rafael.tictactoe.core.platform.permissions.PermissionsState
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
+import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.settings.presentation.components.Preferences
 import com.rafael.tictactoe.feature.settings.presentation.components.ProfilePictureMenu
 import com.rafael.tictactoe.feature.settings.presentation.components.SettingsTopBar

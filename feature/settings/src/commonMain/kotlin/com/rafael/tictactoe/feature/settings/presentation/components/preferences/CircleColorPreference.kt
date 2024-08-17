@@ -10,9 +10,9 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.dp
 import com.rafael.tictactoe.core.resources.Res
 import com.rafael.tictactoe.core.resources.color_circle
-import com.rafael.tictactoe.feature.settings.domain.enums.Customization
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
+import com.rafael.tictactoe.core.settings.domain.enums.Customization
+import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.settings.presentation.components.templates.IconPreference
 
 @Composable
@@ -34,7 +34,11 @@ fun CircleColorPreference(
         },
         trailingIcon = Icons.AutoMirrored.Filled.ArrowForward,
         onClick = {
-            onEvent(SettingsEvent.SetCustomizationType(Customization.CIRCLECOLOR))
+            onEvent(
+                SettingsEvent.SetCustomizationType(
+                    Customization.CIRCLECOLOR,
+                ),
+            )
             onEvent(SettingsEvent.ShowColorSelectionDialog(true))
         },
     )

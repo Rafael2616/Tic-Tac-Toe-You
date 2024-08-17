@@ -4,12 +4,12 @@ import com.rafael.tictactoe.core.platform.network.utils.Error
 import com.rafael.tictactoe.core.platform.network.utils.NetworkError
 import com.rafael.tictactoe.core.platform.network.utils.Result
 import com.rafael.tictactoe.core.platform.network.utils.asEmptyDataResult
+import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.game.domain.model.GameState
 import com.rafael.tictactoe.feature.game.domain.model.OnlineGameState
 import com.rafael.tictactoe.feature.game.domain.model.Player
 import com.rafael.tictactoe.feature.game.domain.repository.ErrorMessage
 import com.rafael.tictactoe.feature.game.domain.repository.GameRepository
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.delete

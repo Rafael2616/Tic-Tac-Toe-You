@@ -57,11 +57,11 @@ import com.rafael.tictactoe.core.resources.no_matching_settings_msg
 import com.rafael.tictactoe.core.resources.search_settings
 import com.rafael.tictactoe.core.resources.search_tip
 import com.rafael.tictactoe.core.resources.settings
+import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.core.ui.theme.AppTheme
 import com.rafael.tictactoe.feature.changelogs.presentation.components.WhatsNewDialog
 import com.rafael.tictactoe.feature.settings.domain.model.SettingItem
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.settings.presentation.components.dialogs.BoardCustomizationDialog
 import com.rafael.tictactoe.feature.settings.presentation.components.dialogs.ColorSelectionDialog
 import com.rafael.tictactoe.feature.settings.presentation.components.templates.PreferenceGroup

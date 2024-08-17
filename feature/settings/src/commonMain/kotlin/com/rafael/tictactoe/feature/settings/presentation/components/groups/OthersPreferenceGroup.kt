@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import com.rafael.tictactoe.core.resources.Res
 import com.rafael.tictactoe.core.resources.group_others
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
+import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
+import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.settings.presentation.components.preferences.AboutAppPreference
 import com.rafael.tictactoe.feature.settings.presentation.components.preferences.OpenSourceLicensesPreference
 import com.rafael.tictactoe.feature.settings.presentation.components.preferences.UpdateHistoryPreference

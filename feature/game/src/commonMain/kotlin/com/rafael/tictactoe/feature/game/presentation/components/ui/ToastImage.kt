@@ -8,8 +8,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import com.rafael.tictactoe.core.resources.draws.drawCircleInToast
 import com.rafael.tictactoe.core.resources.draws.drawXinToast
+import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.game.domain.model.GameState
-import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 
 @Composable
 internal fun ToastImage(
