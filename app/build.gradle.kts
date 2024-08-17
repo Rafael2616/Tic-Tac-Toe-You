@@ -119,9 +119,6 @@ kotlin {
             implementation(libs.androidx.core)
             implementation(libs.androidx.activity.compose)
             implementation(libs.androidx.core.splashscreen)
-            // Koin
-            implementation(libs.koin.android)
-            implementation(libs.koin.androidx.compose)
         }
         androidUnitTest.dependencies {
             implementation(libs.junit)
@@ -133,11 +130,9 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(libs.androidx.annotation)
-            // Coil
-            implementation(libs.coil.compose)
 
             // Projects
-            implementation(projects.core.navigation)
+            implementation(projects.core.di)
             implementation(projects.core.navigationImpl)
             implementation(projects.core.resources)
         }

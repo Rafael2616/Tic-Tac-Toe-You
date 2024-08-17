@@ -41,21 +41,21 @@ kotlin {
             implementation(libs.androidx.room.runtime)
             // Coil
             api(libs.coil.compose)
-            api(libs.coil.network)
+            implementation(libs.coil.network)
             // ColorPicker Compose
             implementation(libs.skydoves.colorpicker.compose)
 
             // Projects
-            api(projects.core.domain)
-            api(projects.core.services)
-            api(projects.core.resources)
-            api(projects.core.navigation)
-            api(projects.core.platform)
+            implementation(projects.core.domain)
+            implementation(projects.core.services)
+            implementation(projects.core.resources)
+            implementation(projects.core.navigation)
+            implementation(projects.core.platform)
 
             // My multiplatform core implementation of smart-tool factory extended colors library
-            api(projects.libs.extendedColors)
+            implementation(projects.libs.extendedColors)
             // My multiplatform implementation of LazyColumnScrollbar library
-            api(projects.libs.lazyColumnScrollbar)
+            implementation(projects.libs.lazyColumnScrollbar)
         }
         iosMain.dependencies {
             // Ktor

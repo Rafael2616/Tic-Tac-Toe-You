@@ -22,9 +22,11 @@ kotlin {
             implementation(libs.material.motion.compose)
 
             // Projects
+            api(projects.core.navigation)
             implementation(projects.core.game)
+            implementation(projects.core.platform)
+            implementation(projects.core.resources)
             implementation(projects.core.ui)
-            implementation(projects.core.navigation)
             implementation(projects.feature.changelogs)
             implementation(projects.feature.game)
             implementation(projects.feature.libraryInfo)

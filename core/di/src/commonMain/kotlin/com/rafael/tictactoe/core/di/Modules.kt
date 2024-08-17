@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.core.navigation.impl.modules
+package com.rafael.tictactoe.core.di
 
 import com.rafael.tictactoe.core.platform.di.modules.platformModule
 import com.rafael.tictactoe.core.services.di.modules.servicesModule

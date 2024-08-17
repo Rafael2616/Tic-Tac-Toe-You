@@ -40,10 +40,11 @@ kotlin {
             implementation(libs.ktor.client.content.negotiation)
 
             // Projects
+            implementation(projects.core.domain)
             implementation(projects.core.game)
-            implementation(projects.core.ui)
-            implementation(projects.core.resources)
             implementation(projects.core.platform)
+            implementation(projects.core.resources)
+            implementation(projects.core.ui)
             implementation(projects.feature.settings)
         }
         iosMain.dependencies {
