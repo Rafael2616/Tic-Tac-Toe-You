@@ -40,5 +40,6 @@ ksp {
 
 dependencies {
     add("kspAndroid", libs.androidx.room.compiler)
-    add("kspIosX64", libs.androidx.room.compiler)
+//    disable ksp for Ios for now until this issue is fixed https://github.com/google/ksp/issues/1974
+//    add("kspIosX64", libs.androidx.room.compiler)
 }
