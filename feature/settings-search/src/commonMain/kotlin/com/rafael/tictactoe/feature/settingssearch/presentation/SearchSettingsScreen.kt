@@ -245,7 +245,6 @@ fun SearchSettingsScreen(
 // @PreviewLightDark
 // @PreviewScreenSizes
 @Composable
-@ExperimentalMaterial3Api
 private fun SearchSettingsScreenPreview() {
     AppTheme {
         SearchSettingsScreen(

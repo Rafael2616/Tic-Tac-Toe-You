@@ -1,7 +1,6 @@
 package com.rafael.tictactoe.feature.settings.presentation
 
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -17,7 +16,6 @@ import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 @PreviewLightDark
 @PreviewScreenSizes
 @Composable
-@ExperimentalMaterial3Api
 private fun SettingsScreenPreview() {
     MaterialTheme {
         Surface(
