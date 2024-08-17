@@ -1,5 +1,4 @@
 import com.diffplug.gradle.spotless.SpotlessExtension
-import org.gradle.kotlin.dsl.configure
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
@@ -34,25 +33,25 @@ dependencies {
 gradlePlugin {
     // register the convention plugin
     plugins {
-        register("spotlessLibrary") {
+        register("spotless") {
             id = "com.rafael.spotless"
-            implementationClass = "AndroidSpotlessConventionPlugin"
+            implementationClass = "SpotlessConventionPlugin"
         }
-        register("androidLibrary") {
-            id = "com.rafael.android.library"
-            implementationClass = "AndroidLibraryConventionPlugin"
-        }
-        register("androidApplication") {
-            id = "com.rafael.android.application"
-            implementationClass = "AndroidApplicationConventionPlugin"
+        register("library") {
+            id = "com.rafael.library"
+            implementationClass = "MultiplatformLibraryConventionPlugin"
         }
         register("composeLibrary") {
             id = "com.rafael.compose.library"
-            implementationClass = "AndroidLibraryComposeConventionPlugin"
+            implementationClass = "MultiplatformLibraryComposeConventionPlugin"
+        }
+        register("application") {
+            id = "com.rafael.application"
+            implementationClass = "MultiplatformApplicationConventionPlugin"
         }
         register("composeApplication") {
             id = "com.rafael.compose.application"
-            implementationClass = "AndroidApplicationComposeConventionPlugin"
+            implementationClass = "MultiplatformApplicationComposeConventionPlugin"
         }
     }
 }

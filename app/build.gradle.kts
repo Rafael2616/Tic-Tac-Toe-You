@@ -4,8 +4,8 @@ import com.android.build.gradle.internal.api.ApkVariantOutputImpl
 import java.util.Properties
 
 plugins {
-    alias(libs.plugins.rafael.android.application)
-    alias(libs.plugins.rafael.android.application.compose)
+    alias(libs.plugins.rafael.application)
+    alias(libs.plugins.rafael.application.compose)
     alias(libs.plugins.rafael.spotless)
     alias(libs.plugins.licensee)
     alias(libs.plugins.baselineprofile)

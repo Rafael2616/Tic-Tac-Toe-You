@@ -1,18 +1,19 @@
 import com.android.build.api.dsl.ApplicationExtension
-import com.rafael.gradle.configureKotlinMultiplatform
+import com.rafael.gradle.configureComposeMultiplatform
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 
-class AndroidApplicationConventionPlugin : Plugin<Project> {
+class MultiplatformApplicationComposeConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
-                apply("com.android.application")
-                apply("org.jetbrains.kotlin.multiplatform")
+                apply("org.jetbrains.kotlin.plugin.compose")
+                apply("org.jetbrains.compose")
             }
+
             extensions.configure<ApplicationExtension> {
-                configureKotlinMultiplatform(this)
+                configureComposeMultiplatform()
             }
         }
     }

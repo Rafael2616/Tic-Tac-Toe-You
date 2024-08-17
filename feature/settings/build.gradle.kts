@@ -1,6 +1,6 @@
 plugins {
-    alias(libs.plugins.rafael.android.library)
-    alias(libs.plugins.rafael.android.library.compose)
+    alias(libs.plugins.rafael.library)
+    alias(libs.plugins.rafael.library.compose)
     alias(libs.plugins.rafael.spotless)
     alias(libs.plugins.androidx.room)
     alias(libs.plugins.ksp)

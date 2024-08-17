@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.rafael.android.library)
+    alias(libs.plugins.rafael.library)
     alias(libs.plugins.rafael.spotless)
 }
 
