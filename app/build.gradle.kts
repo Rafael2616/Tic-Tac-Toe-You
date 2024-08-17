@@ -137,7 +137,6 @@ kotlin {
             implementation(libs.coil.compose)
 
             // Projects
-            implementation(projects.core.game)
             implementation(projects.core.navigation)
             implementation(projects.core.navigationImpl)
             implementation(projects.core.resources)
