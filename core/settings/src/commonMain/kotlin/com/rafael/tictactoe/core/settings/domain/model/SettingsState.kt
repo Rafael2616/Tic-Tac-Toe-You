@@ -5,6 +5,11 @@ import androidx.compose.ui.graphics.ImageBitmap
 import com.rafael.tictactoe.core.domain.util.Colors
 import com.rafael.tictactoe.core.domain.util.getVersionName
 import com.rafael.tictactoe.core.settings.domain.enums.Customization
+import com.rafael.tictactoe.core.settings.domain.model.BoardConstants.DEF_CARDS_BORDER_THICKNESS
+import com.rafael.tictactoe.core.settings.domain.model.BoardConstants.DEF_CARDS_COLOR
+import com.rafael.tictactoe.core.settings.domain.model.BoardConstants.DEF_CARDS_CORNER_RADIUS
+import com.rafael.tictactoe.core.settings.domain.model.BoardConstants.DEF_CARDS_ELEVATION
+import com.rafael.tictactoe.core.settings.domain.model.BoardConstants.DEF_CARDS_SHADOW
 
 data class SettingsState(
     val color: Colors = Colors.Companion.get(),
@@ -28,11 +33,11 @@ data class SettingsState(
     val profilePictureBitmap: ImageBitmap? = null,
     val showBoardCustomizationDialog: Boolean = false,
     val shapeSelected: Int = 1,
-    val boardCardsCornerRadius: Float = BoardConstants.DEF_CARDS_CORNER_RADIUS,
-    val boardCardsThickness: Float = BoardConstants.DEF_CARDS_BORDER_THICKNESS,
-    val boardCardsElevation: Float = BoardConstants.DEF_CARDS_ELEVATION,
-    val boardCardsShadow: Float = BoardConstants.DEF_CARDS_SHADOW,
-    val boardCardsBorderColor: Color = BoardConstants.DEF_CARDS_COLOR,
+    val boardCardsCornerRadius: Float = DEF_CARDS_CORNER_RADIUS,
+    val boardCardsThickness: Float = DEF_CARDS_BORDER_THICKNESS,
+    val boardCardsElevation: Float = DEF_CARDS_ELEVATION,
+    val boardCardsShadow: Float = DEF_CARDS_SHADOW,
+    val boardCardsBorderColor: Color = DEF_CARDS_COLOR,
     val isRGBEffectOn: Boolean = false,
     val isGradientOn: Boolean = true,
 )

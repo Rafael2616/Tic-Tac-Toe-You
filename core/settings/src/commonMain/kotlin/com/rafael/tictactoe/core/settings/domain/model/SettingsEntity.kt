@@ -1,6 +1,12 @@
 package com.rafael.tictactoe.core.settings.domain.model
 
-@androidx.room.Entity(tableName = "settings")
+import androidx.room.Entity
+import com.rafael.tictactoe.core.settings.domain.model.BoardConstants.DEF_CARDS_BORDER_THICKNESS
+import com.rafael.tictactoe.core.settings.domain.model.BoardConstants.DEF_CARDS_CORNER_RADIUS
+import com.rafael.tictactoe.core.settings.domain.model.BoardConstants.DEF_CARDS_ELEVATION
+import com.rafael.tictactoe.core.settings.domain.model.BoardConstants.DEF_CARDS_SHADOW
+
+@Entity(tableName = "settings")
 data class SettingsEntity(
     @androidx.room.PrimaryKey
     var id: Int = 1,
@@ -37,10 +43,10 @@ data class SettingsEntity(
                 selectedCircleColor = 5,
                 appVersion = "0",
                 shapeSelected = 1,
-                boardCardsCornerRadius = BoardConstants.DEF_CARDS_CORNER_RADIUS,
-                boardCardsThickness = BoardConstants.DEF_CARDS_BORDER_THICKNESS,
-                boardCardsElevation = BoardConstants.DEF_CARDS_ELEVATION,
-                boardCardsShadow = BoardConstants.DEF_CARDS_SHADOW,
+                boardCardsCornerRadius = DEF_CARDS_CORNER_RADIUS,
+                boardCardsThickness = DEF_CARDS_BORDER_THICKNESS,
+                boardCardsElevation = DEF_CARDS_ELEVATION,
+                boardCardsShadow = DEF_CARDS_SHADOW,
                 boardCardsBorderColor = "FFFFFFFF",
                 isRGBEffectOn = false,
                 isGradientOn = true,
