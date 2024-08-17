@@ -38,8 +38,6 @@ import com.rafael.tictactoe.feature.settings.presentation.components.dialogs.Col
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-@ExperimentalMaterial3Api
-@ExperimentalLayoutApi
 fun GameScreen(
     navController: NavController,
     gameMode: GameMode,

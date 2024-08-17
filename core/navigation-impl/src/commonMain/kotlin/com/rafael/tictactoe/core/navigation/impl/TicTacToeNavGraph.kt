@@ -1,22 +1,18 @@
 package com.rafael.tictactoe.core.navigation.impl
 
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import coil3.annotation.ExperimentalCoilApi
 import com.rafael.tictactoe.core.game.domain.model.GameMode
 import com.rafael.tictactoe.core.navigation.Changelogs
 import com.rafael.tictactoe.core.navigation.Destinations
@@ -54,11 +50,7 @@ import soup.compose.material.motion.animation.materialSharedAxisXOut
 import soup.compose.material.motion.animation.rememberSlideDistance
 
 @Composable
-@ExperimentalLayoutApi
-@ExperimentalMaterial3Api
-@ExperimentalTextApi
-@ExperimentalCoilApi
-@KoinExperimentalAPI
+@OptIn(KoinExperimentalAPI::class)
 fun TicTacToeNavGraph(
     modifier: Modifier = Modifier,
     destination: Destinations? = null,

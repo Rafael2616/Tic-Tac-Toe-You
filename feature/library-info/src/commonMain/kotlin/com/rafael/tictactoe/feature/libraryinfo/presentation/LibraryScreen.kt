@@ -49,7 +49,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-@ExperimentalMaterial3Api
+@OptIn(ExperimentalMaterial3Api::class)
 fun LibraryScreen(
     navController: NavController,
     libraries: List<OssLibrary>,

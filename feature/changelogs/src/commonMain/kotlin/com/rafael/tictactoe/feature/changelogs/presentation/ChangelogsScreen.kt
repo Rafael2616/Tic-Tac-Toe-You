@@ -35,7 +35,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalUriHandler
-import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -55,8 +54,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-@ExperimentalMaterial3Api
-@ExperimentalTextApi
+@OptIn(ExperimentalMaterial3Api::class)
 fun ChangelogsScreen(
     navController: NavController,
     settingsState: SettingsState,
@@ -175,7 +173,6 @@ fun ChangelogsScreen(
 // @PreviewScreenSizes
 @Composable
 @ExperimentalMaterial3Api
-@ExperimentalTextApi
 private fun ChangelogsScreenPreview() {
     AppTheme {
         ChangelogsScreen(

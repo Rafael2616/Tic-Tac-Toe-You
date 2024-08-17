@@ -12,7 +12,7 @@ import androidx.compose.ui.text.withAnnotation
 import androidx.compose.ui.text.withStyle
 
 @Composable
-@ExperimentalTextApi
+@OptIn(ExperimentalTextApi::class)
 internal fun styledChangelog(changelog: String): AnnotatedString {
     return buildAnnotatedString {
         val keywords = listOf("Added:", "Fixes:", "Improvements:", "Code:", "Others:")

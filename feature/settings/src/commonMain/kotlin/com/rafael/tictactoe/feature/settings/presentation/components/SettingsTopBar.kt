@@ -35,7 +35,7 @@ import com.rafael.tictactoe.feature.settings.domain.model.SettingsState
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-@ExperimentalMaterial3Api
+@OptIn(ExperimentalMaterial3Api::class)
 internal fun SettingsTopBar(
     navController: NavController,
     state: SettingsState,

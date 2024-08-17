@@ -50,7 +50,7 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-@ExperimentalMaterial3Api
+@OptIn(ExperimentalMaterial3Api::class)
 internal fun DifficultyLevelSwitcher(
     state: GameState,
     onEvent: (GameEvent) -> Unit,

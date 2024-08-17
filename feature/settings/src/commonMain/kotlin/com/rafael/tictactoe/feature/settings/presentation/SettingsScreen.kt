@@ -1,7 +1,6 @@
 package com.rafael.tictactoe.feature.settings.presentation
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
@@ -18,7 +17,6 @@ import com.rafael.tictactoe.feature.settings.presentation.components.dialogs.Boa
 import com.rafael.tictactoe.feature.settings.presentation.components.dialogs.ColorSelectionDialog
 
 @Composable
-@ExperimentalMaterial3Api
 fun SettingsScreen(
     navController: NavController,
     state: SettingsState,

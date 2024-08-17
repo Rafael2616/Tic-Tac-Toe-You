@@ -19,7 +19,6 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -35,7 +34,6 @@ import com.rafael.tictactoe.feature.settings.domain.model.SettingsEvent
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-@ExperimentalTextApi
 fun WhatsNewDialog(
     onEvent: (SettingsEvent) -> Unit,
     navController: NavController,

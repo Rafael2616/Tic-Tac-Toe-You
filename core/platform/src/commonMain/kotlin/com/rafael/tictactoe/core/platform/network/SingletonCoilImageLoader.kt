@@ -12,7 +12,7 @@ import coil3.request.crossfade
 import coil3.util.DebugLogger
 import okio.FileSystem
 
-@ExperimentalCoilApi
+@OptIn(ExperimentalCoilApi::class)
 @Composable
 fun SingletonCoilImageLoader() {
     setSingletonImageLoaderFactory { context ->

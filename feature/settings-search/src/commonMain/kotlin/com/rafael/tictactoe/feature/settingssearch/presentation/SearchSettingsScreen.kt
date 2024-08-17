@@ -48,7 +48,6 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.semantics.isTraversalGroup
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.traversalIndex
-import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -72,8 +71,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-@ExperimentalMaterial3Api
-@ExperimentalTextApi
+@OptIn(ExperimentalMaterial3Api::class)
 fun SearchSettingsScreen(
     navController: NavController,
     searchState: SearchSettingsState,
@@ -248,7 +246,6 @@ fun SearchSettingsScreen(
 // @PreviewScreenSizes
 @Composable
 @ExperimentalMaterial3Api
-@ExperimentalTextApi
 private fun SearchSettingsScreenPreview() {
     AppTheme {
         SearchSettingsScreen(
