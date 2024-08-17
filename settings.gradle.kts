@@ -1,5 +1,8 @@
 @file:Suppress("UnstableApiUsage")
 
+include(":baselineprofile")
+
+
 rootProject.name = "TicTacToe-You"
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")

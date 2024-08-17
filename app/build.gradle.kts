@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.rafael.android.application.compose)
     alias(libs.plugins.rafael.spotless)
     alias(libs.plugins.licensee)
+    alias(libs.plugins.baselineprofile)
 }
 
 android {
@@ -119,6 +120,7 @@ kotlin {
             implementation(libs.androidx.core)
             implementation(libs.androidx.activity.compose)
             implementation(libs.androidx.core.splashscreen)
+            implementation(libs.androidx.profileinstaller)
         }
         androidUnitTest.dependencies {
             implementation(libs.junit)
@@ -137,4 +139,14 @@ kotlin {
             implementation(projects.core.resources)
         }
     }
+}
+
+dependencies {
+    baselineProfile(projects.baselineprofile)
+}
+
+baselineProfile {
+    // Don't build on every iteration of a full assemble.
+    // Instead enable generation directly for the release build variant.
+    automaticGenerationDuringBuild = false
 }
