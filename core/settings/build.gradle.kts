@@ -32,6 +32,7 @@ kotlin {
         }
     }
 }
+
 ksp {
     arg("room.schemaLocation", "$projectDir/schemas")
     arg("room.incremental", "true")

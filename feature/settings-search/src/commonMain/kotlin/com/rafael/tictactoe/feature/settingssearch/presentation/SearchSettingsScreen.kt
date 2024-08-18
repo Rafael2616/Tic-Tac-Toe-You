@@ -60,7 +60,6 @@ import com.rafael.tictactoe.core.resources.settings
 import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.core.ui.theme.AppTheme
-import com.rafael.tictactoe.feature.changelogs.presentation.components.WhatsNewDialog
 import com.rafael.tictactoe.feature.settings.domain.model.SettingItem
 import com.rafael.tictactoe.feature.settings.presentation.components.dialogs.BoardCustomizationDialog
 import com.rafael.tictactoe.feature.settings.presentation.components.dialogs.ColorSelectionDialog
@@ -221,13 +220,6 @@ fun SearchSettingsScreen(
 
     AnimatedVisibility(settingsState.showColorSelectionDialog) {
         ColorSelectionDialog(latestOnEvent, settingsState)
-    }
-
-    AnimatedVisibility(settingsState.showWhatsNewDialog) {
-        WhatsNewDialog(
-            latestOnEvent,
-            navController,
-        )
     }
 
     AnimatedVisibility(settingsState.showBoardCustomizationDialog) {
