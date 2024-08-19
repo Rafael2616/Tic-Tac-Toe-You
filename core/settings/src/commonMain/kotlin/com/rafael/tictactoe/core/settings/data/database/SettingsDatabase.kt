@@ -1,5 +1,6 @@
 package com.rafael.tictactoe.core.settings.data.database
 
+import androidx.room.ConstructedBy
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
@@ -13,6 +14,7 @@ import com.rafael.tictactoe.core.settings.domain.model.SettingsEntity
     version = 4,
     exportSchema = false,
 )
+@ConstructedBy(SettingsDatabaseConstructor::class)
 abstract class SettingsDatabase : RoomDatabase() {
 
     abstract fun settingsDao(): SettingsDao
