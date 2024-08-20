@@ -1,7 +1,10 @@
 package com.rafael.tictactoe.core.domain.util
 
-actual val VERSION_CODE: Int = 0
+import platform.Foundation.NSBundle
+
+actual val VERSION_CODE: Int =
+    (NSBundle.mainBundle.infoDictionary["CFBundleVersion"] as String? ?: "0").toInt()
 
 actual fun getVersionName(): String {
-    TODO(" getVersionName(): String Not yet implemented on IOS")
+    return NSBundle.mainBundle.infoDictionary["CFBundleShortVersionString"] as String? ?: ""
 }
