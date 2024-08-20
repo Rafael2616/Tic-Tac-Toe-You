@@ -14,8 +14,6 @@ kotlin {
             // Koin
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
-            // Ktor
-            implementation(libs.ktor.client.android)
         }
         commonMain.dependencies {
             // Kotlin
@@ -46,9 +44,6 @@ kotlin {
             implementation(projects.core.resources)
             implementation(projects.core.ui)
             implementation(projects.feature.settings)
-        }
-        iosMain.dependencies {
-            implementation(libs.ktor.client.ios)
         }
     }
 }

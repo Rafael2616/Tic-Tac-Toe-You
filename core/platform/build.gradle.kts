@@ -11,6 +11,8 @@ kotlin {
         androidMain.dependencies {
             // AndroidX
             implementation(libs.androidx.activity.compose)
+            // Ktor
+            implementation(libs.ktor.client.android)
         }
         commonMain.dependencies {
             // Kotlin
@@ -20,6 +22,8 @@ kotlin {
             // Moko
             api(libs.moko.permissions)
             api(libs.moko.permissions.compose)
+            // Ktor
+            api(libs.ktor.client.core)
             // Koin
             api(libs.koin.core)
             implementation(libs.koin.core.viewmodel)
@@ -27,6 +31,9 @@ kotlin {
             // Coil
             api(libs.coil.compose)
             api(libs.coil.compose.core)
+        }
+        iosMain.dependencies {
+            implementation(libs.ktor.client.ios)
         }
     }
 }
