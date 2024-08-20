@@ -11,7 +11,6 @@ import com.rafael.tictactoe.core.settings.domain.model.SettingsEntity
 import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.core.settings.domain.repository.SettingsRepository
-import com.rafael.tictactoe.feature.settings.data.utils.toBitmap
 import com.rafael.tictactoe.feature.settings.data.utils.toByteArray
 import com.rafael.tictactoe.feature.settings.domain.profile.ProfilePictureUtilsImpl
 import kotlinx.coroutines.Dispatchers
@@ -21,7 +20,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.decodeToImageBitmap
 
+@OptIn(ExperimentalResourceApi::class)
 class SettingsViewModel(
     private val repository: SettingsRepository,
 ) : ViewModel() {
@@ -59,7 +61,7 @@ class SettingsViewModel(
                     boardCardsBorderColor = Color(settings.boardCardsBorderColor.toLong(16)),
                     isRGBEffectOn = settings.isRGBEffectOn,
                     isGradientOn = settings.isGradientOn,
-                    profilePictureBitmap = settings.profilePicture?.toBitmap(),
+                    profilePictureBitmap = settings.profilePicture?.decodeToImageBitmap(),
                 )
             }
             backgroundMusic(
@@ -294,7 +296,7 @@ class SettingsViewModel(
                 settings.profilePicture = profileManager.getPictureBitmap(imageUri).toByteArray()
                 repository.setAllSettingsValues(settings)
                 _state.update {
-                    it.copy(profilePictureBitmap = settings.profilePicture?.toBitmap())
+                    it.copy(profilePictureBitmap = settings.profilePicture?.decodeToImageBitmap())
                 }
             }
         }
