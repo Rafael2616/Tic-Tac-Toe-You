@@ -1,10 +1,10 @@
-package com.rafael.tictactoe.core.platform.network.utils
+package com.rafael.tictactoe.core.domain.network
 
 // @author Philipp Lackner https://github.com/philipplackner
 
 sealed interface Result<out D, out E : Error> {
     data class Success<out D>(val data: D) : Result<D, Nothing>
-    data class Error<out E : com.rafael.tictactoe.core.platform.network.utils.Error>(val error: E) :
+    data class Error<out E : com.rafael.tictactoe.core.domain.network.Error>(val error: E) :
         Result<Nothing, E>
 }
 

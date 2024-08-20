@@ -37,8 +37,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.rafael.tictactoe.core.platform.network.utils.NetworkError
-import com.rafael.tictactoe.core.platform.network.utils.Result
+import com.rafael.tictactoe.core.domain.network.NetworkError
+import com.rafael.tictactoe.core.domain.network.Result
 import com.rafael.tictactoe.core.resources.Res
 import com.rafael.tictactoe.core.resources.cannot_find_player
 import com.rafael.tictactoe.core.resources.connection_error

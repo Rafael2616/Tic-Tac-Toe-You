@@ -1,7 +1,7 @@
 package com.rafael.tictactoe.feature.game.domain.repository
 
-import com.rafael.tictactoe.core.platform.network.utils.Error
-import com.rafael.tictactoe.core.platform.network.utils.Result
+import com.rafael.tictactoe.core.domain.network.Error
+import com.rafael.tictactoe.core.domain.network.Result
 import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.game.domain.model.GameState
 import com.rafael.tictactoe.feature.game.domain.model.OnlineGameState

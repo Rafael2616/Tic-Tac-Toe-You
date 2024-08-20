@@ -2,9 +2,9 @@ package com.rafael.tictactoe.feature.game.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.rafael.tictactoe.core.domain.network.onSuccess
 import com.rafael.tictactoe.core.domain.util.toColor
 import com.rafael.tictactoe.core.game.domain.model.GameMode
-import com.rafael.tictactoe.core.platform.network.utils.onSuccess
 import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.game.domain.audio.cardGridSound
