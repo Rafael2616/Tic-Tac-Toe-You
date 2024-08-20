@@ -45,7 +45,7 @@ internal fun Project.configureKotlinMultiplatform(
     }
 
     plugins.withId("org.jetbrains.kotlin.multiplatform") {
-        extensions.configure<KotlinMultiplatformExtension> {
+        kotlinMultiplatformExtension {
 
             val isAndroidApp = plugins.hasPlugin("com.android.application")
             val isAndroidLibrary = plugins.hasPlugin("com.android.library")
@@ -65,7 +65,7 @@ internal fun Project.configureKotlinMultiplatform(
             listOf(
                 iosX64(),
                 iosArm64(),
-                iosSimulatorArm64()
+                iosSimulatorArm64(),
             ).forEach { iosTarget ->
                 iosTarget.binaries.framework {
                     baseName = this@configureKotlinMultiplatform.name
@@ -80,6 +80,10 @@ internal fun Project.configureKotlinMultiplatform(
             }
         }
     }
+}
+
+fun Project.kotlinMultiplatformExtension(block: KotlinMultiplatformExtension.() -> Unit) {
+    extensions.configure<KotlinMultiplatformExtension>(block)
 }
 
 val Project.javaVersion: JavaVersion
