@@ -12,9 +12,9 @@ class LifecycleEventsHandler {
     companion object {
         @Composable
         fun Handle(
-            onStop: () -> Unit,
-            onResume: () -> Unit,
-            onDestroy: () -> Unit,
+            onStop: () -> Unit = {},
+            onResume: () -> Unit = {},
+            onDestroy: () -> Unit = {},
         ) {
             val lifecycleOwner = LocalLifecycleOwner.current
             val latestOnStop by rememberUpdatedState(onStop)
