@@ -18,7 +18,8 @@ kotlin {
             // Kotlin
             implementation(libs.kotlinx.datetime)
             // AndroidX
-            implementation(libs.androidx.viewmodel.compose)
+            implementation(libs.jetbrains.viewmodel.compose)
+            implementation(libs.jetbrains.lifecyle.compose)
             // Moko
             api(libs.moko.permissions)
             api(libs.moko.permissions.compose)
