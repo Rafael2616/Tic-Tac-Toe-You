@@ -15,8 +15,6 @@ room {
 kotlin {
     sourceSets {
         androidMain.dependencies {
-            // Room
-            implementation(libs.androidx.room.ktx)
             // Koin
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
