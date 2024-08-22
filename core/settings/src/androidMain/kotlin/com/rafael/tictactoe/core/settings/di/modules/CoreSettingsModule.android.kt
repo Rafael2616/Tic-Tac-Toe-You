@@ -16,9 +16,9 @@ actual val coreSettingsModule: Module = module {
             SettingsDatabase.DATABASE_NAME,
         )
             .addMigrations(
-                Migrations().migration1To2,
-                Migrations().migration2To3,
-                Migrations().migration3To4,
+                Migrations.migration1To2,
+                Migrations.migration2To3,
+                Migrations.migration3To4,
             )
             .fallbackToDestructiveMigration(true)
             .build()
