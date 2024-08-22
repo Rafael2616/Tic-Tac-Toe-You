@@ -65,8 +65,8 @@ fun MainScreen(
     mainState: MainState,
     onRedirectToGameModes: (Boolean) -> Unit,
     onSettingsEvent: (SettingsEvent) -> Unit,
-    currentChangelog: Changelog? = null,
     modifier: Modifier = Modifier,
+    currentChangelog: Changelog? = null,
     destination: Destinations? = null,
 ) {
     val items = listOf(

@@ -9,24 +9,24 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class ChangelogsViewModel : ViewModel() {
-    private var _allChangelogs = MutableStateFlow(listOf(Changelog()))
-    private var _currentChangelog = MutableStateFlow(Changelog())
+    private var allChangelogs = MutableStateFlow(listOf(Changelog()))
+    private var currentChangelog = MutableStateFlow(Changelog())
 
     fun getCurrent(): Changelog {
         viewModelScope.launch {
-            _currentChangelog.update {
+            currentChangelog.update {
                 ChangelogGetter.getCurrent()
             }
         }
-        return _currentChangelog.value
+        return currentChangelog.value
     }
 
     fun getAll(): List<Changelog> {
         viewModelScope.launch {
-            _allChangelogs.update {
+            allChangelogs.update {
                 ChangelogGetter.getAll()
             }
         }
-        return _allChangelogs.value
+        return allChangelogs.value
     }
 }

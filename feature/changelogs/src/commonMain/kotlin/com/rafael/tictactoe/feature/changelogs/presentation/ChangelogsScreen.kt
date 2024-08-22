@@ -136,9 +136,13 @@ fun ChangelogsScreen(
                             ),
                         ) {
                             Text(
-                                text = "v" + if (currentVersion == version) version + " - " + stringResource(
-                                    Res.string.current,
-                                ) else version,
+                                text = "v" + if (currentVersion == version) {
+                                    version + " - " + stringResource(
+                                        Res.string.current,
+                                    )
+                                } else {
+                                    version
+                                },
                                 style = MaterialTheme.typography.titleLarge.copy(
                                     fontWeight = FontWeight.Bold,
                                 ),
