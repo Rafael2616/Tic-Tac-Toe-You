@@ -78,6 +78,7 @@ internal fun DifficultyLevelSwitcher(
                 onClick = {
                     if (!state.isGameFinished && state.isCardClicked.flatten().any { it }) {
                         scope.launch {
+                            snackbarHostState.currentSnackbarData?.dismiss()
                             snackbarHostState.showSnackbar(snackbarMessage)
                         }
                     } else {
