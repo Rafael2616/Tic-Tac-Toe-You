@@ -1,8 +1,0 @@
-Fixes:
- - fix permission issues in recent Android versions preventing profile picture functionality to work
-
-Code:
- - Support Kotlin and Compose multiplatform
- https://github.com/Rafael2616/Tic-Tac-Toe-You/commit/e15417b5b7f0c8e9ed9d4e840ec6175c4793f097
- - Bump all dependencies to their latest versions
- - Code optimizations, refactors and cleanups

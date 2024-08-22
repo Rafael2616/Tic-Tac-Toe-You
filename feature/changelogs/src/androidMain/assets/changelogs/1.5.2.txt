@@ -1,5 +1,0 @@
-Added:
-- You can now select an picture for your settings screen top bar
-
-Improvements:
-- Updated dependencies

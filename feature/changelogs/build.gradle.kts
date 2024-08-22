@@ -20,3 +20,9 @@ kotlin {
         }
     }
 }
+
+compose.resources {
+    publicResClass = true
+    packageOfResClass = "com.rafael.tictactoe.feature.changelogs"
+    generateResClass = always
+}

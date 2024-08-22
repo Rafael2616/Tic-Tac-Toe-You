@@ -25,6 +25,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -47,7 +48,7 @@ import com.rafael.tictactoe.core.resources.update_history
 import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.core.ui.theme.AppTheme
-import com.rafael.tictactoe.feature.changelogs.data.getChangelogFiles
+import com.rafael.tictactoe.feature.changelogs.data.ChangelogGetter
 import com.rafael.tictactoe.feature.changelogs.presentation.components.WhatsNewDialog
 import com.rafael.tictactoe.feature.changelogs.presentation.util.styledChangelog
 import org.jetbrains.compose.resources.stringResource
@@ -59,7 +60,7 @@ fun ChangelogsScreen(
     navController: NavController,
     settingsState: SettingsState,
     modifier: Modifier = Modifier,
-    changelogs: List<Pair<String, String>> = getChangelogFiles(),
+    changelogs: List<Pair<String, String>> = emptyList(),
     onEvent: (SettingsEvent) -> Unit,
 ) {
     var isGoBackClicked by rememberSaveable { mutableStateOf(false) }
@@ -68,6 +69,11 @@ fun ChangelogsScreen(
     val currentVersion = if (version.contains("-")) version.split("-")[0] else version
     val uriHandler = LocalUriHandler.current
     val layoutResult = remember { mutableStateOf<TextLayoutResult?>(null) }
+    var allChangelogs by remember { mutableStateOf(changelogs) }
+
+    LaunchedEffect(Unit) {
+        allChangelogs = ChangelogGetter.getAll()
+    }
 
     Scaffold(
         modifier = modifier
@@ -116,7 +122,7 @@ fun ChangelogsScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterVertically),
         ) {
-            changelogs.forEach { (version, changelog) ->
+            allChangelogs.forEach { (version, changelog) ->
                 val styledChangelog = styledChangelog(changelog)
                 Card(
                     modifier = Modifier

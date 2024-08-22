@@ -1,2 +1,0 @@
-Improvements:
-- This is a quality of life update that only adds improvements behind code related to performance and minor tweaks for UI
