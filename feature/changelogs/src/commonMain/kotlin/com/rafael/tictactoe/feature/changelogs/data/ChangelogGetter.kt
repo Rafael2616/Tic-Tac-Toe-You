@@ -18,7 +18,7 @@ internal class ChangelogGetter {
             val correctedVariant = if (variant != "") "" else variant
             var changelogContent: Pair<String, String> = Pair("", "")
             try {
-                Res.readBytes("files/assets/changelogs/$versionNumber$correctedVariant.txt").also {
+                Res.readBytes("files/changelogs/$versionNumber$correctedVariant.txt").also {
                     changelogContent = Pair(versionNumber, it.decodeToString())
                 }
             } catch (e: MissingResourceException) {
@@ -41,12 +41,12 @@ internal class ChangelogGetter {
 
             try {
                 (Dispatchers.IO) {
-                    Res.readBytes("files/assets/changelogs/fileIndex.txt")
+                    Res.readBytes("files/changelogs/fileIndex.txt")
                         .decodeToString()
                         .split("\n")
                         .map { it.trim() }
                         .forEach { changelogFileName ->
-                            Res.readBytes("files/assets/changelogs/$changelogFileName")
+                            Res.readBytes("files/changelogs/$changelogFileName")
                                 .decodeToString()
                                 .also { changelogContent ->
                                     changelogFiles.add(changelogFileName.removeSuffix(".txt") to changelogContent)
