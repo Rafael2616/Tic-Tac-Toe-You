@@ -108,13 +108,13 @@ fun TicTacToeNavGraph(
                         val gameState by gameViewModel.state.collectAsStateWithLifecycle()
                         val onGameEvent = gameViewModel::onEvent
                         GameScreen(
-                            navController = navController,
                             gameMode = args.gameMode,
                             gameState = gameState,
                             settingsState = settingsState,
                             onGameEvent = onGameEvent,
                             onSettingsEvent = onSettingsEvent,
                             onUpdateSettingsState = gameViewModel::updateSettingsState,
+                            popBackStack = navController::popBackStack,
                         )
                     }
                     composable<Settings> {
@@ -132,8 +132,8 @@ fun TicTacToeNavGraph(
                         val libraryViewModel = koinViewModel<LibraryViewModel>()
                         val libraries by libraryViewModel.ossLibraries.collectAsStateWithLifecycle()
                         LibraryScreen(
-                            navController = navController,
                             libraries = libraries,
+                            popBackStack = navController::popBackStack,
                         )
                     }
                     composable<SettingsSearch> {

@@ -22,8 +22,6 @@ kotlin {
             implementation(libs.kotlinx.collections.immutable)
             // AndroidX
             implementation(libs.androidx.annotation)
-            // Navigation
-            implementation(libs.androidx.navigation.compose)
             // Media3
             implementation(libs.androidx.media3.common)
             implementation(libs.androidx.media3.exoplayer)

@@ -18,7 +18,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.rafael.tictactoe.core.resources.Res
 import com.rafael.tictactoe.core.resources.leave
 import com.rafael.tictactoe.core.resources.leave_game_description
@@ -30,9 +29,9 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun ExitGameDialog(
-    navController: NavController,
     onEvent: (GameEvent) -> Unit,
     onSettingsEvent: (SettingsEvent) -> Unit,
+    popBackStack: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     var isExitClicked by rememberSaveable { mutableStateOf(false) }
@@ -67,7 +66,7 @@ internal fun ExitGameDialog(
                     if (!isExitClicked) {
                         isExitClicked = true
                         onEvent(GameEvent.ExitGame(onSettingsEvent))
-                        navController.popBackStack()
+                        popBackStack()
                     }
                 },
             ) {

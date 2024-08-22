@@ -118,7 +118,7 @@ fun ChangelogsScreen(
             verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterVertically),
         ) {
             allChangelogs.forEach { (version, changes) ->
-                if (!version.isBlank() || !changes.isEmpty()) {
+                if (version.isNotBlank() || changes.isNotEmpty()) {
                     val styledChangelog = styledChangelog(changes)
                     Card(
                         modifier = Modifier
@@ -137,7 +137,7 @@ fun ChangelogsScreen(
                         ) {
                             Text(
                                 text = "v" + if (currentVersion == version) {
-                                    version + " - " + stringResource(
+                                    "$version - " + stringResource(
                                         Res.string.current,
                                     )
                                 } else {

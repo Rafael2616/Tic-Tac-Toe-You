@@ -38,8 +38,6 @@ import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.rafael.tictactoe.core.resources.Res
 import com.rafael.tictactoe.core.resources.open_source_licenses
 import com.rafael.tictactoe.core.ui.theme.AppTheme
@@ -51,8 +49,8 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun LibraryScreen(
-    navController: NavController,
     libraries: List<OssLibrary>,
+    popBackStack: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val uriHandler = LocalUriHandler.current
@@ -74,7 +72,7 @@ fun LibraryScreen(
                         onClick = {
                             if (!isGoBackClicked) {
                                 isGoBackClicked = true
-                                navController.popBackStack()
+                                popBackStack()
                             }
                         },
                     ) {
@@ -164,7 +162,6 @@ fun LibraryScreen(
 private fun LibraryScreenPreview() {
     AppTheme {
         LibraryScreen(
-            navController = rememberNavController(),
             libraries = listOf(
                 OssLibrary(
                     name = "Compose",
@@ -189,6 +186,7 @@ private fun LibraryScreenPreview() {
                     ),
                 ),
             ),
+            popBackStack = {},
         )
     }
 }

@@ -13,8 +13,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.rafael.tictactoe.core.game.domain.model.GameMode
 import com.rafael.tictactoe.core.platform.presentation.OnBack
 import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
@@ -39,13 +37,13 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun GameScreen(
-    navController: NavController,
     gameMode: GameMode,
     gameState: GameState,
     settingsState: SettingsState,
     onGameEvent: (GameEvent) -> Unit,
     onSettingsEvent: (SettingsEvent) -> Unit,
     onUpdateSettingsState: (SettingsState) -> Unit,
+    popBackStack: () -> Unit,
 ) {
     val latestOnSettingsEvent by rememberUpdatedState(onSettingsEvent)
     val latestOnGameEvent by rememberUpdatedState(onGameEvent)
@@ -138,9 +136,9 @@ fun GameScreen(
 
     AnimatedVisibility(gameState.showExitGameDialog) {
         ExitGameDialog(
-            navController,
             latestOnGameEvent,
             latestOnSettingsEvent,
+            popBackStack,
         )
     }
 
@@ -164,13 +162,13 @@ fun GameScreen(
 private fun GameScreenPreview() {
     AppTheme {
         GameScreen(
-            navController = rememberNavController(),
             gameMode = GameMode.PvP,
             gameState = GameState(),
             settingsState = SettingsState(),
             onGameEvent = {},
             onSettingsEvent = {},
             onUpdateSettingsState = {},
+            popBackStack = {},
         )
     }
 }
