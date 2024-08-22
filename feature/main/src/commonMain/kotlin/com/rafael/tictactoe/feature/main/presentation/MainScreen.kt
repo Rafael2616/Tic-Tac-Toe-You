@@ -51,6 +51,7 @@ import com.rafael.tictactoe.core.resources.vs_cpu
 import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.core.ui.theme.AppTheme
+import com.rafael.tictactoe.feature.changelogs.domain.Changelog
 import com.rafael.tictactoe.feature.changelogs.presentation.components.WhatsNewDialog
 import com.rafael.tictactoe.feature.main.domain.model.MainState
 import com.rafael.tictactoe.feature.main.domain.model.ScreenItem
@@ -64,6 +65,7 @@ fun MainScreen(
     mainState: MainState,
     onRedirectToGameModes: (Boolean) -> Unit,
     onSettingsEvent: (SettingsEvent) -> Unit,
+    currentChangelog: Changelog? = null,
     modifier: Modifier = Modifier,
     destination: Destinations? = null,
 ) {
@@ -170,10 +172,13 @@ fun MainScreen(
     }
 
     AnimatedVisibility(state.showWhatsNewDialog) {
-        WhatsNewDialog(
-            onSettingsEvent,
-            navController,
-        )
+        currentChangelog?.let {
+            WhatsNewDialog(
+                currentChangelog = it,
+                onEvent = onSettingsEvent,
+                navController = navController,
+            )
+        }
     }
 
     /**

@@ -11,6 +11,9 @@ kotlin {
         commonMain.dependencies {
             // Navigation
             implementation(libs.androidx.navigation.compose)
+            // Koin
+            implementation(libs.koin.core)
+            implementation(libs.koin.core.viewmodel)
             // Projects
             implementation(projects.core.domain)
             implementation(projects.core.navigation)

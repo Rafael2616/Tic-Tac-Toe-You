@@ -18,11 +18,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -34,26 +29,17 @@ import com.rafael.tictactoe.core.resources.close
 import com.rafael.tictactoe.core.resources.see_history
 import com.rafael.tictactoe.core.resources.whats_new
 import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
-import com.rafael.tictactoe.feature.changelogs.data.ChangelogGetter
+import com.rafael.tictactoe.feature.changelogs.domain.Changelog
 import com.rafael.tictactoe.feature.changelogs.presentation.util.styledChangelog
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun WhatsNewDialog(
+    currentChangelog: Changelog,
     onEvent: (SettingsEvent) -> Unit,
     navController: NavController,
     modifier: Modifier = Modifier,
 ) {
-    var versionNumber by remember { mutableStateOf("") }
-    var changelog by remember { mutableStateOf("") }
-
-    LaunchedEffect(Unit) {
-        ChangelogGetter.getCurrent().also {
-            versionNumber = it.first
-            changelog = it.second
-        }
-    }
-
     AlertDialog(
         onDismissRequest = {
             onEvent(SettingsEvent.HideWhatsNewDialog)
@@ -69,7 +55,7 @@ fun WhatsNewDialog(
         },
         title = {
             Text(
-                text = stringResource(Res.string.whats_new) + " v$versionNumber",
+                text = stringResource(Res.string.whats_new) + " v${currentChangelog.version}",
                 style = MaterialTheme.typography.titleLarge,
             )
         },
@@ -80,7 +66,7 @@ fun WhatsNewDialog(
                     .verticalScroll(rememberScrollState()),
             ) {
                 Text(
-                    text = styledChangelog(changelog),
+                    text = styledChangelog(currentChangelog.changes),
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.inverseSurface,
                     textAlign = TextAlign.Start,

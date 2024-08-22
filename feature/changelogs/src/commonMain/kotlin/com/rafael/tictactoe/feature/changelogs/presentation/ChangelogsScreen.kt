@@ -25,7 +25,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -48,7 +47,7 @@ import com.rafael.tictactoe.core.resources.update_history
 import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.core.ui.theme.AppTheme
-import com.rafael.tictactoe.feature.changelogs.data.ChangelogGetter
+import com.rafael.tictactoe.feature.changelogs.domain.Changelog
 import com.rafael.tictactoe.feature.changelogs.presentation.components.WhatsNewDialog
 import com.rafael.tictactoe.feature.changelogs.presentation.util.styledChangelog
 import org.jetbrains.compose.resources.stringResource
@@ -59,8 +58,9 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun ChangelogsScreen(
     navController: NavController,
     settingsState: SettingsState,
+    allChangelogs: List<Changelog>,
+    currentChangelog: Changelog,
     modifier: Modifier = Modifier,
-    changelogs: List<Pair<String, String>> = emptyList(),
     onEvent: (SettingsEvent) -> Unit,
 ) {
     var isGoBackClicked by rememberSaveable { mutableStateOf(false) }
@@ -69,11 +69,6 @@ fun ChangelogsScreen(
     val currentVersion = if (version.contains("-")) version.split("-")[0] else version
     val uriHandler = LocalUriHandler.current
     val layoutResult = remember { mutableStateOf<TextLayoutResult?>(null) }
-    var allChangelogs by remember { mutableStateOf(changelogs) }
-
-    LaunchedEffect(Unit) {
-        allChangelogs = ChangelogGetter.getAll()
-    }
 
     Scaffold(
         modifier = modifier
@@ -122,45 +117,58 @@ fun ChangelogsScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterVertically),
         ) {
-            allChangelogs.forEach { (version, changelog) ->
-                val styledChangelog = styledChangelog(changelog)
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .wrapContentHeight(),
-                    colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp),
-                    ),
-                ) {
-                    Column(
-                        modifier = Modifier.padding(16.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
+            allChangelogs.forEach { (version, changes) ->
+                if (!version.isBlank() || !changes.isEmpty()) {
+                    val styledChangelog = styledChangelog(changes)
+                    Card(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .wrapContentHeight(),
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(10.dp),
+                        ),
                     ) {
-                        Text(
-                            text = "v" + if (currentVersion == version) version + " - " + stringResource(Res.string.current) else version,
-                            style = MaterialTheme.typography.titleLarge.copy(
-                                fontWeight = FontWeight.Bold,
+                        Column(
+                            modifier = Modifier.padding(16.dp),
+                            verticalArrangement = Arrangement.spacedBy(
+                                8.dp,
+                                Alignment.CenterVertically,
                             ),
-                        )
-                        Text(
-                            text = styledChangelog,
-                            modifier = Modifier
-                                .pointerInput(Unit) {
-                                    detectTapGestures { pos ->
-                                        layoutResult.value?.let { layoutResult ->
-                                            val position = layoutResult.getOffsetForPosition(pos)
-                                            val link = styledChangelog.getStringAnnotations(position, position).firstOrNull()
-                                            if (link?.tag == "URL") {
-                                                uriHandler.openUri(link.item)
+                        ) {
+                            Text(
+                                text = "v" + if (currentVersion == version) version + " - " + stringResource(
+                                    Res.string.current,
+                                ) else version,
+                                style = MaterialTheme.typography.titleLarge.copy(
+                                    fontWeight = FontWeight.Bold,
+                                ),
+                            )
+                            Text(
+                                text = styledChangelog,
+                                modifier = Modifier
+                                    .pointerInput(Unit) {
+                                        detectTapGestures { pos ->
+                                            layoutResult.value?.let { layoutResult ->
+                                                val position =
+                                                    layoutResult.getOffsetForPosition(pos)
+                                                val link = styledChangelog.getStringAnnotations(
+                                                    position,
+                                                    position,
+                                                ).firstOrNull()
+                                                if (link?.tag == "URL") {
+                                                    uriHandler.openUri(link.item)
+                                                }
                                             }
                                         }
-                                    }
+                                    },
+                                onTextLayout = {
+                                    layoutResult.value = it
                                 },
-                            onTextLayout = {
-                                layoutResult.value = it
-                            },
-                        )
+                            )
+                        }
                     }
+                } else {
+                    Text("Loading...")
                 }
             }
         }
@@ -168,6 +176,7 @@ fun ChangelogsScreen(
 
     AnimatedVisibility(settingsState.showWhatsNewDialog) {
         WhatsNewDialog(
+            currentChangelog,
             onEvent,
             navController,
         )
@@ -183,16 +192,17 @@ private fun ChangelogsScreenPreview() {
     AppTheme {
         ChangelogsScreen(
             navController = rememberNavController(),
-            changelogs = listOf(
-                Pair("1.0.0", "Initial release"),
-                Pair("1.0.1", "Fixes: fix one issue"),
-                Pair(
+            allChangelogs = listOf(
+                Changelog("1.0.0", "Initial release"),
+                Changelog("1.0.1", "Fixes: fix one issue"),
+                Changelog(
                     "1.0.2",
                     "" +
                         "Added: add new feature" +
                         "\nhttps://test.com.br/",
                 ),
             ),
+            currentChangelog = Changelog(),
             settingsState = SettingsState(),
             onEvent = {},
         )

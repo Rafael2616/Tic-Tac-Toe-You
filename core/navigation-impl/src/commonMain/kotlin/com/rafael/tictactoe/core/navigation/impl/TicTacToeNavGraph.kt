@@ -28,6 +28,7 @@ import com.rafael.tictactoe.core.platform.permissions.PermissionsViewModel
 import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.core.ui.theme.AppTheme
 import com.rafael.tictactoe.feature.changelogs.presentation.ChangelogsScreen
+import com.rafael.tictactoe.feature.changelogs.presentation.viewmodel.ChangelogsViewModel
 import com.rafael.tictactoe.feature.game.presentation.GameScreen
 import com.rafael.tictactoe.feature.game.presentation.viewmodel.GameViewModel
 import com.rafael.tictactoe.feature.libraryinfo.presentation.LibraryScreen
@@ -68,6 +69,8 @@ fun TicTacToeNavGraph(
         val settingsViewModel = koinViewModel<SettingsViewModel>()
         val settingsState by settingsViewModel.state.collectAsStateWithLifecycle()
         val onSettingsEvent = settingsViewModel::onEvent
+        val changelogsViewModel = koinViewModel<ChangelogsViewModel>()
+        val currentChangelog = changelogsViewModel.getCurrent()
 
         AppTheme(
             state = settingsState,
@@ -94,6 +97,7 @@ fun TicTacToeNavGraph(
                             mainState = mainState,
                             onSettingsEvent = onSettingsEvent,
                             onRedirectToGameModes = mainViewModel::canRedirectToAnGameModeScreen,
+                            currentChangelog = currentChangelog,
                         )
                     }
                     composable<Game>(
@@ -145,9 +149,12 @@ fun TicTacToeNavGraph(
                         )
                     }
                     composable<Changelogs> {
+                        val allChangelogs = changelogsViewModel.getAll()
                         ChangelogsScreen(
                             navController = navController,
                             settingsState = settingsState,
+                            allChangelogs = allChangelogs,
+                            currentChangelog = currentChangelog,
                             onEvent = onSettingsEvent,
                         )
                     }
