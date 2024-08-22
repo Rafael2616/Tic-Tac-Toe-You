@@ -1,0 +1,14 @@
+Added:
+- Search feature for settings
+- Long press shortcuts to game modes
+
+Fixes:
+- Fix infinite loading in online match mode
+- Fix subtitle cropping in landscape mode
+
+Improvements:
+- Update style for color selection dialog
+
+Code:
+- Rewrite code in various places
+- Bump deps to upstream

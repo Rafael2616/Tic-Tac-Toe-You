@@ -22,7 +22,7 @@ kotlin {
 }
 
 compose.resources {
-    publicResClass = true
+    publicResClass = false
     packageOfResClass = "com.rafael.tictactoe.feature.changelogs"
     generateResClass = always
 }
