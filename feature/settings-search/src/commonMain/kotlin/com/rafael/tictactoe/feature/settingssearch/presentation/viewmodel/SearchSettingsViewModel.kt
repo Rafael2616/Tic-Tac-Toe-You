@@ -62,7 +62,12 @@ class SearchSettingsViewModel : ViewModel() {
                 }
             }
             SearchSettingsEvent.ResetQuery -> {
-                _state.update { it.copy(query = "") }
+                _state.update {
+                    it.copy(
+                        query = "",
+                        matchingSettings = emptyList(),
+                    )
+                }
             }
         }
     }
