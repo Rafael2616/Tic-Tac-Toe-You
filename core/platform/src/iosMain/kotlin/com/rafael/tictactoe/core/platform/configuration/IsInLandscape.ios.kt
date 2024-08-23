@@ -1,4 +1,8 @@
 package com.rafael.tictactoe.core.platform.configuration
 
+import platform.UIKit.UIDevice
+import platform.UIKit.UIDeviceOrientation
+
 actual val isInLandscape: Boolean
-    get() = TODO("isInLandscape: Boolean Not yet implemented on IOS")
+    get() = UIDevice.currentDevice.orientation ==
+        (UIDeviceOrientation.UIDeviceOrientationLandscapeLeft || UIDeviceOrientation.UIDeviceOrientationLandscapeRight)

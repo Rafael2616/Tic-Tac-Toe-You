@@ -20,6 +20,7 @@ kotlin {
             // AndroidX
             implementation(libs.jetbrains.viewmodel.compose)
             implementation(libs.jetbrains.lifecyle.compose)
+            implementation(libs.androidx.core)
             // Moko
             api(libs.moko.permissions)
             api(libs.moko.permissions.compose)
