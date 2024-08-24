@@ -1,12 +1,13 @@
 package com.rafael.tictactoe.feature.game.domain.model
 
+import com.rafael.tictactoe.core.domain.model.Event
 import com.rafael.tictactoe.core.domain.network.Error
 import com.rafael.tictactoe.core.domain.network.Result
 import com.rafael.tictactoe.core.game.domain.model.GameMode
 import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.feature.game.domain.repository.ErrorMessage
 
-sealed interface GameEvent {
+sealed interface GameEvent : Event {
     data class SetGameMode(val mode: GameMode) : GameEvent
     data class GetFirstPlayerName(val name: String) : GameEvent
     data class GetSecondPlayerName(val name: String) : GameEvent

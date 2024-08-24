@@ -1,9 +1,10 @@
 package com.rafael.tictactoe.core.settings.domain.model
 
 import androidx.compose.ui.graphics.Color
+import com.rafael.tictactoe.core.domain.model.Event
 import com.rafael.tictactoe.core.settings.domain.enums.Customization
 
-sealed interface SettingsEvent {
+sealed interface SettingsEvent : Event {
     data object ToggleIsBackgroundMusicOn : SettingsEvent
     data object ToggleIsSoundEffectsOn : SettingsEvent
     data object ToggleIsDarkThemeOn : SettingsEvent
