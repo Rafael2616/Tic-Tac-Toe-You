@@ -21,10 +21,3 @@ plugins {
     alias(libs.plugins.rafael.application).apply(false)
     alias(libs.plugins.rafael.application.compose).apply(false)
 }
-
-configurations.all {
-    resolutionStrategy {
-        force("org.bouncycastle:bcpkix-jdk18on:1.78.1")
-        force("org.bouncycastle:bcprov-jdk18on:1.78.1")
-    }
-}
