@@ -6,7 +6,7 @@ Fixes:
  - fix "whats new" dialog not showing the changelog, only and blank screen
 
 Improvements:
- - dismiss the previous snackbar if is active before showing and new snackbar when trying to change the game mode during one match in vs CPU match
+ - dismiss the previous snackbar if is active before showing an new snackbar when trying to change the game mode during match in vs CPU match
 
 Code:
  - update dependencies

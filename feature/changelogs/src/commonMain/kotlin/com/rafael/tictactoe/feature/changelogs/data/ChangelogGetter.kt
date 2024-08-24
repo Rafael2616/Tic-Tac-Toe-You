@@ -20,9 +20,12 @@ internal class ChangelogGetter {
             var changelogContent = Changelog()
             try {
                 (Dispatchers.IO) {
-                    Res.readBytes("files/changelogs/$versionNumber$correctedVariant.txt").also {
+                    Res.readBytes("files/changelogs/$versionNumber$correctedVariant.txt")
+                        .decodeToString()
+                        .trim()
+                        .also {
                         if (it.isNotEmpty()) {
-                            changelogContent = Changelog(versionNumber, it.decodeToString())
+                            changelogContent = Changelog(versionNumber, it)
                         }
                     }
                 }
@@ -54,6 +57,7 @@ internal class ChangelogGetter {
                         .forEach { changelogFileName ->
                             Res.readBytes("files/changelogs/$changelogFileName")
                                 .decodeToString()
+                                .trim()
                                 .also { changelogContent ->
                                     changelogFiles.add(
                                         Changelog(
