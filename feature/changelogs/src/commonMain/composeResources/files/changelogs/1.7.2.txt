@@ -1,0 +1,13 @@
+This release fix 2 regressions that occurs after kotlin/compose multiplatform project migration
+
+Fixes:
+ - fix an regression that cause settings items to not be centered on the screen
+ - fix an regression that cause search bar "clear" button not cleaning the settings when clicked
+ - fix "whats new" dialog not showing the changelog, only and blank screen
+
+Improvements:
+ - dismiss the previous snackbar if is active before showing and new snackbar when trying to change the game mode during one match in vs CPU match
+
+Code:
+ - update dependencies
+ - commonize some methods to make iOS compatibility more closer
