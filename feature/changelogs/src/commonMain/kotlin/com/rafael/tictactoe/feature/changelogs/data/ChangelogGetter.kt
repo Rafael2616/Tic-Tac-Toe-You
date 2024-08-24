@@ -24,10 +24,10 @@ internal class ChangelogGetter {
                         .decodeToString()
                         .trim()
                         .also {
-                        if (it.isNotEmpty()) {
-                            changelogContent = Changelog(versionNumber, it)
+                            if (it.isNotEmpty()) {
+                                changelogContent = Changelog(versionNumber, it)
+                            }
                         }
-                    }
                 }
             } catch (e: MissingResourceException) {
                 e.printStackTrace()
