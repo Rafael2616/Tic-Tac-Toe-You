@@ -63,7 +63,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build Desktop App
-        run: ./gradlew Tic-Tac-Toe-You:app:jvmRun -DmainClass=com.rafael.tictactoe.MainKt --quiet
+        run: ./gradlew app:jvmRun -DmainClass=com.rafael.tictactoe.MainKt --quiet
 
   check-kotlin-style:
     runs-on: ubuntu-latest
