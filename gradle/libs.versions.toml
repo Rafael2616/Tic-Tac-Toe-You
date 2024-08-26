@@ -8,7 +8,7 @@ javaVersion = "17"
 
 # Plugins
 agp = "8.5.2"
-spotless = "7.0.0.BETA1"
+spotless = "7.0.0.BETA2"
 ksp = "2.0.20-1.0.24"
 kotlin = "2.0.20"
 licensee = "1.11.0"
