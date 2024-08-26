@@ -28,11 +28,9 @@ internal class AndroidProfilePictureUtils : ProfilePictureUtils {
         return bitmap!!.asImageBitmap()
     }
 
-    private fun compressionFormat(extension: String?): CompressFormat {
-        return when (extension) {
-            "jpg", "jpeg" -> CompressFormat.JPEG
-            "png" -> CompressFormat.PNG
-            else -> CompressFormat.JPEG
-        }
+    private fun compressionFormat(extension: String?): CompressFormat = when (extension) {
+        "jpg", "jpeg" -> CompressFormat.JPEG
+        "png" -> CompressFormat.PNG
+        else -> CompressFormat.JPEG
     }
 }

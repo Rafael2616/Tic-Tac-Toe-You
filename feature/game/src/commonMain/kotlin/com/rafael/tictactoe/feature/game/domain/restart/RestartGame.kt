@@ -32,9 +32,7 @@ class RestartGame {
      * Defines which player will start the new match based on factors such as;
      * if there have been past winners and who was the last winner
      */
-    fun resetPlayer(state: GameState): Boolean {
-        return resetXImage(state) == state.isXFor1
-    }
+    fun resetPlayer(state: GameState): Boolean = resetXImage(state) == state.isXFor1
 
     fun resetIsPlayerCPU(state: GameState): Boolean {
         val is1Win = state.is1Win

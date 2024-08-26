@@ -146,9 +146,7 @@ internal class ScrollStateController(
         }
     }
 
-    override fun indicatorValue(): Float {
-        return offsetCorrectionInverse(thumbOffsetNormalized.value)
-    }
+    override fun indicatorValue(): Float = offsetCorrectionInverse(thumbOffsetNormalized.value)
 
     private fun offsetCorrectionInverse(top: Float): Float {
         val topRealMax = 1f

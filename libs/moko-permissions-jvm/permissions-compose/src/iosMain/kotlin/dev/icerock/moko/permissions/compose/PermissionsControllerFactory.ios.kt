@@ -8,10 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 
 @Composable
-actual fun rememberPermissionsControllerFactory(): PermissionsControllerFactory {
-    return remember {
-        PermissionsControllerFactory {
-            dev.icerock.moko.permissions.ios.PermissionsController()
-        }
+actual fun rememberPermissionsControllerFactory(): PermissionsControllerFactory = remember {
+    PermissionsControllerFactory {
+        dev.icerock.moko.permissions.ios.PermissionsController()
     }
 }

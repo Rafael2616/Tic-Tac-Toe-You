@@ -18,10 +18,8 @@ actual interface PermissionsController {
     companion object {
         operator fun invoke(
             applicationContext: Context,
-        ): PermissionsController {
-            return PermissionsControllerImpl(
-                applicationContext = applicationContext,
-            )
-        }
+        ): PermissionsController = PermissionsControllerImpl(
+            applicationContext = applicationContext,
+        )
     }
 }

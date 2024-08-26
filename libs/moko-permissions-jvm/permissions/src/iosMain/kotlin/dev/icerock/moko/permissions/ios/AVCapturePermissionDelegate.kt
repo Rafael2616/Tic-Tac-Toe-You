@@ -55,9 +55,8 @@ internal class AVCapturePermissionDelegate(
         }
     }
 
-    private fun currentAuthorizationStatus(): AVAuthorizationStatus {
-        return AVCaptureDevice.authorizationStatusForMediaType(type)
-    }
+    private fun currentAuthorizationStatus(): AVAuthorizationStatus =
+        AVCaptureDevice.authorizationStatusForMediaType(type)
 }
 
 private fun AVCaptureDevice.Companion.requestAccess(

@@ -189,9 +189,7 @@ object RGBUtil {
         red: Int,
         green: Int,
         blue: Int,
-    ): Int {
-        return Color(red, green, blue).toArgb()
-    }
+    ): Int = Color(red, green, blue).toArgb()
 
     /**
      * Return a color-int from alpha, red, green, blue components.
@@ -207,19 +205,15 @@ object RGBUtil {
         red: Float,
         green: Float,
         blue: Float,
-    ): Int {
-        return Color(red, green, blue).toArgb()
-    }
+    ): Int = Color(red, green, blue).toArgb()
 
     /**
      * Convert red, green, blue components [0..255] range in [Integer] to Hex format String
      */
-    fun rgbToHex(red: Int, green: Int, blue: Int): String {
-        return "#" +
-            red.toString(16).padStart(2, '0') +
-            green.toString(16).padStart(2, '0') +
-            blue.toString(16).padStart(2, '0')
-    }
+    fun rgbToHex(red: Int, green: Int, blue: Int): String = "#" +
+        red.toString(16).padStart(2, '0') +
+        green.toString(16).padStart(2, '0') +
+        blue.toString(16).padStart(2, '0')
 
     /**
      * Convert rgb array to Hex format String
@@ -229,22 +223,18 @@ object RGBUtil {
      * rgb[2] is Blue [0...255]
      * ```
      */
-    fun rgbToHex(rgb: IntArray): String {
-        return "#" +
-            rgb[0].toString(16).padStart(2, '0') +
-            rgb[1].toString(16).padStart(2, '0') +
-            rgb[2].toString(16).padStart(2, '0')
-    }
+    fun rgbToHex(rgb: IntArray): String = "#" +
+        rgb[0].toString(16).padStart(2, '0') +
+        rgb[1].toString(16).padStart(2, '0') +
+        rgb[2].toString(16).padStart(2, '0')
 
     /**
      * Convert red, green, blue components [0f..1f] range in [Float] to Hex format String
      */
-    fun rgbToHex(red: Float, green: Float, blue: Float): String {
-        return "#" +
-            red.fractionToRGBRange().toString(16).padStart(2, '0') +
-            green.fractionToRGBRange().toString(16).padStart(2, '0') +
-            blue.fractionToRGBRange().toString(16).padStart(2, '0')
-    }
+    fun rgbToHex(red: Float, green: Float, blue: Float): String = "#" +
+        red.fractionToRGBRange().toString(16).padStart(2, '0') +
+        green.fractionToRGBRange().toString(16).padStart(2, '0') +
+        blue.fractionToRGBRange().toString(16).padStart(2, '0')
 
     /**
      * Return a color-int from alpha, red, green, blue components.
@@ -256,9 +246,8 @@ object RGBUtil {
      * @param green  Green component [0..255] of the color
      * @param blue Blue component [0..255] of the color
      */
-    fun argbToColorInt(alpha: Int, red: Int, green: Int, blue: Int): Int {
-        return (alpha shl 24) or (red shl 16) or (green shl 8) or blue
-    }
+    fun argbToColorInt(alpha: Int, red: Int, green: Int, blue: Int): Int =
+        (alpha shl 24) or (red shl 16) or (green shl 8) or blue
 
     /**
      * Return a color-int from alpha, red, green, blue components.
@@ -288,12 +277,11 @@ object RGBUtil {
      * Blue is [0...255]
      * ```
      */
-    fun argbToHex(alpha: Int, red: Int, green: Int, blue: Int): String {
-        return "#" + alpha.toString(16).padStart(2, '0') +
+    fun argbToHex(alpha: Int, red: Int, green: Int, blue: Int): String =
+        "#" + alpha.toString(16).padStart(2, '0') +
             red.toString(16).padStart(2, '0') +
             green.toString(16).padStart(2, '0') +
             blue.toString(16).padStart(2, '0')
-    }
 
     /**
      * Convert alpha, red, green, blue components in [0f..1f] range in [Float] argb to Hex format String
@@ -305,12 +293,11 @@ object RGBUtil {
      * Blue is [0...1f]
      * ```
      */
-    fun argbToHex(alpha: Float, red: Float, green: Float, blue: Float): String {
-        return "#" + alpha.fractionToRGBRange().toString(16).padStart(2, '0') +
+    fun argbToHex(alpha: Float, red: Float, green: Float, blue: Float): String =
+        "#" + alpha.fractionToRGBRange().toString(16).padStart(2, '0') +
             red.fractionToRGBRange().toString(16).padStart(2, '0') +
             green.fractionToRGBRange().toString(16).padStart(2, '0') +
             blue.fractionToRGBRange().toString(16).padStart(2, '0')
-    }
 
 /*
     RGB-HEX Conversions

@@ -18,11 +18,7 @@ val gameModeNavType = object : NavType<GameMode>(
         bundle.putString(key, json.encodeToString(value))
     }
 
-    override fun parseValue(value: String): GameMode {
-        return json.decodeFromString(value)
-    }
+    override fun parseValue(value: String): GameMode = json.decodeFromString(value)
 
-    override fun serializeAsValue(value: GameMode): String {
-        return json.encodeToString(value)
-    }
+    override fun serializeAsValue(value: GameMode): String = json.encodeToString(value)
 }

@@ -13,38 +13,44 @@ import androidx.compose.ui.text.withStyle
 
 @Composable
 @OptIn(ExperimentalTextApi::class)
-internal fun styledChangelog(changelog: String): AnnotatedString {
-    return buildAnnotatedString {
-        val keywords = listOf("Added:", "Fixes:", "Improvements:", "Code:", "Others:")
-        val textParts = changelog.split("\n")
+internal fun styledChangelog(changelog: String): AnnotatedString = buildAnnotatedString {
+    val keywords = listOf("Added:", "Fixes:", "Improvements:", "Code:", "Others:")
+    val textParts = changelog.split("\n")
 
-        textParts.forEachIndexed { index, part ->
-            if (keywords.any { part.contains(it) }) {
-                withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)) {
-                    append(part)
+    textParts.forEachIndexed { index, part ->
+        if (keywords.any { part.contains(it) }) {
+            withStyle(
+                style = SpanStyle(
+                    color = MaterialTheme.colorScheme.primary,
+                    fontWeight = FontWeight.Bold,
+                ),
+            ) {
+                append(part)
+            }
+        } else {
+            val urlPattern = "https?://\\S+".toRegex()
+            val matcherResult = urlPattern.find(part)
+            if (matcherResult != null) {
+                val url = matcherResult.value
+                withStyle(
+                    style = SpanStyle(
+                        color = MaterialTheme.colorScheme.primary,
+                        textDecoration = TextDecoration.Underline,
+                    ),
+                ) {
+                    withAnnotation(
+                        tag = "URL",
+                        annotation = url,
+                    ) {
+                        append(url)
+                    }
                 }
             } else {
-                val urlPattern = "https?://\\S+".toRegex()
-                val matcherResult = urlPattern.find(part)
-                if (matcherResult != null) {
-                    val url = matcherResult.value
-                    withStyle(
-                        style = SpanStyle(color = MaterialTheme.colorScheme.primary, textDecoration = TextDecoration.Underline),
-                    ) {
-                        withAnnotation(
-                            tag = "URL",
-                            annotation = url,
-                        ) {
-                            append(url)
-                        }
-                    }
-                } else {
-                    append(part)
-                }
+                append(part)
             }
-            if (index < textParts.size - 1) {
-                append("\n")
-            }
+        }
+        if (index < textParts.size - 1) {
+            append("\n")
         }
     }
 }

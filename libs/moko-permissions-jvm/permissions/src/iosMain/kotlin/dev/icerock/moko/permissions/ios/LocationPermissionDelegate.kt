@@ -21,9 +21,8 @@ internal class LocationPermissionDelegate(
     private val locationManagerDelegate: LocationManagerDelegate,
     private val permission: Permission,
 ) : PermissionDelegate {
-    override suspend fun providePermission() {
-        return provideLocationPermission(CLLocationManager.authorizationStatus())
-    }
+    override suspend fun providePermission() =
+        provideLocationPermission(CLLocationManager.authorizationStatus())
 
     override suspend fun getPermissionState(): PermissionState {
         val status: CLAuthorizationStatus = CLLocationManager.authorizationStatus()

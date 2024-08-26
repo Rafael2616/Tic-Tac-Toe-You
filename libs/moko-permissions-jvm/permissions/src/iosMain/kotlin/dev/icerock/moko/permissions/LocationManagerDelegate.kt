@@ -9,7 +9,9 @@ import platform.CoreLocation.CLLocationManager
 import platform.CoreLocation.CLLocationManagerDelegateProtocol
 import platform.darwin.NSObject
 
-internal class LocationManagerDelegate : NSObject(), CLLocationManagerDelegateProtocol {
+internal class LocationManagerDelegate :
+    NSObject(),
+    CLLocationManagerDelegateProtocol {
     private var callback: ((CLAuthorizationStatus) -> Unit)? = null
 
     private val locationManager = CLLocationManager()

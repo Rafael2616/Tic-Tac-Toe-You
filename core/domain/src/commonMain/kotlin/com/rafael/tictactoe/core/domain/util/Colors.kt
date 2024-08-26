@@ -16,21 +16,19 @@ data class Colors(
     val transparent: Color,
 ) {
     companion object {
-        fun get(): Colors {
-            return Colors(
-                blue = Color(0xFF1A73E8),
-                red = Color.Red,
-                yellow = Color.Yellow,
-                darkGreen = Color(0xFF299961),
-                lightGreen = Color.Green,
-                purple = Color(0xFF820AD1),
-                magenta = Color.Magenta,
-                white = Color.White,
-                cyan = Color(0xFF00E8FF),
-                burntYellow = Color(0xFFFBBC04),
-                transparent = Color.Transparent,
-            )
-        }
+        fun get(): Colors = Colors(
+            blue = Color(0xFF1A73E8),
+            red = Color.Red,
+            yellow = Color.Yellow,
+            darkGreen = Color(0xFF299961),
+            lightGreen = Color.Green,
+            purple = Color(0xFF820AD1),
+            magenta = Color.Magenta,
+            white = Color.White,
+            cyan = Color(0xFF00E8FF),
+            burntYellow = Color(0xFFFBBC04),
+            transparent = Color.Transparent,
+        )
     }
 }
 

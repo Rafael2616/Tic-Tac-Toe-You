@@ -159,7 +159,7 @@ compose.desktop {
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb, TargetFormat.Exe)
-            packageName = "com.rafael.tictactoe"
+            packageName = "TicTacToe You"
             packageVersion = libs.versions.versionName.get()
         }
     }

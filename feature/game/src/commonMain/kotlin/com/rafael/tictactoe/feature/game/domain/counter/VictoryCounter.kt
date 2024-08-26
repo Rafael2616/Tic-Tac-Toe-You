@@ -12,12 +12,10 @@ import org.jetbrains.compose.resources.getString
 
 internal class VictoryCounter {
 
-    fun updateVictoryCounter(state: GameState): Pair<Int, Int> {
-        return if (state.is1Win) {
-            Pair(state.player1Wins + 1, state.player2Wins)
-        } else {
-            Pair(state.player1Wins, state.player2Wins + 1)
-        }
+    fun updateVictoryCounter(state: GameState): Pair<Int, Int> = if (state.is1Win) {
+        Pair(state.player1Wins + 1, state.player2Wins)
+    } else {
+        Pair(state.player1Wins, state.player2Wins + 1)
     }
 
     fun shouldShowVictoryCounterReset(state: GameState): Boolean {

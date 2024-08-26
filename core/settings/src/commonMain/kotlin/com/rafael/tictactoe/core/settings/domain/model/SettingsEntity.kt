@@ -30,28 +30,26 @@ data class SettingsEntity(
     var profilePicture: ByteArray?,
 ) {
     companion object {
-        fun getDefaultSettings(): SettingsEntity {
-            return SettingsEntity(
-                id = 1,
-                isBackgroundMusicOn = true,
-                isDarkThemeOn = true,
-                isDynamicColorsOn = true,
-                isFollowingSystemOn = true,
-                isSoundEffectsOn = true,
-                selectedWinnerLineColor = 2,
-                selectedXColor = 1,
-                selectedCircleColor = 5,
-                appVersion = "0",
-                shapeSelected = 1,
-                boardCardsCornerRadius = DEF_CARDS_CORNER_RADIUS,
-                boardCardsThickness = DEF_CARDS_BORDER_THICKNESS,
-                boardCardsElevation = DEF_CARDS_ELEVATION,
-                boardCardsShadow = DEF_CARDS_SHADOW,
-                boardCardsBorderColor = "FFFFFFFF",
-                isRGBEffectOn = false,
-                isGradientOn = true,
-                profilePicture = null,
-            )
-        }
+        fun getDefaultSettings(): SettingsEntity = SettingsEntity(
+            id = 1,
+            isBackgroundMusicOn = true,
+            isDarkThemeOn = true,
+            isDynamicColorsOn = true,
+            isFollowingSystemOn = true,
+            isSoundEffectsOn = true,
+            selectedWinnerLineColor = 2,
+            selectedXColor = 1,
+            selectedCircleColor = 5,
+            appVersion = "0",
+            shapeSelected = 1,
+            boardCardsCornerRadius = DEF_CARDS_CORNER_RADIUS,
+            boardCardsThickness = DEF_CARDS_BORDER_THICKNESS,
+            boardCardsElevation = DEF_CARDS_ELEVATION,
+            boardCardsShadow = DEF_CARDS_SHADOW,
+            boardCardsBorderColor = "FFFFFFFF",
+            isRGBEffectOn = false,
+            isGradientOn = true,
+            profilePicture = null,
+        )
     }
 }

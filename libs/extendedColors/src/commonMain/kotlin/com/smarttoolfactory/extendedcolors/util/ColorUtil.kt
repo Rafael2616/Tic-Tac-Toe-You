@@ -90,9 +90,7 @@ object ColorUtil {
      * @param color Jetpack Compose [Color]
      * @return 3 element array which holds the input RGB components.
      */
-    fun colorToARGBArray(color: Color): IntArray {
-        return colorIntToRGBArray(color.toArgb())
-    }
+    fun colorToARGBArray(color: Color): IntArray = colorIntToRGBArray(color.toArgb())
 
     /**
      * Convert Jetpack [Color] into 3 element array of red, green, and blue
@@ -104,9 +102,7 @@ object ColorUtil {
      * @param color Jetpack Compose [Color]
      * @return 3 element array which holds the input RGB components.
      */
-    fun colorToRGBArray(color: Color): IntArray {
-        return colorIntToRGBArray(color.toArgb())
-    }
+    fun colorToRGBArray(color: Color): IntArray = colorIntToRGBArray(color.toArgb())
 
     /**
      * Convert Jetpack [Color] into 3 element array of red, green, and blue
@@ -125,13 +121,10 @@ object ColorUtil {
         rgbIn[2] = argbArray[2]
     }
 
-    fun colorToHex(color: Color): String {
-        return rgbToHex(color.red, color.green, color.blue)
-    }
+    fun colorToHex(color: Color): String = rgbToHex(color.red, color.green, color.blue)
 
-    fun colorToHexAlpha(color: Color): String {
-        return argbToHex(color.alpha, color.red, color.green, color.blue)
-    }
+    fun colorToHexAlpha(color: Color): String =
+        argbToHex(color.alpha, color.red, color.green, color.blue)
 
     /**
      * Convert a RGB color in [Integer] form to HSV (hue-saturation-value) components.

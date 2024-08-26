@@ -38,9 +38,7 @@ object HSLUtil {
      * hsl[2] is Lightness [0...1]
      * ```
      */
-    fun hslToHSV(hslIn: FloatArray): FloatArray {
-        return hslToHSV(hslIn[0], hslIn[1], hslIn[2])
-    }
+    fun hslToHSV(hslIn: FloatArray): FloatArray = hslToHSV(hslIn[0], hslIn[1], hslIn[2])
 
 /*
     HSL-ColorInt Conversions
@@ -56,9 +54,7 @@ object HSLUtil {
      * hsl[2] is Lightness [0...1]
      * ```
      */
-    fun hslToColorInt(hslIn: FloatArray): Int {
-        return hslToColorInt(hslIn[0], hslIn[1], hslIn[2])
-    }
+    fun hslToColorInt(hslIn: FloatArray): Int = hslToColorInt(hslIn[0], hslIn[1], hslIn[2])
 
     /**
      * Convert HSL (hue-saturation-lightness) components to a RGB color in [Integer] format.
@@ -70,9 +66,11 @@ object HSLUtil {
         hue: Float,
         saturation: Float,
         lightness: Float,
-    ): Int {
-        return Color(hue.fractionToRGBRange(), saturation.fractionToRGBRange(), lightness.fractionToRGBRange()).toArgb()
-    }
+    ): Int = Color(
+        hue.fractionToRGBRange(),
+        saturation.fractionToRGBRange(),
+        lightness.fractionToRGBRange(),
+    ).toArgb()
 
 /*
     HSL-RGB Conversions
@@ -92,9 +90,7 @@ object HSLUtil {
      * ```
      * @param hslIn 3 element array which holds the input HSL components.
      */
-    fun hslToRGB(hslIn: FloatArray): IntArray {
-        return colorIntToRGBArray(hslToColorInt(hslIn))
-    }
+    fun hslToRGB(hslIn: FloatArray): IntArray = colorIntToRGBArray(hslToColorInt(hslIn))
 
     /**
      * Convert HSL (hue-saturation-lightness) components to a RGB red, green blue array.
@@ -114,11 +110,9 @@ object HSLUtil {
         hue: Float,
         saturation: Float,
         lightness: Float,
-    ): IntArray {
-        return colorIntToRGBArray(
-            intColor = hslToColorInt(hue, saturation, lightness),
-        )
-    }
+    ): IntArray = colorIntToRGBArray(
+        intColor = hslToColorInt(hue, saturation, lightness),
+    )
 
     /**
      * Convert HSL (hue-saturation-lightness) components to a RGB red, green blue array.

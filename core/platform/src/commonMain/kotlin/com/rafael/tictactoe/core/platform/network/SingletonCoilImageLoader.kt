@@ -20,26 +20,24 @@ fun SingletonCoilImageLoader() {
     }
 }
 
-fun defaultAsyncImageLoader(context: PlatformContext): ImageLoader {
-    return ImageLoader.Builder(context)
-        .memoryCachePolicy(CachePolicy.ENABLED)
-        .memoryCache {
-            MemoryCache.Builder()
-                .maxSizePercent(context, 0.3)
-                .strongReferencesEnabled(true)
-                .build()
-        }
-        .diskCachePolicy(CachePolicy.ENABLED)
-        .networkCachePolicy(CachePolicy.ENABLED)
-        .diskCache {
-            DiskCache.Builder()
-                .directory(FileSystem.SYSTEM_TEMPORARY_DIRECTORY / "image_cache")
-                .maxSizeBytes(1024L * 1024 * 1024) // 512MB
-                .build()
-        }
-        .crossfade(true)
-        .logger(
-            DebugLogger(),
-        )
-        .build()
-}
+fun defaultAsyncImageLoader(context: PlatformContext): ImageLoader = ImageLoader.Builder(context)
+    .memoryCachePolicy(CachePolicy.ENABLED)
+    .memoryCache {
+        MemoryCache.Builder()
+            .maxSizePercent(context, 0.3)
+            .strongReferencesEnabled(true)
+            .build()
+    }
+    .diskCachePolicy(CachePolicy.ENABLED)
+    .networkCachePolicy(CachePolicy.ENABLED)
+    .diskCache {
+        DiskCache.Builder()
+            .directory(FileSystem.SYSTEM_TEMPORARY_DIRECTORY / "image_cache")
+            .maxSizeBytes(1024L * 1024 * 1024) // 512MB
+            .build()
+    }
+    .crossfade(true)
+    .logger(
+        DebugLogger(),
+    )
+    .build()

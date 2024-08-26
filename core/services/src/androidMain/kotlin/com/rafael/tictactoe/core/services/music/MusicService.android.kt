@@ -20,9 +20,7 @@ actual class MusicService : Service() {
     private val backgroundMusic =
         MediaItem.fromUri(Uri.parse("android.resource://${context.packageName}/$backgroundMusicFile"))
 
-    override fun onBind(intent: Intent): IBinder? {
-        return null
-    }
+    override fun onBind(intent: Intent): IBinder? = null
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         startBackgroundMusic()

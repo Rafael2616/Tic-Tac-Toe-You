@@ -6,6 +6,4 @@ import com.rafael.tictactoe.feature.game.domain.model.GameState
 actual fun gotOldSound(
     state: GameState,
     settingsState: SettingsState,
-): Boolean {
-    return false
-}
+): Boolean = false

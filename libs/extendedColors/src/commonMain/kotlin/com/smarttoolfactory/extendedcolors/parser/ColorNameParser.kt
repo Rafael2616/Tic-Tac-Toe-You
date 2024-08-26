@@ -9,10 +9,8 @@ import com.smarttoolfactory.extendedcolors.util.HexUtil
 import kotlin.math.sqrt
 
 @Composable
-fun rememberColorParser(): ColorNameParser {
-    return remember {
-        ColorNameParser()
-    }
+fun rememberColorParser(): ColorNameParser = remember {
+    ColorNameParser()
 }
 
 /**

@@ -15,17 +15,14 @@ class SettingsRepositoryImpl(
         println("Settings repository has been initialized")
     }
 
-    override suspend fun getAllSettingsValues(id: Int): SettingsEntity? {
-        return withContext(Dispatchers.IO) { settingsDao.getSettingsValues(id) }
-    }
+    override suspend fun getAllSettingsValues(id: Int): SettingsEntity? =
+        withContext(Dispatchers.IO) { settingsDao.getSettingsValues(id) }
 
     override suspend fun setAllSettingsValues(settingsEntity: SettingsEntity) {
         settingsDao.setAllSettingsValues(settingsEntity)
     }
 
-    override suspend fun getProfilePicture(): ByteArray? {
-        return settingsDao.getProfilePicture()
-    }
+    override suspend fun getProfilePicture(): ByteArray? = settingsDao.getProfilePicture()
 
     override suspend fun deleteProfilePicture(profilePicture: ByteArray) {
         settingsDao.deleteProfilePicture(profilePicture)

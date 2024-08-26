@@ -149,9 +149,8 @@ class PermissionsControllerImpl(
         )
     }
 
-    override suspend fun isPermissionGranted(permission: Permission): Boolean {
-        return getPermissionState(permission) == PermissionState.Granted
-    }
+    override suspend fun isPermissionGranted(permission: Permission): Boolean =
+        getPermissionState(permission) == PermissionState.Granted
 
     @Suppress("ReturnCount")
     override suspend fun getPermissionState(permission: Permission): PermissionState {
@@ -191,12 +190,10 @@ class PermissionsControllerImpl(
     private fun shouldShowRequestPermissionRationale(
         activity: Activity,
         permission: String,
-    ): Boolean {
-        return ActivityCompat.shouldShowRequestPermissionRationale(
-            activity,
-            permission,
-        )
-    }
+    ): Boolean = ActivityCompat.shouldShowRequestPermissionRationale(
+        activity,
+        permission,
+    )
 
     override fun openAppSettings() {
         val intent = Intent().apply {
@@ -208,28 +205,26 @@ class PermissionsControllerImpl(
     }
 
     @Suppress("CyclomaticComplexMethod")
-    private fun Permission.toPlatformPermission(): List<String> {
-        return when (this) {
-            Permission.CAMERA -> listOf(Manifest.permission.CAMERA)
-            Permission.GALLERY -> galleryCompat()
-            Permission.STORAGE -> allStoragePermissions()
-            Permission.WRITE_STORAGE -> listOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            Permission.LOCATION -> fineLocationCompat()
-            Permission.COARSE_LOCATION -> listOf(Manifest.permission.ACCESS_COARSE_LOCATION)
-            Permission.BACKGROUND_LOCATION -> backgroundLocationCompat()
-            Permission.REMOTE_NOTIFICATION -> remoteNotificationsPermissions()
-            Permission.RECORD_AUDIO -> listOf(Manifest.permission.RECORD_AUDIO)
-            Permission.BLUETOOTH_LE -> allBluetoothPermissions()
-            Permission.BLUETOOTH_SCAN -> bluetoothScanCompat()
-            Permission.BLUETOOTH_ADVERTISE -> bluetoothAdvertiseCompat()
-            Permission.BLUETOOTH_CONNECT -> bluetoothConnectCompat()
-            Permission.CONTACTS -> listOf(
-                Manifest.permission.READ_CONTACTS,
-                Manifest.permission.WRITE_CONTACTS,
-            )
+    private fun Permission.toPlatformPermission(): List<String> = when (this) {
+        Permission.CAMERA -> listOf(Manifest.permission.CAMERA)
+        Permission.GALLERY -> galleryCompat()
+        Permission.STORAGE -> allStoragePermissions()
+        Permission.WRITE_STORAGE -> listOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        Permission.LOCATION -> fineLocationCompat()
+        Permission.COARSE_LOCATION -> listOf(Manifest.permission.ACCESS_COARSE_LOCATION)
+        Permission.BACKGROUND_LOCATION -> backgroundLocationCompat()
+        Permission.REMOTE_NOTIFICATION -> remoteNotificationsPermissions()
+        Permission.RECORD_AUDIO -> listOf(Manifest.permission.RECORD_AUDIO)
+        Permission.BLUETOOTH_LE -> allBluetoothPermissions()
+        Permission.BLUETOOTH_SCAN -> bluetoothScanCompat()
+        Permission.BLUETOOTH_ADVERTISE -> bluetoothAdvertiseCompat()
+        Permission.BLUETOOTH_CONNECT -> bluetoothConnectCompat()
+        Permission.CONTACTS -> listOf(
+            Manifest.permission.READ_CONTACTS,
+            Manifest.permission.WRITE_CONTACTS,
+        )
 
-            Permission.MOTION -> motionPermissions()
-        }
+        Permission.MOTION -> motionPermissions()
     }
 
     /**

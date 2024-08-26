@@ -18,19 +18,17 @@ class PermissionsControllerImpl : PermissionsController {
         }
     }
 
-    override suspend fun isPermissionGranted(permission: Permission): Boolean {
-        return when (permission) {
-            Permission.WRITE_STORAGE -> {
-                val storageDir = File(System.getProperty("user.home"))
-                storageDir.canWrite()
-            }
-
-            else -> true
+    override suspend fun isPermissionGranted(permission: Permission): Boolean = when (permission) {
+        Permission.WRITE_STORAGE -> {
+            val storageDir = File(System.getProperty("user.home"))
+            storageDir.canWrite()
         }
+
+        else -> true
     }
 
-    override suspend fun getPermissionState(permission: Permission): PermissionState {
-        return when (permission) {
+    override suspend fun getPermissionState(permission: Permission): PermissionState =
+        when (permission) {
             Permission.WRITE_STORAGE -> {
                 val storageDir = File(System.getProperty("user.home"))
                 if (storageDir.canWrite()) {
@@ -41,7 +39,6 @@ class PermissionsControllerImpl : PermissionsController {
             }
 
             else -> PermissionState.Granted
-        }
     }
 
     override fun openAppSettings() {

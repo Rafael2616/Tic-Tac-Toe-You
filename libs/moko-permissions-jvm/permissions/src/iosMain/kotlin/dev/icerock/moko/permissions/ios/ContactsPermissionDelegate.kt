@@ -21,13 +21,11 @@ internal class ContactsPermissionDelegate(
     private val permission: Permission,
     private val contactStore: CNContactStore,
 ) : PermissionDelegate {
-    override suspend fun providePermission() {
-        return provideLocationPermission(
-            CNContactStore.authorizationStatusForEntityType(
-                CNEntityType.CNEntityTypeContacts,
-            ),
-        )
-    }
+    override suspend fun providePermission() = provideLocationPermission(
+        CNContactStore.authorizationStatusForEntityType(
+            CNEntityType.CNEntityTypeContacts,
+        ),
+    )
 
     override suspend fun getPermissionState(): PermissionState {
         val status: CNAuthorizationStatus =

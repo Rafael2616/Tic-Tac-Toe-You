@@ -45,16 +45,12 @@ internal class ToastNameController {
         }
     }
 
-    private suspend fun currentNameWhenGotOld(): String {
-        return getString(Res.string.got_old)
-    }
+    private suspend fun currentNameWhenGotOld(): String = getString(Res.string.got_old)
 
-    private fun currentNameWhenThereWinner(state: GameState): String {
-        return if (state.is1Win) {
-            state.player1Name
-        } else {
-            state.player2Name
-        }
+    private fun currentNameWhenThereWinner(state: GameState): String = if (state.is1Win) {
+        state.player1Name
+    } else {
+        state.player2Name
     }
 
     suspend fun counterAfterGameStarts(state: GameState): Flow<Pair<String, Boolean>> = flow {

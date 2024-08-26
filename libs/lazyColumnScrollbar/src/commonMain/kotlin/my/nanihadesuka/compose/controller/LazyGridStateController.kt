@@ -79,18 +79,16 @@ internal fun rememberLazyGridStateController(
         }
     }
 
-    fun LazyGridItemInfo.fractionHiddenTop(firstItemOffset: Int): Float {
-        return when (orientationUpdated.value) {
+    fun LazyGridItemInfo.fractionHiddenTop(firstItemOffset: Int): Float =
+        when (orientationUpdated.value) {
             Orientation.Vertical -> if (size.height == 0) 0f else firstItemOffset / size.width.toFloat()
             Orientation.Horizontal -> if (size.width == 0) 0f else firstItemOffset / size.width.toFloat()
-        }
     }
 
-    fun LazyGridItemInfo.fractionVisibleBottom(viewportEndOffset: Int): Float {
-        return when (orientationUpdated.value) {
+    fun LazyGridItemInfo.fractionVisibleBottom(viewportEndOffset: Int): Float =
+        when (orientationUpdated.value) {
             Orientation.Vertical -> if (size.height == 0) 0f else (viewportEndOffset - offset.y).toFloat() / size.height.toFloat()
             Orientation.Horizontal -> if (size.width == 0) 0f else (viewportEndOffset - offset.x).toFloat() / size.width.toFloat()
-        }
     }
 
     val thumbSizeNormalizedReal = remember {
@@ -202,9 +200,7 @@ internal class LazyGridStateController(
 
     override val isSelected = _isSelected
 
-    override fun indicatorValue(): Int {
-        return state.firstVisibleItemIndex
-    }
+    override fun indicatorValue(): Int = state.firstVisibleItemIndex
 
     override fun onDraggableState(deltaPixels: Float, maxLengthPixels: Float) {
         val displace = if (reverseLayout.value) -deltaPixels else deltaPixels // side effect ?

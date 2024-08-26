@@ -96,9 +96,7 @@ object HSVUtil {
      * hsl[2] is Lightness [0...1]
      * ```
      */
-    fun hsvToHSL(hsvIn: FloatArray): FloatArray {
-        return hsvToHSL(hsvIn[0], hsvIn[1], hsvIn[2])
-    }
+    fun hsvToHSL(hsvIn: FloatArray): FloatArray = hsvToHSL(hsvIn[0], hsvIn[1], hsvIn[2])
 
     /**
      * Convert HSV components(hue-saturation-value) to HSL
@@ -135,9 +133,7 @@ object HSVUtil {
         hue: Float,
         saturation: Float,
         value: Float,
-    ): Int {
-        return hsvToColorInt(floatArrayOf(hue, saturation, value))
-    }
+    ): Int = hsvToColorInt(floatArrayOf(hue, saturation, value))
 
     /**
      * Convert HSV (hue-saturation-value) components to a RGB color in [Integer] form.
@@ -150,9 +146,11 @@ object HSVUtil {
      * ```
      * @param hsvIn 3 element array which holds the input HSV components.
      */
-    fun hsvToColorInt(hsvIn: FloatArray): Int {
-        return Color(hsvIn[0].fractionToRGBRange(), hsvIn[1].fractionToRGBRange(), hsvIn[2].fractionToRGBRange()).toArgb()
-    }
+    fun hsvToColorInt(hsvIn: FloatArray): Int = Color(
+        hsvIn[0].fractionToRGBRange(),
+        hsvIn[1].fractionToRGBRange(),
+        hsvIn[2].fractionToRGBRange(),
+    ).toArgb()
 
 /*
     HSV-Color Conversions
@@ -170,9 +168,7 @@ object HSVUtil {
         saturation: Float,
         value: Float,
         alpha: Float,
-    ): Color {
-        return Color.hsv(hue, saturation, value, alpha)
-    }
+    ): Color = Color.hsv(hue, saturation, value, alpha)
 
 /*
     HSV-RGB Conversions
@@ -193,11 +189,9 @@ object HSVUtil {
         hue: Float,
         saturation: Float,
         value: Float,
-    ): IntArray {
-        return colorIntToRGBArray(
-            hsvToColorInt(hue, saturation, value),
-        )
-    }
+    ): IntArray = colorIntToRGBArray(
+        hsvToColorInt(hue, saturation, value),
+    )
 
     /**
      * Convert HSV (hue-saturation-value) components to a RGB red, green blue array.
@@ -213,11 +207,9 @@ object HSVUtil {
      * ```
      * @param hsvIn 3 element array which holds the input HSV components.
      */
-    fun hsvToRGB(hsvIn: FloatArray): IntArray {
-        return colorIntToRGBArray(
-            hsvToColorInt(hsvIn),
-        )
-    }
+    fun hsvToRGB(hsvIn: FloatArray): IntArray = colorIntToRGBArray(
+        hsvToColorInt(hsvIn),
+    )
 
     /**
      * Convert HSV (hue-saturation-value) components to a RGB red, green blue array.

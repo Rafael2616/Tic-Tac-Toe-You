@@ -21,30 +21,28 @@ data class Level(
     val index: Int,
 ) {
     companion object {
-        fun getLevels(isDarkThemeOn: Boolean): List<Level> {
-            return listOf(
-                Level(
-                    level = CPUDifficultyLevel.Easy,
-                    name = Res.string.level_easy,
-                    icon = Icons.Filled.SentimentSatisfied,
-                    tint = if (isDarkThemeOn) Color.Green else Color(0xFF299961),
-                    index = 0,
-                ),
-                Level(
-                    level = CPUDifficultyLevel.Medium,
-                    name = Res.string.level_medium,
-                    icon = Icons.Filled.SentimentNeutral,
-                    tint = if (isDarkThemeOn) Color.Yellow else Colors.get().burntYellow,
-                    index = 1,
-                ),
-                Level(
-                    level = CPUDifficultyLevel.Hard,
-                    name = Res.string.level_hard,
-                    icon = Icons.Filled.SentimentDissatisfied,
-                    tint = Color.Red,
-                    index = 2,
-                ),
-            )
-        }
+        fun getLevels(isDarkThemeOn: Boolean): List<Level> = listOf(
+            Level(
+                level = CPUDifficultyLevel.Easy,
+                name = Res.string.level_easy,
+                icon = Icons.Filled.SentimentSatisfied,
+                tint = if (isDarkThemeOn) Color.Green else Color(0xFF299961),
+                index = 0,
+            ),
+            Level(
+                level = CPUDifficultyLevel.Medium,
+                name = Res.string.level_medium,
+                icon = Icons.Filled.SentimentNeutral,
+                tint = if (isDarkThemeOn) Color.Yellow else Colors.get().burntYellow,
+                index = 1,
+            ),
+            Level(
+                level = CPUDifficultyLevel.Hard,
+                name = Res.string.level_hard,
+                icon = Icons.Filled.SentimentDissatisfied,
+                tint = Color.Red,
+                index = 2,
+            ),
+        )
     }
 }

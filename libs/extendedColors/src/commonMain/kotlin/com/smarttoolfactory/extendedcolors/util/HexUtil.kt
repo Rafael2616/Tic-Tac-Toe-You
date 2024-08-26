@@ -53,7 +53,5 @@ object HexUtil {
         colorIntToARGBArray(colorInt, argbIn)
     }
 
-    fun hexToColor(colorString: String): Color {
-        return Color(hexToColorInt(colorString))
-    }
+    fun hexToColor(colorString: String): Color = Color(hexToColorInt(colorString))
 }
