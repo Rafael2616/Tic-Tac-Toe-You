@@ -67,7 +67,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build Desktop App
-        run: ./gradlew app:jvmRun -DmainClass=com.rafael.tictactoe.MainKt --quiet
+        run: ./gradlew packageReleaseExe
 
   check-kotlin-style:
     runs-on: ubuntu-latest

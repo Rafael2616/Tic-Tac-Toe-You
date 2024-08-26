@@ -3,6 +3,9 @@ package com.rafael.tictactoe.core.settings.data.repository
 import com.rafael.tictactoe.core.settings.data.dao.SettingsDao
 import com.rafael.tictactoe.core.settings.domain.model.SettingsEntity
 import com.rafael.tictactoe.core.settings.domain.repository.SettingsRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
+import kotlinx.coroutines.withContext
 
 class SettingsRepositoryImpl(
     private val settingsDao: SettingsDao,
@@ -13,7 +16,7 @@ class SettingsRepositoryImpl(
     }
 
     override suspend fun getAllSettingsValues(id: Int): SettingsEntity? {
-        return settingsDao.getSettingsValues(id)
+        return withContext(Dispatchers.IO) { settingsDao.getSettingsValues(id) }
     }
 
     override suspend fun setAllSettingsValues(settingsEntity: SettingsEntity) {
