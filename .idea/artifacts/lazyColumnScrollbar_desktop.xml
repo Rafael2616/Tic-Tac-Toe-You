@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="lazyColumnScrollbar-desktop">
+    <output-path>$PROJECT_DIR$/libs/lazyColumnScrollbar/build/libs</output-path>
+    <root id="archive" name="lazyColumnScrollbar-desktop.jar">
+      <element id="module-output" name="TicTacToe-You.libs.lazyColumnScrollbar.desktopMain" />
+    </root>
+  </artifact>
+</component>

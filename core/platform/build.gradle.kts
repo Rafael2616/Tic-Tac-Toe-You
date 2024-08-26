@@ -21,8 +21,8 @@ kotlin {
             implementation(libs.jetbrains.viewmodel.compose)
             implementation(libs.jetbrains.lifecyle.compose)
             // Moko
-            api(libs.moko.permissions)
-            api(libs.moko.permissions.compose)
+            api(projects.libs.mokoPermissionsJvm.permissions)
+            api(projects.libs.mokoPermissionsJvm.permissionsCompose)
             // Ktor
             api(libs.ktor.client.core)
             // Koin
@@ -35,6 +35,9 @@ kotlin {
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.ios)
+        }
+        jvmMain.dependencies {
+            implementation(libs.ktor.client.android)
         }
     }
 }

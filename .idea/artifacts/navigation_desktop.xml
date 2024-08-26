@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="navigation-desktop">
+    <output-path>$PROJECT_DIR$/core/navigation/build/libs</output-path>
+    <root id="archive" name="navigation-desktop.jar">
+      <element id="module-output" name="TicTacToe-You.core.navigation.desktopMain" />
+    </root>
+  </artifact>
+</component>

@@ -16732,7 +16732,7 @@ HSPLcom/rafael/tictactoe/feature/game/di/modules/GameModuleKt$$ExternalSynthetic
 HSPLcom/rafael/tictactoe/feature/game/di/modules/GameModuleKt$$ExternalSyntheticLambda6;->invoke(Ljava/lang/Object;)Ljava/lang/Object;
 Lcom/rafael/tictactoe/feature/game/domain/repository/GameRepository;
 Lcom/rafael/tictactoe/feature/game/presentation/viewmodel/GameViewModel;
-Lcom/rafael/tictactoe/feature/libraryinfo/data/repository/OssLibraryRepository;
+Lcom/rafael/tictactoe/feature/libraryinfo/data/repository/com.rafael.tictactoe.feature.libraryinfo.data.repository.OssLibraryRepository;
 Lcom/rafael/tictactoe/feature/libraryinfo/di/modules/LibraryInfoModuleKt;
 HSPLcom/rafael/tictactoe/feature/libraryinfo/di/modules/LibraryInfoModuleKt;->$r8$lambda$-ePzaYyoQuUq_j3n-NsRQRgzEzg(Lorg/koin/core/module/Module;)Lkotlin/Unit;
 HSPLcom/rafael/tictactoe/feature/libraryinfo/di/modules/LibraryInfoModuleKt;-><clinit>()V

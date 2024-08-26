@@ -2,6 +2,7 @@ import app.cash.licensee.LicenseeTask
 import app.cash.licensee.UnusedAction.IGNORE
 import com.android.build.gradle.internal.api.ApkVariantOutputImpl
 import java.util.Properties
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
     alias(libs.plugins.rafael.application)
@@ -135,6 +136,7 @@ kotlin {
 
             // Projects
             implementation(projects.core.di)
+            implementation(projects.core.platform)
             implementation(projects.core.navigationImpl)
             implementation(projects.core.resources)
         }
@@ -149,4 +151,16 @@ baselineProfile {
     // Don't build on every iteration of a full assemble.
     // Instead enable generation directly for the release build variant.
     automaticGenerationDuringBuild = false
+}
+
+compose.desktop {
+    application {
+        mainClass = "MainKt"
+
+        nativeDistributions {
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb, TargetFormat.Exe)
+            packageName = "com.rafael.tictactoe"
+            packageVersion = libs.versions.versionName.get()
+        }
+    }
 }

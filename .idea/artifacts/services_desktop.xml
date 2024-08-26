@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="services-desktop">
+    <output-path>$PROJECT_DIR$/core/services/build/libs</output-path>
+    <root id="archive" name="services-desktop.jar">
+      <element id="module-output" name="TicTacToe-You.core.services.desktopMain" />
+    </root>
+  </artifact>
+</component>

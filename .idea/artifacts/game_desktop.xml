@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="game-desktop">
+    <output-path>$PROJECT_DIR$/feature/game/build/libs</output-path>
+    <root id="archive" name="game-desktop.jar">
+      <element id="module-output" name="TicTacToe-You.feature.game.desktopMain" />
+    </root>
+  </artifact>
+</component>

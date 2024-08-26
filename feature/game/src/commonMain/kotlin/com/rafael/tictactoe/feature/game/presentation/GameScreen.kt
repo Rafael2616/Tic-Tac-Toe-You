@@ -33,6 +33,7 @@ import com.rafael.tictactoe.feature.game.presentation.components.ui.PlayerSearch
 import com.rafael.tictactoe.feature.game.presentation.components.ui.VictoryCounter
 import com.rafael.tictactoe.feature.game.presentation.components.ui.WinnerLines
 import com.rafael.tictactoe.feature.settings.presentation.components.dialogs.ColorSelectionDialog
+import io.ktor.util.PlatformUtils
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -148,7 +149,7 @@ fun GameScreen(
         onDispose {}
     }
 
-    OnBack {
+    OnBack(!PlatformUtils.IS_JVM) {
         latestOnGameEvent(GameEvent.ToggleExitDialog)
     }
 }

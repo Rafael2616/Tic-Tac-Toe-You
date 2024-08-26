@@ -33,6 +33,11 @@ internal fun Project.configureComposeMultiplatform() {
                     commonTest.dependencies {
                         implementation(compose.uiTest)
                     }
+                    jvmMain.dependencies {
+                        implementation(compose.desktop.currentOs)
+                        implementation(compose.desktop.common)
+                        implementation(compose.uiUtil)
+                    }
                 }
             }
         }

@@ -114,7 +114,7 @@ class GameViewModel(
                 _state.update {
                     it.copy(
                         selectedDifficultyLevel = event.level,
-                        cpuDifficultyLevel = event.level.level,
+                        // cpuDifficultyLevel = event.level.level,
                     )
                 }
             }

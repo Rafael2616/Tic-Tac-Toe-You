@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="extendedColors-desktop">
+    <output-path>$PROJECT_DIR$/libs/extendedColors/build/libs</output-path>
+    <root id="archive" name="extendedColors-desktop.jar">
+      <element id="module-output" name="TicTacToe-You.libs.extendedColors.desktopMain" />
+    </root>
+  </artifact>
+</component>

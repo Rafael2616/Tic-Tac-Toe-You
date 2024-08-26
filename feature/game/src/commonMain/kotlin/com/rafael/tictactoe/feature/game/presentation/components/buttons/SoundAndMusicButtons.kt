@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.outlined.VolumeOff
 import androidx.compose.material.icons.automirrored.outlined.VolumeUp
 import androidx.compose.material.icons.filled.ExpandLess
@@ -22,6 +23,10 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -34,6 +39,7 @@ import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.game.domain.model.GameEvent
 import com.rafael.tictactoe.feature.game.domain.model.GameState
 import com.rafael.tictactoe.feature.game.domain.model.SoundItem
+import io.ktor.util.PlatformUtils
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -44,6 +50,11 @@ internal fun SoundAndMusicButtons(
     settingsState: SettingsState,
     modifier: Modifier = Modifier,
 ) {
+    val topDistance = if (PlatformUtils.IS_JVM) 15.dp else 55.dp
+    var enableOnBack by remember {
+        mutableStateOf(false)
+    }
+
     val buttons = listOf(
         SoundItem(
             name = Res.string.active_sound,
@@ -60,7 +71,7 @@ internal fun SoundAndMusicButtons(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .padding(start = 15.dp, top = 55.dp),
+            .padding(start = 15.dp, top = topDistance),
         contentAlignment = Alignment.TopStart,
     ) {
         Column(
@@ -68,6 +79,20 @@ internal fun SoundAndMusicButtons(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
         ) {
+            if (PlatformUtils.IS_JVM) {
+                IconButton(
+                    modifier = Modifier
+                        .size(35.dp),
+                    onClick = { enableOnBack = true },
+                ) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = "Back Button",
+                        modifier = Modifier
+                            .size(30.dp),
+                    )
+                }
+            }
             // Expand Button, when clicked shows sound effects and background music buttons
             IconButton(
                 modifier = Modifier
@@ -108,5 +133,9 @@ internal fun SoundAndMusicButtons(
                 }
             }
         }
+    }
+    if (enableOnBack) {
+        onEvent(GameEvent.ToggleExitDialog)
+        enableOnBack = false
     }
 }

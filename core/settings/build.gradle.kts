@@ -28,6 +28,11 @@ kotlin {
             // Projects
             api(projects.core.domain)
         }
+        jvmMain.dependencies {
+            // Sqlite
+            implementation(libs.androidx.sqlite.bundled)
+            api(libs.kotlinx.coroutines.swing)
+        }
     }
 }
 
@@ -43,4 +48,5 @@ dependencies {
     add("kspIosSimulatorArm64", libs.androidx.room.compiler)
     add("kspIosX64", libs.androidx.room.compiler)
     add("kspIosArm64", libs.androidx.room.compiler)
+    add("kspJvm", libs.androidx.room.compiler)
 }

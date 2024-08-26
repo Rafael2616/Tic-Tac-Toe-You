@@ -21,6 +21,9 @@ kotlin {
             implementation(projects.core.settings)
             implementation(projects.core.ui)
         }
+        jvmMain.dependencies {
+            implementation(libs.kotlinx.coroutines.swing)
+        }
     }
 }
 

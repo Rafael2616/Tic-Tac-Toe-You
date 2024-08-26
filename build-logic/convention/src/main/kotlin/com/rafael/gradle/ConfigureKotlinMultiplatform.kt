@@ -62,6 +62,8 @@ internal fun Project.configureKotlinMultiplatform(
                 }
             }
 
+            jvm()
+
             listOf(
                 iosX64(),
                 iosArm64(),

@@ -4,8 +4,8 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.Composable
 
 @Composable
-actual fun OnBack(action: () -> Unit) {
-    BackHandler {
+actual fun OnBack(enabled: Boolean, action: () -> Unit) {
+    BackHandler(enabled) {
         action()
     }
 }
