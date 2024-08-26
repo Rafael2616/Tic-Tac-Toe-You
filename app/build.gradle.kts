@@ -162,5 +162,12 @@ compose.desktop {
             packageName = "TicTacToe You"
             packageVersion = libs.versions.versionName.get()
         }
+        buildTypes.release.proguard {
+            obfuscate.set(true)
+            configurationFiles.from(
+                project.file("compose-desktop.pro"),
+                project.file("proguard-rules.pro"),
+            )
+        }
     }
 }

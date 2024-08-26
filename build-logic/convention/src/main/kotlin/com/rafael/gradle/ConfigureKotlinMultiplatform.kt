@@ -39,7 +39,7 @@ internal fun Project.configureKotlinMultiplatform(
                     "/META-INF/LICENSE.md",
                     "/META-INF/LICENSE-notice.md",
                     "/META-INF/gradle/incremental.annotation.processors",
-                )
+                 )
             }
         }
     }
