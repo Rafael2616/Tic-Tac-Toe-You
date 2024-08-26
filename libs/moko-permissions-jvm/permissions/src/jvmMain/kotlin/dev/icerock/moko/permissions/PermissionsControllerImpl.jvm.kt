@@ -39,7 +39,7 @@ class PermissionsControllerImpl : PermissionsController {
             }
 
             else -> PermissionState.Granted
-    }
+        }
 
     override fun openAppSettings() {
         // TODO("Not yet implemented")

@@ -22,8 +22,7 @@ sealed interface GameEvent : Event {
     data object ToggleIsXForPlayer1 : GameEvent
     data object DismissExitDialog : GameEvent
     data class SelectCPUDifficultyMode(val level: Level) : GameEvent
-    data class UpdateRequestState(val state: Pair<Result<Any, Error>, ErrorMessage>? = null) :
-        GameEvent
+    data class UpdateRequestState(val state: Pair<Result<Any, Error>, ErrorMessage>? = null) : GameEvent
     data class GetRemotePlayers(val onSettingsEvent: ((SettingsEvent) -> Unit)? = null) : GameEvent
     data object PostRemotePlayer : GameEvent
     data object RemoveRemotePlayer : GameEvent

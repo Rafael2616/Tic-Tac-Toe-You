@@ -72,7 +72,7 @@ data class SettingItem(
                 ),
                 isAvailable = !settingsState.isFollowingSystemOn,
 
-                ),
+            ),
             // Dynamic Colors
             SettingItem(
                 content = { onEvent, state, _ -> DynamicColorsPreference(onEvent, state) },
