@@ -34,6 +34,7 @@ private fun SettingsScreenPreview() {
                 onEvent = {},
                 onDeleteImage = {},
                 onSaveImage = {},
+                onSaveImageByBitmap = {},
             )
         }
     }
