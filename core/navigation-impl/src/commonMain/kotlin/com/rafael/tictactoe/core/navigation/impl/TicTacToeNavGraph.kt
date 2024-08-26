@@ -126,6 +126,7 @@ fun TicTacToeNavGraph(
                             onEvent = onSettingsEvent,
                             onDeleteImage = settingsViewModel::onDeleteImage,
                             onSaveImage = settingsViewModel::onSaveImage,
+                            onSaveImageByBitmap = settingsViewModel::onSaveImageByBitmap,
                         )
                     }
                     composable<LibraryInfo> {

@@ -1,6 +1,7 @@
 package com.rafael.tictactoe.feature.settings.presentation.viewmodel
 
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import coil3.Uri
@@ -286,6 +287,7 @@ class SettingsViewModel(
         }
     }
 
+    // For use in Android
     fun onSaveImage(imageUri: Uri? = null) {
         val profileManager = ProfilePictureUtilsImpl()
         _state.update { it.copy(showProfilePictureMenu = false) }
@@ -298,6 +300,22 @@ class SettingsViewModel(
                 _state.update {
                     it.copy(profilePictureBitmap = settings.profilePicture?.decodeToImageBitmap())
                 }
+            }
+        }
+    }
+
+    // For use in Jvm
+    fun onSaveImageByBitmap(imageBitmap: ImageBitmap?) {
+        _state.update { it.copy(showProfilePictureMenu = false) }
+
+        viewModelScope.launch(Dispatchers.IO) {
+            imageBitmap?.let { bitmap ->
+                _state.update {
+                    it.copy(profilePictureBitmap = bitmap)
+                }
+                val settings = repository.getAllSettingsValues(1) ?: defaultSettings
+                settings.profilePicture = bitmap.toByteArray()
+                repository.setAllSettingsValues(settings)
             }
         }
     }

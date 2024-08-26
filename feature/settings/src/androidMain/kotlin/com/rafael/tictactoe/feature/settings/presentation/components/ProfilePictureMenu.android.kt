@@ -24,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.unit.dp
 import coil3.Uri
 import coil3.toCoilUri
@@ -45,6 +46,7 @@ actual fun ProfilePictureMenu(
     requestGalleryPermission: () -> Unit,
     onDeleteImage: () -> Unit,
     onSaveImage: (uri: Uri) -> Unit,
+    onSaveImageByBitmap: (imageBitmap: ImageBitmap?) -> Unit,
     modifier: Modifier,
 ) {
     val profilePicture = state.profilePictureBitmap

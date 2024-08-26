@@ -2,6 +2,7 @@ package com.rafael.tictactoe.feature.settings.presentation.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ImageBitmap
 import coil3.Uri
 import com.rafael.tictactoe.core.platform.permissions.PermissionsState
 import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
@@ -15,6 +16,7 @@ actual fun ProfilePictureMenu(
     requestGalleryPermission: () -> Unit,
     onDeleteImage: () -> Unit,
     onSaveImage: (uri: Uri) -> Unit,
+    onSaveImageByBitmap: (imageBitmap: ImageBitmap?) -> Unit,
     modifier: Modifier,
 ) {
     TODO("Not yet implemented")
