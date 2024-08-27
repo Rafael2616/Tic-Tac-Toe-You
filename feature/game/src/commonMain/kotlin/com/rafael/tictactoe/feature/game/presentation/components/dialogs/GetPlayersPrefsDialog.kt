@@ -61,6 +61,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.rafael.tictactoe.core.domain.util.Colors
 import com.rafael.tictactoe.core.game.domain.model.GameMode
+import com.rafael.tictactoe.core.platform.Platform
 import com.rafael.tictactoe.core.platform.configuration.isImeVisible
 import com.rafael.tictactoe.core.platform.presentation.LocalViewCurrent
 import com.rafael.tictactoe.core.resources.Res
@@ -114,10 +115,14 @@ internal fun GetPlayersPrefsDialog(
     val maxLetterLength by rememberSaveable { mutableIntStateOf(10) }
     val containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(18.dp)
     val bottomPadding by animateDpAsState(
-        if (isImeVisible) {
-            WindowInsets.ime.asPaddingValues().calculateBottomPadding().plus(8.dp)
+        if (!Platform.IS_WINDOWS) {
+            if (isImeVisible) {
+                WindowInsets.ime.asPaddingValues().calculateBottomPadding().plus(8.dp)
+            } else {
+                densityHeight / 2 - dialogHeight / 2
+            }
         } else {
-            densityHeight / 2 - dialogHeight / 2
+            0.dp
         },
         animationSpec = spring(
             dampingRatio = Spring.DampingRatioMediumBouncy,
@@ -141,7 +146,7 @@ internal fun GetPlayersPrefsDialog(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(bottom = bottomPadding.coerceAtLeast(0.dp)),
-            contentAlignment = Alignment.BottomCenter,
+            contentAlignment = if (Platform.IS_WINDOWS) Alignment.Center else Alignment.BottomCenter,
         ) {
             Card(
                 shape = MaterialTheme.shapes.large,
@@ -247,7 +252,10 @@ internal fun GetPlayersPrefsDialog(
                         .fillMaxWidth()
                         .height(60.dp),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterHorizontally),
+                    horizontalArrangement = Arrangement.spacedBy(
+                        4.dp,
+                        Alignment.CenterHorizontally,
+                    ),
                 ) {
                     val canvasOnClick = {
                         focusManager.clearFocus()
@@ -391,7 +399,10 @@ internal fun GetPlayersPrefsDialog(
                             SingleChoiceSegmentedButtonRow {
                                 levels.forEachIndexed { index, level ->
                                     SegmentedButton(
-                                        shape = SegmentedButtonDefaults.itemShape(index = index, count = levels.size),
+                                        shape = SegmentedButtonDefaults.itemShape(
+                                            index = index,
+                                            count = levels.size,
+                                        ),
                                         icon = {
                                             SegmentedButtonDefaults.Icon(active = index == state.selectedDifficultyLevel.index) {
                                                 Icon(
@@ -407,7 +418,9 @@ internal fun GetPlayersPrefsDialog(
                                         },
                                         selected = index == state.selectedDifficultyLevel.index,
                                         colors = SegmentedButtonDefaults.colors(
-                                            inactiveContainerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(4.dp),
+                                            inactiveContainerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(
+                                                4.dp,
+                                            ),
                                         ),
                                     ) {
                                         Text(stringResource(level.name))

@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.unit.dp
+import com.rafael.tictactoe.core.platform.Platform
 import com.rafael.tictactoe.core.platform.configuration.isInLandscape
 import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.game.domain.model.GameState
@@ -27,7 +28,7 @@ internal fun WinnerLines(
 ) {
     val winningPositionsIndices = state.winningPositionsIndices
     val winnerLineColor = settingsState.winnerLineColor
-    val pPadding = PaddingValues(start = 8.dp, end = 8.dp, bottom = 50.dp)
+    val pPadding = PaddingValues(start = 8.dp, end = 8.dp, bottom = if (Platform.IS_WINDOWS) 5.dp else 50.dp)
     val lPadding = PaddingValues(start = 8.dp, end = 40.dp, bottom = 8.dp)
 
     Column(

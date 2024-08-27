@@ -30,6 +30,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.rafael.tictactoe.core.platform.Platform
 import com.rafael.tictactoe.core.platform.configuration.isInLandscape
 import com.rafael.tictactoe.core.settings.domain.model.BoardConstants.SHAPE_CUSTOM
 import com.rafael.tictactoe.core.settings.domain.model.SettingsState
@@ -48,7 +49,7 @@ internal fun GameBoard(
 ) {
     val cardItems = remember { listOf(0, 1, 2) }
     val rowItems = remember { listOf(0, 1, 2) }
-    val pPadding = PaddingValues(start = 8.dp, end = 8.dp, bottom = 50.dp)
+    val pPadding = PaddingValues(start = 8.dp, end = 8.dp, bottom = if (Platform.IS_WINDOWS) 5.dp else 50.dp)
     val lPadding = PaddingValues(start = 8.dp, end = 40.dp, bottom = 8.dp)
     val rgbAnimController = rememberRGBAnimation()
     var rgbColorCurrent by remember { mutableStateOf(Color.Red) }

@@ -31,6 +31,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.rafael.tictactoe.core.platform.Platform
 import com.rafael.tictactoe.core.resources.Res
 import com.rafael.tictactoe.core.resources.active_music
 import com.rafael.tictactoe.core.resources.active_sound
@@ -39,7 +40,6 @@ import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.game.domain.model.GameEvent
 import com.rafael.tictactoe.feature.game.domain.model.GameState
 import com.rafael.tictactoe.feature.game.domain.model.SoundItem
-import io.ktor.util.PlatformUtils
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -50,7 +50,7 @@ internal fun SoundAndMusicButtons(
     settingsState: SettingsState,
     modifier: Modifier = Modifier,
 ) {
-    val topDistance = if (PlatformUtils.IS_JVM) 15.dp else 55.dp
+    val topDistance = if (Platform.IS_WINDOWS) 15.dp else 55.dp
     var enableOnBack by remember {
         mutableStateOf(false)
     }
@@ -79,7 +79,7 @@ internal fun SoundAndMusicButtons(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
         ) {
-            if (PlatformUtils.IS_JVM) {
+            if (Platform.IS_WINDOWS) {
                 IconButton(
                     modifier = Modifier
                         .size(35.dp),

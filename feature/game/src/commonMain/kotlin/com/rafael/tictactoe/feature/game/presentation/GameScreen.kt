@@ -14,6 +14,7 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import com.rafael.tictactoe.core.game.domain.model.GameMode
+import com.rafael.tictactoe.core.platform.Platform
 import com.rafael.tictactoe.core.platform.presentation.OnBack
 import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.core.settings.domain.model.SettingsState
@@ -33,7 +34,6 @@ import com.rafael.tictactoe.feature.game.presentation.components.ui.PlayerSearch
 import com.rafael.tictactoe.feature.game.presentation.components.ui.VictoryCounter
 import com.rafael.tictactoe.feature.game.presentation.components.ui.WinnerLines
 import com.rafael.tictactoe.feature.settings.presentation.components.dialogs.ColorSelectionDialog
-import io.ktor.util.PlatformUtils
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -149,7 +149,7 @@ fun GameScreen(
         onDispose {}
     }
 
-    OnBack(!PlatformUtils.IS_JVM) {
+    OnBack(!Platform.IS_WINDOWS) {
         latestOnGameEvent(GameEvent.ToggleExitDialog)
     }
 }
