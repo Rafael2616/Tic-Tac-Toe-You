@@ -1,6 +1,6 @@
 <!--suppress ALL -->
 <div align="center">
-<img src="screenshots/AppLogo.png" width="244" alt="screenshot_logo"/>
+<img src="core/resources/src/androidMain/res/drawable-night/ic_launcher_foreground.png" width="250" alt="screenshot_logo"/>
 </div>
 
 <h1 align="center">Tic Tac Toe You</h1>
