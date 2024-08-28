@@ -20,10 +20,11 @@ fun OthersPreferenceGroup(
     onEvent: (SettingsEvent) -> Unit,
     state: SettingsState,
     navController: NavController,
+    modifier: Modifier = Modifier,
 ) {
     PreferenceGroup(
         heading = Res.string.group_others,
-        modifier = Modifier.padding(bottom = 8.dp),
+        modifier = modifier.padding(bottom = 8.dp),
     ) {
         AboutAppPreference(onEvent, state)
         ViewOnGithubPreference()
