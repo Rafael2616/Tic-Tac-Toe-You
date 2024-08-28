@@ -21,8 +21,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImagePainter
 import coil3.compose.SubcomposeAsyncImage
 import coil3.compose.SubcomposeAsyncImageContent
-import com.rafael.tictactoe.core.domain.util.VERSION_CODE
-import com.rafael.tictactoe.core.domain.util.getVersionName
+import com.rafael.tictactoe.core.domain.util.BuildInfo.VERSION_CODE
+import com.rafael.tictactoe.core.domain.util.BuildInfo.VERSION_NAME
 import com.rafael.tictactoe.core.resources.Res
 import com.rafael.tictactoe.core.resources.about_app
 import com.rafael.tictactoe.core.resources.app_version
@@ -51,7 +51,7 @@ fun AboutAppPreference(
         title = Res.string.about_app,
         description = if (state.isAboutShown) {
             stringResource(Res.string.creator_message) + "\n" + stringResource(Res.string.app_version) + " " +
-                getVersionName() + " (" + VERSION_CODE + ")"
+                VERSION_NAME + " (" + VERSION_CODE + ")"
         } else {
             null
         },

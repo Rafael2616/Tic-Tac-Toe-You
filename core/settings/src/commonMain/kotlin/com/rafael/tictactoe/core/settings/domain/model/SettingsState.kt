@@ -2,8 +2,8 @@ package com.rafael.tictactoe.core.settings.domain.model
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
+import com.rafael.tictactoe.core.domain.util.BuildInfo.VERSION_NAME
 import com.rafael.tictactoe.core.domain.util.Colors
-import com.rafael.tictactoe.core.domain.util.getVersionName
 import com.rafael.tictactoe.core.settings.domain.enums.Customization
 import com.rafael.tictactoe.core.settings.domain.model.BoardConstants.DEF_CARDS_BORDER_THICKNESS
 import com.rafael.tictactoe.core.settings.domain.model.BoardConstants.DEF_CARDS_COLOR
@@ -27,7 +27,7 @@ data class SettingsState(
     val circleColor: Color = color.lightGreen,
     val selectedCircleColor: Int = 5,
     val customizationType: Customization = Customization.XCOLOR,
-    val appVersion: String = getVersionName(),
+    val appVersion: String = VERSION_NAME,
     val showWhatsNewDialog: Boolean = false,
     val showProfilePictureMenu: Boolean = false,
     val profilePictureBitmap: ImageBitmap? = null,

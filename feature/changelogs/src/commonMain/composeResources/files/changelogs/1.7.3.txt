@@ -1,0 +1,9 @@
+Added:
+ - The game now has a desktop application thanks to Kotlin multiplatform capabilities, see:
+ https://github.com/Rafael2616/Tic-Tac-Toe-You/commit/6ac003503b09fe1e3fe7486667c85ad056b0c454
+ - The desktop variant is essentially the same app, with some little tweak like and back button in the game screen and a different method to get the profile image
+ - Also only music and sound related features are missing from now.
+
+Code:
+ - Misc code refactors and cleanups
+ - Bumped dependencies to their latest versions

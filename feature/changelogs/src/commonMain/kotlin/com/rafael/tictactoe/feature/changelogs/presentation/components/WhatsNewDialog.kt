@@ -1,5 +1,6 @@
 package com.rafael.tictactoe.feature.changelogs.presentation.components
 
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,7 +18,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -39,6 +45,10 @@ fun WhatsNewDialog(
     navController: NavController,
     modifier: Modifier = Modifier,
 ) {
+    val uriHandler = LocalUriHandler.current
+    val layoutResult = remember { mutableStateOf<TextLayoutResult?>(null) }
+    val styledChangelog = styledChangelog(currentChangelog.changes)
+
     AlertDialog(
         onDismissRequest = {
             onEvent(SettingsEvent.HideWhatsNewDialog)
@@ -65,12 +75,30 @@ fun WhatsNewDialog(
                     .verticalScroll(rememberScrollState()),
             ) {
                 Text(
-                    text = styledChangelog(currentChangelog.changes),
+                    text = styledChangelog,
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.inverseSurface,
                     textAlign = TextAlign.Start,
                     modifier = Modifier
-                        .fillMaxSize(),
+                        .fillMaxSize()
+                        .pointerInput(Unit) {
+                            detectTapGestures { pos ->
+                                layoutResult.value?.let { layoutResult ->
+                                    val position =
+                                        layoutResult.getOffsetForPosition(pos)
+                                    val link = styledChangelog.getStringAnnotations(
+                                        position,
+                                        position,
+                                    ).firstOrNull()
+                                    if (link?.tag == "URL") {
+                                        uriHandler.openUri(link.item)
+                                    }
+                                }
+                            }
+                        },
+                    onTextLayout = {
+                        layoutResult.value = it
+                    },
                 )
             }
         },

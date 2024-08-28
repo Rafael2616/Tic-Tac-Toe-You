@@ -1,6 +1,6 @@
 package com.rafael.tictactoe.feature.changelogs.data
 
-import com.rafael.tictactoe.core.domain.util.getVersionName
+import com.rafael.tictactoe.core.domain.util.BuildInfo.VERSION_NAME
 import com.rafael.tictactoe.feature.changelogs.Res
 import com.rafael.tictactoe.feature.changelogs.domain.Changelog
 import kotlinx.coroutines.Dispatchers
@@ -13,7 +13,7 @@ internal class ChangelogGetter {
     companion object {
         @OptIn(ExperimentalResourceApi::class)
         suspend fun getCurrent(): Changelog {
-            val version = getVersionName()
+            val version = VERSION_NAME
             val versionNumber = if (version.contains("-")) version.split("-")[0] else version
             val variant = if (version.contains("-")) version.split("-")[1] else ""
             val correctedVariant = if (variant != "") "" else variant

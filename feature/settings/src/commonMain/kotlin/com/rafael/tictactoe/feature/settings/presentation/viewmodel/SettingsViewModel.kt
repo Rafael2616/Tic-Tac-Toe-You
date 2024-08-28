@@ -5,7 +5,7 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import coil3.Uri
-import com.rafael.tictactoe.core.domain.util.getVersionName
+import com.rafael.tictactoe.core.domain.util.BuildInfo.VERSION_NAME
 import com.rafael.tictactoe.core.domain.util.toColor
 import com.rafael.tictactoe.core.services.music.backgroundMusic
 import com.rafael.tictactoe.core.settings.domain.model.SettingsEntity
@@ -53,7 +53,7 @@ class SettingsViewModel(
                     xColor = settings.selectedXColor.toColor(),
                     circleColor = settings.selectedCircleColor.toColor(),
                     appVersion = settings.appVersion,
-                    showWhatsNewDialog = settings.appVersion == "O" || settings.appVersion != getVersionName(),
+                    showWhatsNewDialog = settings.appVersion == "O" || settings.appVersion != VERSION_NAME,
                     shapeSelected = settings.shapeSelected,
                     boardCardsCornerRadius = settings.boardCardsCornerRadius,
                     boardCardsThickness = settings.boardCardsThickness,
@@ -218,7 +218,7 @@ class SettingsViewModel(
                 _state.update { it.copy(showWhatsNewDialog = false) }
                 viewModelScope.launch(Dispatchers.IO) {
                     val settings = repository.getAllSettingsValues(1) ?: defaultSettings
-                    settings.appVersion = getVersionName()
+                    settings.appVersion = VERSION_NAME
                     repository.setAllSettingsValues(settings)
                 }
             }

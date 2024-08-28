@@ -2,8 +2,8 @@
 minSdk = "26"
 targetSdk = "35"
 compileSdk = "35"
-versionCode = "163"
-versionName = "1.7.2"
+versionCode = "164"
+versionName = "1.7.3"
 javaVersion = "17"
 
 # Plugins

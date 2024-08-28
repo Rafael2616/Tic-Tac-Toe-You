@@ -40,7 +40,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.rafael.tictactoe.core.domain.util.getVersionName
+import com.rafael.tictactoe.core.domain.util.BuildInfo.VERSION_NAME
 import com.rafael.tictactoe.core.resources.Res
 import com.rafael.tictactoe.core.resources.current
 import com.rafael.tictactoe.core.resources.update_history
@@ -65,7 +65,7 @@ fun ChangelogsScreen(
 ) {
     var isGoBackClicked by rememberSaveable { mutableStateOf(false) }
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
-    val version = getVersionName()
+    val version = VERSION_NAME
     val currentVersion = if (version.contains("-")) version.split("-")[0] else version
     val uriHandler = LocalUriHandler.current
     val layoutResult = remember { mutableStateOf<TextLayoutResult?>(null) }
@@ -171,8 +171,6 @@ fun ChangelogsScreen(
                             )
                         }
                     }
-                } else {
-                    Text("Loading...")
                 }
             }
         }
