@@ -10,7 +10,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             // Navigation
-            implementation(libs.androidx.navigation.compose)
+            implementation(libs.jetbrains.navigation.compose)
             // Koin
             implementation(libs.koin.core)
             implementation(libs.koin.core.viewmodel)

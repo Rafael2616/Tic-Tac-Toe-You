@@ -26,7 +26,7 @@ kotlin {
             implementation(libs.koin.core.viewmodel)
             implementation(libs.koin.compose)
             // Navigation
-            implementation(libs.androidx.navigation.compose)
+            implementation(libs.jetbrains.navigation.compose)
 
             // Projects
             implementation(projects.core.resources)

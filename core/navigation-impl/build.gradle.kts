@@ -13,7 +13,7 @@ kotlin {
             // Kotlin
             implementation(libs.kotlinx.serialization.json)
             // Navigation
-            implementation(libs.androidx.navigation.compose)
+            implementation(libs.jetbrains.navigation.compose)
             // Koin
             api(libs.koin.core)
             implementation(libs.koin.compose.viewmodel)
