@@ -10,7 +10,7 @@ import org.koin.core.module.Module
 import org.koin.dsl.module
 
 actual val coreSettingsModule: Module = module {
-    val databaseDirectory = File(System.getProperty("user.home"), "settings.db")
+    val databaseDirectory = File(System.getProperty("java.io.tmpdir"), "settings.db")
     single {
         Room.databaseBuilder<SettingsDatabase>(
             databaseDirectory.absolutePath,
