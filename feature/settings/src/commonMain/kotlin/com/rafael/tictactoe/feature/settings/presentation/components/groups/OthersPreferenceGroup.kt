@@ -1,6 +1,9 @@
 package com.rafael.tictactoe.feature.settings.presentation.components.groups
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.rafael.tictactoe.core.resources.Res
 import com.rafael.tictactoe.core.resources.group_others
@@ -18,7 +21,10 @@ fun OthersPreferenceGroup(
     state: SettingsState,
     navController: NavController,
 ) {
-    PreferenceGroup(heading = Res.string.group_others) {
+    PreferenceGroup(
+        heading = Res.string.group_others,
+        modifier = Modifier.padding(bottom = 8.dp),
+    ) {
         AboutAppPreference(onEvent, state)
         ViewOnGithubPreference()
         UpdateHistoryPreference(navController)
