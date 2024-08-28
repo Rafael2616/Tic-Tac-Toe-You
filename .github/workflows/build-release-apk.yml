@@ -46,7 +46,7 @@ jobs:
 
 
   build-release-desktop-msi:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Checkout code
