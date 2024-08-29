@@ -144,7 +144,7 @@ kotlin {
 }
 
 dependencies {
-    baselineProfile(projects.baselineprofile)
+    baselineProfile(projects.baselineProfile)
 }
 
 baselineProfile {

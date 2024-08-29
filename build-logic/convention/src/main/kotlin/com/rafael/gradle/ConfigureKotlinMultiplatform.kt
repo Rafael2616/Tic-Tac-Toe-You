@@ -90,5 +90,5 @@ fun Project.kotlinMultiplatformExtension(block: KotlinMultiplatformExtension.() 
 
 val Project.javaVersion: JavaVersion
     get() = JavaVersion.toVersion(
-        libs.findVersion("javaVersion").get().toString(),
+        libs.findVersion("jvmTarget").get().toString(),
     )

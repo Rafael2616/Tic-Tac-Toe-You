@@ -63,4 +63,4 @@ include(":libs:extendedColors")
 include(":libs:moko-permissions-jvm:permissions")
 include(":libs:moko-permissions-jvm:permissions-compose")
 
-include(":baselineprofile")
+include(":baseline-profile")

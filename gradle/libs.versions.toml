@@ -4,7 +4,7 @@ targetSdk = "35"
 compileSdk = "35"
 versionCode = "164"
 versionName = "1.7.3"
-javaVersion = "17"
+jvmTarget = "17"
 
 # Plugins
 agp = "8.5.2"
