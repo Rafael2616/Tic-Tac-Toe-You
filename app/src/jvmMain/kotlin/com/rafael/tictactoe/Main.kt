@@ -26,7 +26,7 @@ fun main() = application {
         onCloseRequest = ::exitApplication,
         icon = painterResource("ic_launcher_foreground.png"),
     ) {
-        window.minimumSize = Dimension(400, 650)
+        window.minimumSize = Dimension(400, 750)
         TicTacToeNavGraph()
     }
 }
