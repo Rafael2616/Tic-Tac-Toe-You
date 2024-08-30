@@ -16,8 +16,6 @@ kotlin {
             implementation(libs.koin.androidx.compose)
         }
         commonMain.dependencies {
-            // AndroidX
-            implementation(libs.androidx.annotation)
             // Navigation
             implementation(libs.jetbrains.navigation.compose)
             // Koin
