@@ -117,11 +117,12 @@ licensee {
 kotlin {
     sourceSets {
         androidMain.dependencies {
-            // Android Core
+            // AndroidX
             implementation(libs.androidx.core)
             implementation(libs.androidx.activity.compose)
             implementation(libs.androidx.core.splashscreen)
             implementation(libs.androidx.profileinstaller)
+            implementation(libs.androidx.annotation)
         }
         androidUnitTest.dependencies {
             implementation(libs.junit)
@@ -132,8 +133,6 @@ kotlin {
             implementation(libs.mockk)
         }
         commonMain.dependencies {
-            implementation(libs.androidx.annotation)
-
             // Projects
             implementation(projects.core.di)
             implementation(projects.core.platform)
