@@ -19,8 +19,6 @@ kotlin {
             // Kotlin
             implementation(libs.kotlinx.coroutines)
             implementation(libs.kotlinx.collections.immutable)
-            // AndroidX
-            implementation(libs.androidx.annotation)
             // Koin
             api(libs.koin.core)
             implementation(libs.koin.core.viewmodel)
