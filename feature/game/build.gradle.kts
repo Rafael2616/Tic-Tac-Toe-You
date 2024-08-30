@@ -14,6 +14,9 @@ kotlin {
             // Koin
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
+            // Media3
+            implementation(libs.androidx.media3.common)
+            implementation(libs.androidx.media3.exoplayer)
         }
         commonMain.dependencies {
             // Kotlin
@@ -22,9 +25,6 @@ kotlin {
             implementation(libs.kotlinx.collections.immutable)
             // AndroidX
             implementation(libs.androidx.annotation)
-            // Media3
-            implementation(libs.androidx.media3.common)
-            implementation(libs.androidx.media3.exoplayer)
             // Koin
             api(libs.koin.core)
             implementation(libs.koin.core.viewmodel)
