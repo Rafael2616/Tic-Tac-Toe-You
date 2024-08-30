@@ -23,7 +23,7 @@ actual fun AppTheme(
     // This is necessary as compose 'isSystemInDarkTheme()' has a bug that not trigger the recomposition in jvm
     // See: https://youtrack.jetbrains.com/issue/CMP-5871/
     // Remove when the issue below is fixed
-    var recomposableIsSystemInDarkTheme by remember { mutableStateOf( currentSystemTheme.name == "DARK" ) }
+    var recomposableIsSystemInDarkTheme by remember { mutableStateOf(currentSystemTheme.name == "DARK") }
 
     // Handle which color scheme will be applied
     val colors = if (isFollowingSystemOn) {
