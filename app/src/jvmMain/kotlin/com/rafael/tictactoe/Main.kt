@@ -1,5 +1,6 @@
 package com.rafael.tictactoe
 
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -15,7 +16,7 @@ import java.awt.Dimension
 import org.jetbrains.compose.resources.stringResource
 
 fun main() = application {
-    initKoinJvm()
+    remember { initKoinJvm() }
     Window(
         title = stringResource(Res.string.app_name),
         state = rememberWindowState(
