@@ -55,7 +55,11 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalFoundationApi::class)
 @Composable
-fun ApplicationScope.CustomTitleBar(window: ComposeWindow, windowScope: WindowScope) {
+fun ApplicationScope.CustomTitleBar(
+    window: ComposeWindow,
+    windowScope: WindowScope,
+    modifier: Modifier = Modifier,
+) {
     var isMinimized by remember { mutableStateOf(window.isMinimized) }
     val settingsViewModel = koinViewModel<SettingsViewModel>()
     val state by settingsViewModel.state.collectAsStateWithLifecycle()
@@ -95,7 +99,7 @@ fun ApplicationScope.CustomTitleBar(window: ComposeWindow, windowScope: WindowSc
                     ),
                 )
                 Row(
-                    modifier = Modifier
+                    modifier = modifier
                         .fillMaxWidth()
                         .background(MaterialTheme.colorScheme.surface)
                         .height(35.dp)
@@ -143,10 +147,14 @@ fun ApplicationScope.CustomTitleBar(window: ComposeWindow, windowScope: WindowSc
                                 delayMillis = 600,
                                 tooltipPlacement = TooltipPlacement.CursorPoint(
                                     alignment = Alignment.BottomEnd,
-                                    offset = if (index % 2 == 0) DpOffset(
-                                        10.dp,
-                                        10.dp,
-                                    ) else DpOffset.Zero, // tooltip offset
+                                    offset = if (index % 2 == 0) {
+                                        DpOffset(
+                                            10.dp,
+                                            10.dp,
+                                        )
+                                    } else {
+                                        DpOffset.Zero
+                                    }, // tooltip offset
                                 ),
                             ) {
                                 IconButton(
@@ -197,13 +205,5 @@ data class TitleBarIcon(
 enum class TitleBarName {
     MINIMIZE,
     MAXIMIZE,
-    CLOSE
+    CLOSE,
 }
-//modifier = Modifier
-//.background(exitButtonBackgroundColor)
-//.onPointerEvent(PointerEventType.Move) {
-//    exitButtonBackgroundColor = Color.Red
-//}
-//.onPointerEvent(PointerEventType.Exit) {
-//    exitButtonBackgroundColor = Color.Transparent
-//},
