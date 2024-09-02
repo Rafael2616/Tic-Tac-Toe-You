@@ -12,7 +12,7 @@ internal fun cpuMovesHandler(state: GameState): MutableMap<String, Any>? {
     val isCPUPlayer1 = state.isCPUPlayer1
     val isXImage = state.isXImage
     val isGameFinished = state.isGameFinished
-    val level = state.cpuDifficultyLevel
+    val level = state.selectedDifficultyLevel.level
     val moveParams: MutableMap<String, Any> = mutableMapOf()
 
     if (isGameFinished) return null

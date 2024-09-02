@@ -32,7 +32,6 @@ data class GameState(
     val player2NameOnCounter: String = "",
     val isCPU: Boolean = false,
     val gameMode: GameMode = GameMode.PvP,
-    val cpuDifficultyLevel: CPUDifficultyLevel = CPUDifficultyLevel.Medium,
     val isCPUPlayer1: Boolean = false,
     val isUsingEasyLevel: Boolean = false,
     val showExitGameDialog: Boolean = false,

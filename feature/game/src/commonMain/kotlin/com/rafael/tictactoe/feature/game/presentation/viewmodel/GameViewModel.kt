@@ -112,10 +112,7 @@ class GameViewModel(
 
             is GameEvent.SelectCPUDifficultyMode -> {
                 _state.update {
-                    it.copy(
-                        selectedDifficultyLevel = event.level,
-                        // cpuDifficultyLevel = event.level.level,
-                    )
+                    it.copy(selectedDifficultyLevel = event.level)
                 }
             }
 
@@ -255,9 +252,7 @@ class GameViewModel(
     }
 
     private fun setupGameMode(mode: GameMode) {
-        _state.update { it.copy(gameMode = mode) }.also {
-            println("Starting new match in ${state.value.gameMode} game mode!")
-        }
+        _state.update { it.copy(gameMode = mode) }
 
         setPlayerNamesOnCounter()
         switchPlayerNamesOrder()
@@ -346,6 +341,8 @@ class GameViewModel(
         switchPlayerNamesOrder()
         setPlayerNamesOnCounter()
         updateCurrentToastName()
+
+        println("Starting new match in ${state.value.gameMode} game mode!")
     }
 
     private fun resetVictoryCounter() {
