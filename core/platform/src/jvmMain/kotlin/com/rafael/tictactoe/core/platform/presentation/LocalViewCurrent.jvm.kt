@@ -10,6 +10,7 @@ actual class LocalViewCurrent {
         actual val height: Int
             @Composable
             get() = LocalWindowInfo.current.containerSize.height
+
         @OptIn(ExperimentalComposeUiApi::class)
         actual val width: Int
             @Composable
