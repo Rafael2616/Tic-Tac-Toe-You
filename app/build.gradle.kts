@@ -139,6 +139,15 @@ kotlin {
             implementation(projects.core.navigationImpl)
             implementation(projects.core.resources)
         }
+        jvmMain {
+            val licenseeTask = tasks.named<LicenseeTask>("licenseeJvm")
+            val copyArtifactsTask = tasks.register<Copy>("copyJvmArtifacts") {
+                dependsOn(licenseeTask)
+                from(licenseeTask.map { it.outputDir.file("artifacts.json") })
+                into(layout.buildDirectory.dir("generated/dependencyAssets/jvm"))
+            }
+            resources.srcDir(copyArtifactsTask.map { it.destinationDir })
+        }
     }
 }
 

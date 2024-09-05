@@ -32,7 +32,7 @@ actual class OssLibraryRepository {
         .stateIn(MainScope(), SharingStarted.Lazily, emptyList())
 
     private fun loadJsonFile(): String? {
-        val resourcePath = "build/generated/dependencyAssets/debug/artifacts.json"
+        val resourcePath = "build/generated/dependencyAssets/jvm/artifacts.json"
         return try {
             val resource = File(resourcePath)
             resource.readText()
