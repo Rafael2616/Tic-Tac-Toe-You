@@ -1,6 +1,7 @@
 package com.rafael.tictactoe.core.settings.domain.model
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.rafael.tictactoe.core.settings.domain.model.BoardConstants.DEF_CARDS_BORDER_THICKNESS
 import com.rafael.tictactoe.core.settings.domain.model.BoardConstants.DEF_CARDS_CORNER_RADIUS
 import com.rafael.tictactoe.core.settings.domain.model.BoardConstants.DEF_CARDS_ELEVATION
@@ -8,7 +9,7 @@ import com.rafael.tictactoe.core.settings.domain.model.BoardConstants.DEF_CARDS_
 
 @Entity(tableName = "settings")
 data class SettingsEntity(
-    @androidx.room.PrimaryKey
+    @PrimaryKey
     var id: Int = 1,
     var isBackgroundMusicOn: Boolean,
     var isDarkThemeOn: Boolean,
