@@ -1,7 +1,7 @@
 package com.rafael.tictactoe.core.settings.di.modules
 
 import androidx.room.Room
-import com.rafael.tictactoe.core.settings.data.database.Migrations
+import com.rafael.tictactoe.core.settings.data.database.LegacyMigrations
 import com.rafael.tictactoe.core.settings.data.database.SettingsDatabase
 import com.rafael.tictactoe.core.settings.data.repository.SettingsRepositoryImpl
 import org.koin.android.ext.koin.androidContext
@@ -16,9 +16,9 @@ actual val coreSettingsModule: Module = module {
             SettingsDatabase.DATABASE_NAME,
         )
             .addMigrations(
-                Migrations.migration1To2,
-                Migrations.migration2To3,
-                Migrations.migration3To4,
+                LegacyMigrations.migration1To2,
+                LegacyMigrations.migration2To3,
+                LegacyMigrations.migration3To4,
             )
             .fallbackToDestructiveMigration(true)
             .build()
