@@ -62,13 +62,13 @@ actual fun AppTheme(
     )
 
     // Set System Bars Colors
-    DisposableEffect(isDarkThemeOn) {
+    DisposableEffect(isDarkThemeOn, isSystemInDarkTheme) {
         val activity = context as ComponentActivity
         activity.enableEdgeToEdge(
             statusBarStyle = SystemBarStyle.auto(
                 Color.TRANSPARENT,
                 Color.TRANSPARENT,
-            ) { isDarkThemeOn },
+            ) { isDarkThemeOn  && isSystemInDarkTheme && isFollowingSystemOn || !isFollowingSystemOn && isDarkThemeOn},
             navigationBarStyle = SystemBarStyle.auto(
                 Color.TRANSPARENT,
                 Color.TRANSPARENT,
