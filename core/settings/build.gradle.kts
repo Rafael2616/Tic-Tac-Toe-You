@@ -23,7 +23,6 @@ kotlin {
             implementation(libs.kotlinx.coroutines)
             // Room
             implementation(libs.androidx.room.runtime)
-            implementation(libs.androidx.sqlite.bundled)
             // Koin
             api(libs.koin.core)
             implementation(libs.koin.core.viewmodel)
@@ -33,6 +32,8 @@ kotlin {
         jvmMain.dependencies {
             // Coroutines swing
             api(libs.kotlinx.coroutines.swing)
+            // Sqlite
+            implementation(libs.androidx.sqlite.bundled)
         }
     }
 }
