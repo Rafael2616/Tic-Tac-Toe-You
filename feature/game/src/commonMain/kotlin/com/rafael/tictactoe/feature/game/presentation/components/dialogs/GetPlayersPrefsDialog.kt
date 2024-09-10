@@ -205,6 +205,7 @@ internal fun GetPlayersPrefsDialog(
                         enabled = if (state.gameMode == GameMode.VsCPU) textField1State else true,
                         keyboardOptions = keyboardOptions,
                         colors = textFieldColors,
+                        singleLine = true,
                         modifier = Modifier
                             .weight(1f)
                             .focusRequester(focusRequester),
@@ -241,6 +242,7 @@ internal fun GetPlayersPrefsDialog(
                             enabled = if (state.gameMode == GameMode.VsCPU) !textField1State else true,
                             keyboardOptions = keyboardOptions,
                             colors = textFieldColors,
+                            singleLine = true,
                             modifier = Modifier.weight(1f),
                         )
                     }

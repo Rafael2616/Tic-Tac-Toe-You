@@ -18,6 +18,6 @@ fun UpdateHistoryPreference(
         title = Res.string.update_history,
         leadingIcon = Icons.Outlined.History,
         trailingIcon = Icons.AutoMirrored.Filled.ArrowForward,
-        onClick = { navController.navigate(Changelogs("changelogsScreen")) },
+        onClick = { navController.navigate(Changelogs) },
     )
 }

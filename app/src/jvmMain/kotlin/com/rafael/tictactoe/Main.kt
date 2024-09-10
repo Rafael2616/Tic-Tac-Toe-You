@@ -2,7 +2,6 @@ package com.rafael.tictactoe
 
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
@@ -12,7 +11,9 @@ import com.rafael.tictactoe.core.di.initKoinJvm
 import com.rafael.tictactoe.core.navigation.impl.TicTacToeNavGraph
 import com.rafael.tictactoe.core.resources.Res
 import com.rafael.tictactoe.core.resources.app_name
+import com.rafael.tictactoe.core.resources.ic_launcher_foreground
 import java.awt.Dimension
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 fun main() = application {
@@ -25,7 +26,7 @@ fun main() = application {
             position = WindowPosition.Aligned(Alignment.Center),
         ),
         onCloseRequest = ::exitApplication,
-        icon = painterResource("ic_launcher_foreground.png"),
+        icon = painterResource(Res.drawable.ic_launcher_foreground),
     ) {
         window.minimumSize = Dimension(400, 750)
         TicTacToeNavGraph()
