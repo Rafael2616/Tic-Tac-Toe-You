@@ -21,7 +21,9 @@ pluginManagement {
 }
 
 dependencyResolutionManagement {
-    repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
+    // Remove the comment below when this issue is fixed https://youtrack.jetbrains.com/issue/KT-68533/Kotlin-2.0-WasmJs-error-when-using-RepositoriesMode.FAILONPROJECTREPOS
+    // repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
+
     repositories {
         google {
             content {

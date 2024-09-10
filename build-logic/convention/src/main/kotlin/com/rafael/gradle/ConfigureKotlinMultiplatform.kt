@@ -7,7 +7,9 @@ import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinJsCompile
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -74,8 +76,33 @@ internal fun Project.configureKotlinMultiplatform(
                     isStatic = true
                 }
             }
+            @OptIn(ExperimentalWasmDsl::class)
+            wasmJs {
+                moduleName = project.name
+                browser()
+//                https://youtrack.jetbrains.com/issue/KT-68614
+//                browser {
+//                    val projectDirPath = project.projectDir.path
+//                    commonWebpackConfig {
+//                        outputFileName = "${project.name}.js"
+//                        devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
+//                            static = (static ?: mutableListOf()).apply {
+//                                // Serve sources to debug inside browser
+//                                add(projectDirPath)
+//                            }
+//                        }
+//                    }
+//                }
+                binaries.executable()
+            }
         }
         tasks.withType<KotlinCompile>().configureEach {
+            // Remove when expect/actual declaration becomes stable
+            compilerOptions {
+                freeCompilerArgs.add("-Xexpect-actual-classes")
+            }
+        }
+        tasks.withType<KotlinJsCompile>().configureEach {
             // Remove when expect/actual declaration becomes stable
             compilerOptions {
                 freeCompilerArgs.add("-Xexpect-actual-classes")
