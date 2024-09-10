@@ -27,7 +27,7 @@ import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.toRoute
+import androidx.navigation.NavDestination.Companion.hasRoute
 import com.rafael.tictactoe.core.navigation.Changelogs
 import com.rafael.tictactoe.core.resources.Res
 import com.rafael.tictactoe.core.resources.close
@@ -103,12 +103,12 @@ fun WhatsNewDialog(
             }
         },
         confirmButton = {
-            if (navController.currentBackStackEntry?.toRoute<Changelogs>()?.screenName != "changelogsScreen") {
+            if (navController.currentBackStackEntry?.destination?.hasRoute(Changelogs::class) == false) {
                 OutlinedButton(
                     contentPadding = PaddingValues(horizontal = 12.dp),
                     onClick = {
                         onEvent(SettingsEvent.HideWhatsNewDialog)
-                        navController.navigate(Changelogs("changelogsScreen"))
+                        navController.navigate(Changelogs)
                     },
                 ) {
                     Text(text = stringResource(Res.string.see_history))

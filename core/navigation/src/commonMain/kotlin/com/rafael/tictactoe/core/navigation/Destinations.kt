@@ -21,8 +21,6 @@ data object LibraryInfo : Destinations
 data object SettingsSearch : Destinations
 
 @Serializable
-data class Changelogs(
-    val screenName: String = "",
-) : Destinations
+data object Changelogs: Destinations
 
 interface Destinations
