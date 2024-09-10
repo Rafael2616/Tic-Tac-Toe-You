@@ -2,7 +2,7 @@ package com.rafael.tictactoe.feature.game.domain.model
 
 import com.rafael.tictactoe.core.domain.network.Error
 import com.rafael.tictactoe.core.domain.network.Result
-import com.rafael.tictactoe.core.game.domain.model.GameMode
+import com.rafael.tictactoe.core.navigation.GameMode
 import com.rafael.tictactoe.feature.game.domain.repository.ErrorMessage
 
 data class GameState(

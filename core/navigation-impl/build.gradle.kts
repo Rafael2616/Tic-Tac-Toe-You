@@ -23,7 +23,6 @@ kotlin {
 
             // Projects
             api(projects.core.navigation)
-            implementation(projects.core.game)
             implementation(projects.core.platform)
             implementation(projects.core.resources)
             implementation(projects.core.ui)

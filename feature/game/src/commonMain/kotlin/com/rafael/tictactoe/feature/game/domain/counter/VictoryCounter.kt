@@ -1,6 +1,6 @@
 package com.rafael.tictactoe.feature.game.domain.counter
 
-import com.rafael.tictactoe.core.game.domain.model.GameMode
+import com.rafael.tictactoe.core.navigation.GameMode
 import com.rafael.tictactoe.core.resources.Res
 import com.rafael.tictactoe.core.resources.cpu
 import com.rafael.tictactoe.core.resources.player

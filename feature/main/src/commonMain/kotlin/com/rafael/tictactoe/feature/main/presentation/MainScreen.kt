@@ -37,9 +37,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.rafael.tictactoe.core.game.domain.model.GameMode
 import com.rafael.tictactoe.core.navigation.Destinations
 import com.rafael.tictactoe.core.navigation.Game
+import com.rafael.tictactoe.core.navigation.GameMode
 import com.rafael.tictactoe.core.navigation.Settings
 import com.rafael.tictactoe.core.platform.configuration.isInLandscape
 import com.rafael.tictactoe.core.resources.Res

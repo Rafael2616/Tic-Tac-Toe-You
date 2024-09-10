@@ -1,4 +1,4 @@
-package com.rafael.tictactoe.core.game.domain.model
+package com.rafael.tictactoe.core.navigation
 
 import kotlinx.serialization.Serializable
 

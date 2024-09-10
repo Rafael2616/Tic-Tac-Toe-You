@@ -13,7 +13,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import com.rafael.tictactoe.core.game.domain.model.GameMode
+import com.rafael.tictactoe.core.navigation.GameMode
 import com.rafael.tictactoe.core.platform.Platform
 import com.rafael.tictactoe.core.platform.presentation.OnBack
 import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent

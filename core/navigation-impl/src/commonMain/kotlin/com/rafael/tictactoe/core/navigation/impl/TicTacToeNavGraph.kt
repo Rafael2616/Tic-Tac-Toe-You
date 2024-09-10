@@ -13,10 +13,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import com.rafael.tictactoe.core.game.domain.model.GameMode
 import com.rafael.tictactoe.core.navigation.Changelogs
 import com.rafael.tictactoe.core.navigation.Destinations
 import com.rafael.tictactoe.core.navigation.Game
+import com.rafael.tictactoe.core.navigation.GameMode
 import com.rafael.tictactoe.core.navigation.LibraryInfo
 import com.rafael.tictactoe.core.navigation.Main
 import com.rafael.tictactoe.core.navigation.Settings

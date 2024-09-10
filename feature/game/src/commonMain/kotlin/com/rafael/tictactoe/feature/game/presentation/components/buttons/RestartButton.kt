@@ -21,7 +21,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rafael.tictactoe.core.domain.util.Colors
-import com.rafael.tictactoe.core.game.domain.model.GameMode
+import com.rafael.tictactoe.core.navigation.GameMode
 import com.rafael.tictactoe.core.platform.configuration.isInLandscape
 import com.rafael.tictactoe.core.resources.Res
 import com.rafael.tictactoe.core.resources.restart
