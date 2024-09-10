@@ -37,7 +37,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.onPointerEvent
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpOffset
@@ -48,8 +47,10 @@ import androidx.compose.ui.window.WindowScope
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.rafael.tictactoe.core.resources.Res
 import com.rafael.tictactoe.core.resources.app_name
+import com.rafael.tictactoe.core.resources.ic_launcher_foreground
 import com.rafael.tictactoe.core.ui.theme.AppTheme
 import com.rafael.tictactoe.feature.settings.presentation.viewmodel.SettingsViewModel
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -108,7 +109,7 @@ fun ApplicationScope.CustomTitleBar(
                     horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.Start),
                 ) {
                     Image(
-                        painter = painterResource("ic_launcher_foreground.png"),
+                        painter = painterResource(Res.drawable.ic_launcher_foreground),
                         contentDescription = null,
                         modifier = Modifier.size(24.dp),
                     )
