@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="lazyColumnScrollbar-wasm-js">
+    <output-path>$PROJECT_DIR$/libs/lazyColumnScrollbar/build/libs</output-path>
+    <root id="archive" name="lazyColumnScrollbar-wasm-js.jar">
+      <element id="module-output" name="TicTacToe-You.libs.lazyColumnScrollbar.wasmJsMain" />
+    </root>
+  </artifact>
+</component>

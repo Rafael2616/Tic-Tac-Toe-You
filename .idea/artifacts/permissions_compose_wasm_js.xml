@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="permissions-compose-wasm-js">
+    <output-path>$PROJECT_DIR$/libs/moko-permissions-jvm/permissions-compose/build/libs</output-path>
+    <root id="archive" name="permissions-compose-wasm-js.jar">
+      <element id="module-output" name="TicTacToe-You.libs.moko-permissions-jvm.permissions-compose.wasmJsMain" />
+    </root>
+  </artifact>
+</component>

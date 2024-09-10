@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="platform-wasm-js">
+    <output-path>$PROJECT_DIR$/core/platform/build/libs</output-path>
+    <root id="archive" name="platform-wasm-js.jar">
+      <element id="module-output" name="TicTacToe-You.core.platform.wasmJsMain" />
+    </root>
+  </artifact>
+</component>
