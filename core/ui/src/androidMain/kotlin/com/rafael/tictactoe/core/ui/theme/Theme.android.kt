@@ -68,7 +68,7 @@ actual fun AppTheme(
             statusBarStyle = SystemBarStyle.auto(
                 Color.TRANSPARENT,
                 Color.TRANSPARENT,
-            ) { isDarkThemeOn  && isSystemInDarkTheme && isFollowingSystemOn || !isFollowingSystemOn && isDarkThemeOn},
+            ) { isDarkThemeOn && isSystemInDarkTheme && isFollowingSystemOn || !isFollowingSystemOn && isDarkThemeOn },
             navigationBarStyle = SystemBarStyle.auto(
                 Color.TRANSPARENT,
                 Color.TRANSPARENT,
