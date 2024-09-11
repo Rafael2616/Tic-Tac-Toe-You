@@ -1,6 +1,5 @@
 package com.rafael.tictactoe.core.navigation
 
-import com.rafael.tictactoe.core.game.domain.model.GameMode
 import kotlinx.serialization.Serializable
 
 interface Destinations

@@ -24,7 +24,6 @@ kotlin {
             implementation(libs.koin.compose)
 
             // Projects
-            implementation(projects.core.game)
             implementation(projects.core.ui)
             implementation(projects.core.resources)
             implementation(projects.core.platform)

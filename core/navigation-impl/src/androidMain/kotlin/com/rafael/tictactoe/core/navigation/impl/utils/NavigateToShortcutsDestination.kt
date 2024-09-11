@@ -3,9 +3,9 @@ package com.rafael.tictactoe.core.navigation.impl.utils
 import android.app.Application
 import android.content.Context
 import android.content.Intent
-import com.rafael.tictactoe.core.game.domain.model.GameMode
 import com.rafael.tictactoe.core.navigation.Destinations
 import com.rafael.tictactoe.core.navigation.Game
+import com.rafael.tictactoe.core.navigation.GameMode
 import com.rafael.tictactoe.core.resources.R
 import org.koin.java.KoinJavaComponent.inject
 
