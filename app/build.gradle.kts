@@ -148,6 +148,19 @@ kotlin {
             }
             resources.srcDir(copyArtifactsTask.map { it.destinationDir })
         }
+        wasmJsMain {
+            val licenseeTask = tasks.named<LicenseeTask>("licenseeWasmJs")
+            val copyArtifactsTask = tasks.register<Copy>("copyWasmJsArtifacts") {
+                dependsOn(licenseeTask)
+                from(licenseeTask.map { it.outputDir.file("artifacts.json") })
+                into(layout.buildDirectory.dir("processedResources/wasmJs/main/generated/dependencyAssets/wasmJs"))
+            }
+            resources.srcDir(copyArtifactsTask.map { it.destinationDir })
+
+            tasks.named("wasmJsProcessResources") {
+                dependsOn(copyArtifactsTask)
+            }
+        }
     }
 }
 
