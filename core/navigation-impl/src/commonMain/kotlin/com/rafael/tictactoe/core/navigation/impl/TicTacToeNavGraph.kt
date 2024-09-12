@@ -70,7 +70,7 @@ fun TicTacToeNavGraph(
         val settingsState by settingsViewModel.state.collectAsStateWithLifecycle()
         val onSettingsEvent = settingsViewModel::onEvent
         val changelogsViewModel = koinViewModel<ChangelogsViewModel>()
-        val currentChangelog = changelogsViewModel.getCurrent()
+        val currentChangelog by changelogsViewModel.currentChangelog.collectAsStateWithLifecycle()
 
         AppTheme(
             state = settingsState,
@@ -149,7 +149,8 @@ fun TicTacToeNavGraph(
                         )
                     }
                     composable<Changelogs> {
-                        val allChangelogs = changelogsViewModel.getAll()
+                        changelogsViewModel.getAll()
+                        val allChangelogs by changelogsViewModel.allChangelogs.collectAsStateWithLifecycle()
                         ChangelogsScreen(
                             navController = navController,
                             settingsState = settingsState,

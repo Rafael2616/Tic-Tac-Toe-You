@@ -1,10 +1,10 @@
 package com.rafael.tictactoe.feature.changelogs.data
 
 import com.rafael.tictactoe.core.domain.util.BuildInfo.VERSION_NAME
+import com.rafael.tictactoe.core.platform.dispatchers.IO
 import com.rafael.tictactoe.feature.changelogs.Res
 import com.rafael.tictactoe.feature.changelogs.domain.Changelog
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 import kotlinx.coroutines.invoke
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.MissingResourceException
