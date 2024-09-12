@@ -7,7 +7,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.navigation.NavController
-import coil3.Uri
 import com.rafael.tictactoe.core.platform.permissions.PermissionsState
 import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.core.settings.domain.model.SettingsState
@@ -25,8 +24,7 @@ fun SettingsScreen(
     requestGalleryPermission: () -> Unit,
     onEvent: (SettingsEvent) -> Unit,
     onDeleteImage: () -> Unit,
-    onSaveImage: (Uri) -> Unit,
-    onSaveImageByBitmap: (bitmap: ImageBitmap?) -> Unit,
+    onSaveImage: (bitmap: ImageBitmap?) -> Unit,
 ) {
     val latestOnEvent by rememberUpdatedState(onEvent)
 
@@ -51,7 +49,6 @@ fun SettingsScreen(
             requestGalleryPermission,
             onDeleteImage,
             onSaveImage,
-            onSaveImageByBitmap,
         )
     }
 

@@ -125,8 +125,7 @@ fun TicTacToeNavGraph(
                             requestGalleryPermission = permissionsViewModel::provideOrRequestGalleryPermission,
                             onEvent = onSettingsEvent,
                             onDeleteImage = settingsViewModel::onDeleteImage,
-                            onSaveImage = settingsViewModel::onSaveImage,
-                            onSaveImageByBitmap = settingsViewModel::onSaveImageByBitmap,
+                            onSaveImage = settingsViewModel::onSaveImageByBitmap,
                         )
                     }
                     composable<LibraryInfo> {
