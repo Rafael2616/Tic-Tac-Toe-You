@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import coil3.Uri
 import com.rafael.tictactoe.core.domain.util.BuildInfo.VERSION_NAME
 import com.rafael.tictactoe.core.domain.util.toColor
+import com.rafael.tictactoe.core.platform.dispatchers.IO
 import com.rafael.tictactoe.core.services.music.backgroundMusic
 import com.rafael.tictactoe.core.settings.domain.model.SettingsEntity
 import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
@@ -15,7 +16,6 @@ import com.rafael.tictactoe.core.settings.domain.repository.SettingsRepository
 import com.rafael.tictactoe.feature.settings.data.utils.toByteArray
 import com.rafael.tictactoe.feature.settings.domain.profile.ProfilePictureUtilsImpl
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

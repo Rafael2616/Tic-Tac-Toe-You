@@ -17,6 +17,7 @@ kotlin {
             // Projects
             implementation(projects.core.domain)
             implementation(projects.core.navigation)
+            implementation(projects.core.platform)
             implementation(projects.core.resources)
             implementation(projects.core.settings)
             implementation(projects.core.ui)

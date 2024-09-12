@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.rafael.tictactoe.core.domain.network.onSuccess
 import com.rafael.tictactoe.core.domain.util.toColor
 import com.rafael.tictactoe.core.navigation.GameMode
+import com.rafael.tictactoe.core.platform.dispatchers.IO
 import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.game.domain.audio.cardGridSound
@@ -24,7 +25,6 @@ import com.rafael.tictactoe.feature.game.domain.names.ToastNameController
 import com.rafael.tictactoe.feature.game.domain.repository.GameRepository
 import com.rafael.tictactoe.feature.game.domain.restart.RestartGame
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
