@@ -32,6 +32,9 @@ kotlin {
             // Coil
             api(libs.coil.compose)
             implementation(libs.coil.network)
+            // FileKit
+            implementation(libs.filekit.core)
+            implementation(libs.filekit.compose)
             // ColorPicker Compose
             implementation(libs.skydoves.colorpicker.compose)
 

@@ -110,6 +110,8 @@ licensee {
     allowUrl("http://openjdk.java.net/legal/gplv2+ce.html")
     allowUrl("https://glassfish.dev.java.net/nonav/public/CDDL+GPL.html")
     allowUrl("https://github.com/icerockdev/moko-permissions/blob/master/LICENSE.md")
+    allowUrl("https://github.com/vinceglb/FileKit/blob/main/LICENSE")
+    allowUrl("https://github.com/hypfvieh/dbus-java/blob/master/LICENSE")
 
     unusedAction(IGNORE)
 }

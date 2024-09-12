@@ -287,7 +287,7 @@ class SettingsViewModel(
         }
     }
 
-    // For use in Android
+    // An alternative to get images from gallery by using Uris, for use only in Android
     fun onSaveImage(imageUri: Uri? = null) {
         val profileManager = ProfilePictureUtilsImpl()
         _state.update { it.copy(showProfilePictureMenu = false) }
@@ -304,7 +304,6 @@ class SettingsViewModel(
         }
     }
 
-    // For use in Jvm
     fun onSaveImageByBitmap(imageBitmap: ImageBitmap?) {
         _state.update { it.copy(showProfilePictureMenu = false) }
 
