@@ -17,12 +17,12 @@ class ChangelogsViewModel : ViewModel() {
     val allChangelogs = _allChangelogs.asStateFlow()
     val currentChangelog = _currentChangelog.asStateFlow()
 
-
     init {
         viewModelScope.launch(Dispatchers.IO) {
             getCurrent()
         }
     }
+
     fun getCurrent() {
         viewModelScope.launch(Dispatchers.IO) {
             _currentChangelog.update {
