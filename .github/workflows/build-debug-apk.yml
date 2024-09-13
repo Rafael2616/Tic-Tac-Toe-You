@@ -63,7 +63,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build Desktop Debug MSI
-        run: ./gradlew :app:packageMsi -DmainClass=com.rafael.tictactoe.MainKt --quiet
+        run: ./gradlew :app:packageMsi -DmainClass=MainKt --quiet
 
   build-debug-wasmJs-executable:
     runs-on: ubuntu-latest

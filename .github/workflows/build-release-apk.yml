@@ -66,7 +66,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build Desktop Release MSI
-        run: ./gradlew :app:packageReleaseMsi -DmainClass=com.rafael.tictactoe.MainKt --quiet
+        run: ./gradlew :app:packageReleaseMsi -DmainClass=MainKt --quiet
 
   build-release-wasmJs-executable:
     runs-on: ubuntu-latest
