@@ -35,7 +35,7 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
-    - name: Build Release APK
+    - name: Build Android Release APK
       run: ./gradlew assembleRelease
 
     - name: Upload APK
@@ -43,7 +43,6 @@ jobs:
       with:
         name: app-release
         path: app/build/outputs/apk/release/*.apk
-
 
   build-release-desktop-msi:
     runs-on: windows-latest
@@ -66,8 +65,32 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Build Desktop App
+      - name: Build Desktop Release MSI
         run: ./gradlew packageReleaseMsi
+
+  build-release-wasmJs-executable:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          dependency-graph: generate-and-submit
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build Web Release Distribution
+        run: ./gradlew :app:wasmJsBrowserDistribution
 
   check-kotlin-style:
     runs-on: ubuntu-latest
