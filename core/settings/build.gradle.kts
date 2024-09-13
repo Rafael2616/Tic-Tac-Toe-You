@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+
 plugins {
     alias(libs.plugins.rafael.library)
     alias(libs.plugins.rafael.library.compose)
@@ -13,6 +15,18 @@ room {
 }
 
 kotlin {
+    @OptIn(ExperimentalKotlinGradlePluginApi::class)
+    applyDefaultHierarchyTemplate {
+        common {
+            group("commonNonWasm") {
+                withJvm()
+                withAndroidTarget()
+                group("ios") {
+                    withIos()
+                }
+            }
+        }
+    }
     sourceSets {
         androidMain.dependencies {
             // Koin
@@ -21,8 +35,6 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(libs.kotlinx.coroutines)
-            // Room
-            implementation(libs.androidx.room.runtime)
             // Koin
             api(libs.koin.core)
             implementation(libs.koin.core.viewmodel)
@@ -34,6 +46,18 @@ kotlin {
             api(libs.kotlinx.coroutines.swing)
             // Sqlite
             implementation(libs.androidx.sqlite.bundled)
+        }
+        val commonNonWasmMain by getting {
+            dependencies {
+                implementation(libs.kotlinx.coroutines)
+                // Room
+                implementation(libs.androidx.room.runtime)
+                // Koin
+                api(libs.koin.core)
+                implementation(libs.koin.core.viewmodel)
+                // Projects
+                api(projects.core.domain)
+            }
         }
     }
 }
