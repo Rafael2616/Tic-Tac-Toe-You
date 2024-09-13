@@ -24,7 +24,7 @@ actual class OssLibraryRepository {
             .distinctBy { "${it.groupId}:${it.artifactId}" }
             .sortedBy { it.name }
             .toList()
-         emit(ossLibraries)
+        emit(ossLibraries)
     }
         .flowOn(Dispatchers.Main)
         .stateIn(MainScope(), SharingStarted.Lazily, emptyList())
@@ -36,7 +36,7 @@ actual class OssLibraryRepository {
             loadBytesFromPath(filePath).decodeToString()
         } catch (e: Exception) {
             e.printStackTrace()
-             null
+            null
         }
     }
 }
