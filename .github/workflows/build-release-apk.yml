@@ -36,7 +36,7 @@ jobs:
       run: chmod +x gradlew
 
     - name: Build Android Release APK
-      run: ./gradlew assembleRelease
+      run: ./gradlew :app:assembleRelease
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
@@ -66,7 +66,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build Desktop Release MSI
-        run: ./gradlew packageReleaseMsi
+        run: ./gradlew :app:packageReleaseMsi -DmainClass=com.rafael.tictactoe.MainKt --quiet
 
   build-release-wasmJs-executable:
     runs-on: ubuntu-latest
@@ -94,7 +94,7 @@ jobs:
 
   check-kotlin-style:
     runs-on: ubuntu-latest
-    needs: [ build-release-android-apk, build-release-desktop-msi ]
+    needs: [ build-release-android-apk, build-release-desktop-msi, build-release-wasmJs-executable ]
 
     steps:
     - name: Checkout code

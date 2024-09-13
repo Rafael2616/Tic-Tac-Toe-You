@@ -39,7 +39,7 @@ jobs:
       run: chmod +x gradlew
 
     - name: Build Android Debug APK
-      run: ./gradlew assembleDebug
+      run: ./gradlew :app:assembleDebug
 
   build-debug-desktop-msi:
     runs-on: windows-latest
@@ -63,7 +63,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build Desktop Debug MSI
-        run: ./gradlew packageMsi
+        run: ./gradlew :app:packageMsi -DmainClass=com.rafael.tictactoe.MainKt --quiet
 
   build-debug-wasmJs-executable:
     runs-on: ubuntu-latest
@@ -91,7 +91,7 @@ jobs:
 
   check-kotlin-style:
     runs-on: ubuntu-latest
-    needs: [ build-debug-android-apk, build-debug-desktop-msi ]
+    needs: [ build-debug-android-apk, build-debug-desktop-msi, build-debug-wasmJs-executable ]
 
     steps:
     - name: Checkout code
