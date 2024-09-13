@@ -63,7 +63,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build Desktop Debug MSI
-        run: ./gradlew :app:packageMsi -DmainClass=MainKt --quiet
+        run: ./gradlew :app:createDistributable
 
   build-debug-wasmJs-executable:
     runs-on: ubuntu-latest
