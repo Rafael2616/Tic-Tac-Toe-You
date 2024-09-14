@@ -178,7 +178,7 @@ baselineProfile {
 
 compose.desktop {
     application {
-        mainClass = "MainKt"
+        mainClass = "com.rafael.tictactoe.MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb, TargetFormat.Exe)
