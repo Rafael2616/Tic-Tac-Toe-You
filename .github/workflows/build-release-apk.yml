@@ -66,7 +66,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build Desktop Release MSI
-        run: ./gradlew :app:packageReleaseMsi -DmainClass=MainKt --quiet
+        run: ./gradlew :app:createReleaseDistributable
 
   build-release-wasmJs-executable:
     runs-on: ubuntu-latest
@@ -90,7 +90,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build Web Release Distribution
-        run: ./gradlew :app:createReleaseDistributable
+        run: ./gradlew :app:wasmJsBrowserDistribution
 
   check-kotlin-style:
     runs-on: ubuntu-latest
