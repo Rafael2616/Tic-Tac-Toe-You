@@ -11,6 +11,7 @@ import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinJsCompile
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 internal fun Project.configureKotlinMultiplatform(
@@ -41,7 +42,7 @@ internal fun Project.configureKotlinMultiplatform(
                     "/META-INF/LICENSE.md",
                     "/META-INF/LICENSE-notice.md",
                     "/META-INF/gradle/incremental.annotation.processors",
-                 )
+                )
             }
         }
     }
@@ -72,27 +73,26 @@ internal fun Project.configureKotlinMultiplatform(
                 iosSimulatorArm64(),
             ).forEach { iosTarget ->
                 iosTarget.binaries.framework {
-                    baseName = this@configureKotlinMultiplatform.name
+                    baseName = project.name
                     isStatic = true
                 }
             }
             @OptIn(ExperimentalWasmDsl::class)
             wasmJs {
                 moduleName = project.name
-                browser()
-//                https://youtrack.jetbrains.com/issue/KT-68614
-//                browser {
-//                    val projectDirPath = project.projectDir.path
-//                    commonWebpackConfig {
-//                        outputFileName = "${project.name}.js"
-//                        devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-//                            static = (static ?: mutableListOf()).apply {
-//                                // Serve sources to debug inside browser
-//                                add(projectDirPath)
-//                            }
-//                        }
-//                    }
-//                }
+                browser {
+                    val projectDirPath = project.projectDir.path
+                    val projectOutputFileName = "${project.name}.js"
+                    commonWebpackConfig {
+                        outputFileName = projectOutputFileName
+                        devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
+                            static = (static ?: mutableListOf()).apply {
+                                // Serve sources to debug inside browser
+                                add(projectDirPath)
+                            }
+                        }
+                    }
+                }
                 binaries.executable()
             }
         }
