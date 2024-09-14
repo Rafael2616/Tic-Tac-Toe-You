@@ -63,7 +63,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build Desktop Debug MSI
-        run: ./gradlew :app:createDistributable
+        run: ./gradlew :app:packageMsi
 
   build-debug-wasmJs-executable:
     runs-on: ubuntu-latest
@@ -87,7 +87,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build Web Debug Distribution
-        run: ./gradlew :app:wasmJsBrowserDevelopmentExecutableDistribution
+        run: ./gradlew :app:wasmJsBrowserDevelopmentWebpack
 
   check-kotlin-style:
     runs-on: ubuntu-latest

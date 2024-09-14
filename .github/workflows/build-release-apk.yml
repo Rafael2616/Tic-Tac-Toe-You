@@ -66,7 +66,13 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build Desktop Release MSI
-        run: ./gradlew :app:createReleaseDistributable
+        run: ./gradlew :app:packageReleaseMsi
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: desktop-release
+          path: app\build\compose\binaries\main\msi\*.msi
 
   build-release-wasmJs-executable:
     runs-on: ubuntu-latest
@@ -90,7 +96,13 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build Web Release Distribution
-        run: ./gradlew :app:wasmJsBrowserDistribution
+        run: ./gradlew :app:wasmJsBrowserProductionWebpack
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-release
+          path: build/js/packages/app
 
   check-kotlin-style:
     runs-on: ubuntu-latest
