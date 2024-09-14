@@ -14,7 +14,7 @@ import androidx.compose.ui.text.withStyle
 @Composable
 @OptIn(ExperimentalTextApi::class)
 internal fun styledChangelog(changelog: String): AnnotatedString = buildAnnotatedString {
-    val keywords = listOf("Added:", "Fixes:", "Improvements:", "Code:", "Others:")
+    val keywords = listOf("Added:", "Fixes", "Improvements:", "Code:", "Others:")
     val textParts = changelog.split("\n")
 
     textParts.forEachIndexed { index, part ->

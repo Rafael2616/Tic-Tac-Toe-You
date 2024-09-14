@@ -1,0 +1,20 @@
+Added:
+ - The game now has a web application!
+ - The web variant is essentially the same app, missing only the settings configurations persistence as Room does not support wasm yet
+ - Also only music and sound related features are missing from now.
+
+Fixes/All Platforms:
+ - Fix regression in cpuDifficultyLevel variable not being attributed
+
+Fixes/Android:
+ - Fix status bar color not being corrected updated if dark theme is toggled via quick settings e Follow system setting is on
+
+Fixes/Desktop:
+ - Fix when theme is changed in the settings an it not causes an recomposition and consequently not update the app to new theme, this is a know issue in CMP
+ https://youtrack.jetbrains.com/issue/CMP-5871/
+ - Fix weired UI in GetPlayersPrefs dialog text fields if enter key is pressed multiple times
+ - Properly get the real jvm dependencies for library-info feature instead android dependencies
+
+Code:
+ - Misc code refactors and cleanups
+ - Bumped dependencies to their latest versions
