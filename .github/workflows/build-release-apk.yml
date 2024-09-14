@@ -72,7 +72,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: desktop-release
-          path: app\build\compose\binaries\main\msi\*.msi
+          path: app\build\compose\binaries\main-release\msi\*.msi
 
   build-release-wasmJs-executable:
     runs-on: ubuntu-latest
