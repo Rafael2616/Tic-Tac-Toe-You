@@ -1,5 +1,6 @@
 package com.rafael.tictactoe.core.settings.domain.model
 
+import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import com.rafael.tictactoe.core.domain.util.BuildInfo.VERSION_NAME
@@ -11,6 +12,7 @@ import com.rafael.tictactoe.core.settings.domain.model.BoardConstants.DEF_CARDS_
 import com.rafael.tictactoe.core.settings.domain.model.BoardConstants.DEF_CARDS_ELEVATION
 import com.rafael.tictactoe.core.settings.domain.model.BoardConstants.DEF_CARDS_SHADOW
 
+@Stable
 data class SettingsState(
     val color: Colors = Colors.Companion.get(),
     val isBackgroundMusicOn: Boolean = false,
