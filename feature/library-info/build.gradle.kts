@@ -57,5 +57,5 @@ kotlin {
 }
 
 dependencies {
-    debugImplementation("androidx.compose.ui:ui-test-manifest:1.7.1")
+    debugImplementation(libs.androidx.ui.test.manifest)
 }

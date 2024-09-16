@@ -20,6 +20,7 @@ core-splashscreen = "1.2.0-alpha02"
 media3 = "1.4.1"
 baselineprofile = "1.3.0"
 profileinstaller = "1.4.0-rc01"
+uiTestManifest = "1.7.1"
 
 junit = "4.13.2"
 expresso = "3.6.1"
@@ -100,6 +101,7 @@ androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", versi
 androidx-media3-exoplayer = { module = "androidx.media3:media3-exoplayer", version.ref = "media3" }
 androidx-media3-common = { module = "androidx.media3:media3-common", version.ref = "media3" }
 
+androidx-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "uiTestManifest" }
 androidx-uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "uiautomator" }
 androidx-benchmark-macro-junit4 = { group = "androidx.benchmark", name = "benchmark-macro-junit4", version.ref = "benchmarkMacroJunit4" }
 androidx-profileinstaller = { group = "androidx.profileinstaller", name = "profileinstaller", version.ref = "profileinstaller" }
