@@ -55,5 +55,9 @@ kotlin {
             // Ktor
             implementation(libs.ktor.client.ios)
         }
+        wasmJsMain.dependencies {
+            // Ktor
+            implementation(libs.ktor.client.js)
+        }
     }
 }

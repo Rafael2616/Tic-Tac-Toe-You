@@ -39,5 +39,8 @@ kotlin {
         jvmMain.dependencies {
             implementation(libs.ktor.client.android)
         }
+        wasmJsMain.dependencies {
+            implementation(libs.ktor.client.js)
+        }
     }
 }
