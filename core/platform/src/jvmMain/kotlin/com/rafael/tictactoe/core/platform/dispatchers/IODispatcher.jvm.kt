@@ -3,5 +3,5 @@ package com.rafael.tictactoe.core.platform.dispatchers
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 
-actual val Dispatchers.IO: CoroutineDispatcher
-    get() = Default
+actual val Dispatchers.IODispatcher: CoroutineDispatcher
+    get() = IO

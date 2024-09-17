@@ -1,7 +1,7 @@
 package com.rafael.tictactoe.feature.changelogs.data
 
 import com.rafael.tictactoe.core.domain.util.BuildInfo.VERSION_NAME
-import com.rafael.tictactoe.core.platform.dispatchers.IO
+import com.rafael.tictactoe.core.platform.dispatchers.IODispatcher
 import com.rafael.tictactoe.feature.changelogs.Res
 import com.rafael.tictactoe.feature.changelogs.domain.Changelog
 import kotlinx.coroutines.Dispatchers
@@ -19,7 +19,7 @@ internal class ChangelogGetter {
             val correctedVariant = if (variant != "") "" else variant
             var changelogContent = Changelog()
             try {
-                (Dispatchers.IO) {
+                (Dispatchers.IODispatcher) {
                     Res.readBytes("files/changelogs/$versionNumber$correctedVariant.txt")
                         .decodeToString()
                         .trim()
@@ -48,7 +48,7 @@ internal class ChangelogGetter {
             val changelogFiles = mutableListOf<Changelog>()
 
             try {
-                (Dispatchers.IO) {
+                (Dispatchers.IODispatcher) {
                     Res.readBytes("files/changelogs/fileIndex.txt")
                         .decodeToString()
                         .split("\n")

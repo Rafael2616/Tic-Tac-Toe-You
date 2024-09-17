@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import coil3.Uri
 import com.rafael.tictactoe.core.domain.util.BuildInfo.VERSION_NAME
 import com.rafael.tictactoe.core.domain.util.toColor
-import com.rafael.tictactoe.core.platform.dispatchers.IO
+import com.rafael.tictactoe.core.platform.dispatchers.IODispatcher
 import com.rafael.tictactoe.core.services.music.backgroundMusic
 import com.rafael.tictactoe.core.settings.domain.model.SettingsEntity
 import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
@@ -37,7 +37,7 @@ class SettingsViewModel(
 
     // Initialize ViewModel StateFlows variables with corresponding values from SettingsRepository
     init {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IODispatcher) {
             val settings = repository.getAllSettingsValues(1) ?: defaultSettings
             _state.update {
                 it.copy(
@@ -79,7 +79,7 @@ class SettingsViewModel(
             SettingsEvent.ToggleIsBackgroundMusicOn -> {
                 _state.update { it.copy(isBackgroundMusicOn = !it.isBackgroundMusicOn) }
 
-                viewModelScope.launch(Dispatchers.IO) {
+                viewModelScope.launch(Dispatchers.IODispatcher) {
                     val settings = repository.getAllSettingsValues(1) ?: defaultSettings
                     settings.isBackgroundMusicOn = state.value.isBackgroundMusicOn
                     repository.setAllSettingsValues(settings)
@@ -93,7 +93,7 @@ class SettingsViewModel(
             SettingsEvent.ToggleIsDarkThemeOn -> {
                 _state.update { it.copy(isDarkThemeOn = !it.isDarkThemeOn) }
 
-                viewModelScope.launch(Dispatchers.IO) {
+                viewModelScope.launch(Dispatchers.IODispatcher) {
                     val settings = repository.getAllSettingsValues(1) ?: defaultSettings
                     settings.isDarkThemeOn = state.value.isDarkThemeOn
                     repository.setAllSettingsValues(settings)
@@ -103,7 +103,7 @@ class SettingsViewModel(
             SettingsEvent.ToggleIsDynamicColorsOn -> {
                 _state.update { it.copy(isDynamicColorsOn = !it.isDynamicColorsOn) }
 
-                viewModelScope.launch(Dispatchers.IO) {
+                viewModelScope.launch(Dispatchers.IODispatcher) {
                     val settings = repository.getAllSettingsValues(1) ?: defaultSettings
                     settings.isDynamicColorsOn = state.value.isDynamicColorsOn
                     repository.setAllSettingsValues(settings)
@@ -118,7 +118,7 @@ class SettingsViewModel(
                     )
                 }
 
-                viewModelScope.launch(Dispatchers.IO) {
+                viewModelScope.launch(Dispatchers.IODispatcher) {
                     val settings = repository.getAllSettingsValues(1) ?: defaultSettings
                     settings.isFollowingSystemOn = state.value.isFollowingSystemOn
                     settings.isDarkThemeOn = event.isSystemInDarkTheme
@@ -130,7 +130,7 @@ class SettingsViewModel(
             SettingsEvent.ToggleIsSoundEffectsOn -> {
                 _state.update { it.copy(isSoundEffectsOn = !it.isSoundEffectsOn) }
 
-                viewModelScope.launch(Dispatchers.IO) {
+                viewModelScope.launch(Dispatchers.IODispatcher) {
                     val settings = repository.getAllSettingsValues(1) ?: defaultSettings
                     settings.isSoundEffectsOn = state.value.isSoundEffectsOn
                     repository.setAllSettingsValues(settings)
@@ -140,7 +140,7 @@ class SettingsViewModel(
             is SettingsEvent.SetIsDarkThemeOn -> {
                 _state.update { it.copy(isDarkThemeOn = event.value) }
 
-                viewModelScope.launch(Dispatchers.IO) {
+                viewModelScope.launch(Dispatchers.IODispatcher) {
                     val settings = repository.getAllSettingsValues(1) ?: defaultSettings
                     settings.isDarkThemeOn = state.value.isDarkThemeOn
                     repository.setAllSettingsValues(settings)
@@ -188,7 +188,7 @@ class SettingsViewModel(
             }
 
             is SettingsEvent.SelectedWinnerLineColor -> {
-                viewModelScope.launch(Dispatchers.IO) {
+                viewModelScope.launch(Dispatchers.IODispatcher) {
                     val settings = repository.getAllSettingsValues(1) ?: defaultSettings
                     settings.selectedWinnerLineColor = event.value
                     repository.setAllSettingsValues(settings)
@@ -197,7 +197,7 @@ class SettingsViewModel(
             }
 
             is SettingsEvent.SelectedXColor -> {
-                viewModelScope.launch(Dispatchers.IO) {
+                viewModelScope.launch(Dispatchers.IODispatcher) {
                     val settings = repository.getAllSettingsValues(1) ?: defaultSettings
                     settings.selectedXColor = event.value
                     repository.setAllSettingsValues(settings)
@@ -206,7 +206,7 @@ class SettingsViewModel(
             }
 
             is SettingsEvent.SelectedCircleColor -> {
-                viewModelScope.launch(Dispatchers.IO) {
+                viewModelScope.launch(Dispatchers.IODispatcher) {
                     val settings = repository.getAllSettingsValues(1) ?: defaultSettings
                     settings.selectedCircleColor = event.value
                     repository.setAllSettingsValues(settings)
@@ -216,7 +216,7 @@ class SettingsViewModel(
 
             SettingsEvent.HideWhatsNewDialog -> {
                 _state.update { it.copy(showWhatsNewDialog = false) }
-                viewModelScope.launch(Dispatchers.IO) {
+                viewModelScope.launch(Dispatchers.IODispatcher) {
                     val settings = repository.getAllSettingsValues(1) ?: defaultSettings
                     settings.appVersion = VERSION_NAME
                     repository.setAllSettingsValues(settings)
@@ -252,7 +252,7 @@ class SettingsViewModel(
                         isRGBEffectOn = event.isRGBEffectOn,
                     )
                 }
-                viewModelScope.launch(Dispatchers.IO) {
+                viewModelScope.launch(Dispatchers.IODispatcher) {
                     val settings = repository.getAllSettingsValues(1) ?: defaultSettings
                     settings.shapeSelected = event.index
                     settings.boardCardsCornerRadius = event.shape.cornerRadius
@@ -280,7 +280,7 @@ class SettingsViewModel(
                 showProfilePictureMenu = false,
             )
         }
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IODispatcher) {
             val settings = repository.getAllSettingsValues(1) ?: defaultSettings
             settings.profilePicture = null
             repository.setAllSettingsValues(settings)
@@ -292,7 +292,7 @@ class SettingsViewModel(
         val profileManager = ProfilePictureUtilsImpl()
         _state.update { it.copy(showProfilePictureMenu = false) }
 
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IODispatcher) {
             imageUri?.let {
                 val settings = repository.getAllSettingsValues(1) ?: defaultSettings
                 settings.profilePicture = profileManager.getPictureBitmap(imageUri).toByteArray()
@@ -307,7 +307,7 @@ class SettingsViewModel(
     fun onSaveImageByBitmap(imageBitmap: ImageBitmap?) {
         _state.update { it.copy(showProfilePictureMenu = false) }
 
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IODispatcher) {
             imageBitmap?.let { bitmap ->
                 _state.update {
                     it.copy(profilePictureBitmap = bitmap)

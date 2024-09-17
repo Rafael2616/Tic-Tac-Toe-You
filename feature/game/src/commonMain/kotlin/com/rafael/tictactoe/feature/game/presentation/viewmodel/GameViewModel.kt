@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.rafael.tictactoe.core.domain.network.onSuccess
 import com.rafael.tictactoe.core.domain.util.toColor
 import com.rafael.tictactoe.core.navigation.GameMode
-import com.rafael.tictactoe.core.platform.dispatchers.IO
+import com.rafael.tictactoe.core.platform.dispatchers.IODispatcher
 import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import com.rafael.tictactoe.feature.game.domain.audio.cardGridSound
@@ -118,7 +118,7 @@ class GameViewModel(
 
             is GameEvent.GetRemotePlayers -> {
                 searchPlayersJob?.cancel()
-                searchPlayersJob = viewModelScope.launch(Dispatchers.IO) {
+                searchPlayersJob = viewModelScope.launch(Dispatchers.IODispatcher) {
                     val response = repository.getRemotePlayers()
                     response.first.onSuccess { players ->
                         val availablePlayers: Flow<List<Player>> = flow { emit(players) }
@@ -162,28 +162,28 @@ class GameViewModel(
             }
 
             GameEvent.PostRemotePlayer -> {
-                viewModelScope.launch(Dispatchers.IO) {
+                viewModelScope.launch(Dispatchers.IODispatcher) {
                     val requestState = repository.postPlayer(state.value, settingsState.value)
                     _state.update { it.copy(requestState = requestState) }
                 }
             }
 
             GameEvent.RemoveRemotePlayer -> {
-                viewModelScope.launch(Dispatchers.IO) {
+                viewModelScope.launch(Dispatchers.IODispatcher) {
                     val requestState = repository.removePlayer(state.value.matchID)
                     _state.update { it.copy(requestState = requestState) }
                 }
             }
 
             GameEvent.SendInitialOnlineGameState -> {
-                viewModelScope.launch(Dispatchers.IO) {
+                viewModelScope.launch(Dispatchers.IODispatcher) {
                     val requestState = repository.postInitialGameState(state.value.matchID)
                     _state.update { it.copy(requestState = requestState) }
                 }
             }
 
             GameEvent.GetOnlineGameState -> {
-                viewModelScope.launch(Dispatchers.IO) {
+                viewModelScope.launch(Dispatchers.IODispatcher) {
                     val response = repository.getGameState()
                     response.first.onSuccess { gameState ->
                         onlineGameState = gameState
@@ -206,7 +206,7 @@ class GameViewModel(
             }
 
             GameEvent.UpdateOnlineGameState -> {
-                viewModelScope.launch(Dispatchers.IO) {
+                viewModelScope.launch(Dispatchers.IODispatcher) {
                     val requestState = repository.updateGameState(state.value)
                     _state.update { it.copy(requestState = requestState) }
                     requestState.first.onSuccess { gameStateAsFlow ->
@@ -215,7 +215,7 @@ class GameViewModel(
                 }
             }
             GameEvent.EndOnlineMatch -> {
-                viewModelScope.launch(Dispatchers.IO) {
+                viewModelScope.launch(Dispatchers.IODispatcher) {
                     val requestState = repository.endMatch(state.value.matchID)
                     _state.update { it.copy(requestState = requestState) }
                 }

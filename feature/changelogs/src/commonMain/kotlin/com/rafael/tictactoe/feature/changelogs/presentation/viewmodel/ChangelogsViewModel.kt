@@ -2,7 +2,7 @@ package com.rafael.tictactoe.feature.changelogs.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rafael.tictactoe.core.platform.dispatchers.IO
+import com.rafael.tictactoe.core.platform.dispatchers.IODispatcher
 import com.rafael.tictactoe.feature.changelogs.data.ChangelogGetter
 import com.rafael.tictactoe.feature.changelogs.domain.Changelog
 import kotlinx.coroutines.Dispatchers
@@ -18,13 +18,13 @@ class ChangelogsViewModel : ViewModel() {
     val currentChangelog = _currentChangelog.asStateFlow()
 
     init {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IODispatcher) {
             getCurrent()
         }
     }
 
     fun getCurrent() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IODispatcher) {
             _currentChangelog.update {
                 ChangelogGetter.getCurrent()
             }
@@ -32,7 +32,7 @@ class ChangelogsViewModel : ViewModel() {
     }
 
     fun getAll() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IODispatcher) {
             _allChangelogs.update {
                 ChangelogGetter.getAll()
             }
