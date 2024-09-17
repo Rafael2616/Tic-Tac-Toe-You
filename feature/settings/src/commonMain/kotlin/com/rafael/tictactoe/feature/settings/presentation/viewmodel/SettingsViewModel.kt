@@ -69,7 +69,6 @@ class SettingsViewModel(
                 isBackgroundMusicOn = settings.isBackgroundMusicOn,
                 isAppInOnStop = false,
             )
-            onSaveImage()
             this.cancel()
         }
     }
