@@ -6,19 +6,8 @@
     {
       "groupName": "Kotlin & KSP",
       "matchPackagePrefixes": [
-        "com.google.devtools.ksp"
-      ],
-      "matchPackagePatterns": [
-        "org.jetbrains.kotlin.*"
-      ]
-    },
-    {
-      "groupName": "Room",
-      "matchPackagePrefixes": [
-        "androidx.room"
-      ],
-      "matchPackagePatterns": [
-        "androidx.room:room-*"
+        "com.google.devtools.ksp",
+        "org.jetbrains.kotlin"
       ]
     }
   ]
