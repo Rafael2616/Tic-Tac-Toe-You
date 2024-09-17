@@ -25,7 +25,6 @@ kotlin {
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         instrumentedTestVariant.sourceSetTree.set(KotlinSourceSetTree.test)
-        //...
     }
     sourceSets {
         androidMain.dependencies {
