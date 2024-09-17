@@ -5,14 +5,11 @@ import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.get
-import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.dsl.KotlinJsCompile
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 internal fun Project.configureKotlinMultiplatform(
     commonExtension: CommonExtension<*, *, *, *, *, *>,
@@ -95,16 +92,9 @@ internal fun Project.configureKotlinMultiplatform(
                 }
                 binaries.executable()
             }
-        }
-        tasks.withType<KotlinCompile>().configureEach {
-            // Remove when expect/actual declaration becomes stable
+            @OptIn(ExperimentalKotlinGradlePluginApi::class)
             compilerOptions {
-                freeCompilerArgs.add("-Xexpect-actual-classes")
-            }
-        }
-        tasks.withType<KotlinJsCompile>().configureEach {
-            // Remove when expect/actual declaration becomes stable
-            compilerOptions {
+                // Remove when expect/actual declaration becomes stable
                 freeCompilerArgs.add("-Xexpect-actual-classes")
             }
         }
