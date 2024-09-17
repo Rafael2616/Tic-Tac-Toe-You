@@ -157,8 +157,6 @@ kotlin {
                 from(licenseeTask.map { it.outputDir.file("artifacts.json") })
                 into(layout.buildDirectory.dir("processedResources/wasmJs/main/generated/dependencyAssets/wasmJs"))
             }
-            resources.srcDir(copyArtifactsTask.map { it.destinationDir })
-
             tasks.named("wasmJsProcessResources") {
                 dependsOn(copyArtifactsTask)
             }
