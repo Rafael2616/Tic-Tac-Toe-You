@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import my.nanihadesuka.compose.controller.rememberLazyGridStateController
 import my.nanihadesuka.compose.generic.ElementScrollbar
 
+@Suppress("ktlint:compose:content-slot-reused", "ktlint:compose:lambda-param-event-trailing")
 @Composable
 fun LazyVerticalGridScrollbar(
     state: LazyGridState,

@@ -10,6 +10,7 @@ import androidx.compose.ui.unit.Dp
 import my.nanihadesuka.compose.controller.rememberScrollStateController
 import my.nanihadesuka.compose.generic.ElementScrollbar
 
+@Suppress("ktlint:compose:content-slot-reused", "ktlint:compose:lambda-param-event-trailing")
 @Composable
 fun ColumnScrollbar(
     state: ScrollState,

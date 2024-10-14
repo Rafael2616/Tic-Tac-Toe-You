@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import my.nanihadesuka.compose.controller.rememberLazyListStateController
 import my.nanihadesuka.compose.generic.ElementScrollbar
 
+@Suppress("ktlint:compose:content-slot-reused", "ktlint:compose:lambda-param-event-trailing")
 @Composable
 fun LazyColumnScrollbar(
     state: LazyListState,

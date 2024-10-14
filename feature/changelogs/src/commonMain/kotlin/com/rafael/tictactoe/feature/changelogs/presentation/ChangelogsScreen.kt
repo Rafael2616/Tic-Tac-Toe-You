@@ -60,8 +60,8 @@ fun ChangelogsScreen(
     settingsState: SettingsState,
     allChangelogs: List<Changelog>,
     currentChangelog: Changelog,
-    modifier: Modifier = Modifier,
     onEvent: (SettingsEvent) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     var isGoBackClicked by rememberSaveable { mutableStateOf(false) }
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
