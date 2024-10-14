@@ -10,7 +10,7 @@ jvmTarget = "17"
 agp = "8.7.0"
 spotless = "7.0.0.BETA2"
 ksp = "2.1.0-Beta1-1.0.25"
-kotlin = "2.1.0-Beta1"
+kotlin = "2.1.0-Beta2"
 licensee = "1.11.0"
 
 # Android-specific
