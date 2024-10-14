@@ -5,7 +5,6 @@ import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.get
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
@@ -55,7 +54,6 @@ internal fun Project.configureKotlinMultiplatform(
                     if (isAndroidLibrary) {
                         publishLibraryVariants("release")
                     }
-                    @OptIn(ExperimentalKotlinGradlePluginApi::class)
                     compilerOptions {
                         jvmTarget.set(JvmTarget.JVM_17)
                     }
@@ -92,7 +90,6 @@ internal fun Project.configureKotlinMultiplatform(
                 }
                 binaries.executable()
             }
-            @OptIn(ExperimentalKotlinGradlePluginApi::class)
             compilerOptions {
                 // Remove when expect/actual declaration becomes stable
                 freeCompilerArgs.add("-Xexpect-actual-classes")
