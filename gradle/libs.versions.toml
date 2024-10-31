@@ -7,7 +7,7 @@ versionName = "1.7.4"
 jvmTarget = "17"
 
 # Plugins
-agp = "8.7.1"
+agp = "8.7.2"
 spotless = "7.0.0.BETA4"
 ksp = "2.1.0-Beta2-1.0.25"
 kotlin = "2.1.0-Beta2"
