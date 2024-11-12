@@ -93,6 +93,7 @@ internal fun Project.configureKotlinMultiplatform(
             compilerOptions {
                 // Remove when expect/actual declaration becomes stable
                 freeCompilerArgs.add("-Xexpect-actual-classes")
+                jvmToolchain(21)
             }
         }
     }
