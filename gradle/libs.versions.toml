@@ -9,8 +9,8 @@ jvmTarget = "21"
 # Plugins
 agp = "8.7.2"
 spotless = "7.0.0.BETA4"
-ksp = "2.1.0-Beta2-1.0.26"
-kotlin = "2.1.0-Beta2"
+ksp = "2.1.0-RC-1.0.27"
+kotlin = "2.1.0-RC"
 licensee = "1.12.0"
 
 # Android-specific
