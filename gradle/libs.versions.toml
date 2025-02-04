@@ -45,7 +45,7 @@ ktor = "3.0.1"
 androidx-annotation = "1.9.1"
 material-motion-compose = "2.0.1"
 colorpicker-compose = "1.1.2"
-compose-rules = "0.4.18"
+compose-rules = "0.4.22"
 moko-permissions = "0.18.1"
 filekit = "0.8.8"
 
