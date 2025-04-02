@@ -1,8 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="services-jvm">
     <output-path>$PROJECT_DIR$/core/services/build/libs</output-path>
-    <root id="archive" name="services-jvm.jar">
-      <element id="module-output" name="TicTacToe-You.core.services.jvmMain" />
-    </root>
+    <root id="archive" name="services-jvm.jar" />
   </artifact>
 </component>

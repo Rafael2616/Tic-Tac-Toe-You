@@ -1,8 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="changelogs-jvm">
     <output-path>$PROJECT_DIR$/feature/changelogs/build/libs</output-path>
-    <root id="archive" name="changelogs-jvm.jar">
-      <element id="module-output" name="TicTacToe-You.feature.changelogs.jvmMain" />
-    </root>
+    <root id="archive" name="changelogs-jvm.jar" />
   </artifact>
 </component>
