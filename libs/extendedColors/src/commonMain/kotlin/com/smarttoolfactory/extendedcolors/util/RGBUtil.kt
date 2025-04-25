@@ -246,8 +246,7 @@ object RGBUtil {
      * @param green  Green component [0..255] of the color
      * @param blue Blue component [0..255] of the color
      */
-    fun argbToColorInt(alpha: Int, red: Int, green: Int, blue: Int): Int =
-        (alpha shl 24) or (red shl 16) or (green shl 8) or blue
+    fun argbToColorInt(alpha: Int, red: Int, green: Int, blue: Int): Int = (alpha shl 24) or (red shl 16) or (green shl 8) or blue
 
     /**
      * Return a color-int from alpha, red, green, blue components.
@@ -277,11 +276,10 @@ object RGBUtil {
      * Blue is [0...255]
      * ```
      */
-    fun argbToHex(alpha: Int, red: Int, green: Int, blue: Int): String =
-        "#" + alpha.toString(16).padStart(2, '0') +
-            red.toString(16).padStart(2, '0') +
-            green.toString(16).padStart(2, '0') +
-            blue.toString(16).padStart(2, '0')
+    fun argbToHex(alpha: Int, red: Int, green: Int, blue: Int): String = "#" + alpha.toString(16).padStart(2, '0') +
+        red.toString(16).padStart(2, '0') +
+        green.toString(16).padStart(2, '0') +
+        blue.toString(16).padStart(2, '0')
 
     /**
      * Convert alpha, red, green, blue components in [0f..1f] range in [Float] argb to Hex format String
@@ -293,11 +291,10 @@ object RGBUtil {
      * Blue is [0...1f]
      * ```
      */
-    fun argbToHex(alpha: Float, red: Float, green: Float, blue: Float): String =
-        "#" + alpha.fractionToRGBRange().toString(16).padStart(2, '0') +
-            red.fractionToRGBRange().toString(16).padStart(2, '0') +
-            green.fractionToRGBRange().toString(16).padStart(2, '0') +
-            blue.fractionToRGBRange().toString(16).padStart(2, '0')
+    fun argbToHex(alpha: Float, red: Float, green: Float, blue: Float): String = "#" + alpha.fractionToRGBRange().toString(16).padStart(2, '0') +
+        red.fractionToRGBRange().toString(16).padStart(2, '0') +
+        green.fractionToRGBRange().toString(16).padStart(2, '0') +
+        blue.fractionToRGBRange().toString(16).padStart(2, '0')
 
 /*
     RGB-HEX Conversions
@@ -306,27 +303,23 @@ object RGBUtil {
      * Get hex representation of a rgb Color in [Integer] format
      */
 
-    fun Int.toRgbString(): String =
-        "#${red.toString(16).padStart(2, '0')}" +
-            green.toString(16).padStart(2, '0') +
-            blue.toString(16).padStart(2, '0')
-                .uppercase()
+    fun Int.toRgbString(): String = "#${red.toString(16).padStart(2, '0')}" +
+        green.toString(16).padStart(2, '0') +
+        blue.toString(16).padStart(2, '0')
+            .uppercase()
 
     /**
      * Get hex representation of a argb Color in [Integer] format
      */
-    fun Int.toArgbString(): String =
-        "#${alpha.toString(16).padStart(2, '0')}" +
-            red.toString(16).padStart(2, '0') +
-            green.toString(16).padStart(2, '0') +
-            blue.toString(16).padStart(2, '0')
-                .uppercase()
+    fun Int.toArgbString(): String = "#${alpha.toString(16).padStart(2, '0')}" +
+        red.toString(16).padStart(2, '0') +
+        green.toString(16).padStart(2, '0') +
+        blue.toString(16).padStart(2, '0')
+            .uppercase()
 
-    private fun String.toStringComponent() =
-        this.let { if (it.length == 1) "0$it" else it }
+    private fun String.toStringComponent() = this.let { if (it.length == 1) "0$it" else it }
 
-    private fun Int.toStringComponent(): String =
-        this.toString(16).let { if (it.length == 1) "0$it" else it }
+    private fun Int.toStringComponent(): String = this.toString(16).let { if (it.length == 1) "0$it" else it }
 
     inline val Int.alpha: Int
         get() = (this shr 24) and 0xFF

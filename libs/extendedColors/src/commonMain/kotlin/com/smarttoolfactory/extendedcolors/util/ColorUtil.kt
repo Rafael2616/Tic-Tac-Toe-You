@@ -123,8 +123,7 @@ object ColorUtil {
 
     fun colorToHex(color: Color): String = rgbToHex(color.red, color.green, color.blue)
 
-    fun colorToHexAlpha(color: Color): String =
-        argbToHex(color.alpha, color.red, color.green, color.blue)
+    fun colorToHexAlpha(color: Color): String = argbToHex(color.alpha, color.red, color.green, color.blue)
 
     /**
      * Convert a RGB color in [Integer] form to HSV (hue-saturation-value) components.

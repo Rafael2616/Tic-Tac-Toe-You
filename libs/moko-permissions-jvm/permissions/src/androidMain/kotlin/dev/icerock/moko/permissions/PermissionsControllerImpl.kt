@@ -149,8 +149,7 @@ class PermissionsControllerImpl(
         )
     }
 
-    override suspend fun isPermissionGranted(permission: Permission): Boolean =
-        getPermissionState(permission) == PermissionState.Granted
+    override suspend fun isPermissionGranted(permission: Permission): Boolean = getPermissionState(permission) == PermissionState.Granted
 
     @Suppress("ReturnCount")
     override suspend fun getPermissionState(permission: Permission): PermissionState {
@@ -233,52 +232,48 @@ class PermissionsControllerImpl(
      * @see https://developer.android.com/about/versions/13/behavior-changes-13#granular-media-permissions
      */
 
-    private fun allStoragePermissions() =
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            listOf(
-                Manifest.permission.READ_MEDIA_AUDIO,
-                Manifest.permission.READ_MEDIA_IMAGES,
-                Manifest.permission.READ_MEDIA_VIDEO,
-            )
-        } else {
-            listOf(Manifest.permission.READ_EXTERNAL_STORAGE)
-        }
+    private fun allStoragePermissions() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        listOf(
+            Manifest.permission.READ_MEDIA_AUDIO,
+            Manifest.permission.READ_MEDIA_IMAGES,
+            Manifest.permission.READ_MEDIA_VIDEO,
+        )
+    } else {
+        listOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+    }
 
-    private fun galleryCompat() =
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            listOf(
-                Manifest.permission.READ_MEDIA_IMAGES,
-                Manifest.permission.READ_MEDIA_VIDEO,
-            )
-        } else {
-            listOf(Manifest.permission.READ_EXTERNAL_STORAGE)
-        }
+    private fun galleryCompat() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        listOf(
+            Manifest.permission.READ_MEDIA_IMAGES,
+            Manifest.permission.READ_MEDIA_VIDEO,
+        )
+    } else {
+        listOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+    }
 
-    private fun fineLocationCompat() =
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            listOf(
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-            )
-        } else {
-            listOf(Manifest.permission.ACCESS_FINE_LOCATION)
-        }
+    private fun fineLocationCompat() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        listOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+        )
+    } else {
+        listOf(Manifest.permission.ACCESS_FINE_LOCATION)
+    }
 
-    private fun backgroundLocationCompat() =
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            listOf(
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_BACKGROUND_LOCATION,
-            )
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            listOf(
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_BACKGROUND_LOCATION,
-            )
-        } else {
-            listOf(Manifest.permission.ACCESS_FINE_LOCATION)
-        }
+    private fun backgroundLocationCompat() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        listOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_BACKGROUND_LOCATION,
+        )
+    } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        listOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_BACKGROUND_LOCATION,
+        )
+    } else {
+        listOf(Manifest.permission.ACCESS_FINE_LOCATION)
+    }
 
     /**
      * Bluetooth permissions
@@ -286,60 +281,54 @@ class PermissionsControllerImpl(
      * @see https://developer.android.com/guide/topics/connectivity/bluetooth/permissions
      */
 
-    private fun allBluetoothPermissions() =
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            listOf(
-                Manifest.permission.BLUETOOTH_CONNECT,
-                Manifest.permission.BLUETOOTH_SCAN,
-                Manifest.permission.BLUETOOTH_ADVERTISE,
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-            )
-        } else {
-            listOf(
-                Manifest.permission.BLUETOOTH,
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-            )
-        }
+    private fun allBluetoothPermissions() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        listOf(
+            Manifest.permission.BLUETOOTH_CONNECT,
+            Manifest.permission.BLUETOOTH_SCAN,
+            Manifest.permission.BLUETOOTH_ADVERTISE,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+        )
+    } else {
+        listOf(
+            Manifest.permission.BLUETOOTH,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+        )
+    }
 
-    private fun bluetoothScanCompat() =
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            listOf(Manifest.permission.BLUETOOTH_SCAN)
-        } else {
-            listOf(Manifest.permission.BLUETOOTH)
-        }
+    private fun bluetoothScanCompat() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        listOf(Manifest.permission.BLUETOOTH_SCAN)
+    } else {
+        listOf(Manifest.permission.BLUETOOTH)
+    }
 
-    private fun bluetoothAdvertiseCompat() =
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            listOf(Manifest.permission.BLUETOOTH_ADVERTISE)
-        } else {
-            listOf(Manifest.permission.BLUETOOTH)
-        }
+    private fun bluetoothAdvertiseCompat() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        listOf(Manifest.permission.BLUETOOTH_ADVERTISE)
+    } else {
+        listOf(Manifest.permission.BLUETOOTH)
+    }
 
-    private fun bluetoothConnectCompat() =
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            listOf(Manifest.permission.BLUETOOTH_CONNECT)
-        } else {
-            listOf(Manifest.permission.BLUETOOTH)
-        }
+    private fun bluetoothConnectCompat() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        listOf(Manifest.permission.BLUETOOTH_CONNECT)
+    } else {
+        listOf(Manifest.permission.BLUETOOTH)
+    }
 
-    private fun motionPermissions() =
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            listOf(
-                Manifest.permission.ACTIVITY_RECOGNITION,
-                Manifest.permission.BODY_SENSORS,
-            )
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
-            listOf(Manifest.permission.BODY_SENSORS)
-        } else {
-            emptyList()
-        }
+    private fun motionPermissions() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        listOf(
+            Manifest.permission.ACTIVITY_RECOGNITION,
+            Manifest.permission.BODY_SENSORS,
+        )
+    } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
+        listOf(Manifest.permission.BODY_SENSORS)
+    } else {
+        emptyList()
+    }
 
-    private fun remoteNotificationsPermissions() =
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            listOf(Manifest.permission.POST_NOTIFICATIONS)
-        } else {
-            emptyList()
-        }
+    private fun remoteNotificationsPermissions() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        listOf(Manifest.permission.POST_NOTIFICATIONS)
+    } else {
+        emptyList()
+    }
 
     private companion object {
         val VERSIONS_WITHOUT_NOTIFICATION_PERMISSION =

@@ -19,12 +19,11 @@ class PermissionsControllerImpl : PermissionsController {
         else -> true
     }
 
-    override suspend fun getPermissionState(permission: Permission): PermissionState =
-        when (permission) {
-            Permission.WRITE_STORAGE -> PermissionState.Granted
+    override suspend fun getPermissionState(permission: Permission): PermissionState = when (permission) {
+        Permission.WRITE_STORAGE -> PermissionState.Granted
 
-            else -> PermissionState.Granted
-        }
+        else -> PermissionState.Granted
+    }
 
     override fun openAppSettings() {
         // TODO("Not yet implemented")

@@ -7,6 +7,5 @@ import org.jetbrains.compose.resources.decodeToImageBitmap
 
 actual class ProfilePictureUtilsImpl actual constructor() : ProfilePictureUtils {
     @OptIn(ExperimentalResourceApi::class)
-    actual override fun getPictureBitmap(imageUri: Uri): ImageBitmap =
-        ByteArray(0).decodeToImageBitmap()
+    actual override fun getPictureBitmap(imageUri: Uri): ImageBitmap = ByteArray(0).decodeToImageBitmap()
 }

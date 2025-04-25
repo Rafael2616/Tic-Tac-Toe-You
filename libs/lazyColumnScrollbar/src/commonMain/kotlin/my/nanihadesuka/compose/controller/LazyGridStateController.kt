@@ -79,17 +79,15 @@ internal fun rememberLazyGridStateController(
         }
     }
 
-    fun LazyGridItemInfo.fractionHiddenTop(firstItemOffset: Int): Float =
-        when (orientationUpdated.value) {
-            Orientation.Vertical -> if (size.height == 0) 0f else firstItemOffset / size.width.toFloat()
-            Orientation.Horizontal -> if (size.width == 0) 0f else firstItemOffset / size.width.toFloat()
-        }
+    fun LazyGridItemInfo.fractionHiddenTop(firstItemOffset: Int): Float = when (orientationUpdated.value) {
+        Orientation.Vertical -> if (size.height == 0) 0f else firstItemOffset / size.width.toFloat()
+        Orientation.Horizontal -> if (size.width == 0) 0f else firstItemOffset / size.width.toFloat()
+    }
 
-    fun LazyGridItemInfo.fractionVisibleBottom(viewportEndOffset: Int): Float =
-        when (orientationUpdated.value) {
-            Orientation.Vertical -> if (size.height == 0) 0f else (viewportEndOffset - offset.y).toFloat() / size.height.toFloat()
-            Orientation.Horizontal -> if (size.width == 0) 0f else (viewportEndOffset - offset.x).toFloat() / size.width.toFloat()
-        }
+    fun LazyGridItemInfo.fractionVisibleBottom(viewportEndOffset: Int): Float = when (orientationUpdated.value) {
+        Orientation.Vertical -> if (size.height == 0) 0f else (viewportEndOffset - offset.y).toFloat() / size.height.toFloat()
+        Orientation.Horizontal -> if (size.width == 0) 0f else (viewportEndOffset - offset.x).toFloat() / size.width.toFloat()
+    }
 
     val thumbSizeNormalizedReal = remember {
         derivedStateOf {

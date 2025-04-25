@@ -12,8 +12,7 @@ class SettingsRepositoryImpl(
         println("Settings repository has been initialized")
     }
 
-    override suspend fun getAllSettingsValues(id: Int): SettingsEntity? =
-        settingsDao.getSettingsValues(id)
+    override suspend fun getAllSettingsValues(id: Int): SettingsEntity? = settingsDao.getSettingsValues(id)
 
     override suspend fun setAllSettingsValues(settingsEntity: SettingsEntity) {
         settingsDao.setAllSettingsValues(settingsEntity)

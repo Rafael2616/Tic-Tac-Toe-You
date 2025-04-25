@@ -18,14 +18,11 @@ class PermissionsController : PermissionsControllerProtocol {
     private val locationManagerDelegate = LocationManagerDelegate()
     private val contactStore = CNContactStore()
 
-    override suspend fun providePermission(permission: Permission) =
-        getDelegate(permission).providePermission()
+    override suspend fun providePermission(permission: Permission) = getDelegate(permission).providePermission()
 
-    override suspend fun isPermissionGranted(permission: Permission): Boolean =
-        getDelegate(permission).getPermissionState() == PermissionState.Granted
+    override suspend fun isPermissionGranted(permission: Permission): Boolean = getDelegate(permission).getPermissionState() == PermissionState.Granted
 
-    override suspend fun getPermissionState(permission: Permission): PermissionState =
-        getDelegate(permission).getPermissionState()
+    override suspend fun getPermissionState(permission: Permission): PermissionState = getDelegate(permission).getPermissionState()
 
     override fun openAppSettings() {
         val settingsUrl: NSURL = NSURL.URLWithString(UIApplicationOpenSettingsURLString)!!

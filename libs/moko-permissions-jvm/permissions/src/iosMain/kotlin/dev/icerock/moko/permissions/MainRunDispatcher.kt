@@ -14,6 +14,5 @@ import platform.Foundation.performBlock
  * Simple object made to ensure dispatching to the main looper on iOS
  */
 internal object MainRunDispatcher : CoroutineDispatcher() {
-    override fun dispatch(context: CoroutineContext, block: Runnable) =
-        NSRunLoop.mainRunLoop.performBlock { block.run() }
+    override fun dispatch(context: CoroutineContext, block: Runnable) = NSRunLoop.mainRunLoop.performBlock { block.run() }
 }

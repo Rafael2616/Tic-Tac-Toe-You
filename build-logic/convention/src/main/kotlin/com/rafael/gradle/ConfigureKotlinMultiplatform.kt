@@ -74,7 +74,7 @@ internal fun Project.configureKotlinMultiplatform(
             }
             @OptIn(ExperimentalWasmDsl::class)
             wasmJs {
-                moduleName = project.name
+                //moduleName = project.name
                 browser {
                     val projectDirPath = project.projectDir.path
                     val projectOutputFileName = "${project.name}.js"
@@ -86,6 +86,11 @@ internal fun Project.configureKotlinMultiplatform(
                                 add(projectDirPath)
                             }
                         }
+                    }
+                }
+                compilations.configureEach {
+                    outputModuleName.apply {
+                        project.provider { project.name }
                     }
                 }
                 binaries.executable()

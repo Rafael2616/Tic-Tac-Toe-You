@@ -27,19 +27,18 @@ class PermissionsControllerImpl : PermissionsController {
         else -> true
     }
 
-    override suspend fun getPermissionState(permission: Permission): PermissionState =
-        when (permission) {
-            Permission.WRITE_STORAGE -> {
-                val storageDir = File(System.getProperty("user.home"))
-                if (storageDir.canWrite()) {
-                    PermissionState.Granted
-                } else {
-                    PermissionState.Denied
-                }
+    override suspend fun getPermissionState(permission: Permission): PermissionState = when (permission) {
+        Permission.WRITE_STORAGE -> {
+            val storageDir = File(System.getProperty("user.home"))
+            if (storageDir.canWrite()) {
+                PermissionState.Granted
+            } else {
+                PermissionState.Denied
             }
-
-            else -> PermissionState.Granted
         }
+
+        else -> PermissionState.Granted
+    }
 
     override fun openAppSettings() {
         // TODO("Not yet implemented")

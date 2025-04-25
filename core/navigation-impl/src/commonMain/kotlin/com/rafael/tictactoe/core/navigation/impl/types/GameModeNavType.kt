@@ -3,7 +3,6 @@ package com.rafael.tictactoe.core.navigation.impl.types
 import androidx.core.bundle.Bundle
 import androidx.navigation.NavType
 import com.rafael.tictactoe.core.navigation.GameMode
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 val gameModeNavType = object : NavType<GameMode>(

@@ -54,11 +54,9 @@ internal fun rememberLazyListStateController(
         }
     }
 
-    fun LazyListItemInfo.fractionHiddenTop(firstItemOffset: Int) =
-        if (size == 0) 0f else firstItemOffset / size.toFloat()
+    fun LazyListItemInfo.fractionHiddenTop(firstItemOffset: Int) = if (size == 0) 0f else firstItemOffset / size.toFloat()
 
-    fun LazyListItemInfo.fractionVisibleBottom(viewportEndOffset: Int) =
-        if (size == 0) 0f else (viewportEndOffset - offset).toFloat() / size.toFloat()
+    fun LazyListItemInfo.fractionVisibleBottom(viewportEndOffset: Int) = if (size == 0) 0f else (viewportEndOffset - offset).toFloat() / size.toFloat()
 
     val thumbSizeNormalizedReal = remember {
         derivedStateOf {
