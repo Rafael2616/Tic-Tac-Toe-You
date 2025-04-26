@@ -49,7 +49,6 @@ internal fun Project.configureKotlinMultiplatform(
             val isAndroidApp = plugins.hasPlugin("com.android.application")
             val isAndroidLibrary = plugins.hasPlugin("com.android.library")
             if (isAndroidApp || isAndroidLibrary) {
-
                 androidTarget {
                     if (isAndroidLibrary) {
                         publishLibraryVariants("release")
