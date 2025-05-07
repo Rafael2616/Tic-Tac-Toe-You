@@ -184,7 +184,7 @@ compose.desktop {
             packageVersion = libs.versions.versionName.get()
         }
         buildTypes.release.proguard {
-            obfuscate.set(true)
+            obfuscate.set(false)
             configurationFiles.from(
                 project.file("compose-desktop.pro"),
                 project.file("proguard-rules.pro"),

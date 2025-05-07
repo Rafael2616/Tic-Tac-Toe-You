@@ -6,3 +6,8 @@
 -dontwarn androidx.room.**
 -keep class com.sun.jna.** { *; }
 -keep class * implements com.sun.jna.** { *; }
+-dontwarn kotlinx.datetime.**
+-dontwarn kotlinx.serialization.**
+-dontwarn org.freedesktop.dbus.**
+-dontwarn io.ktor.**
+-dontwarn org.slf4j.**
