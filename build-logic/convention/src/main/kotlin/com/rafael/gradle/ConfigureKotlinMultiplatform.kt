@@ -3,13 +3,18 @@ package com.rafael.gradle
 import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
+import org.gradle.api.file.DuplicatesStrategy
+import org.gradle.jvm.tasks.Jar
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.get
+import org.gradle.kotlin.dsl.withType
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
+@OptIn(ExperimentalKotlinGradlePluginApi::class)
 internal fun Project.configureKotlinMultiplatform(
     commonExtension: CommonExtension<*, *, *, *, *, *>,
 ) {
@@ -59,7 +64,16 @@ internal fun Project.configureKotlinMultiplatform(
                 }
             }
 
-            jvm()
+            jvm {
+                binaries {
+                    tasks.withType<Jar>().configureEach {
+                        if (name == "${this.name}Jar") {
+                            duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+                            // Or exclude("META-INF/MANIFEST.MF") if needed
+                        }
+                    }
+                }
+            }
 
             listOf(
                 iosX64(),
