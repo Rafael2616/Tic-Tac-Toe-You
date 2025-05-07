@@ -19,9 +19,11 @@ internal fun Project.configureComposeMultiplatform() {
                         implementation(compose.materialIconsExtended)
                         implementation(compose.runtime)
                         implementation(compose.ui)
+                        implementation(compose.uiUtil)
                         implementation(compose.animation)
                         implementation(compose.components.resources)
                         implementation(compose.components.uiToolingPreview)
+                        implementation(libs.findLibrary("jetbrains-compose-backhandler").get())
                     }
                     androidMain.dependencies {
                         implementation(compose.preview)
