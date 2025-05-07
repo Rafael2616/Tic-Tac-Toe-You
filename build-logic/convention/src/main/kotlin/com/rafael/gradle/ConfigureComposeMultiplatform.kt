@@ -24,6 +24,7 @@ internal fun Project.configureComposeMultiplatform() {
                         implementation(compose.components.resources)
                         implementation(compose.components.uiToolingPreview)
                         implementation(libs.findLibrary("jetbrains-compose-backhandler").get())
+                        implementation(libs.findLibrary("jetbrains-lifecyle-compose").get())
                     }
                     androidMain.dependencies {
                         implementation(compose.preview)
