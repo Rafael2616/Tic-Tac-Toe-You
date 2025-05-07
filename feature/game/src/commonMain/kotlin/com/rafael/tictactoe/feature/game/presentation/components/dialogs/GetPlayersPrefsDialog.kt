@@ -54,6 +54,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
@@ -63,7 +64,6 @@ import com.rafael.tictactoe.core.domain.util.Colors
 import com.rafael.tictactoe.core.navigation.GameMode
 import com.rafael.tictactoe.core.platform.Platform
 import com.rafael.tictactoe.core.platform.configuration.isImeVisible
-import com.rafael.tictactoe.core.platform.presentation.LocalViewCurrent
 import com.rafael.tictactoe.core.resources.Res
 import com.rafael.tictactoe.core.resources.draws.drawCircleInDialog
 import com.rafael.tictactoe.core.resources.draws.drawXinDialog
@@ -90,7 +90,7 @@ internal fun GetPlayersPrefsDialog(
     settingsState: SettingsState,
     modifier: Modifier = Modifier,
 ) {
-    val view = LocalViewCurrent
+    val view = LocalWindowInfo.current.containerSize
     val focusManager = LocalFocusManager.current
     val keyboardController = LocalSoftwareKeyboardController.current
     val density = LocalDensity.current.density
