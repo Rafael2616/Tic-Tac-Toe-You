@@ -1,7 +1,7 @@
 Política de Privacidade
-Nome do App: Agropec 2025
+Agropec 2025
 
-Última atualização: 17/07/2025
+Última atualização: 22/07/2025
 
 Agropec 2025 respeita sua privacidade. Esta Política de Privacidade explica como coletamos, usamos e protegemos as informações dos usuários.
 
