@@ -18,7 +18,7 @@ Agropec 2025 não compartilha informações com terceiros, pois não armazena ne
 Embora nenhuma transmissão ou armazenamento de dados seja realizada pelo aplicativo, adotamos boas práticas de desenvolvimento para garantir que a câmera seja utilizada apenas para a função proposta, de forma segura.
 
 5. Alterações nesta Política de Privacidade
-Podemos atualizar esta Política periodicamente. Notificaremos sobre alterações importantes através da própria página do aplicativo na Google Play.
+Podemos atualizar esta Política periodicamente. Notificaremos sobre alterações importantes através da própria página do aplicativo na Google Play e Apple Store.
 
 6. Contato
 Em caso de dúvidas, entre em contato pelo email:
