@@ -4,5 +4,5 @@ import platform.UIKit.UIDevice
 import platform.UIKit.UIDeviceOrientation
 
 actual val isInLandscape: Boolean
-    get() = UIDevice.currentDevice.orientation ==
-        (UIDeviceOrientation.UIDeviceOrientationLandscapeLeft || UIDeviceOrientation.UIDeviceOrientationLandscapeRight)
+    get() = UIDevice.currentDevice.orientation == UIDeviceOrientation.UIDeviceOrientationLandscapeLeft ||
+        UIDevice.currentDevice.orientation == UIDeviceOrientation.UIDeviceOrientationLandscapeRight

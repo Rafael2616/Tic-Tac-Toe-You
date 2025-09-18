@@ -106,6 +106,7 @@ licensee {
     allow("LGPL-2.1-only")
     allow("MIT")
     allow("BSD-3-Clause")
+    allowUrl("https://opensource.org/license/mit")
     allowUrl("https://www.gnu.org/licenses/gpl-3.0.en.html")
     allowUrl("http://openjdk.java.net/legal/gplv2+ce.html")
     allowUrl("https://glassfish.dev.java.net/nonav/public/CDDL+GPL.html")

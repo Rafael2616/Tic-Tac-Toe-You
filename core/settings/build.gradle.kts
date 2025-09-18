@@ -1,3 +1,4 @@
+
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 
 plugins {
@@ -74,4 +75,16 @@ dependencies {
     add("kspIosX64", libs.androidx.room.compiler)
     add("kspIosArm64", libs.androidx.room.compiler)
     add("kspJvm", libs.androidx.room.compiler)
+}
+
+tasks.matching { it.name.startsWith("ksp") }.configureEach {
+    dependsOn(
+        "generateResourceAccessorsForAndroidMain",
+        "generateResourceAccessorsForAndroidRelease",
+        "generateResourceAccessorsForCommonNonWasmMain",
+        "generateResourceAccessorsForCommonMain",
+        "generateExpectResourceCollectorsForCommonMain",
+        "generateActualResourceCollectorsForAndroidMain",
+        "generateComposeResClass",
+    )
 }
