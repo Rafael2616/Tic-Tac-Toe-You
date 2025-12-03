@@ -20,7 +20,7 @@ core-splashscreen = "1.2.0-rc01"
 media3 = "1.8.0"
 baselineprofile = "1.4.1"
 profileinstaller = "1.4.1"
-uiTestManifest = "1.9.1"
+uiTestManifest = "1.10.0"
 
 junit = "4.13.2"
 expresso = "3.7.0"
