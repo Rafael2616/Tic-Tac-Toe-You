@@ -4,7 +4,7 @@ import androidx.annotation.FloatRange
 
 data class BoardCustomization(
     val name: String,
-    @FloatRange val valueRange: ClosedFloatingPointRange<Float>,
+    @param:FloatRange val valueRange: ClosedFloatingPointRange<Float>,
     val value: Float,
     val onValueChange: (Float) -> Unit,
     val steps: Int,

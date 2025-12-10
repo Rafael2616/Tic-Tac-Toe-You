@@ -546,7 +546,6 @@ fun BoardCustomizationDialog(
                             onEvent(SettingsEvent.ShowBoardCustomizationDialog(false))
                         },
                         contentPadding = PaddingValues(vertical = 6.dp, horizontal = 8.dp),
-                        modifier = Modifier.width(80.dp),
                     ) {
                         Text(text = stringResource(Res.string.cancel))
                     }

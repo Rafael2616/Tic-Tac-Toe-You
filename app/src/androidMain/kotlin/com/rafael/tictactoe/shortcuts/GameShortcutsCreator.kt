@@ -13,9 +13,9 @@ import com.rafael.tictactoe.core.resources.R
 internal class GameShortcutsCreator {
 
     data class Shortcut(
-        @StringRes val shortLabel: Int,
-        @StringRes val longLabel: Int,
-        @DrawableRes val icon: Int,
+        @param:StringRes val shortLabel: Int,
+        @param:StringRes val longLabel: Int,
+        @param:DrawableRes val icon: Int,
     )
 
     private val shortcuts = listOf(

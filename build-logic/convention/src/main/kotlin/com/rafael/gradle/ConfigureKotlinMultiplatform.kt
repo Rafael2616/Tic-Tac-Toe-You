@@ -20,10 +20,6 @@ internal fun Project.configureKotlinMultiplatform(
     commonExtension.apply {
         compileSdk = libs.findVersion("compileSdk").get().toString().toIntOrNull()
 
-        sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-        sourceSets["main"].res.srcDirs("src/androidMain/res")
-        sourceSets["main"].resources.srcDirs("src/commonMain/resources")
-
         defaultConfig {
             minSdk = libs.findVersion("minSdk").get().toString().toIntOrNull()
         }

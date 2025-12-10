@@ -32,9 +32,10 @@ import com.rafael.tictactoe.core.resources.remove_photo
 import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
 import com.rafael.tictactoe.core.settings.domain.model.SettingsState
 import dev.icerock.moko.permissions.PermissionState
-import io.github.vinceglb.filekit.compose.rememberFilePickerLauncher
-import io.github.vinceglb.filekit.core.PickerMode
-import io.github.vinceglb.filekit.core.PickerType
+import io.github.vinceglb.filekit.dialogs.FileKitMode
+import io.github.vinceglb.filekit.dialogs.compose.rememberFilePickerLauncher
+import io.github.vinceglb.filekit.dialogs.FileKitType
+import io.github.vinceglb.filekit.readBytes
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.decodeToImageBitmap
@@ -53,7 +54,7 @@ fun ProfilePictureMenu(
 ) {
     val profilePicture = state.profilePictureBitmap
     val scope = rememberCoroutineScope()
-    val launcher = rememberFilePickerLauncher(type = PickerType.Image, mode = PickerMode.Single) { file ->
+    val launcher = rememberFilePickerLauncher(type = FileKitType.Image, mode = FileKitMode.Single) { file ->
         scope.launch {
             onSaveImage(file?.readBytes()?.decodeToImageBitmap())
         }
