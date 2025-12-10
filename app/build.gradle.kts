@@ -1,6 +1,5 @@
 import app.cash.licensee.LicenseeTask
-import app.cash.licensee.UnusedAction.IGNORE
-import com.android.build.gradle.internal.api.ApkVariantOutputImpl
+import app.cash.licensee.UnusedAction
 import java.util.Properties
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
@@ -46,18 +45,6 @@ android {
     }
 
     buildTypes {
-        create("beta") {
-            isMinifyEnabled = true
-            signingConfig = releaseSigningConfig
-            applicationIdSuffix = ".beta"
-            versionNameSuffix = "-beta"
-            resValue("string", "app_name_beta", "Jogo da Velha - Beta")
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
-            )
-        }
-
         named("debug") {
             signingConfig = releaseSigningConfig
             applicationIdSuffix = ".debug"
@@ -92,12 +79,7 @@ android {
         }
     }
 
-    applicationVariants.all {
-        outputs.all {
-            (this as? ApkVariantOutputImpl)?.outputFileName =
-                "TicTacToe-You v$versionName.apk"
-        }
-    }
+    base.archivesName = "TicTacToe-You v${android.defaultConfig.versionName}"
 }
 
 licensee {
@@ -114,7 +96,7 @@ licensee {
     allowUrl("https://github.com/vinceglb/FileKit/blob/main/LICENSE")
     allowUrl("https://github.com/hypfvieh/dbus-java/blob/master/LICENSE")
 
-    unusedAction(IGNORE)
+    unusedAction(UnusedAction.LOG)
 }
 
 kotlin {
@@ -126,14 +108,6 @@ kotlin {
             implementation(libs.androidx.core.splashscreen)
             implementation(libs.androidx.profileinstaller)
             implementation(libs.androidx.annotation)
-        }
-        androidUnitTest.dependencies {
-            implementation(libs.junit)
-        }
-        androidInstrumentedTest.dependencies {
-            implementation(libs.androidx.test.espresso.core)
-            implementation(libs.androidx.test.ext.junit)
-            implementation(libs.mockk)
         }
         commonMain.dependencies {
             // Projects

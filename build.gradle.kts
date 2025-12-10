@@ -14,11 +14,4 @@ plugins {
     alias(libs.plugins.licensee).apply(false)
     alias(libs.plugins.android.test).apply(false)
     alias(libs.plugins.baselineprofile).apply(false)
-
-    // This is an error in gradle 8.11
-//    alias(libs.plugins.rafael.spotless).apply(false)
-//    alias(libs.plugins.rafael.library).apply(false)
-//    alias(libs.plugins.rafael.library.compose).apply(false)
-//    alias(libs.plugins.rafael.application).apply(false)
-//    alias(libs.plugins.rafael.application.compose).apply(false)
 }

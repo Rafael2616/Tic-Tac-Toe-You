@@ -35,11 +35,6 @@ dependencyResolutionManagement {
         mavenCentral()
         maven("https://jitpack.io")
     }
-    buildCache {
-        local {
-            isEnabled = true
-        }
-    }
 }
 
 include(":app")

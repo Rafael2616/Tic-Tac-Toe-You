@@ -42,7 +42,6 @@ import com.rafael.tictactoe.feature.settingssearch.presentation.viewmodel.Search
 import dev.icerock.moko.permissions.compose.BindEffect
 import dev.icerock.moko.permissions.compose.rememberPermissionsControllerFactory
 import kotlin.reflect.typeOf
-import org.koin.compose.KoinContext
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 import soup.compose.material.motion.animation.materialSharedAxisXIn
@@ -65,108 +64,106 @@ fun TicTacToeNavGraph(
 
     BindEffect(permissionsController)
 
-    KoinContext {
-        val settingsViewModel = koinViewModel<SettingsViewModel>()
-        val settingsState by settingsViewModel.state.collectAsStateWithLifecycle()
-        val onSettingsEvent = settingsViewModel::onEvent
-        val changelogsViewModel = koinViewModel<ChangelogsViewModel>()
-        val currentChangelog by changelogsViewModel.currentChangelog.collectAsStateWithLifecycle()
+    val settingsViewModel = koinViewModel<SettingsViewModel>()
+    val settingsState by settingsViewModel.state.collectAsStateWithLifecycle()
+    val onSettingsEvent = settingsViewModel::onEvent
+    val changelogsViewModel = koinViewModel<ChangelogsViewModel>()
+    val currentChangelog by changelogsViewModel.currentChangelog.collectAsStateWithLifecycle()
 
-        AppTheme(
-            state = settingsState,
+    AppTheme(
+        state = settingsState,
+    ) {
+        Surface(
+            color = MaterialTheme.colorScheme.background,
+            modifier = modifier.fillMaxSize(),
         ) {
-            Surface(
-                color = MaterialTheme.colorScheme.background,
-                modifier = modifier.fillMaxSize(),
+            NavHost(
+                navController = navController,
+                startDestination = Main,
+                enterTransition = { materialSharedAxisXIn(!isRtl, slideDistance) },
+                exitTransition = { materialSharedAxisXOut(!isRtl, slideDistance) },
+                popEnterTransition = { materialSharedAxisXIn(isRtl, slideDistance) },
+                popExitTransition = { materialSharedAxisXOut(isRtl, slideDistance) },
             ) {
-                NavHost(
-                    navController = navController,
-                    startDestination = Main,
-                    enterTransition = { materialSharedAxisXIn(!isRtl, slideDistance) },
-                    exitTransition = { materialSharedAxisXOut(!isRtl, slideDistance) },
-                    popEnterTransition = { materialSharedAxisXIn(isRtl, slideDistance) },
-                    popExitTransition = { materialSharedAxisXOut(isRtl, slideDistance) },
+                composable<Main> {
+                    val mainViewModel = koinViewModel<MainViewModel>()
+                    val mainState by mainViewModel.state.collectAsStateWithLifecycle()
+                    MainScreen(
+                        navController = navController,
+                        destination = destination,
+                        state = settingsState,
+                        mainState = mainState,
+                        onSettingsEvent = onSettingsEvent,
+                        onRedirectToGameModes = mainViewModel::canRedirectToAnGameModeScreen,
+                        currentChangelog = currentChangelog,
+                    )
+                }
+                composable<Game>(
+                    typeMap = mapOf(typeOf<GameMode>() to gameModeNavType),
                 ) {
-                    composable<Main> {
-                        val mainViewModel = koinViewModel<MainViewModel>()
-                        val mainState by mainViewModel.state.collectAsStateWithLifecycle()
-                        MainScreen(
-                            navController = navController,
-                            destination = destination,
-                            state = settingsState,
-                            mainState = mainState,
-                            onSettingsEvent = onSettingsEvent,
-                            onRedirectToGameModes = mainViewModel::canRedirectToAnGameModeScreen,
-                            currentChangelog = currentChangelog,
-                        )
-                    }
-                    composable<Game>(
-                        typeMap = mapOf(typeOf<GameMode>() to gameModeNavType),
-                    ) {
-                        val args = it.toRoute<Game>()
-                        val gameViewModel = koinViewModel<GameViewModel>()
-                        val gameState by gameViewModel.state.collectAsStateWithLifecycle()
-                        val onGameEvent = gameViewModel::onEvent
-                        GameScreen(
-                            gameMode = args.gameMode,
-                            gameState = gameState,
-                            settingsState = settingsState,
-                            onGameEvent = onGameEvent,
-                            onSettingsEvent = onSettingsEvent,
-                            onUpdateSettingsState = gameViewModel::updateSettingsState,
-                            popBackStack = navController::popBackStack,
-                        )
-                    }
-                    composable<Settings> {
-                        SettingsScreen(
-                            navController = navController,
-                            state = settingsState,
-                            permissionsState = permissionsState,
-                            requestGalleryPermission = permissionsViewModel::provideOrRequestGalleryPermission,
-                            onEvent = onSettingsEvent,
-                            onDeleteImage = settingsViewModel::onDeleteImage,
-                            onSaveImage = settingsViewModel::onSaveImageByBitmap,
-                        )
-                    }
-                    composable<LibraryInfo> {
-                        val libraryViewModel = koinViewModel<LibraryViewModel>()
-                        val libraries by libraryViewModel.ossLibraries.collectAsStateWithLifecycle()
-                        LibraryScreen(
-                            libraries = libraries,
-                            popBackStack = navController::popBackStack,
-                        )
-                    }
-                    composable<SettingsSearch> {
-                        val searchSettingsViewModel = koinViewModel<SearchSettingsViewModel>()
-                        val searchState by searchSettingsViewModel.state.collectAsStateWithLifecycle()
-                        val onSearchEvent = searchSettingsViewModel::onEvent
-                        SearchSettingsScreen(
-                            navController = navController,
-                            searchState = searchState,
-                            settingsState = settingsState,
-                            onSearchEvent = onSearchEvent,
-                            onEvent = onSettingsEvent,
-                        )
-                    }
-                    composable<Changelogs> {
-                        changelogsViewModel.getAll()
-                        val allChangelogs by changelogsViewModel.allChangelogs.collectAsStateWithLifecycle()
-                        ChangelogsScreen(
-                            navController = navController,
-                            settingsState = settingsState,
-                            allChangelogs = allChangelogs,
-                            currentChangelog = currentChangelog,
-                            onEvent = onSettingsEvent,
-                        )
-                    }
+                    val args = it.toRoute<Game>()
+                    val gameViewModel = koinViewModel<GameViewModel>()
+                    val gameState by gameViewModel.state.collectAsStateWithLifecycle()
+                    val onGameEvent = gameViewModel::onEvent
+                    GameScreen(
+                        gameMode = args.gameMode,
+                        gameState = gameState,
+                        settingsState = settingsState,
+                        onGameEvent = onGameEvent,
+                        onSettingsEvent = onSettingsEvent,
+                        onUpdateSettingsState = gameViewModel::updateSettingsState,
+                        popBackStack = navController::popBackStack,
+                    )
+                }
+                composable<Settings> {
+                    SettingsScreen(
+                        navController = navController,
+                        state = settingsState,
+                        permissionsState = permissionsState,
+                        requestGalleryPermission = permissionsViewModel::provideOrRequestGalleryPermission,
+                        onEvent = onSettingsEvent,
+                        onDeleteImage = settingsViewModel::onDeleteImage,
+                        onSaveImage = settingsViewModel::onSaveImageByBitmap,
+                    )
+                }
+                composable<LibraryInfo> {
+                    val libraryViewModel = koinViewModel<LibraryViewModel>()
+                    val libraries by libraryViewModel.ossLibraries.collectAsStateWithLifecycle()
+                    LibraryScreen(
+                        libraries = libraries,
+                        popBackStack = navController::popBackStack,
+                    )
+                }
+                composable<SettingsSearch> {
+                    val searchSettingsViewModel = koinViewModel<SearchSettingsViewModel>()
+                    val searchState by searchSettingsViewModel.state.collectAsStateWithLifecycle()
+                    val onSearchEvent = searchSettingsViewModel::onEvent
+                    SearchSettingsScreen(
+                        navController = navController,
+                        searchState = searchState,
+                        settingsState = settingsState,
+                        onSearchEvent = onSearchEvent,
+                        onEvent = onSettingsEvent,
+                    )
+                }
+                composable<Changelogs> {
+                    changelogsViewModel.getAll()
+                    val allChangelogs by changelogsViewModel.allChangelogs.collectAsStateWithLifecycle()
+                    ChangelogsScreen(
+                        navController = navController,
+                        settingsState = settingsState,
+                        allChangelogs = allChangelogs,
+                        currentChangelog = currentChangelog,
+                        onEvent = onSettingsEvent,
+                    )
                 }
             }
         }
-        SingletonCoilImageLoader()
-
-        LifecycleEventsHandler.Handle(
-            onStop = { onSettingsEvent(SettingsEvent.StartBackgroundMusic(isAppInOnStop = true)) },
-            onResume = { onSettingsEvent(SettingsEvent.StartBackgroundMusic(isAppInOnStop = false)) },
-        )
     }
+    SingletonCoilImageLoader()
+
+    LifecycleEventsHandler.Handle(
+        onStop = { onSettingsEvent(SettingsEvent.StartBackgroundMusic(isAppInOnStop = true)) },
+        onResume = { onSettingsEvent(SettingsEvent.StartBackgroundMusic(isAppInOnStop = false)) },
+    )
 }
