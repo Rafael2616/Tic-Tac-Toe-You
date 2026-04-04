@@ -1,6 +1,6 @@
 Política de Privacidade - InclusiMap
 
-Última atualização: 27/03/2026
+Última atualização: 04/04/2026
 
 InclusiMap respeita sua privacidade. Esta Política de Privacidade explica como coletamos, usamos e protegemos as informações dos usuários.
 
@@ -22,4 +22,4 @@ Podemos atualizar esta Política periodicamente. Notificaremos sobre alteraçõe
 6. Contato
 Em caso de dúvidas, entre em contato pelo email:
 
-[rafaelmouranascimento18@gmail.com]
+[suporteinclusimap@gmail.com]
