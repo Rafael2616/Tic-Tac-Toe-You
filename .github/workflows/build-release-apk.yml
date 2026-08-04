@@ -39,7 +39,7 @@ jobs:
       run: ./gradlew :androidApp:assembleRelease
 
     - name: Upload APK
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v7
       with:
         name: app-release
         path: androidApp/build/outputs/apk/release/*.apk
@@ -69,7 +69,7 @@ jobs:
         run: ./gradlew :app:packageReleaseMsi
 
       - name: Upload APP
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: desktop-release
           path: app\build\compose\binaries\main-release\msi\*.msi
@@ -99,7 +99,7 @@ jobs:
         run: ./gradlew :app:wasmJsBrowserProductionWebpack
 
       - name: Upload APP
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: web-release
           path: build/js/packages/app
