@@ -1,90 +1,45 @@
-
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-
 plugins {
-    alias(libs.plugins.rafael.library)
-    alias(libs.plugins.rafael.library.compose)
+    alias(libs.plugins.rafael.multiplatform.library)
+    alias(libs.plugins.rafael.multiplatform.library.compose)
     alias(libs.plugins.rafael.spotless)
     alias(libs.plugins.androidx.room)
     alias(libs.plugins.ksp)
 }
 
-android.namespace = "com.rafael.tictactoe.core.settings"
-
-room {
-    schemaDirectory("$projectDir/schemas")
-}
-
 kotlin {
-    @OptIn(ExperimentalKotlinGradlePluginApi::class)
-    applyDefaultHierarchyTemplate {
-        common {
-            group("commonNonWasm") {
-                withJvm()
-                withAndroidTarget()
-                group("ios") {
-                    withIos()
-                }
-            }
-        }
-    }
     sourceSets {
         androidMain.dependencies {
             // Koin
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
+            implementation(libs.androidx.sqlite.bundled)
         }
         commonMain.dependencies {
-            implementation(libs.kotlinx.coroutines)
-            // Koin
             api(libs.koin.core)
             implementation(libs.koin.core.viewmodel)
+            implementation(libs.kotlinx.coroutines)
+            implementation(libs.androidx.room.runtime)
+
             // Projects
             api(projects.core.domain)
         }
         jvmMain.dependencies {
             // Coroutines swing
             api(libs.kotlinx.coroutines.swing)
-            // Sqlite
             implementation(libs.androidx.sqlite.bundled)
         }
-        val commonNonWasmMain by getting {
-            dependencies {
-                implementation(libs.kotlinx.coroutines)
-                // Room
-                implementation(libs.androidx.room.runtime)
-                // Koin
-                api(libs.koin.core)
-                implementation(libs.koin.core.viewmodel)
-                // Projects
-                api(projects.core.domain)
-            }
+        iosMain.dependencies {
+            implementation(libs.androidx.sqlite.bundled)
         }
     }
 }
 
-ksp {
-    arg("room.schemaLocation", "$projectDir/schemas")
-    arg("room.incremental", "true")
-    arg("room.generateKotlin", "true")
+room3 {
+    schemaDirectory("$projectDir/schemas")
 }
 
 dependencies {
     add("kspAndroid", libs.androidx.room.compiler)
-    add("kspIosSimulatorArm64", libs.androidx.room.compiler)
-    add("kspIosX64", libs.androidx.room.compiler)
     add("kspIosArm64", libs.androidx.room.compiler)
     add("kspJvm", libs.androidx.room.compiler)
-}
-
-tasks.matching { it.name.startsWith("ksp") }.configureEach {
-    dependsOn(
-        "generateResourceAccessorsForAndroidMain",
-        "generateResourceAccessorsForAndroidRelease",
-        "generateResourceAccessorsForCommonNonWasmMain",
-        "generateResourceAccessorsForCommonMain",
-        "generateExpectResourceCollectorsForCommonMain",
-        "generateActualResourceCollectorsForAndroidMain",
-        "generateComposeResClass",
-    )
 }

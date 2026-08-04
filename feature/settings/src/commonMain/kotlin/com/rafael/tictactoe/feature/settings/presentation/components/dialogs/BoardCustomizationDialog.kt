@@ -127,6 +127,7 @@ fun BoardCustomizationDialog(
     var sliderShadow by remember { mutableFloatStateOf(if (state.shapeSelected == SHAPE_CUSTOM) state.boardCardsShadow else DEF_CARDS_SHADOW) }
     var localShapeSelected by remember { mutableIntStateOf(state.shapeSelected) }
     var localCardsBorderHexColor by remember { mutableStateOf("FFFFFFFF") }
+    @Suppress("DEPRECATION")
     val clipboardManager = LocalClipboardManager.current
     var isRGBEffectOn by remember { mutableStateOf(state.isRGBEffectOn) }
     var isGradientOn by remember { mutableStateOf(state.isGradientOn) }

@@ -4,8 +4,6 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
@@ -13,8 +11,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.backhandler.BackHandler
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.PreviewScreenSizes
+import androidx.navigationevent.NavigationEventInfo
+import androidx.navigationevent.compose.NavigationEventHandler
+import androidx.navigationevent.compose.rememberNavigationEventState
 import com.rafael.tictactoe.core.navigation.GameMode
 import com.rafael.tictactoe.core.platform.Platform
 import com.rafael.tictactoe.core.settings.domain.model.SettingsEvent
@@ -35,9 +37,7 @@ import com.rafael.tictactoe.feature.game.presentation.components.ui.PlayerSearch
 import com.rafael.tictactoe.feature.game.presentation.components.ui.VictoryCounter
 import com.rafael.tictactoe.feature.game.presentation.components.ui.WinnerLines
 import com.rafael.tictactoe.feature.settings.presentation.components.dialogs.ColorSelectionDialog
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun GameScreen(
     gameMode: GameMode,
@@ -151,17 +151,22 @@ fun GameScreen(
         onDispose {}
     }
 
-    BackHandler(!Platform.IS_WINDOWS) {
+val navigationState = rememberNavigationEventState(
+    currentInfo = NavigationEventInfo.None,
+    backInfo = listOf(NavigationEventInfo.None)
+)
+    NavigationEventHandler(
+        state = navigationState,
+        isBackEnabled = !Platform.IS_WINDOWS
+    ) {
         latestOnGameEvent(GameEvent.ToggleExitDialog)
     }
 }
 
-@Preview
-// @PreviewLightDark
-// @PreviewScreenSizes
+@Preview(showBackground = true)
+@PreviewLightDark
+@PreviewScreenSizes
 @Composable
-@ExperimentalMaterial3Api
-@ExperimentalLayoutApi
 private fun GameScreenPreview() {
     AppTheme {
         GameScreen(

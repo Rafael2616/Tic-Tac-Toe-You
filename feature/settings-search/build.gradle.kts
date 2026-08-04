@@ -1,10 +1,8 @@
 plugins {
-    alias(libs.plugins.rafael.library)
-    alias(libs.plugins.rafael.library.compose)
+    alias(libs.plugins.rafael.multiplatform.library)
+    alias(libs.plugins.rafael.multiplatform.library.compose)
     alias(libs.plugins.rafael.spotless)
 }
-
-android.namespace = "com.rafael.tictactoe.feature.settings_search"
 
 kotlin {
     sourceSets {

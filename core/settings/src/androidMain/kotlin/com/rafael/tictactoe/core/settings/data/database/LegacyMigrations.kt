@@ -1,13 +1,13 @@
 package com.rafael.tictactoe.core.settings.data.database
 
-import androidx.room.migration.Migration
+import androidx.room3.migration.Migration
 import androidx.sqlite.SQLiteConnection
 import androidx.sqlite.execSQL
 
-internal class LegacyMigrations : IMigrations {
+internal class LegacyMigrations {
     companion object {
         val migration1To2 = object : Migration(1, 2) {
-            override fun migrate(connection: SQLiteConnection) {
+            override suspend fun migrate(connection: SQLiteConnection) {
                 val addAppVersion =
                     "ALTER TABLE 'settings' ADD COLUMN 'appVersion' TEXT NOT NULL DEFAULT 'O'"
                 val addSelectedWinnerLineColor =
@@ -25,7 +25,7 @@ internal class LegacyMigrations : IMigrations {
         }
 
         val migration2To3 = object : Migration(2, 3) {
-            override fun migrate(connection: SQLiteConnection) {
+            override suspend fun migrate(connection: SQLiteConnection) {
                 val addShapeSelected =
                     "ALTER TABLE 'settings' ADD COLUMN 'shapeSelected' INTEGER NOT NULL DEFAULT 1"
                 val addBoardCardsCornerRadius =
@@ -55,7 +55,7 @@ internal class LegacyMigrations : IMigrations {
         }
 
         val migration3To4 = object : Migration(3, 4) {
-            override fun migrate(connection: SQLiteConnection) {
+            override suspend fun migrate(connection: SQLiteConnection) {
                 val addProfilePicture =
                     "ALTER TABLE 'settings' ADD COLUMN 'profilePicture' BLOB DEFAULT null"
                 connection.execSQL(addProfilePicture)

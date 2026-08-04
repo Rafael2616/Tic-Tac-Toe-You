@@ -23,7 +23,6 @@ pluginManagement {
 dependencyResolutionManagement {
     // Remove the comment below when this issue is fixed https://youtrack.jetbrains.com/issue/KT-68533/Kotlin-2.0-WasmJs-error-when-using-RepositoriesMode.FAILONPROJECTREPOS
     // repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
-
     repositories {
         google {
             content {
@@ -38,6 +37,7 @@ dependencyResolutionManagement {
 }
 
 include(":app")
+include(":androidApp")
 include(":core:di")
 include(":core:domain")
 include(":core:navigation")
@@ -59,4 +59,4 @@ include(":libs:extendedColors")
 include(":libs:moko-permissions-jvm:permissions")
 include(":libs:moko-permissions-jvm:permissions-compose")
 
-include(":baseline-profile")
+//include(":baseline-profile")

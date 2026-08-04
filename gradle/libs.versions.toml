@@ -1,52 +1,56 @@
 [versions]
+namespace = "com.rafael.tictactoe"
 minSdk = "26"
-targetSdk = "36"
-compileSdk = "36"
-versionCode = "167"
-versionName = "1.7.6"
+targetSdk = "37"
+compileSdk = "37"
+versionCode = "168"
+versionName = "1.7.7"
 jvmTarget = "21"
 
 # Plugins
-agp = "8.13.1"
-spotless = "8.1.0"
-ksp = "2.3.3"
-kotlin = "2.2.21"
+agp = "9.3.1"
+spotless = "8.9.0"
+ksp = "2.3.11"
+kotlin = "2.4.10"
 licensee = "1.14.1"
 
 # Android-specific
-activity-compose = "1.12.1"
-core-ktx = "1.17.0"
+activity-compose = "1.13.0"
+core-ktx = "1.19.0"
 core-splashscreen = "1.2.0"
-media3 = "1.8.0"
+media3 = "1.10.1"
 baselineprofile = "1.4.1"
 profileinstaller = "1.4.1"
-uiTestManifest = "1.10.0"
+uiTestManifest = "1.11.4"
 
 junit = "4.13.2"
 expresso = "3.7.0"
 androidx-test-junit = "1.3.0"
-mockk = "1.14.7"
-uiautomator = "2.3.0"
+mockk = "1.14.11"
+uiautomator = "2.4.0"
 benchmarkMacroJunit4 = "1.4.1"
 
 # Multiplatform-ready dependencies
-kotlinx-coroutines = "1.10.2"
-kotlinx-collections-immutable = "0.4.0"
-kotlinx-serialization = "1.9.0"
-kotlinx-datetime = "0.7.1"
-navigation-compose = "2.9.1"
-lifecycle-compose = "2.9.6"
-jetbrains-compose = "1.9.3"
-koin = "4.1.1"
-room = "2.8.4"
-sqlite = "2.6.2"
-coil = "3.3.0"
-ktor = "3.3.3"
-androidx-annotation = "1.9.1"
+kotlinx-coroutines = "1.11.0"
+kotlinx-collections-immutable = "0.5.1"
+kotlinx-serialization = "1.11.0"
+kotlinx-datetime = "0.8.0"
+koin = "4.2.2"
+room = "3.0.1"
+sqlite = "2.7.0"
+coil = "3.5.0"
+ktor = "3.5.2"
+androidx-annotation = "1.10.0"
 material-motion-compose = "2.0.1"
-colorpicker-compose = "1.1.3"
-compose-rules = "0.5.1"
-filekit = "0.12.0"
+colorpicker-compose = "1.2.0"
+compose-rules = "0.6.3"
+filekit = "0.14.2"
+navigation3-compose = "1.1.1"
+navigation-event-compose = "1.1.0"
+lifecycle-compose = "2.11.0"
+jetbrains-compose = "1.11.1"
+material3 = "1.11.0-alpha07"
+navigation-compose = "2.9.2"
 
 [libraries]
 kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
@@ -55,16 +59,28 @@ kotlinx-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collec
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 
+jetbrains-compose-material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "material3" }
+jetbrains-compose-material-icons-extended = { module = "org.jetbrains.compose.material:material-icons-extended", version = "1.7.3" }
+jetbrains-compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "jetbrains-compose" }
+jetbrains-compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "jetbrains-compose" }
+jetbrains-compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "jetbrains-compose" }
+jetbrains-compose-ui-tooling-preview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "jetbrains-compose" }
+jetbrains-compose-animation = { module = "org.jetbrains.compose.animation:animation", version.ref = "jetbrains-compose" }
+jetbrains-compose-resources = { module = "org.jetbrains.compose.components:components-resources", version.ref = "jetbrains-compose" }
+jetbrains-compose-desktop = { module = "org.jetbrains.compose.desktop:desktop", version.ref = "jetbrains-compose" }
 jetbrains-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
+jetbrains-navigation3-compose = { module = "org.jetbrains.androidx.navigation3:navigation3-ui", version.ref = "navigation3-compose" }
+jetbrains-navigation-event-compose = { module = "org.jetbrains.androidx.navigationevent:navigationevent-compose", version.ref = "navigation-event-compose" }
 jetbrains-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle-compose" }
-jetbrains-lifecyle-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle-compose" }
-jetbrains-compose-backhandler = { module = "org.jetbrains.compose.ui:ui-backhandler", version.ref = "jetbrains-compose" }
+jetbrains-lifecycle-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle-compose" }
+jetbrains-compose-window-sizeclass = { module = "org.jetbrains.compose.material3:material3-window-size-class", version.ref = "material3" }
+
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil-compose-core = { module = "io.coil-kt.coil3:coil-compose-core", version.ref = "coil" }
 coil-network = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil" }
 
-androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
-androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+androidx-room-runtime = { module = "androidx.room3:room3-runtime", version.ref = "room" }
+androidx-room-compiler = { module = "androidx.room3:room3-compiler", version.ref = "room" }
 androidx-sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
 
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
@@ -114,9 +130,11 @@ composeCompiler-gradle = { module = "org.jetbrains.kotlin:compose-compiler-gradl
 compose-gradle = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "jetbrains-compose" }
 
 [plugins]
-androidx-room = { id = "androidx.room", version.ref = "room" }
-com-android-application = { id = "com.android.application", version.ref = "agp" }
-com-android-library = { id = "com.android.library", version.ref = "agp" }
+androidx-room = { id = "androidx.room3", version.ref = "room" }
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+android-test = { id = "com.android.test", version.ref = "agp" }
+android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
@@ -125,11 +143,19 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 jetbrains-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "jetbrains-compose" }
 licensee = { id = "app.cash.licensee", version.ref = "licensee" }
-android-test = { id = "com.android.test", version.ref = "agp" }
 baselineprofile = { id = "androidx.baselineprofile", version.ref = "baselineprofile" }
 
 rafael-spotless = { id = "com.rafael.spotless", version = "unspecified" }
-rafael-library = { id = "com.rafael.library", version = "unspecified" }
-rafael-library-compose = { id = "com.rafael.compose.library", version = "unspecified" }
-rafael-application = { id = "com.rafael.application", version = "unspecified" }
-rafael-application-compose = { id = "com.rafael.compose.application", version = "unspecified" }
+rafael-multiplatform-library = { id = "com.rafael.multiplatform.library", version = "unspecified" }
+rafael-multiplatform-library-compose = { id = "com.rafael.compose.multiplatform.library", version = "unspecified" }
+rafael-android-library = { id = "com.rafael.android.library", version = "unspecified" }
+rafael-android-compose = { id = "com.rafael.compose.android", version = "unspecified" }
+
+[bundles]
+compose-multiplatform-ext-deps = [
+    "jetbrains-viewmodel-compose",
+    "jetbrains-lifecycle-compose",
+    "jetbrains-compose-window-sizeclass",
+    "jetbrains-navigation3-compose",
+    "jetbrains-navigation-event-compose",
+]

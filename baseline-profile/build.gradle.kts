@@ -3,7 +3,6 @@
 plugins {
     alias(libs.plugins.android.test)
     alias(libs.plugins.baselineprofile)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.rafael.spotless)
 }
 

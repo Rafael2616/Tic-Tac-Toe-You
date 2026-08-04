@@ -37,21 +37,21 @@ gradlePlugin {
             id = "com.rafael.spotless"
             implementationClass = "SpotlessConventionPlugin"
         }
-        register("library") {
-            id = "com.rafael.library"
+        register("androidLibrary") {
+            id = "com.rafael.android.library"
+            implementationClass = "AndroidLibraryConventionPlugin"
+        }
+        register("composeAndroid") {
+            id = "com.rafael.compose.android"
+            implementationClass = "AndroidComposeConventionPlugin"
+        }
+        register("multiplatformLibrary") {
+            id = "com.rafael.multiplatform.library"
             implementationClass = "MultiplatformLibraryConventionPlugin"
         }
-        register("composeLibrary") {
-            id = "com.rafael.compose.library"
+        register("composeMultiplatformLibrary") {
+            id = "com.rafael.compose.multiplatform.library"
             implementationClass = "MultiplatformLibraryComposeConventionPlugin"
-        }
-        register("application") {
-            id = "com.rafael.application"
-            implementationClass = "MultiplatformApplicationConventionPlugin"
-        }
-        register("composeApplication") {
-            id = "com.rafael.compose.application"
-            implementationClass = "MultiplatformApplicationComposeConventionPlugin"
         }
     }
 }
@@ -60,9 +60,7 @@ extensions.configure<SpotlessExtension> {
     kotlin {
         ktlint()
             .customRuleSets(
-                listOf(
-                    libs.ktlint.compose.rules.get().toString(),
-                ),
+                listOf(libs.ktlint.compose.rules.get().toString()),
             )
         target("src/**/*.kt")
     }

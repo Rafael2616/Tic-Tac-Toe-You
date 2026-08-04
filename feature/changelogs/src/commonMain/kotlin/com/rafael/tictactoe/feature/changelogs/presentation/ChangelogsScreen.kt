@@ -15,7 +15,6 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.outlined.NewReleases
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LargeTopAppBar
@@ -37,6 +36,9 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
@@ -51,10 +53,8 @@ import com.rafael.tictactoe.feature.changelogs.domain.Changelog
 import com.rafael.tictactoe.feature.changelogs.presentation.components.WhatsNewDialog
 import com.rafael.tictactoe.feature.changelogs.presentation.util.styledChangelog
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-@OptIn(ExperimentalMaterial3Api::class)
 fun ChangelogsScreen(
     navController: NavController,
     settingsState: SettingsState,
@@ -185,11 +185,10 @@ fun ChangelogsScreen(
     }
 }
 
-@Preview
-// @PreviewLightDark
-// @PreviewScreenSizes
+@Preview(showBackground = true)
+@PreviewLightDark
+@PreviewScreenSizes
 @Composable
-@ExperimentalMaterial3Api
 private fun ChangelogsScreenPreview() {
     AppTheme {
         ChangelogsScreen(

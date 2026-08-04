@@ -1,11 +1,10 @@
 plugins {
-    alias(libs.plugins.rafael.library)
+    alias(libs.plugins.rafael.multiplatform.library)
     alias(libs.plugins.rafael.spotless)
 }
 
-android.namespace = "com.rafael.tictactoe.core.services"
-
 kotlin {
+    android.androidResources.enable = true
     sourceSets {
         androidMain.dependencies {
             // Media3

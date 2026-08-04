@@ -84,6 +84,7 @@ fun ColorSelectionDialog(
     state: SettingsState,
     modifier: Modifier = Modifier,
 ) {
+    @Suppress("DEPRECATION")
     val clipboardManager = LocalClipboardManager.current
     val selectedIcon = when (state.customizationType) {
         Customization.XCOLOR -> 0

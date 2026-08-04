@@ -1,115 +1,89 @@
 package com.rafael.gradle
 
-import com.android.build.api.dsl.CommonExtension
-import org.gradle.api.JavaVersion
+import com.android.build.api.dsl.ApplicationExtension
+import com.android.build.api.dsl.LibraryExtension
 import org.gradle.api.Project
 import org.gradle.api.file.DuplicatesStrategy
 import org.gradle.jvm.tasks.Jar
 import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
-@OptIn(ExperimentalKotlinGradlePluginApi::class)
-internal fun Project.configureKotlinMultiplatform(
-    commonExtension: CommonExtension<*, *, *, *, *, *>,
-) {
-    commonExtension.apply {
-        compileSdk = libs.findVersion("compileSdk").get().toString().toIntOrNull()
-
-        defaultConfig {
-            minSdk = libs.findVersion("minSdk").get().toString().toIntOrNull()
-        }
-
-        compileOptions {
-            sourceCompatibility = javaVersion
-            targetCompatibility = javaVersion
-        }
-
-        packaging {
-            resources {
-                excludes += listOf(
-                    "/META-INF/AL2.0",
-                    "/META-INF/INDEX.LIST",
-                    "/META-INF/LGPL2.1",
-                    "/META-INF/LICENSE.md",
-                    "/META-INF/LICENSE-notice.md",
-                    "/META-INF/gradle/incremental.annotation.processors",
-                )
+internal fun Project.configureKotlinMultiplatform() {
+    kotlinMultiplatformExtension {
+        if (pluginManager.hasPlugin("com.android.kotlin.multiplatform.library")) {
+            android {
+                namespace = projectNamespace
+                compileSdk = libs.findVersion("compileSdk").get().toString().toInt()
+                minSdk = libs.findVersion("minSdk").get().toString().toInt()
             }
+        } else if (pluginManager.hasPlugin("com.android.application") || pluginManager.hasPlugin("com.android.library")) {
+            androidTarget()
+        }
+
+        jvm {
+            @OptIn(ExperimentalKotlinGradlePluginApi::class)
+            binaries {
+                tasks.withType<Jar>().configureEach {
+                    if (name == "${this.name}Jar") {
+                        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+                        // Or exclude("META-INF/MANIFEST.MF") if needed
+                    }
+                }
+            }
+        }
+
+        listOf(
+            iosArm64(),
+            // iosSimulatorArm64(), enable if you want simulator and build with Macs
+        ).forEach { iosTarget ->
+            val projectName = project.name.replaceFirstChar { it.uppercase() }.replace("-", "")
+            iosTarget.binaries.framework {
+                baseName = projectName
+                isStatic = true
+                freeCompilerArgs += listOf("-Xbinary=bundleId=$projectNamespace")
+            }
+        }
+        @OptIn(ExperimentalWasmDsl::class)
+        wasmJs {
+            browser {
+                val projectOutputFileName = "${project.name}.js"
+                commonWebpackConfig {
+                    outputFileName = projectOutputFileName
+                }
+            }
+            compilations.configureEach {
+                outputModuleName.apply {
+                    project.provider { project.name }
+                }
+            }
+            binaries.executable()
+        }
+        compilerOptions {
+            // Remove when expect/actual declaration becomes stable
+            freeCompilerArgs.add("-Xexpect-actual-classes")
+            jvmToolchain(javaVersion.majorVersion.toInt())
         }
     }
 
-    plugins.withId("org.jetbrains.kotlin.multiplatform") {
-        kotlinMultiplatformExtension {
+    val compileSdkVersion = libs.findVersion("compileSdk").get().toString().toInt()
+    val minSdkVersion = libs.findVersion("minSdk").get().toString().toInt()
 
-            val isAndroidApp = plugins.hasPlugin("com.android.application")
-            val isAndroidLibrary = plugins.hasPlugin("com.android.library")
-            if (isAndroidApp || isAndroidLibrary) {
-                androidTarget {
-                    if (isAndroidLibrary) {
-                        publishLibraryVariants("release")
-                    }
-                    compilerOptions {
-                        jvmTarget.set(JvmTarget.JVM_21)
-                    }
-                }
+    pluginManager.withPlugin("com.android.application") {
+        extensions.configure<ApplicationExtension>("android") {
+            compileSdk = compileSdkVersion
+            defaultConfig {
+                minSdk = minSdkVersion
             }
-
-            jvm {
-                binaries {
-                    tasks.withType<Jar>().configureEach {
-                        if (name == "${this.name}Jar") {
-                            duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-                            // Or exclude("META-INF/MANIFEST.MF") if needed
-                        }
-                    }
-                }
-            }
-
-            listOf(
-                iosX64(),
-                iosArm64(),
-                iosSimulatorArm64(),
-            ).forEach { iosTarget ->
-                iosTarget.binaries.framework {
-                    baseName = project.name
-                    isStatic = true
-                }
-            }
-            @OptIn(ExperimentalWasmDsl::class)
-            wasmJs {
-                //moduleName = project.name
-                browser {
-                    val projectOutputFileName = "${project.name}.js"
-                    commonWebpackConfig {
-                        outputFileName = projectOutputFileName
-                    }
-                }
-                compilations.configureEach {
-                    outputModuleName.apply {
-                        project.provider { project.name }
-                    }
-                }
-                binaries.executable()
-            }
-            compilerOptions {
-                // Remove when expect/actual declaration becomes stable
-                freeCompilerArgs.add("-Xexpect-actual-classes")
-                jvmToolchain(21)
+        }
+    }
+    pluginManager.withPlugin("com.android.library") {
+        extensions.configure<LibraryExtension>("android") {
+            compileSdk = compileSdkVersion
+            defaultConfig {
+                minSdk = minSdkVersion
             }
         }
     }
 }
-
-fun Project.kotlinMultiplatformExtension(block: KotlinMultiplatformExtension.() -> Unit) {
-    extensions.configure<KotlinMultiplatformExtension>(block)
-}
-
-val Project.javaVersion: JavaVersion
-    get() = JavaVersion.toVersion(
-        libs.findVersion("jvmTarget").get().toString(),
-    )

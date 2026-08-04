@@ -33,6 +33,9 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -56,7 +59,6 @@ import com.rafael.tictactoe.feature.changelogs.presentation.components.WhatsNewD
 import com.rafael.tictactoe.feature.main.domain.model.MainState
 import com.rafael.tictactoe.feature.main.domain.model.ScreenItem
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun MainScreen(
@@ -191,9 +193,9 @@ fun MainScreen(
     }
 }
 
-@Preview
-// @PreviewLightDark
-// @PreviewScreenSizes
+@Preview(showBackground = true)
+@PreviewLightDark
+@PreviewScreenSizes
 @Composable
 private fun MainScreenPreview() {
     AppTheme {

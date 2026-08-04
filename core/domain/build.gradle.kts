@@ -1,17 +1,7 @@
+import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget
+
 plugins {
-    alias(libs.plugins.rafael.library)
-    alias(libs.plugins.rafael.library.compose)
+    alias(libs.plugins.rafael.multiplatform.library)
+    alias(libs.plugins.rafael.multiplatform.library.compose)
     alias(libs.plugins.rafael.spotless)
-}
-
-android {
-    namespace = "com.rafael.tictactoe.core.domain"
-
-    defaultConfig {
-        buildConfigField("int", "VERSION_CODE", libs.versions.versionCode.get())
-        buildConfigField("String", "VERSION_NAME", "\"${libs.versions.versionName.get()}\"")
-    }
-    buildFeatures {
-        buildConfig = true
-    }
 }

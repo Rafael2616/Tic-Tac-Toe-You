@@ -13,7 +13,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -36,6 +35,9 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rafael.tictactoe.core.resources.Res
@@ -44,10 +46,8 @@ import com.rafael.tictactoe.core.ui.theme.AppTheme
 import com.rafael.tictactoe.feature.libraryinfo.domain.model.OssLibrary
 import com.rafael.tictactoe.feature.libraryinfo.presentation.utils.annotatedLink
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-@OptIn(ExperimentalMaterial3Api::class)
 fun LibraryScreen(
     libraries: List<OssLibrary>,
     popBackStack: () -> Unit,
@@ -154,11 +154,10 @@ fun LibraryScreen(
     }
 }
 
-@Preview
-// @PreviewLightDark
-// @PreviewScreenSizes
+@Preview(showBackground = true)
+@PreviewLightDark
+@PreviewScreenSizes
 @Composable
-@ExperimentalMaterial3Api
 private fun LibraryScreenPreview() {
     AppTheme {
         LibraryScreen(

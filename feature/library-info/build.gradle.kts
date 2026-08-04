@@ -1,25 +1,23 @@
-import org.jetbrains.compose.ExperimentalComposeLibrary
+import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget
 
 plugins {
-    alias(libs.plugins.rafael.library)
-    alias(libs.plugins.rafael.library.compose)
+    alias(libs.plugins.rafael.multiplatform.library)
+    alias(libs.plugins.rafael.multiplatform.library.compose)
     alias(libs.plugins.rafael.spotless)
     alias(libs.plugins.kotlin.serialization)
 }
 
-android {
-    namespace = "com.rafael.tictactoe.feature.library_info"
-    defaultConfig {
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnit4Runner"
-    }
-    testOptions {
-        unitTests {
+kotlin {
+    // New KMP Android target DSL
+    extensions.configure<KotlinMultiplatformAndroidLibraryTarget>("android") {
+        androidResources.enable = true
+        withDeviceTest {
+            instrumentationRunner = "androidx.test.runner.AndroidJUnit4Runner"
+        }
+        withHostTest {
             isIncludeAndroidResources = true
         }
     }
-}
-
-kotlin {
     sourceSets {
         androidMain.dependencies {
             // Koin
@@ -39,16 +37,5 @@ kotlin {
             implementation(projects.core.resources)
             implementation(projects.core.ui)
         }
-        androidUnitTest.dependencies {
-            implementation(libs.junit)
-            implementation(libs.mockk)
-            @OptIn(ExperimentalComposeLibrary::class)
-            implementation(compose.uiTest)
-            implementation(compose.desktop.uiTestJUnit4)
-        }
     }
-}
-
-dependencies {
-    debugImplementation(libs.androidx.ui.test.manifest)
 }

@@ -1,10 +1,8 @@
 plugins {
-    alias(libs.plugins.rafael.library)
-    alias(libs.plugins.rafael.library.compose)
+    alias(libs.plugins.rafael.multiplatform.library)
+    alias(libs.plugins.rafael.multiplatform.library.compose)
     alias(libs.plugins.rafael.spotless)
 }
-
-android.namespace = "com.rafael.tictactoe.core.platform"
 
 kotlin {
     sourceSets {
@@ -19,7 +17,6 @@ kotlin {
             implementation(libs.kotlinx.datetime)
             // AndroidX
             implementation(libs.jetbrains.viewmodel.compose)
-            implementation(libs.jetbrains.lifecyle.compose)
             // Moko
             api(projects.libs.mokoPermissionsJvm.permissions)
             api(projects.libs.mokoPermissionsJvm.permissionsCompose)

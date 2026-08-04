@@ -49,6 +49,9 @@ import androidx.compose.ui.semantics.isTraversalGroup
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.traversalIndex
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
@@ -67,7 +70,6 @@ import com.rafael.tictactoe.feature.settings.presentation.components.templates.P
 import com.rafael.tictactoe.feature.settingssearch.domain.model.SearchSettingsEvent
 import com.rafael.tictactoe.feature.settingssearch.domain.model.SearchSettingsState
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
@@ -233,9 +235,9 @@ fun SearchSettingsScreen(
     }
 }
 
-@Preview
-// @PreviewLightDark
-// @PreviewScreenSizes
+@Preview(showBackground = true)
+@PreviewLightDark
+@PreviewScreenSizes
 @Composable
 private fun SearchSettingsScreenPreview() {
     AppTheme {

@@ -1,10 +1,12 @@
 package com.rafael.tictactoe.feature.game.domain.model
 
+import androidx.compose.runtime.Stable
 import com.rafael.tictactoe.core.domain.network.Error
 import com.rafael.tictactoe.core.domain.network.Result
 import com.rafael.tictactoe.core.navigation.GameMode
 import com.rafael.tictactoe.feature.game.domain.repository.ErrorMessage
 
+@Stable
 data class GameState(
     val currentPlayerName: String = "",
     val player1Name: String = "",

@@ -1,9 +1,8 @@
-import com.android.build.api.dsl.LibraryExtension
 import com.rafael.gradle.configureComposeMultiplatform
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.configure
 
+@Suppress("unused")
 class MultiplatformLibraryComposeConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
@@ -12,7 +11,7 @@ class MultiplatformLibraryComposeConventionPlugin : Plugin<Project> {
                 apply("org.jetbrains.compose")
             }
 
-            extensions.configure<LibraryExtension> {
+            plugins.withId("org.jetbrains.kotlin.multiplatform") {
                 configureComposeMultiplatform()
             }
         }

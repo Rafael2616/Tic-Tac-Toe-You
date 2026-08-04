@@ -1,8 +1,8 @@
 @file:Suppress("UnstableApiUsage")
 
 plugins {
-    alias(libs.plugins.rafael.library)
-    alias(libs.plugins.rafael.library.compose)
+    alias(libs.plugins.rafael.multiplatform.library)
+    alias(libs.plugins.rafael.multiplatform.library.compose)
     alias(libs.plugins.rafael.spotless)
 }
 
@@ -11,30 +11,13 @@ object MySettings {
     val namespace = "my.nanihadesuka.lazycolumnscrollbar"
 }
 
-android {
-    namespace = MySettings.namespace
-
-    buildFeatures {
-        compose = true
-    }
-
-    defaultConfig {
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
-        vectorDrawables {
-            useSupportLibrary = true
+kotlin {
+    android {
+        namespace = MySettings.namespace
+        withDeviceTest {
+            instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFile("proguard-rules.pro")
-        }
-    }
-
-    testOptions {
-        unitTests {
+        withHostTest {
             isIncludeAndroidResources = true
         }
     }

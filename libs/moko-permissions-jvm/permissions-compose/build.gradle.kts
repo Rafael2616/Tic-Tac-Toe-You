@@ -3,21 +3,22 @@
  */
 
 plugins {
-    alias(libs.plugins.rafael.library)
-    alias(libs.plugins.rafael.library.compose)
+    alias(libs.plugins.rafael.multiplatform.library)
+    alias(libs.plugins.rafael.multiplatform.library.compose)
     alias(libs.plugins.rafael.spotless)
 }
 
-android.namespace = "dev.icerock.moko.permissions.compose"
-
 kotlin {
+    android {
+        namespace = "dev.icerock.moko.permissions.compose"
+    }
     sourceSets {
         commonMain.dependencies {
             api(projects.libs.mokoPermissionsJvm.permissions)
         }
         androidMain.dependencies {
             implementation(libs.androidx.activity.compose)
-            implementation(libs.jetbrains.lifecyle.compose)
+            implementation(libs.jetbrains.lifecycle.compose)
         }
     }
 }

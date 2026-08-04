@@ -36,13 +36,13 @@ jobs:
       run: chmod +x gradlew
 
     - name: Build Android Release APK
-      run: ./gradlew :app:assembleRelease
+      run: ./gradlew :androidApp:assembleRelease
 
     - name: Upload APK
       uses: actions/upload-artifact@v5
       with:
         name: app-release
-        path: app/build/outputs/apk/release/*.apk
+        path: androidApp/build/outputs/apk/release/*.apk
 
   build-release-desktop-msi:
     runs-on: windows-latest
@@ -68,7 +68,7 @@ jobs:
       - name: Build Desktop Release MSI
         run: ./gradlew :app:packageReleaseMsi
 
-      - name: Upload APK
+      - name: Upload APP
         uses: actions/upload-artifact@v5
         with:
           name: desktop-release
@@ -98,7 +98,7 @@ jobs:
       - name: Build Web Release Distribution
         run: ./gradlew :app:wasmJsBrowserProductionWebpack
 
-      - name: Upload APK
+      - name: Upload APP
         uses: actions/upload-artifact@v5
         with:
           name: web-release
