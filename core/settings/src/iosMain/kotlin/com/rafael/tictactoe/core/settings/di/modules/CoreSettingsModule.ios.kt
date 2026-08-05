@@ -3,6 +3,7 @@ package com.rafael.tictactoe.core.settings.di.modules
 import com.rafael.tictactoe.core.settings.data.database.SettingsDatabase
 import com.rafael.tictactoe.core.settings.data.database.getRoomDatabase
 import com.rafael.tictactoe.core.settings.data.repository.SettingsRepositoryImpl
+import com.rafael.tictactoe.core.settings.domain.repository.SettingsRepository
 import kotlinx.cinterop.ExperimentalForeignApi
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -20,7 +21,7 @@ actual val coreSettingsModule: Module = module {
             .fallbackToDestructiveMigration(dropAllTables = true)
             .build()
     }
-    single {
+    single<SettingsRepository> {
         SettingsRepositoryImpl(get<SettingsDatabase>().settingsDao())
     }
 }
