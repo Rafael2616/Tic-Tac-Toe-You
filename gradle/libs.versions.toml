@@ -27,7 +27,7 @@ benchmarkMacroJunit4 = "1.4.1"
 
 # Multiplatform-ready dependencies
 kotlinx-coroutines = "1.11.0"
-kotlinx-collections-immutable = "0.5.1"
+kotlinx-collections-immutable = "0.5.2"
 kotlinx-serialization = "1.11.0"
 kotlinx-datetime = "0.8.0"
 koin = "4.2.2"
