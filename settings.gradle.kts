@@ -54,7 +54,6 @@ include(":feature:main")
 include(":feature:settings")
 include(":feature:settings-search")
 
-include(":libs:lazyColumnScrollbar")
 include(":libs:extendedColors")
 include(":libs:moko-permissions-jvm:permissions")
 include(":libs:moko-permissions-jvm:permissions-compose")

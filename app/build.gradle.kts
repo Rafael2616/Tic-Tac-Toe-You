@@ -1,4 +1,5 @@
 import app.cash.licensee.LicenseeTask
+import app.cash.licensee.SpdxId
 import app.cash.licensee.UnusedAction
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
@@ -11,6 +12,7 @@ plugins {
 }
 
 licensee {
+    allow(SpdxId.MIT)
     allow("Apache-2.0")
     allowUrl("https://opensource.org/license/mit")
     allowUrl("https://github.com/vinceglb/FileKit/blob/main/LICENSE")

@@ -10,7 +10,7 @@ import org.koin.dsl.module
 import org.w3c.dom.Worker
 
 @OptIn(ExperimentalWasmJsInterop::class)
-private fun instantiateWorker(): Worker = js("new Worker(new URL('./sqlite-web-worker/worker.js', import.meta.url))")
+fun instantiateWorker(): Worker = js("new Worker(new URL('./sqlite-web-worker/worker.js', import.meta.url))")
 
 actual val coreSettingsModule: Module = module {
     single {

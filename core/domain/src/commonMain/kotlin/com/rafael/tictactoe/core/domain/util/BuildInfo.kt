@@ -7,5 +7,5 @@ expect object BuildInfo {
 }
 
 const val COMMON_APPLICATION_ID = "com.rafael.tictactoe"
-const val COMMON_VERSION_CODE = 165
-const val COMMON_VERSION_NAME = "1.7.4"
+const val COMMON_VERSION_CODE = 169
+const val COMMON_VERSION_NAME = "1.7.7"

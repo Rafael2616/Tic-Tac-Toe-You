@@ -1,6 +1,5 @@
 package com.rafael.tictactoe.feature.game.di.modules
 
-import com.rafael.tictactoe.core.platform.network.ktorClientEngine
 import com.rafael.tictactoe.feature.game.data.repository.GameRepositoryImpl
 import com.rafael.tictactoe.feature.game.domain.repository.GameRepository
 import com.rafael.tictactoe.feature.game.presentation.viewmodel.GameViewModel
@@ -22,7 +21,7 @@ val gameModule: Module = module {
         GameViewModel(get<GameRepository>())
     }
     single {
-        HttpClient(ktorClientEngine) {
+        HttpClient {
             install(Logging) {
                 level = LogLevel.ALL
             }

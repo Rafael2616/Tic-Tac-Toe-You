@@ -9,7 +9,20 @@ let nextStatementId = 0;
 function openRequest(id, requestData) {
   try {
     const newDatabaseId = nextDatabaseId++;
-    const newDatabase = new sqlite3.oo1.OpfsDb(requestData.fileName);
+    let newDatabase;
+    if (typeof sqlite3?.oo1?.OpfsDb === 'function') {
+      try {
+        newDatabase = new sqlite3.oo1.OpfsDb(requestData.fileName);
+      } catch (opfsError) {
+        console.warn("Failed to instantiate OpfsDb, falling back to sqlite3.oo1.DB:", opfsError);
+        newDatabase = new sqlite3.oo1.DB(requestData.fileName, 'c');
+      }
+    } else if (typeof sqlite3?.oo1?.DB === 'function') {
+      console.warn("sqlite3.oo1.OpfsDb is not available. Falling back to sqlite3.oo1.DB.");
+      newDatabase = new sqlite3.oo1.DB(requestData.fileName, 'c');
+    } else {
+      throw new Error("SQLite OO1 database constructors are not available.");
+    }
     databases.set(newDatabaseId, newDatabase);
     postMessage({'id': id, data: {'databaseId': newDatabaseId}});
   } catch (error) {

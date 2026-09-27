@@ -7,34 +7,24 @@ plugins {
 kotlin {
     sourceSets {
         androidMain.dependencies {
-            // AndroidX
             implementation(libs.androidx.activity.compose)
-            // Koin
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
-            // Ktor
-            implementation(libs.ktor.client.android)
         }
         commonMain.dependencies {
-            // Kotlin
             implementation(libs.kotlinx.coroutines)
             implementation(libs.kotlinx.collections.immutable)
-            // AndroidX
             implementation(libs.androidx.annotation)
-            // Navigation
             implementation(libs.jetbrains.navigation.compose)
-            // Koin
             api(libs.koin.core)
             implementation(libs.koin.core.viewmodel)
             implementation(libs.koin.compose)
-            // Coil
             api(libs.coil.compose)
             implementation(libs.coil.network)
-            // FileKit
             implementation(libs.filekit.core)
             implementation(libs.filekit.compose)
-            // ColorPicker Compose
             implementation(libs.skydoves.colorpicker.compose)
+            implementation(libs.lazyColumn.scrollbar)
 
             // Projects
             implementation(projects.core.navigation)
@@ -46,16 +36,6 @@ kotlin {
 
             // My multiplatform core implementation of smart-tool factory extended colors library
             implementation(projects.libs.extendedColors)
-            // My multiplatform implementation of LazyColumnScrollbar library
-            implementation(projects.libs.lazyColumnScrollbar)
-        }
-        iosMain.dependencies {
-            // Ktor
-            implementation(libs.ktor.client.ios)
-        }
-        wasmJsMain.dependencies {
-            // Ktor
-            implementation(libs.ktor.client.js)
         }
     }
 }

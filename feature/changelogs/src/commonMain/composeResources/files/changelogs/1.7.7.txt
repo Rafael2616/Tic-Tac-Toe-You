@@ -1,0 +1,2 @@
+Fixes/All Platforms:
+ - Dependencies and vulnerabilities fixed
