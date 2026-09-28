@@ -40,7 +40,9 @@ room3 {
 
 dependencies {
     add("kspAndroid", libs.androidx.room.compiler)
-    add("kspIosArm64", libs.androidx.room.compiler)
     add("kspJvm", libs.androidx.room.compiler)
     add("kspWasmJs", libs.androidx.room.compiler)
+    if (configurations.findByName("kspIosArm64") != null) {
+        add("kspIosArm64", libs.androidx.room.compiler)
+    }
 }

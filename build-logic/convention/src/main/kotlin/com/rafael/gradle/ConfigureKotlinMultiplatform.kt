@@ -33,15 +33,17 @@ internal fun Project.configureKotlinMultiplatform() {
             }
         }
 
-        listOf(
-            iosArm64(),
-            // iosSimulatorArm64(), enable if you want simulator and build with Macs
-        ).forEach { iosTarget ->
-            val projectName = project.name.replaceFirstChar { it.uppercase() }.replace("-", "")
-            iosTarget.binaries.framework {
-                baseName = projectName
-                isStatic = true
-                freeCompilerArgs += listOf("-Xbinary=bundleId=$projectNamespace")
+        if (isKotlinNativeHostSupported) {
+            listOf(
+                iosArm64(),
+                // iosSimulatorArm64(), enable if you want simulator and build with Macs
+            ).forEach { iosTarget ->
+                val projectName = project.name.replaceFirstChar { it.uppercase() }.replace("-", "")
+                iosTarget.binaries.framework {
+                    baseName = projectName
+                    isStatic = true
+                    freeCompilerArgs += listOf("-Xbinary=bundleId=$projectNamespace")
+                }
             }
         }
         @OptIn(ExperimentalWasmDsl::class)

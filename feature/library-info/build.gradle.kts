@@ -1,5 +1,3 @@
-import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget
-
 plugins {
     alias(libs.plugins.rafael.multiplatform.library)
     alias(libs.plugins.rafael.multiplatform.library.compose)
@@ -8,16 +6,7 @@ plugins {
 }
 
 kotlin {
-    // New KMP Android target DSL
-    extensions.configure<KotlinMultiplatformAndroidLibraryTarget>("android") {
-        androidResources.enable = true
-        withDeviceTest {
-            instrumentationRunner = "androidx.test.runner.AndroidJUnit4Runner"
-        }
-        withHostTest {
-            isIncludeAndroidResources = true
-        }
-    }
+    android.androidResources.enable = true
     sourceSets {
         androidMain.dependencies {
             // Koin

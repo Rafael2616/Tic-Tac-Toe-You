@@ -47,3 +47,19 @@ val Project.projectNamespace: String
             }"
         }
     }
+
+
+val Project.isKotlinNativeHostSupported: Boolean
+    get() {
+        val osName = System.getProperty("os.name").lowercase()
+        val osArch = System.getProperty("os.arch").lowercase()
+        val isX86_64 = osArch == "x86_64" || osArch == "amd64"
+        val isArm64 = osArch == "aarch64" || osArch == "arm64"
+
+        return when {
+            osName.contains("mac") || osName.contains("darwin") -> isX86_64 || isArm64
+            osName.contains("linux") -> isX86_64
+            osName.contains("win") -> isX86_64
+            else -> false
+        }
+    }
