@@ -9,7 +9,7 @@ jvmTarget = "25"
 
 # Plugins
 agp = "9.4.1"
-spotless = "8.10.3"
+spotless = "8.10.4"
 ksp = "2.3.12"
 kotlin = "2.4.20"
 licensee = "1.14.1"
